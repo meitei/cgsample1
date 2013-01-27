@@ -1,0 +1,35 @@
+	<div id="work">
+		<script>
+			$(function() {
+				jQuery("#searchSagyoGrid").jqGrid({
+					datatype: "local",
+					width: "700",
+					height: "250",
+					rowNum: 10,
+					pager: "searchSagyoPager",
+					multiselect: true,
+					viewrecords: true,
+					colNames: ["作業コード","作業名","詳細","備考","単位コード","単位名","取引先単価","税区分","受付内容種別","間取り区分","名称変更可能フラグ","価格調整不可フラグ","上限価格","下限価格","明細種別"],
+					colModel: [
+						{name:"sagyoCd", index:"sagyoCd", hidden:true},
+						{name:"sagyoName", index:"sagyoName", editable: true},
+						{name:"shosaiName", index:"shosaiName"},
+						{name:"biko", index:"biko"},
+						{name:"taniCd", index:"taniCd", hidden:true},
+						{name:"taniName", index:"taniName", hidden:true},
+						{name:"hyojunTanka", index:"hyojunTanka", width: 100, align: "right", formatter: "currency", formatoptions:{thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '0'}},
+						{name:"zeiKbn", index:"zeiKbn", hidden:true},
+						{name:"uketsukeNaiyoName", index:"uketsukeNaiyoName"},
+						{name:"madoriName", index:"madoriName"},
+						{name:"meishoHenkoKanoFlg", index:"meishoHenkoKanoFlg", hidden:true},
+						{name:"kakakuChoseiFukaFlg", index:"kakakuChoseiFukaFlg", hidden:true},
+						{name:"jogenKakaku", index:"jogenKakaku", hidden:true},
+						{name:"kagenKakaku", index:"kagenKakaku", hidden:true},
+						{name:"shubetsuCd", index:"shubetsuCd", hidden:true}
+					]
+				}).navGrid('#searchSagyoPager',{edit:false, add:false, del:false, search:false});
+			});
+		</script>
+		<table id="searchSagyoGrid"></table>		
+		<div id="searchSagyoPager"></div>
+	</div>
