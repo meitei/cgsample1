@@ -1,0 +1,50 @@
+<div>
+<div style="margin: 5px;"><input type="button" id="btnCompanySearch" color="black" value="検　索" /></div>
+</div>
+<div id="company">
+    <table id="searchCompanyGrid"></table>        
+    <div id="searchCompanyPager"></div>
+</div>
+<script>
+$(function() {
+    jQuery("#searchCompanyGrid").jqGrid({
+        datatype: "local",
+        width: "700",
+        height: "250",
+        rowNum: 10,
+        pager: "searchCompanyPager",
+        multiselect: true,
+        viewrecords: true,
+        colNames: ["ID","会社名","住所","郵便番号","電話番号","FAX番号","WEBサイト"],
+        colModel: [
+            {name:"id", index:"id"},
+            {name:"name", index:"name", editable: true},
+            {name:"address", index:"address", editable: true},
+            {name:"post", index:"post", editable: true},
+            {name:"tel", index:"tel", editable: true},
+            {name:"fax", index:"fax", editable: true},
+            {name:"url", index:"url", editable: true}
+        ]
+    }).navGrid('#searchCompanyPager',{edit:false, add:false, del:false, search:false});
+});
+
+$("input#btnCompanySearch").click(function() {
+    var url = "http://localhost:3000/companies.json";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: url,
+        //data: data,
+        dataType: "json",
+        success: function(result) {
+            if(result.length > 0) {
+                for(var i=0; i<result.length; i++) {
+                    $("#searchCompanyGrid").addRowData(undefined, result[i]);
+                }
+            }
+        }
+    });
+});
+
+
+</script>
