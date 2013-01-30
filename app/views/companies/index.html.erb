@@ -1,5 +1,5 @@
 <div>
-<div style="margin: 5px;"><input type="button" id="btnCompanySearch" color="black" value="検　索" /></div>
+<div style="margin: 5px;"><a class="btn btn-primary" id="btnCompanySearch" href="#" />SERACH</a>
 </div>
 <div id="company">
     <table id="searchCompanyGrid"></table>        
@@ -28,7 +28,7 @@ $(function() {
     }).navGrid('#searchCompanyPager',{edit:false, add:false, del:false, search:false});
 });
 
-$("input#btnCompanySearch").click(function() {
+$("a#btnCompanySearch").click(function() {
     var url = "companies.json";
     $.ajax({
         scriptCharset:"UTF-8",
