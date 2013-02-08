@@ -1,5 +1,10 @@
 JqgridSample::Application.routes.draw do
 
+  get "item_extend/search"
+
+  resources :items
+
+
   resources :companies
 
 

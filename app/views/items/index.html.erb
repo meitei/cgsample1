@@ -1,0 +1,51 @@
+<div>
+    ID:<input type="input" id="txtID" style="width:50px"/>
+    Name:<input type="input" id="txtName" style="width:150px"/>
+    <div style="margin: 5px;"></div>
+    <a class="btn btn-primary" id="btnSearch" href="#" />SERACH</a>
+    <div style="margin: 5px;"></div>
+</div>
+<div id="company">
+    <table id="searchGrid"></table>  
+    <div id="searchPager"></div>
+</div>
+<script>
+$(function() {
+    jQuery("#searchGrid").jqGrid({
+        datatype: "local",
+        width: "700",
+        height: "250",
+        cellEdit: true,
+        rowNum: 10,
+        pager: "searchPager",
+        //multiselect: true,
+        //viewrecords: true,
+        colNames: ["ID","名前","金額"],
+        colModel: [
+            {name:"id", index:"id"},
+            {name:"name", index:"name", edittype:"textarea", editoptions:{size:10}},
+            {name:"kin", index:"kin"}
+        ]
+    }).navGrid('#searchPager',{edit:false, add:false, del:false, search:false});
+});
+
+$("a#btnSearch").click(function() {
+    var url = "item_extend/search";
+    url += "?ID=" + $("#txtID").val() + "&Name=" + $("#txtName").val();
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: url,
+        //data: data,
+        dataType: "json",
+        success: function(result) {
+            $("#searchGrid").clearGridData();
+            if(result.length > 0) {
+                for(var i=0; i<result.length; i++) {
+                    $("#searchGrid").addRowData(undefined, result[i]);
+                }
+            }
+        }
+    });
+});
+</script>
