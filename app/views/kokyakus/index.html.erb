@@ -7,41 +7,73 @@
 </div>
 <script>
 $(function() {
+    var isLoaded = false;
+    var colNames = ["顧客ID","姓","名","姓","名","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","１","２","３","学校名","備考","更新日時","更新者ID","登録日時","登録者ID","更新ID"];
+    var colModelSettings = [
+            {name:"kokyakuId", index:"kokyakuId"},
+            {name:"kokyakuNm1", index:"kokyakuNm1", editable:true},
+            {name:"kokyakuNm2", index:"kokyakuNm2", editable:true},
+            {name:"kokyakuNmKana1", index:"kokyakuNmKana1", editable:true},
+            {name:"kokyakuNmKana2", index:"kokyakuNmKana2", editable:true},
+            {name:"seibetsu", index:"seibetsu", editable:true, edittype:"select"},
+            {name:"tanjoDt", index:"tanjoDt", editable:true, editrules:{date:true}},
+            {name:"postNo", index:"postNo", editable:true, hidden:true, editrules:{edithidden:true}},
+            {name:"address1", index:"address1", editable:true},
+            {name:"address2", index:"address2", editable:true, hidden:true, editrules:{edithidden:true}},
+            {name:"tel1", index:"tel1", editable:true},
+            {name:"tel2", index:"tel2", editable:true, hidden:true, editrules:{edithidden:true}},
+            {name:"fax", index:"fax", editable:true, hidden:true, editrules:{edithidden:true}},
+            {name:"shobyouCd1", index:"shobyouCd1", editable:true},
+            {name:"shobyouCd2", index:"shobyouCd2", editable:true},
+            {name:"shobyouCd3", index:"shobyouCd3", editable:true},
+            {name:"gakkoNm", index:"gakkoNm", editable:true},
+            {name:"biko", index:"biko", editable:true, hidden:true, edittype:"textarea", editrules:{edithidden:true}},
+            {name:"koshinDt", index:"koshinDt", editable:true, hidden:true},
+            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
+            {name:"torokuDt", index:"torokuDt", editable:true, hidden:true},
+            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
+            {name:"koshinId", index:"koshinId", editable:true, hidden:true}
+    ];
     jQuery("#searchCustomerGrid").jqGrid({
         datatype: "local",
-        width: "800",
+        width: "900",
         height: "400",
         cellEdit: false,
         rowNum: 10,
         pager: "searchCustomerPager",
         multiselect: false,
         //viewrecords: true,                                   
-        colNames: ["顧客ID","顧客氏名(姓)","顧客氏名(名)","仮名(姓)","仮名(名)","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名１コード","傷病名２コード","傷病名３コード","学校名","備考","更新日時","更新者ID","登録日時","登録者ID","更新ID"],
-        colModel: [
-            {name:"kokyakuId", index:"kokyakuId"},
-            {name:"kokyakuNm1", index:"kokyakuNm1", editable:true},
-            {name:"kokyakuNm2", index:"kokyakuNm2", editable:true},
-            {name:"kokyakuNmKana1", index:"kokyakuNmKana1", editable:true},
-            {name:"kokyakuNmKana2", index:"kokyakuNmKana2", editable:true},
-            {name:"seibetsu", index:"seibetsu", editable:true},
-            {name:"tanjoDt", index:"tanjoDt", editable:true},
-            {name:"postNo", index:"postNo", editable:true},
-            {name:"address1", index:"address1", editable:true},
-            {name:"address2", index:"address2", editable:true},
-            {name:"tel1", index:"tel1", editable:true},
-            {name:"tel2", index:"tel2", editable:true},
-            {name:"fax", index:"fax", editable:true},
-            {name:"shobyouCd1", index:"shobyouCd1", editable:true},
-            {name:"shobyouCd2", index:"shobyouCd2", editable:true},
-            {name:"shobyouCd3", index:"shobyouCd3", editable:true},
-            {name:"gakkoNm", index:"gakkoNm", editable:true},
-            {name:"biko", index:"biko", editable:true},
-            {name:"koshinDt", index:"koshinDt", editable:true},
-            {name:"koshinshaId", index:"koshinshaId", editable:true},
-            {name:"torokuDt", index:"torokuDt", editable:true},
-            {name:"torokushaId", index:"torokushaId", editable:true},
-            {name:"koshinId", index:"koshinId", editable:true}
-        ]
+        colNames: colNames,
+        colModel: colModelSettings,
+        gridComplete: function(){
+            if(!isLoaded == true){
+                $("#searchCustomerGrid").jqGrid("setGroupHeaders", {
+                    useColSpanStyle: true,
+                    groupHeaders: [
+                        {startColumnName: "kokyakuNm1", numberOfColumns: 2, titleText:"顧客氏名"},
+                        {startColumnName: "kokyakuNmKana1", numberOfColumns: 2, titleText:"顧客カナ"},
+                        {startColumnName: "shobyouCd1", numberOfColumns: 3, titleText:"病名・障害名"}
+
+                    ]
+                });
+                isLoaded = true;
+            }
+        },
+        onSelectRow: function(){
+            var rowid = $("#searchCustomerGrid").jqGrid("getGridParam", "selrow");
+            if(rowid != null) {
+                $("#searchCustomerGrid").jqGrid("editGridRow", rowid, {
+                    height: "auto",
+                    modal: true,
+                    editCaption: "編集",
+                    bSubmit: "更新",
+                    bCancel: "キャンセル"
+                });
+            } else {
+                alert("選択されていません");
+            }
+            return false;
+        }
     }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
 });
 
@@ -55,6 +87,7 @@ $("a#btnCustomerSearch").click(function() {
         dataType: "json",
         success: function(result) {
             if(result.length > 0) {
+                $("#searchCustomerGrid").clearGridData();
                 for(var i=0; i<result.length; i++) {
                     $("#searchCustomerGrid").addRowData(undefined, result[i]);
                 }
