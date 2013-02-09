@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  kokyaku_id: 1
+  kokyaku_nm1: MyString
+  kokyaku_nm2: MyString
+  kokyaku_nm_kana1: MyString
+  kokyaku_nm_kana2: MyString
+  seibetsu: 1
+  tanjo_dt: 2013-02-09
+  post_no: MyString
+  address1: MyString
+  address2: MyString
+  tel1: MyString
+  tel2: MyString
+  fax: MyString
+  shobyou_cd1: 1
+  shobyou_cd2: 1
+  shobyou_cd3: 1
+  gakko_nm: MyString
+  biko: MyString
+  koshin_dt: 2013-02-09 10:46:41
+  koshinsha_id: 1
+  toroku_dt: 2013-02-09 10:46:41
+  torokusha_id: 1
+  koshin_id: 1
+
+two:
+  kokyaku_id: 1
+  kokyaku_nm1: MyString
+  kokyaku_nm2: MyString
+  kokyaku_nm_kana1: MyString
+  kokyaku_nm_kana2: MyString
+  seibetsu: 1
+  tanjo_dt: 2013-02-09
+  post_no: MyString
+  address1: MyString
+  address2: MyString
+  tel1: MyString
+  tel2: MyString
+  fax: MyString
+  shobyou_cd1: 1
+  shobyou_cd2: 1
+  shobyou_cd3: 1
+  gakko_nm: MyString
+  biko: MyString
+  koshin_dt: 2013-02-09 10:46:41
+  koshinsha_id: 1
+  toroku_dt: 2013-02-09 10:46:41
+  torokusha_id: 1
+  koshin_id: 1

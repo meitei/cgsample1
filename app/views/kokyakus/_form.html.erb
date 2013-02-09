@@ -1,0 +1,109 @@
+<%= form_for(@kokyaku) do |f| %>
+  <% if @kokyaku.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@kokyaku.errors.count, "error") %> prohibited this kokyaku from being saved:</h2>
+
+      <ul>
+      <% @kokyaku.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :kokyakuId %><br />
+    <%= f.number_field :kokyakuId %>
+  </div>
+  <div class="field">
+    <%= f.label :kokyakuNm1 %><br />
+    <%= f.text_field :kokyakuNm1 %>
+  </div>
+  <div class="field">
+    <%= f.label :kokyakuNm2 %><br />
+    <%= f.text_field :kokyakuNm2 %>
+  </div>
+  <div class="field">
+    <%= f.label :kokyakuNmKana1 %><br />
+    <%= f.text_field :kokyakuNmKana1 %>
+  </div>
+  <div class="field">
+    <%= f.label :kokyakuNmKana2 %><br />
+    <%= f.text_field :kokyakuNmKana2 %>
+  </div>
+  <div class="field">
+    <%= f.label :seibetsu %><br />
+    <%= f.number_field :seibetsu %>
+  </div>
+  <div class="field">
+    <%= f.label :tanjoDt %><br />
+    <%= f.date_select :tanjoDt %>
+  </div>
+  <div class="field">
+    <%= f.label :postNo %><br />
+    <%= f.text_field :postNo %>
+  </div>
+  <div class="field">
+    <%= f.label :address1 %><br />
+    <%= f.text_field :address1 %>
+  </div>
+  <div class="field">
+    <%= f.label :address2 %><br />
+    <%= f.text_field :address2 %>
+  </div>
+  <div class="field">
+    <%= f.label :tel1 %><br />
+    <%= f.text_field :tel1 %>
+  </div>
+  <div class="field">
+    <%= f.label :tel2 %><br />
+    <%= f.text_field :tel2 %>
+  </div>
+  <div class="field">
+    <%= f.label :fax %><br />
+    <%= f.text_field :fax %>
+  </div>
+  <div class="field">
+    <%= f.label :shobyouCd1 %><br />
+    <%= f.number_field :shobyouCd1 %>
+  </div>
+  <div class="field">
+    <%= f.label :shobyouCd2 %><br />
+    <%= f.number_field :shobyouCd2 %>
+  </div>
+  <div class="field">
+    <%= f.label :shobyouCd3 %><br />
+    <%= f.number_field :shobyouCd3 %>
+  </div>
+  <div class="field">
+    <%= f.label :gakkoNm %><br />
+    <%= f.text_field :gakkoNm %>
+  </div>
+  <div class="field">
+    <%= f.label :biko %><br />
+    <%= f.text_field :biko %>
+  </div>
+  <div class="field">
+    <%= f.label :koshinDt %><br />
+    <%= f.datetime_select :koshinDt %>
+  </div>
+  <div class="field">
+    <%= f.label :koshinshaId %><br />
+    <%= f.number_field :koshinshaId %>
+  </div>
+  <div class="field">
+    <%= f.label :torokuDt %><br />
+    <%= f.datetime_select :torokuDt %>
+  </div>
+  <div class="field">
+    <%= f.label :torokushaId %><br />
+    <%= f.number_field :torokushaId %>
+  </div>
+  <div class="field">
+    <%= f.label :koshinId %><br />
+    <%= f.number_field :koshinId %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
