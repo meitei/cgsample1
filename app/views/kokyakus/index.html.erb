@@ -1,20 +1,21 @@
-<div>
-<div style="margin: 5px;"><a class="btn btn-primary" id="btnCustomerSearch" href="#" />検索</a>
-</div>
-<div id="customer">
+<div style="width:1024;">
+<%= render 'search' %>
+<div style="width:1024px; clear:both;" id="customer">
     <table id="searchCustomerGrid"></table>        
     <div id="searchCustomerPager"></div>
 </div>
+<div style="width:1024px; margin:5px;">
+    <a style="float:right;" class="btn btn-primary" id="btnCustomerNew" href="#" />新規追加</a>
+</div>
+<%= render 'form2' %>
 <script>
 $(function() {
     var isLoaded = false;
-    var colNames = ["顧客ID","姓","名","姓","名","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","１","２","３","学校名","備考","更新日時","更新者ID","登録日時","登録者ID","更新ID"];
+    var colNames = ["顧客ID","顧客名","顧客カナ","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","１","２","３","学校名","備考","更新者ID","登録者ID"];
     var colModelSettings = [
             {name:"kokyakuId", index:"kokyakuId"},
-            {name:"kokyakuNm1", index:"kokyakuNm1", editable:true},
-            {name:"kokyakuNm2", index:"kokyakuNm2", editable:true},
-            {name:"kokyakuNmKana1", index:"kokyakuNmKana1", editable:true},
-            {name:"kokyakuNmKana2", index:"kokyakuNmKana2", editable:true},
+            {name:"kokyakuNm", index:"kokyakuNm", editable:true},
+            {name:"kokyakuNmKana", index:"kokyakuNmKana", editable:true},
             {name:"seibetsu", index:"seibetsu", editable:true, edittype:"select"},
             {name:"tanjoDt", index:"tanjoDt", editable:true, editrules:{date:true}},
             {name:"postNo", index:"postNo", editable:true, hidden:true, editrules:{edithidden:true}},
@@ -28,16 +29,13 @@ $(function() {
             {name:"shobyouCd3", index:"shobyouCd3", editable:true},
             {name:"gakkoNm", index:"gakkoNm", editable:true},
             {name:"biko", index:"biko", editable:true, hidden:true, edittype:"textarea", editrules:{edithidden:true}},
-            {name:"koshinDt", index:"koshinDt", editable:true, hidden:true},
             {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
-            {name:"torokuDt", index:"torokuDt", editable:true, hidden:true},
-            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
-            {name:"koshinId", index:"koshinId", editable:true, hidden:true}
+            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true}
     ];
-    jQuery("#searchCustomerGrid").jqGrid({
+    $("#searchCustomerGrid").jqGrid({
         datatype: "local",
-        width: "900",
-        height: "400",
+        width: "1024",
+        height: "300",
         cellEdit: false,
         rowNum: 10,
         pager: "searchCustomerPager",
@@ -50,40 +48,48 @@ $(function() {
                 $("#searchCustomerGrid").jqGrid("setGroupHeaders", {
                     useColSpanStyle: true,
                     groupHeaders: [
-                        {startColumnName: "kokyakuNm1", numberOfColumns: 2, titleText:"顧客氏名"},
-                        {startColumnName: "kokyakuNmKana1", numberOfColumns: 2, titleText:"顧客カナ"},
                         {startColumnName: "shobyouCd1", numberOfColumns: 3, titleText:"病名・障害名"}
-
                     ]
                 });
                 isLoaded = true;
             }
         },
         onSelectRow: function(){
-            var rowid = $("#searchCustomerGrid").jqGrid("getGridParam", "selrow");
-            if(rowid != null) {
-                $("#searchCustomerGrid").jqGrid("editGridRow", rowid, {
-                    height: "auto",
-                    modal: true,
-                    editCaption: "編集",
-                    bSubmit: "更新",
-                    bCancel: "キャンセル"
-                });
-            } else {
-                alert("選択されていません");
-            }
+            // var rowid = $("#searchCustomerGrid").jqGrid("getGridParam", "selrow");
+            // if(rowid != null) {
+            //     $("#searchCustomerGrid").jqGrid("editGridRow", rowid, {
+            //         height: "auto",
+            //         modal: true,
+            //         editCaption: "編集",
+            //         bSubmit: "更新",
+            //         bCancel: "キャンセル"
+            //     });
+            // } else {
+            //     alert("選択されていません");
+            // }
+            showKokyakuFormDialog();
             return false;
         }
     }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
 });
 
 $("a#btnCustomerSearch").click(function() {
+    searchKokyaku();
+    return false;
+});
+
+$("a#btnCustomerNew").click(function() {
+    showKokyakuFormDialog();
+    return false;
+});
+
+// 検索用メソッド
+function searchKokyaku() {
     var url = "kokyakus.json";
     $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
         url: url,
-        //data: data,
         dataType: "json",
         success: function(result) {
             if(result.length > 0) {
@@ -93,8 +99,70 @@ $("a#btnCustomerSearch").click(function() {
                 }
             }
         }
+    });    
+}
+
+// 更新用メソッド
+function executeKokyaku(kokyakuId) {
+    var url;
+    var type;
+    if(kokyakuId != null) {
+        url = "kokyakus/" + kokyakuId + ".json";
+        type = "PUT";
+    } else {
+        url = "kokyakus.json";
+        type = "POST";
+    }
+    var data = {};
+    var postData = {};
+    var kokyaku = $("#kokyakuForm").serializeArray();
+    $.each(kokyaku, function() {
+        data[this.name] = this.value;
     });
-});
+    data["koshinshaId"] = 1;
+    data["torokushaId"] = 1;
+    postData["kokyaku"] = data;
+    postData["id"] = kokyakuId;
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: postData,
+        root: "kokyaku",
+        dataType: "json",
+        success: function(result) {
+            if(result != null) {
+                searchKokyaku();
+            }
+        }
+    });
+    $("#kokyakuFormDialog").dialog("close");
+    return false;    
+}
+
+// 登録用フォームダイアログオープン
+function showKokyakuFormDialog() {
+
+    // ダイアログ表示
+    $("#kokyakuFormDialog").dialog({
+        //show: {effect: "pulsate", duration: 1000, times: 1},
+        width: "auto",
+        modal: true
+    });
+    $("#kokyakuFormDialog").focus();
+
+    // ダイアログ登録ボタン
+    $("a#btnCustomerRegist").click(function() {
+        executeKokyaku();
+        return false;
+    });
+
+    // ダイアログ閉じるボタン
+    $("a#btnCustomerClose").click(function() {
+        $("#kokyakuFormDialog").dialog("close");
+        return false;
+    });    
+}
 
 
 </script>

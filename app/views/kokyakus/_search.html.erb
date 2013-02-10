@@ -1,0 +1,81 @@
+<div id="kokyakuSearch" style="width:1024px;">
+  <form id="kokyakuSearchForm">
+  <div>
+    <table style="width:100%">
+      <tr>
+        <th style="width:75px;">顧客コード</th>
+        <td style="width:150px;">
+          <input style="width:50px;" type="text" id="kokyakuCdFrom" />&nbsp;〜
+          <input style="width:50px;" type="text" id="kokyakuCdTo" />
+        </td>
+        <th style="width:75px;">郵便番号</th>
+        <td style="width:150px;">
+          <input style="width:130px;" type="text" id="postNo" />
+        </td>
+        <th style="width:75px;">FAX番号</th>
+        <td style="width:150px;">
+          <input style="width:130px;" type="text" id="fax" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:75px;">顧客名</th>
+        <td style="width:150px;">
+          <input style="width:130px;" type="text" id="kokyakuNm" />
+        </td>
+        <th style="width:75px;">住所１</th>
+        <td style="width:150px;">
+          <input style="width:130px;" type="text" id="address1" />
+        </td>
+        <th style="width:75px;">病名・障害名</th>
+        <td style="width:150px;">
+          <input style="width:130px;" type="text" id="shobyouNm" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:75px;">顧客カナ</th>
+        <td style="width:150px;">
+          <input style="width:130px;" type="text" id="kokyakuNmKana" />
+        </td>
+        <th style="width:75px;">住所２</th>
+        <td style="width:150px;">
+          <input style="width:130px;" type="text" id="address2" />
+        </td>
+        <th style="width:75px;">学校名</th>
+        <td style="width:150px;">
+          <input style="width:130px;" type="text" id="gakkoNm" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:75px;">生年月日</th>
+        <td style="width:150px;">
+          <input style="width:50px;" type="text" id="tanjoDtFrom" />&nbsp;〜
+          <input style="width:50px;" type="text" id="tanjoDtTo" />
+        </td>
+        <th style="width:75px;">携帯番号</th>
+        <td style="width:150px;">
+          <input style="width:130px;" type="text" id="tel2" />
+        </td>
+        <th style="width:75px;">&nbsp;</th>
+        <td style="width:150px;">&nbsp;</td>
+      </tr>
+    </table>
+    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerSearch" href="#" />検索</a></div>
+    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerClear" href="#" />条件クリア</a></div>
+  </div>
+  <div>
+  </div>
+  </form>
+</div>
+<script>
+$(function() {
+  $("#tanjoDtFrom").datepicker();
+  $("#tanjoDtTo").datepicker();
+  // $("#kokyakuSearch").accordion({
+  //   header: "h5",
+  //   collapsible: true,
+  //   animated: "bounceslide",
+  //   active: 4
+  // });
+});
+
+</script>

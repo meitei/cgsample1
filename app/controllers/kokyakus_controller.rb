@@ -40,6 +40,7 @@ class KokyakusController < ApplicationController
   # POST /kokyakus
   # POST /kokyakus.json
   def create
+    logger.debug(params)
     @kokyaku = Kokyaku.new(params[:kokyaku])
 
     respond_to do |format|
