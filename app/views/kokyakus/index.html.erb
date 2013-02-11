@@ -34,10 +34,12 @@ $(function() {
     ];
     $("#searchCustomerGrid").jqGrid({
         datatype: "local",
+        //url: "kokyakus.json",
         width: "1024",
-        height: "300",
+        height: "240",
         cellEdit: false,
         rowNum: 10,
+        //rowList:[10,20,30], 
         pager: "searchCustomerPager",
         multiselect: false,
         //viewrecords: true,                                   
@@ -85,21 +87,42 @@ $("a#btnCustomerNew").click(function() {
 
 // 検索用メソッド
 function searchKokyaku() {
-    var url = "kokyakus.json";
-    $.ajax({
-        scriptCharset:"UTF-8",
-        type: "GET",
-        url: url,
-        dataType: "json",
-        success: function(result) {
-            if(result.length > 0) {
-                $("#searchCustomerGrid").clearGridData();
-                for(var i=0; i<result.length; i++) {
-                    $("#searchCustomerGrid").addRowData(undefined, result[i]);
-                }
-            }
+    var data = {};
+    //data["torihikisakiCd"] = clientTorihikisakiCd;
+    //data["sagyoShohinName"] = $("input#sagyoShohinName").val();
+    $("#searchCustomerGrid").clearGridData();
+    //data["uketsukeNaiyoKbn"] = $("select[name='uketsukeNaiyo'] :selected").val();
+    //data["madoriKbn"] = $("select[name='madoriKbn'] :selected").val();
+    var param = {
+        datatype: "json",
+        //root: "kokyaku",
+        //mtype: "GET",
+        url: "kokyakus/search.json",
+        //postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
         }
-    });    
+    };
+    $("#searchCustomerGrid").setGridParam(param).trigger("reloadGrid");
+    // var url = "kokyakus.json";
+    // $.ajax({
+    //     scriptCharset:"UTF-8",
+    //     type: "GET",
+    //     url: url,
+    //     dataType: "json",
+    //     success: function(result) {
+    //         if(result.length > 0) {
+    //             $("#searchCustomerGrid").clearGridData();
+    //             for(var i=0; i<result.length; i++) {
+    //                 $("#searchCustomerGrid").addRowData(undefined, result[i]);
+    //             }
+    //         }
+    //     }
+    // });    
 }
 
 // 更新用メソッド

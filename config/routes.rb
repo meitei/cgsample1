@@ -1,6 +1,8 @@
 JqgridSample::Application.routes.draw do
 
-  resources :kokyakus
+  resources :kokyakus do
+    get 'search', :on => :collection
+  end
 
 
   get "item_extend/search"

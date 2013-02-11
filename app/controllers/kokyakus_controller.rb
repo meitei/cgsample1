@@ -2,11 +2,39 @@ class KokyakusController < ApplicationController
   # GET /kokyakus
   # GET /kokyakus.json
   def index
-    @kokyakus = Kokyaku.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @kokyakus }
+      format.json { render json: @responce }
+    end
+  end
+
+  # GET /kokyakus/search
+  # GET /kokyakus/search.json
+  def search
+    @records = Kokyaku.count
+    @limit = params[:rows].to_i
+    @page = params[:page].to_i
+    if @records > 0
+      n = @records.quo(@limit)
+      @total_pages = n.ceil
+    else
+      @total_pages = 0
+    end
+    @start = @limit * @page - @limit;
+    @kokyakus = Kokyaku.find(:all, :offset => @start, :limit => @limit)
+
+    @responce = {
+      total: @total_pages.to_s,
+      page: params[:page],
+      records: @records.to_s,
+      rows: @kokyakus
+    }
+    #logger.debug(@responce)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @responce }
     end
   end
 
