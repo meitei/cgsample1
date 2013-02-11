@@ -21,7 +21,7 @@ class KokyakusController < ApplicationController
     conditions = conditions.where("postNo LIKE ?", params[:postNo] + "%") if params[:postNo] != ""
     conditions = conditions.where("address1 LIKE ?", params[:address1] + "%") if params[:address1] != ""
     conditions = conditions.where("address2 LIKE ?", params[:address2] + "%") if params[:address2] != ""
-    #conditions = conditions.where("tel1 LIKE ?", params[:tel1] + "%") if params[:tel1] != ""
+    conditions = conditions.where("tel1 LIKE ?", params[:tel1] + "%") if params[:tel1] != ""
     conditions = conditions.where("tel2 LIKE ?", params[:tel2] + "%") if params[:tel2] != ""
     conditions = conditions.where("fax LIKE ?", params[:fax] + "%") if params[:fax] != ""
     conditions = conditions.where("shobyoNm LIKE ?", params[:shobyoNm] + "%") if params[:shobyoNm] != ""
