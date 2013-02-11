@@ -89,6 +89,10 @@ $("a#btnCustomerNew").click(function() {
 function searchKokyaku() {
     var data = {};
     //data["torihikisakiCd"] = clientTorihikisakiCd;
+    var search = $("#kokyakuSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
     //data["sagyoShohinName"] = $("input#sagyoShohinName").val();
     $("#searchCustomerGrid").clearGridData();
     //data["uketsukeNaiyoKbn"] = $("select[name='uketsukeNaiyo'] :selected").val();
@@ -98,7 +102,7 @@ function searchKokyaku() {
         //root: "kokyaku",
         //mtype: "GET",
         url: "kokyakus/search.json",
-        //postData: data,
+        postData: data,
         jsonReader: {
             root: "rows",
             page: "page",

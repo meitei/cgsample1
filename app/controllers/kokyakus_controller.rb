@@ -2,32 +2,52 @@ class KokyakusController < ApplicationController
   # GET /kokyakus
   # GET /kokyakus.json
   def index
-
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @responce }
+      #format.json { render json: @responce }
     end
   end
 
   # GET /kokyakus/search
   # GET /kokyakus/search.json
   def search
-    @records = Kokyaku.count
-    @limit = params[:rows].to_i
-    @page = params[:page].to_i
-    if @records > 0
-      n = @records.quo(@limit)
-      @total_pages = n.ceil
+    conditions = Kokyaku.where("kokyakuId NOT ?", nil)
+    conditions = conditions.where("kokyakuId >= ?", params[:kokyakuIdFrom].to_i) if params[:kokyakuIdFrom] != ""
+    conditions = conditions.where("kokyakuId <= ?", params[:kokyakuIdTo].to_i) if params[:kokyakuIdTo] != ""
+    conditions = conditions.where("kokyakuNm LIKE ?", params[:kokyakuNm] + "%") if params[:kokyakuNm] != ""
+    conditions = conditions.where("kokyakuNmKana LIKE ?", params[:kokyakuNmKana] + "%") if params[:kokyakuNmKana] != ""
+    conditions = conditions.where("tanjoDtFrom >= ?", params[:tanjoDtFrom] + "%") if params[:tanjoDtFrom] != ""
+    conditions = conditions.where("tanjoDtTo <= ?", params[:tanjoDtTo] + "%") if params[:tanjoDtTo] != ""
+    conditions = conditions.where("postNo LIKE ?", params[:postNo] + "%") if params[:postNo] != ""
+    conditions = conditions.where("address1 LIKE ?", params[:address1] + "%") if params[:address1] != ""
+    conditions = conditions.where("address2 LIKE ?", params[:address2] + "%") if params[:address2] != ""
+    #conditions = conditions.where("tel1 LIKE ?", params[:tel1] + "%") if params[:tel1] != ""
+    conditions = conditions.where("tel2 LIKE ?", params[:tel2] + "%") if params[:tel2] != ""
+    conditions = conditions.where("fax LIKE ?", params[:fax] + "%") if params[:fax] != ""
+    conditions = conditions.where("shobyoNm LIKE ?", params[:shobyoNm] + "%") if params[:shobyoNm] != ""
+    conditions = conditions.where("gakkoNm LIKE ?", params[:gakkoNm] + "%") if params[:gakkoNm] != ""
+    logger.debug(conditions)
+
+    records = conditions.count
+    limit = params[:rows].to_i
+    page = params[:page].to_i
+    if records > 0
+      n = records.quo(limit)
+      total_pages = n.ceil
     else
-      @total_pages = 0
+      total_pages = 0
     end
-    @start = @limit * @page - @limit;
-    @kokyakus = Kokyaku.find(:all, :offset => @start, :limit => @limit)
+    start = limit * page - limit;
+    @kokyakus = conditions.find(
+      :all, 
+      :offset => start, 
+      :limit => limit,
+      :order => "kokyakuId DESC")
 
     @responce = {
-      total: @total_pages.to_s,
+      total: total_pages.to_s,
       page: params[:page],
-      records: @records.to_s,
+      records: records.to_s,
       rows: @kokyakus
     }
     #logger.debug(@responce)
