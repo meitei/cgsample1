@@ -3,6 +3,7 @@
     Name:<input type="input" id="txtName" style="width:150px"/>
     <div style="margin: 5px;"></div>
     <a class="btn btn-primary" id="btnSearch" href="#" />SERACH</a>
+    <a class="btn btn-primary" id="btnReport" href="#" />Report</a>
     <div style="margin: 5px;"></div>
 </div>
 <div id="company">
@@ -48,4 +49,21 @@ $("a#btnSearch").click(function() {
         }
     });
 });
+
+$("a#btnReport").click(function() {
+    var url = "items/report.json";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: url,
+        //data: data,
+        dataType: "json",
+        success: function(result) {
+            if (result.length > 0){
+                
+            }
+        }
+    });
+});
+
 </script>

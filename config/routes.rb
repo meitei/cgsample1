@@ -7,8 +7,9 @@ JqgridSample::Application.routes.draw do
 
   get "item_extend/search"
 
-  resources :items
-
+  resources :items do
+    get 'report', :on => :collection
+  end
 
   resources :companies
 
