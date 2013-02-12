@@ -58,22 +58,15 @@ $(function() {
                 isLoaded = true;
             }
         },
-        onSelectRow: function(){
-            // var rowid = $("#searchCustomerGrid").jqGrid("getGridParam", "selrow");
-            // if(rowid != null) {
-            //     $("#searchCustomerGrid").jqGrid("editGridRow", rowid, {
-            //         height: "auto",
-            //         modal: true,
-            //         editCaption: "編集",
-            //         bSubmit: "更新",
-            //         bCancel: "キャンセル"
-            //     });
-            // } else {
-            //     alert("選択されていません");
-            // }
-            showKokyakuFormDialog();
-            return false;
-        }
+        // onSelectRow: function(rowid, iCol, cellcontent){
+        //     if(iCol == 18) {
+        //         showKokyakuFormDialog(cellcontent);
+        //     }
+        //     if(iCol == 19) {
+                
+        //     }
+        //     return false;
+        // }
     }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
 });
 
@@ -88,29 +81,23 @@ $("a#btnCustomerNew").click(function() {
 });
 
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-reload-alt-1.png' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='showKokyakuFormDialog(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 function deleteFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-remove-alt-1.png' title='削除' style='width:16px; height:16px'>";
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeKokyaku(" + rowdata['kokyakuId'] + ")' title='削除' style='width:16px; height:16px'>";
 }
 
 // 検索用メソッド
 function searchKokyaku() {
     var data = {};
-    //data["torihikisakiCd"] = clientTorihikisakiCd;
     var search = $("#kokyakuSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
-    //data["sagyoShohinName"] = $("input#sagyoShohinName").val();
     $("#searchCustomerGrid").clearGridData();
-    //data["uketsukeNaiyoKbn"] = $("select[name='uketsukeNaiyo'] :selected").val();
-    //data["madoriKbn"] = $("select[name='madoriKbn'] :selected").val();
     var param = {
         datatype: "json",
-        //root: "kokyaku",
-        //mtype: "GET",
         url: "kokyakus/search.json",
         postData: data,
         jsonReader: {
@@ -122,21 +109,6 @@ function searchKokyaku() {
         }
     };
     $("#searchCustomerGrid").setGridParam(param).trigger("reloadGrid");
-    // var url = "kokyakus.json";
-    // $.ajax({
-    //     scriptCharset:"UTF-8",
-    //     type: "GET",
-    //     url: url,
-    //     dataType: "json",
-    //     success: function(result) {
-    //         if(result.length > 0) {
-    //             $("#searchCustomerGrid").clearGridData();
-    //             for(var i=0; i<result.length; i++) {
-    //                 $("#searchCustomerGrid").addRowData(undefined, result[i]);
-    //             }
-    //         }
-    //     }
-    // });    
 }
 
 // 更新用メソッド
@@ -178,8 +150,37 @@ function executeKokyaku(kokyakuId) {
 }
 
 // 登録用フォームダイアログオープン
-function showKokyakuFormDialog() {
+function showKokyakuFormDialog(kokyakuId) {
 
+    if(kokyakuId != null) {
+        var url = "kokyakus/" + kokyakuId + ".json";
+        $.ajax({
+            scriptCharset:"UTF-8",
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result) {
+                if(result) {
+                    $("#kokyakuForm #kokyakuNm").val(result["kokyakuNm"]);
+                    $("#kokyakuForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
+                    $("#kokyakuForm #seibetsu").val(result["seibetsu"]);
+                    $("#kokyakuForm #tanjoDt").val(result["tanjoDt"]);
+                    $("#kokyakuForm #postNo").val(result["postNo"]);
+                    $("#kokyakuForm #address1").val(result["address1"]);
+                    $("#kokyakuForm #address2").val(result["address2"]);
+                    $("#kokyakuForm #tel1").val(result["tel1"]);
+                    $("#kokyakuForm #tel2").val(result["tel2"]);
+                    $("#kokyakuForm #fax").val(result["fax"]);
+                    $("#kokyakuForm #shobyouCd1").val(result["shobyouCd1"]);
+                    $("#kokyakuForm #shobyouCd2").val(result["shobyouCd2"]);
+                    $("#kokyakuForm #shobyouCd3").val(result["shobyouCd3"]);
+                    $("#kokyakuForm #gakkoNm").val(result["gakkoNm"]);
+                    $("#kokyakuForm #biko").val(result["biko"]);
+                }
+                return false;
+            }
+        });
+    }
     // ダイアログ表示
     $("#kokyakuFormDialog").dialog({
         //show: {effect: "pulsate", duration: 1000, times: 1},
@@ -190,7 +191,7 @@ function showKokyakuFormDialog() {
 
     // ダイアログ登録ボタン
     $("a#btnCustomerRegist").click(function() {
-        executeKokyaku();
+        executeKokyaku(kokyakuId);
         return false;
     });
 
@@ -201,5 +202,24 @@ function showKokyakuFormDialog() {
     });    
 }
 
+// 削除用メソッド
+function removeKokyaku(kokyakuId) {
+    if (confirm("削除します。よろしいですか？") == false) {
+        return false;
+    }
+    var url = "kokyakus/" + kokyakuId + ".json";
+    var type = "DELETE";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: "id=" + kokyakuId,
+        dataType: "json",
+        success: function(result) {
+        }
+    });
+    searchKokyaku();
+    return false;    
+}
 
 </script>
