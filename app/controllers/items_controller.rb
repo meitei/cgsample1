@@ -88,8 +88,9 @@ class ItemsController < ApplicationController
 
   def report
 
-    # (B)
-    report = ThinReports::Report.new :layout => File.join(Rails.root,'app', 'reports', 'hello_world')
+    # (B) ThinReportレイアウトのテンプレートの場所を指定する
+    templateDir = File.join(Rails.root, 'app', 'reports')
+    report = ThinReports::Report.new :layout => File.join(templateDir,'hello_world')
 
     # (C) 1ページ目
     report.start_new_page
@@ -116,13 +117,32 @@ class ItemsController < ApplicationController
              :world_ja => 'report_solution')
     end
 
-    fileName = "tmp/" + Time.now.strftime("%Y%m%d%H%S") + "_hello_world.pdf"
+    # 保存先
+    saveDir = File.join(Rails.root, "public", "tmp")
+
+    # tmp内のファイルを削除する
+    files = Dir.glob(File.join(saveDir,"*.pdf"))
+    files.each do |file|
+        fileDate = File.basename(file)[0..7] 
+        # 保存日数を指定する          (※とりあえず全部削除する)
+        delDate = (Date.today).strftime("%Y%m%d")
+        if fileDate <= delDate
+          File.delete(file)
+        end
+    end
+
+    # ディレクトリの作成
+    if !File.exists?(saveDir)
+        Dir.mkdir(saveDir)
+    end
+
+    fileName = Time.now.strftime("%Y%m%d%H%M%S") + "_hello_world.pdf"
 
     # (G)ファイル保存
-    report.generate_file(File.join(Rails.root, "public", fileName))
+    report.generate_file(File.join(saveDir,fileName))
 
-    # @items = Item.all
-    fileInfo = {'fileName' => fileName}
+    # http://serverName/tmp/fileName.pdf で読み込まれるようにする
+    fileInfo = {'fileName' =>"tmp/" + fileName}
 
    # render :json => fileInfo
     respond_to do |format|
