@@ -1,0 +1,2 @@
+module ByoinsHelper
+end

@@ -1,0 +1,207 @@
+<div style="width:1024;">
+<%= render 'search' %>
+<div style="width:1024px; clear:both;" id="byoin">
+    <table id="searchByoinGrid"></table>
+    <div id="searchByoinPager"></div>
+</div>
+<div style="width:1024px; margin:5px;">
+    <a style="float:right;" class="btn btn-primary" id="btnByoinNew" href="#" />新規追加</a>
+</div>
+<%= render 'form' %>
+<script>
+// ##############################
+// 
+// ##############################
+$(function() {
+    var isLoaded = false;
+    var colNames = ["病院コード","病院名","更新者ID","登録者ID","",""];
+    var colModelSettings = [
+            {name:"byoinCd", index:"byoinCd"},
+            {name:"byoinNm", index:"byoinNm", editable:true},
+            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
+            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+    ];
+    $("#searchByoinGrid").jqGrid({
+        datatype: "local",
+        width: "1024",
+        height: "240",
+        cellEdit: false,
+        rowNum: 10,
+        pager: "searchByoinPager",
+        multiselect: false,
+        colNames: colNames,
+        colModel: colModelSettings,
+        gridComplete: function(){
+            if(!isLoaded == true){
+                isLoaded = true;
+            }
+        },
+    }).navGrid('#searchByoinPager',{edit:false, add:false, del:false, search:false});
+});
+
+// ##############################
+// 検索ボタンクリック処理
+// ##############################
+$("a#btnByoinSearch").click(function() {
+    searchByoin();
+    return false;
+});
+
+// ##############################
+// 新規登録ボタンクリック処理
+// ##############################
+$("a#btnByoinNew").click(function() {
+    showByoinFormDialog();
+    return false;
+});
+
+// ##############################
+// グリッド更新ボタンクリック処理
+// ##############################
+function updateFormatter(cellval, options, rowdata) {
+    return "<img src='/images/database-reload-alt-1.png' onclick='showByoinFormDialog(" + rowdata['byoinCd'] + ")' title='更新' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// グリッド削除ボタンクリック処理
+// ##############################
+function deleteFormatter(cellval, options, rowdata) {
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeByoin(" + rowdata['byoinCd'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// 検索用メソッド
+// ##############################
+function searchByoin() {
+    var data = {};
+    var search = $("#byoinSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
+    $("#searchByoinGrid").clearGridData();
+    var param = {
+        datatype: "json",
+        url: "byoins/search.json",
+        postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
+        }
+    };
+    $("#searchByoinGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// ##############################
+// 更新用メソッド
+// ##############################
+function executeByoin(byoinCd) {
+    var url;
+    var type;
+    if(byoinCd != null) {
+        url = "byoins/" + byoinCd + ".json";
+        type = "PUT";
+    } else {
+        url = "byoins.json";
+        type = "POST";
+    }
+    var data = {};
+    var postData = {};
+    var byoin = $("#byoinForm").serializeArray();
+    $.each(byoin, function() {
+        data[this.name] = this.value;
+    });
+    // 更新ユーザー、登録ユーザーを設定する
+    data["koshinshaId"] = 1;
+    data["torokushaId"] = 1;
+
+    postData["byoin"] = data;
+    postData["id"] = byoinCd;
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: postData,
+        root: "byoin",
+        dataType: "json",
+        success: function(result) {
+            if(result != null) {
+                searchByoin();
+            }
+        }
+    });
+    $("#byoinFormDialog").dialog("close");
+    return false;
+}
+
+// ##############################
+// 登録用フォームダイアログオープン
+// ##############################
+function showByoinFormDialog(byoinCd) {
+
+    // 値の初期化
+    $("#byoinForm #byoinNm").val("");
+
+    if(byoinCd != null) {
+        var url = "byoins/" + byoinCd + ".json";
+        $.ajax({
+            scriptCharset:"UTF-8",
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result) {
+                if(result) {
+                    $("#byoinForm #byoinNm").val(result["byoinNm"]);
+                }
+                return false;
+            }
+        });
+    }
+    // ダイアログ表示
+    $("#byoinFormDialog").dialog({
+        //show: {effect: "pulsate", duration: 1000, times: 1},
+        width: "auto",
+        modal: true
+    });
+    $("#byoinFormDialog").focus();
+
+    // ダイアログ登録ボタン
+    $("a#btnByoinRegist").click(function() {
+        executeByoin(byoinCd);
+        return false;
+    });
+
+    // ダイアログ閉じるボタン
+    $("a#btnByoinClose").click(function() {
+        $("#byoinFormDialog").dialog("close");
+        return false;
+    });
+}
+
+// ##############################
+// 削除用メソッド
+// ##############################
+function removeByoin(byoinCd) {
+    if (confirm("削除します。よろしいですか？") == false) {
+        return false;
+    }
+    var url = "byoins/" + byoinCd + ".json";
+    var type = "DELETE";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: "id=" + byoinCd,
+        dataType: "json",
+        success: function(result) {
+        }
+    });
+    searchByoin();
+    return false;
+}
+
+</script>
