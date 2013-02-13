@@ -11,7 +11,7 @@ class KokyakusController < ApplicationController
   # GET /kokyakus/search
   # GET /kokyakus/search.json
   def search
-    conditions = Kokyaku.where("kokyakuId NOT ?", nil)
+    conditions = Kokyaku.where("1 = ?", 1)
     conditions = conditions.where("kokyakuId >= ?", params[:kokyakuIdFrom].to_i) if params[:kokyakuIdFrom] != ""
     conditions = conditions.where("kokyakuId <= ?", params[:kokyakuIdTo].to_i) if params[:kokyakuIdTo] != ""
     conditions = conditions.where("kokyakuNm LIKE ?", params[:kokyakuNm] + "%") if params[:kokyakuNm] != ""
