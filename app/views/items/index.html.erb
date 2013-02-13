@@ -59,8 +59,8 @@ $("a#btnReport").click(function() {
         //data: data,
         dataType: "json",
         success: function(result) {
-            if (result.length > 0){
-                
+            if (result != null){
+                window.open(result.fileName, "帳票出力");
             }
         }
     });

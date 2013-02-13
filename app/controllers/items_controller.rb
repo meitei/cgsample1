@@ -116,13 +116,14 @@ class ItemsController < ApplicationController
              :world_ja => 'report_solution')
     end
 
-    fileName = Time.now.strftime("%Y%m%d%H%S") + "_hello_world"
+    fileName = "tmp/" + Time.now.strftime("%Y%m%d%H%S") + "_hello_world.pdf"
 
-    # (G)
-    report.generate_file(File.join(Rails.root,'app', 'reports', 'tmp', fileName))
+    # (G)ファイル保存
+    report.generate_file(File.join(Rails.root, "public", fileName))
 
     # @items = Item.all
     fileInfo = {'fileName' => fileName}
+
    # render :json => fileInfo
     respond_to do |format|
       format.html
