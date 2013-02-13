@@ -82,7 +82,7 @@ class ByoinsController < ApplicationController
   end
 
   # ##############################
-  # 追加メソッド
+  # Search
   # params :
   # byoinCdFrom
   # byoinCdTo

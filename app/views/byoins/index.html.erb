@@ -98,6 +98,8 @@ function searchByoin() {
 
 // ##############################
 // 更新用メソッド
+// param:
+// byoinCd : 病院コード
 // ##############################
 function executeByoin(byoinCd) {
     var url;
@@ -140,6 +142,8 @@ function executeByoin(byoinCd) {
 
 // ##############################
 // 登録用フォームダイアログオープン
+// param:
+// byoinCd : 病院コード
 // ##############################
 function showByoinFormDialog(byoinCd) {
 
@@ -165,7 +169,12 @@ function showByoinFormDialog(byoinCd) {
     $("#byoinFormDialog").dialog({
         //show: {effect: "pulsate", duration: 1000, times: 1},
         width: "auto",
-        modal: true
+        modal: true,
+        buttons : {
+            '登録' :function() {
+                executeByoin(byoinCd);
+            }
+        }
     });
     $("#byoinFormDialog").focus();
 
@@ -184,6 +193,8 @@ function showByoinFormDialog(byoinCd) {
 
 // ##############################
 // 削除用メソッド
+// param:
+// byoinCd : 病院コード
 // ##############################
 function removeByoin(byoinCd) {
     if (confirm("削除します。よろしいですか？") == false) {
