@@ -57,16 +57,7 @@ $(function() {
                 });
                 isLoaded = true;
             }
-        },
-        // onSelectRow: function(rowid, iCol, cellcontent){
-        //     if(iCol == 18) {
-        //         showKokyakuFormDialog(cellcontent);
-        //     }
-        //     if(iCol == 19) {
-                
-        //     }
-        //     return false;
-        // }
+        }
     }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
 });
 
@@ -145,7 +136,7 @@ function executeKokyaku(kokyakuId) {
             }
         }
     });
-    $("#kokyakuFormDialog").dialog("close");
+    //$("#kokyakuFormDialog").dialog("close");
     return false;    
 }
 
@@ -185,13 +176,27 @@ function showKokyakuFormDialog(kokyakuId) {
     $("#kokyakuFormDialog").dialog({
         //show: {effect: "pulsate", duration: 1000, times: 1},
         width: "auto",
-        modal: true
+        modal: true,
+        buttons: {
+            "閉じる": function(){
+                $(this).dialog('close');
+            },
+            "登録": function(){
+                // クライアントバリデーション
+                if (!$("#kokyakuForm").validationEngine("validate")) {
+                    return;
+                }
+                executeKokyaku(kokyakuId);
+                $(this).dialog('close');
+            }
+        }
     });
+    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
+    //$(".ui-dialog-buttonset > button").addClass("btn-primary");
     $("#kokyakuFormDialog").focus();
 
     // ダイアログ登録ボタン
     $("a#btnCustomerRegist").click(function() {
-        executeKokyaku(kokyakuId);
         return false;
     });
 
@@ -199,7 +204,9 @@ function showKokyakuFormDialog(kokyakuId) {
     $("a#btnCustomerClose").click(function() {
         $("#kokyakuFormDialog").dialog("close");
         return false;
-    });    
+    });
+    // バリデート
+    $("#kokyakuForm").validationEngine("attach");
 }
 
 // 削除用メソッド

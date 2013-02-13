@@ -5,11 +5,11 @@
       <tr>
         <th style="width:100px;">顧客名称</th>
         <td style="width:250px;">
-          <input style="width:200px;" type="text" id="kokyakuNm" name="kokyakuNm" />
+          <input style="width:200px;" class="validate[required, maxSize[10]]" type="text" class="validate[maxSize[40]]" id="kokyakuNm" name="kokyakuNm" />
         </td>
         <th style="width:100px;">電話番号</th>
         <td style="width:250px;">
-         <input style="width:200px;" type="text" id="tel1" name="tel1" />
+         <input style="width:200px;" class="validate[maxSize[40], custom[phone]]" type="text" id="tel1" name="tel1" />
         </td>
       </tr>
       <tr>
@@ -19,7 +19,7 @@
         </td>
         <th style="width:100px;">携帯番号</th>
         <td style="width:200px;">
-          <input style="width:200px;" type="text" id="tel2" name="tel2" />
+          <input style="width:200px;" class="validate[maxSize[40], custom[phone]]" type="text" id="tel2" name="tel2" />
         </td>
       </tr>
       <tr>
@@ -33,7 +33,7 @@
         </td>
         <th style="width:100px;">FAX番号</th>
         <td style="width:200px;">
-          <input style="width:200px;" type="text" id="fax" name="fax" />
+          <input style="width:200px;" class="validate[maxSize[40], custom[phone]]" type="text" id="fax" name="fax" />
         </td>
       </tr>
       <tr>
@@ -53,7 +53,7 @@
       <tr>
         <th style="width:100px;">郵便番号</th>
         <td style="width:250px;">
-          <input style="width:100px;" type="text" id="postNo" name="postNo" />
+          <input style="width:100px;" class="validate[maxSize[10], custom[postal]]" type="text" id="postNo" name="postNo" />
         </td>
         <th style="width:100px;" scope="row">病名・障害名２</th>
         <td style="width:200px;">
@@ -97,13 +97,11 @@
     </table>
   </div>
   </form>
-
   <br />
-
-  <div>
+<!--   <div>
     <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerRegist" href="#" />登録</a></div>
     <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerClose" href="#" />閉じる</a></div>
-  </div>
+  </div> -->
 </div>
 <script>
 $(function() {
