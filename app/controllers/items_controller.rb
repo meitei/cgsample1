@@ -1,7 +1,7 @@
 # coding: utf-8
-require 'thinreports'
-require 'time'
-require "date"
+#require 'thinreports'
+#require 'time'
+#require "date"
 
 class ItemsController < ApplicationController
   # GET /items
@@ -89,60 +89,60 @@ class ItemsController < ApplicationController
   def report
 
     # (B) ThinReportレイアウトのテンプレートの場所を指定する
-    templateDir = File.join(Rails.root, 'app', 'reports')
-    report = ThinReports::Report.new :layout => File.join(templateDir,'hello_world')
+    #templateDir = File.join(Rails.root, 'app', 'reports')
+    #report = ThinReports::Report.new :layout => File.join(templateDir,'hello_world')
 
     # (C) 1ページ目
-    report.start_new_page
+    #report.start_new_page
 
-    report.page.item(:world).value('ThinReports')
-    report.page.item(:world_ja).value('report_solution')
+    # report.page.item(:world).value('ThinReports')
+    # report.page.item(:world_ja).value('report_solution')
 
-    # (D) 2ページ目
-    report.start_new_page do |page|
-      page.item(:world).value('Ruby').style(:color, '#ff0000')
-      page.item(:hello).style(:color, '#ff0000')
-      page.item(:world_ja).value('おらおら')
-    end
+    # # (D) 2ページ目
+    # report.start_new_page do |page|
+    #   page.item(:world).value('Ruby').style(:color, '#ff0000')
+    #   page.item(:hello).style(:color, '#ff0000')
+    #   page.item(:world_ja).value('おらおら')
+    # end
 
-    # (E) 3ページ目
-    report.start_new_page do
-      item(:world).value('Hello')
-      item(:hello).hide
-    end
+    # # (E) 3ページ目
+    # report.start_new_page do
+    #   item(:world).value('Hello')
+    #   item(:hello).hide
+    # end
 
-    # (F) 4ページ目
-    report.start_new_page do
-      values(:world    => 'ThinReports', 
-             :world_ja => 'report_solution')
-    end
+    # # (F) 4ページ目
+    # report.start_new_page do
+    #   values(:world    => 'ThinReports', 
+    #          :world_ja => 'report_solution')
+    # end
 
-    # 保存先
-    saveDir = File.join(Rails.root, "public", "tmp")
+    # # 保存先
+    # saveDir = File.join(Rails.root, "public", "tmp")
 
-    # tmp内のファイルを削除する
-    files = Dir.glob(File.join(saveDir,"*.pdf"))
-    files.each do |file|
-        fileDate = File.basename(file)[0..7] 
-        # 保存日数を指定する          (※とりあえず全部削除する)
-        delDate = (Date.today).strftime("%Y%m%d")
-        if fileDate <= delDate
-          File.delete(file)
-        end
-    end
+    # # tmp内のファイルを削除する
+    # files = Dir.glob(File.join(saveDir,"*.pdf"))
+    # files.each do |file|
+    #     fileDate = File.basename(file)[0..7] 
+    #     # 保存日数を指定する          (※とりあえず全部削除する)
+    #     delDate = (Date.today).strftime("%Y%m%d")
+    #     if fileDate <= delDate
+    #       File.delete(file)
+    #     end
+    # end
 
-    # ディレクトリの作成
-    if !File.exists?(saveDir)
-        Dir.mkdir(saveDir)
-    end
+    # # ディレクトリの作成
+    # if !File.exists?(saveDir)
+    #     Dir.mkdir(saveDir)
+    # end
 
-    fileName = Time.now.strftime("%Y%m%d%H%M%S") + "_hello_world.pdf"
+    # fileName = Time.now.strftime("%Y%m%d%H%M%S") + "_hello_world.pdf"
 
-    # (G)ファイル保存
-    report.generate_file(File.join(saveDir,fileName))
+    # # (G)ファイル保存
+    # report.generate_file(File.join(saveDir,fileName))
 
-    # http://serverName/tmp/fileName.pdf で読み込まれるようにする
-    fileInfo = {'fileName' =>"tmp/" + fileName}
+    # # http://serverName/tmp/fileName.pdf で読み込まれるようにする
+    # fileInfo = {'fileName' =>"tmp/" + fileName}
 
    # render :json => fileInfo
     respond_to do |format|
