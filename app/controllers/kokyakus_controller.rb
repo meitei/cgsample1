@@ -41,7 +41,8 @@ class KokyakusController < ApplicationController
     @kokyakus = conditions.find(
       :all, 
       :offset => start, 
-      :limit => limit)
+      :limit => limit,
+      :order => '"kokyakuId" DESC')
 
     @responce = {
       total: total_pages.to_s,
