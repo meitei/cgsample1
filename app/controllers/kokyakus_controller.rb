@@ -42,7 +42,7 @@ class KokyakusController < ApplicationController
       :all, 
       :offset => start, 
       :limit => limit,
-      :order => "kokyakuId DESC")
+      :order => "kokyakuid DESC")
 
     @responce = {
       total: total_pages.to_s,
