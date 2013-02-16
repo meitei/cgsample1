@@ -171,24 +171,24 @@ function showByoinFormDialog(byoinCd) {
         width: "auto",
         modal: true,
         buttons : {
+            "閉じる": function(){
+                $('#byoinForm input[type="text"], select, textarea').val('');
+                $(this).dialog('close');
+            },
             '登録' :function() {
+                // クライアントバリデーション
+                if (!$("#byoinForm").validationEngine("validate")) {
+                    return;
+                }
                 executeByoin(byoinCd);
+                $('#byoinForm input[type="text"], select, textarea').val('');
+                $(this).dialog('close');
             }
         }
     });
+    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     $("#byoinFormDialog").focus();
-
-    // ダイアログ登録ボタン
-    $("a#btnByoinRegist").click(function() {
-        executeByoin(byoinCd);
-        return false;
-    });
-
-    // ダイアログ閉じるボタン
-    $("a#btnByoinClose").click(function() {
-        $("#byoinFormDialog").dialog("close");
-        return false;
-    });
+    $("#byoinForm").validationEngine("attach");
 }
 
 // ##############################
