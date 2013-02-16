@@ -90,7 +90,8 @@ class ByoinsController < ApplicationController
   # ##############################
   def search
 
-    conditions = Byoin.where("\"byoinCd\" NOT ?", nil)
+    #conditions = Byoin.where("\"byoinCd\" NOT ?", nil)
+    conditions = Byoin.where("1 = ?", 1)
     conditions = conditions.where("\"byoinCd\" >= ?", params[:byoinCdFrom].to_i) if params[:byoinCdFrom] != ""
     conditions = conditions.where("\"byoinCd\" <= ?", params[:byoinCdTo].to_i) if params[:byoinCdTo] != ""
     conditions = conditions.where("\"byoinNm\" LIKE ?", params[:byoinNm] + "%") if params[:byoinNm] != ""
