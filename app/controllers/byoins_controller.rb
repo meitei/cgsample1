@@ -90,10 +90,10 @@ class ByoinsController < ApplicationController
   # ##############################
   def search
 
-    conditions = Byoin.where("byoinCd NOT ?", nil)
-    conditions = conditions.where("byoinCd >= ?", params[:byoinCdFrom].to_i) if params[:byoinCdFrom] != ""
-    conditions = conditions.where("byoinCd <= ?", params[:byoinCdTo].to_i) if params[:byoinCdTo] != ""
-    conditions = conditions.where("byoinNm LIKE ?", params[:byoinNm] + "%") if params[:byoinNm] != ""
+    conditions = Byoin.where("\"byoinCd\" NOT ?", nil)
+    conditions = conditions.where("\"byoinCd\" >= ?", params[:byoinCdFrom].to_i) if params[:byoinCdFrom] != ""
+    conditions = conditions.where("\"byoinCd\" <= ?", params[:byoinCdTo].to_i) if params[:byoinCdTo] != ""
+    conditions = conditions.where("\"byoinNm\" LIKE ?", params[:byoinNm] + "%") if params[:byoinNm] != ""
     logger.debug(conditions)
 
     records = conditions.count
@@ -110,7 +110,7 @@ class ByoinsController < ApplicationController
       :all, 
       :offset => start, 
       :limit => limit,
-      :order => "byoinCd DESC")
+      :order => "\"byoinCd\" DESC")
 
     @responce = {
       total: total_pages.to_s,
