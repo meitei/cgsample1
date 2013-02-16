@@ -177,7 +177,6 @@ function executeKokyaku(kokyakuId) {
 
 // 登録用フォームダイアログオープン
 function showKokyakuFormDialog(kokyakuId) {
-
     if(kokyakuId != null) {
         var url = "kokyakus/" + kokyakuId + ".json";
         $.ajax({
@@ -215,6 +214,7 @@ function showKokyakuFormDialog(kokyakuId) {
         buttons: {
             "閉じる": function(){
                 $('#kokyakuForm input[type="text"], select, textarea').val('');
+                $("#kokyakuForm").validate().resetForm();
                 $(this).dialog('close');
             },
             "登録": function(){
