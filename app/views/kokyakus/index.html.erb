@@ -10,6 +10,36 @@
 <%= render 'form2' %>
 <script>
 $(function() {
+    $("#kokyakuForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) { 
+            $(element).addClass(errorClass); 
+        }, 
+        unhighlight: function (element, errorClass, validClass) { 
+            $(element).removeClass(errorClass); 
+        },
+        rules: {
+            kokyakuNm: {required:true, maxlength:10},
+            kokyakuNmKana: {katakana:true, maxlength:10},
+            //seibetsu: {required:true, maxlength:10},
+            tanjoDt: {date:true},
+            postNo: {postnum:true, maxlength:8},
+            address1: {maxlength:100},
+            address2: {maxlength:100},
+            tel1: {telnum:true, maxlength:12},
+            tel2: {mobilenum:true, maxlength:13},
+            fax: {telnum:true, maxlength:12},
+            //shobyouCd1: {required:true, maxlength:10},
+            //shobyouCd2: {required:true, maxlength:10},
+            //shobyouCd3: {required:true, maxlength:10},
+            gakkoNm: {maxlength:20},
+            biko: {maxlength:100},
+        }
+        //messages: {
+        //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //}
+    });
     var isLoaded = false;
     var colNames = ["顧客ID","顧客名","顧客カナ","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","１","２","３","学校名","備考","更新者ID","登録者ID","",""];
     var colModelSettings = [
@@ -147,7 +177,6 @@ function executeKokyaku(kokyakuId) {
 
 // 登録用フォームダイアログオープン
 function showKokyakuFormDialog(kokyakuId) {
-
     if(kokyakuId != null) {
         var url = "kokyakus/" + kokyakuId + ".json";
         $.ajax({
@@ -185,13 +214,14 @@ function showKokyakuFormDialog(kokyakuId) {
         buttons: {
             "閉じる": function(){
                 $('#kokyakuForm input[type="text"], select, textarea').val('');
+                $("#kokyakuForm").validate().resetForm();
                 $(this).dialog('close');
             },
             "登録": function(){
                 // クライアントバリデーション
-                if (!$("#kokyakuForm").validationEngine("validate")) {
-                    return;
-                }
+                if ($("#kokyakuForm").valid() == false) {
+                     return false;
+                 }
                 executeKokyaku(kokyakuId);
                 $('#kokyakuForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
@@ -213,7 +243,7 @@ function showKokyakuFormDialog(kokyakuId) {
         return false;
     });
     // バリデート
-    $("#kokyakuForm").validationEngine("attach");
+    //$("#kokyakuForm").validationEngine("attach");
 }
 
 // 削除用メソッド
