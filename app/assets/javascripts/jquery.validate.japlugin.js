@@ -64,13 +64,15 @@ jQuery.validator.addMethod("alphanum", function(value, element) {
 
 //郵便番号（例:012-3456）
 jQuery.validator.addMethod("postnum", function(value, element) {
-	return this.optional(element) || /^¥d{3}¥-¥d{4}$/.test(value);
+	//return this.optional(element) || /^¥d{3}-¥d{4}$/.test(value);
+	return this.optional(element) || /^[0-9-]{8}$/.test(value);
 	}, "郵便番号を入力してください（例:123-4567）"
 );
 
 //携帯番号（例:010-2345-6789）
 jQuery.validator.addMethod("mobilenum", function(value, element) {
-	return this.optional(element) || /^0¥d0-¥d{4}-¥d{4}$/.test(value);
+	//return this.optional(element) || /^0¥d0-¥d{4}-¥d{4}$/.test(value);
+	return this.optional(element) || /^[0-9-]{13}$/.test(value);
 	}, "携帯番号を入力してください（例:010-2345-6789）"
 );
 
