@@ -1,5 +1,9 @@
 JqgridSample::Application.routes.draw do
 
+  resources :hoken_shubetsus do
+    get 'search', :on => :collection
+  end
+
   resources :byoins do
     get 'search', :on => :collection
   end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  hokenShubetsuCd: 1
+  hokenShubetsuNm: MyString
+  hyojiJyun: 1
+  koshinshaId: 1
+  torokushaId: 1
+
+two:
+  hokenShubetsuCd: 1
+  hokenShubetsuNm: MyString
+  hyojiJyun: 1
+  koshinshaId: 1
+  torokushaId: 1

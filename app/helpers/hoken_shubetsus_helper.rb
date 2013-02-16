@@ -1,0 +1,2 @@
+module HokenShubetsusHelper
+end
