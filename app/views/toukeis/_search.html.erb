@@ -1,0 +1,48 @@
+<div id="toukeiSearch" style="width:1024px;">
+  <form id="toukeiSearchForm">
+  <div>
+    <table style="width:100%">
+      <tr>
+        <th style="width:75px;">対象期間</th>
+        <td style="width:150px;">
+          <input style="width:75px;" type="text" id="targetSpnFrom" name="targetSpnFrom" />&nbsp;〜
+          <input style="width:80px;" type="text" id="targetSpnTo" name="targetSpnTo" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:75px;">集計単位</th>
+        <td style="width:200px;">
+          <input type="radio" id="sumUnt" name="sumUnt" />制作担当別
+          <input type="radio" id="sumUnt" name="sumUnt" />病院別
+          <input type="radio" id="sumUnt" name="sumUnt" />製品別
+          <input type="radio" id="sumUnt" name="sumUnt" />パーツ別
+          <input type="radio" id="sumUnt" name="sumUnt" />見積製品項目別
+        </td>
+        <th style="width:75px;">出力条件</th>
+        <td style="width:150px;">
+          <input type="radio" id="outCond" name="outCond" />月別
+          <input type="radio" id="outCond" name="outCond" />年度別
+          <input type="radio" id="outCond" name="outCond" />総合計
+        </td>
+      </tr>
+    </table>
+    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnToukeiSearch" href="#" />検索</a></div>
+    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnToukeiClear" href="#" />条件クリア</a></div>
+  </div>
+  <div>
+  </div>
+  </form>
+</div>
+<script>
+$(function() {
+  $("#targetSpnFrom").datepicker();
+  $("#targetSpnTo").datepicker();
+  // $("#kokyakuSearch").accordion({
+  //   header: "h5",
+  //   collapsible: true,
+  //   animated: "bounceslide",
+  //   active: 4
+  // });
+});
+
+</script>

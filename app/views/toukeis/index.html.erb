@@ -1,0 +1,237 @@
+<div style="width:1024;">
+<%= render 'search' %>
+<div style="width:1024px; clear:both;" id="customer">
+    <table id="searchToukeiGrid"></table>
+    <div id="searchToukeiPager"></div>
+</div>
+
+<div style="width:1024px; margin:5px;">
+    <a style="float:right;" class="btn btn-primary" id="btnShowGraph" href="#" />グラフ表示</a>
+</div>
+
+<!--
+<div style="width:1024px; margin:5px;">
+    <a style="float:right;" class="btn btn-primary" id="btnCustomerNew" href="#" />新規追加</a>
+</div>
+-->
+<%= render 'form2' %>
+<script>
+$(function() {
+    $("#toukeiSearchForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass(errorClass);
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass(errorClass);
+        },
+        rules: {
+            targetSpnFrom: {date:true},
+            targetSpnTo: {date:true},
+        }
+        //messages: {
+        //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //}
+    });
+    var isLoaded = false;
+    var colNames = ["集計単位","金額","台数"];
+    var colModelSettings = [
+            {name:"sumUnt", index:"sumUnt"},
+            {name:"kingaku", index:"kingaku", editable:false},
+            {name:"daisu", index:"daisu", editable:false}
+    ];
+    $("#searchToukeiGrid").jqGrid({
+        datatype: "local",
+        //url: "kokyakus.json",
+        width: "1024",
+        height: "240",
+        cellEdit: false,
+        rowNum: 10,
+        //rowList:[10,20,30],
+        pager: "searchToukeiPager",
+        multiselect: false,
+        //viewrecords: true,
+        colNames: colNames,
+        colModel: colModelSettings
+    }).navGrid('#searchToukeiPager',{edit:false, add:false, del:false, search:false});
+});
+
+$("a#btnToukeiSearch").click(function() {
+    searchToukei();
+    return false;
+});
+
+$("a#btnToukeiClear").click(function() {
+    $('#toukeiSearchForm input[type="text"]').val('');
+    return false;
+});
+
+$("a#btnShowGraph").click(function() {
+    showToukeiGraphDialog();
+    return false;
+});
+
+function updateFormatter(cellval, options, rowdata) {
+    return "<img src='/images/database-reload-alt-1.png' onclick='showKokyakuFormDialog(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
+}
+
+function deleteFormatter(cellval, options, rowdata) {
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeKokyaku(" + rowdata['kokyakuId'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+// 検索用メソッド
+function searchToukei() {
+    var data = {};
+    var search = $("#toukeiSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
+    $("#searchToukeiGrid").clearGridData();
+    var param = {
+        datatype: "json",
+        url: "toukeis/search.json",
+        postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
+        }
+    };
+    $("#searchToukeiGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// グラフ用フォームダイアログオープン
+function showToukeiGraphDialog(sumNendo, sumUnt, sumJoken) {
+    // if(kokyakuId != null) {
+    //     var url = "kokyakus/" + kokyakuId + ".json";
+    //     $.ajax({
+    //         scriptCharset:"UTF-8",
+    //         type: "GET",
+    //         url: url,
+    //         dataType: "json",
+    //         success: function(result) {
+    //             if(result) {
+    //                 $("#kokyakuForm #kokyakuNm").val(result["kokyakuNm"]);
+    //                 $("#kokyakuForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
+    //                 $("#kokyakuForm #seibetsu").val(result["seibetsu"]);
+    //                 $("#kokyakuForm #tanjoDt").val(result["tanjoDt"]);
+    //                 $("#kokyakuForm #postNo").val(result["postNo"]);
+    //                 $("#kokyakuForm #address1").val(result["address1"]);
+    //                 $("#kokyakuForm #address2").val(result["address2"]);
+    //                 $("#kokyakuForm #tel1").val(result["tel1"]);
+    //                 $("#kokyakuForm #tel2").val(result["tel2"]);
+    //                 $("#kokyakuForm #fax").val(result["fax"]);
+    //                 $("#kokyakuForm #shobyouCd1").val(result["shobyouCd1"]);
+    //                 $("#kokyakuForm #shobyouCd2").val(result["shobyouCd2"]);
+    //                 $("#kokyakuForm #shobyouCd3").val(result["shobyouCd3"]);
+    //                 $("#kokyakuForm #gakkoNm").val(result["gakkoNm"]);
+    //                 $("#kokyakuForm #biko").val(result["biko"]);
+    //             }
+    //             return false;
+    //         }
+    //     });
+    // }
+    // ダイアログ表示
+    $("#toukeiGraphDialog").dialog({
+        //show: {effect: "pulsate", duration: 1000, times: 1},
+        width: "auto",
+        modal: true,
+        buttons: {
+            "閉じる": function(){
+                $(this).dialog('close');
+            }
+        }
+    });
+    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
+    //$(".ui-dialog-buttonset > button").addClass("btn-primary");
+    $("#toukeiGraphDialog").focus();
+
+    // // ダイアログ登録ボタン
+    // $("a#btnCustomerRegist").click(function() {
+    //     return false;
+    // });
+
+    // Horizontal bar chart
+    // var plot3 = $.jqplot('chart3', [
+    //     [[2,1], [4,2], [6,3], [3,4]],
+    //     [[5,1], [1,2], [3,3], [4,4]],
+    //     [[4,1], [7,2], [1,3], [2,4]]], {
+    //     seriesDefaults: {
+    //         renderer: $.jqplot.BarRenderer,
+    //         // Show point labels to the right ('e'ast) of each bar.
+    //         // edgeTolerance of -15 allows labels flow outside the grid
+    //         // up to 15 pixels.  If they flow out more than that, they
+    //         // will be hidden.
+    //         pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
+    //         // Rotate the bar shadow as if bar is lit from top right.
+    //         shadowAngle: 135,
+    //         // Here's where we tell the chart it is oriented horizontally.
+    //         rendererOptions: {
+    //             barDirection: 'horizontal'
+    //         }
+    //     },
+    //     axes: {
+    //         yaxis: {
+    //             renderer: $.jqplot.CategoryAxisRenderer
+    //         }
+    //     }
+    // });
+
+  var s1 = [2, 6, 7, 10];
+  var s2 = [7, 5, 3, 4];
+  var s3 = [14, 9, 3, 8];
+  plot3 = $.jqplot('chart3', [s1, s2, s3], {
+    // Tell the plot to stack the bars.
+    stackSeries: true,
+    captureRightClick: true,
+    seriesDefaults:{
+      renderer:$.jqplot.BarRenderer,
+      rendererOptions: {
+          // Put a 30 pixel margin between bars.
+          barMargin: 30,
+          // Highlight bars when mouse button pressed.
+          // Disables default highlighting on mouse over.
+          highlightMouseDown: true
+      },
+      pointLabels: {show: true}
+    },
+    axes: {
+      xaxis: {
+          renderer: $.jqplot.CategoryAxisRenderer
+      },
+      yaxis: {
+        // Don't pad out the bottom of the data range.  By default,
+        // axes scaled as if data extended 10% above and below the
+        // actual range to prevent data points right on grid boundaries.
+        // Don't want to do that here.
+        padMin: 0
+      }
+    },
+    legend: {
+      show: true,
+      location: 'e',
+      placement: 'outside'
+    }
+  });
+  // Bind a listener to the "jqplotDataClick" event.  Here, simply change
+  // the text of the info3 element to show what series and ponit were
+  // clicked along with the data for that point.
+  $('#chart3').bind('jqplotDataClick',
+    function (ev, seriesIndex, pointIndex, data) {
+      $('#info3').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+    }
+  );
+
+    // ダイアログ閉じるボタン
+    $("a#btnToukeiClose").click(function() {
+        $("#toukeiGraphDialog").dialog("close");
+        return false;
+    });
+    // バリデート
+    //$("#kokyakuForm").validationEngine("attach");
+}
+
+</script>

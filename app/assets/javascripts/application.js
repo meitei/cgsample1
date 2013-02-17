@@ -16,4 +16,10 @@
 //= require twitter/bootstrap
 //= require jquery.validate
 //= require jquery.validate.japlugin
+
+//= require jquery.jqplot
+//= require ./plugins/jqplot.barRenderer
+//= require ./plugins/jqplot.categoryAxisRenderer
+//= require ./plugins/jqplot.pointLabels
+
 //= require_tree .
