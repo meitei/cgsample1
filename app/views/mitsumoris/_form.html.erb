@@ -1,0 +1,25 @@
+<%= form_for(@mitsumori) do |f| %>
+  <% if @mitsumori.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mitsumori.errors.count, "error") %> prohibited this mitsumori from being saved:</h2>
+
+      <ul>
+      <% @mitsumori.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mitsumoriId %><br />
+    <%= f.number_field :mitsumoriId %>
+  </div>
+  <div class="field">
+    <%= f.label :kokyakuId %><br />
+    <%= f.number_field :kokyakuId %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

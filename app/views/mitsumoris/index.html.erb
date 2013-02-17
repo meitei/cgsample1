@@ -1,16 +1,16 @@
 <div style="width:1024;">
 <%= render 'search' %>
-<div style="width:1024px; clear:both;" id="customer">
-    <table id="searchCustomerGrid"></table>        
-    <div id="searchCustomerPager"></div>
+<div style="width:1024px; clear:both;" id="estimate">
+    <table id="searchEstimateGrid"></table>        
+    <div id="searchEstimatePager"></div>
 </div>
 <div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnCustomerNew" href="#" />新規追加</a>
+    <a style="float:right;" class="btn btn-primary" id="btnEstimateNew" href="#" />新規追加</a>
 </div>
 <%= render 'form2' %>
 <script>
 $(function() {
-    $("#kokyakuForm").validate({
+    $("#estimateForm").validate({
         errorClass:'error',
         errorElement:'label',
         highlight: function (element, errorClass, validClass) { 
@@ -64,7 +64,7 @@ $(function() {
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
             {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
     ];
-    $("#searchCustomerGrid").jqGrid({
+    $("#searchEstimateGrid").jqGrid({
         datatype: "local",
         //url: "kokyakus.json",
         width: "1024",
@@ -72,14 +72,14 @@ $(function() {
         cellEdit: false,
         rowNum: 10,
         //rowList:[10,20,30], 
-        pager: "searchCustomerPager",
+        pager: "searchEstimatePager",
         multiselect: false,
         //viewrecords: true,                                   
         colNames: colNames,
         colModel: colModelSettings,
         gridComplete: function(){
             if(!isLoaded == true){
-                $("#searchCustomerGrid").jqGrid("setGroupHeaders", {
+                $("#searchEstimateGrid").jqGrid("setGroupHeaders", {
                     useColSpanStyle: true,
                     groupHeaders: [
                         {startColumnName: "shobyouCd1", numberOfColumns: 3, titleText:"病名・障害名"}
@@ -88,40 +88,40 @@ $(function() {
                 isLoaded = true;
             }
         }
-    }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
+    }).navGrid('#searchEstimatePager',{edit:false, add:false, del:false, search:false});
 });
 
-$("a#btnCustomerSearch").click(function() {
+$("a#btnEstimateSearch").click(function() {
     searchKokyaku();
     return false;
 });
 
-$("a#btnCustomerClear").click(function() {
+$("a#btnEstimateClear").click(function() {
     $('#kokyakuSearchForm input[type="text"]').val('');
     return false;
 });
 
-$("a#btnCustomerNew").click(function() {
-    showKokyakuFormDialog();
+$("a#btnEstimateNew").click(function() {
+    showEstimateFormDialog();
     return false;
 });
 
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src='/images/database-reload-alt-1.png' onclick='showKokyakuFormDialog(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='showEstimateFormDialog(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 function deleteFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-remove-alt-1.png' onclick='removeKokyaku(" + rowdata['kokyakuId'] + ")' title='削除' style='width:16px; height:16px'>";
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeEstimate(" + rowdata['kokyakuId'] + ")' title='削除' style='width:16px; height:16px'>";
 }
 
 // 検索用メソッド
-function searchKokyaku() {
+function searchEstimate() {
     var data = {};
-    var search = $("#kokyakuSearchForm").serializeArray();
+    var search = $("#estimateSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
-    $("#searchCustomerGrid").clearGridData();
+    $("#searchEstimateGrid").clearGridData();
     var param = {
         datatype: "json",
         url: "kokyakus/search.json",
@@ -134,11 +134,11 @@ function searchKokyaku() {
             repeatitems: false
         }
     };
-    $("#searchCustomerGrid").setGridParam(param).trigger("reloadGrid");
+    $("#searchEstimateGrid").setGridParam(param).trigger("reloadGrid");
 }
 
 // 更新用メソッド
-function executeKokyaku(kokyakuId) {
+function executeEstimate(kokyakuId) {
     var url;
     var type;
     if(kokyakuId != null) {
@@ -150,7 +150,7 @@ function executeKokyaku(kokyakuId) {
     }
     var data = {};
     var postData = {};
-    var kokyaku = $("#kokyakuForm").serializeArray();
+    var kokyaku = $("#estimateForm").serializeArray();
     $.each(kokyaku, function() {
         data[this.name] = this.value;
     });
@@ -171,12 +171,12 @@ function executeKokyaku(kokyakuId) {
             }
         }
     });
-    //$("#kokyakuFormDialog").dialog("close");
+    //$("#estimateFormDialog").dialog("close");
     return false;    
 }
 
 // 登録用フォームダイアログオープン
-function showKokyakuFormDialog(kokyakuId) {
+function showEstimateFormDialog(kokyakuId) {
     if(kokyakuId != null) {
         var url = "kokyakus/" + kokyakuId + ".json";
         $.ajax({
@@ -186,69 +186,69 @@ function showKokyakuFormDialog(kokyakuId) {
             dataType: "json",
             success: function(result) {
                 if(result) {
-                    $("#kokyakuForm #kokyakuNm").val(result["kokyakuNm"]);
-                    $("#kokyakuForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
-                    $("#kokyakuForm #seibetsu").val(result["seibetsu"]);
-                    $("#kokyakuForm #tanjoDt").val(result["tanjoDt"]);
-                    $("#kokyakuForm #postNo").val(result["postNo"]);
-                    $("#kokyakuForm #address1").val(result["address1"]);
-                    $("#kokyakuForm #address2").val(result["address2"]);
-                    $("#kokyakuForm #tel1").val(result["tel1"]);
-                    $("#kokyakuForm #tel2").val(result["tel2"]);
-                    $("#kokyakuForm #fax").val(result["fax"]);
-                    $("#kokyakuForm #shobyouCd1").val(result["shobyouCd1"]);
-                    $("#kokyakuForm #shobyouCd2").val(result["shobyouCd2"]);
-                    $("#kokyakuForm #shobyouCd3").val(result["shobyouCd3"]);
-                    $("#kokyakuForm #gakkoNm").val(result["gakkoNm"]);
-                    $("#kokyakuForm #biko").val(result["biko"]);
+                    $("#estimateForm #kokyakuNm").val(result["kokyakuNm"]);
+                    $("#estimateForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
+                    $("#estimateForm #seibetsu").val(result["seibetsu"]);
+                    $("#estimateForm #tanjoDt").val(result["tanjoDt"]);
+                    $("#estimateForm #postNo").val(result["postNo"]);
+                    $("#estimateForm #address1").val(result["address1"]);
+                    $("#estimateForm #address2").val(result["address2"]);
+                    $("#estimateForm #tel1").val(result["tel1"]);
+                    $("#estimateForm #tel2").val(result["tel2"]);
+                    $("#estimateForm #fax").val(result["fax"]);
+                    $("#estimateForm #shobyouCd1").val(result["shobyouCd1"]);
+                    $("#estimateForm #shobyouCd2").val(result["shobyouCd2"]);
+                    $("#estimateForm #shobyouCd3").val(result["shobyouCd3"]);
+                    $("#estimateForm #gakkoNm").val(result["gakkoNm"]);
+                    $("#estimateForm #biko").val(result["biko"]);
                 }
                 return false;
             }
         });
     }
     // ダイアログ表示
-    $("#kokyakuFormDialog").dialog({
+    $("#estimateFormDialog").dialog({
         show: {effect: "clip"},
         hide: {effect: "clip"},
         width: "auto",
         modal: true,
         buttons: {
             "閉じる": function(){
-                $('#kokyakuForm input[type="text"], select, textarea').val('');
-                $("#kokyakuForm").validate().resetForm();
+                $('#estimateForm input[type="text"], select, textarea').val('');
+                $("#estimateForm").validate().resetForm();
                 $(this).dialog('close');
             },
             "登録": function(){
                 // クライアントバリデーション
-                if ($("#kokyakuForm").valid() == false) {
+                if ($("#estimateForm").valid() == false) {
                      return false;
                  }
-                executeKokyaku(kokyakuId);
-                $('#kokyakuForm input[type="text"], select, textarea').val('');
+                executeEstimate(kokyakuId);
+                $('#estimateForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
             }
         }
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     //$(".ui-dialog-buttonset > button").addClass("btn-primary");
-    $("#kokyakuFormDialog").focus();
+    $("#estimateFormDialog").focus();
 
     // ダイアログ登録ボタン
-    $("a#btnCustomerRegist").click(function() {
+    $("a#btnEstimateRegist").click(function() {
         return false;
     });
 
     // ダイアログ閉じるボタン
-    $("a#btnCustomerClose").click(function() {
-        $("#kokyakuFormDialog").dialog("close");
+    $("a#btnEstimateClose").click(function() {
+        $("#estimateFormDialog").dialog("close");
         return false;
     });
     // バリデート
-    //$("#kokyakuForm").validationEngine("attach");
+    //$("#estimateForm").validationEngine("attach");
 }
 
 // 削除用メソッド
-function removeKokyaku(kokyakuId) {
+function removeEstimate(kokyakuId) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
@@ -263,7 +263,7 @@ function removeKokyaku(kokyakuId) {
         success: function(result) {
         }
     });
-    searchKokyaku();
+    searchEstimate();
     return false;    
 }
 

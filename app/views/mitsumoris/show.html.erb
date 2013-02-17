@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Mitsumoriid:</b>
+  <%= @mitsumori.mitsumoriId %>
+</p>
+
+<p>
+  <b>Kokyakuid:</b>
+  <%= @mitsumori.kokyakuId %>
+</p>
+
+
+<%= link_to 'Edit', edit_mitsumori_path(@mitsumori) %> |
+<%= link_to 'Back', mitsumoris_path %>
