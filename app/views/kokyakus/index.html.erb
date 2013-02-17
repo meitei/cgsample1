@@ -208,7 +208,8 @@ function showKokyakuFormDialog(kokyakuId) {
     }
     // ダイアログ表示
     $("#kokyakuFormDialog").dialog({
-        //show: {effect: "pulsate", duration: 1000, times: 1},
+        show: {effect: "clip"},
+        hide: {effect: "clip"},
         width: "auto",
         modal: true,
         buttons: {
