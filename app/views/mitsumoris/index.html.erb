@@ -1,0 +1,269 @@
+<div style="width:1024;">
+<%= render 'search' %>
+<div style="width:1024px; clear:both;" id="estimate">
+    <table id="searchEstimateGrid"></table>        
+    <div id="searchEstimatePager"></div>
+</div>
+<div style="width:1024px; margin:5px;">
+    <a style="float:right;" class="btn btn-primary" id="btnEstimateNew" href="#" />新規追加</a>
+</div>
+<%= render 'form2' %>
+<script>
+$(function() {
+    $("#estimateForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) { 
+            $(element).addClass(errorClass); 
+        }, 
+        unhighlight: function (element, errorClass, validClass) { 
+            $(element).removeClass(errorClass); 
+        },
+        rules: {
+            kokyakuNm: {required:true, maxlength:10},
+            kokyakuNmKana: {katakana:true, maxlength:10},
+            //seibetsu: {required:true, maxlength:10},
+            tanjoDt: {date:true},
+            postNo: {postnum:true, maxlength:8},
+            address1: {maxlength:100},
+            address2: {maxlength:100},
+            tel1: {telnum:true, maxlength:12},
+            tel2: {mobilenum:true, maxlength:13},
+            fax: {telnum:true, maxlength:12},
+            //shobyouCd1: {required:true, maxlength:10},
+            //shobyouCd2: {required:true, maxlength:10},
+            //shobyouCd3: {required:true, maxlength:10},
+            gakkoNm: {maxlength:20},
+            biko: {maxlength:100},
+        }
+        //messages: {
+        //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //}
+    });
+    var isLoaded = false;
+    var colNames = ["顧客ID","顧客名","顧客カナ","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","１","２","３","学校名","備考","更新者ID","登録者ID","",""];
+    var colModelSettings = [
+            {name:"kokyakuId", index:"kokyakuId"},
+            {name:"kokyakuNm", index:"kokyakuNm", editable:true},
+            {name:"kokyakuNmKana", index:"kokyakuNmKana", editable:true},
+            {name:"seibetsu", index:"seibetsu", editable:true, edittype:"select"},
+            {name:"tanjoDt", index:"tanjoDt", editable:true, editrules:{date:true}},
+            {name:"postNo", index:"postNo", editable:true, hidden:true, editrules:{edithidden:true}},
+            {name:"address1", index:"address1", editable:true},
+            {name:"address2", index:"address2", editable:true, hidden:true, editrules:{edithidden:true}},
+            {name:"tel1", index:"tel1", editable:true},
+            {name:"tel2", index:"tel2", editable:true, hidden:true, editrules:{edithidden:true}},
+            {name:"fax", index:"fax", editable:true, hidden:true, editrules:{edithidden:true}},
+            {name:"shobyouCd1", index:"shobyouCd1", editable:true},
+            {name:"shobyouCd2", index:"shobyouCd2", editable:true},
+            {name:"shobyouCd3", index:"shobyouCd3", editable:true},
+            {name:"gakkoNm", index:"gakkoNm", editable:true},
+            {name:"biko", index:"biko", editable:true, hidden:true, edittype:"textarea", editrules:{edithidden:true}},
+            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
+            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+    ];
+    $("#searchEstimateGrid").jqGrid({
+        datatype: "local",
+        //url: "kokyakus.json",
+        width: "1024",
+        height: "240",
+        cellEdit: false,
+        rowNum: 10,
+        //rowList:[10,20,30], 
+        pager: "searchEstimatePager",
+        multiselect: false,
+        //viewrecords: true,                                   
+        colNames: colNames,
+        colModel: colModelSettings,
+        gridComplete: function(){
+            if(!isLoaded == true){
+                $("#searchEstimateGrid").jqGrid("setGroupHeaders", {
+                    useColSpanStyle: true,
+                    groupHeaders: [
+                        {startColumnName: "shobyouCd1", numberOfColumns: 3, titleText:"病名・障害名"}
+                    ]
+                });
+                isLoaded = true;
+            }
+        }
+    }).navGrid('#searchEstimatePager',{edit:false, add:false, del:false, search:false});
+});
+
+$("a#btnEstimateSearch").click(function() {
+    searchKokyaku();
+    return false;
+});
+
+$("a#btnEstimateClear").click(function() {
+    $('#kokyakuSearchForm input[type="text"]').val('');
+    return false;
+});
+
+$("a#btnEstimateNew").click(function() {
+    showEstimateFormDialog();
+    return false;
+});
+
+function updateFormatter(cellval, options, rowdata) {
+    return "<img src='/images/database-reload-alt-1.png' onclick='showEstimateFormDialog(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
+}
+
+function deleteFormatter(cellval, options, rowdata) {
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeEstimate(" + rowdata['kokyakuId'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+// 検索用メソッド
+function searchEstimate() {
+    var data = {};
+    var search = $("#estimateSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
+    $("#searchEstimateGrid").clearGridData();
+    var param = {
+        datatype: "json",
+        url: "kokyakus/search.json",
+        postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
+        }
+    };
+    $("#searchEstimateGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// 更新用メソッド
+function executeEstimate(kokyakuId) {
+    var url;
+    var type;
+    if(kokyakuId != null) {
+        url = "kokyakus/" + kokyakuId + ".json";
+        type = "PUT";
+    } else {
+        url = "kokyakus.json";
+        type = "POST";
+    }
+    var data = {};
+    var postData = {};
+    var kokyaku = $("#estimateForm").serializeArray();
+    $.each(kokyaku, function() {
+        data[this.name] = this.value;
+    });
+    data["koshinshaId"] = 1;
+    data["torokushaId"] = 1;
+    postData["kokyaku"] = data;
+    postData["id"] = kokyakuId;
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: postData,
+        root: "kokyaku",
+        dataType: "json",
+        success: function(result) {
+            if(result != null) {
+                searchKokyaku();
+            }
+        }
+    });
+    //$("#estimateFormDialog").dialog("close");
+    return false;    
+}
+
+// 登録用フォームダイアログオープン
+function showEstimateFormDialog(kokyakuId) {
+    if(kokyakuId != null) {
+        var url = "kokyakus/" + kokyakuId + ".json";
+        $.ajax({
+            scriptCharset:"UTF-8",
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result) {
+                if(result) {
+                    $("#estimateForm #kokyakuNm").val(result["kokyakuNm"]);
+                    $("#estimateForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
+                    $("#estimateForm #seibetsu").val(result["seibetsu"]);
+                    $("#estimateForm #tanjoDt").val(result["tanjoDt"]);
+                    $("#estimateForm #postNo").val(result["postNo"]);
+                    $("#estimateForm #address1").val(result["address1"]);
+                    $("#estimateForm #address2").val(result["address2"]);
+                    $("#estimateForm #tel1").val(result["tel1"]);
+                    $("#estimateForm #tel2").val(result["tel2"]);
+                    $("#estimateForm #fax").val(result["fax"]);
+                    $("#estimateForm #shobyouCd1").val(result["shobyouCd1"]);
+                    $("#estimateForm #shobyouCd2").val(result["shobyouCd2"]);
+                    $("#estimateForm #shobyouCd3").val(result["shobyouCd3"]);
+                    $("#estimateForm #gakkoNm").val(result["gakkoNm"]);
+                    $("#estimateForm #biko").val(result["biko"]);
+                }
+                return false;
+            }
+        });
+    }
+    // ダイアログ表示
+    $("#estimateFormDialog").dialog({
+        //show: {effect: "pulsate", duration: 1000, times: 1},
+        width: "auto",
+        modal: true,
+        buttons: {
+            "閉じる": function(){
+                $('#estimateForm input[type="text"], select, textarea').val('');
+                $("#estimateForm").validate().resetForm();
+                $(this).dialog('close');
+            },
+            "登録": function(){
+                // クライアントバリデーション
+                if ($("#estimateForm").valid() == false) {
+                     return false;
+                 }
+                executeEstimate(kokyakuId);
+                $('#estimateForm input[type="text"], select, textarea').val('');
+                $(this).dialog('close');
+            }
+        }
+    });
+    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
+    //$(".ui-dialog-buttonset > button").addClass("btn-primary");
+    $("#estimateFormDialog").focus();
+
+    // ダイアログ登録ボタン
+    $("a#btnEstimateRegist").click(function() {
+        return false;
+    });
+
+    // ダイアログ閉じるボタン
+    $("a#btnEstimateClose").click(function() {
+        $("#estimateFormDialog").dialog("close");
+        return false;
+    });
+    // バリデート
+    //$("#estimateForm").validationEngine("attach");
+}
+
+// 削除用メソッド
+function removeEstimate(kokyakuId) {
+    if (confirm("削除します。よろしいですか？") == false) {
+        return false;
+    }
+    var url = "kokyakus/" + kokyakuId + ".json";
+    var type = "DELETE";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: "id=" + kokyakuId,
+        dataType: "json",
+        success: function(result) {
+        }
+    });
+    searchEstimate();
+    return false;    
+}
+
+</script>

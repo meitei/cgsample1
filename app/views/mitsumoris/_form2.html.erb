@@ -1,0 +1,81 @@
+<div id="estimateFormDialog" title="顧客フォーム画面" style="display: none;">
+<div id="estimateForm" class="jqwizard">
+    <div class="jqwizard_panel">
+        <div class="jqwizard_content" id="edit_as_you_like_1">
+            <h3>Step 1</h3>
+            <div class="edit_as_you_like">step 1 の内容</div>
+        </div>
+        <div class="jqwizard_content" id="edit_as_you_like_2">
+            <h3>Step 2</h3>
+            <div class="edit_as_you_like">step 2 の内容</div>
+        </div>
+        <div class="jqwizard_content" id="edit_as_you_like_3">
+            <h3>Step 3</h3>
+            <div class="edit_as_you_like">step 3 の内容</div>
+        </div>
+        <div class="jqwizard_content" id="edit_as_you_like_4">
+            <h3>Step 4</h3>
+            <div class="edit_as_you_like">step 4 の内容</div>
+        </div>
+
+    </div>
+    <div class="jqwizard_buttons">
+        <button type="button" class="jqwizard_previous"> <img src="/images/jqwizard/arrow_left.png" alt="" /> Back </button>
+        <button type="button" class="jqwizard_next"> Next <img src="/images/jqwizard/arrow_right.png" alt=""/> </button>
+    </div>
+    <div class="jqwizard_navi">
+        <ul>
+            <li><a href="#edit_as_you_like_1" title=""><em>Step 1: XXX</em><span>step 1 の内容</span></a></li>
+            <li><a href="#edit_as_you_like_2" title=""><em>Step 2: XXX</em><span>step 2 の内容</span></a></li>
+            <li><a href="#edit_as_you_like_3" title=""><em>Step 3: XXX</em><span>step 3 の内容</span></a></li>
+            <li><a href="#edit_as_you_like_4" title=""><em>Step 4: XXX</em><span>step 4 の内容</span></a></li>
+
+        </ul>
+    </div>
+</div>
+  <br />
+<!--   <div>
+    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerRegist" href="#" />登録</a></div>
+    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerClose" href="#" />閉じる</a></div>
+  </div> -->
+</div>
+<style type="text/css">
+.jqwizard {
+    width:690px;
+}
+.jqwizard_panel {
+    padding:5px;
+    background-color:#F5F5F5;
+}
+.edit_as_you_like {
+    height:300px;
+}
+.jqwizard_buttons {
+    margin:10px;
+}
+
+/*
+ * このサンプル用の画像パスを指定
+ */
+.jqwizard_navi li {
+  background-image: url(/images/jqwizard/navBtn.gif);
+}
+
+.jqwizard_navi li.jqwizard_current {
+  background-image: url(/images/jqwizard/navCurrentBtn.gif);
+}
+
+.jqwizard_navi li.jqwizard_lastdone {
+  background-image: url(/images/jqwizard/navLastDoneBtn.gif);
+}
+
+.jqwizard_navi li.jqwizard_done {
+  background-image: url(/images/jqwizard/navDoneBtn.gif);
+}
+
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){
+      $("#estimateForm").wizard();
+  });
+</script>
