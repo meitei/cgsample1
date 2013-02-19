@@ -5,9 +5,8 @@
     <div id="searchEstimatePager"></div>
 </div>
 <div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnEstimateNew" href="#" />新規追加</a>
+    <a style="float:right;" class="btn btn-primary" id="btnEstimateNew" href="mitsumoris/new" />新規追加</a>
 </div>
-<%= render 'form2' %>
 <script>
 $(function() {
     $("#estimateForm").validate({
@@ -101,10 +100,10 @@ $("a#btnEstimateClear").click(function() {
     return false;
 });
 
-$("a#btnEstimateNew").click(function() {
-    showEstimateFormDialog();
-    return false;
-});
+// $("a#btnEstimateNew").click(function() {
+//     showEstimateFormDialog();
+//     return false;
+// });
 
 function updateFormatter(cellval, options, rowdata) {
     return "<img src='/images/database-reload-alt-1.png' onclick='showEstimateFormDialog(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
