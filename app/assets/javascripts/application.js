@@ -21,5 +21,6 @@
 //= require ./plugins/jqplot.barRenderer
 //= require ./plugins/jqplot.categoryAxisRenderer
 //= require ./plugins/jqplot.pointLabels
+//= require jquery-ui-1.10.1.custom
 
 //= require_tree .
