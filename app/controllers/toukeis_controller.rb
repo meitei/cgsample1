@@ -62,12 +62,16 @@ class ToukeisController < ApplicationController
   def kokyaku_list
     #--- 未実装 ---
 
-    has_key = (params[:kokyakuId] != nil && params[:kokyakuId] != "")
-    sqlbind = "%" + params[:kokyakuId] + "%" if has_key
-    sqlstat = "\"kokyakuId\" LIKE ? OR \"kokyakuNm\" LIKE ? "
+    has_key = (params[:kokyakuId] != nil and params[:kokyakuId] != "")
+    sqlbind_s = "%" + params[:kokyakuId] + "%" if has_key
+    sqlbind_i = -1
+    sqlbind_i = params[:kokyakuId].to_i if has_key and params[:kokyakuId] =~ /\d+/
+    sqlstat = []
+    sqlstat << "\"kokyakuId\" = ? "
+    sqlstat << "\"kokyakuNm\" LIKE ? "
 
     conditions = Kokyaku.where("1 = ?", 1)
-    conditions = conditions.where(sqlstat, sqlbind, sqlbind) if has_key
+    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_i, sqlbind_s) if has_key
     logger.debug(conditions)
 
     @kokyakus = conditions.find(
