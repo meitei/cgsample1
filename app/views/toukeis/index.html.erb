@@ -55,6 +55,36 @@ $(function() {
         colNames: colNames,
         colModel: colModelSettings
     }).navGrid('#searchToukeiPager',{edit:false, add:false, del:false, search:false});
+
+    // var availableTags = [
+    //   "0001:山田太郎",
+    //   "0002:山田花子",
+    //   "0003:山田一郎",
+    //   "0004:山田洋次"
+    // ];
+    $( "#kokyakuId" ).autocomplete({
+      // source: availableTags,
+      source: function(request, response) {
+        $.ajax({
+          url: "/toukeis/kokyaku_list.json",
+          dataType: "json",
+          root: "list",
+          data: {'kokyakuId' : $('#kokyakuId').val()},
+          success: function(data) {
+            response($.map(data.list, function(item) {
+              return {
+                label: item.kokyakuId+' : '+item.kokyakuNm,
+                value: item.kokyakuId
+              }
+            }))
+          }
+        })
+      }
+      // ,
+      // select: function (event, ui) {
+      //   ui.item.value = ui.item.value.split(':').shift();
+      // }
+    });
 });
 
 $("a#btnToukeiSearch").click(function() {

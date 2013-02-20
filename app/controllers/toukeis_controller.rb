@@ -59,6 +59,40 @@ class ToukeisController < ApplicationController
     end
   end
 
+  def kokyaku_list
+    #--- 未実装 ---
+
+    has_key = (params[:kokyakuId] != nil && params[:kokyakuId] != "")
+    sqlbind = "%" + params[:kokyakuId] + "%" if has_key
+    sqlstat = "\"kokyakuId\" LIKE ? OR \"kokyakuNm\" LIKE ? "
+
+    conditions = Kokyaku.where("1 = ?", 1)
+    conditions = conditions.where(sqlstat, sqlbind, sqlbind) if has_key
+    logger.debug(conditions)
+
+    @kokyakus = conditions.find(
+      :all,
+      :limit => 1000,
+      :order => "\"kokyakuId\" DESC")
+
+    # responce = []
+    # @kokyakus.each {|k|
+    #   responce << (k.kokyakuId + ":" + k.kokyakuNm)
+    # }
+
+    @responce = {
+      list: @kokyakus
+    }
+
+    logger.debug(@responce)
+
+    respond_to do |format|
+      format.html  { render :nothing => true }
+      format.json { render json: @responce }
+    end
+  end
+
+
   # GET /kokyakus/1
   # GET /kokyakus/1.json
   def show
