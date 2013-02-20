@@ -13,6 +13,19 @@
 // 
 // ##############################
 $(function() {
+    $("#byoinForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) { 
+            $(element).addClass(errorClass); 
+        }, 
+        unhighlight: function (element, errorClass, validClass) { 
+            $(element).removeClass(errorClass); 
+        },
+        rules: {
+            byoinNm: {required:true, maxlength:40},
+        }
+    });
     var isLoaded = false;
     var colNames = ["病院コード","病院名","更新者ID","登録者ID","",""];
     var colModelSettings = [
@@ -167,19 +180,21 @@ function showByoinFormDialog(byoinCd) {
     }
     // ダイアログ表示
     $("#byoinFormDialog").dialog({
-        //show: {effect: "pulsate", duration: 1000, times: 1},
+        show: {effect: "clip"},
+        hide: {effect: "clip"},
         width: "auto",
         modal: true,
         buttons : {
             "閉じる": function(){
                 $('#byoinForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
+                return false;
             },
             '登録' :function() {
                 // クライアントバリデーション
-                if (!$("#byoinForm").validationEngine("validate")) {
-                    return;
-                }
+                if ($("#byoinForm").valid() == false) {
+                     return false;
+                 }
                 executeByoin(byoinCd);
                 $('#byoinForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');

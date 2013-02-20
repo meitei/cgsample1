@@ -13,12 +13,26 @@
 // 
 // ##############################
 $(function() {
+    $("#hokenShubetsuForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) { 
+            $(element).addClass(errorClass); 
+        }, 
+        unhighlight: function (element, errorClass, validClass) { 
+            $(element).removeClass(errorClass); 
+        },
+        rules: {
+            hokenShubetsuNm: {required:true, maxlength:40},
+            hyojiJun: {maxlength:3},
+        }
+    });
     var isLoaded = false;
     var colNames = ["保険種別コード","保険種別名", "表示順","更新者ID","登録者ID","",""];
     var colModelSettings = [
             {name:"hokenShubetsuCd", index:"hokenShubetsuCd"},
             {name:"hokenShubetsuNm", index:"hokenShubetsuNm", editable:true},
-            {name:"hojiJyun", index:"hojiJyun", editable:true},
+            {name:"hyojiJun", index:"hyojiJun", editable:true},
             {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
             {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
@@ -122,7 +136,7 @@ function executeHokenShubetsu(hokenShubetsuCd) {
     data["koshinshaId"] = 1;
     data["torokushaId"] = 1;
 
-    postData["hokenShubetsu"] = data;
+    postData["hoken_shubetsu"] = data;
     postData["id"] = hokenShubetsuCd;
     $.ajax({
         scriptCharset:"UTF-8",
@@ -168,7 +182,8 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
     }
     // ダイアログ表示
     $("#hokenShubetsuFormDialog").dialog({
-        //show: {effect: "pulsate", duration: 1000, times: 1},
+        show: {effect: "clip"},
+        hide: {effect: "clip"},
         width: "auto",
         modal: true,
         buttons : {
@@ -178,18 +193,18 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
             },
             '登録' :function() {
                 // クライアントバリデーション
-                if (!$("#hokenShubetsuForm").validationEngine("validate")) {
-                    return;
-                }
+                if ($("#hokenShubetsuForm").valid() == false) {
+                     return false;
+                 }
                 executeHokenShubetsu(hokenShubetsuCd);
                 $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
+                return false;
             }
         }
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     $("#hokenShubetsuFormDialog").focus();
-    $("#hokenShubetsuForm").validationEngine("attach");
 }
 
 // ##############################
