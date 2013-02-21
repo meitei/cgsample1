@@ -23,7 +23,7 @@ $(function() {
             $(element).removeClass(errorClass); 
         },
         rules: {
-            byoinNm: {required:true, maxlength:40},
+            byoinNm: {required:true, maxlength:25},
         }
     });
     var isLoaded = false;
@@ -160,9 +160,6 @@ function executeByoin(byoinCd) {
 // ##############################
 function showByoinFormDialog(byoinCd) {
 
-    // 値の初期化
-    $("#byoinForm #byoinNm").val("");
-
     if(byoinCd != null) {
         var url = "byoins/" + byoinCd + ".json";
         $.ajax({
@@ -187,6 +184,7 @@ function showByoinFormDialog(byoinCd) {
         buttons : {
             "閉じる": function(){
                 $('#byoinForm input[type="text"], select, textarea').val('');
+                $("#byoinForm").validate().resetForm();
                 $(this).dialog('close');
                 return false;
             },
