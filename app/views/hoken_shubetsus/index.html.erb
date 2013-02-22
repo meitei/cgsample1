@@ -23,8 +23,8 @@ $(function() {
             $(element).removeClass(errorClass); 
         },
         rules: {
-            hokenShubetsuNm: {required:true, maxlength:40},
-            hyojiJun: {maxlength:3},
+            hokenShubetsuNm: {required:true, maxlength:25},
+            hyojiJun: {required:true, number:true, maxlength:3},
         }
     });
     var isLoaded = false;
@@ -162,9 +162,6 @@ function executeHokenShubetsu(hokenShubetsuCd) {
 // ##############################
 function showHokenShubetsuFormDialog(hokenShubetsuCd) {
 
-    // 値の初期化
-    $("#hokenShubetsuForm #hokenShubetsuNm").val("");
-
     if(hokenShubetsuCd != null) {
         var url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
         $.ajax({
@@ -189,6 +186,7 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
         buttons : {
             "閉じる": function(){
                 $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
+                $("#hokenShubetsuForm").validate().resetForm();
                 $(this).dialog('close');
             },
             '登録' :function() {
@@ -216,7 +214,7 @@ function removeHokenShubetsu(hokenShubetsuCd) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
-    var url = "hokenShubetsus/" + hokenShubetsuCd + ".json";
+    var url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
     var type = "DELETE";
     $.ajax({
         scriptCharset:"UTF-8",
