@@ -1,5 +1,18 @@
-<h1>New kokyaku</h1>
+<h2>顧客登録</h2>
+<hr/>
+<%= render 'form2' %>
 
-<%= render 'form' %>
+<script>
+$(function() {
+	$("a#btnCustomerRegist").click(function() {
+	    executeKokyaku();
+	    return false;
+	});
 
-<%= link_to 'Back', kokyakus_path %>
+	$("a#btnCustomerReturn").click(function() {
+    location.href = "/kokyakus";
+	    return false;
+	});
+});
+
+</script>
