@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  konyuRirekiId: 1
+  kokyakuId: 1
+  byoinCd: 1
+  ishiNm: MyString
+  rigakuRyohoNm: MyString
+  sagyoRyohoNm: MyString
+  mitsumoriTantoEigyoCd: 1
+  mitsumoriDt: 2013-02-23
+  shubetsuCd: 1
+  mitsumoriKomokuCd: 1
+  shohinNm: MyString
+  sinsho: MyString
+  hokenShubetsuCd: 1
+  kin: 9.99
+  seikyuKin: 9.99
+  shohinSiyoBiko: MyString
+  uketsukeSesakuTantoCd: 1
+  juchuDt: 2013-02-23
+  kariAwaseTantoCd: 1
+  kariAwaseDt: 2013-02-23
+  nohinTantoCd: 1
+  nohinDt: 2013-02-23
+  kofuDt: 2013-02-23
+  kannoDt: 2013-02-23
+  nyukinDt: 2013-02-23
+  oshiinDt: 2013-02-23
+  kanryoDt: 2013-02-23
+  koshinshaId: 1
+  torokushaId: 1
+  koshinId: 1
+
+two:
+  konyuRirekiId: 1
+  kokyakuId: 1
+  byoinCd: 1
+  ishiNm: MyString
+  rigakuRyohoNm: MyString
+  sagyoRyohoNm: MyString
+  mitsumoriTantoEigyoCd: 1
+  mitsumoriDt: 2013-02-23
+  shubetsuCd: 1
+  mitsumoriKomokuCd: 1
+  shohinNm: MyString
+  sinsho: MyString
+  hokenShubetsuCd: 1
+  kin: 9.99
+  seikyuKin: 9.99
+  shohinSiyoBiko: MyString
+  uketsukeSesakuTantoCd: 1
+  juchuDt: 2013-02-23
+  kariAwaseTantoCd: 1
+  kariAwaseDt: 2013-02-23
+  nohinTantoCd: 1
+  nohinDt: 2013-02-23
+  kofuDt: 2013-02-23
+  kannoDt: 2013-02-23
+  nyukinDt: 2013-02-23
+  oshiinDt: 2013-02-23
+  kanryoDt: 2013-02-23
+  koshinshaId: 1
+  torokushaId: 1
+  koshinId: 1

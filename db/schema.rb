@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223051154) do
+ActiveRecord::Schema.define(:version => 20130223102335) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -70,23 +70,46 @@ ActiveRecord::Schema.define(:version => 20130223051154) do
     t.datetime "updated_at",                   :null => false
   end
 
+  create_table "konyu_rirekis", :force => true do |t|
+    t.integer  "konyuRirekiId"
+    t.integer  "kokyakuId"
+    t.integer  "byoinCd"
+    t.string   "ishiNm"
+    t.string   "rigakuRyohoNm"
+    t.string   "sagyoRyohoNm"
+    t.integer  "mitsumoriTantoEigyoCd"
+    t.date     "mitsumoriDt"
+    t.integer  "shubetsuCd"
+    t.integer  "mitsumoriKomokuCd"
+    t.string   "shohinNm"
+    t.string   "sinsho"
+    t.integer  "hokenShubetsuCd"
+    t.decimal  "kin"
+    t.decimal  "seikyuKin"
+    t.string   "shohinSiyoBiko"
+    t.integer  "uketsukeSesakuTantoCd"
+    t.date     "juchuDt"
+    t.integer  "kariAwaseTantoCd"
+    t.date     "kariAwaseDt"
+    t.integer  "nohinTantoCd"
+    t.date     "nohinDt"
+    t.date     "kofuDt"
+    t.date     "kannoDt"
+    t.date     "nyukinDt"
+    t.date     "oshiinDt"
+    t.date     "kanryoDt"
+    t.integer  "koshinshaId"
+    t.integer  "torokushaId"
+    t.integer  "koshinId"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
   create_table "mitsumoris", :force => true do |t|
     t.integer  "mitsumoriId"
     t.integer  "kokyakuId"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "shobyos", :primary_key => "shobyoCd", :force => true do |t|
-    t.string   "shobyoNm",     :limit => 50, :null => false
-    t.string   "shobyoNmKana", :limit => 50, :null => false
-    t.string   "icd10Cd",      :limit => 50
-    t.date     "shusaiDt"
-    t.date     "haishiDt"
-    t.integer  "koshinshaId",                :null => false
-    t.integer  "torokushaId",                :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
   end
 
   create_table "users", :force => true do |t|
