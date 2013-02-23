@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shogyoCd: 
+  shobyoNm: MyString
+  shobyoNmKana: MyString
+  icd10Cd: MyString
+  shusaiDt: 2013-02-23
+  haishiDt: 2013-02-23
+  koshinshaId: 
+  torokushaId: 1
+
+two:
+  shogyoCd: 
+  shobyoNm: MyString
+  shobyoNmKana: MyString
+  icd10Cd: MyString
+  shusaiDt: 2013-02-23
+  haishiDt: 2013-02-23
+  koshinshaId: 
+  torokushaId: 1

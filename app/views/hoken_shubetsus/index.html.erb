@@ -13,26 +13,13 @@
 // 
 // ##############################
 $(function() {
-    $("#hokenShubetsuForm").validate({
-        errorClass:'error',
-        errorElement:'label',
-        highlight: function (element, errorClass, validClass) { 
-            $(element).addClass(errorClass); 
-        }, 
-        unhighlight: function (element, errorClass, validClass) { 
-            $(element).removeClass(errorClass); 
-        },
-        rules: {
-            hokenShubetsuNm: {required:true, maxlength:25},
-            hyojiJun: {required:true, number:true, maxlength:3},
-        }
-    });
+    
     var isLoaded = false;
     var colNames = ["保険種別コード","保険種別名", "表示順","更新者ID","登録者ID","",""];
     var colModelSettings = [
             {name:"hokenShubetsuCd", index:"hokenShubetsuCd"},
-            {name:"hokenShubetsuNm", index:"hokenShubetsuNm", editable:true},
-            {name:"hyojiJun", index:"hyojiJun", editable:true},
+            {name:"hokenShubetsuNm", index:"hokenShubetsuNm"},
+            {name:"hyojiJun", index:"hyojiJun", hidden:true},
             {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
             {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
@@ -172,6 +159,7 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
             success: function(result) {
                 if(result) {
                     $("#hokenShubetsuForm #hokenShubetsuNm").val(result["hokenShubetsuNm"]);
+                    $("#hokenShubetsuForm #hyojiJun").val(result["hyojiJun"]);
                 }
                 return false;
             }

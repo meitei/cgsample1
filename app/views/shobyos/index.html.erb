@@ -1,11 +1,11 @@
 <div style="width:1024;">
 <%= render 'search' %>
-<div style="width:1024px; clear:both;" id="byoin">
-    <table id="searchByoinGrid"></table>
-    <div id="searchByoinPager"></div>
+<div style="width:1024px; clear:both;" id="shobyo">
+    <table id="searchShobyoGrid"></table>
+    <div id="searchShobyoPager"></div>
 </div>
 <div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnByoinNew" href="#" />新規追加</a>
+    <a style="float:right;" class="btn btn-primary" id="btnShobyoNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -15,22 +15,26 @@
 $(function() {
     
     var isLoaded = false;
-    var colNames = ["病院コード","病院名","更新者ID","登録者ID","",""];
+    var colNames = ["傷病コード","傷病名","傷病名カナ", "ICD10CD" ,"収載日","廃止日", "更新者ID","登録者ID","",""];
     var colModelSettings = [
-            {name:"byoinCd", index:"byoinCd"},
-            {name:"byoinNm", index:"byoinNm"},
+            {name:"shobyoCd", index:"shobyoCd", hidden:true},
+            {name:"shobyoNm", index:"shobyoNm"},
+            {name:"shobyoNmKana", index:"shobyoNmKana"},
+            {name:"icd10Cd", index:"icd10Cd"},
+            {name:"shusaiDt", index:"shusaiDt", hidden:true},
+            {name:"haishiDt", index:"haishiDt", hidden:true},
             {name:"koshinshaId", index:"koshinshaId", hidden:true},
             {name:"torokushaId", index:"torokushaId", hidden:true},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
             {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
     ];
-    $("#searchByoinGrid").jqGrid({
+    $("#searchShobyoGrid").jqGrid({
         datatype: "local",
         width: "1024",
         height: "240",
         cellEdit: false,
         rowNum: 10,
-        pager: "searchByoinPager",
+        pager: "searchShobyoPager",
         multiselect: false,
         colNames: colNames,
         colModel: colModelSettings,
@@ -39,22 +43,22 @@ $(function() {
                 isLoaded = true;
             }
         },
-    }).navGrid('#searchByoinPager',{edit:false, add:false, del:false, search:false});
+    }).navGrid('#searchShobyoPager',{edit:false, add:false, del:false, search:false});
 });
 
 // ##############################
 // 検索ボタンクリック処理
 // ##############################
-$("a#btnByoinSearch").click(function() {
-    searchByoin();
+$("a#btnShobyoSearch").click(function() {
+    searchShobyo();
     return false;
 });
 
 // ##############################
 // 新規登録ボタンクリック処理
 // ##############################
-$("a#btnByoinNew").click(function() {
-    showByoinFormDialog();
+$("a#btnShobyoNew").click(function() {
+    showShobyoFormDialog();
     return false;
 });
 
@@ -62,29 +66,29 @@ $("a#btnByoinNew").click(function() {
 // グリッド更新ボタンクリック処理
 // ##############################
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src='/images/database-reload-alt-1.png' onclick='showByoinFormDialog(" + rowdata['byoinCd'] + ")' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='showShobyoFormDialog(" + rowdata['shobyoCd'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // グリッド削除ボタンクリック処理
 // ##############################
 function deleteFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-remove-alt-1.png' onclick='removeByoin(" + rowdata['byoinCd'] + ")' title='削除' style='width:16px; height:16px'>";
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeShobyo(" + rowdata['shobyoCd'] + ")' title='削除' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // 検索用メソッド
 // ##############################
-function searchByoin() {
+function searchShobyo() {
     var data = {};
-    var search = $("#byoinSearchForm").serializeArray();
+    var search = $("#shobyoSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
-    $("#searchByoinGrid").clearGridData();
+    $("#searchShobyoGrid").clearGridData();
     var param = {
         datatype: "json",
-        url: "byoins/search.json",
+        url: "shobyos/search.json",
         postData: data,
         jsonReader: {
             root: "rows",
@@ -94,62 +98,62 @@ function searchByoin() {
             repeatitems: false
         }
     };
-    $("#searchByoinGrid").setGridParam(param).trigger("reloadGrid");
+    $("#searchShobyoGrid").setGridParam(param).trigger("reloadGrid");
 }
 
 // ##############################
 // 更新用メソッド
 // param:
-// byoinCd : 病院コード
+// shobyoCd : 傷病コード
 // ##############################
-function executeByoin(byoinCd) {
+function executeShobyo(shobyoCd) {
     var url;
     var type;
-    if(byoinCd != null) {
-        url = "byoins/" + byoinCd + ".json";
+    if(shobyoCd != null) {
+        url = "shobyos/" + shobyoCd + ".json";
         type = "PUT";
     } else {
-        url = "byoins.json";
+        url = "shobyos.json";
         type = "POST";
     }
     var data = {};
     var postData = {};
-    var byoin = $("#byoinForm").serializeArray();
-    $.each(byoin, function() {
+    var shobyo = $("#shobyoForm").serializeArray();
+    $.each(shobyo, function() {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
     data["koshinshaId"] = 1;
     data["torokushaId"] = 1;
 
-    postData["byoin"] = data;
-    postData["id"] = byoinCd;
+    postData["shobyo"] = data;
+    postData["id"] = shobyoCd;
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
         data: postData,
-        root: "byoin",
+        root: "shobyo",
         dataType: "json",
         success: function(result) {
             if(result != null) {
-                searchByoin();
+                searchShobyo();
             }
         }
     });
-    $("#byoinFormDialog").dialog("close");
+    $("#shobyoFormDialog").dialog("close");
     return false;
 }
 
 // ##############################
 // 登録用フォームダイアログオープン
 // param:
-// byoinCd : 病院コード
+// shobyoCd : 傷病コード
 // ##############################
-function showByoinFormDialog(byoinCd) {
+function showShobyoFormDialog(shobyoCd) {
 
-    if(byoinCd != null) {
-        var url = "byoins/" + byoinCd + ".json";
+    if(shobyoCd != null) {
+        var url = "shobyos/" + shobyoCd + ".json";
         $.ajax({
             scriptCharset:"UTF-8",
             type: "GET",
@@ -157,62 +161,66 @@ function showByoinFormDialog(byoinCd) {
             dataType: "json",
             success: function(result) {
                 if(result) {
-                    $("#byoinForm #byoinNm").val(result["byoinNm"]);
+                    $("#shobyoForm #shobyoNm").val(result["shobyoNm"]);
+                    $("#shobyoForm #shobyoNmKana").val(result["shobyoNmKana"]);
+                    $("#shobyoForm #icd10Cd").val(result["icd10Cd"]);
+                    $("#shobyoForm #shusaiDt").val(result["shusaiDt"]);
+                    $("#shobyoForm #haishiDt").val(result["haishiDt"]);
                 }
                 return false;
             }
         });
     }
     // ダイアログ表示
-    $("#byoinFormDialog").dialog({
+    $("#shobyoFormDialog").dialog({
         show: {effect: "clip"},
         hide: {effect: "clip"},
         width: "auto",
         modal: true,
         buttons : {
             "閉じる": function(){
-                $('#byoinForm input[type="text"], select, textarea').val('');
-                $("#byoinForm").validate().resetForm();
+                $('#shobyoForm input[type="text"], select, textarea').val('');
+                $("#shobyoForm").validate().resetForm();
                 $(this).dialog('close');
                 return false;
             },
             '登録' :function() {
                 // クライアントバリデーション
-                if ($("#byoinForm").valid() == false) {
+                if ($("#shobyoForm").valid() == false) {
                      return false;
                  }
-                executeByoin(byoinCd);
-                $('#byoinForm input[type="text"], select, textarea').val('');
+                executeShobyo(shobyoCd);
+                $('#shobyoForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
             }
         }
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
-    $("#byoinFormDialog").focus();
-    $("#byoinForm").validationEngine("attach");
+    $("#shobyoFormDialog").focus();
+    $("#shobyoForm").validationEngine("attach");
 }
 
 // ##############################
 // 削除用メソッド
 // param:
-// byoinCd : 病院コード
+// shobyoCd : 傷病コード
 // ##############################
-function removeByoin(byoinCd) {
+function removeShobyo(shobyoCd) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
-    var url = "byoins/" + byoinCd + ".json";
+    var url = "shobyos/" + shobyoCd + ".json";
     var type = "DELETE";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + byoinCd,
+        data: "id=" + shobyoCd,
         dataType: "json",
         success: function(result) {
         }
     });
-    searchByoin();
+    searchShobyo();
     return false;
 }
 
