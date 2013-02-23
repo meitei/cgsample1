@@ -1,11 +1,11 @@
 <div style="width:1024;">
 <%= render 'search' %>
-<div style="width:1024px; clear:both;" id="hokenShubetsu">
-    <table id="searchHokenShubetsuGrid"></table>
-    <div id="searchHokenShubetsuPager"></div>
+<div style="width:1024px; clear:both;" id="shobyo">
+    <table id="searchShobyoGrid"></table>
+    <div id="searchShobyoPager"></div>
 </div>
 <div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnHokenShubetsuNew" href="#" />新規追加</a>
+    <a style="float:right;" class="btn btn-primary" id="btnShobyoNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -15,23 +15,26 @@
 $(function() {
     
     var isLoaded = false;
-    var colNames = ["保険種別コード","保険種別名", "表示順","更新者ID","登録者ID","",""];
+    var colNames = ["傷病コード","傷病名","傷病名カナ", "ICD10CD" ,"収載日","廃止日", "更新者ID","登録者ID","",""];
     var colModelSettings = [
-            {name:"hokenShubetsuCd", index:"hokenShubetsuCd"},
-            {name:"hokenShubetsuNm", index:"hokenShubetsuNm"},
-            {name:"hyojiJun", index:"hyojiJun", hidden:true},
-            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
-            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
+            {name:"shobyoCd", index:"shobyoCd", hidden:true},
+            {name:"shobyoNm", index:"shobyoNm"},
+            {name:"shobyoNmKana", index:"shobyoNmKana"},
+            {name:"icd10Cd", index:"icd10Cd"},
+            {name:"shusaiDt", index:"shusaiDt", hidden:true},
+            {name:"haishiDt", index:"haishiDt", hidden:true},
+            {name:"koshinshaId", index:"koshinshaId", hidden:true},
+            {name:"torokushaId", index:"torokushaId", hidden:true},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
             {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
     ];
-    $("#searchHokenShubetsuGrid").jqGrid({
+    $("#searchShobyoGrid").jqGrid({
         datatype: "local",
         width: "1024",
         height: "240",
         cellEdit: false,
         rowNum: 10,
-        pager: "searchHokenShubetsuPager",
+        pager: "searchShobyoPager",
         multiselect: false,
         colNames: colNames,
         colModel: colModelSettings,
@@ -40,22 +43,22 @@ $(function() {
                 isLoaded = true;
             }
         },
-    }).navGrid('#searchHokenShubetsuPager',{edit:false, add:false, del:false, search:false});
+    }).navGrid('#searchShobyoPager',{edit:false, add:false, del:false, search:false});
 });
 
 // ##############################
 // 検索ボタンクリック処理
 // ##############################
-$("a#btnHokenShubetsuSearch").click(function() {
-    searchHokenShubetsu();
+$("a#btnShobyoSearch").click(function() {
+    searchShobyo();
     return false;
 });
 
 // ##############################
 // 新規登録ボタンクリック処理
 // ##############################
-$("a#btnHokenShubetsuNew").click(function() {
-    showHokenShubetsuFormDialog();
+$("a#btnShobyoNew").click(function() {
+    showShobyoFormDialog();
     return false;
 });
 
@@ -63,29 +66,29 @@ $("a#btnHokenShubetsuNew").click(function() {
 // グリッド更新ボタンクリック処理
 // ##############################
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src='/images/database-reload-alt-1.png' onclick='showHokenShubetsuFormDialog(" + rowdata['hokenShubetsuCd'] + ")' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='showShobyoFormDialog(" + rowdata['shobyoCd'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // グリッド削除ボタンクリック処理
 // ##############################
 function deleteFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-remove-alt-1.png' onclick='removeHokenShubetsu(" + rowdata['hokenShubetsuCd'] + ")' title='削除' style='width:16px; height:16px'>";
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeShobyo(" + rowdata['shobyoCd'] + ")' title='削除' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // 検索用メソッド
 // ##############################
-function searchHokenShubetsu() {
+function searchShobyo() {
     var data = {};
-    var search = $("#hokenShubetsuSearchForm").serializeArray();
+    var search = $("#shobyoSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
-    $("#searchHokenShubetsuGrid").clearGridData();
+    $("#searchShobyoGrid").clearGridData();
     var param = {
         datatype: "json",
-        url: "hoken_shubetsus/search.json",
+        url: "shobyos/search.json",
         postData: data,
         jsonReader: {
             root: "rows",
@@ -95,62 +98,62 @@ function searchHokenShubetsu() {
             repeatitems: false
         }
     };
-    $("#searchHokenShubetsuGrid").setGridParam(param).trigger("reloadGrid");
+    $("#searchShobyoGrid").setGridParam(param).trigger("reloadGrid");
 }
 
 // ##############################
 // 更新用メソッド
 // param:
-// hokenShubetsuCd : 病院コード
+// shobyoCd : 傷病コード
 // ##############################
-function executeHokenShubetsu(hokenShubetsuCd) {
+function executeShobyo(shobyoCd) {
     var url;
     var type;
-    if(hokenShubetsuCd != null) {
-        url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
+    if(shobyoCd != null) {
+        url = "shobyos/" + shobyoCd + ".json";
         type = "PUT";
     } else {
-        url = "hoken_shubetsus.json";
+        url = "shobyos.json";
         type = "POST";
     }
     var data = {};
     var postData = {};
-    var hokenShubetsu = $("#hokenShubetsuForm").serializeArray();
-    $.each(hokenShubetsu, function() {
+    var shobyo = $("#shobyoForm").serializeArray();
+    $.each(shobyo, function() {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
     data["koshinshaId"] = 1;
     data["torokushaId"] = 1;
 
-    postData["hoken_shubetsu"] = data;
-    postData["id"] = hokenShubetsuCd;
+    postData["shobyo"] = data;
+    postData["id"] = shobyoCd;
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
         data: postData,
-        root: "hokenShubetsu",
+        root: "shobyo",
         dataType: "json",
         success: function(result) {
             if(result != null) {
-                searchHokenShubetsu();
+                searchShobyo();
             }
         }
     });
-    $("#hokenShubetsuFormDialog").dialog("close");
+    $("#shobyoFormDialog").dialog("close");
     return false;
 }
 
 // ##############################
 // 登録用フォームダイアログオープン
 // param:
-// hokenShubetsuCd : 病院コード
+// shobyoCd : 傷病コード
 // ##############################
-function showHokenShubetsuFormDialog(hokenShubetsuCd) {
+function showShobyoFormDialog(shobyoCd) {
 
-    if(hokenShubetsuCd != null) {
-        var url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
+    if(shobyoCd != null) {
+        var url = "shobyos/" + shobyoCd + ".json";
         $.ajax({
             scriptCharset:"UTF-8",
             type: "GET",
@@ -158,63 +161,67 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
             dataType: "json",
             success: function(result) {
                 if(result) {
-                    $("#hokenShubetsuForm #hokenShubetsuNm").val(result["hokenShubetsuNm"]);
-                    $("#hokenShubetsuForm #hyojiJun").val(result["hyojiJun"]);
+                    $("#shobyoForm #shobyoNm").val(result["shobyoNm"]);
+                    $("#shobyoForm #shobyoNmKana").val(result["shobyoNmKana"]);
+                    $("#shobyoForm #icd10Cd").val(result["icd10Cd"]);
+                    $("#shobyoForm #shusaiDt").val(result["shusaiDt"]);
+                    $("#shobyoForm #haishiDt").val(result["haishiDt"]);
                 }
                 return false;
             }
         });
     }
     // ダイアログ表示
-    $("#hokenShubetsuFormDialog").dialog({
+    $("#shobyoFormDialog").dialog({
         show: {effect: "clip"},
         hide: {effect: "clip"},
         width: "auto",
         modal: true,
         buttons : {
             "閉じる": function(){
-                $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
-                $("#hokenShubetsuForm").validate().resetForm();
+                $('#shobyoForm input[type="text"], select, textarea').val('');
+                $("#shobyoForm").validate().resetForm();
                 $(this).dialog('close');
+                return false;
             },
             '登録' :function() {
                 // クライアントバリデーション
-                if ($("#hokenShubetsuForm").valid() == false) {
+                if ($("#shobyoForm").valid() == false) {
                      return false;
                  }
-                executeHokenShubetsu(hokenShubetsuCd);
-                $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
+                executeShobyo(shobyoCd);
+                $('#shobyoForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
-                return false;
             }
         },
         open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
-    $("#hokenShubetsuFormDialog").focus();
+    $("#shobyoFormDialog").focus();
+    $("#shobyoForm").validationEngine("attach");
 }
 
 // ##############################
 // 削除用メソッド
 // param:
-// hokenShubetsuCd : 病院コード
+// shobyoCd : 傷病コード
 // ##############################
-function removeHokenShubetsu(hokenShubetsuCd) {
+function removeShobyo(shobyoCd) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
-    var url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
+    var url = "shobyos/" + shobyoCd + ".json";
     var type = "DELETE";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + hokenShubetsuCd,
+        data: "id=" + shobyoCd,
         dataType: "json",
         success: function(result) {
         }
     });
-    searchHokenShubetsu();
+    searchShobyo();
     return false;
 }
 

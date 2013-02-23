@@ -7,6 +7,10 @@ JqgridSample::Application.routes.draw do
     get 'search', :on => :collection
   end
 
+ resources :shobyos do
+    get 'search', :on => :collection
+  end
+
   resources :byoins do
     get 'search', :on => :collection
   end

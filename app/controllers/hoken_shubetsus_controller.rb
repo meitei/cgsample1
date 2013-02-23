@@ -110,7 +110,7 @@ class HokenShubetsusController < ApplicationController
       :all, 
       :offset => start, 
       :limit => limit,
-      :order => "\"hokenShubetsuCd\" DESC")
+      :order => "\"hyojiJun\"")
 
     @responce = {
       total: total_pages.to_s,
