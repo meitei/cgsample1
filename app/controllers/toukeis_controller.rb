@@ -97,13 +97,13 @@ class ToukeisController < ApplicationController
   end
 
 
-  # GET /kokyakus/1
-  # GET /kokyakus/1.json
-  def show
-    @kokyaku = Kokyaku.find(params[:id])
+  # GET /toukeis/graph
+  # GET /toukeis/graph.json
+  def graph
+    # @kokyaku = Kokyaku.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # graph.html.erb
       format.json { render json: @kokyaku }
     end
   end

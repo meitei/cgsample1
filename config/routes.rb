@@ -25,6 +25,7 @@ JqgridSample::Application.routes.draw do
   resources :toukeis do
     get 'search', :on => :collection
     get 'kokyaku_list', :on => :collection
+    get 'graph', :on => :collection
   end
 
   resources :companies

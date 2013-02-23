@@ -6,7 +6,7 @@
 </div>
 
 <div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnShowGraph" href="#" />グラフ表示</a>
+    <a style="float:right;" class="btn btn-primary" id="btnShowGraph" href="toukeis/graph" />グラフ表示</a>
 </div>
 
 <!--
@@ -73,7 +73,7 @@ $(function() {
           success: function(data) {
             response($.map(data.list, function(item) {
               return {
-                label: item.kokyakuId+' : '+item.kokyakuNm,
+                label: item.kokyakuNm+' - '+item.kokyakuId,
                 value: item.kokyakuId
               }
             }))
@@ -97,10 +97,10 @@ $("a#btnToukeiClear").click(function() {
     return false;
 });
 
-$("a#btnShowGraph").click(function() {
-    showToukeiGraphDialog();
-    return false;
-});
+// $("a#btnShowGraph").click(function() {
+//     showToukeiGraphDialog();
+//     return false;
+// });
 
 function updateFormatter(cellval, options, rowdata) {
     return "<img src='/images/database-reload-alt-1.png' onclick='showKokyakuFormDialog(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
