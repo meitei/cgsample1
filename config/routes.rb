@@ -1,5 +1,8 @@
 JqgridSample::Application.routes.draw do
 
+  resources :shains
+
+
   resources :mitsumoris
 
 

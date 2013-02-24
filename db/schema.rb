@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223102335) do
+ActiveRecord::Schema.define(:version => 20130224095038) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -110,6 +110,33 @@ ActiveRecord::Schema.define(:version => 20130223102335) do
     t.integer  "kokyakuId"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "shains", :primary_key => "shainId", :force => true do |t|
+    t.string   "shainCd",       :limit => 10, :null => false
+    t.string   "myoji",         :limit => 50, :null => false
+    t.string   "name",          :limit => 50, :null => false
+    t.string   "myojiFuri",     :limit => 50, :null => false
+    t.string   "nameFuri",      :limit => 50, :null => false
+    t.string   "loginId",       :limit => 50, :null => false
+    t.string   "loginPassword", :limit => 50, :null => false
+    t.integer  "manageFlg",                   :null => false
+    t.integer  "koshinshaId",                 :null => false
+    t.integer  "torokushaId",                 :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "shobyos", :primary_key => "shobyoCd", :force => true do |t|
+    t.string   "shobyoNm",     :limit => 50, :null => false
+    t.string   "shobyoNmKana", :limit => 50, :null => false
+    t.string   "icd10Cd",      :limit => 50
+    t.date     "shusaiDt"
+    t.date     "haishiDt"
+    t.integer  "koshinshaId",                :null => false
+    t.integer  "torokushaId",                :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "users", :force => true do |t|

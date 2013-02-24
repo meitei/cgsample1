@@ -1,0 +1,61 @@
+<%= form_for(@shain) do |f| %>
+  <% if @shain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shain.errors.count, "error") %> prohibited this shain from being saved:</h2>
+
+      <ul>
+      <% @shain.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :shainId %><br />
+    <%= f.number_field :shainId %>
+  </div>
+  <div class="field">
+    <%= f.label :shainCd %><br />
+    <%= f.text_field :shainCd %>
+  </div>
+  <div class="field">
+    <%= f.label :myoji %><br />
+    <%= f.text_field :myoji %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :myojiFuri %><br />
+    <%= f.text_field :myojiFuri %>
+  </div>
+  <div class="field">
+    <%= f.label :nameFuri %><br />
+    <%= f.text_field :nameFuri %>
+  </div>
+  <div class="field">
+    <%= f.label :loginId %><br />
+    <%= f.text_field :loginId %>
+  </div>
+  <div class="field">
+    <%= f.label :loginPassword %><br />
+    <%= f.text_field :loginPassword %>
+  </div>
+  <div class="field">
+    <%= f.label :manageFlg %><br />
+    <%= f.number_field :manageFlg %>
+  </div>
+  <div class="field">
+    <%= f.label :koshinshaId %><br />
+    <%= f.number_field :koshinshaId %>
+  </div>
+  <div class="field">
+    <%= f.label :torokushaId %><br />
+    <%= f.number_field :torokushaId %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
