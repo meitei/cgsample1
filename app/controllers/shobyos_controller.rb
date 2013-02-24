@@ -92,7 +92,7 @@ class ShobyosController < ApplicationController
     # 検索条件設定
     conditions = Shobyo.where("1 = ?", 1)
     conditions = conditions.where("\"shobyoNm\" LIKE ?", params[:syobyoNm] + "%") if params[:shobyoNm] != ""
-    conditions = conditions.where("\"shobyoNm\" LIKE ?", params[:syobyoNm] + "%") if params[:shobyoNm] != ""
+    conditions = conditions.where("\"shobyoNmKana\" LIKE ?", params[:shobyoNmKana] + "%") if params[:shobyoNmKana] != ""
     logger.debug(conditions)
 
     records = conditions.count

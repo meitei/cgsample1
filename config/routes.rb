@@ -1,10 +1,10 @@
 JqgridSample::Application.routes.draw do
 
-  resources :shains
-
+  resources :shains do
+      get 'search', :on => :collection
+  end
 
   resources :mitsumoris
-
 
   resources :hoken_shubetsus do
     get 'search', :on => :collection

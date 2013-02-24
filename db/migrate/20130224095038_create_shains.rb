@@ -13,7 +13,7 @@ class CreateShains < ActiveRecord::Migration
       t.integer :manageFlg, :null => false
       t.integer :koshinshaId, :null => false
       t.integer :torokushaId, :null => false
-
+      t.date :loginLastDt
       t.timestamps
 
     end

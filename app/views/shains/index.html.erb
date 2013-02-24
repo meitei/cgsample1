@@ -1,43 +1,233 @@
-<h1>Listing shains</h1>
+<div style="width:1024;">
+<%= render 'search' %>
+<div style="width:1024px; clear:both;" id="shain">
+    <table id="searchShainGrid"></table>
+    <div id="searchShainPager"></div>
+</div>
+<div style="width:1024px; margin:5px;">
+    <a style="float:right;" class="btn btn-primary" id="btnShainNew" href="#" />新規追加</a>
+</div>
+<%= render 'form' %>
+<script>
+// ##############################
+// 
+// ##############################
+$(function() {
+    
+    var isLoaded = false;
+    var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","ログイン日付","更新者ID","登録者ID","",""];
+    var colModelSettings = [
+            {name:"shainId", index:"shainId", hidden:true},
+            {name:"shainCd", index:"shainCd"},
+            {name:"myoji", index:"myoji"},
+            {name:"name", index:"name"},
+            {name:"myojiFuri", index:"myojiFuri"},
+            {name:"nameFuri", index:"nameFuri"},
+            {name:"loginId", index:"loginId"},
+            {name:"loginPassword", index:"loginPassword"},
+            {name:"manageFlg", index:"manageFlg"},
+            {name:"loginLastDt", index:"loginLastDt"},
+            {name:"koshinshaId", index:"koshinshaId", hidden:true},
+            {name:"torokushaId", index:"torokushaId", hidden:true},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+    ];
+    $("#searchShainGrid").jqGrid({
+        datatype: "local",
+        width: "1024",
+        height: "240",
+        cellEdit: false,
+        rowNum: 10,
+        pager: "searchShainPager",
+        multiselect: false,
+        colNames: colNames,
+        colModel: colModelSettings,
+        gridComplete: function(){
+            if(!isLoaded == true){
+                isLoaded = true;
+            }
+        },
+    }).navGrid('#searchShainPager',{edit:false, add:false, del:false, search:false});
+});
 
-<table>
-  <tr>
-    <th>Shainid</th>
-    <th>Shaincd</th>
-    <th>Myoji</th>
-    <th>Name</th>
-    <th>Myojifuri</th>
-    <th>Namefuri</th>
-    <th>Loginid</th>
-    <th>Loginpassword</th>
-    <th>Manageflg</th>
-    <th>Koshinshaid</th>
-    <th>Torokushaid</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+// ##############################
+// 検索ボタンクリック処理
+// ##############################
+$("a#btnShainSearch").click(function() {
+    searchShain();
+    return false;
+});
 
-<% @shains.each do |shain| %>
-  <tr>
-    <td><%= shain.shainId %></td>
-    <td><%= shain.shainCd %></td>
-    <td><%= shain.myoji %></td>
-    <td><%= shain.name %></td>
-    <td><%= shain.myojiFuri %></td>
-    <td><%= shain.nameFuri %></td>
-    <td><%= shain.loginId %></td>
-    <td><%= shain.loginPassword %></td>
-    <td><%= shain.manageFlg %></td>
-    <td><%= shain.koshinshaId %></td>
-    <td><%= shain.torokushaId %></td>
-    <td><%= link_to 'Show', shain %></td>
-    <td><%= link_to 'Edit', edit_shain_path(shain) %></td>
-    <td><%= link_to 'Destroy', shain, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+// ##############################
+// 新規登録ボタンクリック処理
+// ##############################
+$("a#btnShainNew").click(function() {
+    showShainFormDialog();
+    return false;
+});
 
-<br />
+// ##############################
+// グリッド更新ボタンクリック処理
+// ##############################
+function updateFormatter(cellval, options, rowdata) {
+    return "<img src='/images/database-reload-alt-1.png' onclick='showShainFormDialog(" + rowdata['shainId'] + ")' title='更新' style='width:16px; height:16px'>";
+}
 
-<%= link_to 'New Shain', new_shain_path %>
+// ##############################
+// グリッド削除ボタンクリック処理
+// ##############################
+function deleteFormatter(cellval, options, rowdata) {
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeShain(" + rowdata['shainId'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// 検索用メソッド
+// ##############################
+function searchShain() {
+    var data = {};
+    var search = $("#shainSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
+    $("#searchShainGrid").clearGridData();
+    var param = {
+        datatype: "json",
+        url: "shains/search.json",
+        postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
+        }
+    };
+    $("#searchShainGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// ##############################
+// 更新用メソッド
+// param:
+// shainId : 社員ID
+// ##############################
+function executeShain(shainId) {
+    var url;
+    var type;
+    if(shainCd != null) {
+        url = "shains/" + shainId + ".json";
+        type = "PUT";
+    } else {
+        url = "shains.json";
+        type = "POST";
+    }
+    var data = {};
+    var postData = {};
+    var shain = $("#shainForm").serializeArray();
+    $.each(shain, function() {
+        data[this.name] = this.value;
+    });
+    // 更新ユーザー、登録ユーザーを設定する
+    data["koshinshaId"] = 1;
+    data["torokushaId"] = 1;
+
+    postData["shain"] = data;
+    postData["id"] = shainId;
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: postData,
+        root: "shain",
+        dataType: "json",
+        success: function(result) {
+            searchShain();
+        }
+    });
+    $("#shainFormDialog").dialog("close");
+    return false;
+}
+
+// ##############################
+// 登録用フォームダイアログオープン
+// param:
+// shainId : 社員ID
+// ##############################
+function showShainFormDialog(shainId) {
+
+    if(shainId != null) {
+        var url = "shains/" + shainId + ".json";
+        $.ajax({
+            scriptCharset:"UTF-8",
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result) {
+                if(result) {
+                    $("#shainForm #shainCd").val(result["shainCd"]);
+                    $("#shainForm #myoji").val(result["myoji"]);
+                    $("#shainForm #name").val(result["name"]);
+                    $("#shainForm #myojiFuri").val(result["myojiFuri"]);
+                    $("#shainForm #nameFuri").val(result["nameFuri"]);
+                    $("#shainForm #loginId").val(result["loginId"]);
+                    $("#shainForm #loginPassword").val(result["loginPassword"]);
+                    $("#shainForm #manageFlg").val(result["manageFlg"]);
+                }
+                return false;
+            }
+        });
+    }
+    // ダイアログ表示
+    $("#shainFormDialog").dialog({
+        show: {effect: "clip"},
+        hide: {effect: "clip"},
+        width: "auto",
+        modal: true,
+        buttons : {
+            "閉じる": function(){
+                $('#shainForm input[type="text"], select, textarea').val('');
+                $("#shainForm").validate().resetForm();
+                $(this).dialog('close');
+                return false;
+            },
+            '登録' :function() {
+                // クライアントバリデーション
+                if ($("#shainForm").valid() == false) {
+                     return false;
+                 }
+                executeShain(shainCd);
+                $('#shainForm input[type="text"], select, textarea').val('');
+                $(this).dialog('close');
+            }
+        },
+        open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
+    });
+    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
+    $("#shainFormDialog").focus();
+    $("#shainForm").validationEngine("attach");
+}
+
+// ##############################
+// 削除用メソッド
+// param:
+// shainId : 社員ID
+// ##############################
+function removeShain(shainId) {
+    if (confirm("削除します。よろしいですか？") == false) {
+        return false;
+    }
+    var url = "shains/" + shainId + ".json";
+    var type = "DELETE";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: "id=" + shainId,
+        dataType: "json",
+        success: function(result) {
+                searchShain();
+        }
+    });
+    return false;
+}
+
+</script>

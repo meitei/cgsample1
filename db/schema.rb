@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(:version => 20130224095038) do
     t.integer  "manageFlg",                   :null => false
     t.integer  "koshinshaId",                 :null => false
     t.integer  "torokushaId",                 :null => false
+    t.date     "loginLastDt"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
