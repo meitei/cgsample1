@@ -133,9 +133,7 @@ function executeHokenShubetsu(hokenShubetsuCd) {
         root: "hokenShubetsu",
         dataType: "json",
         success: function(result) {
-            if(result != null) {
-                searchHokenShubetsu();
-            }
+            searchHokenShubetsu();
         }
     });
     $("#hokenShubetsuFormDialog").dialog("close");
@@ -212,9 +210,9 @@ function removeHokenShubetsu(hokenShubetsuCd) {
         data: "id=" + hokenShubetsuCd,
         dataType: "json",
         success: function(result) {
+            searchHokenShubetsu();
         }
     });
-    searchHokenShubetsu();
     return false;
 }
 

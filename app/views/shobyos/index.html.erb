@@ -136,9 +136,7 @@ function executeShobyo(shobyoCd) {
         root: "shobyo",
         dataType: "json",
         success: function(result) {
-            if(result != null) {
-                searchShobyo();
-            }
+            searchShobyo();
         }
     });
     $("#shobyoFormDialog").dialog("close");
@@ -219,9 +217,9 @@ function removeShobyo(shobyoCd) {
         data: "id=" + shobyoCd,
         dataType: "json",
         success: function(result) {
+            searchShobyo();
         }
     });
-    searchShobyo();
     return false;
 }
 

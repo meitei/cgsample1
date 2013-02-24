@@ -132,9 +132,7 @@ function executeByoin(byoinCd) {
         root: "byoin",
         dataType: "json",
         success: function(result) {
-            if(result != null) {
-                searchByoin();
-            }
+            searchByoin();
         }
     });
     $("#byoinFormDialog").dialog("close");
@@ -211,9 +209,9 @@ function removeByoin(byoinCd) {
         data: "id=" + byoinCd,
         dataType: "json",
         success: function(result) {
+                searchByoin();
         }
     });
-    searchByoin();
     return false;
 }
 
