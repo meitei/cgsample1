@@ -12,22 +12,18 @@ class ToukeisController < ApplicationController
   # GET /toukeis/search.json
   def search
     #--- 未実装 ---
-    conditions = Kokyaku.where("1 = ?", 1)
-    conditions = conditions.where("\"kokyakuId\" >= ?", params[:kokyakuIdFrom].to_i) if params[:kokyakuIdFrom] != ""
-    conditions = conditions.where("\"kokyakuId\" <= ?", params[:kokyakuIdTo].to_i) if params[:kokyakuIdTo] != ""
-    conditions = conditions.where("\"kokyakuNm\" LIKE ?", params[:kokyakuNm] + "%") if params[:kokyakuNm] != ""
-    conditions = conditions.where("\"kokyakuNmKana\" LIKE ?", params[:kokyakuNmKana] + "%") if params[:kokyakuNmKana] != ""
-    conditions = conditions.where("\"tanjoDt\" >= ?", params[:tanjoDtFrom]) if params[:tanjoDtFrom] != ""
-    conditions = conditions.where("\"tanjoDt\" <= ?", params[:tanjoDtTo]) if params[:tanjoDtTo] != ""
-    conditions = conditions.where("\"postNo\" LIKE ?", params[:postNo] + "%") if params[:postNo] != ""
-    conditions = conditions.where("address1 LIKE ?", params[:address1] + "%") if params[:address1] != ""
-    conditions = conditions.where("address2 LIKE ?", "%" + params[:address2] + "%") if params[:address2] != ""
-    conditions = conditions.where("tel1 LIKE ?", params[:tel1] + "%") if params[:tel1] != ""
-    conditions = conditions.where("tel2 LIKE ?", params[:tel2] + "%") if params[:tel2] != ""
-    conditions = conditions.where("fax LIKE ?", params[:fax] + "%") if params[:fax] != ""
-    conditions = conditions.where("\"shobyoNm\" LIKE ?", params[:shobyoNm] + "%") if params[:shobyoNm] != ""
-    conditions = conditions.where("\"gakkoNm\" LIKE ?", params[:gakkoNm] + "%") if params[:gakkoNm] != ""
+    conditions = KonyuRireki.where("1 = ?", 1)
+    conditions = conditions.where("\"mitsumoriDt\" >= ?", Date.strptime(params[:targetSpnFrom], "%Y/%m/%d")) if params[:targetSpnFrom] != ""
+    conditions = conditions.where("\"mitsumoriDt\" <= ?", Date.strptime(params[:targetSpnTo], "%Y/%m/%d")) if params[:targetSpnTo] != ""
     logger.debug(conditions)
+
+    sumUnts = {
+      1 => "uketsukeSesakuTantoCd",
+      2 => "byoinCd",
+      3 => "shohinNm",
+      4 => "shubetsuCd",
+      5 => "mitsumoriKomokuCd"
+    }
 
     records = conditions.count
     limit = params[:rows].to_i
@@ -39,17 +35,24 @@ class ToukeisController < ApplicationController
       total_pages = 0
     end
     start = limit * page - limit;
-    @kokyakus = conditions.find(
+    @konyu_rirekis = conditions.find(
       :all,
+      :select => "#{sumUnts[params[:sumUnt].to_i]} sumUntKey, #{"shains.name"} sumUnt, sum(kin) kingaku, count(*) daisu ",
+      :joins => "left outer join shains on shains.shainCd = konyu_rirekis.uketsukeSesakuTantoCd",
+      :group  => "sumUntKey ",
       :offset => start,
-      :limit => limit,
-      :order => "\"kokyakuId\" DESC")
+      :limit  => limit,
+      :order  => "\"sumUntKey\" ASC")
+
+    # @konyu_rirekis.each {|row|
+    #   row["sumUnt"] = row.sesaku_shain.name
+    # }
 
     @responce = {
       total: total_pages.to_s,
       page: params[:page],
       records: records.to_s,
-      rows: @kokyakus
+      rows: @konyu_rirekis
     }
     #logger.debug(@responce)
 
