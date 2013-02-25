@@ -13,26 +13,14 @@
 // 
 // ##############################
 $(function() {
-    $("#byoinForm").validate({
-        errorClass:'error',
-        errorElement:'label',
-        highlight: function (element, errorClass, validClass) { 
-            $(element).addClass(errorClass); 
-        }, 
-        unhighlight: function (element, errorClass, validClass) { 
-            $(element).removeClass(errorClass); 
-        },
-        rules: {
-            byoinNm: {required:true, maxlength:25},
-        }
-    });
+    
     var isLoaded = false;
     var colNames = ["病院コード","病院名","更新者ID","登録者ID","",""];
     var colModelSettings = [
             {name:"byoinCd", index:"byoinCd"},
-            {name:"byoinNm", index:"byoinNm", editable:true},
-            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
-            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
+            {name:"byoinNm", index:"byoinNm"},
+            {name:"koshinshaId", index:"koshinshaId", hidden:true},
+            {name:"torokushaId", index:"torokushaId", hidden:true},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
             {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
     ];
@@ -144,9 +132,7 @@ function executeByoin(byoinCd) {
         root: "byoin",
         dataType: "json",
         success: function(result) {
-            if(result != null) {
-                searchByoin();
-            }
+            searchByoin();
         }
     });
     $("#byoinFormDialog").dialog("close");
@@ -197,7 +183,8 @@ function showByoinFormDialog(byoinCd) {
                 $('#byoinForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
             }
-        }
+        },
+        open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     $("#byoinFormDialog").focus();
@@ -222,9 +209,9 @@ function removeByoin(byoinCd) {
         data: "id=" + byoinCd,
         dataType: "json",
         success: function(result) {
+                searchByoin();
         }
     });
-    searchByoin();
     return false;
 }
 

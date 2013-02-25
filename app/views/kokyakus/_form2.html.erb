@@ -1,111 +1,179 @@
-<div id="kokyakuFormDialog" title="顧客フォーム画面" style="display: none;">
-  <form id="kokyakuForm">
-  <div>
-    <table>
-      <tr>
-        <th style="width:100px;">顧客名称</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="kokyakuNm" name="kokyakuNm" />
-        </td>
-        <th style="width:100px;">電話番号</th>
-        <td style="width:250px;">
-         <input style="width:200px;" type="text" id="tel1" name="tel1" />
-        </td>
-      </tr>
-      <tr>
-        <th style="width:100px;">カナ名称</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="kokyakuNmKana" name="kokyakuNmKana" />
-        </td>
-        <th style="width:100px;">携帯番号</th>
-        <td style="width:200px;">
-          <input style="width:200px;" type="text" id="tel2" name="tel2" />
-        </td>
-      </tr>
-      <tr>
-        <th style="width:100px;">性別</th>
-        <td style="width:250px;">
-          <select style="width:200px;" id="seibetsu" name="seibetsu">
-            <option value=""></option>
-            <option value="0">男性</option>
-            <option value="1">女性</option>
-          </select>
-        </td>
-        <th style="width:100px;">FAX番号</th>
-        <td style="width:200px;">
-          <input style="width:200px;" type="text" id="fax" name="fax" />
-        </td>
-      </tr>
-      <tr>
-        <th style="width:100px;">生年月日</th>
-        <td style="width:250px;">
-          <input style="width:100px;" type="text" id="tanjoDt" name="tanjoDt" />
-        </td>
-        <th style="width:100px;" scope="row">病名・障害名１</th>
-        <td style="width:200px;">
-          <select style="width:200px;" id="shobyouCd1" name="shobyouCd1">
-            <option value=""></option>
-            <option value="0">骨折</option>
-            <option value="1">捻挫</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <th style="width:100px;">郵便番号</th>
-        <td style="width:250px;">
-          <input style="width:100px;" type="text" id="postNo" name="postNo" />
-        </td>
-        <th style="width:100px;" scope="row">病名・障害名２</th>
-        <td style="width:200px;">
-          <select style="width:200px;" id="shobyouCd2" name="shobyouCd2">
-            <option value=""></option>
-            <option value="0">骨折</option>
-            <option value="1">捻挫</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <th style="width:100px;">住所１</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="address1" name="address1" />
-        </td>
-        <th style="width:100px;" scope="row">病名・障害名３</th>
-        <td style="width:200px;">
-          <select style="width:200px;" id="shobyouCd3" name="shobyouCd3">
-            <option value=""></option>
-            <option value="0">骨折</option>
-            <option value="1">捻挫</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <th style="width:100px;">住所２</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="address2" name="address2" />
-        </td>
-        <th style="width:100px;" scope="row">学校名</th>
-        <td style="width:200px;">
-          <input type="text" id="gakkoNm" name="gakkoNm" />
-        </td>
-      </tr>
-      <tr>
-        <th style="width:100px;">備考</th>
-        <td colspan="3" style="width:250px;">
-          <textarea style="width:500px;" id="biko" name="biko" rows="3" cols="250">内容</textarea>
-        </td>
-      </tr>
-    </table>
-  </div>
-  </form>
-  <br />
-<!--   <div>
-    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerRegist" href="#" />登録</a></div>
-    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerClose" href="#" />閉じる</a></div>
-  </div> -->
+<form id="kokyakuForm" style="width:100%;">
+<input type="hidden" id="kokyakuId" name="kokyakuId" value="<%= @kokyaku.kokyakuId %>" />
+<div>
+  <table>
+    <tr>
+      <th style="width:100px;">顧客名称</th>
+      <td style="width:250px;">
+        <input style="width:200px;" type="text" id="kokyakuNm" name="kokyakuNm" />
+      </td>
+      <th style="width:100px;">電話番号</th>
+      <td style="width:250px;">
+       <input style="width:200px;" type="text" id="tel1" name="tel1" value="<%= @kokyaku.tel1 %>" />
+      </td>
+    </tr>
+    <tr>
+      <th style="width:100px;">カナ名称</th>
+      <td style="width:250px;">
+        <input style="width:200px;" type="text" id="kokyakuNmKana" name="kokyakuNmKana" value="<%= @kokyaku.kokyakuNmKana %>" />
+      </td>
+      <th style="width:100px;">携帯番号</th>
+      <td style="width:200px;">
+        <input style="width:200px;" type="text" id="tel2" name="tel2" />
+      </td>
+    </tr>
+    <tr>
+      <th style="width:100px;">性別</th>
+      <td style="width:250px;">
+        <select style="width:200px;" id="seibetsu" name="seibetsu">
+          <option value=""></option>
+          <option value="0">男性</option>
+          <option value="1">女性</option>
+        </select>
+      </td>
+      <th style="width:100px;">FAX番号</th>
+      <td style="width:200px;">
+        <input style="width:200px;" type="text" id="fax" name="fax" />
+      </td>
+    </tr>
+    <tr>
+      <th style="width:100px;">生年月日</th>
+      <td style="width:250px;">
+        <input style="width:100px;" type="text" id="tanjoDt" name="tanjoDt" />
+      </td>
+      <th style="width:100px;" scope="row">病名・障害名１</th>
+      <td style="width:200px;">
+        <select style="width:200px;" id="shobyouCd1" name="shobyouCd1">
+          <option value=""></option>
+          <option value="0">骨折</option>
+          <option value="1">捻挫</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th style="width:100px;">郵便番号</th>
+      <td style="width:250px;">
+        <input style="width:100px;" type="text" id="postNo" name="postNo" />
+      </td>
+      <th style="width:100px;" scope="row">病名・障害名２</th>
+      <td style="width:200px;">
+        <select style="width:200px;" id="shobyouCd2" name="shobyouCd2">
+          <option value=""></option>
+          <option value="0">骨折</option>
+          <option value="1">捻挫</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th style="width:100px;">住所１</th>
+      <td style="width:250px;">
+        <input style="width:200px;" type="text" id="address1" name="address1" />
+      </td>
+      <th style="width:100px;" scope="row">病名・障害名３</th>
+      <td style="width:200px;">
+        <select style="width:200px;" id="shobyouCd3" name="shobyouCd3">
+          <option value=""></option>
+          <option value="0">骨折</option>
+          <option value="1">捻挫</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th style="width:100px;">住所２</th>
+      <td style="width:250px;">
+        <input style="width:200px;" type="text" id="address2" name="address2" />
+      </td>
+      <th style="width:100px;" scope="row">学校名</th>
+      <td style="width:200px;">
+        <input type="text" id="gakkoNm" name="gakkoNm" />
+      </td>
+    </tr>
+    <tr>
+      <th style="width:100px;">備考</th>
+      <td colspan="3" style="width:250px;">
+        <textarea style="width:500px;" id="biko" name="biko" rows="3" cols="250">内容</textarea>
+      </td>
+    </tr>
+  </table>
 </div>
+</form>
+<div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerRegist" href="#" />登録</a></div>
+<div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnCustomerReturn" href="#" />戻る</a></div>
 <script>
 $(function() {
   $("#tanjoDt").datepicker();
+
+  $("#kokyakuForm").validate({
+    errorClass:'error',
+    errorElement:'label',
+    highlight: function (element, errorClass, validClass) { 
+        $(element).addClass(errorClass); 
+    }, 
+    unhighlight: function (element, errorClass, validClass) { 
+        $(element).removeClass(errorClass); 
+    },
+    rules: {
+        kokyakuNm: {required:true, maxlength:10},
+        kokyakuNmKana: {katakana:true, maxlength:10},
+        //seibetsu: {required:true, maxlength:10},
+        tanjoDt: {date:true},
+        postNo: {postnum:true, maxlength:8},
+        address1: {maxlength:100},
+        address2: {maxlength:100},
+        tel1: {telnum:true, maxlength:12},
+        tel2: {mobilenum:true, maxlength:13},
+        fax: {telnum:true, maxlength:12},
+        //shobyouCd1: {required:true, maxlength:10},
+        //shobyouCd2: {required:true, maxlength:10},
+        //shobyouCd3: {required:true, maxlength:10},
+        gakkoNm: {maxlength:20},
+        biko: {maxlength:100},
+    }
+    //messages: {
+    //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+    //}
+  });
 });
+
+// 更新用メソッド
+function executeKokyaku(kokyakuId) {
+  // クライアントバリデーション
+  if ($("#kokyakuForm").valid() == false) {
+     return false;
+  }
+  var url;
+  var type;
+  if(kokyakuId != null) {
+      url = "../../kokyakus/" + kokyakuId + ".json";
+      type = "PUT";
+  } else {
+      url = "../kokyakus.json";
+      type = "POST";
+  }
+  var data = {};
+  var postData = {};
+  var kokyaku = $("#kokyakuForm").serializeArray();
+  $.each(kokyaku, function() {
+      data[this.name] = this.value;
+  });
+  data["koshinshaId"] = 1;
+  data["torokushaId"] = 1;
+  postData["kokyaku"] = data;
+  postData["id"] = kokyakuId;
+  $.ajax({
+      scriptCharset:"UTF-8",
+      type: type,
+      url: url,
+      data: postData,
+      root: "kokyaku",
+      dataType: "json",
+      success: function(result) {
+          if(result != null) {
+              //searchKokyaku();
+          }
+      }
+  });
+  return false;    
+}
 
 </script>

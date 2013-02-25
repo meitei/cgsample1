@@ -1,9 +1,16 @@
 JqgridSample::Application.routes.draw do
 
+  resources :shains do
+      get 'search', :on => :collection
+  end
+
   resources :mitsumoris
 
-
   resources :hoken_shubetsus do
+    get 'search', :on => :collection
+  end
+
+ resources :shobyos do
     get 'search', :on => :collection
   end
 
@@ -25,6 +32,7 @@ JqgridSample::Application.routes.draw do
   resources :toukeis do
     get 'search', :on => :collection
     get 'kokyaku_list', :on => :collection
+    get 'graph', :on => :collection
   end
 
   resources :companies

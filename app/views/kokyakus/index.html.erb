@@ -5,9 +5,8 @@
     <div id="searchCustomerPager"></div>
 </div>
 <div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnCustomerNew" href="#" />新規追加</a>
+    <a style="float:right;" class="btn btn-primary" id="btnCustomerNew" href="kokyakus/new" />新規追加</a>
 </div>
-<%= render 'form2' %>
 <script>
 $(function() {
     $("#kokyakuForm").validate({
@@ -101,13 +100,13 @@ $("a#btnCustomerClear").click(function() {
     return false;
 });
 
-$("a#btnCustomerNew").click(function() {
-    showKokyakuFormDialog();
-    return false;
-});
+// $("a#btnCustomerNew").click(function() {
+//     showKokyakuFormDialog();
+//     return false;
+// });
 
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src='/images/database-reload-alt-1.png' onclick='showKokyakuFormDialog(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='modifyKokyaku(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 function deleteFormatter(cellval, options, rowdata) {
@@ -135,6 +134,12 @@ function searchKokyaku() {
         }
     };
     $("#searchCustomerGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// 更新用メソッド
+function modifyKokyaku(kokyakuId) {
+    location.href = "kokyakus/" + kokyakuId + "/edit";
+    return false;
 }
 
 // 更新用メソッド

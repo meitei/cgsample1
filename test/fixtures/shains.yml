@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shainId: 1
+  shainCd: MyString
+  myoji: MyString
+  name: MyString
+  myojiFuri: MyString
+  nameFuri: MyString
+  loginId: MyString
+  loginPassword: MyString
+  manageFlg: 1
+  koshinshaId: 1
+  torokushaId: 1
+
+two:
+  shainId: 1
+  shainCd: MyString
+  myoji: MyString
+  name: MyString
+  myojiFuri: MyString
+  nameFuri: MyString
+  loginId: MyString
+  loginPassword: MyString
+  manageFlg: 1
+  koshinshaId: 1
+  torokushaId: 1

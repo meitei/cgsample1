@@ -1,11 +1,11 @@
 <div style="width:1024;">
 <%= render 'search' %>
-<div style="width:1024px; clear:both;" id="hokenShubetsu">
-    <table id="searchHokenShubetsuGrid"></table>
-    <div id="searchHokenShubetsuPager"></div>
+<div style="width:1024px; clear:both;" id="shain">
+    <table id="searchShainGrid"></table>
+    <div id="searchShainPager"></div>
 </div>
 <div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnHokenShubetsuNew" href="#" />新規追加</a>
+    <a style="float:right;" class="btn btn-primary" id="btnShainNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -15,23 +15,30 @@
 $(function() {
     
     var isLoaded = false;
-    var colNames = ["保険種別コード","保険種別名", "表示順","更新者ID","登録者ID","",""];
+    var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","ログイン日付","更新者ID","登録者ID","",""];
     var colModelSettings = [
-            {name:"hokenShubetsuCd", index:"hokenShubetsuCd"},
-            {name:"hokenShubetsuNm", index:"hokenShubetsuNm"},
-            {name:"hyojiJun", index:"hyojiJun", hidden:true},
-            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
-            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
+            {name:"shainId", index:"shainId", hidden:true},
+            {name:"shainCd", index:"shainCd"},
+            {name:"myoji", index:"myoji"},
+            {name:"name", index:"name"},
+            {name:"myojiFuri", index:"myojiFuri"},
+            {name:"nameFuri", index:"nameFuri"},
+            {name:"loginId", index:"loginId"},
+            {name:"loginPassword", index:"loginPassword"},
+            {name:"manageFlg", index:"manageFlg"},
+            {name:"loginLastDt", index:"loginLastDt"},
+            {name:"koshinshaId", index:"koshinshaId", hidden:true},
+            {name:"torokushaId", index:"torokushaId", hidden:true},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
             {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
     ];
-    $("#searchHokenShubetsuGrid").jqGrid({
+    $("#searchShainGrid").jqGrid({
         datatype: "local",
         width: "1024",
         height: "240",
         cellEdit: false,
         rowNum: 10,
-        pager: "searchHokenShubetsuPager",
+        pager: "searchShainPager",
         multiselect: false,
         colNames: colNames,
         colModel: colModelSettings,
@@ -40,22 +47,22 @@ $(function() {
                 isLoaded = true;
             }
         },
-    }).navGrid('#searchHokenShubetsuPager',{edit:false, add:false, del:false, search:false});
+    }).navGrid('#searchShainPager',{edit:false, add:false, del:false, search:false});
 });
 
 // ##############################
 // 検索ボタンクリック処理
 // ##############################
-$("a#btnHokenShubetsuSearch").click(function() {
-    searchHokenShubetsu();
+$("a#btnShainSearch").click(function() {
+    searchShain();
     return false;
 });
 
 // ##############################
 // 新規登録ボタンクリック処理
 // ##############################
-$("a#btnHokenShubetsuNew").click(function() {
-    showHokenShubetsuFormDialog();
+$("a#btnShainNew").click(function() {
+    showShainFormDialog();
     return false;
 });
 
@@ -63,29 +70,29 @@ $("a#btnHokenShubetsuNew").click(function() {
 // グリッド更新ボタンクリック処理
 // ##############################
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src='/images/database-reload-alt-1.png' onclick='showHokenShubetsuFormDialog(" + rowdata['hokenShubetsuCd'] + ")' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='showShainFormDialog(" + rowdata['shainId'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // グリッド削除ボタンクリック処理
 // ##############################
 function deleteFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-remove-alt-1.png' onclick='removeHokenShubetsu(" + rowdata['hokenShubetsuCd'] + ")' title='削除' style='width:16px; height:16px'>";
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeShain(" + rowdata['shainId'] + ")' title='削除' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // 検索用メソッド
 // ##############################
-function searchHokenShubetsu() {
+function searchShain() {
     var data = {};
-    var search = $("#hokenShubetsuSearchForm").serializeArray();
+    var search = $("#shainSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
-    $("#searchHokenShubetsuGrid").clearGridData();
+    $("#searchShainGrid").clearGridData();
     var param = {
         datatype: "json",
-        url: "hoken_shubetsus/search.json",
+        url: "shains/search.json",
         postData: data,
         jsonReader: {
             root: "rows",
@@ -95,60 +102,60 @@ function searchHokenShubetsu() {
             repeatitems: false
         }
     };
-    $("#searchHokenShubetsuGrid").setGridParam(param).trigger("reloadGrid");
+    $("#searchShainGrid").setGridParam(param).trigger("reloadGrid");
 }
 
 // ##############################
 // 更新用メソッド
 // param:
-// hokenShubetsuCd : 病院コード
+// shainId : 社員ID
 // ##############################
-function executeHokenShubetsu(hokenShubetsuCd) {
+function executeShain(shainId) {
     var url;
     var type;
-    if(hokenShubetsuCd != null) {
-        url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
+    if(shainCd != null) {
+        url = "shains/" + shainId + ".json";
         type = "PUT";
     } else {
-        url = "hoken_shubetsus.json";
+        url = "shains.json";
         type = "POST";
     }
     var data = {};
     var postData = {};
-    var hokenShubetsu = $("#hokenShubetsuForm").serializeArray();
-    $.each(hokenShubetsu, function() {
+    var shain = $("#shainForm").serializeArray();
+    $.each(shain, function() {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
     data["koshinshaId"] = 1;
     data["torokushaId"] = 1;
 
-    postData["hoken_shubetsu"] = data;
-    postData["id"] = hokenShubetsuCd;
+    postData["shain"] = data;
+    postData["id"] = shainId;
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
         data: postData,
-        root: "hokenShubetsu",
+        root: "shain",
         dataType: "json",
         success: function(result) {
-            searchHokenShubetsu();
+            searchShain();
         }
     });
-    $("#hokenShubetsuFormDialog").dialog("close");
+    $("#shainFormDialog").dialog("close");
     return false;
 }
 
 // ##############################
 // 登録用フォームダイアログオープン
 // param:
-// hokenShubetsuCd : 病院コード
+// shainId : 社員ID
 // ##############################
-function showHokenShubetsuFormDialog(hokenShubetsuCd) {
+function showShainFormDialog(shainId) {
 
-    if(hokenShubetsuCd != null) {
-        var url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
+    if(shainId != null) {
+        var url = "shains/" + shainId + ".json";
         $.ajax({
             scriptCharset:"UTF-8",
             type: "GET",
@@ -156,61 +163,68 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
             dataType: "json",
             success: function(result) {
                 if(result) {
-                    $("#hokenShubetsuForm #hokenShubetsuNm").val(result["hokenShubetsuNm"]);
-                    $("#hokenShubetsuForm #hyojiJun").val(result["hyojiJun"]);
+                    $("#shainForm #shainCd").val(result["shainCd"]);
+                    $("#shainForm #myoji").val(result["myoji"]);
+                    $("#shainForm #name").val(result["name"]);
+                    $("#shainForm #myojiFuri").val(result["myojiFuri"]);
+                    $("#shainForm #nameFuri").val(result["nameFuri"]);
+                    $("#shainForm #loginId").val(result["loginId"]);
+                    $("#shainForm #loginPassword").val(result["loginPassword"]);
+                    $("#shainForm #manageFlg").val(result["manageFlg"]);
                 }
                 return false;
             }
         });
     }
     // ダイアログ表示
-    $("#hokenShubetsuFormDialog").dialog({
+    $("#shainFormDialog").dialog({
         show: {effect: "clip"},
         hide: {effect: "clip"},
         width: "auto",
         modal: true,
         buttons : {
             "閉じる": function(){
-                $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
-                $("#hokenShubetsuForm").validate().resetForm();
+                $('#shainForm input[type="text"], select, textarea').val('');
+                $("#shainForm").validate().resetForm();
                 $(this).dialog('close');
+                return false;
             },
             '登録' :function() {
                 // クライアントバリデーション
-                if ($("#hokenShubetsuForm").valid() == false) {
+                if ($("#shainForm").valid() == false) {
                      return false;
                  }
-                executeHokenShubetsu(hokenShubetsuCd);
-                $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
+                executeShain(shainCd);
+                $('#shainForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
-                return false;
             }
         },
         open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
-    $("#hokenShubetsuFormDialog").focus();
+    $("#shainFormDialog").focus();
+    $("#shainForm").validationEngine("attach");
 }
 
 // ##############################
 // 削除用メソッド
 // param:
-// hokenShubetsuCd : 病院コード
+// shainId : 社員ID
 // ##############################
-function removeHokenShubetsu(hokenShubetsuCd) {
+function removeShain(shainId) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
-    var url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
+    var url = "shains/" + shainId + ".json";
     var type = "DELETE";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + hokenShubetsuCd,
+        data: "id=" + shainId,
         dataType: "json",
         success: function(result) {
-            searchHokenShubetsu();
+                searchShain();
         }
     });
     return false;

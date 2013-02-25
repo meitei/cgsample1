@@ -19,6 +19,18 @@
 
 <script>
 $(function() {
-  
+  $("#byoinForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) { 
+            $(element).addClass(errorClass); 
+        }, 
+        unhighlight: function (element, errorClass, validClass) { 
+            $(element).removeClass(errorClass); 
+        },
+        rules: {
+            byoinNm: {required:true, maxlength:25},
+        }
+    });
 });
 </script>
