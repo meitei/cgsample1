@@ -38,8 +38,8 @@ $(function() {
     var colNames = ["集計単位","金額","台数"];
     var colModelSettings = [
             {name:"sumUnt", index:"sumUnt"},
-            {name:"kingaku", index:"kingaku", editable:false},
-            {name:"daisu", index:"daisu", editable:false}
+            {name:"kingaku", index:"kingaku", editable:false, formatter:"currency", align:"right"},
+            {name:"daisu", index:"daisu", editable:false, formatter:"integer", align:"right"}
     ];
     $("#searchToukeiGrid").jqGrid({
         datatype: "local",
@@ -52,6 +52,7 @@ $(function() {
         pager: "searchToukeiPager",
         multiselect: false,
         //viewrecords: true,
+
         colNames: colNames,
         colModel: colModelSettings
     }).navGrid('#searchToukeiPager',{edit:false, add:false, del:false, search:false});

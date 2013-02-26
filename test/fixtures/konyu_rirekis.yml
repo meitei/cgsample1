@@ -4,19 +4,19 @@ one:
   konyuRirekiId: 1
   kokyakuId: 1
   byoinCd: 1
-  ishiNm: MyString
-  rigakuRyohoNm: MyString
-  sagyoRyohoNm: MyString
+  ishiNm: 医師太郎
+  rigakuRyohoNm: 理学太郎
+  sagyoRyohoNm: 作業太郎
   mitsumoriTantoEigyoCd: 1
   mitsumoriDt: 2013-02-23
   shubetsuCd: 1
   mitsumoriKomokuCd: 1
-  shohinNm: MyString
-  sinsho: MyString
+  shohinNm: 商品名１
+  sinsho: 身障１
   hokenShubetsuCd: 1
-  kin: 9.99
-  seikyuKin: 9.99
-  shohinSiyoBiko: MyString
+  kin: 100000
+  seikyuKin: 30000
+  shohinSiyoBiko: 商品使用備考１
   uketsukeSesakuTantoCd: 1
   juchuDt: 2013-02-23
   kariAwaseTantoCd: 1
@@ -33,23 +33,119 @@ one:
   koshinId: 1
 
 two:
-  konyuRirekiId: 1
+  konyuRirekiId: 2
   kokyakuId: 1
-  byoinCd: 1
-  ishiNm: MyString
-  rigakuRyohoNm: MyString
-  sagyoRyohoNm: MyString
-  mitsumoriTantoEigyoCd: 1
+  byoinCd: 2
+  ishiNm: 医師次郎
+  rigakuRyohoNm: 理学次郎
+  sagyoRyohoNm: 作業次郎
+  mitsumoriTantoEigyoCd: 2
   mitsumoriDt: 2013-02-23
   shubetsuCd: 1
   mitsumoriKomokuCd: 1
-  shohinNm: MyString
-  sinsho: MyString
+  shohinNm: 商品名２
+  sinsho: 身障２
   hokenShubetsuCd: 1
-  kin: 9.99
-  seikyuKin: 9.99
-  shohinSiyoBiko: MyString
+  kin: 120000
+  seikyuKin: 40000
+  shohinSiyoBiko: 商品使用備考２
   uketsukeSesakuTantoCd: 1
+  juchuDt: 2013-02-23
+  kariAwaseTantoCd: 1
+  kariAwaseDt: 2013-02-23
+  nohinTantoCd: 1
+  nohinDt: 2013-02-23
+  kofuDt: 2013-02-23
+  kannoDt: 2013-02-23
+  nyukinDt: 2013-02-23
+  oshiinDt: 2013-02-23
+  kanryoDt: 2013-02-23
+  koshinshaId: 1
+  torokushaId: 1
+  koshinId: 1
+
+three:
+  konyuRirekiId: 3
+  kokyakuId: 1
+  byoinCd: 2
+  ishiNm: 医師三郎
+  rigakuRyohoNm: 理学三郎
+  sagyoRyohoNm: 作業三郎
+  mitsumoriTantoEigyoCd: 1
+  mitsumoriDt: 2013-02-23
+  shubetsuCd: 1
+  mitsumoriKomokuCd: 3
+  shohinNm: 商品名２
+  sinsho: 身障３
+  hokenShubetsuCd: 1
+  kin: 90000
+  seikyuKin: 18000
+  shohinSiyoBiko: 商品使用備考３
+  uketsukeSesakuTantoCd: 2
+  juchuDt: 2013-02-23
+  kariAwaseTantoCd: 1
+  kariAwaseDt: 2013-02-23
+  nohinTantoCd: 1
+  nohinDt: 2013-02-23
+  kofuDt: 2013-02-23
+  kannoDt: 2013-02-23
+  nyukinDt: 2013-02-23
+  oshiinDt: 2013-02-23
+  kanryoDt: 2013-02-23
+  koshinshaId: 1
+  torokushaId: 1
+  koshinId: 1
+
+four:
+  konyuRirekiId: 4
+  kokyakuId: 2
+  byoinCd: 3
+  ishiNm: 医師志郎
+  rigakuRyohoNm: 理学志郎
+  sagyoRyohoNm: 作業志郎
+  mitsumoriTantoEigyoCd: 1
+  mitsumoriDt: 2013-02-23
+  shubetsuCd: 1
+  mitsumoriKomokuCd: 3
+  shohinNm: 商品名４
+  sinsho: 身障４
+  hokenShubetsuCd: 1
+  kin: 190000
+  seikyuKin: 45000
+  shohinSiyoBiko: 商品使用備考４
+  uketsukeSesakuTantoCd: 2
+  juchuDt: 2013-02-23
+  kariAwaseTantoCd: 1
+  kariAwaseDt: 2013-02-23
+  nohinTantoCd: 1
+  nohinDt: 2013-02-23
+  kofuDt: 2013-02-23
+  kannoDt: 2013-02-23
+  nyukinDt: 2013-02-23
+  oshiinDt: 2013-02-23
+  kanryoDt: 2013-02-23
+  koshinshaId: 1
+  torokushaId: 1
+  koshinId: 1
+
+five:
+  konyuRirekiId: 5
+  kokyakuId: 3
+  byoinCd: 5
+  ishiNm: 医師五郎
+  rigakuRyohoNm: 理学五郎
+  sagyoRyohoNm: 作業五郎
+  mitsumoriTantoEigyoCd: 1
+  mitsumoriDt: 2013-02-23
+  shubetsuCd: 1
+  mitsumoriKomokuCd: 3
+  shohinNm: 商品名５
+  sinsho: 身障５
+  hokenShubetsuCd: 1
+  kin: 20000
+  seikyuKin: 3000
+  shohinSiyoBiko: 商品使用備考５
+  uketsukeSesakuTantoCd: 3
   juchuDt: 2013-02-23
   kariAwaseTantoCd: 1
   kariAwaseDt: 2013-02-23
