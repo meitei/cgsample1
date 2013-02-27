@@ -113,7 +113,7 @@ function searchShain() {
 function executeShain(shainId) {
     var url;
     var type;
-    if(shainCd != null) {
+    if(shainId != null) {
         url = "shains/" + shainId + ".json";
         type = "PUT";
     } else {
@@ -194,7 +194,7 @@ function showShainFormDialog(shainId) {
                 if ($("#shainForm").valid() == false) {
                      return false;
                  }
-                executeShain(shainCd);
+                executeShain(shainId);
                 $('#shainForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
             }
@@ -203,7 +203,6 @@ function showShainFormDialog(shainId) {
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     $("#shainFormDialog").focus();
-    $("#shainForm").validationEngine("attach");
 }
 
 // ##############################
