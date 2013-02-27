@@ -70,10 +70,14 @@ $(function() {
             $(element).removeClass(errorClass); 
         },
         rules: {
-            // shobyoNm: {required:true, maxlength:25},
-            // shobyoNmKana: {required:true, katakana:true, maxlength:25},
-            // shusaiDt: {date:true},
-            // haishiDt: {date:true}
+            shainCd: {required:true},
+            myoji: {required:true, maxlength:25},
+            name: {required:true, maxlength:25},
+            myojiFuri: {required:true, katakana:true, maxlength:25},
+            nameFuri: {required:true, katakana:true, maxlength:25},
+            loginId: {required:true},
+            loginPassword: {required:true},
+            manageFlg: {required:true}
         }
     });
 
