@@ -1,4 +1,7 @@
 class ToukeisController < ApplicationController
+
+  SumUnts = Struct.new(:keyCd, :keyLabel, :joins)
+
   # GET /toukeis
   # GET /toukeiss.json
   def index
@@ -11,19 +14,29 @@ class ToukeisController < ApplicationController
   # GET /toukeis/search
   # GET /toukeis/search.json
   def search
-    #--- 未実装 ---
+
     conditions = KonyuRireki.where("1 = ?", 1)
     conditions = conditions.where("\"mitsumoriDt\" >= ?", Date.strptime(params[:targetSpnFrom], "%Y/%m/%d")) if params[:targetSpnFrom] != ""
     conditions = conditions.where("\"mitsumoriDt\" <= ?", Date.strptime(params[:targetSpnTo], "%Y/%m/%d")) if params[:targetSpnTo] != ""
     logger.debug(conditions)
 
+    # Pending...
     sumUnts = {
-      1 => "uketsukeSesakuTantoCd",
-      2 => "byoinCd",
-      3 => "shohinNm",
-      4 => "shubetsuCd",
-      5 => "mitsumoriKomokuCd"
+      1 => SumUnts.new(
+        "uketsukeSesakuTantoCd",
+        "shains.name",
+        "left outer join shains on shains.shainCd = konyu_rirekis.uketsukeSesakuTantoCd")
     }
+    sumUnts.default = sumUnts[1]
+    sumUnt = sumUnts[params[:sumUnt].to_i];
+
+    # sumUnts = {
+    #   1 => "uketsukeSesakuTantoCd",
+    #   2 => "byoinCd",
+    #   3 => "shohinNm",
+    #   4 => "shubetsuCd",
+    #   5 => "mitsumoriKomokuCd"
+    # }
 
     records = conditions.count
     limit = params[:rows].to_i
@@ -37,8 +50,8 @@ class ToukeisController < ApplicationController
     start = limit * page - limit;
     @konyu_rirekis = conditions.find(
       :all,
-      :select => "#{sumUnts[params[:sumUnt].to_i]} sumUntKey, #{"shains.name"} sumUnt, sum(kin) kingaku, count(*) daisu ",
-      :joins => "left outer join shains on shains.shainCd = konyu_rirekis.uketsukeSesakuTantoCd",
+      :select => "#{sumUnt.keyCd} sumUntKey, #{sumUnt.keyLabel} sumUnt, sum(kin) kingaku, count(*) daisu ",
+      :joins => sumUnt.joins,
       :group  => "sumUntKey ",
       :offset => start,
       :limit  => limit,
