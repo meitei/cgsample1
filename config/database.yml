@@ -23,3 +23,13 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
+
+staging:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: sample
+  pool: 5
+  username: root
+  password: Yy5R4AT3UAxVLaFB
+  socket: /var/lib/mysql/mysql.sock
