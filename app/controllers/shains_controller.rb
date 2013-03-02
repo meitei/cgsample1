@@ -115,8 +115,8 @@ class ShainsController < ApplicationController
     # 検索開始
     start = limit * page - limit;
     @shains = conditions.find(
-      :all, 
-      :offset => start, 
+      :all,
+      :offset => start,
       :limit => limit,
       :order => "\"shainCd\"")
 
@@ -125,7 +125,7 @@ class ShainsController < ApplicationController
       total: total_pages.to_s,
       page: params[:page],
       records: records.to_s,
-      rows: @shobyos
+      rows: @shains
     }
     #logger.debug(@responce)
 
