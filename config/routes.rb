@@ -33,6 +33,7 @@ JqgridSample::Application.routes.draw do
     get 'search', :on => :collection
     get 'kokyaku_list', :on => :collection
     get 'graph', :on => :collection
+    get 'graph_data', :on => :collection
   end
 
   resources :companies

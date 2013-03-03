@@ -14,7 +14,7 @@
     <a style="float:right;" class="btn btn-primary" id="btnCustomerNew" href="#" />新規追加</a>
 </div>
 -->
-<%= render 'form2' %>
+
 <script>
 $(function() {
     $("#toukeiSearchForm").validate({
@@ -86,6 +86,10 @@ $(function() {
       //   ui.item.value = ui.item.value.split(':').shift();
       // }
     });
+
+    $('#btnPrev').addClass('disabled');
+    $('#btnNext').addClass('disabled');
+
 });
 
 $("a#btnToukeiSearch").click(function() {
@@ -96,6 +100,16 @@ $("a#btnToukeiSearch").click(function() {
 $("a#btnToukeiClear").click(function() {
     $('#toukeiSearchForm input[type="text"]').val('');
     return false;
+});
+
+$("a#btnPrev").click(function() {
+    searchToukei('prev');
+  return false;
+});
+
+$("a#btnNext").click(function() {
+    searchToukei('next');
+  return false;
 });
 
 // $("a#btnShowGraph").click(function() {
@@ -112,12 +126,13 @@ function deleteFormatter(cellval, options, rowdata) {
 }
 
 // 検索用メソッド
-function searchToukei() {
+function searchToukei(where) {
     var data = {};
     var search = $("#toukeiSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
+    if (where) data['where'] = where;
     $("#searchToukeiGrid").clearGridData();
     var param = {
         datatype: "json",
@@ -129,6 +144,36 @@ function searchToukei() {
             total: "total",
             records: "records",
             repeatitems: false
+        },
+        beforeRequest: function() {
+          $('#outCondYear').html('');
+          $('#btnPrev').addClass('disabled');
+          $('#btnNext').addClass('disabled');
+        },
+        loadComplete : function(data) {
+
+          var strOutCond = ''
+          if (data.cond.outCondYear) {
+            strOutCond = data.cond.outCondYear + " 年 "
+            if (data.cond.outCondMonth) {
+              strOutCond += data.cond.outCondMonth + " 月"
+            }
+          }
+          $('#outCondYear').html(strOutCond);
+
+          // 前へボタンの制御
+          if (data.cond.has_prev) {
+            $('#btnPrev').removeClass('disabled');
+          } else {
+            $('#btnPrev').addClass('disabled');
+          }
+          // 次へボタンの制御
+          if (data.cond.has_next) {
+            $('#btnNext').removeClass('disabled');
+          } else {
+            $('#btnNext').addClass('disabled');
+          }
+
         }
     };
     $("#searchToukeiGrid").setGridParam(param).trigger("reloadGrid");

@@ -15,10 +15,79 @@ class ToukeisController < ApplicationController
   # GET /toukeis/search.json
   def search
 
+    targetSpnFrom = Date.strptime(params[:targetSpnFrom], "%Y/%m/%d") if isDate(params[:targetSpnFrom])
+    targetSpnTo = Date.strptime(params[:targetSpnTo], "%Y/%m/%d") if isDate(params[:targetSpnTo])
+    today = Date.today
+
+    # # 範囲指定からみた本日の位置
+    # if targetSpnFrom > today then
+    #   position = -1
+    # elsif targetSpnTo < today then
+    #   position = 1
+    # else
+    #   position = 0
+    # end
+
+    # @outConds = []
+    # @outCondYear = @outCondMonth = nil
+    # if params[:outCond] == "1" then
+    #   # 月別
+    #   if targetSpnFrom.year == targetSpnTo.year then
+    #     (targetSpnFrom.year ... targetSpnFrom.year).each{(|year|
+    #       (targetSpnFrom.month ... targetSpnFrom.month).each{(|month|
+    #         @outConds << year.to_s + "-" + month.to_s
+    #         if position.zero? then
+    #           if year == today.year then
+    #             @outCondYear = year.to_s
+    #             @outCondMonth = month.to_s if month == today.month
+    #           end
+    #         elsif position < 0 then
+    #           #過去が指定された
+    #         elsif position > 0 then
+    #           #未来が指定された
+    #         end
+    #       }
+    #     }
+    #   end
+    #   @outCondYear =
+    #   untDateTo = Date.new(year, month, -1);
+    # elsif params[:outCond] == "2" then
+    #   # 年度別
+    #   untDateFrom = Date.new(year, 1, 1);
+    #   untDateTo = Date.new(year, 12, 31);
+    # else
+    #   # 総合計
+    #   untDateFrom = nil
+    #   untDateTo = nil
+    # end
+
     conditions = KonyuRireki.where("1 = ?", 1)
-    conditions = conditions.where("\"mitsumoriDt\" >= ?", Date.strptime(params[:targetSpnFrom], "%Y/%m/%d")) if params[:targetSpnFrom] != ""
-    conditions = conditions.where("\"mitsumoriDt\" <= ?", Date.strptime(params[:targetSpnTo], "%Y/%m/%d")) if params[:targetSpnTo] != ""
+    conditions = conditions.where("\"mitsumoriDt\" >= ?", targetSpnFrom) if targetSpnFrom
+    conditions = conditions.where("\"mitsumoriDt\" <= ?", targetSpnTo) if targetSpnTo
     logger.debug(conditions)
+
+    if params[:outCond] == "1" then
+      # 月別
+      if Rails.env.production? then
+        # MySQL
+        # sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y%m')"
+        sumCndKey = "to_char(\"mitsumoriDt\", 'YYYYMM')"
+      else
+        sumCndKey = "strftime('%Y%m', \"mitsumoriDt\")"
+      end
+    elsif params[:outCond] == "2" then
+      # 年度別
+      if Rails.env.production? then
+        # MySQL
+        # sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y')"
+        sumCndKey = "to_char(\"mitsumoriDt\", 'YYYY')"
+      else
+        sumCndKey = "strftime('%Y', \"mitsumoriDt\")"
+      end
+    else
+      # 総合計
+      sumCndKey = "'dummy'"
+    end
 
     # Pending...
     sumUnts = {
@@ -38,6 +107,7 @@ class ToukeisController < ApplicationController
     #   5 => "mitsumoriKomokuCd"
     # }
 
+    # FIXME: 検索結果に対して位置を指定できるようにする
     records = conditions.count
     limit = params[:rows].to_i
     page = params[:page].to_i
@@ -48,24 +118,96 @@ class ToukeisController < ApplicationController
       total_pages = 0
     end
     start = limit * page - limit;
+    # FIXME: ここまで
+
     @konyu_rirekis = conditions.find(
       :all,
-      :select => "#{sumUnt.keyCd} sumUntKey, #{sumUnt.keyLabel} sumUnt, sum(kin) kingaku, count(*) daisu ",
+      :select => "#{sumCndKey} sumCndKey, #{sumUnt.keyCd} sumUntKey, #{sumUnt.keyLabel} sumUnt, sum(kin) kingaku, count(*) daisu ",
       :joins => sumUnt.joins,
-      :group  => "sumUntKey ",
+      :group  => "sumCndKey, sumUntKey ",
       :offset => start,
       :limit  => limit,
-      :order  => "\"sumUntKey\" ASC")
+      :order  => "sumCndKey, sumUntKey ASC")
 
-    # @konyu_rirekis.each {|row|
-    #   row["sumUnt"] = row.sesaku_shain.name
-    # }
+    # 集計単位のリストを作成する
+    cndKeys = []
+    @konyu_rirekis.each {|row|
+      cndKeys << row["sumCndKey"]
+    }
+    cndKeys.uniq!.sort!
+    logger.debug(cndKeys)
+
+    has_prev = false
+    has_next = false
+    outCondYear = outCondMonth = ""
+
+    if not cndKeys.empty? then
+      today_year = today.year.to_s
+      today_month = sprintf("%02d", today.month)
+      if params[:outCond] == "1" then
+        # 月別
+        if cndKeys.index(today_year+today_month) then
+          outCondYear = today_year
+          outCondMonth = today_month
+        else
+          if cndKeys.first > today_year+today_month then
+            # 本日が検索結果の年月より過去の場合
+            outCondYear = cndKeys.first[0..3]
+            outCondMonth = cndKeys.first[4..5]
+          else
+            # 本日が検索結果の年月より未来の場合
+            outCondYear = cndKeys.last[0..3]
+            outCondMonth = cndKeys.last[4..5]
+          end
+        end
+
+        # outCondDate = Date.parse(outCondYear+outCondMonth+"01")
+        # prev_date = outCondDate << 1
+        # next_date = outCondDate >> 1
+        # has_prev = true if cndKeys.index(prev_date.strftime("%y%m"))
+        # has_next = true if cndKeys.index(next_date.strftime("%Y%m"))
+      elsif params[:outCond] == "2" then
+        # 年度別
+        if cndKeys.index(today_year) then
+          outCondYear = today_year
+        else
+          if cndKeys.first > today_year then
+            # 本日が検索結果の年より過去の場合
+            outCondYear = cndKeys.first
+          else
+            # 本日が検索結果の年より未来の場合
+            outCondYear = cndKeys.last
+          end
+        end
+        # has_prev = true if cndKeys.index(outCondYear.to_i.next.to_s)
+        # has_next = true if cndKeys.index(outCondYear.to_i.pred.to_s)
+      else
+        # 総合計
+      end
+      cndPos = cndKeys.index(outCondYear+outCondMonth)
+      if cndPos and cndPos >= 0 then
+        has_prev = true if cndPos > 0
+        has_next = true if cndPos < (cndKeys.size - 1)
+      end
+    end
+    logger.debug("outCondYear => #{outCondYear}, outCondMonth => #{outCondMonth}")
+
+    # 表示中の年月以外は結果から除外する
+    @konyu_rirekis.delete_if {|item|
+      item["sumCndKey"] != outCondYear+outCondMonth and item["sumCndKey"] != "dummy"
+    }
 
     @responce = {
       total: total_pages.to_s,
       page: params[:page],
       records: records.to_s,
-      rows: @konyu_rirekis
+      rows: @konyu_rirekis,
+      cond: {
+        outCondYear: outCondYear,
+        outCondMonth: outCondMonth,
+        has_prev: has_prev,
+        has_next: has_next
+      }
     }
     #logger.debug(@responce)
 
@@ -76,7 +218,6 @@ class ToukeisController < ApplicationController
   end
 
   def kokyaku_list
-    #--- 未実装 ---
 
     has_key = (params[:kokyakuId] != nil and params[:kokyakuId] != "")
     sqlbind_s = "%" + params[:kokyakuId] + "%" if has_key
@@ -100,10 +241,6 @@ class ToukeisController < ApplicationController
     #   responce << (k.kokyakuId + ":" + k.kokyakuNm)
     # }
 
-    @responce = {
-      list: @kokyakus
-    }
-
     logger.debug(@responce)
 
     respond_to do |format|
@@ -118,10 +255,59 @@ class ToukeisController < ApplicationController
   def graph
     # @kokyaku = Kokyaku.find(params[:id])
 
-    respond_to do |format|
-      format.html # graph.html.erb
-      format.json { render json: @kokyaku }
+    year = params[:outCondYear].to_i
+    month = params[:outCondMonth].to_i
+    if params[:outCond] == "1" then
+      # 月別
+      untDateFrom = Date.new(year, month, 1);
+      untDateTo = Date.new(year, month, -1);
+    elsif params[:outCond] == "2" then
+      # 年度別
+      untDateFrom = Date.new(year, 1, 1);
+      untDateTo = Date.new(year, 12, 31);
+    else
+      # 総合計
+      untDateFrom = nil
+      untDateTo = nil
     end
+
+    conditions = KonyuRireki.where("1 = ?", 1)
+    conditions = conditions.where("\"mitsumoriDt\" >= ?", Date.strptime(params[:targetSpnFrom], "%Y/%m/%d")) if params[:targetSpnFrom] != ""
+    conditions = conditions.where("\"mitsumoriDt\" <= ?", Date.strptime(params[:targetSpnTo], "%Y/%m/%d")) if params[:targetSpnTo] != ""
+    conditions = conditions.where("\"mitsumoriDt\" >= ?", untDateFrom) if untDateFrom
+    conditions = conditions.where("\"mitsumoriDt\" >= ?", untDateTo) if untDateTo
+
+
+    logger.debug(conditions)
+
+    # Pending...
+    sumUnts = {
+      1 => SumUnts.new(
+        "uketsukeSesakuTantoCd",
+        "shains.name",
+        "left outer join shains on shains.shainCd = konyu_rirekis.uketsukeSesakuTantoCd")
+    }
+    sumUnts.default = sumUnts[1]
+    sumUnt = sumUnts[params[:sumUnt].to_i];
+
+    @konyu_rirekis = conditions.find(
+      :all,
+      :select => "#{sumUnt.keyCd} sumUntKey, #{sumUnt.keyLabel} sumUnt, sum(kin) kingaku, count(*) daisu ",
+      :joins => sumUnt.joins,
+      :group  => "sumUntKey ",
+      :offset => start,
+      :limit  => limit,
+      :order  => "\"sumUntKey\" ASC")
+
+    @responce = {
+      data: @konyu_rirekis
+    }
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @responce }
+    end
+
   end
 
   # GET /kokyakus/new
@@ -184,4 +370,19 @@ class ToukeisController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def isDate strDate
+    if strDate then
+      match = /(\d+)\/(\d+)\/(\d+)/.match(strDate)
+      if match then
+        parts = match.captures
+        if parts.size == 3 and Date.valid_date?(parts[0].to_i, parts[1].to_i, parts[2].to_i) then
+          return true
+        end
+      end
+    end
+  end
+
+
 end

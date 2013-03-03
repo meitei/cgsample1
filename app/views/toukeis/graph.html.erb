@@ -5,6 +5,28 @@
 <script>
 $(function() {
 
+    // Get graph data.
+    $.ajax({
+      url: "/toukeis/graph_data.json",
+      dataType: "json",
+      root: "list",
+      data: {
+        'outCnd' : $('#outCnd').val(),
+        'outUnt' : $('#outUnt').val(),
+        'sumUnt' : $('#sumUnt').val(),
+        'targetSpnFrom' : $('#targetSpnFrom').val(),
+        'targetSpnTo' : $('#targetSpnTo').val()
+      },
+      success: function(data) {
+        response($.map(data.list, function(item) {
+          return {
+            label: item.kokyakuNm+' - '+item.kokyakuId,
+            value: item.kokyakuId
+          }
+        }))
+      }
+    })
+
     var values = [200, 600, 700, 1000];
     var ticks = ["太郎", "次郎", "花子", "陽子"];
     // Horizontal bar chart
