@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class ShainsController < ApplicationController
   # GET /shains
   # GET /shains.json
@@ -116,6 +118,20 @@ class ShainsController < ApplicationController
     start = limit * page - limit;
     @shains = conditions.find(
       :all,
+      :select => "\"shainId\", 
+                       \"shainCd\",
+                       \"myoji\",
+                       \"name\",
+                       \"myojiFuri\",
+                       \"nameFuri\",
+                       \"loginId\",
+                       \"loginPassword\",
+                       \"manageFlg\",
+                       CASE \"manageFlg\" 
+                           WHEN '1' THEN '一般'
+                           WHEN '2' THEN '管理者'
+                           WHEN '9' THEN '退職者'
+                       END AS \"manageName\"",
       :offset => start,
       :limit => limit,
       :order => "\"shainCd\"")

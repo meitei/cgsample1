@@ -15,7 +15,7 @@
 $(function() {
     
     var isLoaded = false;
-    var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","ログイン日付","更新者ID","登録者ID","",""];
+    var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","管理者フラグ","",""];
     var colModelSettings = [
             {name:"shainId", index:"shainId", hidden:true},
             {name:"shainCd", index:"shainCd"},
@@ -25,10 +25,8 @@ $(function() {
             {name:"nameFuri", index:"nameFuri"},
             {name:"loginId", index:"loginId"},
             {name:"loginPassword", index:"loginPassword"},
-            {name:"manageFlg", index:"manageFlg"},
-            {name:"loginLastDt", index:"loginLastDt",hidden:true},
-            {name:"koshinshaId", index:"koshinshaId", hidden:true},
-            {name:"torokushaId", index:"torokushaId", hidden:true},
+            {name:"manageFlg", index:"manageFlg",hidden:true},
+            {name:"manageName", index:"manageName"},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
             {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
     ];
