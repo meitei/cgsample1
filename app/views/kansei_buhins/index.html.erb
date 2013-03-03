@@ -1,11 +1,11 @@
 <div style="width:1024;">
 <%= render 'search' %>
-<div style="width:1024px; clear:both;" id="shain">
-    <table id="searchShainGrid"></table>
-    <div id="searchShainPager"></div>
+<div style="width:1024px; clear:both;" id="kanseiBuhin">
+    <table id="searchKanseiBuhinGrid"></table>
+    <div id="searchKanseiBuhinPager"></div>
 </div>
 <div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnShainNew" href="#" />新規追加</a>
+    <a style="float:right;" class="btn btn-primary" id="btnKanseiBuhinNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -15,28 +15,27 @@
 $(function() {
     
     var isLoaded = false;
-    var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","管理者フラグ","",""];
+    var colNames = ["完成部品コード","完成部品名","型式コード", "型式名", "価格", "使用部品","備考","更新者ID","登録者ID","",""];
     var colModelSettings = [
-            {name:"shainId", index:"shainId", hidden:true},
-            {name:"shainCd", index:"shainCd"},
-            {name:"myoji", index:"myoji"},
-            {name:"name", index:"name"},
-            {name:"myojiFuri", index:"myojiFuri"},
-            {name:"nameFuri", index:"nameFuri"},
-            {name:"loginId", index:"loginId"},
-            {name:"loginPassword", index:"loginPassword"},
-            {name:"manageFlg", index:"manageFlg",hidden:true},
-            {name:"manageName", index:"manageName"},
+            {name:"buhinCd", index:"buhinCd", hidden:true},
+            {name:"buhinNm", index:"buhinNm"},
+            {name:"katashikiCd", index:"katashikiCd"},
+            {name:"katashikiNm", index:"katashikiNm"},
+            {name:"kakaku", index:"kakaku"},
+            {name:"shiyoBuhin", index:"shiyoBuhin"},
+            {name:"biko", index:"biko"},
+            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
+            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
             {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
     ];
-    $("#searchShainGrid").jqGrid({
+    $("#searchKanseiBuhinGrid").jqGrid({
         datatype: "local",
         width: "1024",
         height: "240",
         cellEdit: false,
         rowNum: 10,
-        pager: "searchShainPager",
+        pager: "searchKanseiBuhinPager",
         multiselect: false,
         colNames: colNames,
         colModel: colModelSettings,
@@ -45,22 +44,22 @@ $(function() {
                 isLoaded = true;
             }
         },
-    }).navGrid('#searchShainPager',{edit:false, add:false, del:false, search:false});
+    }).navGrid('#searchKanseiBuhinPager',{edit:false, add:false, del:false, search:false});
 });
 
 // ##############################
 // 検索ボタンクリック処理
 // ##############################
-$("a#btnShainSearch").click(function() {
-    searchShain();
+$("a#btnKanseiBuhinSearch").click(function() {
+    searchKanseiBuhin();
     return false;
 });
 
 // ##############################
 // 新規登録ボタンクリック処理
 // ##############################
-$("a#btnShainNew").click(function() {
-    showShainFormDialog();
+$("a#btnKanseiBuhinNew").click(function() {
+    showKanseiBuhinFormDialog();
     return false;
 });
 
@@ -68,29 +67,29 @@ $("a#btnShainNew").click(function() {
 // グリッド更新ボタンクリック処理
 // ##############################
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src='/images/database-reload-alt-1.png' onclick='showShainFormDialog(" + rowdata['shainId'] + ")' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='showKanseiBuhinFormDialog(" + rowdata['buhinCd'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // グリッド削除ボタンクリック処理
 // ##############################
 function deleteFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-remove-alt-1.png' onclick='removeShain(" + rowdata['shainId'] + ")' title='削除' style='width:16px; height:16px'>";
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeKanseiBuhin(" + rowdata['buhinCd'] + ")' title='削除' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // 検索用メソッド
 // ##############################
-function searchShain() {
+function searchKanseiBuhin() {
     var data = {};
-    var search = $("#shainSearchForm").serializeArray();
+    var search = $("#kanseiBuhinSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
-    $("#searchShainGrid").clearGridData();
+    $("#searchKanseiBuhinGrid").clearGridData();
     var param = {
         datatype: "json",
-        url: "shains/search.json",
+        url: "kansei_buhins/search.json",
         postData: data,
         jsonReader: {
             root: "rows",
@@ -100,60 +99,60 @@ function searchShain() {
             repeatitems: false
         }
     };
-    $("#searchShainGrid").setGridParam(param).trigger("reloadGrid");
+    $("#searchKanseiBuhinGrid").setGridParam(param).trigger("reloadGrid");
 }
 
 // ##############################
 // 更新用メソッド
 // param:
-// shainId : 社員ID
+// buhinCd : 部品コード
 // ##############################
-function executeShain(shainId) {
+function executeKanseiBuhin(buhinCd) {
     var url;
     var type;
-    if(shainId != null) {
-        url = "shains/" + shainId + ".json";
+    if(buhinCd != null) {
+        url = "kansei_buhins/" + buhinCd + ".json";
         type = "PUT";
     } else {
-        url = "shains.json";
+        url = "kansei_buhins.json";
         type = "POST";
     }
     var data = {};
     var postData = {};
-    var shain = $("#shainForm").serializeArray();
-    $.each(shain, function() {
+    var kanseiBuhin = $("#kanseiBuhinForm").serializeArray();
+    $.each(kanseiBuhin, function() {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
     data["koshinshaId"] = 1;
     data["torokushaId"] = 1;
 
-    postData["shain"] = data;
-    postData["id"] = shainId;
+    postData["kansei_buhin"] = data;
+    postData["id"] = buhinCd;
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
         data: postData,
-        root: "shain",
+        root: "kanseiBuhin",
         dataType: "json",
         success: function(result) {
-            searchShain();
+            searchKanseiBuhin();
         }
     });
-    $("#shainFormDialog").dialog("close");
+    $("#kanseiBuhinFormDialog").dialog("close");
     return false;
 }
 
 // ##############################
 // 登録用フォームダイアログオープン
 // param:
-// shainId : 社員ID
+// buhinCd : 部品コード
 // ##############################
-function showShainFormDialog(shainId) {
+function showKanseiBuhinFormDialog(buhinCd) {
 
-    if(shainId != null) {
-        var url = "shains/" + shainId + ".json";
+    if(buhinCd != null) {
+        var url = "kansei_buhins/" + buhinCd + ".json";
         $.ajax({
             scriptCharset:"UTF-8",
             type: "GET",
@@ -161,67 +160,65 @@ function showShainFormDialog(shainId) {
             dataType: "json",
             success: function(result) {
                 if(result) {
-                    $("#shainForm #shainCd").val(result["shainCd"]);
-                    $("#shainForm #myoji").val(result["myoji"]);
-                    $("#shainForm #name").val(result["name"]);
-                    $("#shainForm #myojiFuri").val(result["myojiFuri"]);
-                    $("#shainForm #nameFuri").val(result["nameFuri"]);
-                    $("#shainForm #loginId").val(result["loginId"]);
-                    $("#shainForm #loginPassword").val(result["loginPassword"]);
-                    $("#shainForm #manageFlg").val(result["manageFlg"]);
+                    $("#kanseiBuhinForm #buhinNm").val(result["buhinNm"]);
+                    $("#kanseiBuhinForm #katashikiCd").val(result["katashikiCd"]);
+                    $("#kanseiBuhinForm #katashikiNm").val(result["katashikiNm"]);
+                    $("#kanseiBuhinForm #kakaku").val(result["kakaku"]);
+                    $("#kanseiBuhinForm #shiyoBuhin").val(result["shiyoBuhin"]);
+                    $("#kanseiBuhinForm #biko").val(result["biko"]);
                 }
                 return false;
             }
         });
     }
     // ダイアログ表示
-    $("#shainFormDialog").dialog({
+    $("#kanseiBuhinFormDialog").dialog({
         show: {effect: "clip"},
         hide: {effect: "clip"},
         width: "auto",
         modal: true,
         buttons : {
             "閉じる": function(){
-                $('#shainForm input[type="text"], select, textarea').val('');
-                $("#shainForm").validate().resetForm();
+                $('#kanseiBuhinForm input[type="text"], select, textarea').val('');
+                $("#kanseiBuhinForm").validate().resetForm();
                 $(this).dialog('close');
-                return false;
             },
             '登録' :function() {
                 // クライアントバリデーション
-                if ($("#shainForm").valid() == false) {
+                if ($("#kanseiBuhinForm").valid() == false) {
                      return false;
                  }
-                executeShain(shainId);
-                $('#shainForm input[type="text"], select, textarea').val('');
+                executeKanseiBuhin(buhinCd);
+                $('#kanseiBuhinForm input[type="text"], select, textarea').val('');
                 $(this).dialog('close');
+                return false;
             }
         },
         open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
-    $("#shainFormDialog").focus();
+    $("#kanseiBuhinFormDialog").focus();
 }
 
 // ##############################
 // 削除用メソッド
 // param:
-// shainId : 社員ID
+// buhinCd : 部品コード
 // ##############################
-function removeShain(shainId) {
+function removeKanseiBuhin(buhinCd) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
-    var url = "shains/" + shainId + ".json";
+    var url = "kansei_buhins/" + buhinCd + ".json";
     var type = "DELETE";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + shainId,
+        data: "id=" + buhinCd,
         dataType: "json",
         success: function(result) {
-                searchShain();
+            searchKanseiBuhin();
         }
     });
     return false;

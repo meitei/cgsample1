@@ -1,5 +1,9 @@
 JqgridSample::Application.routes.draw do
 
+  resources :kansei_buhins do
+      get 'search', :on => :collection
+  end
+
   resources :shains do
       get 'search', :on => :collection
   end
