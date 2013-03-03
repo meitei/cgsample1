@@ -1,0 +1,64 @@
+<div id="kanseiBuhinFormDialog" title="完成部品登録画面" style="display: none;">
+  <form id="kanseiBuhinForm" style="width:600px;height:200px">
+  <div>
+    <table>
+      <tr>
+        <th style="width:100px;">完成部品名称</th>
+        <td style="width:250px;">
+          <input style="width:200px;" type="text" id="buhinNm" name="buhinNm" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:100px;">型式コード</th>
+        <td style="width:250px;">
+          <input style="width:200px;" type="text" id="katashikiCd" name="katashikiCd" />
+        </td>
+        <th style="width:100px;">型式名</th>
+        <td style="width:250px;">
+          <input style="width:200px;" type="text" id="katashikiNm" name="katashikiNm" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:100px;">価格</th>
+        <td style="width:250px;">
+          <input style="width:200px;" type="text" id="kakaku" name="kakaku" />
+        </td>
+        <th style="width:100px;">使用部品</th>
+        <td style="width:250px;">
+          <input style="width:200px;" type="text" id="shiyoBuhin" name="shiyoBuhin" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:100px;">備考</th>
+        <td style="width:250px;">
+          <input style="width:200px;" type="text" id="biko" name="biko" />
+        </td>
+      </tr>
+    </table>
+  </div>
+  </form>
+  <br />
+</div>
+
+<script>
+$(function() {
+  $("#kanseiBuhinForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) { 
+            $(element).addClass(errorClass); 
+        }, 
+        unhighlight: function (element, errorClass, validClass) { 
+            $(element).removeClass(errorClass); 
+        },
+        rules: {
+            buhinNm: {required:true, maxlength:25},
+            katashikiCd: {maxlength:25},
+            katashikiNm: {maxlength:25},
+            kakaku: {required:true, number:true},
+            shiyoBuhin: {maxlength:25},
+            biko: {maxlength:100}
+        }
+    });
+});
+</script>

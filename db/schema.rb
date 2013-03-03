@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224095038) do
+ActiveRecord::Schema.define(:version => 20130303035835) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(:version => 20130224095038) do
     t.integer  "kin"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "kansei_buhins", :primary_key => "buhinCd", :force => true do |t|
+    t.string   "buhinNm",     :limit => 50,  :null => false
+    t.string   "katashikiCd"
+    t.string   "katashikiNm", :limit => 50
+    t.integer  "kakaku",                     :null => false
+    t.string   "shiyoBuhin",  :limit => 50
+    t.text     "biko",        :limit => 200
+    t.integer  "koshinshaId",                :null => false
+    t.integer  "torokushaId",                :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "kokyakus", :primary_key => "kokyakuId", :force => true do |t|

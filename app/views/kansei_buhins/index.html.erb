@@ -1,0 +1,227 @@
+<div style="width:1024;">
+<%= render 'search' %>
+<div style="width:1024px; clear:both;" id="kanseiBuhin">
+    <table id="searchKanseiBuhinGrid"></table>
+    <div id="searchKanseiBuhinPager"></div>
+</div>
+<div style="width:1024px; margin:5px;">
+    <a style="float:right;" class="btn btn-primary" id="btnKanseiBuhinNew" href="#" />新規追加</a>
+</div>
+<%= render 'form' %>
+<script>
+// ##############################
+// 
+// ##############################
+$(function() {
+    
+    var isLoaded = false;
+    var colNames = ["完成部品コード","完成部品名","型式コード", "型式名", "価格", "使用部品","備考","更新者ID","登録者ID","",""];
+    var colModelSettings = [
+            {name:"buhinCd", index:"buhinCd", hidden:true},
+            {name:"buhinNm", index:"buhinNm"},
+            {name:"katashikiCd", index:"katashikiCd"},
+            {name:"katashikiNm", index:"katashikiNm"},
+            {name:"kakaku", index:"kakaku"},
+            {name:"shiyoBuhin", index:"shiyoBuhin"},
+            {name:"biko", index:"biko"},
+            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
+            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+    ];
+    $("#searchKanseiBuhinGrid").jqGrid({
+        datatype: "local",
+        width: "1024",
+        height: "240",
+        cellEdit: false,
+        rowNum: 10,
+        pager: "searchKanseiBuhinPager",
+        multiselect: false,
+        colNames: colNames,
+        colModel: colModelSettings,
+        gridComplete: function(){
+            if(!isLoaded == true){
+                isLoaded = true;
+            }
+        },
+    }).navGrid('#searchKanseiBuhinPager',{edit:false, add:false, del:false, search:false});
+});
+
+// ##############################
+// 検索ボタンクリック処理
+// ##############################
+$("a#btnKanseiBuhinSearch").click(function() {
+    searchKanseiBuhin();
+    return false;
+});
+
+// ##############################
+// 新規登録ボタンクリック処理
+// ##############################
+$("a#btnKanseiBuhinNew").click(function() {
+    showKanseiBuhinFormDialog();
+    return false;
+});
+
+// ##############################
+// グリッド更新ボタンクリック処理
+// ##############################
+function updateFormatter(cellval, options, rowdata) {
+    return "<img src='/images/database-reload-alt-1.png' onclick='showKanseiBuhinFormDialog(" + rowdata['buhinCd'] + ")' title='更新' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// グリッド削除ボタンクリック処理
+// ##############################
+function deleteFormatter(cellval, options, rowdata) {
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeKanseiBuhin(" + rowdata['buhinCd'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// 検索用メソッド
+// ##############################
+function searchKanseiBuhin() {
+    var data = {};
+    var search = $("#kanseiBuhinSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
+    $("#searchKanseiBuhinGrid").clearGridData();
+    var param = {
+        datatype: "json",
+        url: "kansei_buhins/search.json",
+        postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
+        }
+    };
+    $("#searchKanseiBuhinGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// ##############################
+// 更新用メソッド
+// param:
+// buhinCd : 部品コード
+// ##############################
+function executeKanseiBuhin(buhinCd) {
+    var url;
+    var type;
+    if(buhinCd != null) {
+        url = "kansei_buhins/" + buhinCd + ".json";
+        type = "PUT";
+    } else {
+        url = "kansei_buhins.json";
+        type = "POST";
+    }
+    var data = {};
+    var postData = {};
+    var kanseiBuhin = $("#kanseiBuhinForm").serializeArray();
+    $.each(kanseiBuhin, function() {
+        data[this.name] = this.value;
+    });
+    // 更新ユーザー、登録ユーザーを設定する
+    data["koshinshaId"] = 1;
+    data["torokushaId"] = 1;
+
+    postData["kansei_buhin"] = data;
+    postData["id"] = buhinCd;
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: postData,
+        root: "kanseiBuhin",
+        dataType: "json",
+        success: function(result) {
+            searchKanseiBuhin();
+        }
+    });
+    $("#kanseiBuhinFormDialog").dialog("close");
+    return false;
+}
+
+// ##############################
+// 登録用フォームダイアログオープン
+// param:
+// buhinCd : 部品コード
+// ##############################
+function showKanseiBuhinFormDialog(buhinCd) {
+
+    if(buhinCd != null) {
+        var url = "kansei_buhins/" + buhinCd + ".json";
+        $.ajax({
+            scriptCharset:"UTF-8",
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result) {
+                if(result) {
+                    $("#kanseiBuhinForm #buhinNm").val(result["buhinNm"]);
+                    $("#kanseiBuhinForm #katashikiCd").val(result["katashikiCd"]);
+                    $("#kanseiBuhinForm #katashikiNm").val(result["katashikiNm"]);
+                    $("#kanseiBuhinForm #kakaku").val(result["kakaku"]);
+                    $("#kanseiBuhinForm #shiyoBuhin").val(result["shiyoBuhin"]);
+                    $("#kanseiBuhinForm #biko").val(result["biko"]);
+                }
+                return false;
+            }
+        });
+    }
+    // ダイアログ表示
+    $("#kanseiBuhinFormDialog").dialog({
+        show: {effect: "clip"},
+        hide: {effect: "clip"},
+        width: "auto",
+        modal: true,
+        buttons : {
+            "閉じる": function(){
+                $('#kanseiBuhinForm input[type="text"], select, textarea').val('');
+                $("#kanseiBuhinForm").validate().resetForm();
+                $(this).dialog('close');
+            },
+            '登録' :function() {
+                // クライアントバリデーション
+                if ($("#kanseiBuhinForm").valid() == false) {
+                     return false;
+                 }
+                executeKanseiBuhin(buhinCd);
+                $('#kanseiBuhinForm input[type="text"], select, textarea').val('');
+                $(this).dialog('close');
+                return false;
+            }
+        },
+        open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
+    });
+    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
+    $("#kanseiBuhinFormDialog").focus();
+}
+
+// ##############################
+// 削除用メソッド
+// param:
+// buhinCd : 部品コード
+// ##############################
+function removeKanseiBuhin(buhinCd) {
+    if (confirm("削除します。よろしいですか？") == false) {
+        return false;
+    }
+    var url = "kansei_buhins/" + buhinCd + ".json";
+    var type = "DELETE";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: "id=" + buhinCd,
+        dataType: "json",
+        success: function(result) {
+            searchKanseiBuhin();
+        }
+    });
+    return false;
+}
+
+</script>
