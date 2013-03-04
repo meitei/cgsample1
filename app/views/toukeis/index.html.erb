@@ -159,7 +159,11 @@ function searchToukei(where) {
               strOutCond += data.cond.outCondMonth + " 月"
             }
           }
-          $('#outCondYear').html(strOutCond);
+          // 出力条件(表示用)
+          $('#outCondLabel').html(strOutCond);
+          // 出力条件(入出力用)
+          $('#outCondYear').val(data.cond.outCondYear);
+          $('#outCondMonth').val(data.cond.outCondMonth);
 
           // 前へボタンの制御
           if (data.cond.has_prev) {

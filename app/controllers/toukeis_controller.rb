@@ -69,19 +69,25 @@ class ToukeisController < ApplicationController
     if params[:outCond] == "1" then
       # 月別
       if Rails.env.production? then
-        # MySQL
-        # sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y%m')"
+        # PostgreSQL
         sumCndKey = "to_char(\"mitsumoriDt\", 'YYYYMM')"
+      elsif Rails.env.staging? then
+        # MySQL
+        sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y%m')"
       else
+        # SQLite
         sumCndKey = "strftime('%Y%m', \"mitsumoriDt\")"
       end
     elsif params[:outCond] == "2" then
       # 年度別
       if Rails.env.production? then
-        # MySQL
-        # sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y')"
+        # PostgreSQL
         sumCndKey = "to_char(\"mitsumoriDt\", 'YYYY')"
+      elsif Rails.env.staging? then
+        # MySQL
+        sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y')"
       else
+        # SQLite
         sumCndKey = "strftime('%Y', \"mitsumoriDt\")"
       end
     else
@@ -255,53 +261,53 @@ class ToukeisController < ApplicationController
   def graph
     # @kokyaku = Kokyaku.find(params[:id])
 
-    year = params[:outCondYear].to_i
-    month = params[:outCondMonth].to_i
-    if params[:outCond] == "1" then
-      # 月別
-      untDateFrom = Date.new(year, month, 1);
-      untDateTo = Date.new(year, month, -1);
-    elsif params[:outCond] == "2" then
-      # 年度別
-      untDateFrom = Date.new(year, 1, 1);
-      untDateTo = Date.new(year, 12, 31);
-    else
-      # 総合計
-      untDateFrom = nil
-      untDateTo = nil
-    end
+    # year = params[:outCondYear].to_i if params[:outCondYear]
+    # month = params[:outCondMonth].to_i if params[:outCondMonth]
+    # if year and month then
+    #   # 月別
+    #   untDateFrom = Date.new(year, month, 1);
+    #   untDateTo = Date.new(year, month, -1);
+    # elsif year then
+    #   # 年度別
+    #   untDateFrom = Date.new(year, 1, 1);
+    #   untDateTo = Date.new(year, 12, 31);
+    # else
+    #   # 総合計
+    #   untDateFrom = nil
+    #   untDateTo = nil
+    # end
 
-    conditions = KonyuRireki.where("1 = ?", 1)
-    conditions = conditions.where("\"mitsumoriDt\" >= ?", Date.strptime(params[:targetSpnFrom], "%Y/%m/%d")) if params[:targetSpnFrom] != ""
-    conditions = conditions.where("\"mitsumoriDt\" <= ?", Date.strptime(params[:targetSpnTo], "%Y/%m/%d")) if params[:targetSpnTo] != ""
-    conditions = conditions.where("\"mitsumoriDt\" >= ?", untDateFrom) if untDateFrom
-    conditions = conditions.where("\"mitsumoriDt\" >= ?", untDateTo) if untDateTo
+    # conditions = KonyuRireki.where("1 = ?", 1)
+    # conditions = conditions.where("\"mitsumoriDt\" >= ?", Date.strptime(params[:targetSpnFrom], "%Y/%m/%d")) if params[:targetSpnFrom] != ""
+    # conditions = conditions.where("\"mitsumoriDt\" <= ?", Date.strptime(params[:targetSpnTo], "%Y/%m/%d")) if params[:targetSpnTo] != ""
+    # conditions = conditions.where("\"mitsumoriDt\" >= ?", untDateFrom) if untDateFrom
+    # conditions = conditions.where("\"mitsumoriDt\" >= ?", untDateTo) if untDateTo
 
 
-    logger.debug(conditions)
+    # logger.debug(conditions)
 
-    # Pending...
-    sumUnts = {
-      1 => SumUnts.new(
-        "uketsukeSesakuTantoCd",
-        "shains.name",
-        "left outer join shains on shains.shainCd = konyu_rirekis.uketsukeSesakuTantoCd")
-    }
-    sumUnts.default = sumUnts[1]
-    sumUnt = sumUnts[params[:sumUnt].to_i];
+    # # Pending...
+    # sumUnts = {
+    #   1 => SumUnts.new(
+    #     "uketsukeSesakuTantoCd",
+    #     "shains.name",
+    #     "left outer join shains on shains.shainCd = konyu_rirekis.uketsukeSesakuTantoCd")
+    # }
+    # sumUnts.default = sumUnts[1]
+    # sumUnt = sumUnts[params[:sumUnt].to_i];
 
-    @konyu_rirekis = conditions.find(
-      :all,
-      :select => "#{sumUnt.keyCd} sumUntKey, #{sumUnt.keyLabel} sumUnt, sum(kin) kingaku, count(*) daisu ",
-      :joins => sumUnt.joins,
-      :group  => "sumUntKey ",
-      :offset => start,
-      :limit  => limit,
-      :order  => "\"sumUntKey\" ASC")
+    # @konyu_rirekis = conditions.find(
+    #   :all,
+    #   :select => "#{sumUnt.keyCd} sumUntKey, #{sumUnt.keyLabel} sumUnt, sum(kin) kingaku, count(*) daisu ",
+    #   :joins => sumUnt.joins,
+    #   :group  => "sumUntKey ",
+    #   :offset => start,
+    #   :limit  => limit,
+    #   :order  => "\"sumUntKey\" ASC")
 
-    @responce = {
-      data: @konyu_rirekis
-    }
+    # @responce = {
+    #   data: @konyu_rirekis
+    # }
 
     respond_to do |format|
       format.html # index.html.erb
