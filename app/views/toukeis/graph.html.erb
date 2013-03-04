@@ -5,11 +5,32 @@
 <script>
 $(function() {
 
+    // Get graph data.
+    $.ajax({
+      url: "/toukeis/graph_data.json",
+      dataType: "json",
+      root: "list",
+      data: {
+        'outCnd' : $('#outCnd').val(),
+        'outUnt' : $('#outUnt').val(),
+        'sumUnt' : $('#sumUnt').val(),
+        'targetSpnFrom' : $('#targetSpnFrom').val(),
+        'targetSpnTo' : $('#targetSpnTo').val()
+      },
+      success: function(data) {
+        response($.map(data.list, function(item) {
+          return {
+            label: item.kokyakuNm+' - '+item.kokyakuId,
+            value: item.kokyakuId
+          }
+        }))
+      }
+    })
+
+    var values = [200, 600, 700, 1000];
+    var ticks = ["太郎", "次郎", "花子", "陽子"];
     // Horizontal bar chart
-    var plot3 = $.jqplot('chart3', [
-        [[2,1], [4,2], [6,3], [3,4]],
-        [[5,1], [1,2], [3,3], [4,4]],
-        [[4,1], [7,2], [1,3], [2,4]]], {
+    var plot_kin = $.jqplot('chart_kingaku', [values], {
         seriesDefaults: {
             renderer: $.jqplot.BarRenderer,
             // Show point labels to the right ('e'ast) of each bar.
@@ -24,9 +45,13 @@ $(function() {
                 barDirection: 'horizontal'
             }
         },
+        series:[
+            {label:'金額'}
+        ],
         axes: {
             yaxis: {
-                renderer: $.jqplot.CategoryAxisRenderer
+                renderer: $.jqplot.CategoryAxisRenderer,
+                ticks: ticks
             }
         },
         legend: {

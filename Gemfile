@@ -18,6 +18,14 @@ group :development do
   gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem 'capistrano_colors'
+  gem 'rvm-capistrano'
+end
+
+group :staging do
+  gem 'mysql2'
 end
 
 # Gems used only for assets and not required

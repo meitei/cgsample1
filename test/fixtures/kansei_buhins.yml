@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  buhinCd: 1
+  buhinNm: MyString
+  katashikiCd: MyString
+  katashikiNm: MyString
+  kakaku: 1
+  shiyoBuhin: MyString
+  biko: MyString
+  koshinshaId: 1
+  torokushaId: 1
+
+two:
+  buhinCd: 1
+  buhinNm: MyString
+  katashikiCd: MyString
+  katashikiNm: MyString
+  kakaku: 1
+  shiyoBuhin: MyString
+  biko: MyString
+  koshinshaId: 1
+  torokushaId: 1
