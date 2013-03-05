@@ -126,17 +126,22 @@ function deleteFormatter(cellval, options, rowdata) {
 }
 
 // 検索用メソッド
-function searchToukei(where) {
+function searchToukei(direction) {
     var data = {};
     var search = $("#toukeiSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
-    if (where) data['where'] = where;
+    if (direction) {
+      data['direction'] = direction;
+      url = "toukeis/move_page.json";
+    } else {
+      url = "toukeis/search.json";
+    }
     $("#searchToukeiGrid").clearGridData();
     var param = {
         datatype: "json",
-        url: "toukeis/search.json",
+        url: url,
         postData: data,
         jsonReader: {
             root: "rows",
