@@ -153,12 +153,17 @@ class ItemsController < ApplicationController
 
   def report
 
-    # (B) ThinReportレイアウトのテンプレートの場所を指定する
+    # ThinReportレイアウトのテンプレートの場所を指定する
     templateDir = File.join(Rails.root, 'app', 'reports')
-    report = ThinReports::Report.new :layout => File.join(templateDir,'Quotation_1')
 
-    # (E) 1ページ目
-    report.start_new_page do
+    # 各ページで使用するテンプレートファイルを指定
+    report = ThinReports::Report.new
+    report.use_layout File.join(templateDir,'Quotation_1'), :id => :first
+    report.use_layout File.join(templateDir,'Quotation_2'), :id => :second
+
+
+    # 1ページ目
+    report.start_new_page :layout => :first do
       item(:year).value('24')
       item(:month).value('04')
       item(:day).value('01')
@@ -206,6 +211,25 @@ class ItemsController < ApplicationController
 
 
       
+    end
+
+    # 2ページ目
+    report.start_new_page :layout => :second do
+
+      item(:shurui_3_1).value('身体保持部品ﾍﾞﾙﾄ部品ﾎﾞﾃﾞｨﾎﾟｲﾝﾄSH310')
+      item(:tanka_3_1).value('7,654,321')
+      item(:suryo_3_1).value('321')
+      item(:kingaku_3_1).value('87,654,321')
+
+      item(:shurui_4_1).value('完成用部品　車椅子フレーム　リクライニング・ティルト式手押し型')
+      item(:tanka_4_1).value('7,654,321')
+      item(:suryo_4_1).value('321')
+      item(:kingaku_4_1).value('87,654,321')
+
+      # item(:).value('')
+      # item(:).value('')
+      # item(:).value('')
+
     end
 
     # 保存先
