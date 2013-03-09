@@ -17,6 +17,15 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+    <script type="text/javascript">
+      $(function() {
+        $("ul#menu li").hover(function() {
+          $(this).children('ul').show();
+        }, function() {
+          $(this).children('ul').hide();
+        });
+      });
+    </script>
   </head>
   <body>
   <div class="wrapper">
@@ -30,11 +39,19 @@
           </a>
           <a class="brand" href="#">座位保持装置選定・管理システム</a>
           <div class="container nav-collapse">
-            <ul class="nav">
+            <ul id="menu" class="nav">
               <li><%= link_to "顧客管理", "/kokyakus" %></li>
-              <li><%= link_to "購入履歴管理", "" %></li>
+              <li><%= link_to "購入履歴管理", "#" %></li>
               <li><%= link_to "売上管理", "/toukeis" %></li>
-              <li><%= link_to "マスタ管理", "" %></li>
+              <li><%= link_to "マスタ管理", "#" %>
+                <ul>
+                  <li><%= link_to "社員マスタ", "/shains" %></li>
+                  <li><%= link_to "病院マスタ", "/byoins" %></li>
+                  <li><%= link_to "保険種別マスタ", "/hoken_shubetsus" %></li>
+                  <li><%= link_to "傷病マスタ", "/shobyos" %></li>
+                  <li><%= link_to "完成部品マスタ", "/kansei_buhins" %></li>
+                </ul>
+              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

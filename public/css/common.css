@@ -134,6 +134,36 @@ body{background:#d6d8db;}
 	background-repeat: repeat-x;
 }
 
+.navbar .nav > li > ul {
+  display: none;
+  position: absolute;
+  top: 38px;
+  left: 260px;
+  padding: 5px;
+  width: 140px;
+  background: #eee;
+  border: solid 1px #ccc;
+}
+
+.navbar .nav > li > ul > li {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.navbar .nav > li > ul > li > a {
+  display: inline-block;
+  width: 140px;
+  height: 20px;
+}
+
+.navbar .nav > li > ul > li > a:hover {
+  background: #999;
+  color: #fff;
+}
+
+
 /* navbar-page */
 .navbar-page{
 	clear:both;
