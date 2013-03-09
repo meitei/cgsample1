@@ -179,80 +179,7 @@ function executeKokyaku(kokyakuId) {
             }
         }
     });
-    //$("#kokyakuFormDialog").dialog("close");
     return false;    
-}
-
-// 登録用フォームダイアログオープン
-function showKokyakuFormDialog(kokyakuId) {
-    if(kokyakuId != null) {
-        var url = "kokyakus/" + kokyakuId + ".json";
-        $.ajax({
-            scriptCharset:"UTF-8",
-            type: "GET",
-            url: url,
-            dataType: "json",
-            success: function(result) {
-                if(result) {
-                    $("#kokyakuForm #kokyakuNm").val(result["kokyakuNm"]);
-                    $("#kokyakuForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
-                    $("#kokyakuForm #seibetsu").val(result["seibetsu"]);
-                    $("#kokyakuForm #tanjoDt").val(result["tanjoDt"]);
-                    $("#kokyakuForm #postNo").val(result["postNo"]);
-                    $("#kokyakuForm #address1").val(result["address1"]);
-                    $("#kokyakuForm #address2").val(result["address2"]);
-                    $("#kokyakuForm #tel1").val(result["tel1"]);
-                    $("#kokyakuForm #tel2").val(result["tel2"]);
-                    $("#kokyakuForm #fax").val(result["fax"]);
-                    $("#kokyakuForm #shobyouCd1").val(result["shobyouCd1"]);
-                    $("#kokyakuForm #shobyouCd2").val(result["shobyouCd2"]);
-                    $("#kokyakuForm #shobyouCd3").val(result["shobyouCd3"]);
-                    $("#kokyakuForm #gakkoNm").val(result["gakkoNm"]);
-                    $("#kokyakuForm #biko").val(result["biko"]);
-                }
-                return false;
-            }
-        });
-    }
-    // ダイアログ表示
-    $("#kokyakuFormDialog").dialog({
-        show: {effect: "clip"},
-        hide: {effect: "clip"},
-        width: "auto",
-        modal: true,
-        buttons: {
-            "閉じる": function(){
-                $('#kokyakuForm input[type="text"], select, textarea').val('');
-                $("#kokyakuForm").validate().resetForm();
-                $(this).dialog('close');
-            },
-            "登録": function(){
-                // クライアントバリデーション
-                if ($("#kokyakuForm").valid() == false) {
-                     return false;
-                 }
-                executeKokyaku(kokyakuId);
-                $('#kokyakuForm input[type="text"], select, textarea').val('');
-                $(this).dialog('close');
-            }
-        }
-    });
-    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
-    //$(".ui-dialog-buttonset > button").addClass("btn-primary");
-    $("#kokyakuFormDialog").focus();
-
-    // ダイアログ登録ボタン
-    $("a#btnCustomerRegist").click(function() {
-        return false;
-    });
-
-    // ダイアログ閉じるボタン
-    $("a#btnCustomerClose").click(function() {
-        $("#kokyakuFormDialog").dialog("close");
-        return false;
-    });
-    // バリデート
-    //$("#kokyakuForm").validationEngine("attach");
 }
 
 // 削除用メソッド
@@ -261,7 +188,7 @@ function removeKokyaku(kokyakuId) {
         return false;
     }
     var url = "kokyakus/" + kokyakuId + ".json";
-    var type = "DELETE";
+    var type = "PUT";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,

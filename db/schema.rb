@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130303035835) do
+ActiveRecord::Schema.define(:version => 20130309090952) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -61,7 +61,8 @@ ActiveRecord::Schema.define(:version => 20130303035835) do
     t.datetime "updated_at",                 :null => false
   end
 
-  create_table "kokyakus", :primary_key => "kokyakuId", :force => true do |t|
+  create_table "kokyakus", :id => false, :force => true do |t|
+    t.integer  "kokyakuId"
     t.string   "kokyakuNm",     :limit => 100
     t.string   "kokyakuNmKana", :limit => 100
     t.integer  "seibetsu"
@@ -77,10 +78,11 @@ ActiveRecord::Schema.define(:version => 20130303035835) do
     t.integer  "shobyouCd3"
     t.string   "gakkoNm",       :limit => 100
     t.string   "biko",          :limit => 200
-    t.integer  "koshinshaId",                  :null => false
-    t.integer  "torokushaId",                  :null => false
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.integer  "koshinshaId",                                 :null => false
+    t.integer  "torokushaId",                                 :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.integer  "del_flg",                      :default => 0, :null => false
   end
 
   create_table "konyu_rirekis", :force => true do |t|

@@ -13,7 +13,7 @@
       </td>
       <th style="width:100px;" scope="row">病名・障害名１</th>
       <td style="width:150px;">
-        <select style="width:150px;" id="shobyouCd1" name="shobyouCd1" value="<%= @kokyaku.shobyouCd1 %>">
+        <select style="width:150px;" id="shobyouCd1" name="shobyouCd1">
           <option value=""></option>
           <option value="0">骨折</option>
           <option value="1">捻挫</option>
@@ -31,7 +31,7 @@
       </td>
       <th>病名・障害名２</th>
       <td>
-        <select style="width:150px;" id="shobyouCd2" name="shobyouCd2" value="<%= @kokyaku.shobyouCd2 %>">
+        <select style="width:150px;" id="shobyouCd2" name="shobyouCd2">
           <option value=""></option>
           <option value="0">骨折</option>
           <option value="1">捻挫</option>
@@ -41,7 +41,7 @@
     <tr>
       <th>性別</th>
       <td>
-        <select style="width:150px;" id="seibetsu" name="seibetsu" value="<%= @kokyaku.seibetsu %>">
+        <select style="width:150px;" id="seibetsu" name="seibetsu">
           <option value=""></option>
           <option value="0">男性</option>
           <option value="1">女性</option>
@@ -53,7 +53,7 @@
       </td>
       <th>病名・障害名３</th>
       <td>
-        <select style="width:150px;" id="shobyouCd3" name="shobyouCd3" value="<%= @kokyaku.shobyouCd3 %>">
+        <select style="width:150px;" id="shobyouCd3" name="shobyouCd3">
           <option value=""></option>
           <option value="0">骨折</option>
           <option value="1">捻挫</option>
@@ -105,21 +105,18 @@
 </form>
 <script>
 $(function() {
-  $("#tanjoDt").datepicker();
-
   $("#kokyakuForm").validate({
     errorClass:'error',
     errorElement:'label',
     highlight: function (element, errorClass, validClass) { 
-        $(element).addClass(errorClass); 
+      $(element).addClass(errorClass); 
     }, 
     unhighlight: function (element, errorClass, validClass) { 
-        $(element).removeClass(errorClass); 
+      $(element).removeClass(errorClass); 
     },
     rules: {
         kokyakuNm: {required:true, maxlength:10},
         kokyakuNmKana: {katakana:true, maxlength:10},
-        //seibetsu: {required:true, maxlength:10},
         tanjoDt: {date:true},
         postNo: {postnum:true, maxlength:8},
         address1: {maxlength:100},
@@ -127,15 +124,9 @@ $(function() {
         tel1: {telnum:true, maxlength:12},
         tel2: {mobilenum:true, maxlength:13},
         fax: {telnum:true, maxlength:12},
-        //shobyouCd1: {required:true, maxlength:10},
-        //shobyouCd2: {required:true, maxlength:10},
-        //shobyouCd3: {required:true, maxlength:10},
         gakkoNm: {maxlength:20},
         biko: {maxlength:100},
     }
-    //messages: {
-    //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
-    //}
   });
 });
 
