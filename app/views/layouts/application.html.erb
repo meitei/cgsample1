@@ -12,7 +12,6 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
     <![endif]-->
 
-    <%= stylesheet_link_tag "application", :media => "all" %>
     <link href="/css/import.css" media="all" rel="stylesheet" type="text/css" />
     <!-- Javascripts
     ================================================== -->
@@ -20,7 +19,7 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-
+  <div class="wrapper">
     <div class="navbar navbar-fluied-top">
       <div class="navbar-inner">
         <div class="container">
@@ -29,47 +28,30 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">JqgridSample</a>
+          <a class="brand" href="#">座位保持装置選定・管理システム</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "顧客情報", "/kokyakus"  %></li>
-              <li><%= link_to "見積情報", "/mitsumoris"  %></li>
-              <li><%= link_to "社員マスタ", "/shains"  %></li>
-              <li><%= link_to "病院マスタ", "/byoins"  %></li>
-              <li><%= link_to "保険種別マスタ", "/hoken_shubetsus"  %></li>
-              <li><%= link_to "傷病マスタ", "/shobyos"  %></li>
-              <li><%= link_to "完成部品マスタ", "/kansei_buhins"  %></li>
-              <li><%= link_to "統計情報", "/toukeis"  %></li>
+              <li><%= link_to "顧客管理", "/kokyakus" %></li>
+              <li><%= link_to "購入履歴管理", "" %></li>
+              <li><%= link_to "売上管理", "/toukeis" %></li>
+              <li><%= link_to "マスタ管理", "" %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
 
+    <div class="navbar-page cf">
+      <div class="backtop"><a href="">管理システムトップへ戻る</a></div>
+      <div class="info"><span class="name">ログイン名：ヴィンテージ太郎</span>
+          <form class="btn_logout"><input type="image" src="/images/btn_logout.png" /></form></div>
+    </div>
     <div class="container">
-        <div class="row">
-          <!-- <div class="span2">
-            <div class="well sidebar-nav">
-              <h3>SideMenu</h3>
-              <ul class="nav nav-list">
-                <li class="nav-header">メニュー</li>
-                <li><%= link_to "Company", "/companies"  %></li>
-                <li><%= link_to "Item", "/items"  %></li>
-                <li><%= link_to "顧客情報", "/kokyakus"  %></li>
-                <li><%= link_to "病院マスタ", "/byoins"  %></li>
-                <li><%= link_to "保険種別マスタ", "/hoken_shubetsus"  %></li>
-              </ul>
-            </div>
-          </div> -->
-          <div class="span12">
-            <%= yield %>
-          </div>
-        </div><!--/row-->
-
-      <footer>
-        <hr />
-        <p>&copy; Company 2012</p>
-      </footer>
+      <%= yield %>
+    </div>
+    <footer>
+      <p>ARIZONO ORTHOPEDIC SUPPLIES Co.,Ltd. All Rights Reserved.</p>
+    </footer>
 
     </div> <!-- /container -->
 

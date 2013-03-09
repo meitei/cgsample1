@@ -1,11 +1,14 @@
-<div style="width:1024;">
+<div class="title">顧客管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="kokyakuSearch" class="Searchform cf">
 <%= render 'search' %>
-<div style="width:1024px; clear:both;" id="customer">
+</div>
+<div style="clear:both;" id="customer">
     <table id="searchCustomerGrid"></table>        
     <div id="searchCustomerPager"></div>
 </div>
-<div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnCustomerNew" href="kokyakus/new" />新規追加</a>
+<div class="btn_new">
+    <a class="btn_new_kokyaku" id="btnCustomerNew" href="/kokyakus/new">新規追加</a>
 </div>
 <script>
 $(function() {
@@ -66,7 +69,7 @@ $(function() {
     $("#searchCustomerGrid").jqGrid({
         datatype: "local",
         //url: "kokyakus.json",
-        width: "1024",
+        width: "940",
         height: "240",
         cellEdit: false,
         rowNum: 10,
