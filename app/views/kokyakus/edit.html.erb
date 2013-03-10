@@ -12,35 +12,35 @@
 <script>
 $(function() {
 	var kokyakuId = $("#kokyakuId").val();
-	if(kokyakuId != null) {
-		var url = "../../kokyakus/" + kokyakuId + ".json";
-		$.ajax({
-		    scriptCharset:"UTF-8",
-		    type: "GET",
-		    url: url,
-		    dataType: "json",
-		    success: function(result) {
-		        if(result) {
-		            $("#kokyakuForm #kokyakuNm").val(result["kokyakuNm"]);
-		            $("#kokyakuForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
-		            $("#kokyakuForm #seibetsu").val(result["seibetsu"]);
-		            $("#kokyakuForm #tanjoDt").val(result["tanjoDt"]);
-		            $("#kokyakuForm #postNo").val(result["postNo"]);
-		            $("#kokyakuForm #address1").val(result["address1"]);
-		            $("#kokyakuForm #address2").val(result["address2"]);
-		            $("#kokyakuForm #tel1").val(result["tel1"]);
-		            $("#kokyakuForm #tel2").val(result["tel2"]);
-		            $("#kokyakuForm #fax").val(result["fax"]);
-		            $("#kokyakuForm #shobyouCd1").val(result["shobyouCd1"]);
-		            $("#kokyakuForm #shobyouCd2").val(result["shobyouCd2"]);
-		            $("#kokyakuForm #shobyouCd3").val(result["shobyouCd3"]);
-		            $("#kokyakuForm #gakkoNm").val(result["gakkoNm"]);
-		            $("#kokyakuForm #biko").val(result["biko"]);
-		        }
-		        return false;
-		    }
-		});
-	}
+	// if(kokyakuId != null) {
+	// 	var url = "../../kokyakus/" + kokyakuId + ".json";
+	// 	$.ajax({
+	// 	    scriptCharset:"UTF-8",
+	// 	    type: "GET",
+	// 	    url: url,
+	// 	    dataType: "json",
+	// 	    success: function(result) {
+	// 	        if(result) {
+	// 	            $("#kokyakuForm #kokyakuNm").val(result["kokyakuNm"]);
+	// 	            $("#kokyakuForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
+	// 	            $("#kokyakuForm #seibetsu").val(result["seibetsu"]);
+	// 	            $("#kokyakuForm #tanjoDt").val(result["tanjoDt"]);
+	// 	            $("#kokyakuForm #postNo").val(result["postNo"]);
+	// 	            $("#kokyakuForm #address1").val(result["address1"]);
+	// 	            $("#kokyakuForm #address2").val(result["address2"]);
+	// 	            $("#kokyakuForm #tel1").val(result["tel1"]);
+	// 	            $("#kokyakuForm #tel2").val(result["tel2"]);
+	// 	            $("#kokyakuForm #fax").val(result["fax"]);
+	// 	            $("#kokyakuForm #shobyouCd1").val(result["shobyouCd1"]);
+	// 	            $("#kokyakuForm #shobyouCd2").val(result["shobyouCd2"]);
+	// 	            $("#kokyakuForm #shobyouCd3").val(result["shobyouCd3"]);
+	// 	            $("#kokyakuForm #gakkoNm").val(result["gakkoNm"]);
+	// 	            $("#kokyakuForm #biko").val(result["biko"]);
+	// 	        }
+	// 	        return false;
+	// 	    }
+	// 	});
+	// }
 	$("a#btnCustomerRegist").click(function() {
 	    executeKokyaku($("#kokyakuId").val());
 	    return false;

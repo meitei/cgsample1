@@ -44,11 +44,7 @@
     <tr>
       <th>性別</th>
       <td>
-        <select style="width:150px;" id="seibetsu" name="kokyaku[seibetsu]">
-          <option value=""></option>
-          <option value="0">男性</option>
-          <option value="1">女性</option>
-        </select>
+        <%= select :kokyaku, :seibetsu, {"男性" => "0", "女性" => "1"}, :include_blank => true, :style => "width:100px" %>
       </td>
       <th>住所２</th>
       <td>
@@ -142,20 +138,21 @@ function executeKokyaku(kokyakuId) {
   //var action;
   //var method;
   if(kokyakuId != null) {
+    $("#koshinshaId").val("1");
     $("#kokyakuForm").attr("action", "/kokyakus/" + kokyakuId);
     //$("#kokyakuForm").attr("method", "PUT");
     $("#httpMethod").val("put");
       //url = "../../kokyakus/" + kokyakuId + ".json";
       //type = "PUT";
   } else {
+    $("#koshinshaId").val("1");
+    $("#torokushaId").val("1");
       //url = "../kokyakus.json";
       //type = "POST";
     $("#kokyakuForm").attr("action", "/kokyakus");
     //$("#kokyakuForm").attr("method", "POST");
     $("#httpMethod").val("post");
   }
-  $("#koshinshaId").val("1");
-  $("#torokushaId").val("1");
   $("#kokyakuForm").submit();
   // var data = {};
   // var postData = {};

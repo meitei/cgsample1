@@ -132,41 +132,41 @@ function modifyKokyaku(kokyakuId) {
 }
 
 // 更新用メソッド
-function executeKokyaku(kokyakuId) {
-    var url;
-    var type;
-    if(kokyakuId != null) {
-        url = "kokyakus/" + kokyakuId + ".json";
-        type = "PUT";
-    } else {
-        url = "kokyakus.json";
-        type = "POST";
-    }
-    var data = {};
-    var postData = {};
-    var kokyaku = $("#kokyakuForm").serializeArray();
-    $.each(kokyaku, function() {
-        data[this.name] = this.value;
-    });
-    data["koshinshaId"] = 1;
-    data["torokushaId"] = 1;
-    postData["kokyaku"] = data;
-    postData["id"] = kokyakuId;
-    $.ajax({
-        scriptCharset:"UTF-8",
-        type: type,
-        url: url,
-        data: postData,
-        root: "kokyaku",
-        dataType: "json",
-        success: function(result) {
-            if(result != null) {
-                searchKokyaku();
-            }
-        }
-    });
-    return false;    
-}
+// function executeKokyaku(kokyakuId) {
+//     var url;
+//     var type;
+//     if(kokyakuId != null) {
+//         url = "kokyakus/" + kokyakuId + ".json";
+//         type = "PUT";
+//     } else {
+//         url = "kokyakus.json";
+//         type = "POST";
+//     }
+//     var data = {};
+//     var postData = {};
+//     var kokyaku = $("#kokyakuForm").serializeArray();
+//     $.each(kokyaku, function() {
+//         data[this.name] = this.value;
+//     });
+//     data["koshinshaId"] = 1;
+//     data["torokushaId"] = 1;
+//     postData["kokyaku"] = data;
+//     postData["id"] = kokyakuId;
+//     $.ajax({
+//         scriptCharset:"UTF-8",
+//         type: type,
+//         url: url,
+//         data: postData,
+//         root: "kokyaku",
+//         dataType: "json",
+//         success: function(result) {
+//             if(result != null) {
+//                 searchKokyaku();
+//             }
+//         }
+//     });
+//     return false;    
+// }
 
 // 削除用メソッド
 function removeKokyaku(kokyakuId) {
@@ -174,7 +174,7 @@ function removeKokyaku(kokyakuId) {
         return false;
     }
     var url = "kokyakus/" + kokyakuId + ".json";
-    var type = "PUT";
+    var type = "DELETE";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
@@ -185,7 +185,13 @@ function removeKokyaku(kokyakuId) {
         }
     });
     searchKokyaku();
-    return false;    
+    return false;
+    // $("#torokushaId").val("1");
+    // $("#kokyakuForm").attr("action", "/kokyakus/" + kokyakuId);
+    // //$("#kokyakuForm").attr("method", "PUT");
+    // $("#httpMethod").val("delete");
+
+    // $("#kokyakuForm").submit();
 }
 
 </script>

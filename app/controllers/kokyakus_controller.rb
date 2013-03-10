@@ -11,7 +11,7 @@ class KokyakusController < ApplicationController
   # GET /kokyakus/search
   # GET /kokyakus/search.json
   def search
-    conditions = Kokyaku.where("1 = ?", 1)
+    conditions = Kokyaku.where("delFlg = ?", 0)
     conditions = conditions.where("\"kokyakuId\" >= ?", params[:kokyakuIdFrom].to_i) if params[:kokyakuIdFrom] != ""
     conditions = conditions.where("\"kokyakuId\" <= ?", params[:kokyakuIdTo].to_i) if params[:kokyakuIdTo] != ""
     conditions = conditions.where("\"kokyakuNm\" LIKE ?", params[:kokyakuNm] + "%") if params[:kokyakuNm] != ""
@@ -26,7 +26,7 @@ class KokyakusController < ApplicationController
     conditions = conditions.where("fax LIKE ?", params[:fax] + "%") if params[:fax] != ""
     conditions = conditions.where("\"shobyoNm\" LIKE ?", params[:shobyoNm] + "%") if params[:shobyoNm] != ""
     conditions = conditions.where("\"gakkoNm\" LIKE ?", params[:gakkoNm] + "%") if params[:gakkoNm] != ""
-    logger.debug(conditions)
+    #logger.debug(conditions)
 
     records = conditions.count
     limit = params[:rows].to_i
@@ -82,6 +82,7 @@ class KokyakusController < ApplicationController
 
   # GET /kokyakus/1/edit
   def edit
+    logger.debug(params)
     @kokyaku = Kokyaku.find(params[:id])
   end
 
@@ -93,7 +94,7 @@ class KokyakusController < ApplicationController
 
     respond_to do |format|
       if @kokyaku.save
-        format.html { render action: "index", notice: 'Kokyaku was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Kokyaku was successfully created.' }
         format.json { render json: @kokyaku, status: :created, location: @kokyaku }
       else
         format.html { render action: "new" }
@@ -109,7 +110,7 @@ class KokyakusController < ApplicationController
 
     respond_to do |format|
       if @kokyaku.update_attributes(params[:kokyaku])
-        format.html { render action: "index", notice: 'Kokyaku was successfully updated.' }
+        format.html { redirect_to action: "index", notice: 'Kokyaku was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -123,6 +124,7 @@ class KokyakusController < ApplicationController
   def destroy
     @kokyaku = Kokyaku.find(params[:id])
     #@kokyaku.destroy
+    logger.debug(@kokyaku)
     respond_to do |format|
       if @kokyaku.update_attribute(:delFlg, 1)
         format.html { redirect_to @kokyaku, notice: 'Kokyaku was successfully updated.' }
@@ -132,9 +134,5 @@ class KokyakusController < ApplicationController
         format.json { render json: @kokyaku.errors, status: :unprocessable_entity }
       end
     end
-    # respond_to do |format|
-    #   format.html { redirect_to kokyakus_url }
-    #   format.json { head :no_content }
-    # end
   end
 end
