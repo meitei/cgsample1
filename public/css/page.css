@@ -270,10 +270,28 @@
 	text-indent:-10000em;
 	overflow:hidden;
 }
+
+.btn_new .btn_new_mast{
+	display:block;
+	width:148px;
+	height:38px;
+	background:url(../images/btn_new_mast.png) left top no-repeat;
+	text-indent:-10000em;
+	overflow:hidden;
+}
+
 .btn_new .btn_new_kokyaku:hover{
 	filter: alpha(opacity=80);
 	-moz-opacity:0.8;
 	opacity:0.8;
+}
+
+.dialog_new{
+	width:100px;
+	height:38px;
+	background:url(../images/btn_add2.png) left top no-repeat;
+	text-indent:-10000em;
+	overflow:hidden;
 }
 
 .ui-jqgrid{
