@@ -43,28 +43,25 @@ $(function() {
         //}
     });
     var isLoaded = false;
-    var colNames = ["顧客ID","顧客名","顧客カナ","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","１","２","３","学校名","備考","更新者ID","登録者ID","",""];
+    var colNames = ["","ID","顧客名","顧客カナ","","性別","生年月日","郵便番号","電話番号","携帯番号","FAX番号","疾病名","備考","","","",""];
     var colModelSettings = [
-            {name:"kokyakuId", index:"kokyakuId"},
-            {name:"kokyakuNm", index:"kokyakuNm", editable:true},
-            {name:"kokyakuNmKana", index:"kokyakuNmKana", editable:true},
-            {name:"seibetsu", index:"seibetsu", editable:true, edittype:"select"},
-            {name:"tanjoDt", index:"tanjoDt", editable:true, editrules:{date:true}},
-            {name:"postNo", index:"postNo", editable:true, hidden:true, editrules:{edithidden:true}},
-            {name:"address1", index:"address1", editable:true},
-            {name:"address2", index:"address2", editable:true, hidden:true, editrules:{edithidden:true}},
-            {name:"tel1", index:"tel1", editable:true},
-            {name:"tel2", index:"tel2", editable:true, hidden:true, editrules:{edithidden:true}},
-            {name:"fax", index:"fax", editable:true, hidden:true, editrules:{edithidden:true}},
-            {name:"shobyouCd1", index:"shobyouCd1", editable:true},
-            {name:"shobyouCd2", index:"shobyouCd2", editable:true},
-            {name:"shobyouCd3", index:"shobyouCd3", editable:true},
-            {name:"gakkoNm", index:"gakkoNm", editable:true},
-            {name:"biko", index:"biko", editable:true, hidden:true, edittype:"textarea", editrules:{edithidden:true}},
-            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
-            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
-            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
-            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+        {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
+        {name:"kokyakuId", index:"kokyakuId",width:20},
+        {name:"kokyakuNm", index:"kokyakuNm",width:50},
+        {name:"kokyakuNmKana", index:"kokyakuNmKana",width:70},
+        {name:"seibetsu", index:"seibetsu",hidden:true},
+        {name:"seibetsuNm", index:"seibetsuNm",width:30},
+        {name:"tanjoDt", index:"tanjoDt",width:60},
+        {name:"postNo", index:"postNo",width:50},
+        {name:"tel1", index:"tel1", width:70},
+        {name:"tel2", index:"tel2", width:80},
+        {name:"fax", index:"fax", width:70},
+        {name:"shobyouCd1", index:"shobyouCd1",width:80},
+        {name:"biko", index:"biko", editable:true, hidden:true, edittype:"textarea", editrules:{edithidden:true}},
+        {name:"koshinshaId", index:"koshinshaId", hidden:true},
+        {name:"torokushaId", index:"torokushaId", hidden:true},
+        {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
+        {name:'deleteImg', index:'deleteImg', align:'center', width:20, formatter: deleteFormatter}
     ];
     $("#searchCustomerGrid").jqGrid({
         datatype: "local",
@@ -78,18 +75,7 @@ $(function() {
         multiselect: false,
         //viewrecords: true,                                   
         colNames: colNames,
-        colModel: colModelSettings,
-        gridComplete: function(){
-            if(!isLoaded == true){
-                $("#searchCustomerGrid").jqGrid("setGroupHeaders", {
-                    useColSpanStyle: true,
-                    groupHeaders: [
-                        {startColumnName: "shobyouCd1", numberOfColumns: 3, titleText:"病名・障害名"}
-                    ]
-                });
-                isLoaded = true;
-            }
-        }
+        colModel: colModelSettings
     }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
 });
 
