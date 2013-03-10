@@ -1,11 +1,14 @@
-<div style="width:1024;">
-<%= render 'search' %>
-<div style="width:1024px; clear:both;" id="shain">
+<div class="title">社員管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="shainSearch" class="Searchform cf">
+    <%= render 'search' %>
+</div>
+<div style="clear:both;" id="shain">
     <table id="searchShainGrid"></table>
     <div id="searchShainPager"></div>
 </div>
-<div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnShainNew" href="#" />新規追加</a>
+<div class="btn_new">
+   <a class="btn_new_kokyaku" id="btnShainNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -32,7 +35,7 @@ $(function() {
     ];
     $("#searchShainGrid").jqGrid({
         datatype: "local",
-        width: "1024",
+        width: "940",
         height: "240",
         cellEdit: false,
         rowNum: 10,
@@ -53,6 +56,14 @@ $(function() {
 // ##############################
 $("a#btnShainSearch").click(function() {
     searchShain();
+    return false;
+});
+
+// ##############################
+// クリアボタンクリック処理
+// ##############################
+$("a#btnShainClear").click(function() {
+    $('#shainSearchForm input[type="text"]').val('');
     return false;
 });
 

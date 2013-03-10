@@ -1,42 +1,35 @@
 <div id="shobyoFormDialog" title="傷病名登録画面" style="display: none;">
   <form id="shobyoForm" style="width:600px;height:200px">
   <div>
-    <br>
-    <br>
     <table>
       <tr>
-        <th style="width:100px;">傷病名称</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="shobyoNm" name="shobyoNm" />
+        <th style="width:75px;">傷病名称</th>
+        <td style="width:150px;">
+          <input style="width:150px;" type="text" id="shobyoNm" name="shobyoNm" />
         </td>
-        <th style="width:100px;">傷病名称カナ</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="shobyoNmKana" name="shobyoNmKana" />
-        </td>
-      </tr>
-      <tr>
-        <th style="width:100px;">ICD10コード</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="icd10Cd" name="icd10Cd" />
-        </td>
-        <th style="width:100px;">収載日</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="shusaiDt" name="shusaiDt" />
+        <th style="width:75px;">傷病名称カナ</th>
+        <td style="width:150px;">
+          <input style="width:150px;" type="text" id="shobyoNmKana" name="shobyoNmKana" />
         </td>
       </tr>
       <tr>
-        <th style="width:100px;">廃止日</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="haishiDt" name="haishiDt" />
+        <th style="width:75px;">ICD10コード</th>
+        <td style="width:150px;">
+          <input style="width:150px;" type="text" id="icd10Cd" name="icd10Cd" />
+        </td>
+        <th style="width:75px;">収載日</th>
+        <td style="width:150px;">
+          <input style="width:150px;" type="text" id="shusaiDt" name="shusaiDt" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:75px;">廃止日</th>
+        <td style="width:150px;">
+          <input style="width:150px;" type="text" id="haishiDt" name="haishiDt" />
         </td>
     </table>
   </div>
   </form>
-  <br />
-<div id="byoinSearch" style="width:1024px;">
-
-</div>
-
 <script>
 $(function() {
   $("#shusaiDt").datepicker();
