@@ -1,47 +1,47 @@
-<div id="shainFormDialog" title="社員登録画面" style="display: none;">
-  <form id="shainForm" style="width:600px;height:200px">
+<div id="shainFormDialog" title="社員登録画面" class="Tourokuform cf" style="overflow:hidden;display: none;">
+  <form id="shainForm">
   <div>
-    <br>
-    <br>
     <table>
       <tr>
-        <th style="width:100px;">社員コード</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="shainCd" name="shainCd" />
-        </td>
-        <th style="width:100px;">姓</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="myoji" name="myoji" />
+        <th style="width:80px;">社員コード</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="shainCd" name="shainCd" />
         </td>
       </tr>
       <tr>
-        <th style="width:100px;">名</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="name" name="name" />
+        <th style="width:80px;">姓</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="myoji" name="myoji" />
         </td>
-        <th style="width:100px;">姓（フリガナ）</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="myojiFuri" name="myojiFuri" />
-        </td>
-      </tr>
-      <tr>
-        <th style="width:100px;">名（フリガナ）</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="nameFuri" name="nameFuri" />
-        </td>
-        <th style="width:100px;">ログインID</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="text" id="loginId" name="loginId" />
+        <th style="width:80px;">名</th>
+        <td style="width:75px;">
+          <input style="width:130px;" type="text" id="name" name="name" />
         </td>
       </tr>
       <tr>
-        <th style="width:100px;">ログインパスワード</th>
-        <td style="width:250px;">
-          <input style="width:200px;" type="password" id="loginPassword" name="loginPassword" />
+        <th style="width:80px;">姓（フリガナ）</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="myojiFuri" name="myojiFuri" />
         </td>
-        <th style="width:100px;">管理フラグ</th>
-        <td style="width:250px;">
-           <select style="width:200px;" id="manageFlg" name="manageFlg">
+        <th style="width:80px;">名（フリガナ）</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="nameFuri" name="nameFuri" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:80px;">ログインID</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="loginId" name="loginId" />
+        </td>
+        <th style="width:80px;">ログインパスワード</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="password" id="loginPassword" name="loginPassword" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:80px;">管理フラグ</th>
+        <td style="width:175px;">
+           <select style="width:140px;" id="manageFlg" name="manageFlg">
               <option value=""></option>
               <option value="0">一般</option>
               <option value="1">管理者</option>
@@ -53,10 +53,6 @@
   </div>
   </form>
   <br />
-<div id="shainSearch" style="width:1024px;">
-
-</div>
-
 <script>
 $(function() {
 
