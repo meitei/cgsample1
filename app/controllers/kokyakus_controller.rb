@@ -122,11 +122,19 @@ class KokyakusController < ApplicationController
   # DELETE /kokyakus/1.json
   def destroy
     @kokyaku = Kokyaku.find(params[:id])
-    @kokyaku.destroy
-
+    #@kokyaku.destroy
     respond_to do |format|
-      format.html { redirect_to kokyakus_url }
-      format.json { head :no_content }
+      if @kokyaku.update_attribute(:delFlg, 1)
+        format.html { redirect_to @kokyaku, notice: 'Kokyaku was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @kokyaku.errors, status: :unprocessable_entity }
+      end
     end
+    # respond_to do |format|
+    #   format.html { redirect_to kokyakus_url }
+    #   format.json { head :no_content }
+    # end
   end
 end
