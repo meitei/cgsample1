@@ -16,11 +16,7 @@
       </td>
       <th style="width:100px;" scope="row">病名・障害名１</th>
       <td style="width:150px;">
-        <select style="width:150px;" id="shobyouCd1" name="kokyaku[shobyouCd1]">
-          <option value=""></option>
-          <option value="0">骨折</option>
-          <option value="1">捻挫</option>
-        </select>
+        <%= select :kokyaku, :shobyouCd1, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
       </td>
     </tr>
     <tr>
@@ -34,17 +30,13 @@
       </td>
       <th>病名・障害名２</th>
       <td>
-        <select style="width:150px;" id="shobyouCd2" name="kokyaku[shobyouCd2]">
-          <option value=""></option>
-          <option value="0">骨折</option>
-          <option value="1">捻挫</option>
-        </select>
+        <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
       </td>
     </tr>
     <tr>
       <th>性別</th>
       <td>
-        <%= select :kokyaku, :seibetsu, {"男性" => "0", "女性" => "1"}, :include_blank => true, :style => "width:100px" %>
+        <%= select :kokyaku, :seibetsu, [["男性", "0"], ["女性", "1"]], :include_blank => true %>
       </td>
       <th>住所２</th>
       <td>
@@ -52,11 +44,7 @@
       </td>
       <th>病名・障害名３</th>
       <td>
-        <select style="width:150px;" id="shobyouCd3" name="kokyaku[shobyouCd3]">
-          <option value=""></option>
-          <option value="0">骨折</option>
-          <option value="1">捻挫</option>
-        </select>
+        <%= select :kokyaku, :shobyouCd3, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
       </td>
     </tr>
     <tr>
@@ -127,6 +115,10 @@ $(function() {
         biko: {maxlength:100},
     }
   });
+  $("#kokyaku_seibetsu").css("width", "100px");
+  $("#kokyaku_shobyouCd1").css("width", "100px");
+  $("#kokyaku_shobyouCd2").css("width", "100px");
+  $("#kokyaku_shobyouCd3").css("width", "100px");
 });
 
 // 更新用メソッド

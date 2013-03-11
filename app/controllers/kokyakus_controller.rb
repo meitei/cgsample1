@@ -73,6 +73,7 @@ class KokyakusController < ApplicationController
   # GET /kokyakus/new.json
   def new
     @kokyaku = Kokyaku.new
+    @shobyo = Shobyo.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -84,6 +85,7 @@ class KokyakusController < ApplicationController
   def edit
     logger.debug(params)
     @kokyaku = Kokyaku.find(params[:id])
+    @shobyo = Shobyo.all
   end
 
   # POST /kokyakus
