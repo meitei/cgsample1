@@ -4,65 +4,71 @@
       <tr>
         <th style="width:80px;">顧客コード</th>
         <td style="width:175px;">
-          <input style="width:50px;" type="text" id="kokyakuIdFrom" name="kokyakuIdFrom" />&nbsp;〜
-          <input style="width:50px;" type="text" id="kokyakuIdTo" name="kokyakuIdTo" />
+          <input style="width:50px;" type="text" id="kokyakuIdFrom" name="kokyaku[kokyakuIdFrom]" tabindex="2" />&nbsp;〜
+          <input style="width:50px;" type="text" id="kokyakuIdTo" name="kokyaku[kokyakuIdTo]" tabindex="4" />
         </td>
         <th style="width:80px;">郵便番号</th>
         <td style="width:175px;">
-          <input style="width:130px;" type="text" id="postNo" name="postNo" />
+          <input style="width:130px;" type="text" id="postNo" name="kokyaku[postNo]" tabindex="28" />
         </td>
-        <th style="width:80px;">携帯番号</th>
-        <td style="width:175px;">
-          <input style="width:130px;" type="text" id="tel2" name="tel2" />
+        <th>FAX番号</th>
+        <td>
+          <input style="width:130px;" type="text" id="fax" name="kokyaku[fax]" tabindex="38" />
         </td>
       </tr>
       <tr>
         <th>顧客名</th>
         <td>
-          <input style="width:130px;" type="text" id="kokyakuNm" name="kokyakuNm" />
+          <input style="width:130px;" type="text" id="kokyakuNm" name="kokyaku[kokyakuNm]" tabindex="6" />
         </td>
         <th>住所１</th>
         <td>
-          <input style="width:130px;" type="text" id="address1" name="address1" />
+          <input style="width:130px;" type="text" id="address1" name="kokyaku[address1]" tabindex="30" />
         </td>
-        <th>FAX番号</th>
+        <th>傷病名</th>
         <td>
-          <input style="width:130px;" type="text" id="fax" name="fax" />
+          <input style="width:130px;" type="text" id="shobyouNm" name="kokyaku[shobyoNm]" tabindex="40" />
         </td>
       </tr>
       <tr>
         <th>顧客カナ</th>
         <td>
-          <input style="width:130px;" type="text" id="kokyakuNmKana" name="kokyakuNmKana" />
+          <input style="width:130px;" type="text" id="kokyakuNmKana" name="kokyaku[kokyakuNmKana]" tabindex="8" />
         </td>
         <th>住所２</th>
         <td>
-          <input style="width:130px;" type="text" id="address2" name="address2" />
+          <input style="width:130px;" type="text" id="address2" name="kokyaku[address2]" tabindex="32" />
         </td>
-        <th>病名・障害名</th>
+        <th>学校名</th>
         <td>
-          <input style="width:130px;" type="text" id="shobyouNm" name="shobyoNm" />
+          <input style="width:130px;" type="text" id="gakkoNm" name="kokyaku[gakkoNm]" tabindex="42" />
+        </td>
+      </tr>
+      <tr>
+        <th>性別</th>
+        <td>
+          <%= select :kokyaku, :seibetsu, [["男性", "0"], ["女性", "1"]], :include_blank => true %>
+        </td>
+        <th>電話番号</th>
+        <td>
+          <input style="width:130px;" type="text" id="tel1" name="kokyaku[tel1]" tabindex="34" />
         </td>
       </tr>
       <tr>
         <th>生年月日</th>
         <td>
-          <input style="width:50px;" type="text" id="tanjoDtFrom" name="tanjoDtFrom" />&nbsp;〜
-          <input style="width:50px;" type="text" id="tanjoDtTo" name="tanjoDtTo" />
+          <input style="width:50px;" type="text" id="tanjoDtFrom" name="kokyaku[tanjoDtFrom]" tabindex="18" />&nbsp;〜
+          <input style="width:50px;" type="text" id="tanjoDtTo" name="kokyaku[tanjoDtTo]" tabindex="26" />
         </td>
-        <th>電話番号</th>
-        <td>
-          <input style="width:130px;" type="text" id="tel1" name="tel1" />
-        </td>
-        <th>学校名</th>
-        <td>
-          <input style="width:130px;" type="text" id="gakkoNm" name="gakkoNm" />
+        <th style="width:80px;">携帯番号</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="tel2" name="kokyaku[tel2]" tabindex="36" />
         </td>
       </tr>
     </table>
     <div class="btn_submit">
-      <div><a class="btn_search" id="btnCustomerSearch" href="#" />検索</a></div>
-      <div><a class="btn_clear" id="btnCustomerClear" href="#" />条件クリア</a></div>
+      <div><a class="btn_search" id="btnCustomerSearch" href="#" tabindex="44" />検索</a></div>
+      <div><a class="btn_clear" id="btnCustomerClear" href="#" tabindex="46" />条件クリア</a></div>
     </div>
   </div>
   <div>
