@@ -1,11 +1,14 @@
-<div style="width:1024;">
-<%= render 'search' %>
-<div style="width:1024px; clear:both;" id="kanseiBuhin">
+<div class="title">完成部品管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="kanseiBuhinSearch" class="Searchform cf">
+    <%= render 'search' %>
+</div>
+<div style="clear:both;" id="kanseiBuhin">
     <table id="searchKanseiBuhinGrid"></table>
     <div id="searchKanseiBuhinPager"></div>
 </div>
-<div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnKanseiBuhinNew" href="#" />新規追加</a>
+<div class="btn_new">
+    <a class="btn_new_mast" id="btnKanseiBuhinNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -31,7 +34,7 @@ $(function() {
     ];
     $("#searchKanseiBuhinGrid").jqGrid({
         datatype: "local",
-        width: "1024",
+        width: "940",
         height: "240",
         cellEdit: false,
         rowNum: 10,
@@ -60,6 +63,14 @@ $("a#btnKanseiBuhinSearch").click(function() {
 // ##############################
 $("a#btnKanseiBuhinNew").click(function() {
     showKanseiBuhinFormDialog();
+    return false;
+});
+
+// ##############################
+// クリアボタンクリック処理
+// ##############################
+$("a#btnKanseiBuhinClear").click(function() {
+    $('#kanseiBuhinSearchForm input[type="text"]').val('');
     return false;
 });
 

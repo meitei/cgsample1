@@ -7,7 +7,7 @@ class CreateKanseiBuhins < ActiveRecord::Migration
       t.string :katashikiNm, :limit => 50
       t.integer :kakaku,:null => false
       t.string :shiyoBuhin, :limit => 50
-      t.text :biko, :limit => 200
+      t.string :biko, :limit => 200
       t.integer :koshinshaId,:null => false
       t.integer :torokushaId,:null => false
 

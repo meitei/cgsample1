@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jqgrid_rails
-//= require twitter/bootstrap
 //= require jquery.validate
 //= require jquery.validate.japlugin
 

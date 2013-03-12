@@ -1,109 +1,175 @@
-<%= form_for(@kokyaku) do |f| %>
-  <% if @kokyaku.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@kokyaku.errors.count, "error") %> prohibited this kokyaku from being saved:</h2>
+<form id="kokyakuForm" method="post">
+<input type="hidden" id="kokyakuId" name="kokyaku[kokyakuId]" value="<%= @kokyaku.kokyakuId %>" />
+<input type="hidden" id="koshinshaId" name="kokyaku[koshinshaId]" value="<%= @kokyaku.koshinshaId %>" />
+<input type="hidden" id="torokushaId" name="kokyaku[torokushaId]" value="<%= @kokyaku.torokushaId %>" />
+<input type="hidden" id="httpMethod" name="_method" value="" />
+<div>
+  <table>
+    <tr>
+      <th style="width:75px;">顧客名称</th>
+      <td style="width:150px;">
+        <input style="width:150px;" type="text" id="kokyakuNm" name="kokyaku[kokyakuNm]" value="<%= @kokyaku.kokyakuNm %>" />
+      </td>
+      <th style="width:75px;">郵便番号</th>
+      <td style="width:150px;">
+        <input style="width:100px;" type="text" id="postNo" name="kokyaku[postNo]" value="<%= @kokyaku.postNo %>" />
+      </td>
+      <th style="width:100px;" scope="row">病名・障害名１</th>
+      <td style="width:150px;">
+        <%= select :kokyaku, :shobyouCd1, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
+      </td>
+    </tr>
+    <tr>
+      <th>カナ名称</th>
+      <td>
+        <input style="width:150px;" type="text" id="kokyakuNmKana" name="kokyaku[kokyakuNmKana]" value="<%= @kokyaku.kokyakuNmKana %>" />
+      </td>
+      <th>住所１</th>
+      <td>
+        <input style="width:150px;" type="text" id="address1" name="kokyaku[address1]" value="<%= @kokyaku.address1 %>" />
+      </td>
+      <th>病名・障害名２</th>
+      <td>
+        <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
+      </td>
+    </tr>
+    <tr>
+      <th>性別</th>
+      <td>
+        <%= select :kokyaku, :seibetsu, [["男性", "0"], ["女性", "1"]], :include_blank => true %>
+      </td>
+      <th>住所２</th>
+      <td>
+        <input style="width:150px;" type="text" id="address2" name="kokyaku[address2]" value="<%= @kokyaku.address2 %>" />
+      </td>
+      <th>病名・障害名３</th>
+      <td>
+        <%= select :kokyaku, :shobyouCd3, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
+      </td>
+    </tr>
+    <tr>
+      <th>生年月日</th>
+      <td>
+        <input style="width:100px;" type="text" id="tanjoDt" name="kokyaku[tanjoDt]" value="<%= @kokyaku.tanjoDt %>" />
+      </td>
+      <th>電話番号</th>
+      <td>
+       <input style="width:150px;" type="text" id="tel1" name="kokyaku[tel1]" value="<%= @kokyaku.tel1 %>" />
+      </td>
+      <th>学校名</th>
+      <td>
+        <input type="text" id="gakkoNm" name="kokyaku[gakkoNm]" value="<%= @kokyaku.gakkoNm %>" />
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td></td>
+      <th>携帯番号</th>
+      <td>
+        <input style="width:150px;" type="text" id="tel2" name="kokyaku[tel2]" value="<%= @kokyaku.tel2 %>" />
+      </td>
+      <th></th>
+      <td></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td></td>
+      <th>FAX番号</th>
+      <td>
+        <input style="width:150px;" type="text" id="fax" name="kokyaku[fax]" value="<%= @kokyaku.fax %>" />
+      </td>
+      <th></th>
+      <td></td>
+    </tr>
+    <tr>
+      <th style="width:100px;">備考</th>
+      <td colspan="5">
+        <textarea style="width:500px;" id="biko" name="kokyaku[biko]" rows="3" cols="250"><%= @kokyaku.biko %></textarea>
+      </td>
+    </tr>
+  </table>
+</div>
+</form>
+<script>
+$(function() {
+  $("#kokyakuForm").validate({
+    errorClass:'error',
+    errorElement:'label',
+    highlight: function (element, errorClass, validClass) { 
+      $(element).addClass(errorClass); 
+    }, 
+    unhighlight: function (element, errorClass, validClass) { 
+      $(element).removeClass(errorClass); 
+    },
+    rules: {
+        kokyakuNm: {required:true, maxlength:10},
+        kokyakuNmKana: {katakana:true, maxlength:10},
+        tanjoDt: {date:true},
+        postNo: {postnum:true, maxlength:8},
+        address1: {maxlength:100},
+        address2: {maxlength:100},
+        tel1: {telnum:true, maxlength:12},
+        tel2: {mobilenum:true, maxlength:13},
+        fax: {telnum:true, maxlength:12},
+        gakkoNm: {maxlength:20},
+        biko: {maxlength:100},
+    }
+  });
+  $("#kokyaku_seibetsu").css("width", "100px");
+  $("#kokyaku_shobyouCd1").css("width", "100px");
+  $("#kokyaku_shobyouCd2").css("width", "100px");
+  $("#kokyaku_shobyouCd3").css("width", "100px");
+});
 
-      <ul>
-      <% @kokyaku.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+// 更新用メソッド
+function executeKokyaku(kokyakuId) {
+  // クライアントバリデーション
+  if ($("#kokyakuForm").valid() == false) {
+     return false;
+  }
+  //var action;
+  //var method;
+  if(kokyakuId != null) {
+    $("#koshinshaId").val("1");
+    $("#kokyakuForm").attr("action", "/kokyakus/" + kokyakuId);
+    //$("#kokyakuForm").attr("method", "PUT");
+    $("#httpMethod").val("put");
+      //url = "../../kokyakus/" + kokyakuId + ".json";
+      //type = "PUT";
+  } else {
+    $("#koshinshaId").val("1");
+    $("#torokushaId").val("1");
+      //url = "../kokyakus.json";
+      //type = "POST";
+    $("#kokyakuForm").attr("action", "/kokyakus");
+    //$("#kokyakuForm").attr("method", "POST");
+    $("#httpMethod").val("post");
+  }
+  $("#kokyakuForm").submit();
+  // var data = {};
+  // var postData = {};
+  // var kokyaku = $("#kokyakuForm").serializeArray();
+  // $.each(kokyaku, function() {
+  //     data[this.name] = this.value;
+  // });
+  // data["koshinshaId"] = 1;
+  // data["torokushaId"] = 1;
+  // postData["kokyaku"] = data;
+  // postData["id"] = kokyakuId;
+  // $.ajax({
+  //     scriptCharset:"UTF-8",
+  //     type: type,
+  //     url: url,
+  //     data: postData,
+  //     root: "kokyaku",
+  //     dataType: "json",
+  //     success: function(result) {
+  //         if(result != null) {
+  //             //searchKokyaku();
+  //         }
+  //     }
+  // });
+  return false;    
+}
 
-  <div class="field">
-    <%= f.label :kokyakuId %><br />
-    <%= f.number_field :kokyakuId %>
-  </div>
-  <div class="field">
-    <%= f.label :kokyakuNm1 %><br />
-    <%= f.text_field :kokyakuNm1 %>
-  </div>
-  <div class="field">
-    <%= f.label :kokyakuNm2 %><br />
-    <%= f.text_field :kokyakuNm2 %>
-  </div>
-  <div class="field">
-    <%= f.label :kokyakuNmKana1 %><br />
-    <%= f.text_field :kokyakuNmKana1 %>
-  </div>
-  <div class="field">
-    <%= f.label :kokyakuNmKana2 %><br />
-    <%= f.text_field :kokyakuNmKana2 %>
-  </div>
-  <div class="field">
-    <%= f.label :seibetsu %><br />
-    <%= f.number_field :seibetsu %>
-  </div>
-  <div class="field">
-    <%= f.label :tanjoDt %><br />
-    <%= f.date_select :tanjoDt %>
-  </div>
-  <div class="field">
-    <%= f.label :postNo %><br />
-    <%= f.text_field :postNo %>
-  </div>
-  <div class="field">
-    <%= f.label :address1 %><br />
-    <%= f.text_field :address1 %>
-  </div>
-  <div class="field">
-    <%= f.label :address2 %><br />
-    <%= f.text_field :address2 %>
-  </div>
-  <div class="field">
-    <%= f.label :tel1 %><br />
-    <%= f.text_field :tel1 %>
-  </div>
-  <div class="field">
-    <%= f.label :tel2 %><br />
-    <%= f.text_field :tel2 %>
-  </div>
-  <div class="field">
-    <%= f.label :fax %><br />
-    <%= f.text_field :fax %>
-  </div>
-  <div class="field">
-    <%= f.label :shobyouCd1 %><br />
-    <%= f.number_field :shobyouCd1 %>
-  </div>
-  <div class="field">
-    <%= f.label :shobyouCd2 %><br />
-    <%= f.number_field :shobyouCd2 %>
-  </div>
-  <div class="field">
-    <%= f.label :shobyouCd3 %><br />
-    <%= f.number_field :shobyouCd3 %>
-  </div>
-  <div class="field">
-    <%= f.label :gakkoNm %><br />
-    <%= f.text_field :gakkoNm %>
-  </div>
-  <div class="field">
-    <%= f.label :biko %><br />
-    <%= f.text_field :biko %>
-  </div>
-  <div class="field">
-    <%= f.label :koshinDt %><br />
-    <%= f.datetime_select :koshinDt %>
-  </div>
-  <div class="field">
-    <%= f.label :koshinshaId %><br />
-    <%= f.number_field :koshinshaId %>
-  </div>
-  <div class="field">
-    <%= f.label :torokuDt %><br />
-    <%= f.datetime_select :torokuDt %>
-  </div>
-  <div class="field">
-    <%= f.label :torokushaId %><br />
-    <%= f.number_field :torokushaId %>
-  </div>
-  <div class="field">
-    <%= f.label :koshinId %><br />
-    <%= f.number_field :koshinId %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</script>
