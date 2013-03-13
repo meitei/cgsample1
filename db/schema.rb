@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130309094909) do
+ActiveRecord::Schema.define(:version => 20130313074317) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -88,16 +88,9 @@ ActiveRecord::Schema.define(:version => 20130309094909) do
     t.integer  "konyuRirekiId"
     t.integer  "kokyakuId"
     t.integer  "byoinCd"
-    t.string   "ishiNm"
-    t.string   "rigakuRyohoNm"
-    t.string   "sagyoRyohoNm"
     t.integer  "mitsumoriTantoEigyoCd"
     t.date     "mitsumoriDt"
-    t.integer  "shubetsuCd"
-    t.integer  "mitsumoriKomokuCd"
     t.string   "shohinNm"
-    t.string   "sinsho"
-    t.integer  "hokenShubetsuCd"
     t.decimal  "kin"
     t.decimal  "seikyuKin"
     t.string   "shohinSiyoBiko"
@@ -114,9 +107,18 @@ ActiveRecord::Schema.define(:version => 20130309094909) do
     t.date     "kanryoDt"
     t.integer  "koshinshaId"
     t.integer  "torokushaId"
-    t.integer  "koshinId"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.string   "ishiNm1"
+    t.string   "ishiNm2"
+    t.string   "rigakuRyohoNm1"
+    t.string   "rigakuRyohoNm2"
+    t.string   "sagyoRyohoNm1"
+    t.string   "sagyoRyohoNm2"
+    t.integer  "shubetsuKn"
+    t.integer  "seihinCd"
+    t.integer  "hokenShubetsuCd1"
+    t.integer  "hokenShubetsuCd2"
   end
 
   create_table "mitsumori_seihins", :force => true do |t|

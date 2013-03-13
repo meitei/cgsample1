@@ -26,7 +26,6 @@ JqgridSample::Application.routes.draw do
     get 'search', :on => :collection
   end
 
-
   get "item_extend/search"
 
   resources :items do
@@ -41,8 +40,11 @@ JqgridSample::Application.routes.draw do
     get 'graph_data', :on => :collection
   end
 
-  resources :companies
+  resources :konyu_rirekis do
+      get 'search', :on => :collection
+  end
 
+  resources :companies
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
