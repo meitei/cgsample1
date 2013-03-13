@@ -12,20 +12,21 @@ class KokyakusController < ApplicationController
   # GET /kokyakus/search.json
   def search
     conditions = Kokyaku.where("delFlg = ?", 0)
-    conditions = conditions.where("\"kokyakuId\" >= ?", params[:kokyakuIdFrom].to_i) if params[:kokyakuIdFrom] != ""
-    conditions = conditions.where("\"kokyakuId\" <= ?", params[:kokyakuIdTo].to_i) if params[:kokyakuIdTo] != ""
-    conditions = conditions.where("\"kokyakuNm\" LIKE ?", params[:kokyakuNm] + "%") if params[:kokyakuNm] != ""
-    conditions = conditions.where("\"kokyakuNmKana\" LIKE ?", params[:kokyakuNmKana] + "%") if params[:kokyakuNmKana] != ""
-    conditions = conditions.where("\"tanjoDt\" >= ?", params[:tanjoDtFrom]) if params[:tanjoDtFrom] != ""
-    conditions = conditions.where("\"tanjoDt\" <= ?", params[:tanjoDtTo]) if params[:tanjoDtTo] != ""
-    conditions = conditions.where("\"postNo\" LIKE ?", params[:postNo] + "%") if params[:postNo] != ""
-    conditions = conditions.where("address1 LIKE ?", params[:address1] + "%") if params[:address1] != ""
-    conditions = conditions.where("address2 LIKE ?", "%" + params[:address2] + "%") if params[:address2] != ""
-    conditions = conditions.where("tel1 LIKE ?", params[:tel1] + "%") if params[:tel1] != ""
-    conditions = conditions.where("tel2 LIKE ?", params[:tel2] + "%") if params[:tel2] != ""
-    conditions = conditions.where("fax LIKE ?", params[:fax] + "%") if params[:fax] != ""
-    conditions = conditions.where("\"shobyoNm\" LIKE ?", params[:shobyoNm] + "%") if params[:shobyoNm] != ""
-    conditions = conditions.where("\"gakkoNm\" LIKE ?", params[:gakkoNm] + "%") if params[:gakkoNm] != ""
+    conditions = conditions.where("\"kokyakuId\" >= ?", params[:kokyaku][:kokyakuIdFrom].to_i) if params[:kokyaku][:kokyakuIdFrom] != ""
+    conditions = conditions.where("\"kokyakuId\" <= ?", params[:kokyaku][:kokyakuIdTo].to_i) if params[:kokyaku][:kokyakuIdTo] != ""
+    conditions = conditions.where("\"kokyakuNm\" LIKE ?", params[:kokyaku][:kokyakuNm] + "%") if params[:kokyaku][:kokyakuNm] != ""
+    conditions = conditions.where("\"kokyakuNmKana\" LIKE ?", params[:kokyaku][:kokyakuNmKana] + "%") if params[:kokyaku][:kokyakuNmKana] != ""
+    conditions = conditions.where("\"seibetsu\" = ?", params[:kokyaku][:seibetsu]) if params[:kokyaku][:seibetsu] != ""
+    conditions = conditions.where("\"tanjoDt\" >= ?", params[:kokyaku][:tanjoDtFrom]) if params[:kokyaku][:tanjoDtFrom] != ""
+    conditions = conditions.where("\"tanjoDt\" <= ?", params[:kokyaku][:tanjoDtTo]) if params[:kokyaku][:tanjoDtTo] != ""
+    conditions = conditions.where("\"postNo\" LIKE ?", params[:kokyaku][:postNo] + "%") if params[:kokyaku][:postNo] != ""
+    conditions = conditions.where("address1 LIKE ?", params[:kokyaku][:address1] + "%") if params[:kokyaku][:address1] != ""
+    conditions = conditions.where("address2 LIKE ?", "%" + params[:kokyaku][:address2] + "%") if params[:kokyaku][:address2] != ""
+    conditions = conditions.where("tel1 LIKE ?", params[:kokyaku][:tel1] + "%") if params[:kokyaku][:tel1] != ""
+    conditions = conditions.where("tel2 LIKE ?", params[:kokyaku][:tel2] + "%") if params[:kokyaku][:tel2] != ""
+    conditions = conditions.where("fax LIKE ?", params[:kokyaku][:fax] + "%") if params[:kokyaku][:fax] != ""
+    conditions = conditions.where("\"shobyoNm\" LIKE ?", params[:kokyaku][:shobyoNm] + "%") if params[:kokyaku][:shobyoNm] != ""
+    conditions = conditions.where("\"gakkoNm\" LIKE ?", params[:kokyaku][:gakkoNm] + "%") if params[:kokyaku][:gakkoNm] != ""
     #logger.debug(conditions)
 
     records = conditions.count
@@ -40,6 +41,10 @@ class KokyakusController < ApplicationController
     start = limit * page - limit;
     @kokyakus = conditions.find(
       :all, 
+      :joins => "LEFT OUTER JOIN shobyos ON shobyos.shobyoCd = kokyakus.shobyouCd1",
+      # :joins => "LEFT OUTER JOIN shobyos shobyo2 ON shobyos.shobyoCd = kokyakus.shobyouCd2",
+      # :joins => "LEFT OUTER JOIN shobyos shobyo3 ON shobyos.shobyoCd = kokyakus.shobyouCd3",
+      # :include => [:shobyo],
       :offset => start, 
       :limit => limit,
       :order => "\"kokyakuId\" DESC")

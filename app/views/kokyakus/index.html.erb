@@ -77,6 +77,8 @@ $(function() {
         colNames: colNames,
         colModel: colModelSettings
     }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
+
+  $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "10");
 });
 
 $("a#btnCustomerSearch").click(function() {
