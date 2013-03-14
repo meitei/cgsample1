@@ -186,10 +186,13 @@ function showShobyoFormDialog(shobyoCd) {
         hide: {effect: "clip"},
         width: "auto",
         modal: true,
-        buttons : {
+        buttons: {
             "Close":{
-                text : "閉じる",
-                class : "dialog_new",
+                text: "",
+                id: "dialog_close",
+                width: "148px",
+                height: "37px",
+                //image : "/images/btn_add2.png",
                 click : function(){
                 $('#shobyoForm input[type="text"], select, textarea').val('');
                 $("#shobyoForm").validate().resetForm();
@@ -207,7 +210,10 @@ function showShobyoFormDialog(shobyoCd) {
                 $(this).dialog('close');
             }
         },
-        open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
+        open:function(event, ui){
+            $(".ui-dialog-titlebar-close").hide();
+            $("#dialog_close").css("background-image", "url(/images/btn_add2.png)");
+        }
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     $("#shobyoFormDialog").focus();

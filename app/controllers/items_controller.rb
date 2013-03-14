@@ -153,6 +153,13 @@ class ItemsController < ApplicationController
 
   def report
 
+    @mitsumoriTankas = MitsumoriTanka.all
+
+    @mitsumoriTankas.each {|row| 
+      logger.debug(row["tanka"])
+    }
+
+
     # ThinReportレイアウトのテンプレートの場所を指定する
     templateDir = File.join(Rails.root, 'app', 'reports')
 
@@ -160,7 +167,6 @@ class ItemsController < ApplicationController
     report = ThinReports::Report.new
     report.use_layout File.join(templateDir,'Quotation_1'), :id => :first
     report.use_layout File.join(templateDir,'Quotation_2'), :id => :second
-
 
     # 1ページ目
     report.start_new_page :layout => :first do
@@ -192,11 +198,11 @@ class ItemsController < ApplicationController
       item(:saikei_1_1).value('7,654,321')
       item(:saisun_1_1).value('7,654,321')
       item(:suryo_1_1).value('321')
-      item(:kingaku_1_1).value('87,654,321')
+      item(:kin_1_1).value('87,654,321')
 
       item(:tanka_2_1).value('7,654,321')
       item(:suryo_2_1).value('321')
-      item(:kingaku_2_1).value('87,654,321')
+      item(:kin_2_1).value('87,654,321')
 
       # item(:).value('')
       # item(:).value('')
@@ -208,23 +214,21 @@ class ItemsController < ApplicationController
       # item(:).value('')
       # item(:).value('')
       # item(:).value('')
-
-
       
     end
 
     # 2ページ目
     report.start_new_page :layout => :second do
 
-      item(:shurui_3_1).value('身体保持部品ﾍﾞﾙﾄ部品ﾎﾞﾃﾞｨﾎﾟｲﾝﾄSH310')
       item(:tanka_3_1).value('7,654,321')
       item(:suryo_3_1).value('321')
-      item(:kingaku_3_1).value('87,654,321')
+      item(:kin_3_1).value('87,654,321')
 
       item(:shurui_4_1).value('完成用部品　車椅子フレーム　リクライニング・ティルト式手押し型')
       item(:tanka_4_1).value('7,654,321')
       item(:suryo_4_1).value('321')
-      item(:kingaku_4_1).value('87,654,321')
+      item(:kin_4_1).value('87,654,321')
+
 
       # item(:).value('')
       # item(:).value('')
@@ -253,7 +257,7 @@ class ItemsController < ApplicationController
 
     fileName = Time.now.strftime("%Y%m%d%H%M%S") + "_Quotation.pdf"
 
-    # (G)ファイル保存
+    # ファイル保存
     report.generate_file(File.join(saveDir,fileName))
 
     # http://serverName/tmp/fileName.pdf で読み込まれるようにする

@@ -1,27 +1,30 @@
-<div class="title">顧客管理：検索</div>
+<div class="title">購入履歴管理：検索</div>
 <div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
-<div id="kokyakuSearch" class="Searchform cf">
+<div id="konyuRirekiSearch" class="Searchform cf">
 <%= render 'search' %>
 </div>
 <div style="clear:both;" id="customer">
-    <table id="searchCustomerGrid"></table>        
-    <div id="searchCustomerPager"></div>
+    <table id="searchKonyuRirekiGrid"></table>
+    <div id="searchKonyuRirekiPager"></div>
 </div>
 <div class="btn_new">
-    <a class="btn_new_kokyaku" id="btnCustomerNew" href="/kokyakus/new">新規追加</a>
+    <a class="btn_new_mast" id="btnKonyuRirekiNew" href="/konyu_rirekis/new">新規追加</a>
 </div>
 <script>
 $(function() {
-    $("#kokyakuForm").validate({
+    $("#konyuRirekiForm").validate({
         errorClass:'error',
         errorElement:'label',
-        highlight: function (element, errorClass, validClass) { 
-            $(element).addClass(errorClass); 
-        }, 
-        unhighlight: function (element, errorClass, validClass) { 
-            $(element).removeClass(errorClass); 
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass(errorClass);
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass(errorClass);
         },
         rules: {
+            juchuDtFrom: {date:true},
+            juchuDtTo: {date:true},
+
             kokyakuNm: {required:true, maxlength:10},
             kokyakuNmKana: {katakana:true, maxlength:10},
             //seibetsu: {required:true, maxlength:10},
@@ -43,7 +46,7 @@ $(function() {
         //}
     });
     var isLoaded = false;
-    var colNames = ["","ID","顧客名","顧客カナ","","性別","生年月日","郵便番号","電話番号","携帯番号","FAX番号","疾病名","備考","","","",""];
+    var colNames = ["","顧客ID","顧客名","顧客カナ","","性別","生年月日","郵便番号","電話番号","携帯番号","FAX番号","疾病名","備考","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
         {name:"kokyakuId", index:"kokyakuId",width:20},
@@ -63,35 +66,42 @@ $(function() {
         {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
         {name:'deleteImg', index:'deleteImg', align:'center', width:20, formatter: deleteFormatter}
     ];
-    $("#searchCustomerGrid").jqGrid({
+    $("#searchKonyuRirekiGrid").jqGrid({
         datatype: "local",
-        //url: "kokyakus.json",
+        //url: "konyu_rirekis.json",
         width: "940",
-        height: "240",
+        height: "140",
         cellEdit: false,
         rowNum: 10,
-        //rowList:[10,20,30], 
-        pager: "searchCustomerPager",
+        //rowList:[10,20,30],
+        pager: "searchKonyuRirekiPager",
         multiselect: false,
-        //viewrecords: true,                                   
+        //viewrecords: true,
         colNames: colNames,
         colModel: colModelSettings
-    }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
+    }).navGrid('#searchKonyuRirekiPager',{edit:false, add:false, del:false, search:false});
 
-  $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "10");
+    var dateItems = new Array("juchuDt", "kariAwaseDt", "nohinDt", "kofuDt", "nyukinDt", "oshiinDt", "kanryoDt", "mitsumoriDt");
+    $.each(dateItems,function(i) {
+        // alert("#" + this + "From");
+        $("#" + this + "From").datepicker();
+        $("#" + this + "To").datepicker();
+    });
+
+    $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "10");
 });
 
-$("a#btnCustomerSearch").click(function() {
+$("a#btnKonyuRirekiSearch").click(function() {
     searchKokyaku();
     return false;
 });
 
-$("a#btnCustomerClear").click(function() {
-    $('#kokyakuSearchForm input[type="text"]').val('');
+$("a#btnKonyuRirekiClear").click(function() {
+    $('#konyuRirekiSearchForm input[type="text"]').val('');
     return false;
 });
 
-// $("a#btnCustomerNew").click(function() {
+// $("a#btnKonyuRirekiNew").click(function() {
 //     showKokyakuFormDialog();
 //     return false;
 // });
@@ -107,14 +117,14 @@ function deleteFormatter(cellval, options, rowdata) {
 // 検索用メソッド
 function searchKokyaku() {
     var data = {};
-    var search = $("#kokyakuSearchForm").serializeArray();
+    var search = $("#konyuRirekiSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
-    $("#searchCustomerGrid").clearGridData();
+    $("#searchKonyuRirekiGrid").clearGridData();
     var param = {
         datatype: "json",
-        url: "kokyakus/search.json",
+        url: "konyu_rirekis/search.json",
         postData: data,
         jsonReader: {
             root: "rows",
@@ -124,12 +134,12 @@ function searchKokyaku() {
             repeatitems: false
         }
     };
-    $("#searchCustomerGrid").setGridParam(param).trigger("reloadGrid");
+    $("#searchKonyuRirekiGrid").setGridParam(param).trigger("reloadGrid");
 }
 
 // 更新用メソッド
-function modifyKokyaku(kokyakuId) {
-    location.href = "kokyakus/" + kokyakuId + "/edit";
+function modifyKokyaku(konyuRirekiId) {
+    location.href = "konyu_rirekis/" + konyuRirekiId + "/edit";
     return false;
 }
 
@@ -138,10 +148,10 @@ function modifyKokyaku(kokyakuId) {
 //     var url;
 //     var type;
 //     if(kokyakuId != null) {
-//         url = "kokyakus/" + kokyakuId + ".json";
+//         url = "konyu_rirekis/" + kokyakuId + ".json";
 //         type = "PUT";
 //     } else {
-//         url = "kokyakus.json";
+//         url = "konyu_rirekis.json";
 //         type = "POST";
 //     }
 //     var data = {};
@@ -167,21 +177,21 @@ function modifyKokyaku(kokyakuId) {
 //             }
 //         }
 //     });
-//     return false;    
+//     return false;
 // }
 
 // 削除用メソッド
-function removeKokyaku(kokyakuId) {
+function removeKokyaku(konyuRirekiId) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
-    var url = "kokyakus/" + kokyakuId + ".json";
+    var url = "konyu_rirekis/" + konyuRirekiId + ".json";
     var type = "DELETE";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + kokyakuId,
+        data: "id=" + konyuRirekiId,
         dataType: "json",
         success: function(result) {
         }
@@ -189,7 +199,7 @@ function removeKokyaku(kokyakuId) {
     searchKokyaku();
     return false;
     // $("#torokushaId").val("1");
-    // $("#kokyakuForm").attr("action", "/kokyakus/" + kokyakuId);
+    // $("#kokyakuForm").attr("action", "/konyu_rirekis/" + kokyakuId);
     // //$("#kokyakuForm").attr("method", "PUT");
     // $("#httpMethod").val("delete");
 

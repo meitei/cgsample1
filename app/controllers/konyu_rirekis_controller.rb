@@ -1,6 +1,6 @@
-class KokyakusController < ApplicationController
-  # GET /kokyakus
-  # GET /kokyakus.json
+class KonyuRirekisController < ApplicationController
+  # GET /konyu_rirekis
+  # GET /konyu_rirekis.json
   def index
     respond_to do |format|
       format.html # index.html.erb
@@ -8,10 +8,10 @@ class KokyakusController < ApplicationController
     end
   end
 
-  # GET /kokyakus/search
-  # GET /kokyakus/search.json
+  # GET /konyu_rirekis/search
+  # GET /konyu_rirekis/search.json
   def search
-    conditions = Kokyaku.where("delFlg = ?", 0)
+    conditions = KonyuRireki.where("delFlg = ?", 0)
     conditions = conditions.where("\"kokyakuId\" >= ?", params[:kokyaku][:kokyakuIdFrom].to_i) if params[:kokyaku][:kokyakuIdFrom] != ""
     conditions = conditions.where("\"kokyakuId\" <= ?", params[:kokyaku][:kokyakuIdTo].to_i) if params[:kokyaku][:kokyakuIdTo] != ""
     conditions = conditions.where("\"kokyakuNm\" LIKE ?", params[:kokyaku][:kokyakuNm] + "%") if params[:kokyaku][:kokyakuNm] != ""
@@ -39,13 +39,13 @@ class KokyakusController < ApplicationController
       total_pages = 0
     end
     start = limit * page - limit;
-    @kokyakus = conditions.find(
-      :all, 
-      :joins => "LEFT OUTER JOIN shobyos ON shobyos.shobyoCd = kokyakus.shobyouCd1",
-      # :joins => "LEFT OUTER JOIN shobyos shobyo2 ON shobyos.shobyoCd = kokyakus.shobyouCd2",
-      # :joins => "LEFT OUTER JOIN shobyos shobyo3 ON shobyos.shobyoCd = kokyakus.shobyouCd3",
+    @konyu_rirekis = conditions.find(
+      :all,
+      :joins => "LEFT OUTER JOIN shobyos ON shobyos.shobyoCd = konyu_rirekis.shobyouCd1",
+      # :joins => "LEFT OUTER JOIN shobyos shobyo2 ON shobyos.shobyoCd = konyu_rirekis.shobyouCd2",
+      # :joins => "LEFT OUTER JOIN shobyos shobyo3 ON shobyos.shobyoCd = konyu_rirekis.shobyouCd3",
       # :include => [:shobyo],
-      :offset => start, 
+      :offset => start,
       :limit => limit,
       :order => "\"kokyakuId\" DESC")
 
@@ -53,7 +53,7 @@ class KokyakusController < ApplicationController
       total: total_pages.to_s,
       page: params[:page],
       records: records.to_s,
-      rows: @kokyakus
+      rows: @konyu_rirekis
     }
     #logger.debug(@responce)
 
@@ -63,10 +63,10 @@ class KokyakusController < ApplicationController
     end
   end
 
-  # GET /kokyakus/1
-  # GET /kokyakus/1.json
+  # GET /konyu_rirekis/1
+  # GET /konyu_rirekis/1.json
   def show
-    @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = KonyuRireki.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -74,10 +74,10 @@ class KokyakusController < ApplicationController
     end
   end
 
-  # GET /kokyakus/new
-  # GET /kokyakus/new.json
+  # GET /konyu_rirekis/new
+  # GET /konyu_rirekis/new.json
   def new
-    @kokyaku = Kokyaku.new
+    @kokyaku = KonyuRireki.new
     @shobyo = Shobyo.all
 
     respond_to do |format|
@@ -86,22 +86,22 @@ class KokyakusController < ApplicationController
     end
   end
 
-  # GET /kokyakus/1/edit
+  # GET /konyu_rirekis/1/edit
   def edit
     logger.debug(params)
-    @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = KonyuRireki.find(params[:id])
     @shobyo = Shobyo.all
   end
 
-  # POST /kokyakus
-  # POST /kokyakus.json
+  # POST /konyu_rirekis
+  # POST /konyu_rirekis.json
   def create
     logger.debug(params[:kokyaku])
-    @kokyaku = Kokyaku.new(params[:kokyaku])
+    @kokyaku = KonyuRireki.new(params[:kokyaku])
 
     respond_to do |format|
       if @kokyaku.save
-        format.html { redirect_to action: "index", notice: 'Kokyaku was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'KonyuRireki was successfully created.' }
         format.json { render json: @kokyaku, status: :created, location: @kokyaku }
       else
         format.html { render action: "new" }
@@ -110,14 +110,14 @@ class KokyakusController < ApplicationController
     end
   end
 
-  # PUT /kokyakus/1
-  # PUT /kokyakus/1.json
+  # PUT /konyu_rirekis/1
+  # PUT /konyu_rirekis/1.json
   def update
-    @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = KonyuRireki.find(params[:id])
 
     respond_to do |format|
       if @kokyaku.update_attributes(params[:kokyaku])
-        format.html { redirect_to action: "index", notice: 'Kokyaku was successfully updated.' }
+        format.html { redirect_to action: "index", notice: 'KonyuRireki was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -126,15 +126,15 @@ class KokyakusController < ApplicationController
     end
   end
 
-  # DELETE /kokyakus/1
-  # DELETE /kokyakus/1.json
+  # DELETE /konyu_rirekis/1
+  # DELETE /konyu_rirekis/1.json
   def destroy
-    @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = KonyuRireki.find(params[:id])
     #@kokyaku.destroy
     logger.debug(@kokyaku)
     respond_to do |format|
       if @kokyaku.update_attribute(:delFlg, 1)
-        format.html { redirect_to @kokyaku, notice: 'Kokyaku was successfully updated.' }
+        format.html { redirect_to @kokyaku, notice: 'KonyuRireki was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
