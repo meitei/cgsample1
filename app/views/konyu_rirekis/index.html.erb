@@ -1,0 +1,209 @@
+<div class="title">購入履歴管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="konyuRirekiSearch" class="Searchform cf">
+<%= render 'search' %>
+</div>
+<div style="clear:both;" id="customer">
+    <table id="searchKonyuRirekiGrid"></table>
+    <div id="searchKonyuRirekiPager"></div>
+</div>
+<div class="btn_new">
+    <a class="btn_new_mast" id="btnKonyuRirekiNew" href="/konyu_rirekis/new">新規追加</a>
+</div>
+<script>
+$(function() {
+    $("#konyuRirekiForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass(errorClass);
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass(errorClass);
+        },
+        rules: {
+            juchuDtFrom: {date:true},
+            juchuDtTo: {date:true},
+
+            kokyakuNm: {required:true, maxlength:10},
+            kokyakuNmKana: {katakana:true, maxlength:10},
+            //seibetsu: {required:true, maxlength:10},
+            tanjoDt: {date:true},
+            postNo: {postnum:true, maxlength:8},
+            address1: {maxlength:100},
+            address2: {maxlength:100},
+            tel1: {telnum:true, maxlength:12},
+            tel2: {mobilenum:true, maxlength:13},
+            fax: {telnum:true, maxlength:12},
+            //shobyouCd1: {required:true, maxlength:10},
+            //shobyouCd2: {required:true, maxlength:10},
+            //shobyouCd3: {required:true, maxlength:10},
+            gakkoNm: {maxlength:20},
+            biko: {maxlength:100},
+        }
+        //messages: {
+        //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //}
+    });
+    var isLoaded = false;
+    var colNames = ["","顧客ID","顧客名","顧客カナ","","性別","生年月日","郵便番号","電話番号","携帯番号","FAX番号","疾病名","備考","","","",""];
+    var colModelSettings = [
+        {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
+        {name:"kokyakuId", index:"kokyakuId",width:20},
+        {name:"kokyakuNm", index:"kokyakuNm",width:50},
+        {name:"kokyakuNmKana", index:"kokyakuNmKana",width:70},
+        {name:"seibetsu", index:"seibetsu",hidden:true},
+        {name:"seibetsuNm", index:"seibetsuNm",width:30},
+        {name:"tanjoDt", index:"tanjoDt",width:60},
+        {name:"postNo", index:"postNo",width:50},
+        {name:"tel1", index:"tel1", width:70},
+        {name:"tel2", index:"tel2", width:80},
+        {name:"fax", index:"fax", width:70},
+        {name:"shobyouCd1", index:"shobyouCd1",width:80},
+        {name:"biko", index:"biko", editable:true, hidden:true, edittype:"textarea", editrules:{edithidden:true}},
+        {name:"koshinshaId", index:"koshinshaId", hidden:true},
+        {name:"torokushaId", index:"torokushaId", hidden:true},
+        {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
+        {name:'deleteImg', index:'deleteImg', align:'center', width:20, formatter: deleteFormatter}
+    ];
+    $("#searchKonyuRirekiGrid").jqGrid({
+        datatype: "local",
+        //url: "konyu_rirekis.json",
+        width: "940",
+        height: "140",
+        cellEdit: false,
+        rowNum: 10,
+        //rowList:[10,20,30],
+        pager: "searchKonyuRirekiPager",
+        multiselect: false,
+        //viewrecords: true,
+        colNames: colNames,
+        colModel: colModelSettings
+    }).navGrid('#searchKonyuRirekiPager',{edit:false, add:false, del:false, search:false});
+
+    var dateItems = new Array("juchuDt", "kariAwaseDt", "nohinDt", "kofuDt", "nyukinDt", "oshiinDt", "kanryoDt", "mitsumoriDt");
+    $.each(dateItems,function(i) {
+        // alert("#" + this + "From");
+        $("#" + this + "From").datepicker();
+        $("#" + this + "To").datepicker();
+    });
+
+    $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "10");
+});
+
+$("a#btnKonyuRirekiSearch").click(function() {
+    searchKokyaku();
+    return false;
+});
+
+$("a#btnKonyuRirekiClear").click(function() {
+    $('#konyuRirekiSearchForm input[type="text"]').val('');
+    return false;
+});
+
+// $("a#btnKonyuRirekiNew").click(function() {
+//     showKokyakuFormDialog();
+//     return false;
+// });
+
+function updateFormatter(cellval, options, rowdata) {
+    return "<img src='/images/database-reload-alt-1.png' onclick='modifyKokyaku(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
+}
+
+function deleteFormatter(cellval, options, rowdata) {
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeKokyaku(" + rowdata['kokyakuId'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+// 検索用メソッド
+function searchKokyaku() {
+    var data = {};
+    var search = $("#konyuRirekiSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
+    $("#searchKonyuRirekiGrid").clearGridData();
+    var param = {
+        datatype: "json",
+        url: "konyu_rirekis/search.json",
+        postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
+        }
+    };
+    $("#searchKonyuRirekiGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// 更新用メソッド
+function modifyKokyaku(konyuRirekiId) {
+    location.href = "konyu_rirekis/" + konyuRirekiId + "/edit";
+    return false;
+}
+
+// 更新用メソッド
+// function executeKokyaku(kokyakuId) {
+//     var url;
+//     var type;
+//     if(kokyakuId != null) {
+//         url = "konyu_rirekis/" + kokyakuId + ".json";
+//         type = "PUT";
+//     } else {
+//         url = "konyu_rirekis.json";
+//         type = "POST";
+//     }
+//     var data = {};
+//     var postData = {};
+//     var kokyaku = $("#kokyakuForm").serializeArray();
+//     $.each(kokyaku, function() {
+//         data[this.name] = this.value;
+//     });
+//     data["koshinshaId"] = 1;
+//     data["torokushaId"] = 1;
+//     postData["kokyaku"] = data;
+//     postData["id"] = kokyakuId;
+//     $.ajax({
+//         scriptCharset:"UTF-8",
+//         type: type,
+//         url: url,
+//         data: postData,
+//         root: "kokyaku",
+//         dataType: "json",
+//         success: function(result) {
+//             if(result != null) {
+//                 searchKokyaku();
+//             }
+//         }
+//     });
+//     return false;
+// }
+
+// 削除用メソッド
+function removeKokyaku(konyuRirekiId) {
+    if (confirm("削除します。よろしいですか？") == false) {
+        return false;
+    }
+    var url = "konyu_rirekis/" + konyuRirekiId + ".json";
+    var type = "DELETE";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: "id=" + konyuRirekiId,
+        dataType: "json",
+        success: function(result) {
+        }
+    });
+    searchKokyaku();
+    return false;
+    // $("#torokushaId").val("1");
+    // $("#kokyakuForm").attr("action", "/konyu_rirekis/" + kokyakuId);
+    // //$("#kokyakuForm").attr("method", "PUT");
+    // $("#httpMethod").val("delete");
+
+    // $("#kokyakuForm").submit();
+}
+
+</script>

@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="title">顧客管理：顧客編集</div>
+	<div class="statuslabel"><span>顧客編集</span>コメント　無ければ削除</div>
+	<div id="kokyakuSearch" class="Tourokuform cf">
+		<%= render 'form' %>
+	</div>
+    <div class="btn_box">
+      <a id="btnKonyuRirekiReturn" href="#" class="btn_back2" /><img src="/images/btn_back2.png" alt="戻る" /></a>
+      <a id="btnKonyuRirekiRegist" href="#" class="btn_add2" /><img src="/images/btn_add2.png" alt="更新" /></a>
+    </div>
+</div>
+<script>
+$(function() {
+	var kokyakuId = $("#kokyakuId").val();
+	// if(kokyakuId != null) {
+	// 	var url = "../../kokyakus/" + kokyakuId + ".json";
+	// 	$.ajax({
+	// 	    scriptCharset:"UTF-8",
+	// 	    type: "GET",
+	// 	    url: url,
+	// 	    dataType: "json",
+	// 	    success: function(result) {
+	// 	        if(result) {
+	// 	            $("#kokyakuForm #kokyakuNm").val(result["kokyakuNm"]);
+	// 	            $("#kokyakuForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
+	// 	            $("#kokyakuForm #seibetsu").val(result["seibetsu"]);
+	// 	            $("#kokyakuForm #tanjoDt").val(result["tanjoDt"]);
+	// 	            $("#kokyakuForm #postNo").val(result["postNo"]);
+	// 	            $("#kokyakuForm #address1").val(result["address1"]);
+	// 	            $("#kokyakuForm #address2").val(result["address2"]);
+	// 	            $("#kokyakuForm #tel1").val(result["tel1"]);
+	// 	            $("#kokyakuForm #tel2").val(result["tel2"]);
+	// 	            $("#kokyakuForm #fax").val(result["fax"]);
+	// 	            $("#kokyakuForm #shobyouCd1").val(result["shobyouCd1"]);
+	// 	            $("#kokyakuForm #shobyouCd2").val(result["shobyouCd2"]);
+	// 	            $("#kokyakuForm #shobyouCd3").val(result["shobyouCd3"]);
+	// 	            $("#kokyakuForm #gakkoNm").val(result["gakkoNm"]);
+	// 	            $("#kokyakuForm #biko").val(result["biko"]);
+	// 	        }
+	// 	        return false;
+	// 	    }
+	// 	});
+	// }
+	$("a#btnKonyuRirekiRegist").click(function() {
+	    executeKokyaku($("#kokyakuId").val());
+	    return false;
+	});
+
+	$("a#btnKonyuRirekiReturn").click(function() {
+    location.href = "/kokyakus";
+	    return false;
+	});
+});
+
+</script>
