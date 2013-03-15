@@ -12,7 +12,8 @@
       </td>
       <th style="width:75px;">郵便番号</th>
       <td style="width:150px;">
-        <input style="width:100px;" type="text" id="postNo" name="kokyaku[postNo]" value="<%= @kokyaku.postNo %>" tabindex="10" />
+        <input style="width:80px;" type="text" id="postNo" name="kokyaku[postNo]" value="<%= @kokyaku.postNo %>" tabindex="10" />
+        <a id="searchAddress" href="#">住所表示</a>
       </td>
       <th style="width:100px;" scope="row">病名・障害名１</th>
       <td style="width:150px;">
@@ -115,6 +116,24 @@ $(function() {
         biko: {maxlength:100},
     }
   });
+
+  $("a#searchAddress").click(function() {
+    var zipCode = $("#postNo").val();
+    if(zipCode == "") { return false; }
+    var url = "http://api.postalcode.jp/v1/zipsearch?zipcode=" + zipCode + "&callback=callback1";
+    $.ajax({
+      scriptCharset:"UTF-8",
+      type: "GET",
+      url: url,
+      dataType: "jsonp",
+      success: function(data) {
+        var address = data.zipcode;
+        $("#address1").val(address.a1.city + address.a1.town);
+      }
+    });
+    return false;
+  });
+
   $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "6");
   $("#kokyaku_shobyouCd1").css("width", "100px").attr("tabindex", "22");
   $("#kokyaku_shobyouCd2").css("width", "100px").attr("tabindex", "24");
@@ -170,6 +189,13 @@ function executeKokyaku(kokyakuId) {
   //     }
   // });
   return false;    
+}
+
+function callback1( data )
+{
+        var address = data["city"];
+        $("#address1").val(address);
+
 }
 
 </script>
