@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20130313074317) do
     t.string   "katashikiNm", :limit => 50
     t.integer  "kakaku",                     :null => false
     t.string   "shiyoBuhin",  :limit => 50
-    t.string   "biko",        :limit => 200
+    t.text     "biko",        :limit => 200
     t.integer  "koshinshaId",                :null => false
     t.integer  "torokushaId",                :null => false
     t.datetime "created_at",                 :null => false
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20130313074317) do
     t.integer  "torokushaId",                                 :null => false
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
-    t.integer  "delFlg",                       :default => 0, :null => false
+    t.integer  "del_flg",                      :default => 0, :null => false
   end
 
   create_table "konyu_rirekis", :force => true do |t|
