@@ -1,7 +1,8 @@
 # coding: utf-8
 require 'thinreports'
 require 'time'
-require "date"
+require 'date'
+require 'RMagick'
 
 class ItemsController < ApplicationController
   # GET /items
@@ -153,20 +154,15 @@ class ItemsController < ApplicationController
 
   def report
 
-    @mitsumoriTankas = MitsumoriTanka.all
-
-    @mitsumoriTankas.each {|row| 
-      logger.debug(row["tanka"])
-    }
-
+    # @mitsumoriTankas = MitsumoriTanka.all
 
     # ThinReportレイアウトのテンプレートの場所を指定する
     templateDir = File.join(Rails.root, 'app', 'reports')
 
     # 各ページで使用するテンプレートファイルを指定
     report = ThinReports::Report.new
-    report.use_layout File.join(templateDir,'Quotation_1'), :id => :first
-    report.use_layout File.join(templateDir,'Quotation_2'), :id => :second
+    report.use_layout File.join(templateDir, 'Quotation_1'), :id => :first
+    report.use_layout File.join(templateDir, 'Quotation_2'), :id => :second
 
     # 1ページ目
     report.start_new_page :layout => :first do
@@ -184,8 +180,7 @@ class ItemsController < ApplicationController
       strSubtotal = subtotal.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
       item(:subtotal).value(strSubtotal)
       
-      # TODO:消費税計算の端数処理を行う(切り上げ/切り捨て/四捨五入?)
-      # ひとまず切り捨てにしておく
+      # 消費税計算の端数処理(小数部切り捨て)
       taxrate = 0.05
       tax = (subtotal * taxrate).truncate
       strTax = tax.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
@@ -214,7 +209,6 @@ class ItemsController < ApplicationController
       # item(:).value('')
       # item(:).value('')
       # item(:).value('')
-      
     end
 
     # 2ページ目
@@ -229,11 +223,16 @@ class ItemsController < ApplicationController
       item(:suryo_4_1).value('321')
       item(:kin_4_1).value('87,654,321')
 
+      # item(:).value('')
+      # item(:).value('')
+      # item(:).value('')
+    end
 
-      # item(:).value('')
-      # item(:).value('')
-      # item(:).value('')
-
+    # 保存先
+    tmpDir = File.join(Rails.root, "app", 'reports', "tmp")
+    # ディレクトリの作成
+    if !File.exists?(tmpDir)
+        Dir.mkdir(tmpDir)
     end
 
     # 保存先
@@ -255,7 +254,82 @@ class ItemsController < ApplicationController
         Dir.mkdir(saveDir)
     end
 
-    fileName = Time.now.strftime("%Y%m%d%H%M%S") + "_Quotation.pdf"
+    fileName = "Quotation_" + Time.now.strftime("%Y%m%d%H%M%S") + ".pdf"
+
+    # ファイル保存
+    report.generate_file(File.join(saveDir,fileName))
+
+    # http://serverName/tmp/fileName.pdf で読み込まれるようにする
+    fileInfo = {'fileName' =>"tmp/" + fileName}
+
+   # render :json => fileInfo
+    respond_to do |format|
+      format.html
+      format.json { render json: fileInfo }
+    end
+  end
+
+  def report2
+
+    # ThinReportレイアウトのテンプレートの場所を指定する
+    templateDir = File.join(Rails.root, 'app', 'reports')
+
+    # 各ページで使用するテンプレートファイルを指定
+    report = ThinReports::Report.new
+    report.use_layout File.join(templateDir, 'Image_Sample'), :id => :image
+
+    # 保存先
+    tmpDir = File.join(Rails.root, "app", 'reports', "tmp")
+    # ディレクトリの作成
+    if !File.exists?(tmpDir)
+        Dir.mkdir(tmpDir)
+    end
+
+    # 1ページ目
+    report.start_new_page :layout => :image do
+
+      @tests = {
+        "1" => "main.jpg",
+        "2" => "main2.png",
+        "3" => "sub1.png",
+        "4" => "sub2.png",
+        "5" => "sub3.png",
+        "6" => "sub4.png"
+      }
+
+      @tests.each {|key, value|
+        @mitsumoriSeihin = MitsumoriSeihin.find(:first, :conditions => { :seihinNo => key })
+
+        # データからMagick::Imageに変換
+        image = Magick::Image.from_blob(@mitsumoriSeihin["image"]).first
+        # ファイルに保存
+        image.write(File.join(tmpDir, value))
+
+        id = value[0..value.index('.')-1]
+        item(id).src(File.join(tmpDir, value))
+      }
+    end
+
+    # 保存先
+    saveDir = File.join(Rails.root, "public", "tmp")
+
+    # tmp内のファイルを削除する
+    files = Dir.glob(File.join(saveDir,"*.pdf"))
+    files.each do |file|
+        fileDate = File.basename(file)[0..7] 
+        # 保存日数を指定する          (※とりあえず全部削除する)
+        delDate = (Date.today).strftime("%Y%m%d")
+        if fileDate <= delDate
+          File.delete(file)
+        end
+    end
+
+    # ディレクトリの作成
+    if !File.exists?(saveDir)
+        Dir.mkdir(saveDir)
+    end
+
+    fileName = "ImageSample_" + Time.now.strftime("%Y%m%d%H%M%S") + ".pdf"
 
     # ファイル保存
     report.generate_file(File.join(saveDir,fileName))
