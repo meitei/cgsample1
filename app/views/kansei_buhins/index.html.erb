@@ -121,15 +121,16 @@ function searchKanseiBuhin() {
 function executeKanseiBuhin(buhinCd) {
     var url;
     var type;
+    var data = {};
+    var postData = {};
     if(buhinCd != null) {
         url = "kansei_buhins/" + buhinCd + ".json";
-        type = "PUT";
+        type = "POST";
+        postData["_method"] = "put";
     } else {
         url = "kansei_buhins.json";
         type = "POST";
     }
-    var data = {};
-    var postData = {};
     var kanseiBuhin = $("#kanseiBuhinForm").serializeArray();
     $.each(kanseiBuhin, function() {
         data[this.name] = this.value;
@@ -232,12 +233,12 @@ function removeKanseiBuhin(buhinCd) {
         return false;
     }
     var url = "kansei_buhins/" + buhinCd + ".json";
-    var type = "DELETE";
+    var type = "POST";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + buhinCd,
+        data: "id=" + buhinCd + "&_method=delete",
         dataType: "json",
         success: function(result) {
             searchKanseiBuhin();

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313074317) do
+ActiveRecord::Schema.define(:version => 20130316084933) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20130313074317) do
     t.string   "katashikiNm", :limit => 50
     t.integer  "kakaku",                     :null => false
     t.string   "shiyoBuhin",  :limit => 50
-    t.text     "biko",        :limit => 200
+    t.string   "biko",        :limit => 200
     t.integer  "koshinshaId",                :null => false
     t.integer  "torokushaId",                :null => false
     t.datetime "created_at",                 :null => false
@@ -140,6 +140,19 @@ ActiveRecord::Schema.define(:version => 20130313074317) do
     t.integer  "kokyakuId"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "seihins", :primary_key => "seihinId", :force => true do |t|
+    t.string   "bunruiCd",    :limit => 50, :null => false
+    t.string   "bunruiNm",    :limit => 50
+    t.string   "hinmeiCd",    :limit => 50, :null => false
+    t.string   "hinmeiNm",    :limit => 50
+    t.string   "katashikiCd", :limit => 50, :null => false
+    t.string   "katashikiNm", :limit => 50
+    t.integer  "koshinshaId",               :null => false
+    t.integer  "torokushaId",               :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "shains", :primary_key => "shainId", :force => true do |t|

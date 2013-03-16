@@ -120,15 +120,16 @@ function searchShobyo() {
 function executeShobyo(shobyoCd) {
     var url;
     var type;
+    var data = {};
+    var postData = {};
     if(shobyoCd != null) {
         url = "shobyos/" + shobyoCd + ".json";
-        type = "PUT";
+        type = "POST";
+        postData["_method"] = "put";
     } else {
         url = "shobyos.json";
         type = "POST";
     }
-    var data = {};
-    var postData = {};
     var shobyo = $("#shobyoForm").serializeArray();
     $.each(shobyo, function() {
         data[this.name] = this.value;
@@ -231,12 +232,12 @@ function removeShobyo(shobyoCd) {
         return false;
     }
     var url = "shobyos/" + shobyoCd + ".json";
-    var type = "DELETE";
+    var type = "POST";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + shobyoCd,
+        data: "id=" + shobyoCd + "&_method=delete",
         dataType: "json",
         success: function(result) {
             searchShobyo();

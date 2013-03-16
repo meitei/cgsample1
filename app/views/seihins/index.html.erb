@@ -1,14 +1,14 @@
-<div class="title">保険種別管理：検索</div>
+<div class="title">製品管理：検索</div>
 <div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
-<div id="hokenShubetsuSearch" class="Searchform cf">
+<div id="seihinSearch" class="Searchform cf">
     <%= render 'search' %>
 </div>
-<div style="clear:both;" id="hokenShubetsu">
-    <table id="searchHokenShubetsuGrid"></table>
-    <div id="searchHokenShubetsuPager"></div>
+<div style="clear:both;" id="seihin">
+    <table id="searchSeihinGrid"></table>
+    <div id="searchSeihinPager"></div>
 </div>
 <div class="btn_new">
-    <a class="btn_new_mast" id="btnHokenShubetsuNew" href="#" />新規追加</a>
+   <a class="btn_new_mast" id="btnSeihinNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -18,23 +18,25 @@
 $(function() {
     
     var isLoaded = false;
-    var colNames = ["保険種別コード","保険種別名", "表示順","更新者ID","登録者ID","",""];
+    var colNames = ["製品ID","分類コード","分類名","品名コード","品名","型式コード","型式名","",""];
     var colModelSettings = [
-            {name:"hokenShubetsuCd", index:"hokenShubetsuCd"},
-            {name:"hokenShubetsuNm", index:"hokenShubetsuNm"},
-            {name:"hyojiJun", index:"hyojiJun", hidden:true},
-            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
-            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
+            {name:"seihinId", index:"seihinId", hidden:true},
+            {name:"bunruiCd", index:"bunruiCd"},
+            {name:"bunruiNm", index:"bunruiNm"},
+            {name:"hinmeiCd", index:"hinmeiCd"},
+            {name:"hinmeiNm", index:"hinmeiNm"},
+            {name:"katashikiCd", index:"katashikiCd"},
+            {name:"katashikiNm", index:"katashikiNm"},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
             {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
     ];
-    $("#searchHokenShubetsuGrid").jqGrid({
+    $("#searchSeihinGrid").jqGrid({
         datatype: "local",
         width: "940",
         height: "240",
         cellEdit: false,
         rowNum: 10,
-        pager: "searchHokenShubetsuPager",
+        pager: "searchSeihinPager",
         multiselect: false,
         colNames: colNames,
         colModel: colModelSettings,
@@ -43,30 +45,30 @@ $(function() {
                 isLoaded = true;
             }
         },
-    }).navGrid('#searchHokenShubetsuPager',{edit:false, add:false, del:false, search:false});
+    }).navGrid('#searchSeihinPager',{edit:false, add:false, del:false, search:false});
 });
 
 // ##############################
 // 検索ボタンクリック処理
 // ##############################
-$("a#btnHokenShubetsuSearch").click(function() {
-    searchHokenShubetsu();
+$("a#btnSeihinSearch").click(function() {
+    searchSeihin();
     return false;
 });
 
 // ##############################
 // クリアボタンクリック処理
 // ##############################
-$("a#btnHokenShubetsuClear").click(function() {
-    $('#hokenShubetsuSearchForm input[type="text"]').val('');
+$("a#btnSeihinClear").click(function() {
+    $('#seihinSearchForm input[type="text"]').val('');
     return false;
 });
 
 // ##############################
 // 新規登録ボタンクリック処理
 // ##############################
-$("a#btnHokenShubetsuNew").click(function() {
-    showHokenShubetsuFormDialog();
+$("a#btnSeihinNew").click(function() {
+    showSeihinFormDialog();
     return false;
 });
 
@@ -74,29 +76,29 @@ $("a#btnHokenShubetsuNew").click(function() {
 // グリッド更新ボタンクリック処理
 // ##############################
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src='/images/database-reload-alt-1.png' onclick='showHokenShubetsuFormDialog(" + rowdata['hokenShubetsuCd'] + ")' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='showSeihinFormDialog(" + rowdata['seihinId'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // グリッド削除ボタンクリック処理
 // ##############################
 function deleteFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-remove-alt-1.png' onclick='removeHokenShubetsu(" + rowdata['hokenShubetsuCd'] + ")' title='削除' style='width:16px; height:16px'>";
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeSeihin(" + rowdata['seihinId'] + ")' title='削除' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // 検索用メソッド
 // ##############################
-function searchHokenShubetsu() {
+function searchSeihin() {
     var data = {};
-    var search = $("#hokenShubetsuSearchForm").serializeArray();
+    var search = $("#seihinSearchForm").serializeArray();
     $.each(search, function() {
         data[this.name] = this.value;
     });
-    $("#searchHokenShubetsuGrid").clearGridData();
+    $("#searchSeihinGrid").clearGridData();
     var param = {
         datatype: "json",
-        url: "hoken_shubetsus/search.json",
+        url: "seihins/search.json",
         postData: data,
         jsonReader: {
             root: "rows",
@@ -106,61 +108,61 @@ function searchHokenShubetsu() {
             repeatitems: false
         }
     };
-    $("#searchHokenShubetsuGrid").setGridParam(param).trigger("reloadGrid");
+    $("#searchSeihinGrid").setGridParam(param).trigger("reloadGrid");
 }
 
 // ##############################
 // 更新用メソッド
 // param:
-// hokenShubetsuCd : コード
+// seihinId : 製品ID
 // ##############################
-function executeHokenShubetsu(hokenShubetsuCd) {
+function executeSeihin(seihinId) {
     var url;
     var type;
     var data = {};
     var postData = {};
-    if(hokenShubetsuCd != null) {
-        url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
+    if(seihinId != null) {
+        url = "seihins/" + seihinId + ".json";
         type = "POST";
         postData["_method"] = "put";
     } else {
-        url = "hoken_shubetsus.json";
+        url = "seihins.json";
         type = "POST";
     }
-    var hokenShubetsu = $("#hokenShubetsuForm").serializeArray();
-    $.each(hokenShubetsu, function() {
+    var seihin = $("#seihinForm").serializeArray();
+    $.each(seihin, function() {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
     data["koshinshaId"] = 1;
     data["torokushaId"] = 1;
 
-    postData["hoken_shubetsu"] = data;
-    postData["id"] = hokenShubetsuCd;
+    postData["seihin"] = data;
+    postData["id"] = seihinId;
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
         data: postData,
-        root: "hokenShubetsu",
+        root: "seihin",
         dataType: "json",
         success: function(result) {
-            searchHokenShubetsu();
+            searchSeihin();
         }
     });
-    $("#hokenShubetsuFormDialog").dialog("close");
+    $("#seihinFormDialog").dialog("close");
     return false;
 }
 
 // ##############################
 // 登録用フォームダイアログオープン
 // param:
-// hokenShubetsuCd : 保険種別コード
+// seihinId : 製品ID
 // ##############################
-function showHokenShubetsuFormDialog(hokenShubetsuCd) {
+function showSeihinFormDialog(seihinId) {
 
-    if(hokenShubetsuCd != null) {
-        var url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
+    if(seihinId != null) {
+        var url = "seihins/" + seihinId + ".json";
         $.ajax({
             scriptCharset:"UTF-8",
             type: "GET",
@@ -168,15 +170,19 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
             dataType: "json",
             success: function(result) {
                 if(result) {
-                    $("#hokenShubetsuForm #hokenShubetsuNm").val(result["hokenShubetsuNm"]);
-                    $("#hokenShubetsuForm #hyojiJun").val(result["hyojiJun"]);
+                    $("#seihinForm #bunruiCd").val(result["bunruiCd"]);
+                    $("#seihinForm #bunruiNm").val(result["bunruiNm"]);
+                    $("#seihinForm #hinmeiCd").val(result["hinmeiCd"]);
+                    $("#seihinForm #hinmeiNm").val(result["hinmeiNm"]);
+                    $("#seihinForm #katashikiCd").val(result["katashikiCd"]);
+                    $("#seihinForm #katashikiNm").val(result["katashikiNm"]);
                 }
                 return false;
             }
         });
     }
     // ダイアログ表示
-    $("#hokenShubetsuFormDialog").dialog({
+    $("#seihinFormDialog").dialog({
         show: {effect: "clip"},
         hide: {effect: "clip"},
         width: "auto",
@@ -187,8 +193,8 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
                 id: "dialog_close",
                 class : "btn_white",
                 click : function(){
-                    $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
-                    $("#hokenShubetsuForm").validate().resetForm();
+                    $('#seihinForm input[type="text"], select, textarea').val('');
+                    $("#seihinForm").validate().resetForm();
                     $(this).dialog('close');
                     return false;
                 }
@@ -199,41 +205,40 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
                 class: "btn_orange",
                 click: function() {
                     // クライアントバリデーション
-                    if ($("#hokenShubetsuForm").valid() == false) {
+                    if ($("#seihinForm").valid() == false) {
                          return false;
                      }
-                    executeHokenShubetsu(hokenShubetsuCd);
-                    $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
+                    executeSeihin(seihinId);
+                    $('#seihinForm input[type="text"], select, textarea').val('');
                     $(this).dialog('close');
-                    return false;
                 }
             },
         },
         open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
-    $("#hokenShubetsuFormDialog").focus();
+    $("#seihinFormDialog").focus();
 }
 
 // ##############################
 // 削除用メソッド
 // param:
-// hokenShubetsuCd : 保険種別コード
+// seihinId : 製品ID
 // ##############################
-function removeHokenShubetsu(hokenShubetsuCd) {
+function removeSeihin(seihinId) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
-    var url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
+    var url = "seihins/" + seihinId + ".json";
     var type = "POST";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + hokenShubetsuCd + "&_method=delete",
+        data: "id=" + seihinId + "&_method=delete",
         dataType: "json",
         success: function(result) {
-            searchHokenShubetsu();
+                searchSeihin();
         }
     });
     return false;

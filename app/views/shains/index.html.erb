@@ -122,15 +122,16 @@ function searchShain() {
 function executeShain(shainId) {
     var url;
     var type;
+    var data = {};
+    var postData = {};
     if(shainId != null) {
         url = "shains/" + shainId + ".json";
-        type = "PUT";
+        type = "POST";
+        postData["_method"] = "put";
     } else {
         url = "shains.json";
         type = "POST";
     }
-    var data = {};
-    var postData = {};
     var shain = $("#shainForm").serializeArray();
     $.each(shain, function() {
         data[this.name] = this.value;
@@ -234,12 +235,12 @@ function removeShain(shainId) {
         return false;
     }
     var url = "shains/" + shainId + ".json";
-    var type = "DELETE";
+    var type = "POST";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + shainId,
+        data: "id=" + shainId + "&_method=delete",
         dataType: "json",
         success: function(result) {
                 searchShain();
