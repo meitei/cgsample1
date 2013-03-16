@@ -232,7 +232,7 @@ function removeByoin(byoinCd) {
         data: "id=" + byoinCd + "&_method=delete",
         dataType: "json",
         success: function(result) {
-                searchByoin();
+            searchByoin();
         }
     });
     return false;
