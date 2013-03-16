@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130316084933) do
+=======
+ActiveRecord::Schema.define(:version => 20130316083239) do
+>>>>>>> 1b1e9e073c732be3c3a211d296c72c023dc5fd12
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -61,7 +65,8 @@ ActiveRecord::Schema.define(:version => 20130316084933) do
     t.datetime "updated_at",                 :null => false
   end
 
-  create_table "kokyakus", :primary_key => "kokyakuId", :force => true do |t|
+  create_table "kokyakus", :id => false, :force => true do |t|
+    t.integer  "kokyakuId"
     t.string   "kokyakuNm",     :limit => 100
     t.string   "kokyakuNmKana", :limit => 100
     t.integer  "seibetsu"

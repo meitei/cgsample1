@@ -1,5 +1,5 @@
 class AddDelflgToKokyakus < ActiveRecord::Migration
   def change
-    add_column :kokyakus, :delFlg, :tinyint, :null => false, :default => 0
+    add_column :kokyakus, :delFlg, :integer, :null => false, :default => 0
   end
 end
