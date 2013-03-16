@@ -188,32 +188,34 @@ function showShobyoFormDialog(shobyoCd) {
         modal: true,
         buttons: {
             "Close":{
-                text: "",
+                text: "閉じる",
                 id: "dialog_close",
-                width: "148px",
-                height: "37px",
-                //image : "/images/btn_add2.png",
+                class : "btn_white",
                 click : function(){
-                $('#shobyoForm input[type="text"], select, textarea').val('');
-                $("#shobyoForm").validate().resetForm();
-                $(this).dialog('close');
-                return false;
+                    $('#shobyoForm input[type="text"], select, textarea').val('');
+                    $("#shobyoForm").validate().resetForm();
+                    $(this).dialog('close');
+                    return false;
                 }
             },
-            '登録' :function() {
-                // クライアントバリデーション
-                if ($("#shobyoForm").valid() == false) {
-                     return false;
-                 }
-                executeShobyo(shobyoCd);
-                $('#shobyoForm input[type="text"], select, textarea').val('');
-                $(this).dialog('close');
-            }
+            "Regist":{
+                text: "登録",
+                id: "dialog_regist",
+                class: "btn_orange",
+                click: function() {
+                    // クライアントバリデーション
+                    if ($("#shobyoForm").valid() == false) {
+                         return false;
+                     }
+                    executeShobyo(shobyoCd);
+                    $('#shobyoForm input[type="text"], select, textarea').val('');
+                    $(this).dialog('close');
+                }
+            },
         },
         open:function(event, ui){
             $(".ui-dialog-titlebar-close").hide();
-            $("#dialog_close").css("background-image", "url(/images/btn_add2.png)");
-        }
+         }
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     $("#shobyoFormDialog").focus();
