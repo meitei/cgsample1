@@ -5,6 +5,7 @@
     <a class="btn btn-primary" id="btnSearch" href="#" />SERACH</a>
     <a class="btn btn-primary" id="btnReport" href="#" />Report</a>
     <a class="btn btn-primary" id="btnReport2" href="#" />Report2</a>
+    <a class="btn btn-primary" id="btnDisplay" href="#" />Display</a>
     <div style="margin: 5px;"></div>
 </div>
 <div id="company">
@@ -69,6 +70,22 @@ $("a#btnReport").click(function() {
 
 $("a#btnReport2").click(function() {
     var url = "items/report2.json";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: url,
+        //data: data,
+        dataType: "json",
+        success: function(result) {
+            if (result != null){
+                window.open(result.fileName, "帳票出力");
+            }
+        }
+    });
+});
+
+$("a#btnDisplay").click(function() {
+    var url = "items/display.json";
     $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
