@@ -11,22 +11,37 @@ class KonyuRirekisController < ApplicationController
   # GET /konyu_rirekis/search
   # GET /konyu_rirekis/search.json
   def search
-    conditions = KonyuRireki.where("delFlg = ?", 0)
-    conditions = conditions.where("\"kokyakuId\" >= ?", params[:kokyaku][:kokyakuIdFrom].to_i) if params[:kokyaku][:kokyakuIdFrom] != ""
-    conditions = conditions.where("\"kokyakuId\" <= ?", params[:kokyaku][:kokyakuIdTo].to_i) if params[:kokyaku][:kokyakuIdTo] != ""
-    conditions = conditions.where("\"kokyakuNm\" LIKE ?", params[:kokyaku][:kokyakuNm] + "%") if params[:kokyaku][:kokyakuNm] != ""
-    conditions = conditions.where("\"kokyakuNmKana\" LIKE ?", params[:kokyaku][:kokyakuNmKana] + "%") if params[:kokyaku][:kokyakuNmKana] != ""
-    conditions = conditions.where("\"seibetsu\" = ?", params[:kokyaku][:seibetsu]) if params[:kokyaku][:seibetsu] != ""
-    conditions = conditions.where("\"tanjoDt\" >= ?", params[:kokyaku][:tanjoDtFrom]) if params[:kokyaku][:tanjoDtFrom] != ""
-    conditions = conditions.where("\"tanjoDt\" <= ?", params[:kokyaku][:tanjoDtTo]) if params[:kokyaku][:tanjoDtTo] != ""
-    conditions = conditions.where("\"postNo\" LIKE ?", params[:kokyaku][:postNo] + "%") if params[:kokyaku][:postNo] != ""
-    conditions = conditions.where("address1 LIKE ?", params[:kokyaku][:address1] + "%") if params[:kokyaku][:address1] != ""
-    conditions = conditions.where("address2 LIKE ?", "%" + params[:kokyaku][:address2] + "%") if params[:kokyaku][:address2] != ""
-    conditions = conditions.where("tel1 LIKE ?", params[:kokyaku][:tel1] + "%") if params[:kokyaku][:tel1] != ""
-    conditions = conditions.where("tel2 LIKE ?", params[:kokyaku][:tel2] + "%") if params[:kokyaku][:tel2] != ""
-    conditions = conditions.where("fax LIKE ?", params[:kokyaku][:fax] + "%") if params[:kokyaku][:fax] != ""
-    conditions = conditions.where("\"shobyoNm\" LIKE ?", params[:kokyaku][:shobyoNm] + "%") if params[:kokyaku][:shobyoNm] != ""
-    conditions = conditions.where("\"gakkoNm\" LIKE ?", params[:kokyaku][:gakkoNm] + "%") if params[:kokyaku][:gakkoNm] != ""
+    conditions = KonyuRireki.where("1 = 1")
+    conditions = conditions.where("\"kokyakuId\" >= ?", params[:konyu_rireki][:kokyakuIdFrom].to_i) if params[:konyu_rireki][:kokyakuIdFrom] != ""
+    conditions = conditions.where("\"kokyakuId\" <= ?", params[:konyu_rireki][:kokyakuIdTo].to_i) if params[:konyu_rireki][:kokyakuIdTo] != ""
+    conditions = conditions.where("\"hokenShubetsuCd1\" = ?", params[:konyu_rireki][:hokenShubetsuCd1]) if params[:konyu_rireki][:hokenShubetsuCd1] != ""
+    conditions = conditions.where("\"hokenShubetsuCd2\" = ?", params[:konyu_rireki][:hokenShubetsuCd2]) if params[:konyu_rireki][:hokenShubetsuCd2] != ""
+    conditions = conditions.where("\"juchuDt\" >= ?", params[:konyu_rireki][:juchuDtFrom]) if params[:konyu_rireki][:juchuDtFrom] != ""
+    conditions = conditions.where("\"juchuDt\" <= ?", params[:konyu_rireki][:juchuDtTo]) if params[:konyu_rireki][:juchuDtTo] != ""
+    conditions = conditions.where("\"konyu_rirekis.byoinCd\" = ?", params[:konyu_rireki][:byoinCd].to_i) if params[:konyu_rireki][:byoinCd] != ""
+    conditions = conditions.where("\"kariAwaseDt\" >= ?", params[:konyu_rireki][:kariAwaseDtFrom]) if params[:konyu_rireki][:kariAwaseDtFrom] != ""
+    conditions = conditions.where("\"kariAwaseDt\" <= ?", params[:konyu_rireki][:kariAwaseDtTo]) if params[:konyu_rireki][:kariAwaseDtTo] != ""
+    conditions = conditions.where("\"kokyakuNm\" LIKE ?", "%" + params[:konyu_rireki][:kokyakuNm] + "%") if params[:konyu_rireki][:kokyakuNm] != ""
+    conditions = conditions.where("\"shohinNm\" LIKE ?", "%" + params[:konyu_rireki][:shohinNm] + "%") if params[:konyu_rireki][:shohinNm] != ""
+    conditions = conditions.where("\"nohinDt\" >= ?", params[:konyu_rireki][:nohinDtFrom]) if params[:konyu_rireki][:nohinDtFrom] != ""
+    conditions = conditions.where("\"nohinDt\" <= ?", params[:konyu_rireki][:nohinDtTo]) if params[:konyu_rireki][:nohinDtTo] != ""
+    conditions = conditions.where("\"kokyakuNmKana\" LIKE ?", "%" + params[:konyu_rireki][:kokyakuNmKana] + "%") if params[:konyu_rireki][:kokyakuNmKana] != ""
+    conditions = conditions.where("\"uketsukeSesakuTantoCd\" = ?", params[:konyu_rireki][:uketsukeSesakuTantoCd]) if params[:konyu_rireki][:uketsukeSesakuTantoCd] != ""
+    conditions = conditions.where("\"kofuDt\" >= ?", params[:konyu_rireki][:kofuDtFrom]) if params[:konyu_rireki][:kofuDtFrom] != ""
+    conditions = conditions.where("\"kofuDt\" <= ?", params[:konyu_rireki][:kofuDtTo]) if params[:konyu_rireki][:kofuDtTo] != ""
+    conditions = conditions.where("\"shubetsuKn\" = ?", params[:konyu_rireki][:shubetsuKn]) if params[:konyu_rireki][:shubetsuKn] != ""
+    conditions = conditions.where("\"kariAwaseTantoCd\" = ?", params[:konyu_rireki][:kariAwaseTantoCd]) if params[:konyu_rireki][:kariAwaseTantoCd] != ""
+    conditions = conditions.where("\"nyukinDt\" >= ?", params[:konyu_rireki][:nyukinDtFrom]) if params[:konyu_rireki][:nyukinDtFrom] != ""
+    conditions = conditions.where("\"nyukinDt\" <= ?", params[:konyu_rireki][:nyukinDtTo]) if params[:konyu_rireki][:nyukinDtTo] != ""
+    conditions = conditions.where("\"seihinCd\" = ?", params[:konyu_rireki][:seihinCd]) if params[:konyu_rireki][:seihinCd] != ""
+    conditions = conditions.where("\"nohinTantoCd\" = ?", params[:konyu_rireki][:nohinTantoCd]) if params[:konyu_rireki][:nohinTantoCd] != ""
+    conditions = conditions.where("\"oshiinDt\" >= ?", params[:konyu_rireki][:oshiinDtFrom]) if params[:konyu_rireki][:oshiinDtFrom] != ""
+    conditions = conditions.where("\"oshiinDt\" <= ?", params[:konyu_rireki][:oshiinDtTo]) if params[:konyu_rireki][:oshiinDtTo] != ""
+    conditions = conditions.where("\"mitsumoriTantoEigyoCd\" = ?", params[:konyu_rireki][:mitsumoriTantoEigyoCd]) if params[:konyu_rireki][:mitsumoriTantoEigyoCd] != ""
+    conditions = conditions.where("\"kanryoDt\" >= ?", params[:konyu_rireki][:kanryoDtFrom]) if params[:konyu_rireki][:kanryoDtFrom] != ""
+    conditions = conditions.where("\"kanryoDt\" <= ?", params[:konyu_rireki][:kanryoDtTo]) if params[:konyu_rireki][:kanryoDtTo] != ""
+    conditions = conditions.where("\"mitsumoriDt\" >= ?", params[:konyu_rireki][:mitsumoriDtFrom]) if params[:konyu_rireki][:mitsumoriDtFrom] != ""
+    conditions = conditions.where("\"mitsumoriDt\" <= ?", params[:konyu_rireki][:mitsumoriDtTo]) if params[:konyu_rireki][:mitsumoriDtTo] != ""
     #logger.debug(conditions)
 
     records = conditions.count
@@ -41,13 +56,15 @@ class KonyuRirekisController < ApplicationController
     start = limit * page - limit;
     @konyu_rirekis = conditions.find(
       :all,
-      :joins => "LEFT OUTER JOIN shobyos ON shobyos.shobyoCd = konyu_rirekis.shobyouCd1",
+      :joins => "LEFT OUTER JOIN byoins ON byoins.byoinCd = konyu_rirekis.byoinCd",
+      :select => "konyu_rirekis.*, byoins.byoinNm",
+      # :joins => "LEFT OUTER JOIN shobyos ON shobyos.shobyoCd = konyu_rirekis.shobyouCd1",
       # :joins => "LEFT OUTER JOIN shobyos shobyo2 ON shobyos.shobyoCd = konyu_rirekis.shobyouCd2",
       # :joins => "LEFT OUTER JOIN shobyos shobyo3 ON shobyos.shobyoCd = konyu_rirekis.shobyouCd3",
       # :include => [:shobyo],
       :offset => start,
       :limit => limit,
-      :order => "\"kokyakuId\" DESC")
+      :order => "\"kokyakuId\" ASC")
 
     @responce = {
       total: total_pages.to_s,
@@ -55,7 +72,7 @@ class KonyuRirekisController < ApplicationController
       records: records.to_s,
       rows: @konyu_rirekis
     }
-    #logger.debug(@responce)
+    logger.debug(@responce)
 
     respond_to do |format|
       format.html # index.html.erb

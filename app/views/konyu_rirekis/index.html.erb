@@ -3,7 +3,7 @@
 <div id="konyuRirekiSearch" class="Searchform cf">
 <%= render 'search' %>
 </div>
-<div style="clear:both;" id="customer">
+<div style="clear:both;" id="konyuRireki">
     <table id="searchKonyuRirekiGrid"></table>
     <div id="searchKonyuRirekiPager"></div>
 </div>
@@ -46,21 +46,33 @@ $(function() {
         //}
     });
     var isLoaded = false;
-    var colNames = ["","顧客ID","顧客名","顧客カナ","","性別","生年月日","郵便番号","電話番号","携帯番号","FAX番号","疾病名","備考","","","",""];
+    var colNames = ["","ID","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
-        {name:"kokyakuId", index:"kokyakuId",width:20},
-        {name:"kokyakuNm", index:"kokyakuNm",width:50},
-        {name:"kokyakuNmKana", index:"kokyakuNmKana",width:70},
-        {name:"seibetsu", index:"seibetsu",hidden:true},
-        {name:"seibetsuNm", index:"seibetsuNm",width:30},
-        {name:"tanjoDt", index:"tanjoDt",width:60},
-        {name:"postNo", index:"postNo",width:50},
-        {name:"tel1", index:"tel1", width:70},
-        {name:"tel2", index:"tel2", width:80},
-        {name:"fax", index:"fax", width:70},
-        {name:"shobyouCd1", index:"shobyouCd1",width:80},
-        {name:"biko", index:"biko", editable:true, hidden:true, edittype:"textarea", editrules:{edithidden:true}},
+        {name:"kokyakuId", index:"kokyakuId",width:50},
+        {name:"byoinNm", index:"byoinNm",width:80},
+        {name:"kokyakuNm", index:"kokyakuNm",width:80},
+        {name:"kokyakuNmKana", index:"kokyakuNmKana",width:80},
+        {name:"hokenShubetsuNm1", index:"hokenShubetsuNm1",width:70},
+        {name:"hokenShubetsuNm2", index:"hokenShubetsuNm2",width:70},
+        {name:"itemNm", index:"itemNm",width:80},
+        {name:"kin", index:"kin",width:80, formatter:"currency", align:"right"},
+        {name:"seikyuKin", index:"seikyuKin",width:80, formatter:"currency", align:"right"},
+        {name:"uketsukeSesakuTantoNm", index:"uketsukeSesakuTantoNm",width:80},
+        {name:"juchuDt", index:"juchuDt",width:80},
+        {name:"kariAwaseTantoNm", index:"kariAwaseTantoNm",width:80},
+        {name:"kariAwaseDt", index:"kariAwaseDt",width:80},
+        {name:"nohinTantoNm", index:"nohinTantoNm",width:80},
+        {name:"nohinDt", index:"nohinDt",width:80},
+        {name:"kofuDt", index:"kofuDt",width:80},
+        {name:"nyukinDt", index:"nyukinDt",width:80},
+        {name:"oshiinDt", index:"oshiinDt",width:80},
+        {name:"kanryoDt", index:"kanryoDt",width:80},
+        {name:"mitsumoriTantoEigyoNm", index:"mitsumoriTantoEigyoNm",width:80},
+        {name:"mitsumoriDt", index:"mitsumoriDt",width:80},
+        {name:"shubetsuKnNm", index:"shubetsuKnNm",width:80},
+        {name:"shohinNm", index:"shohinNm",width:80},
+        {name:"konyuRirekiId", index:"konyuRirekiId", hidden:true},
         {name:"koshinshaId", index:"koshinshaId", hidden:true},
         {name:"torokushaId", index:"torokushaId", hidden:true},
         {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
@@ -78,7 +90,9 @@ $(function() {
         multiselect: false,
         //viewrecords: true,
         colNames: colNames,
-        colModel: colModelSettings
+        colModel: colModelSettings,
+        shrinkToFit:false
+
     }).navGrid('#searchKonyuRirekiPager',{edit:false, add:false, del:false, search:false});
 
     var dateItems = new Array("juchuDt", "kariAwaseDt", "nohinDt", "kofuDt", "nyukinDt", "oshiinDt", "kanryoDt", "mitsumoriDt");
@@ -88,11 +102,11 @@ $(function() {
         $("#" + this + "To").datepicker();
     });
 
-    $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "10");
+    $("#konyu_rireki_shubetsuKn").css("width", "100px").attr("tabindex", "10");
 });
 
 $("a#btnKonyuRirekiSearch").click(function() {
-    searchKokyaku();
+    searchKonyuRireki();
     return false;
 });
 
@@ -115,7 +129,7 @@ function deleteFormatter(cellval, options, rowdata) {
 }
 
 // 検索用メソッド
-function searchKokyaku() {
+function searchKonyuRireki() {
     var data = {};
     var search = $("#konyuRirekiSearchForm").serializeArray();
     $.each(search, function() {
