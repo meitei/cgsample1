@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316084933) do
+ActiveRecord::Schema.define(:version => 20130316153237) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20130316084933) do
     t.string   "katashikiNm", :limit => 50
     t.integer  "kakaku",                     :null => false
     t.string   "shiyoBuhin",  :limit => 50
-    t.text     "biko",        :limit => 200
+    t.string   "biko",        :limit => 200
     t.integer  "koshinshaId",                :null => false
     t.integer  "torokushaId",                :null => false
     t.datetime "created_at",                 :null => false
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20130316084933) do
     t.integer  "torokushaId",                                 :null => false
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
-    t.integer  "del_flg",                      :default => 0, :null => false
+    t.integer  "delFlg",                       :default => 0, :null => false
   end
 
   create_table "konyu_rirekis", :force => true do |t|
@@ -112,16 +112,17 @@ ActiveRecord::Schema.define(:version => 20130316084933) do
   end
 
   create_table "mitsumori_seihins", :force => true do |t|
-    t.integer  "mitsumoriNo", :null => false
-    t.integer  "seihinNo",    :null => false
-    t.integer  "tanka",       :null => false
-    t.integer  "suryo",       :null => false
-    t.float    "tax",         :null => false
-    t.integer  "kin",         :null => false
-    t.integer  "koshinshaId", :null => false
-    t.integer  "torokushaId", :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "mitsumoriNo",                    :null => false
+    t.integer  "seihinNo",                       :null => false
+    t.integer  "tanka",                          :null => false
+    t.integer  "suryo",                          :null => false
+    t.float    "tax",                            :null => false
+    t.integer  "kin",                            :null => false
+    t.integer  "koshinshaId",                    :null => false
+    t.integer  "torokushaId",                    :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.binary   "image",       :limit => 1048576
   end
 
   create_table "mitsumori_tankas", :primary_key => "seihinNo", :force => true do |t|

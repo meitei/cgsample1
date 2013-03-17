@@ -177,6 +177,15 @@
 	margin:0 0 9px;
 
 }
+.Searchform .btn_graf{
+	display:block;
+	width:101px;
+	height:47px;
+	background:url(../images/btn_graf.png) left top no-repeat;
+	text-indent:-10000em;
+	overflow:hidden;
+	margin:0 0 9px;
+}
 .Searchform .btn_clear{
 	display:block;
 	width:101px;
