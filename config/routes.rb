@@ -52,9 +52,8 @@ JqgridSample::Application.routes.draw do
 
   resources :companies
 
-  get "logout" => "sessions#destroy", :as => "logout"
-  get "login" => "sessions#new", :as => "login"
-  get "signup" => "users#new", :as => "signup"
+  match 'login' => 'sessions#new', :as => :login
+  match 'logout' => 'sessions#destroy', :as => :logout
   resources :users
   resources :sessions
 

@@ -1,0 +1,81 @@
+<div id="shainFormDialog" title="社員登録画面" class="Tourokuform cf" style="overflow:hidden;display: none;">
+  <form id="shainForm">
+  <div>
+    <table>
+      <tr>
+        <th style="width:80px;">社員コード</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="shainCd" name="shainCd" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:80px;">姓</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="myoji" name="myoji" />
+        </td>
+        <th style="width:80px;">名</th>
+        <td style="width:75px;">
+          <input style="width:130px;" type="text" id="name" name="name" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:80px;">姓（フリガナ）</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="myojiFuri" name="myojiFuri" />
+        </td>
+        <th style="width:80px;">名（フリガナ）</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="nameFuri" name="nameFuri" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:80px;">ログインID</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="loginId" name="loginId" />
+        </td>
+        <th style="width:80px;">ログインパスワード</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="password" id="loginPassword" name="loginPassword" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:80px;">管理フラグ</th>
+        <td style="width:175px;">
+           <select style="width:140px;" id="manageFlg" name="manageFlg">
+              <option value=""></option>
+              <option value="0">一般</option>
+              <option value="1">管理者</option>
+              <option value="9">退職者</option>
+            </select>
+        </td>
+      </tr>
+    </table>
+  </div>
+  </form>
+  <br />
+<script>
+$(function() {
+
+  $("#shainForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) { 
+            $(element).addClass(errorClass); 
+        }, 
+        unhighlight: function (element, errorClass, validClass) { 
+            $(element).removeClass(errorClass); 
+        },
+        rules: {
+            shainCd: {required:true},
+            myoji: {required:true, maxlength:25},
+            name: {required:true, maxlength:25},
+            myojiFuri: {required:true, katakana:true, maxlength:25},
+            nameFuri: {required:true, katakana:true, maxlength:25},
+            loginId: {required:true},
+            loginPassword: {required:true},
+            manageFlg: {required:true}
+        }
+    });
+
+});
+</script>
