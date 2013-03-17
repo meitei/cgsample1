@@ -3,6 +3,7 @@ require 'thinreports'
 require 'time'
 require 'date'
 require 'RMagick'
+require 'open-uri'
 
 class ItemsController < ApplicationController
   # GET /items
@@ -87,74 +88,21 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def report
-
-  #   # (B) ThinReportレイアウトのテンプレートの場所を指定する
-  #   templateDir = File.join(Rails.root, 'app', 'reports')
-  #   report = ThinReports::Report.new :layout => File.join(templateDir,'hello_world')
-
-  #   # (C) 1ページ目
-  #   report.start_new_page
-
-  #   report.page.item(:world).value('ThinReports')
-  #   report.page.item(:world_ja).value('report_solution')
-
-  #   # (D) 2ページ目
-  #   report.start_new_page do |page|
-  #     page.item(:world).value('Ruby').style(:color, '#ff0000')
-  #     page.item(:hello).style(:color, '#ff0000')
-  #     page.item(:world_ja).value('おらおら')
-  #   end
-
-  #   # (E) 3ページ目
-  #   report.start_new_page do
-  #     item(:world).value('Hello')
-  #     item(:hello).hide
-  #   end
-
-  #   # (F) 4ページ目
-  #   report.start_new_page do
-  #     values(:world    => 'ThinReports', 
-  #            :world_ja => 'report_solution')
-  #   end
-
-  #   # 保存先
-  #   saveDir = File.join(Rails.root, "public", "tmp")
-
-  #   # tmp内のファイルを削除する
-  #   files = Dir.glob(File.join(saveDir,"*.pdf"))
-  #   files.each do |file|
-  #       fileDate = File.basename(file)[0..7] 
-  #       # 保存日数を指定する          (※とりあえず全部削除する)
-  #       delDate = (Date.today).strftime("%Y%m%d")
-  #       if fileDate <= delDate
-  #         File.delete(file)
-  #       end
-  #   end
-
-  #   # ディレクトリの作成
-  #   if !File.exists?(saveDir)
-  #       Dir.mkdir(saveDir)
-  #   end
-
-  #   fileName = Time.now.strftime("%Y%m%d%H%M%S") + "_hello_world.pdf"
-
-  #   # (G)ファイル保存
-  #   report.generate_file(File.join(saveDir,fileName))
-
-  #   # http://serverName/tmp/fileName.pdf で読み込まれるようにする
-  #   fileInfo = {'fileName' =>"tmp/" + fileName}
-
-  #  # render :json => fileInfo
-  #   respond_to do |format|
-  #     format.html
-  #     format.json { render json: fileInfo }
-  #   end
-  # end
-
   def report
 
-    # @mitsumoriTankas = MitsumoriTanka.all
+    # attr_accessible :seihinNo, :seihinName, :tanka, :tax, :torokushaId, :koshinshaId
+    @mitsumoriTankas = MitsumoriTanka.all
+
+    # @mitsumoriTankas.each {|row| 
+    #   if row["seihinNo"] == 1
+    #     # logger.debug(row["tanka"])
+
+    #     # データからMagick::Imageに変換
+    #     image = Magick::Image.from_blob(row["image"]).first
+    #     # ファイルに保存
+    #     image.write(File.join(tmpDir, imageName))
+    #   end
+    # }
 
     # ThinReportレイアウトのテンプレートの場所を指定する
     templateDir = File.join(Rails.root, 'app', 'reports')
@@ -166,6 +114,7 @@ class ItemsController < ApplicationController
 
     # 1ページ目
     report.start_new_page :layout => :first do
+
       item(:year).value('24')
       item(:month).value('04')
       item(:day).value('01')
@@ -175,6 +124,7 @@ class ItemsController < ApplicationController
       item(:name2).value('○○ ○○○')
       item(:model).value('○○○○○')
       item(:name3).value('○○ ○○○')
+
 
       subtotal = 50000000
       strSubtotal = subtotal.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
@@ -189,6 +139,7 @@ class ItemsController < ApplicationController
       total = subtotal + tax
       strTotal = total.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
       item(:total).value(strTotal)
+
 
       item(:saikei_1_1).value('7,654,321')
       item(:saisun_1_1).value('7,654,321')
@@ -289,25 +240,43 @@ class ItemsController < ApplicationController
     report.start_new_page :layout => :image do
 
       @tests = {
-        "1" => "main.jpg",
-        "2" => "main2.png",
-        "3" => "sub1.png",
-        "4" => "sub2.png",
-        "5" => "sub3.png",
-        "6" => "sub4.png"
+        "mainImage1" => "main1.jpg",
+        "mainImage2" => "main2.png",
+        "subImage1" => "sub1.png",
+        "subImage2" => "sub2.png",
+        "subImage3" => "sub3.png",
+        "subImage4" => "sub4.png"
       }
 
-      @tests.each {|key, value|
-        @mitsumoriSeihin = MitsumoriSeihin.find(:first, :conditions => { :seihinNo => key })
+      @testImage = TestImage.find(:first, :conditions => { :mitsumoriNo => 1 })
+
+      @tests.each {|key, name|
+        @testImage = TestImage.find(:first, :conditions => { :mitsumoriNo => 1 })
 
         # データからMagick::Imageに変換
-        image = Magick::Image.from_blob(@mitsumoriSeihin["image"]).first
+        image = Magick::Image.from_blob(@testImage[key]).first
         # ファイルに保存
-        image.write(File.join(tmpDir, value))
+        image.write(File.join(tmpDir, name))
 
-        id = value[0..value.index('.')-1]
-        item(id).src(File.join(tmpDir, value))
+        # id = name[0..name.index('.')-1]
+        item(key).src(File.join(tmpDir, name))
       }
+
+      # item(:main).value( open('http://blog-imgs-52-origin.fc2.com/s/o/k/sokuhoushimasu/94530522.png') )
+      # item(:main2).value( open('http://blog-imgs-52-origin.fc2.com/s/o/k/sokuhoushimasu/94530522.png') )
+      # item(:sub1).value( open('http://blog-imgs-52-origin.fc2.com/s/o/k/sokuhoushimasu/94530522.png') )
+      # item(:sub2).value( open('http://blog-imgs-52-origin.fc2.com/s/o/k/sokuhoushimasu/94530522.png') )
+      # item(:sub3).value( open('http://blog-imgs-52-origin.fc2.com/s/o/k/sokuhoushimasu/94530522.png') )
+      # item(:sub4).value( open('http://blog-imgs-52-origin.fc2.com/s/o/k/sokuhoushimasu/94530522.png') )
+
+      # item(:main).value( open('http://localhost:3000/images/foot.png') )
+      # item(:main).value( open('http://localhost:3000/items/display') )
+      # item(:main).value( open('http://localhost:3000/items/display') )
+
+      # # GoogleChart Sample
+      # params = ['cht=lc','chs=240x140','chd=t:40,60,60,45,47,75,70,72']
+      # item(:main).value(open('http://chart.googleapis.com/chart?' + URI.encode(params.join('&'))))
+
     end
 
     # 保存先
@@ -343,5 +312,13 @@ class ItemsController < ApplicationController
       format.json { render json: fileInfo }
     end
   end
+
+  def display
+
+      @testImage = TestImage.find(:first, :conditions => { :mitsumoriNo => 1 })
+
+      send_data @testImage["subImage4"]
+  end
+
 
 end
