@@ -12,18 +12,18 @@ require "csv"
 
 
 # add 1 record
-# MitsumoriSeihin.destroy_all(["mitsumoriNo = ?", 1])
+MitsumoriSeihin.destroy_all(["1 = ?", 1])
 
-# MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 1, :tanka => 11111, :suryo => 1, :tax => 1000, :kin => 12111, :torokushaId => 1, :koshinshaId => 1)
-# MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 2, :tanka => 22222, :suryo => 2, :tax => 2000, :kin => 24222, :torokushaId => 1, :koshinshaId => 1)
-# MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 3, :tanka => 33333, :suryo => 3, :tax => 3000, :kin => 36333, :torokushaId => 1, :koshinshaId => 1)
-# MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 4, :tanka => 44444, :suryo => 4, :tax => 4000, :kin => 48444, :torokushaId => 1, :koshinshaId => 1)
-# MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 5, :tanka => 55555, :suryo => 5, :tax => 5000, :kin => 60555, :torokushaId => 1, :koshinshaId => 1)
-# MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 6, :tanka => 66666, :suryo => 6, :tax => 6000, :kin => 72666, :torokushaId => 1, :koshinshaId => 1)
+MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 1, :tanka => 11111, :suryo => 1, :tax => 1000, :kin => 12111, :torokushaId => 1, :koshinshaId => 1)
+MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 2, :tanka => 22222, :suryo => 2, :tax => 2000, :kin => 24222, :torokushaId => 1, :koshinshaId => 1)
+MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 3, :tanka => 33333, :suryo => 3, :tax => 3000, :kin => 36333, :torokushaId => 1, :koshinshaId => 1)
+MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 4, :tanka => 44444, :suryo => 4, :tax => 4000, :kin => 48444, :torokushaId => 1, :koshinshaId => 1)
+MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 5, :tanka => 55555, :suryo => 5, :tax => 5000, :kin => 60555, :torokushaId => 1, :koshinshaId => 1)
+MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => 6, :tanka => 66666, :suryo => 6, :tax => 6000, :kin => 72666, :torokushaId => 1, :koshinshaId => 1)
 
 
 
-TestImage.destroy_all(["mitsumoriNo = ?", 1])
+TestImage.destroy_all(["1 = ?", 1])
 
 imageDir = File.join(Rails.root, 'db', 'import', 'images')
 
