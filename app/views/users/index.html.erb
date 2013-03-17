@@ -1,0 +1,252 @@
+<div class="title">社員管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="shainSearch" class="Searchform cf">
+    <%= render 'search' %>
+</div>
+<div style="clear:both;" id="shain">
+    <table id="searchShainGrid"></table>
+    <div id="searchShainPager"></div>
+</div>
+<div class="btn_new">
+   <a class="btn_new_mast" id="btnShainNew" href="#" />新規追加</a>
+</div>
+<%= render 'form' %>
+<script>
+// ##############################
+// 
+// ##############################
+$(function() {
+    
+    var isLoaded = false;
+    var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","管理者フラグ","",""];
+    var colModelSettings = [
+            {name:"shainId", index:"shainId", hidden:true},
+            {name:"shainCd", index:"shainCd"},
+            {name:"myoji", index:"myoji"},
+            {name:"name", index:"name"},
+            {name:"myojiFuri", index:"myojiFuri"},
+            {name:"nameFuri", index:"nameFuri"},
+            {name:"loginId", index:"loginId"},
+            {name:"loginPassword", index:"loginPassword"},
+            {name:"manageFlg", index:"manageFlg",hidden:true},
+            {name:"manageName", index:"manageName"},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+    ];
+    $("#searchShainGrid").jqGrid({
+        datatype: "local",
+        width: "940",
+        height: "240",
+        cellEdit: false,
+        rowNum: 10,
+        pager: "searchShainPager",
+        multiselect: false,
+        colNames: colNames,
+        colModel: colModelSettings,
+        gridComplete: function(){
+            if(!isLoaded == true){
+                isLoaded = true;
+            }
+        },
+    }).navGrid('#searchShainPager',{edit:false, add:false, del:false, search:false});
+});
+
+// ##############################
+// 検索ボタンクリック処理
+// ##############################
+$("a#btnShainSearch").click(function() {
+    searchShain();
+    return false;
+});
+
+// ##############################
+// クリアボタンクリック処理
+// ##############################
+$("a#btnShainClear").click(function() {
+    $('#shainSearchForm input[type="text"]').val('');
+    return false;
+});
+
+// ##############################
+// 新規登録ボタンクリック処理
+// ##############################
+$("a#btnShainNew").click(function() {
+    showShainFormDialog();
+    return false;
+});
+
+// ##############################
+// グリッド更新ボタンクリック処理
+// ##############################
+function updateFormatter(cellval, options, rowdata) {
+    return "<img src='/images/database-reload-alt-1.png' onclick='showShainFormDialog(" + rowdata['shainId'] + ")' title='更新' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// グリッド削除ボタンクリック処理
+// ##############################
+function deleteFormatter(cellval, options, rowdata) {
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeShain(" + rowdata['shainId'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// 検索用メソッド
+// ##############################
+function searchShain() {
+    var data = {};
+    var search = $("#shainSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
+    $("#searchShainGrid").clearGridData();
+    var param = {
+        datatype: "json",
+        url: "users/search.json",
+        postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
+        }
+    };
+    $("#searchShainGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// ##############################
+// 更新用メソッド
+// param:
+// shainId : 社員ID
+// ##############################
+function executeShain(shainId) {
+    var url;
+    var type;
+    var data = {};
+    var postData = {};
+    if(shainId != null) {
+        url = "users/" + shainId + ".json";
+        type = "POST";
+        postData["_method"] = "put";
+    } else {
+        url = "users.json";
+        type = "POST";
+    }
+    var shain = $("#shainForm").serializeArray();
+    $.each(shain, function() {
+        data[this.name] = this.value;
+    });
+    // 更新ユーザー、登録ユーザーを設定する
+    data["koshinshaId"] = 1;
+    data["torokushaId"] = 1;
+
+    postData["user"] = data;
+    postData["id"] = shainId;
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: postData,
+        root: "user",
+        dataType: "json",
+        success: function(result) {
+            searchShain();
+        }
+    });
+    $("#shainFormDialog").dialog("close");
+    return false;
+}
+
+// ##############################
+// 登録用フォームダイアログオープン
+// param:
+// shainId : 社員ID
+// ##############################
+function showShainFormDialog(shainId) {
+
+    if(shainId != null) {
+        var url = "users/" + shainId + ".json";
+        $.ajax({
+            scriptCharset:"UTF-8",
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result) {
+                if(result) {
+                    $("#shainForm #shainCd").val(result["shainCd"]);
+                    $("#shainForm #myoji").val(result["myoji"]);
+                    $("#shainForm #name").val(result["name"]);
+                    $("#shainForm #myojiFuri").val(result["myojiFuri"]);
+                    $("#shainForm #nameFuri").val(result["nameFuri"]);
+                    $("#shainForm #loginId").val(result["loginId"]);
+                    $("#shainForm #loginPassword").val(result["loginPassword"]);
+                    $("#shainForm #manageFlg").val(result["manageFlg"]);
+                }
+                return false;
+            }
+        });
+    }
+    // ダイアログ表示
+    $("#shainFormDialog").dialog({
+        show: {effect: "clip"},
+        hide: {effect: "clip"},
+        width: "auto",
+        modal: true,
+        buttons : {
+            "Close":{
+                text: "閉じる",
+                id: "dialog_close",
+                class : "btn_white",
+                click : function(){
+                    $('#shainForm input[type="text"], select, textarea').val('');
+                    $("#shainForm").validate().resetForm();
+                    $(this).dialog('close');
+                    return false;
+                }
+            },
+            "Regist":{
+                text: "登録",
+                id: "dialog_regist",
+                class: "btn_orange",
+                click: function() {
+                    // クライアントバリデーション
+                    if ($("#shainForm").valid() == false) {
+                         return false;
+                     }
+                    executeShain(shainId);
+                    $('#shainForm input[type="text"], select, textarea').val('');
+                    $(this).dialog('close');
+                }
+            },
+        },
+        open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
+    });
+    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
+    $("#shainFormDialog").focus();
+}
+
+// ##############################
+// 削除用メソッド
+// param:
+// shainId : 社員ID
+// ##############################
+function removeShain(shainId) {
+    if (confirm("削除します。よろしいですか？") == false) {
+        return false;
+    }
+    var url = "users/" + shainId + ".json";
+    var type = "POST";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: "id=" + shainId + "&_method=delete",
+        dataType: "json",
+        success: function(result) {
+                searchShain();
+        }
+    });
+    return false;
+}
+
+</script>

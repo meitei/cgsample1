@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+LANG    = "ja_JP.UTF-8"
+LC_ALL  = "ja_JP.UTF-8"
+
 gem 'rails', '3.2.12'
 #gem 'twitter-bootstrap-rails'
 gem 'execjs'

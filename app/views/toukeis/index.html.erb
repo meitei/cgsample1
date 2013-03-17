@@ -1,4 +1,4 @@
-<div class="title">売上管理：検索</div>
+<div class="title">統計情報：検索</div>
 <div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
 <div id="tokeiSearch" class="Searchform cf">
   <%= render 'search' %>
@@ -6,9 +6,6 @@
 <div style="clear:both;" id="customer">
     <table id="searchToukeiGrid"></table>
     <div id="searchToukeiPager"></div>
-</div>
-<div style="margin:40px;">
-    <a style="float:right;" class="btn btn-primary" id="btnShowGraph" href="toukeis/graph" />グラフ表示</a>
 </div>
 
 <script>
@@ -41,7 +38,7 @@ $(function() {
         datatype: "local",
         //url: "kokyakus.json",
         width: "940",
-        height: "240",
+        height: "220",
         cellEdit: false,
         rowNum: 10,
         //rowList:[10,20,30],

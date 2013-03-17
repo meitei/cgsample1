@@ -1,41 +1,43 @@
+<div id="toukeiSearch">
   <form id="toukeiSearchForm">
   <div>
     <table>
       <tr>
         <th style="width:80px;">対象期間</th>
-        <td style="width:250px;">
+        <td style="text-align:left;width:190px;">
           <input style="width:75px;" type="text" id="targetSpnFrom" name="targetSpnFrom" />&nbsp;〜
           <input style="width:75px;" type="text" id="targetSpnTo" name="targetSpnTo" />
         </td>
         <th style="width:80px;">顧客コード</br>(サジェストサンプル)</th>
         <td style="width:175px;">
-          <input style="width:100px;" type="text" id="kokyakuId" name="kokyakuId" />
+          <input style="width:130px;" type="text" id="kokyakuId" name="kokyakuId" />
+        </td>
+          <th style="width:80px;"></th>
+            <td style="width:150px;">
+            </td>
+      </tr>
+      <tr>
+        <th style="width:80px;">集計単位</th>
+        <td style="text-align:left;" colspan="3">
+          <input type="radio" id="sumUnt" name="sumUnt" value="1" checked />&nbsp;制作担当別
+          <input type="radio" id="sumUnt" name="sumUnt" value="2" />&nbsp;病院別
+          <input type="radio" id="sumUnt" name="sumUnt" value="3" />&nbsp;製品別
+          <input type="radio" id="sumUnt" name="sumUnt" value="4" />&nbsp;パーツ別
+          <input type="radio" id="sumUnt" name="sumUnt" value="5" />&nbsp;見積製品項目別
         </td>
       </tr>
       <tr>
-        <th>集計単位</th>
-        <td>
-          <input type="radio" id="sumUnt" name="sumUnt" value="1" checked />制作担当別
-          <input type="radio" id="sumUnt" name="sumUnt" value="2" />病院別
-          <input type="radio" id="sumUnt" name="sumUnt" value="3" />製品別
-          <br/>
-          <input type="radio" id="sumUnt" name="sumUnt" value="4" />パーツ別
-          <input type="radio" id="sumUnt" name="sumUnt" value="5" />見積製品項目別
-        </td>
-        <th>出力条件</th>
-        <td>
-          <input type="radio" id="outCond" name="outCond" value="1" checked />月別
-          <input type="radio" id="outCond" name="outCond" value="2" />年度別
-          <input type="radio" id="outCond" name="outCond" value="3" />総合計
+        <th style="width:80px;">出力条件</th>
+        <td style="text-align:left;" colspan="3">
+          <input type="radio" id="outCond" name="outCond" value="1" checked />&nbsp;月別
+          <input type="radio" id="outCond" name="outCond" value="2" />&nbsp;年度別
+          <input type="radio" id="outCond" name="outCond" value="3" />&nbsp;総合計
         </td>
       </tr>
     </table>
-    <div class="btn_submit">
-      <div><a class="btn_search" id="btnToukeiSearch" href="#" tabindex="44" />検索</a></div>
-      <div><a class="btn_clear" id="btnToukeiClear" href="#" tabindex="46" />条件クリア</a></div>
-    </div>
+    <div><a class="btn_search" id="btnToukeiSearch" href="#" />検索</a></div>
+    <div><a class="btn_clear" id="btnToukeiClear" href="#" />条件クリア</a></div>
   </div>
-<!--
   </br clear="all">
   </br>
   <div style="">
@@ -46,19 +48,14 @@
       <input type="hidden" id="outCondYear" name="outCondYear" />
       <input type="hidden" id="outCondMonth" name="outCondMonth" />
     </div>
+    <div><a class="btn_graf" id="btnShowGraph" href="toukeis/graph" />グラフ表示</a></div>
   </div>
--->
   </form>
-
+</div>
 <script>
 $(function() {
   $("#targetSpnFrom").datepicker();
   $("#targetSpnTo").datepicker();
-  // $("#kokyakuSearch").accordion({
-  //   header: "h5",
-  //   collapsible: true,
-  //   animated: "bounceslide",
-  //   active: 4
-  // });
 });
+
 </script>

@@ -36,6 +36,7 @@ JqgridSample::Application.routes.draw do
   resources :items do
     get 'report', :on => :collection
     get 'report2', :on => :collection
+    get 'display', :on => :collection
   end
 
   resources :toukeis do
@@ -52,9 +53,8 @@ JqgridSample::Application.routes.draw do
 
   resources :companies
 
-  get "logout" => "sessions#destroy", :as => "logout"
-  get "login" => "sessions#new", :as => "login"
-  get "signup" => "users#new", :as => "signup"
+  match 'login' => 'sessions#new', :as => :login
+  match 'logout' => 'sessions#destroy', :as => :logout
   resources :users
   resources :sessions
 
