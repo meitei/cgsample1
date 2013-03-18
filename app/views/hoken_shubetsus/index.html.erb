@@ -112,20 +112,21 @@ function searchHokenShubetsu() {
 // ##############################
 // 更新用メソッド
 // param:
-// hokenShubetsuCd : 病院コード
+// hokenShubetsuCd : コード
 // ##############################
 function executeHokenShubetsu(hokenShubetsuCd) {
     var url;
     var type;
+    var data = {};
+    var postData = {};
     if(hokenShubetsuCd != null) {
         url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
-        type = "PUT";
+        type = "POST";
+        postData["_method"] = "put";
     } else {
         url = "hoken_shubetsus.json";
         type = "POST";
     }
-    var data = {};
-    var postData = {};
     var hokenShubetsu = $("#hokenShubetsuForm").serializeArray();
     $.each(hokenShubetsu, function() {
         data[this.name] = this.value;
@@ -154,7 +155,7 @@ function executeHokenShubetsu(hokenShubetsuCd) {
 // ##############################
 // 登録用フォームダイアログオープン
 // param:
-// hokenShubetsuCd : 病院コード
+// hokenShubetsuCd : 保険種別コード
 // ##############################
 function showHokenShubetsuFormDialog(hokenShubetsuCd) {
 
@@ -181,21 +182,32 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
         width: "auto",
         modal: true,
         buttons : {
-            "閉じる": function(){
-                $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
-                $("#hokenShubetsuForm").validate().resetForm();
-                $(this).dialog('close');
+            "Close":{
+                text: "閉じる",
+                id: "dialog_close",
+                class : "btn_white",
+                click : function(){
+                    $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
+                    $("#hokenShubetsuForm").validate().resetForm();
+                    $(this).dialog('close');
+                    return false;
+                }
             },
-            '登録' :function() {
-                // クライアントバリデーション
-                if ($("#hokenShubetsuForm").valid() == false) {
-                     return false;
-                 }
-                executeHokenShubetsu(hokenShubetsuCd);
-                $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
-                $(this).dialog('close');
-                return false;
-            }
+            "Regist":{
+                text: "登録",
+                id: "dialog_regist",
+                class: "btn_orange",
+                click: function() {
+                    // クライアントバリデーション
+                    if ($("#hokenShubetsuForm").valid() == false) {
+                         return false;
+                     }
+                    executeHokenShubetsu(hokenShubetsuCd);
+                    $('#hokenShubetsuForm input[type="text"], select, textarea').val('');
+                    $(this).dialog('close');
+                    return false;
+                }
+            },
         },
         open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
@@ -206,19 +218,19 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
 // ##############################
 // 削除用メソッド
 // param:
-// hokenShubetsuCd : 病院コード
+// hokenShubetsuCd : 保険種別コード
 // ##############################
 function removeHokenShubetsu(hokenShubetsuCd) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
     var url = "hoken_shubetsus/" + hokenShubetsuCd + ".json";
-    var type = "DELETE";
+    var type = "POST";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + hokenShubetsuCd,
+        data: "id=" + hokenShubetsuCd + "&_method=delete",
         dataType: "json",
         success: function(result) {
             searchHokenShubetsu();

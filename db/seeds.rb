@@ -12,11 +12,37 @@ require "csv"
 
 
 # add 1 record
-MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo =>1, :tanka => 25200, :suryo => 3, :tax => 1260, :kin => 26460, :torokushaId => 1, :koshinshaId => 1)
-#MitsumoriTanka.create(:seihinNo => 1, :seihinName => '構造フレーム　金属・木材', :tanka => 25200, :tax => 0.05, :torokushaId => 1, :koshinshaId => 1)
+MitsumoriSeihin.destroy_all(["1 = ?", 1])
+
+200.times{|num|
+	num = num + 1
+	tanka = num * 100
+	tax = tanka * num * 0.05
+	kin = tanka * num + tax
+	MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => num, :tanka => tanka, :suryo => num, :tax => tax, :kin => kin, :torokushaId => 1, :koshinshaId => 1)
+}
 
 
-# add from CSV file
+
+TestImage.destroy_all(["1 = ?", 1])
+
+imageDir = File.join(Rails.root, 'db', 'import', 'images')
+
+TestImage.create(
+	:mitsumoriNo => 1,
+	:text => "Sample Text",
+ 	:mainImage1 => File.read(File.join(imageDir, 'char1.jpg')),
+ 	:mainImage2 => File.read(File.join(imageDir, 'char2.png')),
+ 	:subImage1 => File.read(File.join(imageDir, 'face0.png')),
+ 	:subImage2 => File.read(File.join(imageDir, 'face3.png')),
+ 	:subImage3 => File.read(File.join(imageDir, 'face6.png')),
+ 	:subImage4 => File.read(File.join(imageDir, 'face7.png'))
+)
+
+
+# add records from CSV file
+MitsumoriTanka.destroy_all(["1 = ?", 1])
+
 CSV.foreach('db/import/MitsumoriTankas.csv') do |row|
   MitsumoriTanka.create(:seihinNo => row[0], :seihinName => row[1], :tanka => row[2], :tax => row[3], :torokushaId => 1, :koshinshaId => 1)
 end

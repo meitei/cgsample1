@@ -65,7 +65,7 @@
       <tr>
         <th>種別</th>
         <td>
-          <%= select :kokyaku, :seibetsu, [["男性", "0"], ["女性", "1"]], :include_blank => true, :style => "width:30px;" %>
+          <%= select :konyu_rireki, :shubetsuKn, [["新規", "0"], ["修理", "1"]], :include_blank => true, :style => "width:30px;" %>
         </td>
         <th>仮合担当</th>
         <td>
@@ -83,9 +83,9 @@
         <td>
           <input style="width:130px;" type="text" id="seihinCd" name="konyu_rireki[seihinCd]" tabindex="8" />
         </td>
-        <th>見積担当</th>
+        <th>納品担当</th>
         <td>
-          <input style="width:130px;" type="text" id="mitsumoriTantoEigyoCd" name="konyu_rireki[mitsumoriTantoEigyoCd]" tabindex="32" />
+          <input style="width:130px;" type="text" id="nohinTantoCd" name="konyu_rireki[nohinTantoCd]" tabindex="32" />
         </td>
         <th>押印日</th>
         <td>
@@ -97,8 +97,10 @@
       <tr>
         <th><br/></th>
         <td><br/></td>
-        <th><br/></th>
-        <td><br/></td>
+        <th>見積担当</th>
+        <td>
+          <input style="width:130px;" type="text" id="mitsumoriTantoEigyoCd" name="konyu_rireki[mitsumoriTantoEigyoCd]" tabindex="32" />
+        </td>
         <th>完了日</th>
         <td>
           <input style="width:80px;" type="text" id="kanryoDtFrom" name="konyu_rireki[kanryoDtFrom]" tabindex="18" />&nbsp;〜

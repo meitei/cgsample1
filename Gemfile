@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+LANG    = "ja_JP.UTF-8"
+LC_ALL  = "ja_JP.UTF-8"
+
 gem 'rails', '3.2.12'
 #gem 'twitter-bootstrap-rails'
 gem 'execjs'
@@ -43,6 +46,8 @@ end
 gem 'jquery-rails', '= 2.0.2'
 gem 'jquery-ui-rails'
 gem 'thinreports'
+gem 'rmagick', :require => 'RMagick'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
