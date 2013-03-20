@@ -31,11 +31,11 @@
       <tr>
         <th style="width:80px;">ログインID</th>
         <td style="width:175px;">
-          <input style="width:130px;" type="text" id="loginId" name="loginId" />
+          <input style="width:130px;" type="text" id="username" name="username" />
         </td>
         <th style="width:80px;">ログインパスワード</th>
         <td style="width:175px;">
-          <input style="width:130px;" type="password" id="loginPassword" name="loginPassword" />
+          <input style="width:130px;" type="password" id="password" name="password" />
         </td>
       </tr>
       <tr>
@@ -71,8 +71,8 @@ $(function() {
             name: {required:true, maxlength:25},
             myojiFuri: {required:true, katakana:true, maxlength:25},
             nameFuri: {required:true, katakana:true, maxlength:25},
-            loginId: {required:true},
-            loginPassword: {required:true},
+            username: {required:true},
+            password: {required:true},
             manageFlg: {required:true}
         }
     });

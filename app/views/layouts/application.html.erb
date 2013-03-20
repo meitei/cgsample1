@@ -25,6 +25,11 @@
         }, function() {
           $(this).children('ul').hide();
         });
+
+        $("#logout").click(function() {
+          location.href = "logout";
+          return false;
+        });
       });
     </script>
   </head>
@@ -61,14 +66,14 @@
     </div>
 
     <div class="navbar-page cf">
-<<<<<<< HEAD
-      <div class="backtop"><a href="">管理システムトップへ戻る</a></div>
-      <div class="info"><span class="name">ログイン名：<%= current_user %></span>
-=======
-      <div class="backtop"><a href="/">管理システムトップへ戻る</a></div>
-      <div class="info"><span class="name">ログイン名：ヴィンテージ太郎</span>
->>>>>>> 980bc4b3ae55c4f081d36e6d0b7321d6a176404c
-          <form class="btn_logout"><input type="image" src="/images/btn_logout.png" /></form></div>
+      <div id="backtop" class="backtop"><a href="/">管理システムトップへ戻る</a></div>
+      <% if current_user %>
+        <div id="info" class="info">
+          <span class="name">ログイン名：<%= current_user.username %></span>
+          <input id="logout" type="image" src="/images/btn_logout.png" />
+        </div>
+        <input type="hidden" id="loginId" name="loginId" value="<%= current_user.id %>" />
+      <% end %>
     </div>
     <div class="container">
       <%= yield %>
