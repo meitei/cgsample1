@@ -46,7 +46,7 @@
               <li><%= link_to "売上管理", "/toukeis" %></li>
               <li><%= link_to "マスタ管理", "#" %>
                 <ul>
-                  <li><%= link_to "社員マスタ", "/users" %></li>
+                  <li><%= link_to "社員マスタ", "/shains" %></li>
                   <li><%= link_to "病院マスタ", "/byoins" %></li>
                   <li><%= link_to "保険種別マスタ", "/hoken_shubetsus" %></li>
                   <li><%= link_to "傷病マスタ", "/shobyos" %></li>
@@ -62,7 +62,7 @@
 
     <div class="navbar-page cf">
       <div class="backtop"><a href="">管理システムトップへ戻る</a></div>
-      <div class="info"><span class="name">ログイン名：ヴィンテージ太郎</span>
+      <div class="info"><span class="name">ログイン名：<%= current_user %></span>
           <form class="btn_logout"><input type="image" src="/images/btn_logout.png" /></form></div>
     </div>
     <div class="container">
