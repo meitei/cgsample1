@@ -116,7 +116,6 @@ $(function() {
         biko: {maxlength:100},
     }
   });
-
   $("a#searchAddress").click(function() {
     var zipCode = $("#postNo").val();
     if(zipCode == "") { return false; }
@@ -133,7 +132,6 @@ $(function() {
     });
     return false;
   });
-
   $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "6");
   $("#kokyaku_shobyouCd1").css("width", "100px").attr("tabindex", "22");
   $("#kokyaku_shobyouCd2").css("width", "100px").attr("tabindex", "24");
@@ -149,53 +147,22 @@ function executeKokyaku(kokyakuId) {
   //var action;
   //var method;
   if(kokyakuId != null) {
-    $("#koshinshaId").val("1");
+    $("#koshinshaId").val($("#loginId").val());
     $("#kokyakuForm").attr("action", "/kokyakus/" + kokyakuId);
-    //$("#kokyakuForm").attr("method", "PUT");
     $("#httpMethod").val("put");
-      //url = "../../kokyakus/" + kokyakuId + ".json";
-      //type = "PUT";
   } else {
-    $("#koshinshaId").val("1");
-    $("#torokushaId").val("1");
-      //url = "../kokyakus.json";
-      //type = "POST";
+    $("#koshinshaId").val($("#loginId").val());
+    $("#torokushaId").val($("#loginId").val());
     $("#kokyakuForm").attr("action", "/kokyakus");
-    //$("#kokyakuForm").attr("method", "POST");
     $("#httpMethod").val("post");
   }
   $("#kokyakuForm").submit();
-  // var data = {};
-  // var postData = {};
-  // var kokyaku = $("#kokyakuForm").serializeArray();
-  // $.each(kokyaku, function() {
-  //     data[this.name] = this.value;
-  // });
-  // data["koshinshaId"] = 1;
-  // data["torokushaId"] = 1;
-  // postData["kokyaku"] = data;
-  // postData["id"] = kokyakuId;
-  // $.ajax({
-  //     scriptCharset:"UTF-8",
-  //     type: type,
-  //     url: url,
-  //     data: postData,
-  //     root: "kokyaku",
-  //     dataType: "json",
-  //     success: function(result) {
-  //         if(result != null) {
-  //             //searchKokyaku();
-  //         }
-  //     }
-  // });
-  return false;    
+  return false;
 }
 
-function callback1( data )
-{
-        var address = data["city"];
-        $("#address1").val(address);
-
+function callback1( data ) {
+  var address = data["city"];
+  $("#address1").val(address);
 }
 
 </script>

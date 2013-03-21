@@ -1,10 +1,11 @@
 # coding: utf-8
 
 class ShainsController < ApplicationController
+  skip_before_filter :require_login, :only => [:index, :search, :new, :create]
   # GET /shains
   # GET /shains.json
   def index
-    @shains = Shain.all
+    @shains = User.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +16,7 @@ class ShainsController < ApplicationController
   # GET /shains/1
   # GET /shains/1.json
   def show
-    @shain = Shain.find(params[:id])
+    @shain = User.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +27,7 @@ class ShainsController < ApplicationController
   # GET /shains/new
   # GET /shains/new.json
   def new
-    @shain = Shain.new
+    @shain = User.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +37,13 @@ class ShainsController < ApplicationController
 
   # GET /shains/1/edit
   def edit
-    @shain = Shain.find(params[:id])
+    @shain = User.find(params[:id])
   end
 
   # POST /shains
   # POST /shains.json
   def create
-    @shain = Shain.new(params[:shain])
+    @shain = User.new(params[:shain])
 
     respond_to do |format|
       if @shain.save
@@ -58,7 +59,7 @@ class ShainsController < ApplicationController
   # PUT /shains/1
   # PUT /shains/1.json
   def update
-    @shain = Shain.find(params[:id])
+    @shain = User.find(params[:id])
 
     respond_to do |format|
       if @shain.update_attributes(params[:shain])
@@ -74,7 +75,7 @@ class ShainsController < ApplicationController
   # DELETE /shains/1
   # DELETE /shains/1.json
   def destroy
-    @shain = Shain.find(params[:id])
+    @shain = User.find(params[:id])
     @shain.destroy
 
     respond_to do |format|
@@ -95,7 +96,7 @@ class ShainsController < ApplicationController
   def search
 
     # 検索条件設定
-    conditions = Shain.where("1 = ?", 1)
+    conditions = User.where("1 = ?", 1)
     conditions = conditions.where("\"shainCd\" = ?", params[:shainCd].to_i) if params[:shainCd] !=""
     conditions = conditions.where("\"myoji\" LIKE ?", params[:myoji] + "%") if params[:myoji] != ""
     conditions = conditions.where("\"name\" LIKE ?", params[:name] + "%") if params[:name] != ""
@@ -124,8 +125,8 @@ class ShainsController < ApplicationController
                        \"name\",
                        \"myojiFuri\",
                        \"nameFuri\",
-                       \"loginId\",
-                       \"loginPassword\",
+                       \"username\",
+                       \"password\",
                        \"manageFlg\",
                        CASE \"manageFlg\" 
                            WHEN '0' THEN '一般'
