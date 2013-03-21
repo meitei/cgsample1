@@ -232,14 +232,17 @@ class ReportController < ApplicationController
 
 
     @@mitsumori = Mitsumori.where("konyuRirekiId == ? and kokyakuId == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
-    mitsumoriNo = @@mitsumori["mitsumoriNo"]
 
-    @@mitsumoriTankas = MitsumoriTanka.where(:buhinCd == nil)
+    if @@mitsumori.present?
+      mitsumoriNo = @@mitsumori["mitsumoriNo"]
 
-    @@mitsumoriSeihins = MitsumoriSeihin.where(:mitsumoriNo == mitsumoriNo)
+      @@mitsumoriTankas = MitsumoriTanka.where(:buhinCd == nil)
 
-    sqlstr = "SELECT * FROM (SELECT * FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.seihinNo = mt.seihinNo LEFT JOIN kansei_buhins kn ON mt.buhinCd = kn.buhinCd) WHERE buhinCd IS NOT NULL"
-    @@kanseiBuhins = ActiveRecord::Base.connection.execute(sqlstr)
+      @@mitsumoriSeihins = MitsumoriSeihin.where(:mitsumoriNo == mitsumoriNo)
+
+      sqlstr = "SELECT * FROM (SELECT * FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.seihinNo = mt.seihinNo LEFT JOIN kansei_buhins kn ON mt.buhinCd = kn.buhinCd) WHERE buhinCd IS NOT NULL"
+      @@kanseiBuhins = ActiveRecord::Base.connection.execute(sqlstr)
+    end
 
 
     ###########################
@@ -256,167 +259,178 @@ class ReportController < ApplicationController
     # 1ページ目
     report.start_new_page :layout => :first do
 
-      # t = Time.now
-      # t = Date.new()
-      t = @@mitsumoriDt
-      strDate = "平成" + (t.strftime("%y").to_i + 12).to_s + t.strftime("年%m月%d日")
-      item(:date).value(strDate)
+      if @@mitsumori.present?
+        t = @@mitsumoriDt
+        strDate = "平成" + (t.strftime("%y").to_i + 12).to_s + t.strftime("年%m月%d日")
+        item(:date).value(strDate)
 
-      item(:name1).value(@@atena)
-      item(:name2).value('○○ ○○○')
-      item(:model).value(@@katashiki)
-      item(:name3).value(@@tanto)
+        item(:name1).value(@@atena)
+        item(:name2).value('○○ ○○○')
+        item(:model).value(@@katashiki)
+        item(:name3).value(@@tanto)
 
-      ###########################
-      # 明細行
-      ###########################
-      @@mitsumoriTankas.each {|row|
-        # 1列目の処理
-        # 採型分
-        if @@hash0.key?(row["seihinNo"])
-          line = @@hash0[row["seihinNo"]]
+        if @@mitsumoriTankas.present?
+          ###########################
+          # 明細行
+          ###########################
+          @@mitsumoriTankas.each {|row|
+            # 1列目の処理
+            # 採型分
+            if @@hash0.key?(row["seihinNo"])
+              line = @@hash0[row["seihinNo"]]
 
-          @@headers1.each {|header|
-            if header == 'tanka'
-              id = 'saikei' + '_1_' + line.to_s
-            else
-              id = header + '_1_' + line.to_s
+              @@headers1.each {|header|
+                if header == 'tanka'
+                  id = 'saikei' + '_1_' + line.to_s
+                else
+                  id = header + '_1_' + line.to_s
+                end
+                item(id).value(number_format(row[header]))
+              }
             end
-            item(id).value(number_format(row[header]))
-          }
-        end
 
-        # 採寸分
-        if @@hash1.key?(row["seihinNo"])
-          line = @@hash1[row["seihinNo"]]
+            # 採寸分
+            if @@hash1.key?(row["seihinNo"])
+              line = @@hash1[row["seihinNo"]]
 
-          @@headers1.each {|header|
-            if header == 'tanka'
-              id = 'saisun' + '_1_' + line.to_s
-            else
-              id = header + '_1_' + line.to_s
+              @@headers1.each {|header|
+                if header == 'tanka'
+                  id = 'saisun' + '_1_' + line.to_s
+                else
+                  id = header + '_1_' + line.to_s
+                end
+                item(id).value(number_format(row[header]))
+              }
             end
-            item(id).value(number_format(row[header]))
-          }
-        end
 
-        # 2列目の処理
-        if @@hash2.key?(row["seihinNo"])
-          line = @@hash2[row["seihinNo"]]
+            # 2列目の処理
+            if @@hash2.key?(row["seihinNo"])
+              line = @@hash2[row["seihinNo"]]
 
-          @@headers2.each {|header|
-            id = header + '_2_' + line.to_s
-            item(id).value(number_format(row[header]))
-          }
-        end
-      }
-
-      subtotal = 0
-      tax = 0
-      total = 0
-
-      @@mitsumoriSeihins.each {|row|
-        # 1列目の処理
-        # 採型分
-        if @@hash0.key?(row["seihinNo"])
-          line = @@hash0[row["seihinNo"]]
-
-          @@headers1.each {|header|
-            if header == 'tanka'
-              id = 'saikei' + '_1_' + line.to_s
-            else
-              id = header + '_1_' + line.to_s
+              @@headers2.each {|header|
+                id = header + '_2_' + line.to_s
+                item(id).value(number_format(row[header]))
+              }
             end
-            item(id).value(number_format(row[header]))
           }
         end
 
-        # 採寸分
-        if @@hash1.key?(row["seihinNo"])
-          line = @@hash1[row["seihinNo"]]
+        subtotal = 0
+        tax = 0
+        total = 0
 
-          @@headers1.each {|header|
-            if header == 'tanka'
-              id = 'saisun' + '_1_' + line.to_s
-            else
-              id = header + '_1_' + line.to_s
+        if @@mitsumoriSeihins.present?
+          @@mitsumoriSeihins.each {|row|
+            # 1列目の処理
+            # 採型分
+            if @@hash0.key?(row["seihinNo"])
+              line = @@hash0[row["seihinNo"]]
+
+              @@headers1.each {|header|
+                if header == 'tanka'
+                  id = 'saikei' + '_1_' + line.to_s
+                else
+                  id = header + '_1_' + line.to_s
+                end
+                item(id).value(number_format(row[header]))
+              }
             end
-            item(id).value(number_format(row[header]))
+
+            # 採寸分
+            if @@hash1.key?(row["seihinNo"])
+              line = @@hash1[row["seihinNo"]]
+
+              @@headers1.each {|header|
+                if header == 'tanka'
+                  id = 'saisun' + '_1_' + line.to_s
+                else
+                  id = header + '_1_' + line.to_s
+                end
+                item(id).value(number_format(row[header]))
+              }
+            end
+
+            # 2列目の処理
+            if @@hash2.key?(row["seihinNo"])
+              line = @@hash2[row["seihinNo"]]
+
+              @@headers2.each {|header|
+                id = header + '_2_' + line.to_s
+                item(id).value(number_format(row[header]))
+              }
+            end
+
+            # 集計
+            subtotal += row["tanka"] * row["suryo"]
+            tax += row["tax"]
+            total += row["kin"]
           }
         end
 
-        # 2列目の処理
-        if @@hash2.key?(row["seihinNo"])
-          line = @@hash2[row["seihinNo"]]
 
-          @@headers2.each {|header|
-            id = header + '_2_' + line.to_s
-            item(id).value(number_format(row[header]))
-          }
-        end
-
-        # 集計
-        subtotal += row["tanka"] * row["suryo"]
-        tax += row["tax"]
-        total += row["kin"]
-      }
-
-
-      ###########################
-      # 集計項目
-      ###########################
-      item(:subtotal).value(number_format(subtotal.truncate))
-      item(:tax).value(number_format(tax.truncate))
-      item(:total).value(number_format(total.truncate))
-      item(:charge).value('\ ' + number_format(total.truncate))
-
+        ###########################
+        # 集計項目
+        ###########################
+        item(:subtotal).value(number_format(subtotal.truncate))
+        item(:tax).value(number_format(tax.truncate))
+        item(:total).value(number_format(total.truncate))
+        item(:charge).value('\ ' + number_format(total.truncate))
+      end
     end
 
     # 2ページ目
     report.start_new_page :layout => :second do
 
-      ###########################
-      # 明細行
-      ###########################
-      # 3列目の処理
-      @@mitsumoriTankas.each {|row|
-        if @@hash3.key?(row["seihinNo"])
-          line = @@hash3[row["seihinNo"]]
+      if @@mitsumori.present?
+        ###########################
+        # 明細行
+        ###########################
+        # 3列目の処理
+        if @@mitsumoriTankas.present?
+          @@mitsumoriTankas.each {|row|
+            if @@hash3.key?(row["seihinNo"])
+              line = @@hash3[row["seihinNo"]]
 
-          @@headers3.each {|header|
-            id = header + '_3_' + line.to_s
-            item(id).value(number_format(row[header]))
-          }
-        end
-      }
-
-      # 3列目の処理
-      @@mitsumoriSeihins.each {|row|
-        if @@hash3.key?(row["seihinNo"])
-          line = @@hash3[row["seihinNo"]]
-
-          @@headers3.each {|header|
-            id = header + '_3_' + line.to_s
-            item(id).value(number_format(row[header]))
-          }
-        end
-      }
-
-      # 4列目の処理
-      @@kanseiBuhins.each_with_index do |row, i|
-        # 仕様：最大26行目まで
-        if i < 26
-          line = i + 1
-          @@headers4.each {|header|
-            id = header + '_4_' + line.to_s
-            if header == 'seihinName'
-              item(id).value(row["buhinNm"])
-            else
-              item(id).value(number_format(row[header]))
+              @@headers3.each {|header|
+                id = header + '_3_' + line.to_s
+                item(id).value(number_format(row[header]))
+              }
             end
           }
-        else
-          break
+        end
+
+        if @@mitsumoriSeihins.present?
+          # 3列目の処理
+          @@mitsumoriSeihins.each {|row|
+            if @@hash3.key?(row["seihinNo"])
+              line = @@hash3[row["seihinNo"]]
+
+              @@headers3.each {|header|
+                id = header + '_3_' + line.to_s
+                item(id).value(number_format(row[header]))
+              }
+            end
+          }
+        end
+
+        if @@kanseiBuhins.present?
+          # 4列目の処理
+          @@kanseiBuhins.each_with_index do |row, i|
+            # 仕様：最大26行目まで
+            if i < 26
+              line = i + 1
+              @@headers4.each {|header|
+                id = header + '_4_' + line.to_s
+                if header == 'seihinName'
+                  item(id).value(row["buhinNm"])
+                else
+                  item(id).value(number_format(row[header]))
+                end
+              }
+            else
+              break
+            end
+          end
         end
       end
     end
@@ -457,7 +471,6 @@ class ReportController < ApplicationController
       format.json { render json: fileInfo }
     end
   end
-
 end
 
 
