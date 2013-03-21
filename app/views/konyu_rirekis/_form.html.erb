@@ -6,85 +6,159 @@
 <div>
   <table>
     <tr>
-      <th style="width:75px;">顧客名称</th>
+      <th style="width:100px;">顧客</th>
       <td style="width:150px;">
-        <input style="width:150px;" type="text" id="kokyakuNm" name="kokyaku[kokyakuNm]" value="<%= @kokyaku.kokyakuNm %>" tabindex="2" />
-      </td>
-      <th style="width:75px;">郵便番号</th>
-      <td style="width:150px;">
-        <input style="width:100px;" type="text" id="postNo" name="kokyaku[postNo]" value="<%= @kokyaku.postNo %>" tabindex="10" />
-      </td>
-      <th style="width:100px;" scope="row">病名・障害名１</th>
-      <td style="width:150px;">
+        <!-- 顧客名を表示する -->
         <%= select :kokyaku, :shobyouCd1, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
       </td>
     </tr>
     <tr>
-      <th>カナ名称</th>
-      <td>
-        <input style="width:150px;" type="text" id="kokyakuNmKana" name="kokyaku[kokyakuNmKana]" value="<%= @kokyaku.kokyakuNmKana %>" tabindex="4" />
+      <th style="width:100px;">購入履歴コード</th>
+      <td style="width:150px;">
+        <input style="width:100px;" type="text" id="konyuRirekiId" name="konyuRireki[konyuRirekiId]" value="<%= @kokyaku.postNo %>" tabindex="10" />
       </td>
-      <th>住所１</th>
-      <td>
-        <input style="width:150px;" type="text" id="address1" name="kokyaku[address1]" value="<%= @kokyaku.address1 %>" tabindex="12" />
-      </td>
-      <th>病名・障害名２</th>
-      <td>
+      <th style="width:100px;">受付制作担当者</th>
+      <td style="width:150px;">
+        <!-- 社員マスタを表示 -->
         <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
       </td>
     </tr>
     <tr>
-      <th>性別</th>
+      <th>病院</th>
       <td>
-        <%= select :kokyaku, :seibetsu, [["男性", "0"], ["女性", "1"]], :include_blank => true %>
+        <!-- 病院マスタを表示 -->
+        <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
       </td>
-      <th>住所２</th>
+      <th>受注日</th>
       <td>
-        <input style="width:150px;" type="text" id="address2" name="kokyaku[address2]" value="<%= @kokyaku.address2 %>" tabindex="14" />
-      </td>
-      <th>病名・障害名３</th>
-      <td>
-        <%= select :kokyaku, :shobyouCd3, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
+        <input style="width:130px;" type="text" id="juchuDt" name="kokyaku[juchuDt]" value="<%= @kokyaku.juchuDt %>" tabindex="12" />
       </td>
     </tr>
     <tr>
-      <th>生年月日</th>
+      <th>医師氏名</th>
       <td>
-        <input style="width:100px;" type="text" id="tanjoDt" name="kokyaku[tanjoDt]" value="<%= @kokyaku.tanjoDt %>" tabindex="8" />
+        <input style="width:70px;" type="text" id="ishiNm1" name="kokyaku[ishiNm1]" value="<%= @kokyaku.ishiNm1 %>" tabindex="12" />
+        <input style="width:70px;" type="text" id="ishiNm2" name="kokyaku[ishiNm2]" value="<%= @kokyaku.ishiNm2 %>" tabindex="12" />
       </td>
-      <th>電話番号</th>
+      <th>仮合担当者</th>
       <td>
-       <input style="width:150px;" type="text" id="tel1" name="kokyaku[tel1]" value="<%= @kokyaku.tel1 %>" tabindex="16" />
-      </td>
-      <th>学校名</th>
-      <td>
-        <input type="text" id="gakkoNm" name="kokyaku[gakkoNm]" value="<%= @kokyaku.gakkoNm %>" tabindex="28" />
+        <!-- 社員マスタを表示 -->
+        <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
       </td>
     </tr>
     <tr>
-      <th></th>
-      <td></td>
-      <th>携帯番号</th>
+      <th>理学療法士氏名</th>
       <td>
-        <input style="width:150px;" type="text" id="tel2" name="kokyaku[tel2]" value="<%= @kokyaku.tel2 %>" tabindex="18" />
+        <input style="width:70px;" type="text" id="rigakuRyohoNm1" name="kokyaku[rigakuRyohoNm1]" value="<%= @kokyaku.rigakuRyohoNm1 %>" tabindex="12" />
+        <input style="width:70px;" type="text" id="rigakuRyohoNm2" name="kokyaku[rigakuRyohoNm2]" value="<%= @kokyaku.rigakuRyohoNm2 %>" tabindex="12" />
       </td>
-      <th></th>
-      <td></td>
+      <th>仮合日</th>
+      <td>
+        <input style="width:130px;" type="text" id="kariAwaseDt" name="kokyaku[kariAwaseDt]" value="<%= @kokyaku.kariAwaseDt %>" tabindex="14" />
+      </td>
     </tr>
     <tr>
-      <th></th>
-      <td></td>
-      <th>FAX番号</th>
+      <th>作業療法士氏名</th>
       <td>
-        <input style="width:150px;" type="text" id="fax" name="kokyaku[fax]" value="<%= @kokyaku.fax %>" tabindex="20" />
+        <input style="width:70px;" type="text" id="rigakuRyohoNm1" name="kokyaku[rigakuRyohoNm1]" value="<%= @kokyaku.rigakuRyohoNm1 %>" tabindex="12" />
+        <input style="width:70px;" type="text" id="rigakuRyohoNm2" name="kokyaku[rigakuRyohoNm2]" value="<%= @kokyaku.rigakuRyohoNm2 %>" tabindex="12" />
       </td>
-      <th></th>
-      <td></td>
+      <th>納品担当者</th>
+      <td>
+        <!-- 社員マスタを表示 -->
+        <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
+      </td>
     </tr>
     <tr>
-      <th style="width:100px;">備考</th>
-      <td colspan="5">
-        <textarea style="width:500px;" id="biko" name="kokyaku[biko]" rows="3" cols="250" tabindex="30"><%= @kokyaku.biko %></textarea>
+      <th>見積担当営業</th>
+      <td>
+        <!-- 社員マスタを表示 -->
+        <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
+      </td>
+      <th>納品日</th>
+      <td>
+        <input style="width:130px;" type="text" id="nohinDt" name="kokyaku[nohinDt]" value="<%= @kokyaku.nohinDt %>" tabindex="14" />
+      </td>
+    </tr>
+    <tr>
+      <th>見積日</th>
+      <td>
+        <input style="width:130px;" type="text" id="mitsumoriDt" name="kokyaku[mitsumoriDt]" value="<%= @kokyaku.mitsumoriDt %>" tabindex="14" />
+      </td>
+      <th>交付日</th>
+      <td>
+        <input style="width:130px;" type="text" id="kofuDt" name="kokyaku[kofuDt]" value="<%= @kokyaku.kofuDt %>" tabindex="14" />
+      </td>
+    </tr>
+    <tr>
+      <th>種別</th>
+      <td>
+        <select style="width:130px;" id="shubetsuKbn" name="shubetsuKbn" value="<%= @kokyaku.shubetsuKbn %>">
+              <option value=""></option>
+              <option value="0">新規</option>
+              <option value="1">修理</option>
+            </select>
+      </td>
+      <th>入金日</th>
+      <td>
+        <input style="width:130px;" type="text" id="nyukinDt" name="kokyaku[nyukinDt]" value="<%= @kokyaku.nyukinDt %>" tabindex="14" />
+      </td>
+    </tr>
+    <tr>
+      <th>見積製品項目</th>
+      <td>
+        <!-- 製品マスタを表示 -->
+        <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
+      </td>
+      <th>押印日</th>
+      <td>
+        <input style="width:130px;" type="text" id="oshiinDt" name="kokyaku[oshiinDt]" value="<%= @kokyaku.oshiinDt %>" tabindex="14" />
+      </td>
+    </tr>
+    <tr>
+      <th>商品名</th>
+      <td>
+        <input style="width:130px;" type="text" id="shohinNm" name="kokyaku[shohinNm]" value="<%= @kokyaku.shohinNm %>" tabindex="14" />
+      </td>
+      <th>完了日</th>
+      <td>
+        <input style="width:130px;" type="text" id="kanryoDt" name="kokyaku[kanryoDt]" value="<%= @kokyaku.kanryoDt %>" tabindex="14" />
+      </td>
+    </tr>
+    <tr>
+      <th>保険種別1</th>
+      <td>
+      <!-- 保険種別マスタを表示 -->
+        <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
+      </td>
+      <th>完成図</th>
+      <!-- 完成図を表示する -->
+      <td rowspan="4">
+      </td>
+    </tr>
+    <tr>
+      <th>保険種別2</th>
+      <td>
+        <!-- 保険種別マスタを表示 -->
+        <%= select :kokyaku, :shobyouCd2, @shobyo.map{|t| [t.shobyoNm, t.shobyoCd]}, :include_blank => true %>
+      </td>
+    </tr>
+    <tr>
+      <th>金額</th>
+      <td>
+        <input style="width:130px;" type="text" id="kin" name="kokyaku[kin]" value="<%= @kokyaku.kin %>" tabindex="14" />
+      </td>
+    </tr>
+    <tr>
+      <th>請求金額（負担額）</th>
+      <td>
+        <input style="width:130px;" type="text" id="seikyuKin" name="kokyaku[seikyuKin]" value="<%= @kokyaku.seikyuKin %>" tabindex="14" />
+      </td>
+    </tr>
+    <tr>
+      <th>商品仕様・備考</th>
+      <td>
+        <input style="width:130px;" type="text" id="shohinSiyoBiko" name="kokyaku[shohinSiyoBiko]" value="<%= @kokyaku.shohinSiyoBiko %>" tabindex="14" />
       </td>
     </tr>
   </table>
@@ -92,7 +166,7 @@
 </form>
 <script>
 $(function() {
-  $("#kokyakuForm").validate({
+  $("#konyuRirekiForm").validate({
     errorClass:'error',
     errorElement:'label',
     highlight: function (element, errorClass, validClass) {
@@ -102,7 +176,7 @@ $(function() {
       $(element).removeClass(errorClass);
     },
     rules: {
-        kokyakuNm: {required:true, maxlength:10},
+        kokyakuId: {required:true},
         kokyakuNmKana: {katakana:true, maxlength:10},
         tanjoDt: {date:true},
         postNo: {postnum:true, maxlength:8},
