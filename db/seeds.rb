@@ -41,6 +41,15 @@ CSV.foreach('db/import/MitsumoriTankas.csv') do |row|
   MitsumoriTanka.create(:seihinNo => row[0], :seihinName => row[1], :tanka => row[2], :tax => row[3], :buhinCd => row[4], :torokushaId => 1, :koshinshaId => 1)
 end
 
+# TODO:完成部品マスタ(仮)
+# add records from CSV file
+KanseiBuhin.destroy_all(["1 = ?", 1])
+
+CSV.foreach('db/import/MitsumoriTankas.csv') do |row|
+  if row[4].present?
+    KanseiBuhin.create(:buhinCd => row[4], :buhinNm => row[1], :kakaku => row[2], :katashikiCd => row[4], :katashikiNm => row[4].to_s + "型", :shiyoBuhin => row[1], :biko => row[0], :torokushaId => 1, :koshinshaId => 1)
+  end
+end
 
 ############################################################
 # Test Data

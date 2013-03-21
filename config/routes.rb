@@ -40,7 +40,7 @@ JqgridSample::Application.routes.draw do
 
   resources :items do
     get 'report', :on => :collection
-    get 'report2', :on => :collection
+    get 'image', :on => :collection
   end
 
   resources :toukeis do

@@ -4,7 +4,7 @@
     <div style="margin: 5px;"></div>
     <a class="btn btn-primary" id="btnSearch" href="#" />SERACH</a>
     <a class="btn btn-primary" id="btnReport" href="#" />Report</a>
-    <a class="btn btn-primary" id="btnReport2" href="#" />Report2</a>
+    <a class="btn btn-primary" id="btnImage" href="#" />Image</a>
     <a class="btn btn-primary" id="btnReport1" href="#" />Report</a>
     <div style="margin: 5px;"></div>
 </div>
@@ -54,6 +54,7 @@ $("a#btnSearch").click(function() {
 
 $("a#btnReport").click(function() {
     var url = "items/report.json";
+    url += "?konyuRirekiId=" + $("#txtID").val() + "&kokyakuId=" + $("#txtName").val();
     $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
@@ -68,8 +69,8 @@ $("a#btnReport").click(function() {
     });
 });
 
-$("a#btnReport2").click(function() {
-    var url = "items/report2.json";
+$("a#btnImage").click(function() {
+    var url = "items/image.json";
     $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
@@ -86,6 +87,7 @@ $("a#btnReport2").click(function() {
 
 $("a#btnReport1").click(function() {
     var url = "report/report.json";
+    url += "?konyuRirekiId=" + $("#txtID").val() + "&kokyakuId=" + $("#txtName").val();
     $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",

@@ -90,6 +90,9 @@ class ItemsController < ApplicationController
 
   def report
 
+    konyuRirekiId = params[:konyuRirekiId]
+    kokyakuId = params[:kokyakuId]
+
     ###########################
     # 1列目
     ###########################
@@ -292,13 +295,10 @@ class ItemsController < ApplicationController
     @@headers4 = ['seihinName','tanka','suryo','kin']
 
 
-    # TODO:購入履歴ID、顧客IDをパラメータで受け取る。
-    konyuRirekiId = 1
-    kokyakuId = 1
-
-
-    @@konyuRireki = KonyuRireki.where("kokyakuId == ? and kokyakuId == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
-    
+    ###########################
+    # データ取得
+    ###########################
+    @@konyuRireki = KonyuRireki.where("konyuRirekiId == ? and kokyakuId == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
     @@mitsumoriDt = @@konyuRireki["mitsumoriDt"]
     
     kokyaku = Kokyaku.find(@@konyuRireki["kokyakuId"])
@@ -312,24 +312,20 @@ class ItemsController < ApplicationController
     @@katashiki = seihin["katashikiNm"]
 
 
-    @@mitsumori = Mitsumori.where("kokyakuId == ? and kokyakuId == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
-
+    @@mitsumori = Mitsumori.where("konyuRirekiId == ? and kokyakuId == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
     mitsumoriNo = @@mitsumori["mitsumoriNo"]
 
     @@mitsumoriTankas = MitsumoriTanka.where(:buhinCd == nil)
 
-    # @@kanseiBuhins = KanseiBuhin.where(:buhinCd == nil)
-    @@kanseiBuhins = KanseiBuhin.all
-
-    # TODO:JOIN
-    # @@kanseiBuhins = KanseiBuhin.where(:buhinCd == nil)
     @@mitsumoriSeihins = MitsumoriSeihin.where(:mitsumoriNo == mitsumoriNo)
 
+    sqlstr = "SELECT * FROM (SELECT * FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.seihinNo = mt.seihinNo LEFT JOIN kansei_buhins kn ON mt.buhinCd = kn.buhinCd) WHERE buhinCd IS NOT NULL"
+    @@kanseiBuhins = ActiveRecord::Base.connection.execute(sqlstr)
 
 
-
-
-
+    ###########################
+    # 帳票埋め込み
+    ###########################
     # ThinReportレイアウトのテンプレートの場所を指定する
     templateDir = File.join(Rails.root, 'app', 'reports')
 
@@ -463,8 +459,8 @@ class ItemsController < ApplicationController
       ###########################
       # 明細行
       ###########################
+      # 3列目の処理
       @@mitsumoriTankas.each {|row|
-        # 3列目の処理
         if @@hash3.key?(row["seihinNo"])
           line = @@hash3[row["seihinNo"]]
 
@@ -473,24 +469,10 @@ class ItemsController < ApplicationController
             item(id).value(number_format(row[header]))
           }
         end
-
-        # # 4列目の処理
-        # # TODO:このロジックはない…
-        # if @@hash4.key?(row["seihinNo"])
-        #   line = @@hash4[row["seihinNo"]]
-
-        #   @@headers4.each {|header|
-        #     if header == 'seihinName'
-        #       id = header + '_4_' + line.to_s
-        #       item(id).value(number_format(row[header]))
-        #     end
-        #   }
-        # end
       }
 
-
+      # 3列目の処理
       @@mitsumoriSeihins.each {|row|
-        # 3列目の処理
         if @@hash3.key?(row["seihinNo"])
           line = @@hash3[row["seihinNo"]]
 
@@ -499,24 +481,30 @@ class ItemsController < ApplicationController
             item(id).value(number_format(row[header]))
           }
         end
-
-        # # 4列目の処理
-        # # TODO:本来はここで紐付く製品名を取得するハズ…。
-        # if @@hash4.key?(row["seihinNo"])
-        #   line = @@hash4[row["seihinNo"]]
-
-        #   @@headers4.each {|header|
-        #     if header != 'seihinName'
-        #       id = header + '_4_' + line.to_s
-        #       item(id).value(number_format(row[header]))
-        #     end
-        #   }
-        # end
       }
 
-
+      # 4列目の処理
+      @@kanseiBuhins.each_with_index do |row, i|
+        # 仕様：最大26行目まで
+        if i < 26
+          line = i + 1
+          @@headers4.each {|header|
+            id = header + '_4_' + line.to_s
+            if header == 'seihinName'
+              item(id).value(row["buhinNm"])
+            else
+              item(id).value(number_format(row[header]))
+            end
+          }
+        else
+          break
+        end
+      end
     end
 
+    ###########################
+    # PDFファイル操作
+    ###########################
     # 保存先
     saveDir = File.join(Rails.root, "public", "tmp")
 
@@ -524,9 +512,9 @@ class ItemsController < ApplicationController
     files = Dir.glob(File.join(saveDir,"*.pdf"))
     files.each do |file|
         fileDate = File.basename(file)[0..7] 
-        # 保存日数を指定する          (※とりあえず全部削除する)
+        # 保存日数を指定する (※当日分だけ保持)
         delDate = (Date.today).strftime("%Y%m%d")
-        if fileDate <= delDate
+        if fileDate < delDate
           File.delete(file)
         end
     end
@@ -551,7 +539,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def report2
+  def image
 
     # ThinReportレイアウトのテンプレートの場所を指定する
     templateDir = File.join(Rails.root, 'app', 'reports')
