@@ -46,3 +46,19 @@ MitsumoriTanka.destroy_all(["1 = ?", 1])
 CSV.foreach('db/import/MitsumoriTankas.csv') do |row|
   MitsumoriTanka.create(:seihinNo => row[0], :seihinName => row[1], :tanka => row[2], :tax => row[3], :torokushaId => 1, :koshinshaId => 1)
 end
+
+####User.destroy_all(["1 = ?", 1])
+User.create(
+	:username => 'admin',
+	:email => 'admin@aaaaa.co.jp',
+	:password => 'admin',
+	:password_confirmation => 'admin',
+	:shainCd => 1,
+	:koshinshaId => 1,
+	:torokushaId => 1,
+	:myoji => 'システム',
+	:name => '管理者',
+	:myojiFuri => 'システム',
+	:nameFuri => 'カンリシャ',
+	:manageFlg => 1
+)
