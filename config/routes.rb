@@ -36,10 +36,11 @@ JqgridSample::Application.routes.draw do
 
   get "item_extend/search"
 
+  get "report/report"
+
   resources :items do
     get 'report', :on => :collection
-    get 'report2', :on => :collection
-    get 'display', :on => :collection
+    get 'image', :on => :collection
   end
 
   resources :toukeis do
