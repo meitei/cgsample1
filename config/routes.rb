@@ -4,6 +4,9 @@ JqgridSample::Application.routes.draw do
     get 'search', :on => :collection
   end
 
+  resources :users do
+      get 'search', :on => :collection
+  end
 
   resources :kansei_buhins do
       get 'search', :on => :collection

@@ -1,27 +1,23 @@
-<h1>Sign Up</h1>  
-  
-<%= form_for @user do |f| %>  
-  <% if @user.errors.any?%>  
-    <div class="error_messages">  
-      <h2>Form is invalid</h2>  
-      <ul>  
-        <% for message in @user.errors.full_messages %>  
-          <li><%= message %></li>  
-        <% end %>  
-      </ul>  
-    </div>  
-  <% end %>  
-  <div class="field">  
-    <%= f.label :email %>  
-    <%= f.text_field :email %>  
-  </div>  
-  <div class="field">  
-    <%= f.label :password %>  
-    <%= f.password_field :password %>  
-  </div>  
-  <div class="field">  
-    <%= f.label :password_confirmation %>  
-    <%= f.password_field :password_confirmation %>  
-  </div>  
-  <div class="actions"><%= f.submit %></div>  
-<% end %>  
+<div class="title">社員管理：新規社員登録</div>
+<div class="statuslabel"><span>社員登録</span>コメント　無ければ削除</div>
+<div id="userSearch" class="Tourokuform cf">
+	<%= render 'form' %>
+</div>
+<div class="btn_box">
+	<a id="btnUserReturn" href="#" class="btn_back2"><img src="/images/btn_back2.png" alt="戻る" /></a>
+	<a id="btnUserRegist" href="#" class="btn_add2"><img src="/images/btn_add2.png" alt="登録" /></a>
+</div>
+<script>
+$(function() {
+	$("a#btnUserRegist").click(function() {
+	    executeUser();
+	    return false;
+	});
+
+	$("a#btnUserReturn").click(function() {
+    	location.href = "/users";
+	    return false;
+	});
+});
+
+</script>

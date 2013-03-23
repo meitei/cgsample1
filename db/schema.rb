@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130317100715) do
+ActiveRecord::Schema.define(:version => 20130320083322) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -54,15 +54,14 @@ ActiveRecord::Schema.define(:version => 20130317100715) do
     t.string   "katashikiNm", :limit => 50
     t.integer  "kakaku",                     :null => false
     t.string   "shiyoBuhin",  :limit => 50
-    t.text     "biko",        :limit => 200
+    t.string   "biko",        :limit => 200
     t.integer  "koshinshaId",                :null => false
     t.integer  "torokushaId",                :null => false
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
 
-  create_table "kokyakus", :id => false, :force => true do |t|
-    t.integer  "kokyakuId"
+  create_table "kokyakus", :primary_key => "kokyakuId", :force => true do |t|
     t.string   "kokyakuNm",     :limit => 100
     t.string   "kokyakuNmKana", :limit => 100
     t.integer  "seibetsu"
@@ -130,8 +129,8 @@ ActiveRecord::Schema.define(:version => 20130317100715) do
     t.integer  "tanka",                     :null => false
     t.float    "tax",                       :null => false
     t.integer  "buhinCd"
-    t.integer  "koshinshaId",               :null => false
     t.integer  "torokushaId",               :null => false
+    t.integer  "koshinshaId",               :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
@@ -197,20 +196,21 @@ ActiveRecord::Schema.define(:version => 20130317100715) do
     t.datetime "updated_at",                     :null => false
   end
 
-  create_table "users", :primary_key => "shainId", :force => true do |t|
-    t.string   "shainCd",       :limit => 10, :null => false
-    t.string   "myoji",         :limit => 50, :null => false
-    t.string   "name",          :limit => 50, :null => false
-    t.string   "myojiFuri",     :limit => 50, :null => false
-    t.string   "nameFuri",      :limit => 50, :null => false
-    t.string   "loginId",       :limit => 50, :null => false
-    t.string   "loginPassword", :limit => 50, :null => false
-    t.integer  "manageFlg",                   :null => false
-    t.integer  "koshinshaId",                 :null => false
-    t.integer  "torokushaId",                 :null => false
-    t.date     "loginLastDt"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+  create_table "users", :force => true do |t|
+    t.string   "username",                       :null => false
+    t.string   "email"
+    t.string   "crypted_password"
+    t.string   "salt"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "shainCd",          :limit => 10, :null => false
+    t.string   "myoji",            :limit => 50, :null => false
+    t.string   "name",             :limit => 50, :null => false
+    t.string   "myojiFuri",        :limit => 50, :null => false
+    t.string   "nameFuri",         :limit => 50, :null => false
+    t.integer  "manageFlg",                      :null => false
+    t.integer  "koshinshaId",                    :null => false
+    t.integer  "torokushaId",                    :null => false
   end
 
 end
