@@ -1,69 +1,42 @@
 <div id="estimateForm" class="jqwizard">
     <div class="jqwizard_panel">
         <div class="jqwizard_content" id="order_type">
-            <%= render 'order_type' %>
-        </div>
-        <div class="jqwizard_content" id="structural_frame">
-            <%= render 'structural_frame' %>
-        </div>
-        <div class="jqwizard_content" id="main_frame">
-            <%= render 'main_frame' %>
+            <%= render 'step_1' %>
         </div>
     </div>
     <div class="jqwizard_buttons">
-        <button type="button" id="preview"> <img src="/images/jqwizard/arrow_left.png" alt="" /> Back </button>
-        <button type="button" id="next"> Next <img src="/images/jqwizard/arrow_right.png" alt=""/> </button>
+        <button type="button" class="jqwizard_previous"><img src="/images/btn_back.png" alt="戻る" /></button>
+        <button type="button" class="jqwizard_next"><img src="/images/btn_next.png" alt="次へ"/></button>
     </div>
-    <div class="jqwizard_navi">
+    <div class="jqwizard_navi cf">
         <ul id="jqwizard_list">
-            <li id="step1"><a href="#order_type" title=""><em>Step 1</em><span>座位保持装置の選択</span></a></li>
-            <li id="step2"><a href="#structural_frame" title=""><em>Step 2</em><span>構造フレーム選択</span></a></li>
+            <li id="step1"><a href="#order_type"><em>Step 1</em><span>座位保持装置の選択</span></a></li>
+            <li id="step2"><a href="#"><em>Step 2</em><span>&nbsp;</span></a></li>
+            <li id="step3"><a href="#"><em>Step 3</em><span>&nbsp;</span></a></li>
+            <li id="step4"><a href="#"><em>Step 4</em><span>&nbsp;</span></a></li>
+            <li id="step5"><a href="#"><em>Step 5</em><span>&nbsp;</span></a></li>
+            <li id="step6"><a href="#"><em>Step 6</em><span>&nbsp;</span></a></li>
+            <li id="step7"><a href="#"><em>Step 7</em><span>&nbsp;</span></a></li>
+            <li id="step8"><a href="#"><em>Step 8</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
         </ul>
     </div>
 </div>
-  <br />
-    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnEstimateRegist" href="#" style="display:none;"/>登録</a></div>
-    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnEstimateBack" href="/mitsumoris" />戻る</a></div>
-<div>
+    <div class="btn_box">
+      <a id="btnEstimateBack" href="/mitsumoris" class="btn_back2" /><img src="/images/btn_back2_mitsumori.png" alt="戻る" /></a>
+      <a id="btnEstimateRegist" href="#" class="btn_add2" /><img src="/images/btn_add2.png" alt="登録" /></a>
+    </div>
 </div>
-<style type="text/css">
-.jqwizard {
-    width:100%;
-}
-.jqwizard_panel {
-    padding:5px;
-    background-color:#F5F5F5;
-}
-.edit_as_you_like {
-    height:300px;
-}
-.jqwizard_buttons {
-    margin:10px;
-}
-
-/*
- * このサンプル用の画像パスを指定
- */
-.jqwizard_navi li {
-  background-image: url(/images/jqwizard/navBtn.gif);
-  width: 120px;
-}
-
-.jqwizard_navi li.jqwizard_current {
-  background-image: url(/images/jqwizard/navCurrentBtn.gif);
-}
-
-.jqwizard_navi li.jqwizard_lastdone {
-  background-image: url(/images/jqwizard/navLastDoneBtn.gif);
-}
-
-.jqwizard_navi li.jqwizard_done {
-  background-image: url(/images/jqwizard/navDoneBtn.gif);
-}
-
-</style>
-<script type="text/javascript">
+<script>
   $(document).ready(function(){
-      //$("#estimateForm").wizard();
+      $("#estimateForm").wizard();
   });
 </script>
