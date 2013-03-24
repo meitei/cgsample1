@@ -94,12 +94,12 @@ class KonyuRirekisController < ApplicationController
   # GET /konyu_rirekis/new
   # GET /konyu_rirekis/new.json
   def new
-    @kokyaku = KonyuRireki.new
-    @shobyo = Shobyo.all
+    @konyu_rireki = KonyuRireki.new
+    @hoken_shubetsu = HokenShubetsu.all
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @kokyaku }
+      format.json { render json: @konyu_rireki }
     end
   end
 
