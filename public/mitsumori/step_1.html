@@ -105,12 +105,14 @@
         $("div#step2").load("/mitsumori/step_2_a.html");
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("構造フレーム");
+      $("button.jqwizard_next").attr("disabled", false);
       });
 
       $("input#step1_2").click(function(){
         $("div#step2").load("/mitsumori/step_2_b.html");
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("フレーム材質");
+      $("button.jqwizard_next").attr("disabled", false);
       });
   });
 </script>
