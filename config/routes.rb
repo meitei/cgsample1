@@ -55,6 +55,13 @@ JqgridSample::Application.routes.draw do
       get 'search', :on => :collection
   end
 
+  resources :common_data do
+    get 'kokyaku_list', :on => :collection
+    get 'user_list', :on => :collection
+    get 'byoin_list', :on => :collection
+    get 'seihin_list', :on => :collection
+  end
+
   resources :companies
 
   match 'login' => 'sessions#new', :as => :login
