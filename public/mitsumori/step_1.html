@@ -1,0 +1,118 @@
+<table class="jqwizard_label">
+  <tr><td class="td1"></td>
+      <td class="td2">説明</td>
+      <td class="td3">制作方法を選んでください</td>
+      <td class="td4">注文書チェック項目</td>
+      <td class="td5">写真</td></tr>
+</table>
+<label for="step1_1">
+<table class="jqwizard_item">
+  <tr><td class="td1"><div>1<br /><input type="radio" name="1" value="セミオーダー" id="step1_1"></div></td>
+      <td class="detail">
+        <table class="jqwizard_item_detail">
+          <tr>
+            <td class="td2"></td>
+            <td class="td3" colspan="4"><span class="tit_item">セミオーダー</span></td>
+            <td class="td4"></td>
+          </tr>
+          <tr>
+            <td class="td2">説明</td>
+            <td class="td3" colspan="4">完成用部品に登録されているメイン（ベース）フレームを使用します<br />
+				支持部（バックサポート・シートなど）は、オーダーメイドで製作可能です<br />
+				各フレームの仕様、サイズ寸法をご確認下さい<br />
+				1、高さ調整付きベースフレーム<br />
+				2、一般的な屋外用（学校用）ティルト式メインフレーム<br />
+				3、リクライニング・ティルト式バギーフレーム<br />
+				4、車椅子フレーム</td>
+            <td class="td4">無し</td>
+          </tr>
+          <tr>
+            <td class="td2">見積</td>
+            <td class="mitsumori_td1">内訳</td>
+            <td class="mitsumori_td2">数量</td>
+            <td class="mitsumori_td3">単価</td>
+            <td class="mitsumori_td4">金額</td>
+            <td class="td4">前輪　有</td>
+          </tr>
+        </table></td>
+      <td class="td5"><div><img src="http://dummyimage.com/127x180/666666/ffffff.png" alt="" /></div></td></tr>
+</table>
+</label>
+
+<label for="step1_2">
+<table class="jqwizard_item">
+  <tr><td class="td1"><div>2<br /><input type="radio" name="1" value="フルオーダー" id="step1_2"></div></td>
+      <td class="detail">
+        <table class="jqwizard_item_detail">
+          <tr>
+            <td class="td2"></td>
+            <td class="td3" colspan="4"><span class="tit_item">フルオーダー</span></td>
+            <td class="td4"></td>
+          </tr>
+          <tr>
+            <td class="td2">説明</td>
+            <td class="td3" colspan="4">完成用部品に登録されているメイン（ベース）フレームを使用します<br />
+				支持部（バックサポート・シートなど）は、オーダーメイドで製作可能です<br />
+				各フレームの仕様、サイズ寸法をご確認下さい<br />
+				1、高さ調整付きベースフレーム<br />
+				2、一般的な屋外用（学校用）ティルト式メインフレーム<br />
+				3、リクライニング・ティルト式バギーフレーム<br />
+				4、車椅子フレーム</td>
+            <td class="td4">無し</td>
+          </tr>
+          <tr>
+            <td class="td2">見積</td>
+            <td class="mitsumori_td1">内訳</td>
+            <td class="mitsumori_td2">数量</td>
+            <td class="mitsumori_td3">単価</td>
+            <td class="mitsumori_td4">金額</td>
+            <td class="td4">前輪　有</td>
+          </tr>
+          <tr>
+            <td class="td2"></td>
+            <td class="mitsumori_td1">キャスター</td>
+            <td class="mitsumori_td2">個数　4</td>
+            <td class="mitsumori_td3">1400</td>
+            <td class="mitsumori_td4">5600</td>
+            <td class="td4">前輪　有</td>
+          </tr>
+          <tr>
+            <td class="td2"></td>
+            <td class="mitsumori_td1">キャスター</td>
+            <td class="mitsumori_td2">個数　4</td>
+            <td class="mitsumori_td3">1400</td>
+            <td class="mitsumori_td4">5600</td>
+            <td class="td4">前輪　有</td>
+          </tr>
+        </table></td>
+      <td class="td5"><div><img src="http://dummyimage.com/127x180/666666/ffffff.png" alt="" /></div></td></tr>
+</table>
+</label>
+<script>
+  $(document).ready(function(){
+      $("li#step10").hide();
+      $("li#step11").hide();
+      $("li#step12").hide();
+      $("li#step13").hide();
+      $("li#step14").hide();
+      $("li#step15").hide();
+      $("li#step16").hide();
+      $("li#step17").hide();
+      $("#btnEstimateRegist").hide();
+      $("button.jqwizard_next").attr("disabled", true);
+
+      $("input#step1_1").click(function(){
+        $("div#step2").load("/mitsumori/step_2_a.html");
+        $("li#step2 a").attr("href", "#step2");
+        $("li#step2 span").text("構造フレーム");
+      $("button.jqwizard_next").attr("disabled", false);
+      });
+
+      $("input#step1_2").click(function(){
+        $("div#step2").load("/mitsumori/step_2_b.html");
+        $("li#step2 a").attr("href", "#step2");
+        $("li#step2 span").text("フレーム材質");
+      $("button.jqwizard_next").attr("disabled", false);
+      });
+  });
+</script>
