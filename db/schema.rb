@@ -109,16 +109,6 @@ ActiveRecord::Schema.define(:version => 20130321150243) do
     t.integer  "torokushaId"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
-    t.string   "ishiNm1"
-    t.string   "ishiNm2"
-    t.string   "rigakuRyohoNm1"
-    t.string   "rigakuRyohoNm2"
-    t.string   "sagyoRyohoNm1"
-    t.string   "sagyoRyohoNm2"
-    t.integer  "shubetsuKn"
-    t.integer  "seihinCd"
-    t.integer  "hokenShubetsuCd1"
-    t.integer  "hokenShubetsuCd2"
   end
 
   create_table "mitsumori_seihins", :force => true do |t|
@@ -139,8 +129,8 @@ ActiveRecord::Schema.define(:version => 20130321150243) do
     t.integer  "tanka",                     :null => false
     t.float    "tax",                       :null => false
     t.integer  "buhinCd"
-    t.integer  "koshinshaId",               :null => false
     t.integer  "torokushaId",               :null => false
+    t.integer  "koshinshaId",               :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
