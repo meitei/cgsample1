@@ -5,14 +5,14 @@
       <td class="td4">注文書チェック項目</td>
       <td class="td5">写真</td></tr>
 </table>
-<label for="step1_1">
+<label for="step1_a">
 <table class="jqwizard_item">
   <tr><td class="td1"><div>1<br /><input type="radio" name="1" value="セミオーダー" id="step1_1"></div></td>
       <td class="detail">
         <table class="jqwizard_item_detail">
           <tr>
             <td class="td2"></td>
-            <td class="td3" colspan="4"><span class="tit_item">セミオーダー</span></td>
+            <td class="td3" colspan="4"><span class="tit_item">アルミ・ステンレス</span></td>
             <td class="td4"></td>
           </tr>
           <tr>
@@ -46,7 +46,7 @@
         <table class="jqwizard_item_detail">
           <tr>
             <td class="td2"></td>
-            <td class="td3" colspan="4"><span class="tit_item">フルオーダー</span></td>
+            <td class="td3" colspan="4"><span class="tit_item">木製</span></td>
             <td class="td4"></td>
           </tr>
           <tr>
@@ -88,3 +88,16 @@
       <td class="td5"><div><img src="http://dummyimage.com/127x180/666666/ffffff.png" alt="" /></div></td></tr>
 </table>
 </label>
+<script>
+  $(document).ready(function(){
+      $("li#step10").hide();
+      $("li#step11").hide();
+      $("li#step12").hide();
+      $("li#step13").hide();
+      $("li#step14").hide();
+      $("li#step15").hide();
+      $("li#step16").hide();
+      $("li#step17").hide();
+      $("#btnEstimateRegist").hide();
+  });
+</script>
