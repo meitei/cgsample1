@@ -64,17 +64,17 @@ Kokyaku.create(
 
 
 # Seihin.destroy_all(["1 = ?", 1])
-Seihin.create(
-	:seihinId => 1,
-	:bunruiCd => 1,
-	:bunruiNm => '分類１',
-	:hinmeiCd => 1,
-	:hinmeiNm => '品名１',
-	:katashikiCd => 1,
-	:katashikiNm => '座位保持装置 型式001',
-	:torokushaId => 1,
-	:koshinshaId => 1
-)
+#Seihin.create(
+#	:seihinId => 1,
+#	:bunruiCd => 1,
+#	:bunruiNm => '分類１',
+#	:hinmeiCd => 1,
+#	:hinmeiNm => '品名１',
+#	:katashikiCd => 1,
+#	:katashikiNm => '座位保持装置 型式001',
+#	:torokushaId => 1,
+#	:koshinshaId => 1
+#)
 
 
 # MitsumoriSeihin.destroy_all(["1 = ?", 1])
