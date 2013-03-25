@@ -217,7 +217,7 @@ class ReportController < ApplicationController
     ###########################
     # データ取得
     ###########################
-    @@konyuRireki = KonyuRireki.where("konyuRirekiId == ? and kokyakuId == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
+    @@konyuRireki = KonyuRireki.where("\"konyuRirekiId\" == ? and \"kokyakuId\" == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
     @@mitsumoriDt = @@konyuRireki["mitsumoriDt"]
     
     kokyaku = Kokyaku.find(@@konyuRireki["kokyakuId"])
@@ -231,7 +231,7 @@ class ReportController < ApplicationController
     @@katashiki = seihin["katashikiNm"]
 
 
-    @@mitsumori = Mitsumori.where("konyuRirekiId == ? and kokyakuId == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
+    @@mitsumori = Mitsumori.where("\"konyuRirekiId\" == ? and \"kokyakuId\" == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
 
     if @@mitsumori.present?
       mitsumoriNo = @@mitsumori["mitsumoriNo"]
@@ -240,7 +240,7 @@ class ReportController < ApplicationController
 
       @@mitsumoriSeihins = MitsumoriSeihin.where(:mitsumoriNo == mitsumoriNo)
 
-      sqlstr = "SELECT * FROM (SELECT * FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.seihinNo = mt.seihinNo LEFT JOIN kansei_buhins kn ON mt.buhinCd = kn.buhinCd) WHERE buhinCd IS NOT NULL"
+      sqlstr = "SELECT * FROM (SELECT * FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" LEFT JOIN kansei_buhins kn ON mt.\"buhinCd\" = kn.\"buhinCd\") WHERE \"buhinCd\" IS NOT NULL"
       @@kanseiBuhins = ActiveRecord::Base.connection.execute(sqlstr)
     end
 
