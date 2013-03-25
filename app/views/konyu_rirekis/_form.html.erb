@@ -120,7 +120,7 @@
     <tr>
       <th>見積製品項目</th>
       <td>
-        <input style="width:70px;" type="text" id="seihinCd" name="konyu_rireki[seihinCd]" value="<%= @konyu_rireki.seihinCd %>" tabindex="12" />
+        <input style="width:70px;" type="text" id="seihinId" name="konyu_rireki[seihinId]" value="<%= @konyu_rireki.seihinId %>" tabindex="12" />
         <!-- <input style="width:70px;" type="text" id="hinmeiNm" name="konyu_rireki[hinmeiNm]" value="<%= @konyu_rireki.hinmeiNm %>" tabindex="12" /> -->
         <div id="hinmeiNm"><%= @konyu_rireki.hinmeiNm %></div>
       </td>
@@ -173,7 +173,7 @@
     <tr>
       <th>商品仕様・備考</th>
       <td>
-        <input style="width:230px;" type="text" id="shohinSiyoBiko" name="konyu_rireki[shohinSiyoBiko]" value="<%= @konyu_rireki.shohinSiyoBiko %>" tabindex="14" />
+        <input style="width:230px;" type="text" id="shohinShiyoBiko" name="konyu_rireki[shohinShiyoBiko]" value="<%= @konyu_rireki.shohinShiyoBiko %>" tabindex="14" />
       </td>
       <th><br/></th>
       <td>
@@ -320,13 +320,13 @@ $(function() {
   });
   $( "#byoinNm" ).css({width:"150px"}).addClass("input-xlarge uneditable-input");
 
-  $( "#seihinCd" ).autocomplete({
+  $( "#seihinId" ).autocomplete({
     source: function(request, response) {
       $.ajax({
         url: "/common_data/seihin_list.json",
         dataType: "json",
         root: "list",
-        data: {'seihinId' : $('#seihinCd').val()},
+        data: {'seihinId' : $('#seihinId').val()},
         success: function(data) {
           response($.map(data, function(item) {
             return {

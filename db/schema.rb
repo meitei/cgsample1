@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(:version => 20130321150243) do
     t.string   "shohinNm"
     t.decimal  "kin"
     t.decimal  "seikyuKin"
-    t.string   "shohinSiyoBiko"
+    t.string   "shohinShiyoBiko"
     t.integer  "uketsukeSesakuTantoCd"
     t.date     "juchuDt"
     t.integer  "kariAwaseTantoCd"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20130321150243) do
     t.string   "sagyoRyohoNm1"
     t.string   "sagyoRyohoNm2"
     t.integer  "shubetsuKn"
-    t.integer  "seihinCd"
+    t.integer  "seihinId"
     t.integer  "hokenShubetsuCd1"
     t.integer  "hokenShubetsuCd2"
   end
@@ -139,8 +139,8 @@ ActiveRecord::Schema.define(:version => 20130321150243) do
     t.integer  "tanka",                     :null => false
     t.float    "tax",                       :null => false
     t.integer  "buhinCd"
-    t.integer  "koshinshaId",               :null => false
     t.integer  "torokushaId",               :null => false
+    t.integer  "koshinshaId",               :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end

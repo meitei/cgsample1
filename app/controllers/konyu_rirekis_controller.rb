@@ -34,7 +34,7 @@ class KonyuRirekisController < ApplicationController
     conditions = conditions.where("\"kariAwaseTantoCd\" = ?", params[:konyu_rireki][:kariAwaseTantoCd]) if params[:konyu_rireki][:kariAwaseTantoCd] != ""
     conditions = conditions.where("\"nyukinDt\" >= ?", params[:konyu_rireki][:nyukinDtFrom]) if params[:konyu_rireki][:nyukinDtFrom] != ""
     conditions = conditions.where("\"nyukinDt\" <= ?", params[:konyu_rireki][:nyukinDtTo]) if params[:konyu_rireki][:nyukinDtTo] != ""
-    conditions = conditions.where("\"seihinCd\" = ?", params[:konyu_rireki][:seihinCd]) if params[:konyu_rireki][:seihinCd] != ""
+    conditions = conditions.where("\"seihinId\" = ?", params[:konyu_rireki][:seihinId]) if params[:konyu_rireki][:seihinId] != ""
     conditions = conditions.where("\"nohinTantoCd\" = ?", params[:konyu_rireki][:nohinTantoCd]) if params[:konyu_rireki][:nohinTantoCd] != ""
     conditions = conditions.where("\"oshiinDt\" >= ?", params[:konyu_rireki][:oshiinDtFrom]) if params[:konyu_rireki][:oshiinDtFrom] != ""
     conditions = conditions.where("\"oshiinDt\" <= ?", params[:konyu_rireki][:oshiinDtTo]) if params[:konyu_rireki][:oshiinDtTo] != ""
@@ -208,16 +208,12 @@ class KonyuRirekisController < ApplicationController
   # DELETE /konyu_rirekis/1.json
   def destroy
     @konyuRireki = KonyuRireki.find(params[:id])
-    #@konyuRireki.destroy
+    @konyuRireki.destroy
+
     logger.debug(@konyuRireki)
     respond_to do |format|
-      if @konyuRireki.update_attribute(:delFlg, 1)
-        format.html { redirect_to @konyuRireki, notice: 'KonyuRireki was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @konyuRireki.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @konyuRireki, notice: 'KonyuRireki was successfully deleted.' }
+      format.json { head :no_content }
     end
   end
 
@@ -243,7 +239,7 @@ class KonyuRirekisController < ApplicationController
     joins << "LEFT OUTER JOIN users kat ON kat.shainCd = konyu_rirekis.kariAwaseTantoCd "
     joins << "LEFT OUTER JOIN users nt ON nt.shainCd = konyu_rirekis.nohinTantoCd "
     joins << "LEFT OUTER JOIN users mt ON mt.shainCd = konyu_rirekis.mitsumoriTantoEigyoCd "
-    joins << "LEFT OUTER JOIN seihins ON seihins.seihinId = konyu_rirekis.seihinCd "
+    joins << "LEFT OUTER JOIN seihins ON seihins.seihinId = konyu_rirekis.seihinId "
     joins << "LEFT OUTER JOIN hoken_shubetsus hs1 ON hs1.hokenShubetsuCd = konyu_rirekis.hokenShubetsuCd1 "
     joins << "LEFT OUTER JOIN hoken_shubetsus hs2 ON hs2.hokenShubetsuCd = konyu_rirekis.hokenShubetsuCd2 "
 
