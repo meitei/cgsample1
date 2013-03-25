@@ -66,11 +66,11 @@ Kokyaku.create(
 # Seihin.destroy_all(["1 = ?", 1])
 Seihin.create(
 	:seihinId => 1,
-	:bunruiCd => 1,
+	:bunruiCd => 1.to_s,
 	:bunruiNm => '分類１',
-	:hinmeiCd => 1,
+	:hinmeiCd => 1.to_s,
 	:hinmeiNm => '品名１',
-	:katashikiCd => 1,
+	:katashikiCd => 1.to_s,
 	:katashikiNm => '座位保持装置 型式001',
 	:torokushaId => 1,
 	:koshinshaId => 1
