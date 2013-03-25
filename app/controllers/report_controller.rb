@@ -239,7 +239,7 @@ class ReportController < ApplicationController
 
       @@mitsumoriSeihins = MitsumoriSeihin.where(:mitsumoriNo == mitsumoriNo)
 
-      sqlstr = "SELECT * FROM (SELECT * FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" LEFT JOIN kansei_buhins kn ON mt.\"buhinCd\" = kn.\"buhinCd\") kb WHERE kb.\"buhinCd\" IS NOT NULL"
+      sqlstr = "SELECT * FROM (SELECT kn.\"buhinCd\", kn.\"buhinNm\", ms.tanka, ms.suryo, ms.kin FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" LEFT JOIN kansei_buhins kn ON mt.\"buhinCd\" = kn.\"buhinCd\") kb WHERE kb.\"buhinCd\" IS NOT NULL"
       @@kanseiBuhins = ActiveRecord::Base.connection.execute(sqlstr)
     end
 
