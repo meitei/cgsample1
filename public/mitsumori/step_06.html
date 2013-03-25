@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>見積入力｜座位保持装置選定・管理システム</title>
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="s5aE7/9NhJ6Jhb2vLjDBwXwPCxzDYDjrtw8fvgOxpbU=" name="csrf-token" />
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <link href="css/import.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var radio = $('div.jqwizard_content');
+	//checkedだったら最初からチェックする
+	$('input', radio).each(function(){
+		if ($(this).attr('checked') == 'checked') {
+			$(this).next().addClass('checked');
+		}
+	});
+	//クリックした要素にクラス割り当てる
+	$('label', radio).click(function() {
+		$(this).parent().parent().each(function() {
+			$('label',this).removeClass('checked');
+		});
+		$(this).addClass('checked');
+	});
+});
+</script>
+    <script src="/assets/application-27e0fdcab9dbd0b3d72a4c3058dc28b8.js" type="text/javascript"></script>
+  </head>
+  <body>
+  <div class="wrapper">
+    <div class="navbar navbar-fluied-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">座位保持装置選定・管理システム</a>
+          <div class="container nav-collapse">
+            <ul class="nav">
+              <li><a href="#">顧客管理</a></li>
+              <li><a href="#">購入履歴管理</a></li>
+              <li><a href="#">売上管理</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-page cf">
+      <div class="backtop"><a href="">管理システムトップへ戻る</a></div>
+      <div class="info"><span class="name">ログイン名：ヴィンテージ太郎</span>
+          <form class="btn_logout"><input type="image" src="images/btn_logout.png" /></form></div>
+    </div>
+
+    <div class="container">
+        <div class="title">見積入力</div>
+<!-- ****************************************************************************************************
+
+******************************************************************************************************-->
+<div class="statuslabel"><span>STEP 1</span>介助用グリップの選定</div>
+<div id="estimateForm" class="jqwizard">
+    <div class="jqwizard_panel">
+        <div class="jqwizard_content" id="edit_as_you_like_1">
+            <table class="jqwizard_label">
+                <tr><td class="td1"></td>
+                <td class="td2">選択</td>
+                <td class="td3">制作方法を選んでください</td>
+                <td class="td4">注文書チェック項目</td>
+                <td class="td5">写真</td></tr>
+            </table>
+            <!--不要-->
+            <label for="step1_1">
+                <table class="jqwizard_item">
+                    <tr>
+                        <td class="td1">
+                            <div><input selected type="radio" name="col2" id="col1"></div>
+                        </td>
+                        <td class="detail">
+                            <table class="jqwizard_item_detail">
+                                <tr>
+                                    <td class="td3" colspan="5">
+                                        <span class="tit_item">不要</span>
+                                    </td>
+                                    <td class="td4">
+                                        介助用グリップ&nbsp;無
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="td5">
+                            <div></div>
+                        </td>
+                    </tr>
+                </table>
+            </label>
+
+            <!--車椅子type-->
+            <label for="step1_1">
+                <table class="jqwizard_item">
+                    <tr>
+                        <td class="td1">
+                            <div><input type="radio" name="col2" id="col1"></div>
+                        </td>
+                        <td class="detail">
+                            <table class="jqwizard_item_detail">
+                                <tr>
+                                    <td class="td3" colspan="5">
+                                        <span class="tit_item">車椅子type</span>
+                                    </td>
+                                    <td class="td4">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td2">説明</td>
+                                    <td class="td3" colspan="4">
+                                        グリップの向きが進行方向と同じです<br>
+                                        （介助用車いすのグリップと同じ向き）<br>
+                                        横渡しtypeに比べ、方向転換の操作が容易です<br>
+                                        屋外用として、使用されることが多いです
+                                    </td>
+                                    <td class="td4">
+                                        グリップ&nbsp;有&nbsp;車椅子type
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td2">見積</td>
+                                    <td class="mitsumori_td1">内訳</td>
+                                    <td class="mitsumori_td2">数量</td>
+                                    <td class="mitsumori_td3">単価</td>
+                                    <td class="mitsumori_td4">金額</td>
+                                    <td class="td4"></td>
+                                </tr>
+                                <tr>
+                                    <td class="td2"></td>
+                                    <td class="mitsumori_td1">付属品<br>その他&nbsp;介助用グリップ</td>
+                                    <td class="mitsumori_td2">2</td>
+                                    <td class="mitsumori_td3">2550</td>
+                                    <td class="mitsumori_td4">5100</td>
+                                    <td class="td4"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="td5">
+                            <div><img src="http://dummyimage.com/127x180/666666/ffffff.png" alt="" /></div>
+                        </td>
+                    </tr>
+                </table>
+            </label>
+            <!--横渡しtype-->
+            <label for="step1_1">
+                <table class="jqwizard_item">
+                    <tr>
+                        <td class="td1">
+                            <div><input type="radio" name="col2" id="col1"></div>
+                        </td>
+                        <td class="detail">
+                            <table class="jqwizard_item_detail">
+                                <tr>
+                                    <td class="td3" colspan="5">
+                                        <span class="tit_item">横渡しtype</span>
+                                    </td>
+                                    <td class="td4">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td2">説明</td>
+                                    <td class="td3" colspan="4">
+                                        グリップの向きが進行方向に対して水平です<br>
+                                        車椅子typeに比べ、コンパクトです<br>
+                                        家庭用や屋内用として、使用されることが多いです
+                                    </td>
+                                    <td class="td4">
+                                        グリップ&nbsp;有&nbsp;車椅子type
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td2">見積</td>
+                                    <td class="mitsumori_td1">内訳</td>
+                                    <td class="mitsumori_td2">数量</td>
+                                    <td class="mitsumori_td3">単価</td>
+                                    <td class="mitsumori_td4">金額</td>
+                                    <td class="td4"></td>
+                                </tr>
+                                <tr>
+                                    <td class="td2"></td>
+                                    <td class="mitsumori_td1">付属品<br>その他&nbsp;介助用グリップ</td>
+                                    <td class="mitsumori_td2">2</td>
+                                    <td class="mitsumori_td3">2550</td>
+                                    <td class="mitsumori_td4">5100</td>
+                                    <td class="td4"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="td5">
+                            <div><img src="http://dummyimage.com/127x180/666666/ffffff.png" alt="" /></div>
+                        </td>
+                    </tr>
+                </table>
+            </label>
+        </div>
+    </div>
+    <div class="jqwizard_buttons">
+        <a href="" class="jqwizard_previous"><img src="images/btn_back.png" alt="戻る" /></a>
+        <a href="" class="jqwizard_next"><img src="images/btn_next.png" alt="次へ" /></a>
+    </div>
+    <div class="jqwizard_navi cf">
+        <ul>
+            <li class="jqwizard_done"><a href="#edit_as_you_like_1" title=""><em>Step 1</em><span>使用環境</span></a></li>
+            <li class="jqwizard_lastdone"><a href="#edit_as_you_like_2" title=""><em>Step 2</em><span>フレーム</span></a></li>
+            <li class="jqwizard_current"><a href="#edit_as_you_like_3" title=""><em>Step 3</em><span>機構</span></a></li>
+            <li><a href="#edit_as_you_like_4" title=""><em>Step 4</em><span>構造フレーム</span></a></li>
+            <li><a href="#edit_as_you_like_5" title=""><em>Step 5</em><span>グリップ</span></a></li>
+            <li><a href="#edit_as_you_like_6" title=""><em>Step 6</em><span>バック</span></a></li>
+            <li><a href="#edit_as_you_like_7" title=""><em>Step 7</em><span>シート</span></a></li>
+            <li><a href="#edit_as_you_like_8" title=""><em>Step 8</em><span>ヘッド</span></a></li>
+            <li><a href="#edit_as_you_like_9" title=""><em>Step 9</em><span>アームサポート</span></a></li>
+            <li><a href="#edit_as_you_like_10" title=""><em>Step 10</em><span>アームパッド</span></a></li>
+            <li><a href="#edit_as_you_like_11" title=""><em>Step 11</em><span>レッグサポート</span></a></li>
+            <li><a href="#edit_as_you_like_12" title=""><em>Step 12</em><span>フットサポート</span></a></li>
+            <li><a href="#edit_as_you_like_13" title=""><em>Step 13</em><span>上級</span></a></li>
+            <li><a href="#edit_as_you_like_14" title=""><em>Step 14</em><span>テーブル</span></a></li>
+            <li><a href="#edit_as_you_like_15" title=""><em>Step 15</em><span>シートベルト</span></a></li>
+            <li><a href="#edit_as_you_like_16" title=""><em>Step 16</em><span>パッド</span></a></li>
+            <li><a href="#edit_as_you_like_17" title=""><em>Step 17</em><span>オプション</span></a></li>
+            <li><a href="#edit_as_you_like_18" title=""><em>Step 18</em><span>木製</span></a></li>
+            <li><a href="#edit_as_you_like_19" title=""><em>Step 19</em><span>トイレットチェア</span></a></li>
+            <li><a href="#edit_as_you_like_20" title=""><em>Step 20</em><span>オプション</span></a></li>
+        </ul>
+    </div>
+</div>
+<div class="btn_box">
+      <a id="btnEstimateBack" href="/mitsumoris" class="btn_back2" /><img src="images/btn_back2_mitsumori.png" alt="戻る" /></a>
+      <a id="btnEstimateRegist" href="#" class="btn_add2" /><img src="images/btn_add2.png" alt="登録" /></a>
+</div>
+<div>
+    <footer>
+        <p>ARIZONO ORTHOPEDIC SUPPLIES Co.,Ltd. All Rights Reserved.</p>
+    </footer>
+</div> <!-- /wrapper -->
+
+</body>
+</html>
+
