@@ -217,9 +217,9 @@ class ReportController < ApplicationController
     ###########################
     # データ取得
     ###########################
-    @@konyuRireki = KonyuRireki.where("\"konyuRirekiId\" == ? and \"kokyakuId\" == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
+    @@konyuRireki = KonyuRireki.where("\"konyuRirekiId\" == ? and \"kokyakuId\" == ?", konyuRirekiId, kokyakuId).first
     @@mitsumoriDt = @@konyuRireki["mitsumoriDt"]
-    
+
     kokyaku = Kokyaku.find(@@konyuRireki["kokyakuId"])
     @@atena = kokyaku["kokyakuNm"]
 
@@ -231,7 +231,7 @@ class ReportController < ApplicationController
     @@katashiki = seihin["katashikiNm"]
 
 
-    @@mitsumori = Mitsumori.where("\"konyuRirekiId\" == ? and \"kokyakuId\" == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
+    @@mitsumori = Mitsumori.where("\"konyuRirekiId\" == ? and \"kokyakuId\" == ?", konyuRirekiId, kokyakuId).first
 
     if @@mitsumori.present?
       mitsumoriNo = @@mitsumori["mitsumoriNo"]
