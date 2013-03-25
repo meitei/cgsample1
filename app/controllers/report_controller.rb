@@ -217,7 +217,7 @@ class ReportController < ApplicationController
     ###########################
     # データ取得
     ###########################
-    @@konyuRireki = KonyuRireki.find(:first, :conditions => ["\"konyuRirekiId\" == ? and \"kokyakuId\" == ?", konyuRirekiId.to_i, kokyakuId.to_i])
+    @@konyuRireki = KonyuRireki.find(:first, :conditions => ["\"konyuRirekiId\" = ? and \"kokyakuId\" = ?", konyuRirekiId.to_i, kokyakuId.to_i])
     @@mitsumoriDt = @@konyuRireki["mitsumoriDt"]
 
     kokyaku = Kokyaku.find(@@konyuRireki["kokyakuId"])
@@ -230,7 +230,7 @@ class ReportController < ApplicationController
     seihin = Seihin.find(@@konyuRireki["mitsumoriTantoEigyoCd"])
     @@katashiki = seihin["katashikiNm"]
 
-    @@mitsumori = Mitsumori.find(:first, :conditions => ["\"konyuRirekiId\" == ? and \"kokyakuId\" == ?", konyuRirekiId.to_i, kokyakuId.to_i])
+    @@mitsumori = Mitsumori.find(:first, :conditions => ["\"konyuRirekiId\" = ? and \"kokyakuId\" = ?", konyuRirekiId.to_i, kokyakuId.to_i])
 
     if @@mitsumori.present?
       mitsumoriNo = @@mitsumori["mitsumoriNo"]
