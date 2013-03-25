@@ -1,0 +1,11 @@
+<div class="container" id="mainmenu_box">
+  <div class="title_master">Sample</div>
+  <div class="mainmenu_inner cf">
+    <ul>
+      <li><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :jpg, :id => 1, :column => 1), :id => "imgKanseizu_1_" + "1", :name => "kanseizu", :title => "完成図１", :alt => "完成図１", :size => "200x200") %></li>
+      <li><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :png, :id => 1, :column => 2), :id => "imgKanseizu_2_" + "1", :name => "kanseizu", :title => "完成図２", :alt => "完成図２", :size => "200x200") %></li>
+      <li><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :png, :id => 1, :column => 3), :id => "imgKanseizu_3_" + "1", :name => "kanseizu", :title => "完成図３", :alt => "完成図３", :size => "160x160") %></li>
+      <li><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :png, :id => 1, :column => 4), :id => "imgKanseizu_4_" + "1", :name => "kanseizu", :title => "完成図４", :alt => "完成図４", :size => "160x160") %></li>
+    </ul>
+  </div>
+</div>
