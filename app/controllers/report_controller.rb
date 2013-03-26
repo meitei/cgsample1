@@ -8,7 +8,6 @@ require 'open-uri'
 class ReportController < ApplicationController
 
   def report
-
     konyuRirekiId = params[:konyuRirekiId]
     kokyakuId = params[:kokyakuId]
 
@@ -470,6 +469,7 @@ class ReportController < ApplicationController
       format.json { render json: fileInfo }
     end
   end
+
 end
 
 
