@@ -249,6 +249,7 @@ function searchKonyuRireki() {
     $("#searchKonyuRirekiGrid").clearGridData();
     var param = {
         datatype: "json",
+        mtype: 'POST',
         url: "konyu_rirekis/search.json",
         postData: data,
         jsonReader: {

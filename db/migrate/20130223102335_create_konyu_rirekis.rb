@@ -1,7 +1,7 @@
 class CreateKonyuRirekis < ActiveRecord::Migration
   def change
     create_table :konyu_rirekis do |t|
-      t.integer :konyuRirekiId
+      t.decimal :konyuRirekiId
       t.integer :kokyakuId
       t.integer :byoinCd
       t.string :ishiNm

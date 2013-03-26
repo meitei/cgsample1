@@ -55,7 +55,7 @@ JqgridSample::Application.routes.draw do
   end
 
   resources :konyu_rirekis do
-      get 'search', :on => :collection
+      post 'search', :on => :collection
       post 'file_upload', :on => :collection
       get 'get_image', :on => :collection
   end
