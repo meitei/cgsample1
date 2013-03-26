@@ -25,14 +25,14 @@ class KonyuRirekisController < ApplicationController
 
     # conditions = conditions.where("\"juchuDt\" >= ?", params[:konyu_rireki][:juchuDtFrom]) if params[:konyu_rireki][:juchuDtFrom] != ""
     # conditions = conditions.where("\"juchuDt\" <= ?", params[:konyu_rireki][:juchuDtTo]) if params[:konyu_rireki][:juchuDtTo] != ""
-    conditions = add_condition_date(conditions, "juchuDt", :juchuDtFrom, :juchuDtTo)
+    conditions = add_condition_date(conditions, "\"juchuDt\"", :juchuDtFrom, :juchuDtTo)
 
     # conditions = conditions.where("konyu_rirekis.\"byoinCd\" = ?", params[:konyu_rireki][:byoinCd].to_i) if params[:konyu_rireki][:byoinCd] != ""
     conditions = add_condition_name(conditions, "byoins.\"byoinNm\"", :byoinNm)
 
     # conditions = conditions.where("\"kariAwaseDt\" >= ?", params[:konyu_rireki][:kariAwaseDtFrom]) if params[:konyu_rireki][:kariAwaseDtFrom] != ""
     # conditions = conditions.where("\"kariAwaseDt\" <= ?", params[:konyu_rireki][:kariAwaseDtTo]) if params[:konyu_rireki][:kariAwaseDtTo] != ""
-    conditions = add_condition_date(conditions, "kariAwaseDt", :kariAwaseDtFrom, :kariAwaseDtTo)
+    conditions = add_condition_date(conditions, "\"kariAwaseDt\"", :kariAwaseDtFrom, :kariAwaseDtTo)
 
     # conditions = conditions.where("\"kokyakuNm\" LIKE ?", "%" + params[:konyu_rireki][:kokyakuNm] + "%") if params[:konyu_rireki][:kokyakuNm] != ""
     conditions = add_condition_name(conditions, "kokyakus.\"kokyakuNm\"", :kokyakuNm)
@@ -42,7 +42,7 @@ class KonyuRirekisController < ApplicationController
 
     # conditions = conditions.where("\"nohinDt\" >= ?", params[:konyu_rireki][:nohinDtFrom]) if params[:konyu_rireki][:nohinDtFrom] != ""
     # conditions = conditions.where("\"nohinDt\" <= ?", params[:konyu_rireki][:nohinDtTo]) if params[:konyu_rireki][:nohinDtTo] != ""
-    conditions = add_condition_date(conditions, "nohinDt", :nohinDtFrom, :nohinDtTo)
+    conditions = add_condition_date(conditions, "\"nohinDt\"", :nohinDtFrom, :nohinDtTo)
 
     # conditions = conditions.where("\"kokyakuNmKana\" LIKE ?", "%" + params[:konyu_rireki][:kokyakuNmKana] + "%") if params[:konyu_rireki][:kokyakuNmKana] != ""
     conditions = add_condition_name(conditions, "kokyakus.\"kokyakuNmKana\"", :kokyakuNmKana)
@@ -52,7 +52,7 @@ class KonyuRirekisController < ApplicationController
 
     # conditions = conditions.where("\"kofuDt\" >= ?", params[:konyu_rireki][:kofuDtFrom]) if params[:konyu_rireki][:kofuDtFrom] != ""
     # conditions = conditions.where("\"kofuDt\" <= ?", params[:konyu_rireki][:kofuDtTo]) if params[:konyu_rireki][:kofuDtTo] != ""
-    conditions = add_condition_date(conditions, "kofuDt", :kofuDtFrom, :kofuDtTo)
+    conditions = add_condition_date(conditions, "\"kofuDt\"", :kofuDtFrom, :kofuDtTo)
 
     # conditions = conditions.where("\"shubetsuKn\" = ?", params[:konyu_rireki][:shubetsuKn]) if params[:konyu_rireki][:shubetsuKn] != ""
     conditions = add_condition_str(conditions, "konyu_rirekis.\"shubetsuKn\"", :shubetsuKn)
@@ -62,7 +62,7 @@ class KonyuRirekisController < ApplicationController
 
     # conditions = conditions.where("\"nyukinDt\" >= ?", params[:konyu_rireki][:nyukinDtFrom]) if params[:konyu_rireki][:nyukinDtFrom] != ""
     # conditions = conditions.where("\"nyukinDt\" <= ?", params[:konyu_rireki][:nyukinDtTo]) if params[:konyu_rireki][:nyukinDtTo] != ""
-    conditions = add_condition_date(conditions, "nyukinDt", :nyukinDtFrom, :nyukinDtTo)
+    conditions = add_condition_date(conditions, "\"nyukinDt\"", :nyukinDtFrom, :nyukinDtTo)
 
     # conditions = conditions.where("\"seihinId\" = ?", params[:konyu_rireki][:seihinId]) if params[:konyu_rireki][:seihinId] != ""
     conditions = add_condition_name(conditions, "seihins.\"hinmeiNm\"", :hinmeiNm)
@@ -72,18 +72,18 @@ class KonyuRirekisController < ApplicationController
 
     # conditions = conditions.where("\"oshiinDt\" >= ?", params[:konyu_rireki][:oshiinDtFrom]) if params[:konyu_rireki][:oshiinDtFrom] != ""
     # conditions = conditions.where("\"oshiinDt\" <= ?", params[:konyu_rireki][:oshiinDtTo]) if params[:konyu_rireki][:oshiinDtTo] != ""
-    conditions = add_condition_date(conditions, "oshiinDt", :oshiinDtFrom, :oshiinDtTo)
+    conditions = add_condition_date(conditions, "\"oshiinDt\"", :oshiinDtFrom, :oshiinDtTo)
 
     # conditions = conditions.where("\"mitsumoriTantoEigyoCd\" = ?", params[:konyu_rireki][:mitsumoriTantoEigyoCd]) if params[:konyu_rireki][:mitsumoriTantoEigyoCd] != ""
     conditions = add_condition_userNm(conditions, "mt", :mitsumoriTantoEigyoNm)
 
     # conditions = conditions.where("\"kanryoDt\" >= ?", params[:konyu_rireki][:kanryoDtFrom]) if params[:konyu_rireki][:kanryoDtFrom] != ""
     # conditions = conditions.where("\"kanryoDt\" <= ?", params[:konyu_rireki][:kanryoDtTo]) if params[:konyu_rireki][:kanryoDtTo] != ""
-    conditions = add_condition_date(conditions, "kanryoDt", :kanryoDtFrom, :kanryoDtTo)
+    conditions = add_condition_date(conditions, "\"kanryoDt\"", :kanryoDtFrom, :kanryoDtTo)
 
     # conditions = conditions.where("\"mitsumoriDt\" >= ?", params[:konyu_rireki][:mitsumoriDtFrom]) if params[:konyu_rireki][:mitsumoriDtFrom] != ""
     # conditions = conditions.where("\"mitsumoriDt\" <= ?", params[:konyu_rireki][:mitsumoriDtTo]) if params[:konyu_rireki][:mitsumoriDtTo] != ""
-    conditions = add_condition_date(conditions, "mitsumoriDt", :mitsumoriDtFrom, :mitsumoriDtTo)
+    conditions = add_condition_date(conditions, "\"mitsumoriDt\"", :mitsumoriDtFrom, :mitsumoriDtTo)
 
     #logger.debug(conditions)
 
@@ -317,29 +317,29 @@ class KonyuRirekisController < ApplicationController
 
   def get_select_stmt
     select = "konyu_rirekis.*"
-    select << ",byoins.byoinNm"
-    select << ",kokyakus.kokyakuNm"
-    select << ",kokyakus.kokyakuNmKana"
+    select << ",byoins.\"byoinNm\""
+    select << ",kokyakus.\"kokyakuNm\""
+    select << ",kokyakus.\"kokyakuNmKana\""
     select << ",ust.myoji||' '||ust.name uketsukeSesakuTantoNm"
     select << ",kat.myoji||' '||kat.name kariAwaseTantoNm"
     select << ",nt.myoji||' '||nt.name nohinTantoNm"
     select << ",mt.myoji||' '||mt.name mitsumoriTantoEigyoNm"
-    select << ",seihins.hinmeiNm"
-    select << ",hs1.hokenShubetsuNm hokenShubetsuNm1"
-    select << ",hs2.hokenShubetsuNm hokenShubetsuNm2"
-    select << ",CASE shubetsuKn WHEN 0 THEN '新規' WHEN 1 THEN '修理' ELSE NULL END shubetsuKnNm"
+    select << ",seihins.\"hinmeiNm\""
+    select << ",hs1.\"hokenShubetsuNm\" hokenShubetsuNm1"
+    select << ",hs2.\"hokenShubetsuNm\" hokenShubetsuNm2"
+    select << ",CASE \"shubetsuKn\" WHEN 0 THEN '新規' WHEN 1 THEN '修理' ELSE NULL END shubetsuKnNm"
     # select << ",CASE shubetsuKn WHEN 0 THEN 'xx' WHEN 1 THEN 'yy' ELSE NULL END shubetsuKnNm"
 
     joins = ""
-    joins << "LEFT OUTER JOIN byoins ON byoins.byoinCd = konyu_rirekis.byoinCd "
-    joins << "LEFT OUTER JOIN kokyakus ON kokyakus.kokyakuId = konyu_rirekis.kokyakuId "
-    joins << "LEFT OUTER JOIN users ust ON ust.shainCd = konyu_rirekis.uketsukeSesakuTantoCd "
-    joins << "LEFT OUTER JOIN users kat ON kat.shainCd = konyu_rirekis.kariAwaseTantoCd "
-    joins << "LEFT OUTER JOIN users nt ON nt.shainCd = konyu_rirekis.nohinTantoCd "
-    joins << "LEFT OUTER JOIN users mt ON mt.shainCd = konyu_rirekis.mitsumoriTantoEigyoCd "
-    joins << "LEFT OUTER JOIN seihins ON seihins.seihinId = konyu_rirekis.seihinId "
-    joins << "LEFT OUTER JOIN hoken_shubetsus hs1 ON hs1.hokenShubetsuCd = konyu_rirekis.hokenShubetsuCd1 "
-    joins << "LEFT OUTER JOIN hoken_shubetsus hs2 ON hs2.hokenShubetsuCd = konyu_rirekis.hokenShubetsuCd2 "
+    joins << "LEFT OUTER JOIN byoins ON byoins.\"byoinCd\" = konyu_rirekis.\"byoinCd\" "
+    joins << "LEFT OUTER JOIN kokyakus ON kokyakus.\"kokyakuId\" = konyu_rirekis.\"kokyakuId\" "
+    joins << "LEFT OUTER JOIN users ust ON ust.\"shainCd\" = konyu_rirekis.\"uketsukeSesakuTantoCd\" "
+    joins << "LEFT OUTER JOIN users kat ON kat.\"shainCd\" = konyu_rirekis.\"kariAwaseTantoCd\" "
+    joins << "LEFT OUTER JOIN users nt ON nt.\"shainCd\" = konyu_rirekis.\"nohinTantoCd\" "
+    joins << "LEFT OUTER JOIN users mt ON mt.\"shainCd\" = konyu_rirekis.\"mitsumoriTantoEigyoCd\" "
+    joins << "LEFT OUTER JOIN seihins ON seihins.\"seihinId\" = konyu_rirekis.\"seihinId\" "
+    joins << "LEFT OUTER JOIN hoken_shubetsus hs1 ON hs1.\"hokenShubetsuCd\" = konyu_rirekis.\"hokenShubetsuCd1\" "
+    joins << "LEFT OUTER JOIN hoken_shubetsus hs2 ON hs2.\"hokenShubetsuCd\" = konyu_rirekis.\"hokenShubetsuCd2\" "
 
     return select, joins
   end
