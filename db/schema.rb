@@ -93,13 +93,8 @@ ActiveRecord::Schema.define(:version => 20130326125150) do
     t.string   "shohinNm"
     t.decimal  "kin"
     t.decimal  "seikyuKin"
-<<<<<<< HEAD
-    t.string   "shohinSiyoBiko"
-    t.integer  "uketsukeSesakuTantoCd"
-=======
     t.string   "shohinShiyoBiko"
     t.string   "uketsukeSesakuTantoCd"
->>>>>>> 719814e37c71eb06bb04af0b83ccc4c697f963af
     t.date     "juchuDt"
     t.string   "kariAwaseTantoCd"
     t.date     "kariAwaseDt"
