@@ -5,9 +5,9 @@
       <td class="td4">注文書チェック項目</td>
       <td class="td5">写真</td></tr>
 </table>
-<label for="step1_a">
+<label for="step2_1">
 <table class="jqwizard_item">
-  <tr><td class="td1"><div>1<br /><input type="radio" name="1" value="セミオーダー" id="step1_1"></div></td>
+  <tr><td class="td1"><div>1<br /><input type="radio" name="1" value="セミオーダー" id="step2_1"></div></td>
       <td class="detail">
         <table class="jqwizard_item_detail">
           <tr>
@@ -39,9 +39,9 @@
 </table>
 </label>
 
-<label for="step1_2">
+<label for="step2_2">
 <table class="jqwizard_item">
-  <tr><td class="td1"><div>2<br /><input type="radio" name="1" value="フルオーダー" id="step1_2"></div></td>
+  <tr><td class="td1"><div>2<br /><input type="radio" name="1" value="フルオーダー" id="step2_2"></div></td>
       <td class="detail">
         <table class="jqwizard_item_detail">
           <tr>
@@ -99,5 +99,20 @@
       $("li#step16").hide();
       $("li#step17").hide();
       $("#btnEstimateRegist").hide();
+      $("button.jqwizard_next").attr("disabled", true);
+
+      $("input#step2_1").click(function(){
+        $("div#step3").load("/mitsumori/step_3_a.html");
+        $("li#step3 a").attr("href", "#step3");
+        $("li#step3 span").text("グリップ");
+        $("button.jqwizard_next").attr("disabled", false);
+      });
+
+      $("input#step2_2").click(function(){
+        $("div#step3").load("/mitsumori/step_3_b.html");
+        $("li#step3 a").attr("href", "#step3");
+        $("li#step3 span").text("バックサポート");
+        $("button.jqwizard_next").attr("disabled", false);
+      });
   });
 </script>
