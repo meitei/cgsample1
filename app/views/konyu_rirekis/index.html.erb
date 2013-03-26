@@ -24,29 +24,27 @@ $(function() {
         rules: {
             juchuDtFrom: {date:true},
             juchuDtTo: {date:true},
-
-            kokyakuNm: {required:true, maxlength:10},
-            kokyakuNmKana: {katakana:true, maxlength:10},
-            //seibetsu: {required:true, maxlength:10},
-            tanjoDt: {date:true},
-            postNo: {postnum:true, maxlength:8},
-            address1: {maxlength:100},
-            address2: {maxlength:100},
-            tel1: {telnum:true, maxlength:12},
-            tel2: {mobilenum:true, maxlength:13},
-            fax: {telnum:true, maxlength:12},
-            //shobyouCd1: {required:true, maxlength:10},
-            //shobyouCd2: {required:true, maxlength:10},
-            //shobyouCd3: {required:true, maxlength:10},
-            gakkoNm: {maxlength:20},
-            biko: {maxlength:100},
+            kariAwaseDtFrom: {date:true},
+            kariAwaseDtTo: {date:true},
+            nohinDtFrom: {date:true},
+            nohinDtTo: {date:true},
+            kofuDtFrom: {date:true},
+            kofuDtTo: {date:true},
+            nyukinDtFrom: {date:true},
+            nyukinDtTo: {date:true},
+            oshiinDtFrom: {date:true},
+            oshiinDtTo: {date:true},
+            kanryoDtFrom: {date:true},
+            kanryoDtTo: {date:true},
+            mitsumoriDtFrom: {date:true},
+            mitsumoriDtTo: {date:true}
         }
         //messages: {
         //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
         //}
     });
     var isLoaded = false;
-    var colNames = ["","ID","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","",""];
+    var colNames = ["","ID","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
         {name:"kokyakuId", index:"kokyakuId",width:50},
@@ -55,26 +53,28 @@ $(function() {
         {name:"kokyakuNmKana", index:"kokyakuNmKana",width:80},
         {name:"hokenShubetsuNm1", index:"hokenShubetsuNm1",width:70},
         {name:"hokenShubetsuNm2", index:"hokenShubetsuNm2",width:70},
-        {name:"itemNm", index:"itemNm",width:80},
+        {name:"shohinNm", index:"shohinNm",width:80},
         {name:"kin", index:"kin",width:80, formatter:"currency", align:"right"},
         {name:"seikyuKin", index:"seikyuKin",width:80, formatter:"currency", align:"right"},
         {name:"uketsukeSesakuTantoNm", index:"uketsukeSesakuTantoNm",width:80},
-        {name:"juchuDt", index:"juchuDt",width:80},
+        //{name:"juchuDt", index:"juchuDt",width:80, datefmt:"yyyy/mm/dd"},
+        {name:"juchuDt", index:"juchuDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
         {name:"kariAwaseTantoNm", index:"kariAwaseTantoNm",width:80},
-        {name:"kariAwaseDt", index:"kariAwaseDt",width:80},
+        {name:"kariAwaseDt", index:"kariAwaseDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
         {name:"nohinTantoNm", index:"nohinTantoNm",width:80},
-        {name:"nohinDt", index:"nohinDt",width:80},
-        {name:"kofuDt", index:"kofuDt",width:80},
-        {name:"nyukinDt", index:"nyukinDt",width:80},
-        {name:"oshiinDt", index:"oshiinDt",width:80},
-        {name:"kanryoDt", index:"kanryoDt",width:80},
+        {name:"nohinDt", index:"nohinDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
+        {name:"kofuDt", index:"kofuDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
+        {name:"nyukinDt", index:"nyukinDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
+        {name:"oshiinDt", index:"oshiinDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
+        {name:"kanryoDt", index:"kanryoDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
         {name:"mitsumoriTantoEigyoNm", index:"mitsumoriTantoEigyoNm",width:80},
-        {name:"mitsumoriDt", index:"mitsumoriDt",width:80},
+        {name:"mitsumoriDt", index:"mitsumoriDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
         {name:"shubetsuKnNm", index:"shubetsuKnNm",width:80},
-        {name:"shohinNm", index:"shohinNm",width:80},
+        {name:"hinmeiNm", index:"hinmeiNm",width:80},
         {name:"konyuRirekiId", index:"konyuRirekiId", hidden:true},
         {name:"koshinshaId", index:"koshinshaId", hidden:true},
         {name:"torokushaId", index:"torokushaId", hidden:true},
+        {name:"id", index:"id", hidden:true},
         {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
         {name:'deleteImg', index:'deleteImg', align:'center', width:20, formatter: deleteFormatter}
     ];
@@ -84,16 +84,125 @@ $(function() {
         width: "940",
         height: "140",
         cellEdit: false,
-        rowNum: 10,
+        rowNum: 6,
         //rowList:[10,20,30],
         pager: "searchKonyuRirekiPager",
         multiselect: false,
         //viewrecords: true,
         colNames: colNames,
         colModel: colModelSettings,
+        ondblClickRow: function(id) {
+            rowdata = $('#searchKonyuRirekiGrid').getRowData(id);
+            modifyKokyaku(rowdata.id)
+        },
         shrinkToFit:false
 
     }).navGrid('#searchKonyuRirekiPager',{edit:false, add:false, del:false, search:false});
+
+    var kokyakuItems = ["kokyakuIdFrom","kokyakuIdTo"];
+    $.each(kokyakuItems, function(i) {
+        var itemId = "#" + this;
+        $( itemId ).autocomplete({
+        // source: availableTags,
+            source: function(request, response) {
+              $.ajax({
+                url: "/common_data/kokyaku_list.json",
+                dataType: "json",
+                root: "list",
+                data: {'kokyakuId' : $( itemId ).val()},
+                success: function(data) {
+                  response($.map(data, function(item) {
+                    return {
+                      label: item.kokyakuNm+' - '+item.kokyakuId,
+                      value: item.kokyakuId
+                    }
+                  }))
+                }
+              })
+            }
+        });
+    });
+
+    $( "#byoinNm" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: "/common_data/byoin_list.json",
+            dataType: "json",
+            root: "list",
+            data: {'byoinCd' : $('#byoinNm').val()},
+            success: function(data) {
+              response($.map(data, function(item) {
+                return {
+                  label: item.byoinNm+' - '+item.byoinCd,
+                  value: item.byoinNm
+                }
+              }))
+            }
+          })
+        }
+    });
+
+    $( "#kokyakuNm" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: "/common_data/kokyaku_list.json",
+            dataType: "json",
+            root: "list",
+            data: {'kokyakuId' : $('#kokyakuNm').val()},
+            success: function(data) {
+              response($.map(data, function(item) {
+                return {
+                  label: item.kokyakuNm+' - '+item.kokyakuId,
+                  value: item.kokyakuNm
+                }
+              }))
+            }
+          })
+        }
+    });
+
+  $( "#hinmeiNm" ).autocomplete({
+    source: function(request, response) {
+      $.ajax({
+        url: "/common_data/seihin_list.json",
+        dataType: "json",
+        root: "list",
+        data: {'seihinId' : $('#hinmeiNm').val()},
+        success: function(data) {
+          response($.map(data, function(item) {
+            return {
+              label: item.hinmeiNm+' - '+item.seihinId,
+              value: item.hinmeiNm
+            }
+          }))
+        }
+      })
+    }
+  });
+
+    var userItems = ["uketsukeSesakuTantoNm", "kariAwaseTantoNm", "nohinTantoNm", "mitsumoriTantoEigyoNm"];
+    $.each(userItems,function(i) {
+        var itemId = "#" + this;
+        $(itemId).autocomplete({
+          // source: availableTags,
+          source: function(request, response) {
+            $.ajax({
+              url: "/common_data/user_list.json",
+              dataType: "json",
+              root: "list",
+              data: {'shainCd' : $(itemId).val()},
+              success: function(data) {
+                response($.map(data, function(item) {
+                  return {
+                    label: item.myoji+' '+item.name+' - '+item.shainCd,
+                    value: item.myoji+' '+item.name
+                  }
+                }))
+              }
+            })
+          }
+        });
+    });
 
     var dateItems = new Array("juchuDt", "kariAwaseDt", "nohinDt", "kofuDt", "nyukinDt", "oshiinDt", "kanryoDt", "mitsumoriDt");
     $.each(dateItems,function(i) {
@@ -103,6 +212,8 @@ $(function() {
     });
 
     $("#konyu_rireki_shubetsuKn").css("width", "100px").attr("tabindex", "10");
+    $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px").attr("tabindex", "10");
+    $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px").attr("tabindex", "10");
 });
 
 $("a#btnKonyuRirekiSearch").click(function() {
@@ -121,11 +232,11 @@ $("a#btnKonyuRirekiClear").click(function() {
 // });
 
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src='/images/database-reload-alt-1.png' onclick='modifyKokyaku(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='modifyKokyaku(" + rowdata['id'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 function deleteFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-remove-alt-1.png' onclick='removeKokyaku(" + rowdata['kokyakuId'] + ")' title='削除' style='width:16px; height:16px'>";
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeKokyaku(" + rowdata['id'] + ")' title='削除' style='width:16px; height:16px'>";
 }
 
 // 検索用メソッド
@@ -138,6 +249,7 @@ function searchKonyuRireki() {
     $("#searchKonyuRirekiGrid").clearGridData();
     var param = {
         datatype: "json",
+        mtype: 'POST',
         url: "konyu_rirekis/search.json",
         postData: data,
         jsonReader: {
@@ -152,8 +264,8 @@ function searchKonyuRireki() {
 }
 
 // 更新用メソッド
-function modifyKokyaku(konyuRirekiId) {
-    location.href = "konyu_rirekis/" + konyuRirekiId + "/edit";
+function modifyKokyaku(id) {
+    location.href = "konyu_rirekis/" + id + "/edit";
     return false;
 }
 

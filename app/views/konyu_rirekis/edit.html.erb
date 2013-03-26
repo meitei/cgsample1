@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="title">顧客管理：顧客編集</div>
 	<div class="statuslabel"><span>顧客編集</span>コメント　無ければ削除</div>
-	<div id="kokyakuSearch" class="Tourokuform cf">
+	<div id="konyuRirekiSearch" class="Tourokuform cf">
 		<%= render 'form' %>
 	</div>
     <div class="btn_box">
@@ -11,7 +11,7 @@
 </div>
 <script>
 $(function() {
-	var kokyakuId = $("#kokyakuId").val();
+	// var key_id = $("#id").val();
 	// if(kokyakuId != null) {
 	// 	var url = "../../kokyakus/" + kokyakuId + ".json";
 	// 	$.ajax({
@@ -42,12 +42,12 @@ $(function() {
 	// 	});
 	// }
 	$("a#btnKonyuRirekiRegist").click(function() {
-	    executeKokyaku($("#kokyakuId").val());
+	    executeKonyuRireki($("#id").val());
 	    return false;
 	});
 
 	$("a#btnKonyuRirekiReturn").click(function() {
-    location.href = "/kokyakus";
+    location.href = "/konyu_rirekis";
 	    return false;
 	});
 });

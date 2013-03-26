@@ -38,6 +38,9 @@ JqgridSample::Application.routes.draw do
 
   get "report/report"
 
+  get "kanseizu/show"
+  get "kanseizu/get_image"
+
   resources :items do
     get 'report', :on => :collection
     get 'image', :on => :collection
@@ -52,7 +55,18 @@ JqgridSample::Application.routes.draw do
   end
 
   resources :konyu_rirekis do
-      get 'search', :on => :collection
+      post 'search', :on => :collection
+      post 'file_upload', :on => :collection
+      get 'get_image', :on => :collection
+  end
+  # match ':controller(/:action(/:id))(.:format)', :to => 'konyu_rirekis#get_image'
+  match 'konyu_rirekis(/get_image(/:id))(.:format)', :to => 'konyu_rirekis#get_image'
+
+  resources :common_data do
+    get 'kokyaku_list', :on => :collection
+    get 'user_list', :on => :collection
+    get 'byoin_list', :on => :collection
+    get 'seihin_list', :on => :collection
   end
 
   resources :companies

@@ -18,4 +18,30 @@
       <li class="menulist11"><a href="/kansei_buhins">完成部品マスタ</a></li>
     </ul>
   </div>
+  <div class="title_master">Sample</div>
+  <div class="mainmenu_inner cf">
+    <ul>
+      <li><input type="button" id="btnReport" value="見積書出力" style="width: 175px; height: 40px; float: left; margin: 0 25px 25px 0;"/></li>
+      <oi><%= link_to image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :jpg, :id => 1), :id => "imgKanseizu_" + "1", :name => "kanseizu", :title => "完成図を表示します", :alt => "完成図", :size => "40x40"), :controller =>"kanseizu", :action =>"show", :id =>1 %></oi>
+    </ul>
+  </div>
 </div>
+
+<script>
+$("input#btnReport").click(function() {
+    var url = "report/report.json";
+    url += "?konyuRirekiId=1&kokyakuId=1";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: url,
+        //data: data,
+        dataType: "json",
+        success: function(result) {
+            if (result != null){
+                window.open(result.fileName, "帳票出力");
+            }
+        }
+    });
+});
+</script>

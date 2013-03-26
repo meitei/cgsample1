@@ -1,4 +1,5 @@
 <form id="konyuRirekiForm" method="post">
+<input type="hidden" id="id" name="konyu_rireki[id]" value="<%= @konyu_rireki.id %>" />
 <input type="hidden" id="konyuRirekiId" name="konyu_rireki[konyuRirekiId]" value="<%= @konyu_rireki.konyuRirekiId %>" />
 <input type="hidden" id="koshinshaId" name="konyu_rireki[koshinshaId]" value="<%= @konyu_rireki.koshinshaId %>" />
 <input type="hidden" id="torokushaId" name="konyu_rireki[torokushaId]" value="<%= @konyu_rireki.torokushaId %>" />
@@ -8,31 +9,39 @@
     <tr>
       <th style="width:100px;">顧客コード</th>
       <td style="width:250px;">
-        <input style="width:100px;" type="text" id="kokyakuId" name="konyuRireki[kokyakuId]" value="<%= @konyu_rireki.kokyakuId %>" tabindex="10" />
+        <input style="width:100px;" type="text" id="kokyakuId" name="konyu_rireki[kokyakuId]" value="<%= @konyu_rireki.kokyakuId %>" tabindex="10" />
       </td>
     </tr>
     <tr>
-      <th style="width:100px;">氏名</th>
-      <td style="width:200px;">
+      <th>氏名</th>
+      <td>
+        <!--
         <input style="width:100px;" type="text" id="kokyakuNm" name="konyuRireki[kokyakuNm]" value="<%= @konyu_rireki.kokyakuNm %>" tabindex="10" />
+        -->
+        <div id="kokyakuNm"><%= @konyu_rireki.kokyakuNm %></div>
+        <!-- <span id="kokyakuNm" class="input-xlarge uneditable-input"><%= @konyu_rireki.kokyakuNm %></span> -->
       </td>
     </tr>
     <tr>
-      <th style="width:100px;">購入履歴コード</th>
-      <td style="width:200px;">
-        <input style="width:100px;" type="text" id="konyuRirekiId" name="konyuRireki[konyuRirekiId]" value="<%= @konyu_rireki.konyuRirekiId %>" tabindex="10" />
+      <th>購入履歴コード</th>
+      <td>
+<!--         <input style="width:100px;" type="text" id="konyuRirekiId" name="konyuRireki[konyuRirekiId]" value="<%= @konyu_rireki.konyuRirekiId %>" tabindex="10" /> -->
+        <div id="konyuRirekiId" style="width:100px;" class="input-xlarge uneditable-input"><%= @konyu_rireki.konyuRirekiId %></div>
       </td>
       <th style="width:100px;">受付制作担当者</th>
-      <td style="width:200px;">
-        <input style="width:70px;" type="text" id="uketsukeSesakuTantoCd" name="konyuRireki[uketsukeSesakuTantoCd]" value="<%= @konyu_rireki.uketsukeSesakuTantoCd %>" tabindex="10" />
-        <input style="width:70px;" type="text" id="uketsukeSesakuTantoNm" name="konyuRireki[uketsukeSesakuTantoNm]" value="<%= @konyu_rireki.uketsukeSesakuTantoNm %>" tabindex="10" />
+      <td style="width:250px;">
+        <input style="width:70px;" type="text" id="uketsukeSesakuTantoCd" name="konyu_rireki[uketsukeSesakuTantoCd]" value="<%= @konyu_rireki.uketsukeSesakuTantoCd %>" tabindex="10" />
+<!--         <input style="width:70px;" type="text" id="uketsukeSesakuTantoNm" name="konyuRireki[uketsukeSesakuTantoNm]" value="<%= @konyu_rireki.uketsukeSesakuTantoNm %>" tabindex="10" />
+ -->
+        <div id="uketsukeSesakuTantoNm"><%= @konyu_rireki.uketsukeSesakuTantoNm %></div>
       </td>
     </tr>
     <tr>
       <th>病院</th>
       <td>
-        <input style="width:70px;" type="text" id="byoinCd" name="konyuRireki[byoinCd]" value="<%= @konyu_rireki.byoinCd %>" tabindex="10" />
-        <input style="width:70px;" type="text" id="byoinNm" name="konyuRireki[byoinNm]" value="<%= @konyu_rireki.byoinNm %>" tabindex="10" />
+        <input style="width:70px;" type="text" id="byoinCd" name="konyu_rireki[byoinCd]" value="<%= @konyu_rireki.byoinCd %>" tabindex="10" />
+        <!-- <input style="width:70px;" type="text" id="byoinNm" name="konyuRireki[byoinNm]" value="<%= @konyu_rireki.byoinNm %>" tabindex="10" /> -->
+        <div id="byoinNm"><%= @konyu_rireki.byoinNm %></div>
       </td>
       <th>受注日</th>
       <td>
@@ -47,8 +56,9 @@
       </td>
       <th>仮合担当者</th>
       <td>
-        <input style="width:70px;" type="text" id="kariAwaseTantoCd" name="konyuRireki[kariAwaseTantoCd]" value="<%= @konyu_rireki.kariAwaseTantoCd %>" tabindex="10" />
-        <input style="width:70px;" type="text" id="kariAwaseTantoNm" name="konyuRireki[kariAwaseTantoNm]" value="<%= @konyu_rireki.kariAwaseTantoNm %>" tabindex="10" />
+        <input style="width:70px;" type="text" id="kariAwaseTantoCd" name="konyu_rireki[kariAwaseTantoCd]" value="<%= @konyu_rireki.kariAwaseTantoCd %>" tabindex="10" />
+<!--         <input style="width:70px;" type="text" id="kariAwaseTantoNm" name="konyuRireki[kariAwaseTantoNm]" value="<%= @konyu_rireki.kariAwaseTantoNm %>" tabindex="10" /> -->
+        <div id="kariAwaseTantoNm"><%= @konyu_rireki.kariAwaseTantoNm %></div>
       </td>
     </tr>
     <tr>
@@ -65,20 +75,22 @@
     <tr>
       <th>作業療法士氏名</th>
       <td>
-        <input style="width:70px;" type="text" id="rigakuRyohoNm1" name="konyu_rireki[rigakuRyohoNm1]" value="<%= @konyu_rireki.rigakuRyohoNm1 %>" tabindex="12" />
-        <input style="width:70px;" type="text" id="rigakuRyohoNm2" name="konyu_rireki[rigakuRyohoNm2]" value="<%= @konyu_rireki.rigakuRyohoNm2 %>" tabindex="12" />
+        <input style="width:70px;" type="text" id="sagyoRyohoNm1" name="konyu_rireki[sagyoRyohoNm1]" value="<%= @konyu_rireki.sagyoRyohoNm1 %>" tabindex="12" />
+        <input style="width:70px;" type="text" id="sagyoRyohoNm2" name="konyu_rireki[sagyoRyohoNm2]" value="<%= @konyu_rireki.sagyoRyohoNm2 %>" tabindex="12" />
       </td>
       <th>納品担当者</th>
       <td>
         <input style="width:70px;" type="text" id="nohinTantoCd" name="konyu_rireki[nohinTantoCd]" value="<%= @konyu_rireki.nohinTantoCd %>" tabindex="12" />
-        <input style="width:70px;" type="text" id="nohinTantoNm" name="konyu_rireki[nohinTantoNm]" value="<%= @konyu_rireki.nohinTantoNm %>" tabindex="12" />
+<!--         <input style="width:70px;" type="text" id="nohinTantoNm" name="konyu_rireki[nohinTantoNm]" value="<%= @konyu_rireki.nohinTantoNm %>" tabindex="12" /> -->
+        <div id="nohinTantoNm"><%= @konyu_rireki.nohinTantoNm %></div>
       </td>
     </tr>
     <tr>
       <th>見積担当営業</th>
       <td>
         <input style="width:70px;" type="text" id="mitsumoriTantoEigyoCd" name="konyu_rireki[mitsumoriTantoEigyoCd]" value="<%= @konyu_rireki.mitsumoriTantoEigyoCd %>" tabindex="12" />
-        <input style="width:70px;" type="text" id="mitsumoriTantoEigyoNm" name="konyu_rireki[mitsumoriTantoEigyoNm]" value="<%= @konyu_rireki.mitsumoriTantoEigyoNm %>" tabindex="12" />
+        <!-- <input style="width:70px;" type="text" id="mitsumoriTantoEigyoNm" name="konyu_rireki[mitsumoriTantoEigyoNm]" value="<%= @konyu_rireki.mitsumoriTantoEigyoNm %>" tabindex="12" /> -->
+        <div id="mitsumoriTantoEigyoNm"><%= @konyu_rireki.mitsumoriTantoEigyoNm %></div>
       </td>
       <th>納品日</th>
       <td>
@@ -108,8 +120,9 @@
     <tr>
       <th>見積製品項目</th>
       <td>
-        <input style="width:70px;" type="text" id="seihinCd" name="konyu_rireki[seihinCd]" value="<%= @konyu_rireki.seihinCd %>" tabindex="12" />
-        <input style="width:70px;" type="text" id="hinmeiNm" name="konyu_rireki[hinmeiNm]" value="<%= @konyu_rireki.hinmeiNm %>" tabindex="12" />
+        <input style="width:70px;" type="text" id="seihinId" name="konyu_rireki[seihinId]" value="<%= @konyu_rireki.seihinId %>" tabindex="12" />
+        <!-- <input style="width:70px;" type="text" id="hinmeiNm" name="konyu_rireki[hinmeiNm]" value="<%= @konyu_rireki.hinmeiNm %>" tabindex="12" /> -->
+        <div id="hinmeiNm"><%= @konyu_rireki.hinmeiNm %></div>
       </td>
       <th>押印日</th>
       <td>
@@ -135,6 +148,7 @@
       <th>完成図</th>
       <!-- 完成図を表示する -->
       <td rowspan="4">
+        <div id="uploaded_image"></div>
       </td>
     </tr>
     <tr>
@@ -159,7 +173,12 @@
     <tr>
       <th>商品仕様・備考</th>
       <td>
-        <input style="width:130px;" type="text" id="shohinSiyoBiko" name="konyu_rireki[shohinSiyoBiko]" value="<%= @konyu_rireki.shohinSiyoBiko %>" tabindex="14" />
+        <input style="width:230px;" type="text" id="shohinShiyoBiko" name="konyu_rireki[shohinShiyoBiko]" value="<%= @konyu_rireki.shohinShiyoBiko %>" tabindex="14" />
+      </td>
+      <th><br/></th>
+      <td>
+        <!-- <input style="width:230px;" type="file" > -->
+        <input id="fileupload" type="file" name="files[]" data-url="/konyu_rirekis/file_upload.json" multiple>
       </td>
     </tr>
   </table>
@@ -177,35 +196,206 @@ $(function() {
       $(element).removeClass(errorClass);
     },
     rules: {
-        kokyakuId: {required:true},
-        kokyakuNmKana: {katakana:true, maxlength:10},
-        tanjoDt: {date:true},
-        postNo: {postnum:true, maxlength:8},
-        address1: {maxlength:100},
-        address2: {maxlength:100},
-        tel1: {telnum:true, maxlength:12},
-        tel2: {mobilenum:true, maxlength:13},
-        fax: {telnum:true, maxlength:12},
-        gakkoNm: {maxlength:20},
-        biko: {maxlength:100},
+        ishiNm1: {maxlength:50},
+        ishiNm2: {maxlength:50},
+        rigakuRyohoNm1: {maxlength:50},
+        rigakuRyohoNm2: {maxlength:50},
+        sagyoRyohoNm1: {maxlength:50},
+        sagyoRyohoNm2: {maxlength:50},
+        juchuDtFrom: {date:true},
+        juchuDtTo: {date:true},
+        kariAwaseDtFrom: {date:true},
+        kariAwaseDtTo: {date:true},
+        nohinDtFrom: {date:true},
+        nohinDtTo: {date:true},
+        kofuDtFrom: {date:true},
+        kofuDtTo: {date:true},
+        nyukinDtFrom: {date:true},
+        nyukinDtTo: {date:true},
+        oshiinDtFrom: {date:true},
+        oshiinDtTo: {date:true},
+        kanryoDtFrom: {date:true},
+        kanryoDtTo: {date:true},
+        mitsumoriDtFrom: {date:true},
+        mitsumoriDtTo: {date:true},
+        shohinNm: {maxlength:100},
+        shohinShiyoBiko: {maxlength:200},
     }
   });
   $("#konyu_rireki_shubetsuKn").css("width", "100px").attr("tabindex", "6");
   $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px").attr("tabindex", "6");
   $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px").attr("tabindex", "6");
+
+  // 日付項目のフォーマットを設定する
+  var dateItems = new Array("juchuDt", "kariAwaseDt", "nohinDt", "kofuDt", "nyukinDt", "oshiinDt", "kanryoDt", "mitsumoriDt");
+  $.each(dateItems,function(i) {
+    var dateObj = $("#" + this);
+    if (dateObj.val()) {
+      dateObj.val($.datepicker.formatDate('yy/mm/dd', new Date(dateObj.val())));
+    }
+    dateObj.datepicker();
+  });
+
+  // 金額項目のフォーマットを設定する
+  var kinItems = new Array("kin", "seikyuKin");
+  $.each(kinItems,function(i) {
+    var kinObj = $("#" + this);
+    if (kinObj.val()) {
+      var num = new Number(kinObj.val());
+      kinObj.val(num.toFixed(0));
+    }
+    kinObj.css("text-align","right");
+  });
+
+  $( "#kokyakuId" ).autocomplete({
+    // source: availableTags,
+    source: function(request, response) {
+      $.ajax({
+        url: "/common_data/kokyaku_list.json",
+        dataType: "json",
+        root: "list",
+        data: {'kokyakuId' : $('#kokyakuId').val()},
+        success: function(data) {
+          response($.map(data, function(item) {
+            return {
+              label: item.kokyakuNm+' - '+item.kokyakuId,
+              value: item.kokyakuId
+            }
+          }))
+        }
+      })
+    },
+    select: function (event, ui) {
+      // alert(ui.item.label);
+      $('#kokyakuNm').html(ui.item.label.split(' - ').shift());
+      // ui.item.value = ui.item.value.split(':').shift();
+    }
+  });
+  $( "#kokyakuNm" ).css({width:"150px"}).addClass("input-xlarge uneditable-input");
+
+  var userItems = [
+    ["uketsukeSesakuTantoCd", "uketsukeSesakuTantoNm"],
+    ["kariAwaseTantoCd", "kariAwaseTantoNm"],
+    ["nohinTantoCd", "nohinTantoNm"],
+    ["mitsumoriTantoEigyoCd", "mitsumoriTantoEigyoNm"]
+  ];
+
+  $.each(userItems,function(i) {
+    var itemCd = this[0];
+    var itemNm = this[1];
+    $( "#" + itemCd ).autocomplete({
+      // source: availableTags,
+      source: function(request, response) {
+        $.ajax({
+          url: "/common_data/user_list.json",
+          dataType: "json",
+          root: "list",
+          data: {'shainCd' : $('#' + itemCd).val()},
+          success: function(data) {
+            response($.map(data, function(item) {
+              return {
+                label: item.myoji+' '+item.name+' - '+item.shainCd,
+                value: item.shainCd
+              }
+            }))
+          }
+        })
+      },
+      select: function (event, ui) {
+        // alert(ui.item.label);
+        $('#' + itemNm).html(ui.item.label.split(' - ').shift());
+        // ui.item.value = ui.item.value.split(':').shift();
+      }
+    });
+    // ユーザ名のスタイルを指定する
+    $( "#" + itemNm ).css({width:"150px"}).addClass("input-xlarge uneditable-input");
+  });
+
+  $( "#byoinCd" ).autocomplete({
+    source: function(request, response) {
+      $.ajax({
+        url: "/common_data/byoin_list.json",
+        dataType: "json",
+        root: "list",
+        data: {'byoinCd' : $('#byoinCd').val()},
+        success: function(data) {
+          response($.map(data, function(item) {
+            return {
+              label: item.byoinNm+' - '+item.byoinCd,
+              value: item.byoinCd
+            }
+          }))
+        }
+      })
+    },
+    select: function (event, ui) {
+      $('#byoinNm').html(ui.item.label.split(' - ').shift());
+    }
+  });
+  $( "#byoinNm" ).css({width:"150px"}).addClass("input-xlarge uneditable-input");
+
+  $( "#seihinId" ).autocomplete({
+    source: function(request, response) {
+      $.ajax({
+        url: "/common_data/seihin_list.json",
+        dataType: "json",
+        root: "list",
+        data: {'seihinId' : $('#seihinId').val()},
+        success: function(data) {
+          response($.map(data, function(item) {
+            return {
+              label: item.hinmeiNm+' - '+item.seihinId,
+              value: item.seihinId
+            }
+          }))
+        }
+      })
+    },
+    select: function (event, ui) {
+      $('#hinmeiNm').html(ui.item.label.split(' - ').shift());
+    }
+  });
+  $( "#hinmeiNm" ).css({width:"150px"}).addClass("input-xlarge uneditable-input");
+
+  $('#fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<img />')
+                  .attr('src', file.thumbnail_url)
+                  .attr('alt', file.name + "(" + file.size + "bytes)")
+                  .attr('width', "100px")
+                  .attr('height', "100px")
+                  .appendTo('#uploaded_image');
+            });
+        }
+  });
+  <% files = session[:files] %>
+  <% if files and not files.empty? then %>
+  <%   src = "/konyu_rirekis/get_image/#{files[0][:name]}" %>
+  <%   alt = "#{files[0][:name]}(0bytes)" %>
+
+  $('<img />')
+    .attr('src', '<%=src %>')
+    .attr('alt', '<%=alt %>')
+    .attr('width', "100px")
+    .attr('height', "100px")
+    .appendTo('#uploaded_image');
+  <% end %>
+
 });
 
 // 更新用メソッド
-function executeKonyuRireki(kokyakuId) {
+function executeKonyuRireki(id) {
   // クライアントバリデーション
   if ($("#konyuRirekiForm").valid() == false) {
      return false;
   }
   //var action;
   //var method;
-  if(kokyakuId != null) {
+  if(id != null) {
     $("#koshinshaId").val("1");
-    $("#konyuRirekiForm").attr("action", "/kokyakus/" + kokyakuId);
+    $("#konyuRirekiForm").attr("action", "/konyu_rirekis/" + id);
     //$("#kokyakuForm").attr("method", "PUT");
     $("#httpMethod").val("put");
       //url = "../../kokyakus/" + kokyakuId + ".json";
@@ -215,7 +405,7 @@ function executeKonyuRireki(kokyakuId) {
     $("#torokushaId").val("1");
       //url = "../kokyakus.json";
       //type = "POST";
-    $("#konyuRirekiForm").attr("action", "/kokyakus");
+    $("#konyuRirekiForm").attr("action", "/konyu_rirekis");
     //$("#kokyakuForm").attr("method", "POST");
     $("#httpMethod").val("post");
   }

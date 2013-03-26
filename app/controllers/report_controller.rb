@@ -8,7 +8,6 @@ require 'open-uri'
 class ReportController < ApplicationController
 
   def report
-
     konyuRirekiId = params[:konyuRirekiId]
     kokyakuId = params[:kokyakuId]
 
@@ -217,9 +216,9 @@ class ReportController < ApplicationController
     ###########################
     # データ取得
     ###########################
-    @@konyuRireki = KonyuRireki.where("konyuRirekiId == ? and kokyakuId == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
+    @@konyuRireki = KonyuRireki.find(:first, :conditions => ["\"konyuRirekiId\" = ? and \"kokyakuId\" = ?", konyuRirekiId.to_i, kokyakuId.to_i])
     @@mitsumoriDt = @@konyuRireki["mitsumoriDt"]
-    
+
     kokyaku = Kokyaku.find(@@konyuRireki["kokyakuId"])
     @@atena = kokyaku["kokyakuNm"]
 
@@ -230,8 +229,7 @@ class ReportController < ApplicationController
     seihin = Seihin.find(@@konyuRireki["mitsumoriTantoEigyoCd"])
     @@katashiki = seihin["katashikiNm"]
 
-
-    @@mitsumori = Mitsumori.where("konyuRirekiId == ? and kokyakuId == ?", konyuRirekiId.to_s, kokyakuId.to_s).first
+    @@mitsumori = Mitsumori.find(:first, :conditions => ["\"konyuRirekiId\" = ? and \"kokyakuId\" = ?", konyuRirekiId.to_i, kokyakuId.to_i])
 
     if @@mitsumori.present?
       mitsumoriNo = @@mitsumori["mitsumoriNo"]
@@ -240,7 +238,7 @@ class ReportController < ApplicationController
 
       @@mitsumoriSeihins = MitsumoriSeihin.where(:mitsumoriNo == mitsumoriNo)
 
-      sqlstr = "SELECT * FROM (SELECT * FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.seihinNo = mt.seihinNo LEFT JOIN kansei_buhins kn ON mt.buhinCd = kn.buhinCd) WHERE buhinCd IS NOT NULL"
+      sqlstr = "SELECT * FROM (SELECT kn.\"buhinCd\", kn.\"buhinNm\", ms.tanka, ms.suryo, ms.kin FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" LEFT JOIN kansei_buhins kn ON mt.\"buhinCd\" = kn.\"buhinCd\") kb WHERE kb.\"buhinCd\" IS NOT NULL"
       @@kanseiBuhins = ActiveRecord::Base.connection.execute(sqlstr)
     end
 
@@ -471,6 +469,7 @@ class ReportController < ApplicationController
       format.json { render json: fileInfo }
     end
   end
+
 end
 
 
