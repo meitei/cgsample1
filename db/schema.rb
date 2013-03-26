@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20130326125150) do
   end
 
   create_table "konyu_rirekis", :force => true do |t|
-    t.integer  "konyuRirekiId"
+    t.integer  "konyuRirekiId",         :limit => 11
     t.integer  "kokyakuId"
     t.integer  "byoinCd"
     t.integer  "mitsumoriTantoEigyoCd"

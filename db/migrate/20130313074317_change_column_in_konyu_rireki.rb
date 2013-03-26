@@ -15,6 +15,8 @@ class ChangeColumnInKonyuRireki < ActiveRecord::Migration
     add_column :konyu_rirekis, :kanseiTmbImg, :binary, :limit => 1.megabyte
     add_column :konyu_rirekis, :kanseiImgName, :string
 
+    change_column :konyu_rirekis, :konyuRirekiId, :decimal, :precision => 11, :scale => 0
+
     rename_column :konyu_rirekis, :shohinSiyoBiko, :shohinShiyoBiko
 
     remove_column :konyu_rirekis, :ishiNm, :rigakuRyohoNm, :sagyoRyohoNm, :shubetsuCd, :mitsumoriKomokuCd, :sinsho, :hokenShubetsuCd, :koshinId
