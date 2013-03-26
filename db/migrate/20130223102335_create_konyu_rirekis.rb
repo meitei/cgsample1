@@ -7,7 +7,7 @@ class CreateKonyuRirekis < ActiveRecord::Migration
       t.string :ishiNm
       t.string :rigakuRyohoNm
       t.string :sagyoRyohoNm
-      t.integer :mitsumoriTantoEigyoCd
+      t.string :mitsumoriTantoEigyoCd
       t.date :mitsumoriDt
       t.integer :shubetsuCd
       t.integer :mitsumoriKomokuCd
@@ -17,11 +17,11 @@ class CreateKonyuRirekis < ActiveRecord::Migration
       t.decimal :kin
       t.decimal :seikyuKin
       t.string :shohinSiyoBiko
-      t.integer :uketsukeSesakuTantoCd
+      t.string :uketsukeSesakuTantoCd
       t.date :juchuDt
-      t.integer :kariAwaseTantoCd
+      t.string :kariAwaseTantoCd
       t.date :kariAwaseDt
-      t.integer :nohinTantoCd
+      t.string :nohinTantoCd
       t.date :nohinDt
       t.date :kofuDt
       t.date :kannoDt
