@@ -75,8 +75,8 @@
     <tr>
       <th>作業療法士氏名</th>
       <td>
-        <input style="width:70px;" type="text" id="rigakuRyohoNm1" name="konyu_rireki[rigakuRyohoNm1]" value="<%= @konyu_rireki.rigakuRyohoNm1 %>" tabindex="12" />
-        <input style="width:70px;" type="text" id="rigakuRyohoNm2" name="konyu_rireki[rigakuRyohoNm2]" value="<%= @konyu_rireki.rigakuRyohoNm2 %>" tabindex="12" />
+        <input style="width:70px;" type="text" id="sagyoRyohoNm1" name="konyu_rireki[sagyoRyohoNm1]" value="<%= @konyu_rireki.sagyoRyohoNm1 %>" tabindex="12" />
+        <input style="width:70px;" type="text" id="sagyoRyohoNm2" name="konyu_rireki[sagyoRyohoNm2]" value="<%= @konyu_rireki.sagyoRyohoNm2 %>" tabindex="12" />
       </td>
       <th>納品担当者</th>
       <td>
@@ -148,7 +148,7 @@
       <th>完成図</th>
       <!-- 完成図を表示する -->
       <td rowspan="4">
-        <div sytle="background-color:red;"><img width="100" height="100" src="#"></div>
+        <div id="uploaded_image"></div>
       </td>
     </tr>
     <tr>
@@ -177,7 +177,8 @@
       </td>
       <th><br/></th>
       <td>
-        <input style="width:230px;" type="file" >
+        <!-- <input style="width:230px;" type="file" > -->
+        <input id="fileupload" type="file" name="files[]" data-url="/konyu_rirekis/file_upload.json" multiple>
       </td>
     </tr>
   </table>
@@ -195,17 +196,30 @@ $(function() {
       $(element).removeClass(errorClass);
     },
     rules: {
-        kokyakuId: {required:true},
-        kokyakuNmKana: {katakana:true, maxlength:10},
-        tanjoDt: {date:true},
-        postNo: {postnum:true, maxlength:8},
-        address1: {maxlength:100},
-        address2: {maxlength:100},
-        tel1: {telnum:true, maxlength:12},
-        tel2: {mobilenum:true, maxlength:13},
-        fax: {telnum:true, maxlength:12},
-        gakkoNm: {maxlength:20},
-        biko: {maxlength:100},
+        ishiNm1: {maxlength:50},
+        ishiNm2: {maxlength:50},
+        rigakuRyohoNm1: {maxlength:50},
+        rigakuRyohoNm2: {maxlength:50},
+        sagyoRyohoNm1: {maxlength:50},
+        sagyoRyohoNm2: {maxlength:50},
+        juchuDtFrom: {date:true},
+        juchuDtTo: {date:true},
+        kariAwaseDtFrom: {date:true},
+        kariAwaseDtTo: {date:true},
+        nohinDtFrom: {date:true},
+        nohinDtTo: {date:true},
+        kofuDtFrom: {date:true},
+        kofuDtTo: {date:true},
+        nyukinDtFrom: {date:true},
+        nyukinDtTo: {date:true},
+        oshiinDtFrom: {date:true},
+        oshiinDtTo: {date:true},
+        kanryoDtFrom: {date:true},
+        kanryoDtTo: {date:true},
+        mitsumoriDtFrom: {date:true},
+        mitsumoriDtTo: {date:true},
+        shohinNm: {maxlength:100},
+        shohinShiyoBiko: {maxlength:200},
     }
   });
   $("#konyu_rireki_shubetsuKn").css("width", "100px").attr("tabindex", "6");
@@ -342,6 +356,32 @@ $(function() {
     }
   });
   $( "#hinmeiNm" ).css({width:"150px"}).addClass("input-xlarge uneditable-input");
+
+  $('#fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<img />')
+                  .attr('src', file.thumbnail_url)
+                  .attr('alt', file.name + "(" + file.size + "bytes)")
+                  .attr('width', "100px")
+                  .attr('height', "100px")
+                  .appendTo('#uploaded_image');
+            });
+        }
+  });
+  <% files = session[:files] %>
+  <% if files and not files.empty? then %>
+  <%   src = "/konyu_rirekis/get_image/#{files[0][:name]}" %>
+  <%   alt = "#{files[0][:name]}(0bytes)" %>
+
+  $('<img />')
+    .attr('src', '<%=src %>')
+    .attr('alt', '<%=alt %>')
+    .attr('width', "100px")
+    .attr('height', "100px")
+    .appendTo('#uploaded_image');
+  <% end %>
 
 });
 

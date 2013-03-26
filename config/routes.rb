@@ -53,7 +53,11 @@ JqgridSample::Application.routes.draw do
 
   resources :konyu_rirekis do
       get 'search', :on => :collection
+      post 'file_upload', :on => :collection
+      get 'get_image', :on => :collection
   end
+  # match ':controller(/:action(/:id))(.:format)', :to => 'konyu_rirekis#get_image'
+  match 'konyu_rirekis(/get_image(/:id))(.:format)', :to => 'konyu_rirekis#get_image'
 
   resources :common_data do
     get 'kokyaku_list', :on => :collection

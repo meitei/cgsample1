@@ -11,6 +11,9 @@ class ChangeColumnInKonyuRireki < ActiveRecord::Migration
     add_column :konyu_rirekis, :seihinId, :integer
     add_column :konyu_rirekis, :hokenShubetsuCd1, :integer
     add_column :konyu_rirekis, :hokenShubetsuCd2, :integer
+    add_column :konyu_rirekis, :kanseiImg, :binary, :limit => 1.megabyte
+    add_column :konyu_rirekis, :kanseiTmbImg, :binary, :limit => 1.megabyte
+    add_column :konyu_rirekis, :kanseiImgName, :string
 
     rename_column :konyu_rirekis, :shohinSiyoBiko, :shohinShiyoBiko
 
