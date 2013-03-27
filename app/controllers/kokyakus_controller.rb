@@ -11,7 +11,7 @@ class KokyakusController < ApplicationController
   # GET /kokyakus/search
   # GET /kokyakus/search.json
   def search
-    conditions = Kokyaku.where("delFlg = ?", 0)
+    conditions = Kokyaku.where("\"delFlg\" = ?", 0)
     conditions = conditions.where("\"kokyakuId\" >= ?", params[:kokyaku][:kokyakuIdFrom].to_i) if params[:kokyaku][:kokyakuIdFrom] != ""
     conditions = conditions.where("\"kokyakuId\" <= ?", params[:kokyaku][:kokyakuIdTo].to_i) if params[:kokyaku][:kokyakuIdTo] != ""
     conditions = conditions.where("\"kokyakuNm\" LIKE ?", params[:kokyaku][:kokyakuNm] + "%") if params[:kokyaku][:kokyakuNm] != ""
@@ -40,12 +40,12 @@ class KokyakusController < ApplicationController
     end
     start = limit * page - limit;
     @kokyakus = conditions.find(
-      :all, 
-      :joins => "LEFT OUTER JOIN shobyos ON shobyos.shobyoCd = kokyakus.shobyouCd1",
+      :all,
+      :joins => "LEFT OUTER JOIN shobyos ON shobyos.\"shobyoCd\" = kokyakus.\"shobyouCd1\"",
       # :joins => "LEFT OUTER JOIN shobyos shobyo2 ON shobyos.shobyoCd = kokyakus.shobyouCd2",
       # :joins => "LEFT OUTER JOIN shobyos shobyo3 ON shobyos.shobyoCd = kokyakus.shobyouCd3",
       # :include => [:shobyo],
-      :offset => start, 
+      :offset => start,
       :limit => limit,
       :order => "\"kokyakuId\" DESC")
 
