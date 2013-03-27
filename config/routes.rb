@@ -36,10 +36,11 @@ JqgridSample::Application.routes.draw do
 
   get "item_extend/search"
 
+  get "report/report"
+
   resources :items do
     get 'report', :on => :collection
-    get 'report2', :on => :collection
-    get 'display', :on => :collection
+    get 'image', :on => :collection
   end
 
   resources :toukeis do
@@ -52,6 +53,13 @@ JqgridSample::Application.routes.draw do
 
   resources :konyu_rirekis do
       get 'search', :on => :collection
+  end
+
+  resources :common_data do
+    get 'kokyaku_list', :on => :collection
+    get 'user_list', :on => :collection
+    get 'byoin_list', :on => :collection
+    get 'seihin_list', :on => :collection
   end
 
   resources :companies

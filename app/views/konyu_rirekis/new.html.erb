@@ -1,6 +1,6 @@
-<div class="title">顧客管理：新規顧客登録</div>
-<div class="statuslabel"><span>顧客登録</span>コメント　無ければ削除</div>
-<div id="kokyakuSearch" class="Tourokuform cf">
+<div class="title">購入履歴管理：購入履歴登録</div>
+<div class="statuslabel"><span>購入履歴登録</span>コメント　無ければ削除</div>
+<div id="konyuRirekiSearch" class="Tourokuform cf">
 	<%= render 'form' %>
 </div>
 <div class="btn_box">
@@ -10,12 +10,12 @@
 <script>
 $(function() {
 	$("a#btnKonyuRirekiRegist").click(function() {
-	    executeKokyaku();
+	    executeKonyuRireki();
 	    return false;
 	});
 
 	$("a#btnKonyuRirekiReturn").click(function() {
-    	location.href = "/kokyakus";
+    	location.href = "/konyu_rirekis";
 	    return false;
 	});
 });
