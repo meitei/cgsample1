@@ -119,7 +119,7 @@ class ShainsController < ApplicationController
     start = limit * page - limit;
     @shains = conditions.find(
       :all,
-      :select => "\"shainId\", 
+      :select =>       "id,
                        \"shainCd\",
                        \"myoji\",
                        \"name\",
@@ -128,7 +128,7 @@ class ShainsController < ApplicationController
                        \"username\",
                        \"password\",
                        \"manageFlg\",
-                       CASE \"manageFlg\" 
+                       CASE \"manageFlg\"
                            WHEN '0' THEN '一般'
                            WHEN '1' THEN '管理者'
                            WHEN '9' THEN '退職者'

@@ -102,4 +102,30 @@ class CommonDataController < ApplicationController
     end
   end
 
+  def shobyo_list
+
+    has_key = (params[:shobyoCd] != nil and params[:shobyoCd] != "")
+    sqlbind_s = "%" + params[:shobyoCd] + "%" if has_key
+    sqlbind_i = -1
+    sqlbind_i = params[:shobyoCd].to_i if has_key and params[:shobyoCd] =~ /\d+/
+
+    sqlstat = []
+    sqlstat << "\"shobyoCd\" = ? "
+    sqlstat << "\"shobyoNm\" LIKE ? "
+
+    conditions = Shobyo.where("1 = ?", 1)
+    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_i, sqlbind_s) if has_key
+    logger.debug(conditions)
+
+    @shobyos = conditions.find(
+      :all,
+      :limit => 1000,
+      :order => "\"shobyoCd\" ASC")
+
+    respond_to do |format|
+      format.html  { render :nothing => true }
+      format.json { render json: @shobyos }
+    end
+  end
+
 end
