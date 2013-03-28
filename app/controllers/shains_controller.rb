@@ -116,19 +116,19 @@ class ShainsController < ApplicationController
     end
 
     # 検索開始
+    # 項目が存在しないため、保留。 \"password\",
     start = limit * page - limit;
     @shains = conditions.find(
       :all,
-      :select => "\"shainId\", 
+      :select =>       "id,
                        \"shainCd\",
                        \"myoji\",
                        \"name\",
                        \"myojiFuri\",
                        \"nameFuri\",
                        \"username\",
-                       \"password\",
                        \"manageFlg\",
-                       CASE \"manageFlg\" 
+                       CASE \"manageFlg\"
                            WHEN '0' THEN '一般'
                            WHEN '1' THEN '管理者'
                            WHEN '9' THEN '退職者'
