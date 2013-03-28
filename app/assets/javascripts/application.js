@@ -21,4 +21,7 @@
 //= require ./plugins/jqplot.categoryAxisRenderer
 //= require ./plugins/jqplot.pointLabels
 
+//= require jquery.fileupload
+//= require jquery.iframe-transport
+
 //= require_tree .

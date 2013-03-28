@@ -24,22 +24,20 @@ $(function() {
         rules: {
             juchuDtFrom: {date:true},
             juchuDtTo: {date:true},
-
-            kokyakuNm: {required:true, maxlength:10},
-            kokyakuNmKana: {katakana:true, maxlength:10},
-            //seibetsu: {required:true, maxlength:10},
-            tanjoDt: {date:true},
-            postNo: {postnum:true, maxlength:8},
-            address1: {maxlength:100},
-            address2: {maxlength:100},
-            tel1: {telnum:true, maxlength:12},
-            tel2: {mobilenum:true, maxlength:13},
-            fax: {telnum:true, maxlength:12},
-            //shobyouCd1: {required:true, maxlength:10},
-            //shobyouCd2: {required:true, maxlength:10},
-            //shobyouCd3: {required:true, maxlength:10},
-            gakkoNm: {maxlength:20},
-            biko: {maxlength:100},
+            kariAwaseDtFrom: {date:true},
+            kariAwaseDtTo: {date:true},
+            nohinDtFrom: {date:true},
+            nohinDtTo: {date:true},
+            kofuDtFrom: {date:true},
+            kofuDtTo: {date:true},
+            nyukinDtFrom: {date:true},
+            nyukinDtTo: {date:true},
+            oshiinDtFrom: {date:true},
+            oshiinDtTo: {date:true},
+            kanryoDtFrom: {date:true},
+            kanryoDtTo: {date:true},
+            mitsumoriDtFrom: {date:true},
+            mitsumoriDtTo: {date:true}
         }
         //messages: {
         //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
@@ -55,7 +53,7 @@ $(function() {
         {name:"kokyakuNmKana", index:"kokyakuNmKana",width:80},
         {name:"hokenShubetsuNm1", index:"hokenShubetsuNm1",width:70},
         {name:"hokenShubetsuNm2", index:"hokenShubetsuNm2",width:70},
-        {name:"hinmeiNm", index:"hinmeiNm",width:80},
+        {name:"shohinNm", index:"shohinNm",width:80},
         {name:"kin", index:"kin",width:80, formatter:"currency", align:"right"},
         {name:"seikyuKin", index:"seikyuKin",width:80, formatter:"currency", align:"right"},
         {name:"uketsukeSesakuTantoNm", index:"uketsukeSesakuTantoNm",width:80},
@@ -72,7 +70,7 @@ $(function() {
         {name:"mitsumoriTantoEigyoNm", index:"mitsumoriTantoEigyoNm",width:80},
         {name:"mitsumoriDt", index:"mitsumoriDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
         {name:"shubetsuKnNm", index:"shubetsuKnNm",width:80},
-        {name:"shohinNm", index:"shohinNm",width:80},
+        {name:"hinmeiNm", index:"hinmeiNm",width:80},
         {name:"konyuRirekiId", index:"konyuRirekiId", hidden:true},
         {name:"koshinshaId", index:"koshinshaId", hidden:true},
         {name:"torokushaId", index:"torokushaId", hidden:true},
@@ -93,9 +91,118 @@ $(function() {
         //viewrecords: true,
         colNames: colNames,
         colModel: colModelSettings,
+        ondblClickRow: function(id) {
+            rowdata = $('#searchKonyuRirekiGrid').getRowData(id);
+            modifyKokyaku(rowdata.id)
+        },
         shrinkToFit:false
 
     }).navGrid('#searchKonyuRirekiPager',{edit:false, add:false, del:false, search:false});
+
+    var kokyakuItems = ["kokyakuIdFrom","kokyakuIdTo"];
+    $.each(kokyakuItems, function(i) {
+        var itemId = "#" + this;
+        $( itemId ).autocomplete({
+        // source: availableTags,
+            source: function(request, response) {
+              $.ajax({
+                url: "/common_data/kokyaku_list.json",
+                dataType: "json",
+                root: "list",
+                data: {'kokyakuId' : $( itemId ).val()},
+                success: function(data) {
+                  response($.map(data, function(item) {
+                    return {
+                      label: item.kokyakuNm+' - '+item.kokyakuId,
+                      value: item.kokyakuId
+                    }
+                  }))
+                }
+              })
+            }
+        });
+    });
+
+    $( "#byoinNm" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: "/common_data/byoin_list.json",
+            dataType: "json",
+            root: "list",
+            data: {'byoinCd' : $('#byoinNm').val()},
+            success: function(data) {
+              response($.map(data, function(item) {
+                return {
+                  label: item.byoinNm+' - '+item.byoinCd,
+                  value: item.byoinNm
+                }
+              }))
+            }
+          })
+        }
+    });
+
+    $( "#kokyakuNm" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: "/common_data/kokyaku_list.json",
+            dataType: "json",
+            root: "list",
+            data: {'kokyakuId' : $('#kokyakuNm').val()},
+            success: function(data) {
+              response($.map(data, function(item) {
+                return {
+                  label: item.kokyakuNm+' - '+item.kokyakuId,
+                  value: item.kokyakuNm
+                }
+              }))
+            }
+          })
+        }
+    });
+
+  $( "#hinmeiNm" ).autocomplete({
+    source: function(request, response) {
+      $.ajax({
+        url: "/common_data/seihin_list.json",
+        dataType: "json",
+        root: "list",
+        data: {'seihinId' : $('#hinmeiNm').val()},
+        success: function(data) {
+          response($.map(data, function(item) {
+            return {
+              label: item.hinmeiNm+' - '+item.seihinId,
+              value: item.hinmeiNm
+            }
+          }))
+        }
+      })
+    }
+  });
+
+    var userItems = ["uketsukeSesakuTantoNm", "kariAwaseTantoNm", "nohinTantoNm", "mitsumoriTantoEigyoNm"];
+    $.each(userItems,function(i) {
+        var itemId = "#" + this;
+        $(itemId).autocomplete({
+          // source: availableTags,
+          source: function(request, response) {
+            $.ajax({
+              url: "/common_data/user_list.json",
+              dataType: "json",
+              root: "list",
+              data: {'shainCd' : $(itemId).val()},
+              success: function(data) {
+                response($.map(data, function(item) {
+                  return {
+                    label: item.myoji+' '+item.name+' - '+item.shainCd,
+                    value: item.myoji+' '+item.name
+                  }
+                }))
+              }
+            })
+          }
+        });
+    });
 
     var dateItems = new Array("juchuDt", "kariAwaseDt", "nohinDt", "kofuDt", "nyukinDt", "oshiinDt", "kanryoDt", "mitsumoriDt");
     $.each(dateItems,function(i) {
@@ -105,6 +212,8 @@ $(function() {
     });
 
     $("#konyu_rireki_shubetsuKn").css("width", "100px").attr("tabindex", "10");
+    $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px").attr("tabindex", "10");
+    $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px").attr("tabindex", "10");
 });
 
 $("a#btnKonyuRirekiSearch").click(function() {
@@ -140,6 +249,7 @@ function searchKonyuRireki() {
     $("#searchKonyuRirekiGrid").clearGridData();
     var param = {
         datatype: "json",
+        mtype: 'POST',
         url: "konyu_rirekis/search.json",
         postData: data,
         jsonReader: {

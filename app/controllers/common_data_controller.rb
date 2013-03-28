@@ -29,11 +29,11 @@ class CommonDataController < ApplicationController
   def user_list
 
     has_key = (params[:shainCd] != nil and params[:shainCd] != "")
-    sqlbind_s = "%" + params[:shainCd] + "%" if has_key
+    sqlbind_s = "%" + params[:shainCd].gsub(/(\s|　)+/, '') + "%" if has_key
 
     sqlstat = []
     sqlstat << "\"shainCd\" LIKE ? "
-    sqlstat << "\"name\" LIKE ? "
+    sqlstat << "\"myoji\" || \"name\" LIKE ? "
 
     conditions = User.where("1 = ?", 1)
     conditions = conditions.where(sqlstat.join(" OR "), sqlbind_s, sqlbind_s) if has_key
