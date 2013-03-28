@@ -163,7 +163,7 @@ class KonyuRirekisController < ApplicationController
     # @konyu_rireki.merge add_columns
     # logger.debug(@konyu_rireki)
     @hoken_shubetsu = HokenShubetsu.all
-
+    session.delete(:files) if session.has_key? :files
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @konyu_rireki }
@@ -241,7 +241,7 @@ class KonyuRirekisController < ApplicationController
   # PUT /konyu_rirekis/1.json
   def update
     @konyuRireki = KonyuRireki.find(params[:id])
-    files = session[:files] if session.has_key? :files
+    files = session.delete(:files) if session.has_key? :files
     if files and files.size > 0
       @konyuRireki.kanseiImg = files[0][:data]
       @konyuRireki.kanseiImgName = files[0][:name]

@@ -69,6 +69,7 @@ JqgridSample::Application.routes.draw do
     get 'user_list', :on => :collection
     get 'byoin_list', :on => :collection
     get 'seihin_list', :on => :collection
+    get 'shobyo_list', :on => :collection
   end
 
   resources :companies

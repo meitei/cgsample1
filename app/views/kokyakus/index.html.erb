@@ -4,7 +4,7 @@
 <%= render 'search' %>
 </div>
 <div style="clear:both;" id="customer">
-    <table id="searchCustomerGrid"></table>        
+    <table id="searchCustomerGrid"></table>
     <div id="searchCustomerPager"></div>
 </div>
 <div class="btn_new">
@@ -15,11 +15,11 @@ $(function() {
     $("#kokyakuForm").validate({
         errorClass:'error',
         errorElement:'label',
-        highlight: function (element, errorClass, validClass) { 
-            $(element).addClass(errorClass); 
-        }, 
-        unhighlight: function (element, errorClass, validClass) { 
-            $(element).removeClass(errorClass); 
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass(errorClass);
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass(errorClass);
         },
         rules: {
             kokyakuNm: {required:true, maxlength:10},
@@ -43,20 +43,23 @@ $(function() {
         //}
     });
     var isLoaded = false;
-    var colNames = ["","ID","顧客名","顧客カナ","","性別","生年月日","郵便番号","電話番号","携帯番号","FAX番号","疾病名","備考","","","",""];
+    var colNames = ["","ID","顧客名","顧客カナ","","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名","学校名・施設名","備考","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
-        {name:"kokyakuId", index:"kokyakuId",width:20},
-        {name:"kokyakuNm", index:"kokyakuNm",width:50},
-        {name:"kokyakuNmKana", index:"kokyakuNmKana",width:70},
+        {name:"kokyakuId", index:"kokyakuId",width:30},
+        {name:"kokyakuNm", index:"kokyakuNm",width:80},
+        {name:"kokyakuNmKana", index:"kokyakuNmKana",width:100},
         {name:"seibetsu", index:"seibetsu",hidden:true},
-        {name:"seibetsuNm", index:"seibetsuNm",width:30},
-        {name:"tanjoDt", index:"tanjoDt",width:60},
-        {name:"postNo", index:"postNo",width:50},
-        {name:"tel1", index:"tel1", width:70},
+        {name:"seibetsuNm", index:"seibetsuNm",width:35},
+        {name:"tanjoDt", index:"tanjoDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
+        {name:"postNo", index:"postNo",width:80},
+        {name:"address1", index:"address1",width:100},
+        {name:"address2", index:"address2",width:100},
+        {name:"tel1", index:"tel1", width:80},
         {name:"tel2", index:"tel2", width:80},
-        {name:"fax", index:"fax", width:70},
-        {name:"shobyouCd1", index:"shobyouCd1",width:80},
+        {name:"fax", index:"fax", width:80},
+        {name:"shobyoNm1", index:"shobyoNm1",width:80},
+        {name:"gakkoNm", index:"gakkoNm",width:80},
         {name:"biko", index:"biko", editable:true, hidden:true, edittype:"textarea", editrules:{edithidden:true}},
         {name:"koshinshaId", index:"koshinshaId", hidden:true},
         {name:"torokushaId", index:"torokushaId", hidden:true},
@@ -70,15 +73,65 @@ $(function() {
         height: "240",
         cellEdit: false,
         rowNum: 10,
-        //rowList:[10,20,30], 
+        //rowList:[10,20,30],
         pager: "searchCustomerPager",
         multiselect: false,
-        //viewrecords: true,                                   
+        //viewrecords: true,
         colNames: colNames,
-        colModel: colModelSettings
+        colModel: colModelSettings,
+        ondblClickRow: function(id) {
+            rowdata = $('#searchCustomerGrid').getRowData(id);
+            modifyKokyaku(rowdata.kokyakuId)
+        },
+        shrinkToFit:false
+
     }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
 
-  $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "10");
+    $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "10");
+
+    var kokyakuItems = ["kokyakuIdFrom","kokyakuIdTo"];
+    $.each(kokyakuItems, function(i) {
+        var itemId = "#" + this;
+        $( itemId ).autocomplete({
+        // source: availableTags,
+            source: function(request, response) {
+              $.ajax({
+                url: "/common_data/kokyaku_list.json",
+                dataType: "json",
+                root: "list",
+                data: {'kokyakuId' : $( itemId ).val()},
+                success: function(data) {
+                  response($.map(data, function(item) {
+                    return {
+                      label: item.kokyakuNm+' - '+item.kokyakuId,
+                      value: item.kokyakuId
+                    }
+                  }))
+                }
+              })
+            }
+        });
+    });
+
+    $( "#shobyouNm" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: "/common_data/shobyo_list.json",
+            dataType: "json",
+            root: "list",
+            data: {'shobyoCd' : $('#shobyouNm').val()},
+            success: function(data) {
+              response($.map(data, function(item) {
+                return {
+                  label: item.shobyoNm+' - '+item.shobyoCd,
+                  value: item.shobyoNm
+                }
+              }))
+            }
+          })
+        }
+    });
+
 });
 
 $("a#btnCustomerSearch").click(function() {
