@@ -109,15 +109,16 @@ Mitsumori.create(
 )
 
 
+# imageDir = File.join(Rails.root, 'public', 'images' , 'items')
 imageDir = File.join(Rails.root, 'db', 'import', 'images')
 # TestImage.destroy_all(["1 = ?", 1])
 TestImage.create(
 	:mitsumoriNo => 1,
 	:text => "Sample Text",
- 	:mainImage1 => File.read(File.join(imageDir, 'char1.jpg')),
- 	:mainImage2 => File.read(File.join(imageDir, 'char2.png')),
- 	:subImage1 => File.read(File.join(imageDir, 'face0.png')),
- 	:subImage2 => File.read(File.join(imageDir, 'face3.png')),
- 	:subImage3 => File.read(File.join(imageDir, 'face6.png')),
- 	:subImage4 => File.read(File.join(imageDir, 'face7.png'))
+ 	:mainImage1 => File.read(File.join(imageDir, 'image002.jpg')),
+ 	:mainImage2 => File.read(File.join(imageDir, 'image010.jpg')),
+ 	:subImage1  => File.read(File.join(imageDir, 'image018.jpg')),
+ 	:subImage2  => File.read(File.join(imageDir, 'image024.jpg')),
+ 	:subImage3  => File.read(File.join(imageDir, 'image034.jpg')),
+ 	:subImage4  => File.read(File.join(imageDir, 'image038.jpg'))
 )
