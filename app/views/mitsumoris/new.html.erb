@@ -1,35 +1,22 @@
-<script>
-$(document).ready(function(){
-	$("#estimateForm").wizard();
-    $("div#step1").load("/mitsumori/step_1.html");
 
-      $("li#step10").hide();
-      $("li#step11").hide();
-      $("li#step12").hide();
-      $("li#step13").hide();
-      $("li#step14").hide();
-      $("li#step15").hide();
-      $("li#step16").hide();
-      $("li#step17").hide();
-      $("#btnEstimateRegist").hide();
-      $("button.jqwizard_next").attr("disabled", true);
-
-      $("input#step1_1").click(function(){
-        $("div#step2").load("/mitsumori/step_2_a.html");
-        $("li#step2 a").attr("href", "#step2");
-        $("li#step2 span").text("構造フレーム");
-      $("button.jqwizard_next").attr("disabled", false);
-      });
-
-      $("input#step1_2").click(function(){
-        $("div#step2").load("/mitsumori/step_2_b.html");
-        $("li#step2 a").attr("href", "#step2");
-        $("li#step2 span").text("フレーム材質");
-      $("button.jqwizard_next").attr("disabled", false);
-      });
-});
-</script>
 <div class="container">
 	<div class="title">見積入力</div>
     <div class="statuslabel"><span>STEP 1</span>使用環境　座位保持装置製作方法の選定</div>
 <%= render 'form' %>
+<script>
+$(document).ready(function(){
+  $("#estimateForm").wizard();
+    //$("div#step1").load("/mitsumori/step_1.html");
+    $.ajax({
+               type: 'GET',
+               url: '/mitsumori/step_1.html',
+               dataType: 'html',
+               success: function(data) {
+                   $("div#step1").append(data);
+               },
+               error:function() {
+                   alert('問題がありました。');
+               }
+        });
+});
+</script>
