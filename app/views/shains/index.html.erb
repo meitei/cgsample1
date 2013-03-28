@@ -13,10 +13,10 @@
 <%= render 'form' %>
 <script>
 // ##############################
-// 
+//
 // ##############################
 $(function() {
-    
+
     var isLoaded = false;
     var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","管理者フラグ","",""];
     var colModelSettings = [
@@ -178,6 +178,8 @@ function showShainFormDialog(shainId) {
                     $("#shainForm #name").val(result["name"]);
                     $("#shainForm #myojiFuri").val(result["myojiFuri"]);
                     $("#shainForm #nameFuri").val(result["nameFuri"]);
+                    //FIXME: IDがDB定義と合っていないので修正する
+                    $("#shainForm #username").val(result["username"]);
                     $("#shainForm #loginId").val(result["loginId"]);
                     $("#shainForm #loginPassword").val(result["loginPassword"]);
                     $("#shainForm #manageFlg").val(result["manageFlg"]);

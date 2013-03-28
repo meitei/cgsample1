@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321150243) do
+ActiveRecord::Schema.define(:version => 20130326125150) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -85,20 +85,20 @@ ActiveRecord::Schema.define(:version => 20130321150243) do
   end
 
   create_table "konyu_rirekis", :force => true do |t|
-    t.integer  "konyuRirekiId"
+    t.integer  "konyuRirekiId",         :limit => 11
     t.integer  "kokyakuId"
     t.integer  "byoinCd"
-    t.integer  "mitsumoriTantoEigyoCd"
+    t.string   "mitsumoriTantoEigyoCd"
     t.date     "mitsumoriDt"
     t.string   "shohinNm"
     t.decimal  "kin"
     t.decimal  "seikyuKin"
-    t.string   "shohinSiyoBiko"
-    t.integer  "uketsukeSesakuTantoCd"
+    t.string   "shohinShiyoBiko"
+    t.string   "uketsukeSesakuTantoCd"
     t.date     "juchuDt"
-    t.integer  "kariAwaseTantoCd"
+    t.string   "kariAwaseTantoCd"
     t.date     "kariAwaseDt"
-    t.integer  "nohinTantoCd"
+    t.string   "nohinTantoCd"
     t.date     "nohinDt"
     t.date     "kofuDt"
     t.date     "kannoDt"
@@ -107,8 +107,26 @@ ActiveRecord::Schema.define(:version => 20130321150243) do
     t.date     "kanryoDt"
     t.integer  "koshinshaId"
     t.integer  "torokushaId"
+<<<<<<< HEAD
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+=======
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.string   "ishiNm1"
+    t.string   "ishiNm2"
+    t.string   "rigakuRyohoNm1"
+    t.string   "rigakuRyohoNm2"
+    t.string   "sagyoRyohoNm1"
+    t.string   "sagyoRyohoNm2"
+    t.integer  "shubetsuKn"
+    t.integer  "seihinId"
+    t.integer  "hokenShubetsuCd1"
+    t.integer  "hokenShubetsuCd2"
+    t.binary   "kanseiImg",             :limit => 1048576
+    t.binary   "kanseiTmbImg",          :limit => 1048576
+    t.string   "kanseiImgName"
+>>>>>>> 2dd66db46d90f7a7e9ac7df53a883e069eef3779
   end
 
   create_table "mitsumori_seihins", :force => true do |t|
@@ -301,6 +319,16 @@ ActiveRecord::Schema.define(:version => 20130321150243) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "shains", :primary_key => "shainId", :force => true do |t|
     t.string   "shainCd",       :limit => 10, :null => false
