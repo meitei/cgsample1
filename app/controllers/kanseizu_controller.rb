@@ -12,6 +12,8 @@ class KanseizuController < ApplicationController
   end
 
   def get_image
+    type = "image/jpg"
+
     id = params[:id]
     column = params[:column].to_i
 
@@ -20,19 +22,18 @@ class KanseizuController < ApplicationController
     case column
       when 1
         columnNm = "mainImage1"
-        type = "image/jpg"
       when 2
         columnNm = "mainImage2"
-        type = "image/png"
       when 3
         columnNm = "subImage1"
-        type = "image/png"
       when 4
         columnNm = "subImage2"
-        type = "image/png"
+      when 5
+        columnNm = "subImage3"
+      when 6
+        columnNm = "subImage4"
       else
         columnNm = "mainImage1"
-        type = "image/jpg"
     end
 
     send_data(@img[columnNm], :disposition => "inline", :type => type)
