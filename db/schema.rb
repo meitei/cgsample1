@@ -85,20 +85,20 @@ ActiveRecord::Schema.define(:version => 20130326125150) do
   end
 
   create_table "konyu_rirekis", :force => true do |t|
-    t.integer  "konyuRirekiId",         :limit => 11
+    t.integer  "konyuRirekiId"
     t.integer  "kokyakuId"
     t.integer  "byoinCd"
-    t.string   "mitsumoriTantoEigyoCd"
+    t.integer  "mitsumoriTantoEigyoCd"
     t.date     "mitsumoriDt"
     t.string   "shohinNm"
     t.decimal  "kin"
     t.decimal  "seikyuKin"
-    t.string   "shohinShiyoBiko"
-    t.string   "uketsukeSesakuTantoCd"
+    t.string   "shohinSiyoBiko"
+    t.integer  "uketsukeSesakuTantoCd"
     t.date     "juchuDt"
-    t.string   "kariAwaseTantoCd"
+    t.integer  "kariAwaseTantoCd"
     t.date     "kariAwaseDt"
-    t.string   "nohinTantoCd"
+    t.integer  "nohinTantoCd"
     t.date     "nohinDt"
     t.date     "kofuDt"
     t.date     "kannoDt"
@@ -107,21 +107,8 @@ ActiveRecord::Schema.define(:version => 20130326125150) do
     t.date     "kanryoDt"
     t.integer  "koshinshaId"
     t.integer  "torokushaId"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-    t.string   "ishiNm1"
-    t.string   "ishiNm2"
-    t.string   "rigakuRyohoNm1"
-    t.string   "rigakuRyohoNm2"
-    t.string   "sagyoRyohoNm1"
-    t.string   "sagyoRyohoNm2"
-    t.integer  "shubetsuKn"
-    t.integer  "seihinId"
-    t.integer  "hokenShubetsuCd1"
-    t.integer  "hokenShubetsuCd2"
-    t.binary   "kanseiImg",             :limit => 1048576
-    t.binary   "kanseiTmbImg",          :limit => 1048576
-    t.string   "kanseiImgName"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "mitsumori_seihins", :force => true do |t|
