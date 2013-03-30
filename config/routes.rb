@@ -34,8 +34,6 @@ JqgridSample::Application.routes.draw do
     get 'search', :on => :collection
   end
 
-  resources :wizard
-
   get "item_extend/search"
 
   get "report/report"

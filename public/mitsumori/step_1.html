@@ -88,31 +88,3 @@
       <td class="td5"><div><img src="http://dummyimage.com/127x180/666666/ffffff.png" alt="" /></div></td></tr>
 </table>
 </label>
-<script>
-  $(document).ready(function(){
-      $("li#step10").hide();
-      $("li#step11").hide();
-      $("li#step12").hide();
-      $("li#step13").hide();
-      $("li#step14").hide();
-      $("li#step15").hide();
-      $("li#step16").hide();
-      $("li#step17").hide();
-      $("#btnEstimateRegist").hide();
-      $("button.jqwizard_next").attr("disabled", true);
-
-      $("input#step1_1").click(function(){
-        $("div#step2").load("/mitsumori/step_2_a.html");
-        $("li#step2 a").attr("href", "#step2");
-        $("li#step2 span").text("構造フレーム");
-      $("button.jqwizard_next").attr("disabled", false);
-      });
-
-      $("input#step1_2").click(function(){
-        $("div#step2").load("/mitsumori/step_2_b.html");
-        $("li#step2 a").attr("href", "#step2");
-        $("li#step2 span").text("フレーム材質");
-      $("button.jqwizard_next").attr("disabled", false);
-      });
-  });
-</script>
