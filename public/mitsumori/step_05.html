@@ -1,80 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>見積入力｜座位保持装置選定・管理システム</title>
-    <meta content="authenticity_token" name="csrf-param" />
-<meta content="s5aE7/9NhJ6Jhb2vLjDBwXwPCxzDYDjrtw8fvgOxpbU=" name="csrf-token" />
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
-    <![endif]-->
-
-    <link href="css/import.css" media="all" rel="stylesheet" type="text/css" />
-    <!-- Javascripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	var radio = $('div.jqwizard_content');
-	//checkedだったら最初からチェックする
-	$('input', radio).each(function(){
-		if ($(this).attr('checked') == 'checked') {
-			$(this).next().addClass('checked');
-		}
-	});
-	//クリックした要素にクラス割り当てる
-	$('label', radio).click(function() {
-		$(this).parent().parent().each(function() {
-			$('label',this).removeClass('checked');
-		});
-		$(this).addClass('checked');
-	});
-});
-</script>
-    <script src="/assets/application-27e0fdcab9dbd0b3d72a4c3058dc28b8.js" type="text/javascript"></script>
-  </head>
-  <body>
-  <div class="wrapper">
-    <div class="navbar navbar-fluied-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">座位保持装置選定・管理システム</a>
-          <div class="container nav-collapse">
-            <ul class="nav">
-              <li><a href="#">顧客管理</a></li>
-              <li><a href="#">購入履歴管理</a></li>
-              <li><a href="#">売上管理</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
-
-    <div class="navbar-page cf">
-      <div class="backtop"><a href="">管理システムトップへ戻る</a></div>
-      <div class="info"><span class="name">ログイン名：ヴィンテージ太郎</span>
-          <form class="btn_logout"><input type="image" src="images/btn_logout.png" /></form></div>
-    </div>
-
-    <div class="container">
-        <div class="title">見積入力</div>
-<!-- ****************************************************************************************************
-
-******************************************************************************************************-->
-<div class="statuslabel"><span>STEP 1</span>構造フレーム</div>
-<div id="estimateForm" class="jqwizard">
-    <div class="jqwizard_panel">
-        <div class="jqwizard_content" id="edit_as_you_like_1">
             <table class="jqwizard_label">
                 <tr><td class="td1"></td>
                 <td class="td2">選択</td>
@@ -83,11 +7,11 @@ $(function(){
                 <td class="td5">写真</td></tr>
             </table>
             <!--Panda&nbsp;High-Lowﾌﾚｰﾑ R82A/S 89505-->
-            <label for="step1_1">
+            <label for="step1">
                 <table class="jqwizard_item">
                     <tr>
                         <td class="td1">
-                            <div><input type="radio" name="col2" id="col1"></div>
+                            <div><input checked type="radio" name="COL5_1" id="1-COL5_1" value="1"></div>
                         </td>
                         <td class="detail">
                             <table class="jqwizard_item_detail">
@@ -129,10 +53,11 @@ $(function(){
                                 <tr>
                                     <td class="td2"></td>
                                     <td class="mitsumori_td1">完成用部品<br>構造ﾌﾚｰﾑ&nbsp; 屋内用&nbsp;R82A/S 89505</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">113700</td>
-                                    <td class="mitsumori_td4">113700</td>
+                                    <td class="mitsumori_td2" id="1-13_su">1</td>
+                                    <td class="mitsumori_td3" id="1-13_tan">113700</td>
+                                    <td class="mitsumori_td4" id="1-13_kin">113700</td>
                                     <td class="td4"></td>
+                                    <input type="hidden" id="1-13_tax"/>
                                 </tr>
                             </table>
                         </td>
@@ -143,11 +68,11 @@ $(function(){
                 </table>
             </label>
             <!--きさく&nbsp;PW-2-->
-            <label for="step1_1">
+            <label for="step2">
                 <table class="jqwizard_item">
                     <tr>
                         <td class="td1">
-                            <div><input type="radio" name="col2" id="col1"></div>
+                            <div><input type="radio" name="COL5_1" id="2-COL5_1" value="2"></div>
                         </td>
                         <td class="detail">
                             <table class="jqwizard_item_detail">
@@ -186,36 +111,40 @@ $(function(){
                                     <td class="td4"></td>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" checked name="2-COL5_2" id="2-1-COL5_2" value="1"></td>
                                     <td class="mitsumori_td1">完成用部品<br>構造ﾌﾚｰﾑ&nbsp;屋外用&nbsp;きさく&nbsp;PW2-LL</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">101600</td>
-                                    <td class="mitsumori_td4">101600</td>
+                                    <td class="mitsumori_td2" id="2-14_su">1</td>
+                                    <td class="mitsumori_td3" id="2-14_tan">101600</td>
+                                    <td class="mitsumori_td4" id="2-14_kin">101600</td>
                                     <td class="td4"></td>
+                                    <input type="hidden" id="2-14_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="2-COL5_2" id="2-2-COL5_2" value="2"></td>
                                     <td class="mitsumori_td1">完成用部品<br>構造ﾌﾚｰﾑ&nbsp;屋外用&nbsp;きさく&nbsp;PW2-L</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">100400</td>
-                                    <td class="mitsumori_td4">100400</td>
+                                    <td class="mitsumori_td2" id="2-15_su">1</td>
+                                    <td class="mitsumori_td3" id="2-15_tan">100400</td>
+                                    <td class="mitsumori_td4" id="2-15_kin">100400</td>
                                     <td class="td4"></td>
+                                    <input type="hidden" id="2-15_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="2-COL5_2" id="2-3-COL5_2" value="3"></td>
                                     <td class="mitsumori_td1">完成用部品<br>構造ﾌﾚｰﾑ&nbsp;屋外用&nbsp;きさく&nbsp;PW2-M</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">99200</td>
-                                    <td class="mitsumori_td4">99200</td>
+                                    <td class="mitsumori_td2" id="2-16_su">1</td>
+                                    <td class="mitsumori_td3" id="2-16_tan">99200</td>
+                                    <td class="mitsumori_td4" id="2-16_kin">99200</td>
                                     <td class="td4"></td>
+                                    <input type="hidden" id="2-16_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="2-COL5_2" id="2-4-COL5_2" value="4"></td>
                                     <td class="mitsumori_td1">完成用部品<br>構造ﾌﾚｰﾑ&nbsp;屋外用&nbsp;きさく&nbsp;PW2-S</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">95600</td>
-                                    <td class="mitsumori_td4">95600</td>
+                                    <td class="mitsumori_td2" id="2-17_su">1</td>
+                                    <td class="mitsumori_td3" id="2-17_tan">95600</td>
+                                    <td class="mitsumori_td4" id="2-17_kin">95600</td>
                                     <td class="td4"></td>
+                                    <input type="hidden" id="2-17_tax"/>
                                 </tr>
                             </table>
                         </td>
@@ -227,11 +156,11 @@ $(function(){
             </label>
 
             <!--有薗AR-06FR26-01-->
-            <label for="step1_1">
+            <label for="step3">
                 <table class="jqwizard_item">
                     <tr>
                         <td class="td1">
-                            <div><input type="radio" name="col2" id="col1"></div>
+                            <div><input type="radio" name="COL5_1" id="3-COL5_1" value="3"></div>
                         </td>
                         <td class="detail">
                             <table class="jqwizard_item_detail">
@@ -277,10 +206,11 @@ $(function(){
                                 <tr>
                                     <td class="td2"></td>
                                     <td class="mitsumori_td1">完成用部品<br>構造ﾌﾚｰﾑ&nbsp; 屋外用&nbsp;有薗AR-06FR26-01</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">101600</td>
-                                    <td class="mitsumori_td4">101600</td>
+                                    <td class="mitsumori_td2" id="3-18_su">1</td>
+                                    <td class="mitsumori_td3" id="3-18_tan">101600</td>
+                                    <td class="mitsumori_td4" id="3-18_kin">101600</td>
                                     <td class="td4"></td>
+                                    <input type="hidden" id="3-18_tax"/>
                                 </tr>
                             </table>
                         </td>
@@ -291,11 +221,11 @@ $(function(){
                 </table>
             </label>
             <!--車椅子フレーム-->
-            <label for="step1_1">
+            <label for="step4">
                 <table class="jqwizard_item">
                     <tr>
                         <td class="td1">
-                            <div><input type="radio" name="col2" id="col1"></div>
+                            <div><input type="radio" name="COL5_1" id="4-COL5_1" value="4"></div>
                         </td>
                         <td class="detail">
                             <table class="jqwizard_item_detail">
@@ -322,100 +252,112 @@ $(function(){
                                     <td class="td4"></td>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input checked type="radio" name="4-COL5_4" id="4-1-COL5_4" value="1"></td>
                                     <td class="mitsumori_td1">普通型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">100000</td>
-                                    <td class="mitsumori_td4">100000</td>
+                                    <td class="mitsumori_td2" id="4-19_su">1</td>
+                                    <td class="mitsumori_td3" id="4-19_tan">100000</td>
+                                    <td class="mitsumori_td4" id="4-19_kin">100000</td>
                                     <td class="td4">普通型</td>
+                                    <input type="hidden" id="4-19_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-2-COL5_4" value="2"></td>
                                     <td class="mitsumori_td1">リクライニング式普通型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">120000</td>
-                                    <td class="mitsumori_td4">120000</td>
+                                    <td class="mitsumori_td2" id="4-20_su">1</td>
+                                    <td class="mitsumori_td3" id="4-20_tan">120000</td>
+                                    <td class="mitsumori_td4" id="4-20_kin">120000</td>
                                     <td class="td4">リクライニング式普通型</td>
+                                    <input type="hidden" id="4-20_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-3-COL5_4" value="3"></td>
                                     <td class="mitsumori_td1">ティルト式普通型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">148000</td>
-                                    <td class="mitsumori_td4">148000</td>
+                                    <td class="mitsumori_td2" id="4-21_su">1</td>
+                                    <td class="mitsumori_td3" id="4-21_tan">148000</td>
+                                    <td class="mitsumori_td4" id="4-21_kin">148000</td>
                                     <td class="td4">ティルト式普通型</td>
+                                    <input type="hidden" id="4-21_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-4-COL5_4" value="4"></td>
                                     <td class="mitsumori_td1">ﾘｸﾗｲﾆﾝｸﾞ・ﾃｨﾙﾄ式普通型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">173000</td>
-                                    <td class="mitsumori_td4">173000</td>
+                                    <td class="mitsumori_td2" id="4-22_su">1</td>
+                                    <td class="mitsumori_td3" id="4-22_tan">173000</td>
+                                    <td class="mitsumori_td4" id="4-22_kin">173000</td>
                                     <td class="td4">ﾘｸﾗｲﾆﾝｸﾞ・ﾃｨﾙﾄ式普通型</td>
+                                    <input type="hidden" id="4-22_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio"name="4-COL5_4" id="4-5-COL5_4" value="5"></td>
                                     <td class="mitsumori_td1">片手駆動型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">117000</td>
-                                    <td class="mitsumori_td4">117000</td>
+                                    <td class="mitsumori_td2" id="4-23_su">1</td>
+                                    <td class="mitsumori_td3" id="4-23_tan">117000</td>
+                                    <td class="mitsumori_td4" id="4-23_kin">117000</td>
                                     <td class="td4">片手駆動型</td>
+                                    <input type="hidden" id="4-23_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-6-COL5_4" value="6"></td>
                                     <td class="mitsumori_td1">リクライニング式片手駆動型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">133600</td>
-                                    <td class="mitsumori_td4">133600</td>
+                                    <td class="mitsumori_td2" id="4-24_su">1</td>
+                                    <td class="mitsumori_td3" id="4-24_tan">133600</td>
+                                    <td class="mitsumori_td4" id="4-24_kin">133600</td>
                                     <td class="td4">リクライニング式片手駆動型</td>
+                                    <input type="hidden" id="4-24_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-7-COL5_4" value="7"></td>
                                     <td class="mitsumori_td1">レバー駆動型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">160500</td>
-                                    <td class="mitsumori_td4">160500</td>
+                                    <td class="mitsumori_td2" id="4-25_su">1</td>
+                                    <td class="mitsumori_td3" id="4-25_tan">160500</td>
+                                    <td class="mitsumori_td4" id="4-25_kin">160500</td>
                                     <td class="td4">レバー駆動型</td>
+                                    <input type="hidden" id="4-25_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-8-COL5_4" value="8"></td>
                                     <td class="mitsumori_td1">手押し型&nbsp;A</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">82700</td>
-                                    <td class="mitsumori_td4">82700</td>
+                                    <td class="mitsumori_td2" id="4-26_su">1</td>
+                                    <td class="mitsumori_td3" id="4-26_tan">82700</td>
+                                    <td class="mitsumori_td4" id="4-26_kin">82700</td>
                                     <td class="td4">手押し型&nbsp;A</td>
+                                    <input type="hidden" id="4-26_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-9-COL5_4" value="9"></td>
                                     <td class="mitsumori_td1">手押し型&nbsp;B</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">81000</td>
-                                    <td class="mitsumori_td4">81000</td>
+                                    <td class="mitsumori_td2" id="4-27_su">1</td>
+                                    <td class="mitsumori_td3" id="4-27_tan">81000</td>
+                                    <td class="mitsumori_td4" id="4-27_kin">81000</td>
                                     <td class="td4">手押し型&nbsp;B</td>
+                                    <input type="hidden" id="4-27_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-10-COL5_4" value="10"></td>
                                     <td class="mitsumori_td1">リクライニング式手押し型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">114000</td>
-                                    <td class="mitsumori_td4">114000</td>
+                                    <td class="mitsumori_td2" id="4-28_su">1</td>
+                                    <td class="mitsumori_td3" id="4-28_tan">114000</td>
+                                    <td class="mitsumori_td4" id="4-28_kin">114000</td>
                                     <td class="td4">リクライニング式手押し型</td>
+                                    <input type="hidden" id="4-28_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-11-COL5_4" value="11"></td>
                                     <td class="mitsumori_td1">ティルト式手押し型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">128000</td>
-                                    <td class="mitsumori_td4">128000</td>
+                                    <td class="mitsumori_td2" id="4-29_su">1</td>
+                                    <td class="mitsumori_td3" id="4-29_tan">128000</td>
+                                    <td class="mitsumori_td4" id="4-29_kin">128000</td>
                                     <td class="td4">ティルト式手押し型</td>
+                                    <input type="hidden" id="4-29_tax"/>
                                 </tr>
                                 <tr>
-                                    <td class="td2"><input type="radio"></td>
+                                    <td class="td2"><input type="radio" name="4-COL5_4" id="4-12-COL5_4" value="12"></td>
                                     <td class="mitsumori_td1">ﾘｸﾗｲﾆﾝｸﾞ・ﾃｨﾙﾄ式手押し型</td>
-                                    <td class="mitsumori_td2">1</td>
-                                    <td class="mitsumori_td3">153000</td>
-                                    <td class="mitsumori_td4">153000</td>
+                                    <td class="mitsumori_td2" id="4-30_su">1</td>
+                                    <td class="mitsumori_td3" id="4-30_tan">153000</td>
+                                    <td class="mitsumori_td4" id="4-30_kin">153000</td>
                                     <td class="td4">ﾘｸﾗｲﾆﾝｸﾞ・ﾃｨﾙﾄ式手押し型</td>
+                                    <input type="hidden" id="4-30_tax"/>
                                 </tr>
                             </table>
                         </td>
@@ -425,48 +367,3 @@ $(function(){
                     </tr>
                 </table>
             </label>
-
-        </div>
-    </div>
-    <div class="jqwizard_buttons">
-        <a href="" class="jqwizard_previous"><img src="images/btn_back.png" alt="戻る" /></a>
-        <a href="" class="jqwizard_next"><img src="images/btn_next.png" alt="次へ" /></a>
-    </div>
-    <div class="jqwizard_navi cf">
-        <ul>
-            <li class="jqwizard_done"><a href="#edit_as_you_like_1" title=""><em>Step 1</em><span>使用環境</span></a></li>
-            <li class="jqwizard_lastdone"><a href="#edit_as_you_like_2" title=""><em>Step 2</em><span>フレーム</span></a></li>
-            <li class="jqwizard_current"><a href="#edit_as_you_like_3" title=""><em>Step 3</em><span>機構</span></a></li>
-            <li><a href="#edit_as_you_like_4" title=""><em>Step 4</em><span>構造フレーム</span></a></li>
-            <li><a href="#edit_as_you_like_5" title=""><em>Step 5</em><span>グリップ</span></a></li>
-            <li><a href="#edit_as_you_like_6" title=""><em>Step 6</em><span>バック</span></a></li>
-            <li><a href="#edit_as_you_like_7" title=""><em>Step 7</em><span>シート</span></a></li>
-            <li><a href="#edit_as_you_like_8" title=""><em>Step 8</em><span>ヘッド</span></a></li>
-            <li><a href="#edit_as_you_like_9" title=""><em>Step 9</em><span>アームサポート</span></a></li>
-            <li><a href="#edit_as_you_like_10" title=""><em>Step 10</em><span>アームパッド</span></a></li>
-            <li><a href="#edit_as_you_like_11" title=""><em>Step 11</em><span>レッグサポート</span></a></li>
-            <li><a href="#edit_as_you_like_12" title=""><em>Step 12</em><span>フットサポート</span></a></li>
-            <li><a href="#edit_as_you_like_13" title=""><em>Step 13</em><span>上級</span></a></li>
-            <li><a href="#edit_as_you_like_14" title=""><em>Step 14</em><span>テーブル</span></a></li>
-            <li><a href="#edit_as_you_like_15" title=""><em>Step 15</em><span>シートベルト</span></a></li>
-            <li><a href="#edit_as_you_like_16" title=""><em>Step 16</em><span>パッド</span></a></li>
-            <li><a href="#edit_as_you_like_17" title=""><em>Step 17</em><span>オプション</span></a></li>
-            <li><a href="#edit_as_you_like_18" title=""><em>Step 18</em><span>木製</span></a></li>
-            <li><a href="#edit_as_you_like_19" title=""><em>Step 19</em><span>トイレットチェア</span></a></li>
-            <li><a href="#edit_as_you_like_20" title=""><em>Step 20</em><span>オプション</span></a></li>
-        </ul>
-    </div>
-</div>
-<div class="btn_box">
-      <a id="btnEstimateBack" href="/mitsumoris" class="btn_back2" /><img src="images/btn_back2_mitsumori.png" alt="戻る" /></a>
-      <a id="btnEstimateRegist" href="#" class="btn_add2" /><img src="images/btn_add2.png" alt="登録" /></a>
-</div>
-<div>
-    <footer>
-        <p>ARIZONO ORTHOPEDIC SUPPLIES Co.,Ltd. All Rights Reserved.</p>
-    </footer>
-</div> <!-- /wrapper -->
-
-</body>
-</html>
-

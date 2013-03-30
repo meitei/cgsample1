@@ -7,85 +7,202 @@
   var step = 1;
   var data = {};
 
-  function step2(){
-    $("div#statuslabel span").replaceWith("STEP 2");
+  // メインフレーム機構選定
+  function wizard3(){
     $("#btnEstimateRegist").hide();
-    //$("button.jqwizard_next").attr("disabled", true);
-
+    //
     $("input#1-COL2_1").click(function(){
-      $("div#step3").load("/mitsumori/step_03.html");
-      $("li#step3 a").attr("href", "#step3");
-      $("li#step3 span").text("機構");
-    //$("button.jqwizard_next").attr("disabled", false);
     });
-
+    //
     $("input#2-COL2_1").click(function(){
-      $("div#step3").load("/mitsumori/step_03.html");
+    });
+    //
+    $("input#3-COL2_1").click(function(){
+    });
+    // 次へ
+    $("button.jqwizard_next").click(function() {
+      step = 4;
+      $("div.statuslabel span").replaceWith("<span>STEP 4</span>");
+    });
+  }
+
+  // メインフレーム材質選定
+  function wizard2(){
+    $("#btnEstimateRegist").hide();
+    /* メインフレーム材質選定 */
+    // アルミニューム選択
+    $("input#1-COL2_1").click(function(){
+      $("div#step3").load("/mitsumori/step_03.html", wizard3);
       $("li#step3 a").attr("href", "#step3");
       $("li#step3 span").text("機構");
-    //$("button.jqwizard_next").attr("disabled", false);
+      $("div#step4").load("/mitsumori/step_04.html");
+      $("li#step4 a").attr("href", "#step4");
+      $("li#step4 span").text("使用場所");
+      $("div#step5").load("/mitsumori/step_04.html");
+      $("li#step5 a").attr("href", "#step5");
+      $("li#step5 span").text("グリップ");
+      $("div#step6").load("/mitsumori/step_04.html");
+      $("li#step6 a").attr("href", "#step6");
+      $("li#step6 span").text("シート");
+      $("div#step7").load("/mitsumori/step_04.html");
+      $("li#step7 a").attr("href", "#step7");
+      $("li#step7 span").text("バックサポート");
+      $("div#step8").load("/mitsumori/step_04.html");
+      $("li#step8 a").attr("href", "#step8");
+      $("li#step8 span").text("ヘッドサポート");
+      $("div#step9").load("/mitsumori/step_04.html");
+      $("li#step9 a").attr("href", "#step9");
+      $("li#step9 span").text("アームサポート");
+      $("div#step10").load("/mitsumori/step_04.html");
+      $("li#step10 a").attr("href", "#step10");
+      $("li#step10 span").text("アームパッド");
+      $("div#step11").load("/mitsumori/step_04.html");
+      $("li#step11 a").attr("href", "#step11");
+      $("li#step11 span").text("レッグサポート");
+      $("div#step12").load("/mitsumori/step_04.html");
+      $("li#step12 a").attr("href", "#step12");
+      $("li#step12 span").text("フットサポート");
+      $("div#step13").load("/mitsumori/step_04.html");
+      $("li#step13 a").attr("href", "#step13");
+      $("li#step13 span").text("上肢サポート");
+      $("div#step14").load("/mitsumori/step_04.html");
+      $("li#step14 a").attr("href", "#step14");
+      $("li#step14 span").text("テーブル");
+      $("div#step15").load("/mitsumori/step_04.html");
+      $("li#step15 a").attr("href", "#step15");
+      $("li#step15 span").text("シートベルト");
+      $("div#step16").load("/mitsumori/step_04.html");
+      $("li#step16 a").attr("href", "#step16");
+      $("li#step16 span").text("パッド");
+      $("div#step17").load("/mitsumori/step_04.html");
+      $("li#step17 a").attr("href", "#step17");
+      $("li#step17 span").text("オプション");
     });
-
+    // ステンレス選択
+    $("input#2-COL2_1").click(function(){
+      $("div#step3").load("/mitsumori/step_03.html", wizard3);
+      $("li#step3 a").attr("href", "#step3");
+      $("li#step3 span").text("機構");
+      $("div#step4").load("/mitsumori/step_04.html");
+      $("li#step4 a").attr("href", "#step4");
+      $("li#step4 span").text("使用場所");
+      $("div#step5").load("/mitsumori/step_04.html");
+      $("li#step5 a").attr("href", "#step5");
+      $("li#step5 span").text("グリップ");
+      $("div#step6").load("/mitsumori/step_04.html");
+      $("li#step6 a").attr("href", "#step6");
+      $("li#step6 span").text("シート");
+      $("div#step7").load("/mitsumori/step_04.html");
+      $("li#step7 a").attr("href", "#step7");
+      $("li#step7 span").text("バックサポート");
+      $("div#step8").load("/mitsumori/step_04.html");
+      $("li#step8 a").attr("href", "#step8");
+      $("li#step8 span").text("ヘッドサポート");
+      $("div#step9").load("/mitsumori/step_04.html");
+      $("li#step9 a").attr("href", "#step9");
+      $("li#step9 span").text("アームサポート");
+      $("div#step10").load("/mitsumori/step_04.html");
+      $("li#step10 a").attr("href", "#step10");
+      $("li#step10 span").text("アームパッド");
+      $("div#step11").load("/mitsumori/step_04.html");
+      $("li#step11 a").attr("href", "#step11");
+      $("li#step11 span").text("レッグサポート");
+      $("div#step12").load("/mitsumori/step_04.html");
+      $("li#step12 a").attr("href", "#step12");
+      $("li#step12 span").text("フットサポート");
+      $("div#step13").load("/mitsumori/step_04.html");
+      $("li#step13 a").attr("href", "#step13");
+      $("li#step13 span").text("上肢サポート");
+      $("div#step14").load("/mitsumori/step_04.html");
+      $("li#step14 a").attr("href", "#step14");
+      $("li#step14 span").text("テーブル");
+      $("div#step15").load("/mitsumori/step_04.html");
+      $("li#step15 a").attr("href", "#step15");
+      $("li#step15 span").text("シートベルト");
+      $("div#step16").load("/mitsumori/step_04.html");
+      $("li#step16 a").attr("href", "#step16");
+      $("li#step16 span").text("パッド");
+      $("div#step17").load("/mitsumori/step_04.html");
+      $("li#step17 a").attr("href", "#step17");
+      $("li#step17 span").text("オプション");
+    });
+    // 木製選択
     $("input#3-COL2_1").click(function(){
       $("div#step3").load("/mitsumori/step_2_b.html");
       $("li#step3 a").attr("href", "#step3");
       $("li#step3 span").text("木製");
-    //$("button.jqwizard_next").attr("disabled", false);
     });
-
+    /* 構造フレーム選定 */
+    // 固定型選択
+    $("input#1-COL3_1").click(function(){
+      $("div#step3").load("/mitsumori/step_2_b.html");
+      $("li#step3 a").attr("href", "#step3");
+      $("li#step3 span").text("木製");
+    });
+    // リクライニング式選択
+    $("input#2-COL3_1").click(function(){
+      $("div#step3").load("/mitsumori/step_2_b.html");
+      $("li#step3 a").attr("href", "#step3");
+      $("li#step3 span").text("木製");
+    });
+    // ティルト式選択
+    $("input#3-COL3_1").click(function(){
+      $("div#step3").load("/mitsumori/step_2_b.html");
+      $("li#step3 a").attr("href", "#step3");
+      $("li#step3 span").text("木製");
+    });
+    // リクライニング・ティルト式選択
+    $("input#4-COL3_1").click(function(){
+      $("div#step3").load("/mitsumori/step_2_b.html");
+      $("li#step3 a").attr("href", "#step3");
+      $("li#step3 span").text("木製");
+    });
+    // 次へ
     $("button.jqwizard_next").click(function() {
       step = 3;
       $("div.statuslabel span").replaceWith("<span>STEP 3</span>");
     });
   }
 
-  function step1(){
-    $("li#step10").hide();
-    $("li#step11").hide();
-    $("li#step12").hide();
-    $("li#step13").hide();
-    $("li#step14").hide();
-    $("li#step15").hide();
-    $("li#step16").hide();
-    $("li#step17").hide();
+  // 座位保持装置の選択
+  function wizard1(){
+    // $("li#step10").hide();
+    // $("li#step11").hide();
+    // $("li#step12").hide();
+    // $("li#step13").hide();
+    // $("li#step14").hide();
+    // $("li#step15").hide();
+    // $("li#step16").hide();
+    // $("li#step17").hide();
     $("#btnEstimateRegist").hide();
-    //$("button.jqwizard_next").attr("disabled", true);
-
+    // セミオーダーメイド選択
     $("input#1-COL1_1").click(function(){
-      $("div#step2").load("/mitsumori/step_2_a.html", step2);
+      $("div#step2").load("/mitsumori/step_05.html", wizard2);
       $("li#step2 a").attr("href", "#step2");
       $("li#step2 span").text("構造フレーム");
-    //$("button.jqwizard_next").attr("disabled", false);
     });
-
+    // オーダーメイド選択
     $("input#2-COL1_1").click(function(){
-      $("div#step2").load("/mitsumori/step_02.html", step2);
+      $("div#step2").load("/mitsumori/step_02.html", wizard2);
       $("li#step2 a").attr("href", "#step2");
       $("li#step2 span").text("フレーム材質");
-    //$("button.jqwizard_next").attr("disabled", false);
     });
-
+    // 既製品選択
     $("input#3-COL1_1").click(function(){
-      $("div#step2").load("/mitsumori/step_2_b.html", step2);
+      $("div#step2").load("/mitsumori/step_2_b.html", wizard2);
       $("li#step2 a").attr("href", "#step2");
       $("li#step2 span").text("フレーム材質");
-    //$("button.jqwizard_next").attr("disabled", false);
     });
-
+    // 次へ
     $("button.jqwizard_next").click(function() {
       step = 2;
       $("div.statuslabel span").replaceWith("<span>STEP 2</span>");
     });
-
   }
 
 $(document).ready(function(){
   $("#estimateForm").wizard();
-
-  $("div#step1").load("/mitsumori/step_01.html", step1);
-
-
+  $("div#step1").load("/mitsumori/step_01.html", wizard1);
 });
-
 
 </script>
