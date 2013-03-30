@@ -214,6 +214,10 @@ $(function() {
     $("#konyu_rireki_shubetsuKn").css("width", "100px").attr("tabindex", "10");
     $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px").attr("tabindex", "10");
     $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px").attr("tabindex", "10");
+
+    // 修正画面から遷移した場合、再検索を行う
+    setConditions();
+
 });
 
 $("a#btnKonyuRirekiSearch").click(function() {
@@ -225,11 +229,6 @@ $("a#btnKonyuRirekiClear").click(function() {
     $('#konyuRirekiSearchForm input[type="text"]').val('');
     return false;
 });
-
-// $("a#btnKonyuRirekiNew").click(function() {
-//     showKokyakuFormDialog();
-//     return false;
-// });
 
 function updateFormatter(cellval, options, rowdata) {
     return "<img src='/images/database-reload-alt-1.png' onclick='modifyKokyaku(" + rowdata['id'] + ")' title='更新' style='width:16px; height:16px'>";
@@ -265,46 +264,10 @@ function searchKonyuRireki() {
 
 // 更新用メソッド
 function modifyKokyaku(id) {
+    saveConditions();
     location.href = "konyu_rirekis/" + id + "/edit";
     return false;
 }
-
-// 更新用メソッド
-// function executeKokyaku(kokyakuId) {
-//     var url;
-//     var type;
-//     if(kokyakuId != null) {
-//         url = "konyu_rirekis/" + kokyakuId + ".json";
-//         type = "PUT";
-//     } else {
-//         url = "konyu_rirekis.json";
-//         type = "POST";
-//     }
-//     var data = {};
-//     var postData = {};
-//     var kokyaku = $("#kokyakuForm").serializeArray();
-//     $.each(kokyaku, function() {
-//         data[this.name] = this.value;
-//     });
-//     data["koshinshaId"] = 1;
-//     data["torokushaId"] = 1;
-//     postData["kokyaku"] = data;
-//     postData["id"] = kokyakuId;
-//     $.ajax({
-//         scriptCharset:"UTF-8",
-//         type: type,
-//         url: url,
-//         data: postData,
-//         root: "kokyaku",
-//         dataType: "json",
-//         success: function(result) {
-//             if(result != null) {
-//                 searchKokyaku();
-//             }
-//         }
-//     });
-//     return false;
-// }
 
 // 削除用メソッド
 function removeKokyaku(konyuRirekiId) {
@@ -322,14 +285,26 @@ function removeKokyaku(konyuRirekiId) {
         success: function(result) {
         }
     });
-    searchKokyaku();
+    searchKonyuRireki();
     return false;
-    // $("#torokushaId").val("1");
-    // $("#kokyakuForm").attr("action", "/konyu_rirekis/" + kokyakuId);
-    // //$("#kokyakuForm").attr("method", "PUT");
-    // $("#httpMethod").val("delete");
+}
 
-    // $("#kokyakuForm").submit();
+function saveConditions() {
+    $.cookie.json = true;
+    var data = $("#konyuRirekiSearchForm").serializeArray();
+    $.cookie('conditions', data);
+}
+
+function setConditions() {
+    if (location.search.match(/reload=on/g)) {
+        var conditions = $.cookie('conditions');
+        $.removeCookie('conditions');
+        if (conditions) {
+            $("#konyuRirekiSearchForm")
+                .deserialize($.parseJSON(conditions));
+        }
+        searchKonyuRireki();
+    }
 }
 
 </script>

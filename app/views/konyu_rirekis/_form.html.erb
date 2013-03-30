@@ -361,12 +361,15 @@ $(function() {
         dataType: 'json',
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
-                $('<img />')
-                  .attr('src', file.thumbnail_url)
-                  .attr('alt', file.name + "(" + file.size + "bytes)")
-                  .attr('width', "100px")
-                  .attr('height', "100px")
-                  .appendTo('#uploaded_image');
+                $('#uploaded_image')
+                  .empty()
+                  .append(
+                    $('<img />')
+                      .attr('src', file.thumbnail_url)
+                      .attr('alt', file.name + "(" + file.size + "bytes)")
+                      .attr('width', "100px")
+                      .attr('height', "100px")
+                      .appendTo('#uploaded_image'));
             });
         }
   });

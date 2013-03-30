@@ -24,4 +24,7 @@
 //= require jquery.fileupload
 //= require jquery.iframe-transport
 
+//= require jquery.cookie
+//= require jquery.deserialize
+
 //= require_tree .
