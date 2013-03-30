@@ -22,7 +22,7 @@
   <div class="mainmenu_inner cf">
     <ul>
       <li><input type="button" id="btnReport" value="見積書出力" style="width: 175px; height: 40px; float: left; margin: 0 25px 25px 0;"/></li>
-      <oi><%= link_to image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :jpg, :id => 1), :id => "imgKanseizu_" + "1", :name => "kanseizu", :title => "完成図を表示します", :alt => "完成図", :size => "40x40"), :controller =>"kanseizu", :action =>"show", :id =>1 %></oi>
+      <li><input type="button" id="btnKanseizu" value="完成図表示" style="width: 175px; height: 40px; float: left; margin: 0 25px 25px 0;"/></li>
     </ul>
   </div>
 </div>
@@ -43,5 +43,8 @@ $("input#btnReport").click(function() {
             }
         }
     });
+});
+$("input#btnKanseizu").click(function() {
+    location.href = "kanseizu/show?id=1";
 });
 </script>
