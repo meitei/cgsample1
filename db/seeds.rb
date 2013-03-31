@@ -93,7 +93,7 @@ KonyuRireki.create(
 	:kokyakuId => 1,
 	:mitsumoriDt => '2013/03/20',
 	:mitsumoriTantoEigyoCd => 1,
-	# :seihinCd => 1,
+	:seihinId => 1,
 	:torokushaId => 1,
 	:koshinshaId => 1
 )

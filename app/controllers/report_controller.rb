@@ -225,8 +225,8 @@ class ReportController < ApplicationController
     eigyo = User.find(@@konyuRireki["mitsumoriTantoEigyoCd"])
     @@tanto = eigyo["myoji"] + " " + eigyo["name"]
 
-    # TODO:カラム修正seihinCd
-    seihin = Seihin.find(@@konyuRireki["mitsumoriTantoEigyoCd"])
+    # TODO:カラム修正seihinCd 
+    seihin = Seihin.find(@@konyuRireki["seihinId"])
     @@katashiki = seihin["katashikiNm"]
 
     @@mitsumori = Mitsumori.find(:first, :conditions => ["\"konyuRirekiId\" = ? and \"kokyakuId\" = ?", konyuRirekiId.to_i, kokyakuId.to_i])
