@@ -78,7 +78,7 @@ Seihin.create(
 
 
 # MitsumoriSeihin.destroy_all(["1 = ?", 1])
-200.times{|num|
+100.times{|num|
 	num = num + 1
 	tanka = num * 100
 	tax = tanka * num * 0.05
@@ -105,7 +105,10 @@ Mitsumori.create(
 	:kokyakuId => 1,
 	:mitsumoriNo => 1,
 	:torokushaId => 1,
-	:koshinshaId => 1
+	:koshinshaId => 1,
+	:COL1_1 => 1,
+	:COL2_1 => 1,
+	:COL3_1 => 1
 )
 
 

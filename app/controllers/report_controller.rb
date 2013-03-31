@@ -238,7 +238,7 @@ class ReportController < ApplicationController
 
       @@mitsumoriSeihins = MitsumoriSeihin.where(:mitsumoriNo == mitsumoriNo)
 
-      sqlstr = "SELECT * FROM (SELECT kn.\"buhinCd\", kn.\"buhinNm\", ms.tanka, ms.suryo, ms.kin FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" LEFT JOIN kansei_buhins kn ON mt.\"buhinCd\" = kn.\"buhinCd\") kb WHERE kb.\"buhinCd\" IS NOT NULL"
+      sqlstr = "SELECT * FROM (SELECT kn.\"buhinCd\", kn.\"buhinNm\", ms.tanka, ms.suryo, ms.tax, ms.kin FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" LEFT JOIN kansei_buhins kn ON mt.\"buhinCd\" = kn.\"buhinCd\") kb WHERE kb.\"buhinCd\" IS NOT NULL"
       @@kanseiBuhins = ActiveRecord::Base.connection.execute(sqlstr)
     end
 
@@ -263,9 +263,14 @@ class ReportController < ApplicationController
         item(:date).value(strDate)
 
         item(:name1).value(@@atena)
-        item(:name2).value('○○ ○○○')
+        item(:name2).value('　')
         item(:model).value(@@katashiki)
         item(:name3).value(@@tanto)
+
+        # 集計項目
+        subtotal = 0
+        taxtotal = 0
+        total = 0
 
         if @@mitsumoriTankas.present?
           ###########################
@@ -280,10 +285,8 @@ class ReportController < ApplicationController
               @@headers1.each {|header|
                 if header == 'tanka'
                   id = 'saikei' + '_1_' + line.to_s
-                else
-                  id = header + '_1_' + line.to_s
+                  item(id).value(number_format(row[header]))
                 end
-                item(id).value(number_format(row[header]))
               }
             end
 
@@ -294,10 +297,8 @@ class ReportController < ApplicationController
               @@headers1.each {|header|
                 if header == 'tanka'
                   id = 'saisun' + '_1_' + line.to_s
-                else
-                  id = header + '_1_' + line.to_s
+                  item(id).value(number_format(row[header]))
                 end
-                item(id).value(number_format(row[header]))
               }
             end
 
@@ -306,22 +307,26 @@ class ReportController < ApplicationController
               line = @@hash2[row["seihinNo"]]
 
               @@headers2.each {|header|
-                id = header + '_2_' + line.to_s
-                item(id).value(number_format(row[header]))
+                if header == 'tanka'
+                  id = header + '_2_' + line.to_s
+                  item(id).value(number_format(row[header]))
+                end
               }
             end
           }
         end
 
-        subtotal = 0
-        tax = 0
-        total = 0
-
         if @@mitsumoriSeihins.present?
           @@mitsumoriSeihins.each {|row|
+
             # 1列目の処理
             # 採型分
             if @@hash0.key?(row["seihinNo"])
+              # 集計
+              kin_notax = row["tanka"] * row["suryo"]
+              subtotal += kin_notax
+              taxtotal += row["tax"]
+
               line = @@hash0[row["seihinNo"]]
 
               @@headers1.each {|header|
@@ -330,12 +335,22 @@ class ReportController < ApplicationController
                 else
                   id = header + '_1_' + line.to_s
                 end
-                item(id).value(number_format(row[header]))
+
+                if header == 'kin'
+                  item(id).value(number_format(kin_notax))
+                else
+                  item(id).value(number_format(row[header]))
+                end
               }
             end
 
             # 採寸分
             if @@hash1.key?(row["seihinNo"])
+              # 集計
+              kin_notax = row["tanka"] * row["suryo"]
+              subtotal += kin_notax
+              taxtotal += row["tax"]
+
               line = @@hash1[row["seihinNo"]]
 
               @@headers1.each {|header|
@@ -344,35 +359,69 @@ class ReportController < ApplicationController
                 else
                   id = header + '_1_' + line.to_s
                 end
-                item(id).value(number_format(row[header]))
+
+                if header == 'kin'
+                  item(id).value(number_format(kin_notax))
+                else
+                  item(id).value(number_format(row[header]))
+                end
               }
             end
 
             # 2列目の処理
             if @@hash2.key?(row["seihinNo"])
+              # 集計
+              kin_notax = row["tanka"] * row["suryo"]
+              subtotal += kin_notax
+              taxtotal += row["tax"]
+
               line = @@hash2[row["seihinNo"]]
 
               @@headers2.each {|header|
                 id = header + '_2_' + line.to_s
-                item(id).value(number_format(row[header]))
+
+                if header == 'kin'
+                  item(id).value(number_format(kin_notax))
+                else
+                  item(id).value(number_format(row[header]))
+                end
               }
             end
 
-            # 集計
-            subtotal += row["tanka"] * row["suryo"]
-            tax += row["tax"]
-            total += row["kin"]
+            # 3行目分も集計に加える
+            if @@hash3.key?(row["seihinNo"])
+              # 集計
+              kin_notax = row["tanka"] * row["suryo"]
+              subtotal += kin_notax
+              taxtotal += row["tax"]
+            end
           }
         end
 
+        # 4行目分も集計に加える
+        if @@kanseiBuhins.present?
+          @@kanseiBuhins.each_with_index do |row, i|
+            # 仕様：最大28行目まで
+            if i < 28
+              # 集計
+              kin_notax = row["tanka"] * row["suryo"]
+              subtotal += kin_notax
+              taxtotal += row["tax"]
+            else
+              break
+            end
+          end
+        end
 
         ###########################
         # 集計項目
         ###########################
+        total = subtotal + taxtotal
         item(:subtotal).value(number_format(subtotal.truncate))
-        item(:tax).value(number_format(tax.truncate))
+        item(:taxtotal).value(number_format(taxtotal.truncate))
         item(:total).value(number_format(total.truncate))
         item(:charge).value('\ ' + number_format(total.truncate))
+
       end
     end
 
@@ -390,8 +439,10 @@ class ReportController < ApplicationController
               line = @@hash3[row["seihinNo"]]
 
               @@headers3.each {|header|
-                id = header + '_3_' + line.to_s
-                item(id).value(number_format(row[header]))
+                if header == 'tanka'
+                  id = header + '_3_' + line.to_s
+                  item(id).value(number_format(row[header]))
+                end
               }
             end
           }
@@ -402,10 +453,16 @@ class ReportController < ApplicationController
           @@mitsumoriSeihins.each {|row|
             if @@hash3.key?(row["seihinNo"])
               line = @@hash3[row["seihinNo"]]
+              kin_notax = row["tanka"] * row["suryo"]
 
               @@headers3.each {|header|
                 id = header + '_3_' + line.to_s
-                item(id).value(number_format(row[header]))
+
+                if header == 'kin'
+                  item(id).value(number_format(kin_notax))
+                else
+                  item(id).value(number_format(row[header]))
+                end
               }
             end
           }
@@ -414,13 +471,17 @@ class ReportController < ApplicationController
         if @@kanseiBuhins.present?
           # 4列目の処理
           @@kanseiBuhins.each_with_index do |row, i|
-            # 仕様：最大26行目まで
-            if i < 26
+            # 仕様：最大28行目まで
+            if i < 28
               line = i + 1
+              kin_notax = row["tanka"] * row["suryo"]
+
               @@headers4.each {|header|
                 id = header + '_4_' + line.to_s
                 if header == 'seihinName'
                   item(id).value(row["buhinNm"])
+                elsif header == 'kin'
+                  item(id).value(number_format(kin_notax))
                 else
                   item(id).value(number_format(row[header]))
                 end
@@ -470,9 +531,12 @@ class ReportController < ApplicationController
     end
   end
 
+  def number_format(value)
+    value.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
+  end
+
+  private :number_format
+
 end
 
 
-def number_format(value)
-  value.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
-end
