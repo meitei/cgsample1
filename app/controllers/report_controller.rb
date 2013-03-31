@@ -474,7 +474,7 @@ class ReportController < ApplicationController
             # 仕様：最大28行目まで
             if i < 28
               line = i + 1
-              kin_notax = row["tanka"] * row["suryo"]
+              kin_notax = row["tanka"].to_i * row["suryo"].to_i
 
               @@headers4.each {|header|
                 id = header + '_4_' + line.to_s
