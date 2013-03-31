@@ -18,6 +18,8 @@ JqgridSample::Application.routes.draw do
 
   resources :mitsumoris
 
+  resources :mitsumori_tankas  
+
   resources :hoken_shubetsus do
     get 'search', :on => :collection
   end

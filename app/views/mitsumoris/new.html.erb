@@ -6,12 +6,77 @@
 <script>
   var step = 1;
   var data = {};
+  var tanka = {};
 
   $(document).ready(function(){
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: "/mitsumori_tankas.json",
+        //data: postData,
+        root: "mitsumori_tankas",
+        dataType: "json",
+        success: function(result) {
+            if(result != null) {
+                tanka = result;
+            }
+        }
+    });
     $("#estimateForm").wizard();
     $("#btnEstimateRegist").hide();
     $("div#step1").load("/mitsumori/step_01.html", wizard1);
   });
+
+  /*
+   * 丸めモード、小数点以下の桁数を指定して、数値をフォーマットする。
+   *  
+   * kingaku 処理対象の金額
+   * round 丸めモード（1：切り捨て、2：四捨五入、3：切り上げ）
+   * digits 小数点以下の桁数（0：なし、1：１桁、2：２桁）
+   */
+  function getFormatAmount(kingaku, round, digits) {
+    // 絶対値を取得
+    var abs = Math.abs(kingaku);
+    // 桁数処理用数値
+    var num = Math.pow(10, digits);
+    // 金額を数字に変換
+    var amount = parseFloat(abs) * num;
+    // 四捨五入・切り上げ・切り捨てを求める
+    if(round == 1) {
+      amount = Math.floor(amount) / num;
+    } else if(round == 2) {
+      amount = Math.round(amount) / num;
+    } else if(round == 3) {
+      amount = Math.ceil(amount) / num;
+    } else {
+      return kingaku;
+    }
+    if(kingaku < 0) {
+      return amount * -1;
+    } else {
+      return amount;  
+    }
+  }
+
+  /*
+   * 桁区切りを追加し、金額をフォーマットする。
+   *  
+   * amount 処理対象の金額
+   */
+  function formatComma(amount) {
+    var num = new String(amount).replace(/,/g,"");
+    while(num != (num = num.replace(/^(-?\d+)(\d{3})/,"$1,$2")));
+    return num;
+  }
+
+  /*
+   * 整数に変換する。(null、undefined等は0)
+   *  
+   * val 処理対象
+   */
+  function parseFloatEx(val) {
+    return val ? parseFloat(val) : 0;
+  }
 
 </script>
 <script src="/js/mitsumori/wizard3.js" type="text/javascript"></script>
