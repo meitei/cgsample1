@@ -138,7 +138,7 @@ end
 
 MitsumoriSeihin.destroy_all(["1 = ?", 1])
 
-@mitsumoriTankas = MitsumoriTanka.find(:all, :order => "seihinNo")
+@mitsumoriTankas = MitsumoriTanka.find(:all, :order => "\"seihinNo\"")
 @mitsumoriTankas.each_with_index do |row, i|
 	# サンプルデータ登録件数
 	if i >= 40
