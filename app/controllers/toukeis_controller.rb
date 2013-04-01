@@ -19,6 +19,20 @@ class ToukeisController < ApplicationController
     targetSpnTo = Date.strptime(params[:targetSpnTo], "%Y/%m/%d") if isDate(params[:targetSpnTo])
     today = Date.today
 
+    # outCondYear = params[:outCondYear]
+    # outCondMonth = params[:outCondMonth]
+    # outCondFrom = nil
+    # outCondTo = nil
+    # if outCondYear then
+    #   if outCondMonth then
+    #     outCondFrom = Date::new(outCondYear.to_i, outCondMonth.to_i, 1)
+    #     outCondTo = outCondFrom.end_of_month
+    #   else
+    #     outCondFrom = Date::new(outCondYear.to_i, 1, 1)
+    #     outCondTo = outCondFrom.end_of_year
+    #   end
+    # end
+
     # # 範囲指定からみた本日の位置
     # if targetSpnFrom > today then
     #   position = -1
@@ -135,6 +149,9 @@ class ToukeisController < ApplicationController
       :limit  => limit,
       :order  => "sumCndKey, sumUntKey ASC")
 
+    # 検索結果をSessionに保存
+    session[:konyu_rirekis] = @konyu_rirekis.clone
+
     # 集計単位のリストを作成する
     cndKeys = []
     @konyu_rirekis.each {|row|
@@ -221,6 +238,78 @@ class ToukeisController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @responce }
     end
+  end
+
+  # GET /toukeis/move_page
+  # GET /toukeis/move_page.json
+  def move_page
+
+    outCondYear = params[:outCondYear]
+    outCondMonth = params[:outCondMonth]
+    direction = params[:direction]
+
+    # 検索結果をSessionから取得
+    @konyu_rirekis = session[:konyu_rirekis].clone
+
+    # 集計単位のリストを作成する
+    cndKeys = []
+    @konyu_rirekis.each {|row|
+      cndKeys << row["sumCndKey"]
+    }
+    cndKeys.uniq!.sort!
+    logger.debug(cndKeys)
+
+    has_prev = false
+    has_next = false
+    if not cndKeys.empty? then
+
+      outCondKey = outCondYear
+      outCondKey = outCondKey + outCondMonth if outCondMonth
+
+      cndPos = cndKeys.index(outCondKey)
+      if direction == 'prev' and cndPos > 0 then
+        outCondKey = cndKeys[cndPos - 1]
+      elsif direction == 'next' and cndPos < (cndKeys.size - 1) then
+        outCondKey = cndKeys[cndPos + 1]
+      end
+
+      cndPos = cndKeys.index(outCondKey)
+      if cndPos and cndPos >= 0 then
+        has_prev = true if cndPos > 0
+        has_next = true if cndPos < (cndKeys.size - 1)
+      end
+
+      if outCondYear then
+        outCondYear = outCondKey[0..3]
+        if outCondMonth then
+          outCondMonth = outCondKey[4..5]
+        end
+      end
+    end
+
+    # 表示中の年月以外は結果から除外する
+    @konyu_rirekis.delete_if {|item|
+      item["sumCndKey"] != outCondKey and item["sumCndKey"] != "dummy"
+    }
+
+    @responce = {
+      total: 1.to_s,
+      page: 1.to_s,
+      records: 1.to_s,
+      rows: @konyu_rirekis,
+      cond: {
+        outCondYear: outCondYear,
+        outCondMonth: outCondMonth,
+        has_prev: has_prev,
+        has_next: has_next
+      }
+    }
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @responce }
+    end
+
   end
 
   def kokyaku_list

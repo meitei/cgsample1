@@ -1,7 +1,12 @@
-<h2>顧客登録</h2>
-<hr/>
-<%= render 'form2' %>
-
+<div class="title">顧客管理：新規顧客登録</div>
+<div class="statuslabel"><span>顧客登録</span>コメント　無ければ削除</div>
+<div id="kokyakuSearch" class="Tourokuform cf">
+	<%= render 'form' %>
+</div>
+<div class="btn_box">
+	<a id="btnCustomerReturn" href="#" class="btn_back2" /><img src="/images/btn_back2.png" alt="戻る" /></a>
+	<a id="btnCustomerRegist" href="#" class="btn_add2" /><img src="/images/btn_add2.png" alt="登録" /></a>
+</div>
 <script>
 $(function() {
 	$("a#btnCustomerRegist").click(function() {
@@ -10,7 +15,7 @@ $(function() {
 	});
 
 	$("a#btnCustomerReturn").click(function() {
-    location.href = "/kokyakus";
+    	location.href = "/kokyakus";
 	    return false;
 	});
 });

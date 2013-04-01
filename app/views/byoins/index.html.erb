@@ -1,11 +1,14 @@
-<div style="width:1024;">
-<%= render 'search' %>
-<div style="width:1024px; clear:both;" id="byoin">
+<div class="title">病院管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="byoinSearch" class="Searchform cf">
+    <%= render 'search' %>
+</div>
+<div style="clear:both;" id="byoin">
     <table id="searchByoinGrid"></table>
     <div id="searchByoinPager"></div>
 </div>
-<div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnByoinNew" href="#" />新規追加</a>
+<div class="btn_new">
+    <a class="btn_new_mast" id="btnByoinNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -26,7 +29,7 @@ $(function() {
     ];
     $("#searchByoinGrid").jqGrid({
         datatype: "local",
-        width: "1024",
+        width: "940",
         height: "240",
         cellEdit: false,
         rowNum: 10,
@@ -47,6 +50,14 @@ $(function() {
 // ##############################
 $("a#btnByoinSearch").click(function() {
     searchByoin();
+    return false;
+});
+
+// ##############################
+// クリアボタンクリック処理
+// ##############################
+$("a#btnByoinClear").click(function() {
+    $('#byoinSearchForm input[type="text"]').val('');
     return false;
 });
 
@@ -96,6 +107,8 @@ function searchByoin() {
     };
     $("#searchByoinGrid").setGridParam(param).trigger("reloadGrid");
 }
+
+
 
 // ##############################
 // 更新用メソッド

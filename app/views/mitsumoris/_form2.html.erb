@@ -1,116 +1,28 @@
 <div id="estimateForm" class="jqwizard">
     <div class="jqwizard_panel">
-        <div class="jqwizard_content" id="edit_as_you_like_1">
-            <%= render 'start' %>
+        <div class="jqwizard_content" id="order_type">
+            <%= render 'order_type' %>
         </div>
-        <div class="jqwizard_content" id="edit_as_you_like_2">
-            <h3>Step 2</h3>
-            <div class="edit_as_you_like">step 2 の内容</div>
+        <div class="jqwizard_content" id="structural_frame">
+            <%= render 'structural_frame' %>
         </div>
-        <div class="jqwizard_content" id="edit_as_you_like_3">
-            <h3>Step 3</h3>
-            <div class="edit_as_you_like">step 3 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_4">
-            <h3>Step 4</h3>
-            <div class="edit_as_you_like">step 4 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_5">
-            <h3>Step 5</h3>
-            <div class="edit_as_you_like">step 5 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_6">
-            <h3>Step 6</h3>
-            <div class="edit_as_you_like">step 6 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_7">
-            <h3>Step 7</h3>
-            <div class="edit_as_you_like">step 7 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_8">
-            <h3>Step 8</h3>
-            <div class="edit_as_you_like">step 8 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_9">
-            <h3>Step 9</h3>
-            <div class="edit_as_you_like">step 9 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_10">
-            <h3>Step 10</h3>
-            <div class="edit_as_you_like">step 10 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_11">
-            <h3>Step 11</h3>
-            <div class="edit_as_you_like">step 11 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_12">
-            <h3>Step 12</h3>
-            <div class="edit_as_you_like">step 12 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_13">
-            <h3>Step 13</h3>
-            <div class="edit_as_you_like">step 13 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_14">
-            <h3>Step 14</h3>
-            <div class="edit_as_you_like">step 14 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_15">
-            <h3>Step 15</h3>
-            <div class="edit_as_you_like">step 15 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_16">
-            <h3>Step 16</h3>
-            <div class="edit_as_you_like">step 16 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_17">
-            <h3>Step 17</h3>
-            <div class="edit_as_you_like">step 17 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_18">
-            <h3>Step 18</h3>
-            <div class="edit_as_you_like">step 18 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_19">
-            <h3>Step 19</h3>
-            <div class="edit_as_you_like">step 19 の内容</div>
-        </div>
-        <div class="jqwizard_content" id="edit_as_you_like_20">
-            <h3>Step 20</h3>
-            <div class="edit_as_you_like">step 20 の内容</div>
+        <div class="jqwizard_content" id="main_frame">
+            <%= render 'main_frame' %>
         </div>
     </div>
     <div class="jqwizard_buttons">
-        <button type="button" class="jqwizard_previous"> <img src="/images/jqwizard/arrow_left.png" alt="" /> Back </button>
-        <button type="button" class="jqwizard_next"> Next <img src="/images/jqwizard/arrow_right.png" alt=""/> </button>
+        <button type="button" id="preview"> <img src="/images/jqwizard/arrow_left.png" alt="" /> Back </button>
+        <button type="button" id="next"> Next <img src="/images/jqwizard/arrow_right.png" alt=""/> </button>
     </div>
     <div class="jqwizard_navi">
-        <ul>
-            <li><a href="#edit_as_you_like_1" title=""><em>Step 1</em><span>使用環境</span></a></li>
-            <li><a href="#edit_as_you_like_2" title=""><em>Step 2</em><span>フレーム</span></a></li>
-            <li><a href="#edit_as_you_like_3" title=""><em>Step 3</em><span>機構</span></a></li>
-            <li><a href="#edit_as_you_like_4" title=""><em>Step 4</em><span>構造フレーム</span></a></li>
-            <li><a href="#edit_as_you_like_5" title=""><em>Step 5</em><span>グリップ</span></a></li>
-            <li><a href="#edit_as_you_like_6" title=""><em>Step 6</em><span>バック</span></a></li>
-            <li><a href="#edit_as_you_like_7" title=""><em>Step 7</em><span>シート</span></a></li>
-            <li><a href="#edit_as_you_like_8" title=""><em>Step 8</em><span>ヘッド</span></a></li>
-            <li><a href="#edit_as_you_like_9" title=""><em>Step 9</em><span>アームサポート</span></a></li>
-            <li><a href="#edit_as_you_like_10" title=""><em>Step 10</em><span>アームパッド</span></a></li>
-            <li><a href="#edit_as_you_like_11" title=""><em>Step 11</em><span>レッグサポート</span></a></li>
-            <li><a href="#edit_as_you_like_12" title=""><em>Step 12</em><span>フットサポート</span></a></li>
-            <li><a href="#edit_as_you_like_13" title=""><em>Step 13</em><span>上級</span></a></li>
-            <li><a href="#edit_as_you_like_14" title=""><em>Step 14</em><span>テーブル</span></a></li>
-            <li><a href="#edit_as_you_like_15" title=""><em>Step 15</em><span>シートベルト</span></a></li>
-            <li><a href="#edit_as_you_like_16" title=""><em>Step 16</em><span>パッド</span></a></li>
-            <li><a href="#edit_as_you_like_17" title=""><em>Step 17</em><span>オプション</span></a></li>
-            <li><a href="#edit_as_you_like_18" title=""><em>Step 18</em><span>木製</span></a></li>
-            <li><a href="#edit_as_you_like_19" title=""><em>Step 19</em><span>トイレットチェア</span></a></li>
-            <li><a href="#edit_as_you_like_20" title=""><em>Step 20</em><span>オプション</span></a></li>
+        <ul id="jqwizard_list">
+            <li id="step1"><a href="#order_type" title=""><em>Step 1</em><span>座位保持装置の選択</span></a></li>
+            <li id="step2"><a href="#structural_frame" title=""><em>Step 2</em><span>構造フレーム選択</span></a></li>
         </ul>
     </div>
 </div>
   <br />
-    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnEstimateRegist" href="#" />登録</a></div>
+    <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnEstimateRegist" href="#" style="display:none;"/>登録</a></div>
     <div style="margin:5px; float:right;"><a class="btn btn-primary" id="btnEstimateBack" href="/mitsumoris" />戻る</a></div>
 <div>
 </div>
@@ -152,6 +64,6 @@
 </style>
 <script type="text/javascript">
   $(document).ready(function(){
-      $("#estimateForm").wizard();
+      //$("#estimateForm").wizard();
   });
 </script>

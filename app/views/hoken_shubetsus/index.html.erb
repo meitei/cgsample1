@@ -1,11 +1,14 @@
-<div style="width:1024;">
-<%= render 'search' %>
-<div style="width:1024px; clear:both;" id="hokenShubetsu">
+<div class="title">保険種別管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="hokenShubetsuSearch" class="Searchform cf">
+    <%= render 'search' %>
+</div>
+<div style="clear:both;" id="hokenShubetsu">
     <table id="searchHokenShubetsuGrid"></table>
     <div id="searchHokenShubetsuPager"></div>
 </div>
-<div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnHokenShubetsuNew" href="#" />新規追加</a>
+<div class="btn_new">
+    <a class="btn_new_mast" id="btnHokenShubetsuNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -27,7 +30,7 @@ $(function() {
     ];
     $("#searchHokenShubetsuGrid").jqGrid({
         datatype: "local",
-        width: "1024",
+        width: "940",
         height: "240",
         cellEdit: false,
         rowNum: 10,
@@ -48,6 +51,14 @@ $(function() {
 // ##############################
 $("a#btnHokenShubetsuSearch").click(function() {
     searchHokenShubetsu();
+    return false;
+});
+
+// ##############################
+// クリアボタンクリック処理
+// ##############################
+$("a#btnHokenShubetsuClear").click(function() {
+    $('#hokenShubetsuSearchForm input[type="text"]').val('');
     return false;
 });
 

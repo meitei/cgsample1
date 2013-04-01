@@ -1,11 +1,14 @@
-<div style="width:1024;">
-<%= render 'search' %>
-<div style="width:1024px; clear:both;" id="shobyo">
+<div class="title">傷病管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="shobyoSearch" class="Searchform cf">
+    <%= render 'search' %>
+</div>
+<div style="clear:both;" id="shobyo">
     <table id="searchShobyoGrid"></table>
     <div id="searchShobyoPager"></div>
 </div>
-<div style="width:1024px; margin:5px;">
-    <a style="float:right;" class="btn btn-primary" id="btnShobyoNew" href="#" />新規追加</a>
+<div class="btn_new">
+    <a class="btn_new_mast" id="btnShobyoNew" href="#" />新規追加</a>
 </div>
 <%= render 'form' %>
 <script>
@@ -30,7 +33,7 @@ $(function() {
     ];
     $("#searchShobyoGrid").jqGrid({
         datatype: "local",
-        width: "1024",
+        width: "940",
         height: "240",
         cellEdit: false,
         rowNum: 10,
@@ -51,6 +54,14 @@ $(function() {
 // ##############################
 $("a#btnShobyoSearch").click(function() {
     searchShobyo();
+    return false;
+});
+
+// ##############################
+// クリアボタンクリック処理
+// ##############################
+$("a#btnShobyoClear").click(function() {
+    $('#shobyoSearchForm input[type="text"]').val('');
     return false;
 });
 
@@ -176,11 +187,15 @@ function showShobyoFormDialog(shobyoCd) {
         width: "auto",
         modal: true,
         buttons : {
-            "閉じる": function(){
+            "Close":{
+                text : "閉じる",
+                class : "dialog_new",
+                click : function(){
                 $('#shobyoForm input[type="text"], select, textarea').val('');
                 $("#shobyoForm").validate().resetForm();
                 $(this).dialog('close');
                 return false;
+                }
             },
             '登録' :function() {
                 // クライアントバリデーション

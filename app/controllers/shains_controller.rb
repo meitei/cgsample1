@@ -128,8 +128,8 @@ class ShainsController < ApplicationController
                        \"loginPassword\",
                        \"manageFlg\",
                        CASE \"manageFlg\" 
-                           WHEN '1' THEN '一般'
-                           WHEN '2' THEN '管理者'
+                           WHEN '0' THEN '一般'
+                           WHEN '1' THEN '管理者'
                            WHEN '9' THEN '退職者'
                        END AS \"manageName\"",
       :offset => start,
