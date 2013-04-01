@@ -7,19 +7,208 @@ class KanseizuController < ApplicationController
     @mitsumori = Mitsumori.find(:first, :conditions => ["\"konyuRirekiId\" = ? and \"kokyakuId\" = ?", konyuRirekiId, kokyakuId])
 
     @hash0 = {
-      "COL1_1" => "image002.jpg",
-      "COL2_1" => "image004.jpg",
-      "COL3_1" => "image006.gif",
-      "COL4_1" => "image008.jpg"
+        "COL1_1" => {
+            1 => "image002.jpg",
+            2 => "image004.jpg",
+            3 => "image006.gif"
+        },
+        "COL2_1" => {
+            1 => "image008.jpg",
+            2 => "image010.jpg",
+            3 => ["image013.jpg", "image014.jpg"]
+        },
+        "COL3_1" => {
+            1 => "image016.jpg",
+            2 => "image018.jpg",
+            3 => "image020.jpg",
+            4 => "image022.jpg"
+        },
+        "COL4_1" => {
+            2 => "image024.jpg",
+            3 => "image026.jpg",
+            4 => "image028.jpg",
+            5 => "image030.jpg"
+        },
+        "COL5_1" => {
+            1 => "image032.jpg",
+            2 => "image034.jpg",
+            3 => "image036.jpg"
+        },
+        "COL6_1" => {
+            2 => "image038.jpg",
+            3 => "image040.jpg"
+        },
+        "COL7_1" => {
+            1 => "image042.jpg",
+            2 => "image044.jpg",
+            3 => "image046.jpg",
+            4 => "image048.jpg"
+        },
+        "COL8_1" => {
+            1 => "image050.jpg",
+            2 => "image052.jpg",
+            3 => "image054.jpg",
+            4 => "image056.jpg"
+        },
+        "COL9_1" => {
+            2 => ["image058.jpg", "image061.jpg", "image062.jpg"],
+            3 => "image064.jpg",
+            4 => "image066.jpg",
+            5 => "image068.jpg"
+        },
+        "COL10_1" => {
+            2 => "image070.jpg",
+            3 => "image072.jpg",
+            4 => "image074.jpg"
+        },
+        "COL10_3" => {
+            2 => "image076.jpg"
+        },
+        "COL11_1" => {
+            2 => "image078.jpg",
+            3 => "image080.jpg",
+            4 => "image082.jpg"
+        },
+        "COL12_1" => {
+            1 => "image084.jpg",
+            2 => "image086.jpg",
+            3 => "image088.jpg"
+        },
+        "COL13_1" => {
+            2 => "image090.jpg"
+        },
+        # "COL13_3" => {
+        #     3 => "image092.jpg",
+        #     3 => "image094.jpg",
+        #     4 => "image096.jpg",
+        #     4 => "image098.jpg"
+        # },
+        "COL14_1" => {
+             # => "image100.jpg",
+            3 => "image102.jpg"
+        },
+        "COL15_1" => {
+            2 => "image104.jpg",
+            3 => "image106.jpg",
+            4 => "image108.jpg"
+        },
+        # "COL16_2" => {
+        #      => "image110.jpg"
+        # },
+        # "COL16_3" => {
+        #      => "image112.jpg"
+        # },
+        # "COL16_4" => {
+        #      => "image114.jpg"
+        # },
+        # "COL16_13" => {
+        #      => "image115.jpg"
+        # },
+        # "COL16_9" => {
+        #      => "image117.jpg"
+        # },
+        # "COL16_12" => {
+        #      => "image119.jpg"
+        # },
+        # "COL17_2" => {
+        #      => "image121.jpg"
+        # },
+        # "COL17_3" => {
+        #      => "image123.jpg"
+        # },
+        # "COL17_4" => {
+        #      => "image125.jpg"
+        # },
+        # "COL17_5" => {
+        #      => "image127.jpg"
+        # },
+        # "COL17_6" => {
+        #      => "image129.jpg"
+        # },
+        # "COL17_11" => {
+        #      => "image123.jpg"
+        # },
+        # "COL17_12" => {
+        #      => "image123.jpg"
+        # },
+        # "COL17_13" => {
+        #      => "image133.jpg"
+        # },
+        # "COL17_15" => {
+        #      => "image135.jpg"
+        # },
+        # "COL18_2" => {
+        #      => "image137.jpg"
+        # },
+        # "COL19_2" => {
+        #      => "image137.jpg"
+        # },
+        # "COL19_5" => {
+        #      => "image139.jpg"
+        # },
+        # "COL19_13" => {
+        #      => "image141.jpg"
+        # },
+        # "COL19_14" => {
+        #      => "image143.jpg"
+        # },
+        # "COL20_2" => {
+        #      => "image137.jpg"
+        # },
+        # "COL20_8" => {
+        #      => "image141.jpg"
+        # },
+        # "COL20_9" => {
+        #      => "image143.jpg"
+        # },
+        # "COL21_2" => {
+        #      => "image137.jpg"
+        # },
+        "COL22_1" => {
+            1 => "image011.jpg",
+            2 => "image012.jpg"
+        },
+        "COL_23_1" => {
+            1 => "image145.jpg",
+            2 => "image148.jpg",
+            3 => "image149.jpg",
+            4 => "image151.jpg",
+            5 => "image152.jpg",
+            6 => "image153.jpg"
+        },
+        "COL24_2" => {
+            1 => "image156.jpg",
+            2 => "image155.jpg",
+            3 => "image154.jpg",
+            4 => "image154.jpg",
+            5 => "image154.jpg"
+        },
+        "COL24_3" => {
+            1 => "image159.jpg",
+            2 => "image159.jpg"
+        # },
+        # "COL25_1" => {
+        #      => "image161.jpg"
+        }
     }
 
     mitsumoriNo = @mitsumori["mitsumoriNo"]
 
     @array = []
 
-    @hash0.each_pair {|key, value|
-      if @mitsumori[key] == 1
-        @array.push value
+    @hash0.each_pair {|column, _hash|
+      if @mitsumori[column].present? && @mitsumori[column] > 0
+        _hash.each_pair {|key, value|
+          if @mitsumori[column] == key
+            if value.is_a?(Array)
+              value.each {|value2|
+                @array.push value2
+              }
+            else
+              @array.push value
+            end
+          end
+        }
       end
     }
 
@@ -28,33 +217,5 @@ class KanseizuController < ApplicationController
       format.json { render json: @array }
     end
   end
-
-  # def get_image
-  #   type = "image/jpg"
-
-  #   id = params[:id]
-  #   column = params[:column].to_i
-
-  #   @img = TestImage.find(:first, :conditions => { :mitsumoriNo => id })
-
-  #   case column
-  #     when 1
-  #       columnNm = "mainImage1"
-  #     when 2
-  #       columnNm = "mainImage2"
-  #     when 3
-  #       columnNm = "subImage1"
-  #     when 4
-  #       columnNm = "subImage2"
-  #     when 5
-  #       columnNm = "subImage3"
-  #     when 6
-  #       columnNm = "subImage4"
-  #     else
-  #       columnNm = "mainImage1"
-  #   end
-
-  #   send_data(@img[columnNm], :disposition => "inline", :type => type)
-  # end
 
 end
