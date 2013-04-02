@@ -4,7 +4,7 @@
   <div class="mainmenu_inner cf">
     <ul>
       <% @array.each_with_index do |row, i| %>
-       <li style="margin-bottom:5px;"><%= image_tag("/images/items/" + row , :id => "kanseizu_" + i.to_s, :name => "kanseizu", :size => "200x200") %></li>
+       <li style="margin-bottom:5px;"><%= image_tag("/images/items/" + row , :id => "kanseizu_" + (i+1).to_s, :name => "kanseizu", :size => "200x200") %></li>
       <% end %>
     </ul>
   </div>
