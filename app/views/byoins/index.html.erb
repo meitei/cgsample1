@@ -118,15 +118,16 @@ function searchByoin() {
 function executeByoin(byoinCd) {
     var url;
     var type;
+    var data = {};
+    var postData = {};
     if(byoinCd != null) {
         url = "byoins/" + byoinCd + ".json";
-        type = "PUT";
+        type = "POST";
+        postData["_method"] = "put";
     } else {
         url = "byoins.json";
         type = "POST";
     }
-    var data = {};
-    var postData = {};
     var byoin = $("#byoinForm").serializeArray();
     $.each(byoin, function() {
         data[this.name] = this.value;
@@ -181,21 +182,31 @@ function showByoinFormDialog(byoinCd) {
         width: "auto",
         modal: true,
         buttons : {
-            "閉じる": function(){
-                $('#byoinForm input[type="text"], select, textarea').val('');
-                $("#byoinForm").validate().resetForm();
-                $(this).dialog('close');
-                return false;
+            "Close":{
+                text: "閉じる",
+                id: "dialog_close",
+                class : "btn_white",
+                click : function(){
+                    $('#byoinForm input[type="text"], select, textarea').val('');
+                    $("#byoinForm").validate().resetForm();
+                    $(this).dialog('close');
+                    return false;
+                }
             },
-            '登録' :function() {
-                // クライアントバリデーション
-                if ($("#byoinForm").valid() == false) {
-                     return false;
-                 }
-                executeByoin(byoinCd);
-                $('#byoinForm input[type="text"], select, textarea').val('');
-                $(this).dialog('close');
-            }
+            "Regist":{
+                text: "登録",
+                id: "dialog_regist",
+                class: "btn_orange",
+                click: function() {
+                    // クライアントバリデーション
+                    if ($("#byoinForm").valid() == false) {
+                         return false;
+                     }
+                    executeByoin(byoinCd);
+                    $('#byoinForm input[type="text"], select, textarea').val('');
+                    $(this).dialog('close');
+                }
+            },
         },
         open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
@@ -213,15 +224,15 @@ function removeByoin(byoinCd) {
         return false;
     }
     var url = "byoins/" + byoinCd + ".json";
-    var type = "DELETE";
+    var type = "POST";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + byoinCd,
+        data: "id=" + byoinCd + "&_method=delete",
         dataType: "json",
         success: function(result) {
-                searchByoin();
+            searchByoin();
         }
     });
     return false;

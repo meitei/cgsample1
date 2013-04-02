@@ -1,2 +1,50 @@
-<h1>Welcom#index</h1>
-<p>Find me in app/views/welcom/index.html.erb</p>
+<div class="container" id="mainmenu_box">
+  <div class="title_table">情報管理</div>
+    <div class="mainmenu_inner cf">
+      <ul>
+        <li class="menulist01"><a href="/kokyakus">顧客管理</a></li>
+        <li class="menulist02"><a href="/konyu_rirekis">購入履歴管理</a></li>
+        <li class="menulist04"><a href="/toukeis">売上管理</a></li>
+      </ul>
+  </div>
+  <div class="title_master">マスタ管理</div>
+  <div class="mainmenu_inner cf">
+    <ul>
+      <li class="menulist05"><a href="/shobyos">病名・傷病名マスタ</a></li>
+      <li class="menulist06"><a href="/hoken_shubetsus">保険種別マスタ</a></li>
+      <li class="menulist07"><a href="/byoins">病院マスタ</a></li>
+      <li class="menulist08"><a href="/shains">社員マスタ</a></li>
+      <li class="menulist10"><a href="/seihins">製品マスタ</a></li>
+      <li class="menulist11"><a href="/kansei_buhins">完成部品マスタ</a></li>
+    </ul>
+  </div>
+  <div class="title_master">Sample</div>
+  <div class="mainmenu_inner cf">
+    <ul>
+      <li><input type="button" id="btnReport" value="見積書出力" style="width: 175px; height: 40px; float: left; margin: 0 25px 25px 0;"/></li>
+      <li><input type="button" id="btnKanseizu" value="完成図表示" style="width: 175px; height: 40px; float: left; margin: 0 25px 25px 0;"/></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+$("input#btnReport").click(function() {
+    var url = "report/report.json";
+    url += "?konyuRirekiId=1&kokyakuId=1";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: url,
+        //data: data,
+        dataType: "json",
+        success: function(result) {
+            if (result != null){
+                window.open(result.fileName, "帳票出力");
+            }
+        }
+    });
+});
+$("input#btnKanseizu").click(function() {
+    location.href = "kanseizu/show?konyuRirekiId=1&kokyakuId=1";
+});
+</script>

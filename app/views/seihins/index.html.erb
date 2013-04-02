@@ -1,0 +1,247 @@
+<div class="title">製品管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="seihinSearch" class="Searchform cf">
+    <%= render 'search' %>
+</div>
+<div style="clear:both;" id="seihin">
+    <table id="searchSeihinGrid"></table>
+    <div id="searchSeihinPager"></div>
+</div>
+<div class="btn_new">
+   <a class="btn_new_mast" id="btnSeihinNew" href="#" />新規追加</a>
+</div>
+<%= render 'form' %>
+<script>
+// ##############################
+// 
+// ##############################
+$(function() {
+    
+    var isLoaded = false;
+    var colNames = ["製品ID","分類コード","分類名","品名コード","品名","型式コード","型式名","",""];
+    var colModelSettings = [
+            {name:"seihinId", index:"seihinId", hidden:true},
+            {name:"bunruiCd", index:"bunruiCd"},
+            {name:"bunruiNm", index:"bunruiNm"},
+            {name:"hinmeiCd", index:"hinmeiCd"},
+            {name:"hinmeiNm", index:"hinmeiNm"},
+            {name:"katashikiCd", index:"katashikiCd"},
+            {name:"katashikiNm", index:"katashikiNm"},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+    ];
+    $("#searchSeihinGrid").jqGrid({
+        datatype: "local",
+        width: "940",
+        height: "240",
+        cellEdit: false,
+        rowNum: 10,
+        pager: "searchSeihinPager",
+        multiselect: false,
+        colNames: colNames,
+        colModel: colModelSettings,
+        gridComplete: function(){
+            if(!isLoaded == true){
+                isLoaded = true;
+            }
+        },
+    }).navGrid('#searchSeihinPager',{edit:false, add:false, del:false, search:false});
+});
+
+// ##############################
+// 検索ボタンクリック処理
+// ##############################
+$("a#btnSeihinSearch").click(function() {
+    searchSeihin();
+    return false;
+});
+
+// ##############################
+// クリアボタンクリック処理
+// ##############################
+$("a#btnSeihinClear").click(function() {
+    $('#seihinSearchForm input[type="text"]').val('');
+    return false;
+});
+
+// ##############################
+// 新規登録ボタンクリック処理
+// ##############################
+$("a#btnSeihinNew").click(function() {
+    showSeihinFormDialog();
+    return false;
+});
+
+// ##############################
+// グリッド更新ボタンクリック処理
+// ##############################
+function updateFormatter(cellval, options, rowdata) {
+    return "<img src='/images/database-reload-alt-1.png' onclick='showSeihinFormDialog(" + rowdata['seihinId'] + ")' title='更新' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// グリッド削除ボタンクリック処理
+// ##############################
+function deleteFormatter(cellval, options, rowdata) {
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeSeihin(" + rowdata['seihinId'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// 検索用メソッド
+// ##############################
+function searchSeihin() {
+    var data = {};
+    var search = $("#seihinSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
+    $("#searchSeihinGrid").clearGridData();
+    var param = {
+        datatype: "json",
+        url: "seihins/search.json",
+        postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
+        }
+    };
+    $("#searchSeihinGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// ##############################
+// 更新用メソッド
+// param:
+// seihinId : 製品ID
+// ##############################
+function executeSeihin(seihinId) {
+    var url;
+    var type;
+    var data = {};
+    var postData = {};
+    if(seihinId != null) {
+        url = "seihins/" + seihinId + ".json";
+        type = "POST";
+        postData["_method"] = "put";
+    } else {
+        url = "seihins.json";
+        type = "POST";
+    }
+    var seihin = $("#seihinForm").serializeArray();
+    $.each(seihin, function() {
+        data[this.name] = this.value;
+    });
+    // 更新ユーザー、登録ユーザーを設定する
+    data["koshinshaId"] = 1;
+    data["torokushaId"] = 1;
+
+    postData["seihin"] = data;
+    postData["id"] = seihinId;
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: postData,
+        root: "seihin",
+        dataType: "json",
+        success: function(result) {
+            searchSeihin();
+        }
+    });
+    $("#seihinFormDialog").dialog("close");
+    return false;
+}
+
+// ##############################
+// 登録用フォームダイアログオープン
+// param:
+// seihinId : 製品ID
+// ##############################
+function showSeihinFormDialog(seihinId) {
+
+    if(seihinId != null) {
+        var url = "seihins/" + seihinId + ".json";
+        $.ajax({
+            scriptCharset:"UTF-8",
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result) {
+                if(result) {
+                    $("#seihinForm #bunruiCd").val(result["bunruiCd"]);
+                    $("#seihinForm #bunruiNm").val(result["bunruiNm"]);
+                    $("#seihinForm #hinmeiCd").val(result["hinmeiCd"]);
+                    $("#seihinForm #hinmeiNm").val(result["hinmeiNm"]);
+                    $("#seihinForm #katashikiCd").val(result["katashikiCd"]);
+                    $("#seihinForm #katashikiNm").val(result["katashikiNm"]);
+                }
+                return false;
+            }
+        });
+    }
+    // ダイアログ表示
+    $("#seihinFormDialog").dialog({
+        show: {effect: "clip"},
+        hide: {effect: "clip"},
+        width: "auto",
+        modal: true,
+        buttons : {
+            "Close":{
+                text: "閉じる",
+                id: "dialog_close",
+                class : "btn_white",
+                click : function(){
+                    $('#seihinForm input[type="text"], select, textarea').val('');
+                    $("#seihinForm").validate().resetForm();
+                    $(this).dialog('close');
+                    return false;
+                }
+            },
+            "Regist":{
+                text: "登録",
+                id: "dialog_regist",
+                class: "btn_orange",
+                click: function() {
+                    // クライアントバリデーション
+                    if ($("#seihinForm").valid() == false) {
+                         return false;
+                     }
+                    executeSeihin(seihinId);
+                    $('#seihinForm input[type="text"], select, textarea').val('');
+                    $(this).dialog('close');
+                }
+            },
+        },
+        open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
+    });
+    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
+    $("#seihinFormDialog").focus();
+}
+
+// ##############################
+// 削除用メソッド
+// param:
+// seihinId : 製品ID
+// ##############################
+function removeSeihin(seihinId) {
+    if (confirm("削除します。よろしいですか？") == false) {
+        return false;
+    }
+    var url = "seihins/" + seihinId + ".json";
+    var type = "POST";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: "id=" + seihinId + "&_method=delete",
+        dataType: "json",
+        success: function(result) {
+                searchSeihin();
+        }
+    });
+    return false;
+}
+
+</script>

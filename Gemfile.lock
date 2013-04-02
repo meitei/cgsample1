@@ -159,6 +159,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.2)
+    rmagick (2.13.2)
     ruby-rc4 (0.1.5)
     rvm-capistrano (1.2.7)
       capistrano (>= 2.0.0)
@@ -216,6 +217,7 @@ DEPENDENCIES
   mysql2
   pg
   rails (= 3.2.12)
+  rmagick
   rvm-capistrano
   sass-rails (~> 3.2.3)
   sorcery

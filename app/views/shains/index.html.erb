@@ -13,21 +13,21 @@
 <%= render 'form' %>
 <script>
 // ##############################
-// 
+//
 // ##############################
 $(function() {
-    
+
     var isLoaded = false;
     var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","管理者フラグ","",""];
     var colModelSettings = [
-            {name:"shainId", index:"shainId", hidden:true},
+            {name:"id", index:"id", hidden:true},
             {name:"shainCd", index:"shainCd"},
             {name:"myoji", index:"myoji"},
             {name:"name", index:"name"},
             {name:"myojiFuri", index:"myojiFuri"},
             {name:"nameFuri", index:"nameFuri"},
-            {name:"loginId", index:"loginId"},
-            {name:"loginPassword", index:"loginPassword"},
+            {name:"username", index:"username"},
+            {name:"password", index:"password"},
             {name:"manageFlg", index:"manageFlg",hidden:true},
             {name:"manageName", index:"manageName"},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
@@ -79,14 +79,14 @@ $("a#btnShainNew").click(function() {
 // グリッド更新ボタンクリック処理
 // ##############################
 function updateFormatter(cellval, options, rowdata) {
-    return "<img src='/images/database-reload-alt-1.png' onclick='showShainFormDialog(" + rowdata['shainId'] + ")' title='更新' style='width:16px; height:16px'>";
+    return "<img src='/images/database-reload-alt-1.png' onclick='showShainFormDialog(" + rowdata['id'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 // ##############################
 // グリッド削除ボタンクリック処理
 // ##############################
 function deleteFormatter(cellval, options, rowdata) {
-    return "<img src = '/images/database-remove-alt-1.png' onclick='removeShain(" + rowdata['shainId'] + ")' title='削除' style='width:16px; height:16px'>";
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeShain(" + rowdata['id'] + ")' title='削除' style='width:16px; height:16px'>";
 }
 
 // ##############################
@@ -122,15 +122,16 @@ function searchShain() {
 function executeShain(shainId) {
     var url;
     var type;
+    var data = {};
+    var postData = {};
     if(shainId != null) {
         url = "shains/" + shainId + ".json";
-        type = "PUT";
+        type = "POST";
+        postData["_method"] = "put";
     } else {
         url = "shains.json";
         type = "POST";
     }
-    var data = {};
-    var postData = {};
     var shain = $("#shainForm").serializeArray();
     $.each(shain, function() {
         data[this.name] = this.value;
@@ -177,6 +178,8 @@ function showShainFormDialog(shainId) {
                     $("#shainForm #name").val(result["name"]);
                     $("#shainForm #myojiFuri").val(result["myojiFuri"]);
                     $("#shainForm #nameFuri").val(result["nameFuri"]);
+                    //FIXME: IDがDB定義と合っていないので修正する
+                    $("#shainForm #username").val(result["username"]);
                     $("#shainForm #loginId").val(result["loginId"]);
                     $("#shainForm #loginPassword").val(result["loginPassword"]);
                     $("#shainForm #manageFlg").val(result["manageFlg"]);
@@ -192,21 +195,31 @@ function showShainFormDialog(shainId) {
         width: "auto",
         modal: true,
         buttons : {
-            "閉じる": function(){
-                $('#shainForm input[type="text"], select, textarea').val('');
-                $("#shainForm").validate().resetForm();
-                $(this).dialog('close');
-                return false;
+            "Close":{
+                text: "閉じる",
+                id: "dialog_close",
+                class : "btn_white",
+                click : function(){
+                    $('#shainForm input[type="text"], select, textarea').val('');
+                    $("#shainForm").validate().resetForm();
+                    $(this).dialog('close');
+                    return false;
+                }
             },
-            '登録' :function() {
-                // クライアントバリデーション
-                if ($("#shainForm").valid() == false) {
-                     return false;
-                 }
-                executeShain(shainId);
-                $('#shainForm input[type="text"], select, textarea').val('');
-                $(this).dialog('close');
-            }
+            "Regist":{
+                text: "登録",
+                id: "dialog_regist",
+                class: "btn_orange",
+                click: function() {
+                    // クライアントバリデーション
+                    if ($("#shainForm").valid() == false) {
+                         return false;
+                     }
+                    executeShain(shainId);
+                    $('#shainForm input[type="text"], select, textarea').val('');
+                    $(this).dialog('close');
+                }
+            },
         },
         open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
@@ -224,12 +237,12 @@ function removeShain(shainId) {
         return false;
     }
     var url = "shains/" + shainId + ".json";
-    var type = "DELETE";
+    var type = "POST";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + shainId,
+        data: "id=" + shainId + "&_method=delete",
         dataType: "json",
         success: function(result) {
                 searchShain();

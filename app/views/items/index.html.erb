@@ -4,6 +4,8 @@
     <div style="margin: 5px;"></div>
     <a class="btn btn-primary" id="btnSearch" href="#" />SERACH</a>
     <a class="btn btn-primary" id="btnReport" href="#" />Report</a>
+    <a class="btn btn-primary" id="btnImage" href="#" />Image</a>
+    <a class="btn btn-primary" id="btnReport1" href="#" />Report</a>
     <div style="margin: 5px;"></div>
 </div>
 <div id="company">
@@ -52,6 +54,40 @@ $("a#btnSearch").click(function() {
 
 $("a#btnReport").click(function() {
     var url = "items/report.json";
+    url += "?konyuRirekiId=" + $("#txtID").val() + "&kokyakuId=" + $("#txtName").val();
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: url,
+        //data: data,
+        dataType: "json",
+        success: function(result) {
+            if (result != null){
+                window.open(result.fileName, "帳票出力");
+            }
+        }
+    });
+});
+
+$("a#btnImage").click(function() {
+    var url = "items/image.json";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: url,
+        //data: data,
+        dataType: "json",
+        success: function(result) {
+            if (result != null){
+                window.open(result.fileName, "帳票出力");
+            }
+        }
+    });
+});
+
+$("a#btnReport1").click(function() {
+    var url = "report/report.json";
+    url += "?konyuRirekiId=" + $("#txtID").val() + "&kokyakuId=" + $("#txtName").val();
     $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",

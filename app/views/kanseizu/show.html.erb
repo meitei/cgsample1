@@ -1,0 +1,11 @@
+<div class="container" id="mainmenu_box" style="padding:20px 35px 0px;">
+  <div class="title_master">見積完成図Sample</div>
+
+  <div class="mainmenu_inner cf">
+    <ul>
+      <% @array.each_with_index do |row, i| %>
+       <li style="margin-bottom:5px;"><%= image_tag("/images/items/" + row , :id => "kanseizu_" + i.to_s, :name => "kanseizu", :size => "200x200") %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

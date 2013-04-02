@@ -1,0 +1,23 @@
+<div class="title">購入履歴管理：購入履歴登録</div>
+<div class="statuslabel"><span>購入履歴登録</span>コメント　無ければ削除</div>
+<div id="konyuRirekiSearch" class="Tourokuform cf">
+	<%= render 'form' %>
+</div>
+<div class="btn_box">
+	<a id="btnKonyuRirekiReturn" href="#" class="btn_back2" /><img src="/images/btn_back2.png" alt="戻る" /></a>
+	<a id="btnKonyuRirekiRegist" href="#" class="btn_add2" /><img src="/images/btn_add2.png" alt="登録" /></a>
+</div>
+<script>
+$(function() {
+	$("a#btnKonyuRirekiRegist").click(function() {
+	    executeKonyuRireki();
+	    return false;
+	});
+
+	$("a#btnKonyuRirekiReturn").click(function() {
+    	location.href = "/konyu_rirekis";
+	    return false;
+	});
+});
+
+</script>

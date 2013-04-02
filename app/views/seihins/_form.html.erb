@@ -1,0 +1,62 @@
+<div id="seihinFormDialog" title="製品登録画面" class="Tourokuform cf" style="overflow:hidden;display: none;">
+  <form id="seihinForm">
+  <div>
+    <table>
+      <tr>
+        <th style="width:80px;">分類コード</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="bunruiCd" name="bunruiCd" />
+        </td>
+        <th style="width:80px;">分類名</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="bunruiNm" name="bunruiNm" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:80px;">品名コード</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="hinmeiCd" name="hinmeiCd" />
+        </td>
+        <th style="width:80px;">品名</th>
+        <td style="width:75px;">
+          <input style="width:130px;" type="text" id="hinmeiNm" name="hinmeiNm" />
+        </td>
+      </tr>
+      <tr>
+        <th style="width:80px;">型式コード</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="katashikiCd" name="katashikiCd" />
+        </td>
+        <th style="width:80px;">型式名</th>
+        <td style="width:175px;">
+          <input style="width:130px;" type="text" id="katashikiNm" name="katashikiNm" />
+        </td>
+      </tr>
+    </table>
+  </div>
+  </form>
+  <br />
+<script>
+$(function() {
+
+  $("#seihinForm").validate({
+        errorClass:'error',
+        errorElement:'label',
+        highlight: function (element, errorClass, validClass) { 
+            $(element).addClass(errorClass); 
+        }, 
+        unhighlight: function (element, errorClass, validClass) { 
+            $(element).removeClass(errorClass); 
+        },
+        rules: {
+            bunruiCd: {required:true, maxlength:25},
+            bunruiNm: {maxlength:25},
+            hinmeiCd: {required:true, maxlength:25},
+            hinmeiNm: {maxlength:25},
+            katashikiCd: {required:true, maxlength:25},
+            katashikiNm: {maxlength:25}
+        }
+    });
+
+});
+</script>

@@ -121,15 +121,16 @@ function searchKanseiBuhin() {
 function executeKanseiBuhin(buhinCd) {
     var url;
     var type;
+    var data = {};
+    var postData = {};
     if(buhinCd != null) {
         url = "kansei_buhins/" + buhinCd + ".json";
-        type = "PUT";
+        type = "POST";
+        postData["_method"] = "put";
     } else {
         url = "kansei_buhins.json";
         type = "POST";
     }
-    var data = {};
-    var postData = {};
     var kanseiBuhin = $("#kanseiBuhinForm").serializeArray();
     $.each(kanseiBuhin, function() {
         data[this.name] = this.value;
@@ -189,21 +190,32 @@ function showKanseiBuhinFormDialog(buhinCd) {
         width: "auto",
         modal: true,
         buttons : {
-            "閉じる": function(){
-                $('#kanseiBuhinForm input[type="text"], select, textarea').val('');
-                $("#kanseiBuhinForm").validate().resetForm();
-                $(this).dialog('close');
+            "Close":{
+                text: "閉じる",
+                id: "dialog_close",
+                class : "btn_white",
+                click : function(){
+                    $('#kanseiBuhinForm input[type="text"], select, textarea').val('');
+                    $("#kanseiBuhinForm").validate().resetForm();
+                    $(this).dialog('close');
+                    return false;
+                }
             },
-            '登録' :function() {
-                // クライアントバリデーション
-                if ($("#kanseiBuhinForm").valid() == false) {
-                     return false;
-                 }
-                executeKanseiBuhin(buhinCd);
-                $('#kanseiBuhinForm input[type="text"], select, textarea').val('');
-                $(this).dialog('close');
-                return false;
-            }
+            "Regist":{
+                text: "登録",
+                id: "dialog_regist",
+                class: "btn_orange",
+                click: function() {
+                    // クライアントバリデーション
+                    if ($("#kanseiBuhinForm").valid() == false) {
+                         return false;
+                     }
+                    executeKanseiBuhin(buhinCd);
+                    $('#kanseiBuhinForm input[type="text"], select, textarea').val('');
+                    $(this).dialog('close');
+                    return false;
+                }
+            },
         },
         open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
@@ -221,12 +233,12 @@ function removeKanseiBuhin(buhinCd) {
         return false;
     }
     var url = "kansei_buhins/" + buhinCd + ".json";
-    var type = "DELETE";
+    var type = "POST";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + buhinCd,
+        data: "id=" + buhinCd + "&_method=delete",
         dataType: "json",
         success: function(result) {
             searchKanseiBuhin();

@@ -1,0 +1,140 @@
+<div class="title">社員管理：検索</div>
+<div class="statuslabel"><span>条件設定</span>検索条件を指定してください。</div>
+<div id="userSearch" class="Searchform cf">
+    <%= render 'search' %>
+</div>
+<div style="clear:both;" id="user">
+    <table id="searchUserGrid"></table>
+    <div id="searchUserPager"></div>
+</div>
+<div class="btn_new">
+   <a class="btn_new_mast" id="btnUserNew" href="/users/new" />新規追加</a>
+</div>
+<script>
+// ##############################
+// 
+// ##############################
+$(function() {
+    
+    var isLoaded = false;
+    var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","管理者フラグ","",""];
+    var colModelSettings = [
+            {name:"id", index:"id", hidden:true},
+            {name:"shainCd", index:"shainCd"},
+            {name:"myoji", index:"myoji"},
+            {name:"name", index:"name"},
+            {name:"myojiFuri", index:"myojiFuri"},
+            {name:"nameFuri", index:"nameFuri"},
+            {name:"username", index:"username"},
+            {name:"password", index:"password"},
+            {name:"manageFlg", index:"manageFlg",hidden:true},
+            {name:"manageName", index:"manageName"},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+    ];
+    $("#searchUserGrid").jqGrid({
+        datatype: "local",
+        width: "940",
+        height: "240",
+        cellEdit: false,
+        rowNum: 10,
+        pager: "searchUserPager",
+        multiselect: false,
+        colNames: colNames,
+        colModel: colModelSettings,
+        gridComplete: function(){
+            if(!isLoaded == true){
+                isLoaded = true;
+            }
+        },
+    }).navGrid('#searchUserPager',{edit:false, add:false, del:false, search:false});
+});
+
+// ##############################
+// 検索ボタンクリック処理
+// ##############################
+$("a#btnUserSearch").click(function() {
+    searchUser();
+    return false;
+});
+
+// ##############################
+// クリアボタンクリック処理
+// ##############################
+$("a#btnUserClear").click(function() {
+    $('#userSearchForm input[type="text"]').val('');
+    return false;
+});
+
+// ##############################
+// 新規登録ボタンクリック処理
+// ##############################
+// $("a#btnUserNew").click(function() {
+//     showUserFormDialog();
+//     return false;
+// });
+
+// ##############################
+// グリッド更新ボタンクリック処理
+// ##############################
+function updateFormatter(cellval, options, rowdata) {
+    return "<img src='/images/database-reload-alt-1.png' onclick='showUserFormDialog(" + rowdata['id'] + ")' title='更新' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// グリッド削除ボタンクリック処理
+// ##############################
+function deleteFormatter(cellval, options, rowdata) {
+    return "<img src = '/images/database-remove-alt-1.png' onclick='removeUser(" + rowdata['id'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+// ##############################
+// 検索用メソッド
+// ##############################
+function searchUser() {
+    var data = {};
+    var search = $("#userSearchForm").serializeArray();
+    $.each(search, function() {
+        data[this.name] = this.value;
+    });
+    $("#searchUserGrid").clearGridData();
+    var param = {
+        datatype: "json",
+        url: "users/search.json",
+        postData: data,
+        jsonReader: {
+            root: "rows",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false
+        }
+    };
+    $("#searchUserGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// ##############################
+// 削除用メソッド
+// param:
+// shainId : 社員ID
+// ##############################
+function removeUser(userId) {
+    if (confirm("削除します。よろしいですか？") == false) {
+        return false;
+    }
+    var url = "users/" + userId + ".json";
+    var type = "POST";
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: type,
+        url: url,
+        data: "id=" + userId + "&_method=delete",
+        dataType: "json",
+        success: function(result) {
+                searchUser();
+        }
+    });
+    return false;
+}
+
+</script>

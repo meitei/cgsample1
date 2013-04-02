@@ -1,5 +1,13 @@
 JqgridSample::Application.routes.draw do
 
+  resources :seihins do
+    get 'search', :on => :collection
+  end
+
+  resources :users do
+      get 'search', :on => :collection
+  end
+
   resources :kansei_buhins do
       get 'search', :on => :collection
   end
@@ -9,6 +17,8 @@ JqgridSample::Application.routes.draw do
   end
 
   resources :mitsumoris
+
+  resources :mitsumori_tankas  
 
   resources :hoken_shubetsus do
     get 'search', :on => :collection
@@ -26,11 +36,16 @@ JqgridSample::Application.routes.draw do
     get 'search', :on => :collection
   end
 
-
   get "item_extend/search"
+
+  get "report/report"
+
+  get "kanseizu/show"
+  get "kanseizu/get_image"
 
   resources :items do
     get 'report', :on => :collection
+    get 'image', :on => :collection
   end
 
   resources :toukeis do
@@ -41,12 +56,26 @@ JqgridSample::Application.routes.draw do
     get 'graph_data', :on => :collection
   end
 
+  resources :konyu_rirekis do
+      post 'search', :on => :collection
+      post 'file_upload', :on => :collection
+      get 'get_image', :on => :collection
+  end
+  # match ':controller(/:action(/:id))(.:format)', :to => 'konyu_rirekis#get_image'
+  match 'konyu_rirekis(/get_image(/:id))(.:format)', :to => 'konyu_rirekis#get_image'
+
+  resources :common_data do
+    get 'kokyaku_list', :on => :collection
+    get 'user_list', :on => :collection
+    get 'byoin_list', :on => :collection
+    get 'seihin_list', :on => :collection
+    get 'shobyo_list', :on => :collection
+  end
+
   resources :companies
 
-
-  get "logout" => "sessions#destroy", :as => "logout"
-  get "login" => "sessions#new", :as => "login"
-  get "signup" => "users#new", :as => "signup"
+  match 'login' => 'sessions#new', :as => :login
+  match 'logout' => 'sessions#destroy', :as => :logout
   resources :users
   resources :sessions
 

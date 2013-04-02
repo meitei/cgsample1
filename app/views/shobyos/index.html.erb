@@ -120,15 +120,16 @@ function searchShobyo() {
 function executeShobyo(shobyoCd) {
     var url;
     var type;
+    var data = {};
+    var postData = {};
     if(shobyoCd != null) {
         url = "shobyos/" + shobyoCd + ".json";
-        type = "PUT";
+        type = "POST";
+        postData["_method"] = "put";
     } else {
         url = "shobyos.json";
         type = "POST";
     }
-    var data = {};
-    var postData = {};
     var shobyo = $("#shobyoForm").serializeArray();
     $.each(shobyo, function() {
         data[this.name] = this.value;
@@ -186,28 +187,36 @@ function showShobyoFormDialog(shobyoCd) {
         hide: {effect: "clip"},
         width: "auto",
         modal: true,
-        buttons : {
+        buttons: {
             "Close":{
-                text : "閉じる",
-                class : "dialog_new",
+                text: "閉じる",
+                id: "dialog_close",
+                class : "btn_white",
                 click : function(){
-                $('#shobyoForm input[type="text"], select, textarea').val('');
-                $("#shobyoForm").validate().resetForm();
-                $(this).dialog('close');
-                return false;
+                    $('#shobyoForm input[type="text"], select, textarea').val('');
+                    $("#shobyoForm").validate().resetForm();
+                    $(this).dialog('close');
+                    return false;
                 }
             },
-            '登録' :function() {
-                // クライアントバリデーション
-                if ($("#shobyoForm").valid() == false) {
-                     return false;
-                 }
-                executeShobyo(shobyoCd);
-                $('#shobyoForm input[type="text"], select, textarea').val('');
-                $(this).dialog('close');
-            }
+            "Regist":{
+                text: "登録",
+                id: "dialog_regist",
+                class: "btn_orange",
+                click: function() {
+                    // クライアントバリデーション
+                    if ($("#shobyoForm").valid() == false) {
+                         return false;
+                     }
+                    executeShobyo(shobyoCd);
+                    $('#shobyoForm input[type="text"], select, textarea').val('');
+                    $(this).dialog('close');
+                }
+            },
         },
-        open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
+        open:function(event, ui){
+            $(".ui-dialog-titlebar-close").hide();
+         }
     });
     $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     $("#shobyoFormDialog").focus();
@@ -223,12 +232,12 @@ function removeShobyo(shobyoCd) {
         return false;
     }
     var url = "shobyos/" + shobyoCd + ".json";
-    var type = "DELETE";
+    var type = "POST";
     $.ajax({
         scriptCharset:"UTF-8",
         type: type,
         url: url,
-        data: "id=" + shobyoCd,
+        data: "id=" + shobyoCd + "&_method=delete",
         dataType: "json",
         success: function(result) {
             searchShobyo();

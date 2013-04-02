@@ -1,25 +1,51 @@
-<%= form_for(@mitsumori) do |f| %>
-  <% if @mitsumori.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@mitsumori.errors.count, "error") %> prohibited this mitsumori from being saved:</h2>
-
-      <ul>
-      <% @mitsumori.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<div id="estimateForm" class="jqwizard">
+    <div class="jqwizard_panel">
+        <div class="jqwizard_content" id="step1"></div>
+        <div class="jqwizard_content" id="step2" style="display: none;"></div>
+        <div class="jqwizard_content" id="step3" style="display: none;"></div>
+        <div class="jqwizard_content" id="step4" style="display: none;"></div>
+        <div class="jqwizard_content" id="step5" style="display: none;"></div>
+        <div class="jqwizard_content" id="step6" style="display: none;"></div>
+        <div class="jqwizard_content" id="step7" style="display: none;"></div>
+        <div class="jqwizard_content" id="step8" style="display: none;"></div>
+        <div class="jqwizard_content" id="step9" style="display: none;"></div>
+        <div class="jqwizard_content" id="step10" style="display: none;"></div>
+        <div class="jqwizard_content" id="step11" style="display: none;"></div>
+        <div class="jqwizard_content" id="step12" style="display: none;"></div>
+        <div class="jqwizard_content" id="step13" style="display: none;"></div>
+        <div class="jqwizard_content" id="step14" style="display: none;"></div>
+        <div class="jqwizard_content" id="step15" style="display: none;"></div>
+        <div class="jqwizard_content" id="step16" style="display: none;"></div>
+        <div class="jqwizard_content" id="step17" style="display: none;"></div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :mitsumoriId %><br />
-    <%= f.number_field :mitsumoriId %>
-  </div>
-  <div class="field">
-    <%= f.label :kokyakuId %><br />
-    <%= f.number_field :kokyakuId %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <div class="jqwizard_buttons">
+        <button type="button" class="jqwizard_previous"><img src="/images/btn_back.png" alt="戻る" /></button>
+        <button type="button" class="jqwizard_next"><img src="/images/btn_next.png" alt="次へ"/></button>
+    </div>
+    <div class="jqwizard_navi cf">
+        <ul id="jqwizard_list">
+            <li id="step1"><a href="#step1"><em>Step 1</em><span>使用環境</span></a></li>
+            <li id="step2"><a href="#"><em>Step 2</em><span>&nbsp;</span></a></li>
+            <li id="step3"><a href="#"><em>Step 3</em><span>&nbsp;</span></a></li>
+            <li id="step4"><a href="#"><em>Step 4</em><span>&nbsp;</span></a></li>
+            <li id="step5"><a href="#"><em>Step 5</em><span>&nbsp;</span></a></li>
+            <li id="step6"><a href="#"><em>Step 6</em><span>&nbsp;</span></a></li>
+            <li id="step7"><a href="#"><em>Step 7</em><span>&nbsp;</span></a></li>
+            <li id="step8"><a href="#"><em>Step 8</em><span>&nbsp;</span></a></li>
+            <li id="step9"><a href="#"><em>Step 9</em><span>&nbsp;</span></a></li>
+            <li id="step10"><a href="#"><em>Step 10</em><span>&nbsp;</span></a></li>
+            <li id="step11"><a href="#"><em>Step 11</em><span>&nbsp;</span></a></li>
+            <li id="step12"><a href="#"><em>Step 12</em><span>&nbsp;</span></a></li>
+            <li id="step13"><a href="#"><em>Step 13</em><span>&nbsp;</span></a></li>
+            <li id="step14"><a href="#"><em>Step 14</em><span>&nbsp;</span></a></li>
+            <li id="step15"><a href="#"><em>Step 15</em><span>&nbsp;</span></a></li>
+            <li id="step16"><a href="#"><em>Step 16</em><span>&nbsp;</span></a></li>
+            <li id="step17"><a href="#"><em>Step 17</em><span>&nbsp;</span></a></li>
+        </ul>
+    </div>
+</div>
+    <div class="btn_box">
+      <a id="btnEstimateBack" href="/mitsumoris" class="btn_back2" /><img src="/images/btn_back2_mitsumori.png" alt="戻る" /></a>
+      <a id="btnEstimateRegist" href="#" class="btn_add2" /><img src="/images/btn_add2.png" alt="登録" /></a>
+    </div>
+</div>
