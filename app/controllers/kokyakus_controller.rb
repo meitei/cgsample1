@@ -109,7 +109,7 @@ class KokyakusController < ApplicationController
     nend = get_nend()
 
     # 購入履歴IDの最大を取得する
-    maxId = Kokyaku.maximum(:kokyakuId, :conditions => ["\"kokyakuId\" like ?", nend.to_s + "%"]);
+    maxId = Kokyaku.maximum(:kokyakuId, :conditions => ["\"kokyakuId\" BETWEEN ? AND ?", (nend.to_s + "00000").to_i, (nend.to_s + "99999").to_i])
     if maxId.blank? then
       maxId = 0;
     end
