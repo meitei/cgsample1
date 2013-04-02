@@ -222,7 +222,7 @@ class ReportController < ApplicationController
 
     ## ヘッダ項目：宛名
     kokyaku = Kokyaku.find(konyuRireki["kokyakuId"])
-    @@atena = kokyaku["kokyakuNm"]
+    @@kokyakuNm = kokyaku["kokyakuNm"]
 
     ## ヘッダ項目：型式
     seihin = Seihin.find(konyuRireki["seihinId"])
@@ -269,8 +269,8 @@ class ReportController < ApplicationController
         strDate = "平成" + (t.strftime("%y").to_i + 12).to_s + t.strftime("年%m月%d日")
         item(:date).value(strDate)
 
-        item(:name1).value(@@atena)
-        item(:name2).value('　')
+        item(:name1).value('')  #仕様：空欄とする
+        item(:name2).value(@@kokyakuNm)
         item(:model).value(@@katashiki)
         item(:name3).value(@@tanto)
 
@@ -386,7 +386,7 @@ class ReportController < ApplicationController
           }
         end
 
-        # 4行目分も集計に加える  # TODO:集計に含めるべき？
+        # 4行目分も集計に加える
         if @@kanseiBuhins.present?
           @@kanseiBuhins.each_with_index do |row, i|
             # 仕様：最大28行目まで
