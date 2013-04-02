@@ -1,5 +1,6 @@
   /* 構造フレーム選定 */
   function wizard2a(){
+    //clearNavi("2");
     // 固定型選択
     $("input#1-COL5_1").click(function(){
       $("div#step3").load("/mitsumori/step_06.html", wizard3a);
@@ -146,7 +147,8 @@
   }
 
   // メインフレーム材質選定
-  function wizard2b(){
+  function wizard2e(){
+    //clearNavi("2");
     // アルミニューム選択
     $("input#1-COL2_1").click(function(){
       $("div#step3").load("/mitsumori/step_03.html", wizard3e);
@@ -245,6 +247,7 @@
     });
     // 木製選択
     $("input#3-COL2_1").click(function(){
+      //clearNavi("2");
       $("div#step3").load("/mitsumori/step_2_b.html");
       $("li#step3 a").attr("href", "#step3");
       $("li#step3 span").text("木製");
@@ -281,7 +284,8 @@
   }
 
   // 既製品
-  function wizard2c(){
+  function wizard2h(){
+    //clearNavi("2");
     // 次へ
     $("button.jqwizard_next").click(function() {
       step = 3;
@@ -292,4 +296,91 @@
       step = 1;
       $("div.statuslabel span").replaceWith("<span>STEP 1</span>");
     });
+    // 単価を書き換え
+    for(var i=0; i<tanka.length; i++) {
+      $("div#step2 td#1-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#1-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#1-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#step2 td#2-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#2-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#2-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#step2 td#3-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#3-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#3-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#step2 td#4-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#4-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#4-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+    }
+  }
+
+  // 既製品
+  function wizard2i(){
+    //clearNavi("2");
+    // 次へ
+    $("button.jqwizard_next").click(function() {
+      step = 3;
+      $("div.statuslabel span").replaceWith("<span>STEP 3</span>");
+    });
+    // 戻る
+    $("button.jqwizard_previous").click(function() {
+      step = 1;
+      $("div.statuslabel span").replaceWith("<span>STEP 1</span>");
+    });
+    // 単価を書き換え
+    for(var i=0; i<tanka.length; i++) {
+      $("div#step2 td#1-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#1-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#1-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#step2 td#2-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#2-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#2-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#step2 td#3-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#3-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#3-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#step2 td#4-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#4-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#4-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+    }
+  }
+
+  // 既製品
+  function wizard2j(){
+    //clearNavi("2");
+    // 次へ
+    $("button.jqwizard_next").click(function() {
+      step = 3;
+      $("div.statuslabel span").replaceWith("<span>STEP 3</span>");
+    });
+    // 戻る
+    $("button.jqwizard_previous").click(function() {
+      step = 1;
+      $("div.statuslabel span").replaceWith("<span>STEP 1</span>");
+    });
+    // 単価を書き換え
+    for(var i=0; i<tanka.length; i++) {
+      $("div#step2 td#1-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#1-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#1-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#step2 td#2-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#2-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#2-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#step2 td#3-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#3-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#3-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#step2 td#4-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#step2 td#4-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#step2 input#4-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+    }
   }
