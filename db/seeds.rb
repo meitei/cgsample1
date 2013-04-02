@@ -289,7 +289,7 @@ MitsumoriSeihin.destroy_all(["1 = ?", 1])
 	# 数量=>1～5までを順番に設定
 	num =  i % 5 + 1
 	tanka = row["tanka"]
-	tax = (tanka * num * row["tax"]).truncate
+	tax = (tanka * row["tax"]).truncate
 	kin = tanka * num
 	MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => row["seihinNo"], :tanka => tanka, :suryo => num, :tax => tax, :kin => kin, :torokushaId => 1, :koshinshaId => 1)
 end

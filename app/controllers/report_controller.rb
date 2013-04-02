@@ -331,7 +331,7 @@ class ReportController < ApplicationController
             if @@hash0.key?(row["seihinNo"])
               # 集計
               subtotal += row["kin"]
-              taxtotal += row["tax"]
+              taxtotal += row["tax"] * row["suryo"]
 
               line = @@hash0[row["seihinNo"]]
 
@@ -349,7 +349,7 @@ class ReportController < ApplicationController
             if @@hash1.key?(row["seihinNo"])
               # 集計
               subtotal += row["kin"]
-              taxtotal += row["tax"]
+              taxtotal += row["tax"] * row["suryo"]
 
               line = @@hash1[row["seihinNo"]]
 
@@ -367,7 +367,7 @@ class ReportController < ApplicationController
             if @@hash2.key?(row["seihinNo"])
               # 集計
               subtotal += row["kin"]
-              taxtotal += row["tax"]
+              taxtotal += row["tax"] * row["suryo"]
 
               line = @@hash2[row["seihinNo"]]
 
@@ -381,7 +381,7 @@ class ReportController < ApplicationController
             if @@hash3.key?(row["seihinNo"])
               # 集計
               subtotal += row["kin"]
-              taxtotal += row["tax"]
+              taxtotal += row["tax"] * row["suryo"]
             end
           }
         end
@@ -393,7 +393,7 @@ class ReportController < ApplicationController
             if i < 28
               # 集計
               subtotal += row["kin"].to_i
-              taxtotal += row["tax"].to_i
+              taxtotal += row["tax"].to_i * row["suryo"].to_i
             else
               break
             end
