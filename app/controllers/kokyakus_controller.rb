@@ -105,6 +105,22 @@ class KokyakusController < ApplicationController
     logger.debug(params[:kokyaku])
     @kokyaku = Kokyaku.new(params[:kokyaku])
 
+    # 現在日付から年度を取得する
+    nend = get_nend()
+
+    # 購入履歴IDの最大を取得する
+    maxId = Kokyaku.maximum(:kokyakuId, :conditions => ["\"kokyakuId\" BETWEEN ? AND ?", (nend.to_s + "00000").to_i, (nend.to_s + "99999").to_i])
+    if maxId.blank? then
+      maxId = 0;
+    end
+    maxId_s = maxId.to_s
+    if maxId_s.size > 5 then
+      maxId = maxId_s[(maxId_s.size - 5),maxId_s.size].to_i
+    end
+
+    # 顧客IDを生成する -> 年度下2桁+5桁の連番
+    @kokyaku.kokyakuId = "#{nend}#{format("%05d",(maxId + 1))}".to_i
+
     respond_to do |format|
       if @kokyaku.save
         format.html { redirect_to action: "index", notice: 'Kokyaku was successfully created.' }
@@ -173,6 +189,18 @@ class KokyakusController < ApplicationController
     return select, joins
   end
 
-  private :get_select_stmt
+  def get_nend
+    today = Date.today
+    # 年度(西暦)
+    year = today.year
+    case today.month
+    when 1..3
+      year = today.year - 1
+    end
+    # 年度(和暦) ※平成固定
+    return year - 1988
+  end
+
+  private :get_select_stmt, :get_nend
 
 end

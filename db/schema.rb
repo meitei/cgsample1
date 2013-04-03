@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326125150) do
+ActiveRecord::Schema.define(:version => 20130403103740) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -85,30 +85,43 @@ ActiveRecord::Schema.define(:version => 20130326125150) do
   end
 
   create_table "konyu_rirekis", :force => true do |t|
-    t.integer  "konyuRirekiId"
-    t.integer  "kokyakuId"
+    t.decimal  "konyuRirekiId",                             :precision => 11, :scale => 0
+    t.integer  "kokyakuId",                                                                :null => false
     t.integer  "byoinCd"
-    t.integer  "mitsumoriTantoEigyoCd"
+    t.string   "mitsumoriTantoEigyoCd", :limit => 10
     t.date     "mitsumoriDt"
-    t.string   "shohinNm"
-    t.decimal  "kin"
-    t.decimal  "seikyuKin"
-    t.string   "shohinSiyoBiko"
-    t.integer  "uketsukeSesakuTantoCd"
+    t.string   "shohinNm",              :limit => 100
+    t.decimal  "kin",                                       :precision => 10, :scale => 0
+    t.decimal  "seikyuKin",                                 :precision => 10, :scale => 0
+    t.string   "shohinShiyoBiko",       :limit => 200
+    t.string   "uketsukeSesakuTantoCd", :limit => 10
     t.date     "juchuDt"
-    t.integer  "kariAwaseTantoCd"
+    t.string   "kariAwaseTantoCd",      :limit => 10
     t.date     "kariAwaseDt"
-    t.integer  "nohinTantoCd"
+    t.string   "nohinTantoCd",          :limit => 10
     t.date     "nohinDt"
     t.date     "kofuDt"
     t.date     "kannoDt"
     t.date     "nyukinDt"
     t.date     "oshiinDt"
     t.date     "kanryoDt"
-    t.integer  "koshinshaId"
-    t.integer  "torokushaId"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.integer  "koshinshaId",                                                              :null => false
+    t.integer  "torokushaId",                                                              :null => false
+    t.datetime "created_at",                                                               :null => false
+    t.datetime "updated_at",                                                               :null => false
+    t.string   "ishiNm1",               :limit => 50
+    t.string   "ishiNm2",               :limit => 50
+    t.string   "rigakuRyohoNm1",        :limit => 50
+    t.string   "rigakuRyohoNm2",        :limit => 50
+    t.string   "sagyoRyohoNm1",         :limit => 50
+    t.string   "sagyoRyohoNm2",         :limit => 50
+    t.integer  "shubetsuKn"
+    t.integer  "seihinId"
+    t.integer  "hokenShubetsuCd1"
+    t.integer  "hokenShubetsuCd2"
+    t.binary   "kanseiImg",             :limit => 16777215
+    t.binary   "kanseiTmbImg",          :limit => 16777215
+    t.string   "kanseiImgName"
   end
 
   create_table "mitsumori_seihins", :force => true do |t|
@@ -303,10 +316,10 @@ ActiveRecord::Schema.define(:version => 20130326125150) do
   end
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "session_id",                     :null => false
+    t.text     "data",       :limit => 16777215
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
@@ -341,16 +354,16 @@ ActiveRecord::Schema.define(:version => 20130326125150) do
   end
 
   create_table "test_images", :force => true do |t|
-    t.integer  "mitsumoriNo",                    :null => false
+    t.integer  "mitsumoriNo",                     :null => false
     t.string   "text"
-    t.binary   "mainImage1",  :limit => 1048576
-    t.binary   "mainImage2",  :limit => 1048576
-    t.binary   "subImage1",   :limit => 1048576
-    t.binary   "subImage2",   :limit => 1048576
-    t.binary   "subImage3",   :limit => 1048576
-    t.binary   "subImage4",   :limit => 1048576
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.binary   "mainImage1",  :limit => 16777215
+    t.binary   "mainImage2",  :limit => 16777215
+    t.binary   "subImage1",   :limit => 16777215
+    t.binary   "subImage2",   :limit => 16777215
+    t.binary   "subImage3",   :limit => 16777215
+    t.binary   "subImage4",   :limit => 16777215
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "users", :force => true do |t|

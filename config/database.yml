@@ -8,6 +8,14 @@ development:
   database: db/development.sqlite3
   pool: 5
   timeout: 5000
+  # adapter: mysql2
+  # encoding: utf8
+  # reconnect: false
+  # database: sample
+  # pool: 5
+  # username: root
+  # password: Yy5R4AT3UAxVLaFB
+  # socket: /opt/local/var/run/mysql5/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

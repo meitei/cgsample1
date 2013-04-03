@@ -80,29 +80,32 @@ class ToukeisController < ApplicationController
     conditions = conditions.where("\"mitsumoriDt\" <= ?", targetSpnTo) if targetSpnTo
     logger.debug(conditions)
 
+    # get db adapter
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+
     if params[:outCond] == "1" then
       # 月別
-      if Rails.env.production? then
-        # PostgreSQL
-        sumCndKey = "to_char(\"mitsumoriDt\", 'YYYYMM')"
-      elsif Rails.env.staging? then
+      if adapter == "sqlite3" then
+        # SQLite
+        sumCndKey = "strftime('%Y%m', \"mitsumoriDt\")"
+      elsif adapter == "mysql2" then
         # MySQL
         sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y%m')"
       else
-        # SQLite
-        sumCndKey = "strftime('%Y%m', \"mitsumoriDt\")"
+        # PostgreSQL
+        sumCndKey = "to_char(\"mitsumoriDt\", 'YYYYMM')"
       end
     elsif params[:outCond] == "2" then
       # 年度別
-      if Rails.env.production? then
-        # PostgreSQL
-        sumCndKey = "to_char(\"mitsumoriDt\", 'YYYY')"
-      elsif Rails.env.staging? then
+      if adapter == "sqlite3" then
+        # SQLite
+        sumCndKey = "strftime('%Y', \"mitsumoriDt\")"
+      elsif adapter == "mysql2" then
         # MySQL
         sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y')"
       else
-        # SQLite
-        sumCndKey = "strftime('%Y', \"mitsumoriDt\")"
+        # PostgreSQL
+        sumCndKey = "to_char(\"mitsumoriDt\", 'YYYY')"
       end
     else
       # 総合計
@@ -112,9 +115,11 @@ class ToukeisController < ApplicationController
     # Pending...
     sumUnts = {
       1 => SumUnts.new(
-        "uketsukeSesakuTantoCd",
-        "shains.name",
-        "left outer join shains on shains.shainCd = konyu_rirekis.uketsukeSesakuTantoCd")
+        "\"uketsukeSesakuTantoCd\"",
+        # "users.myoji||' '||users.name",
+        # "concat(users.myoji,' ',users.name)",
+        str_sql_concat("users.myoji","' '","users.name"),
+        "left outer join users on users.\"shainCd\" = konyu_rirekis.\"uketsukeSesakuTantoCd\"")
     }
     sumUnts.default = sumUnts[1]
     sumUnt = sumUnts[params[:sumUnt].to_i];
@@ -142,12 +147,12 @@ class ToukeisController < ApplicationController
 
     @konyu_rirekis = conditions.find(
       :all,
-      :select => "#{sumCndKey} sumCndKey, #{sumUnt.keyCd} sumUntKey, #{sumUnt.keyLabel} sumUnt, sum(kin) kingaku, count(*) daisu ",
+      :select => "#{sumCndKey} \"sumCndKey\", #{sumUnt.keyCd} \"sumUntKey\", #{sumUnt.keyLabel} \"sumUnt\", sum(kin) kingaku, count(*) daisu ",
       :joins => sumUnt.joins,
-      :group  => "sumCndKey, sumUntKey ",
+      :group  => "\"sumCndKey\", \"sumUntKey\" ",
       :offset => start,
       :limit  => limit,
-      :order  => "sumCndKey, sumUntKey ASC")
+      :order  => "\"sumCndKey\", \"sumUntKey\" ASC")
 
     # 検索結果をSessionに保存
     session[:konyu_rirekis] = @konyu_rirekis.clone
@@ -155,9 +160,15 @@ class ToukeisController < ApplicationController
     # 集計単位のリストを作成する
     cndKeys = []
     @konyu_rirekis.each {|row|
-      cndKeys << row["sumCndKey"]
+      # if row["sumCndKey"].blank?
+      #   cndKeys << ""
+      # else
+      #   cndKeys << row["sumCndKey"]
+      # end
+      cndKeys << row["sumCndKey"] if not row["sumCndKey"].blank?
     }
-    cndKeys.uniq!.sort!
+    logger.debug(cndKeys)
+    cndKeys.uniq!.sort! if cndKeys.size > 1
     logger.debug(cndKeys)
 
     has_prev = false
@@ -479,5 +490,13 @@ class ToukeisController < ApplicationController
     end
   end
 
+  def str_sql_concat *strs
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+    if adapter == "mysql2" then
+      "concat(#{strs.join(',')})"
+    else
+      strs.join("||")
+    end
+  end
 
 end

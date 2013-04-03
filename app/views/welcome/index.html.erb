@@ -30,7 +30,7 @@
 <script>
 $("input#btnReport").click(function() {
     var url = "report/report.json";
-    url += "?konyuRirekiId=1&kokyakuId=1";
+    url += "?konyuRirekiId=240000001&kokyakuId=2400001";
     $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
@@ -45,6 +45,6 @@ $("input#btnReport").click(function() {
     });
 });
 $("input#btnKanseizu").click(function() {
-    location.href = "kanseizu/show?konyuRirekiId=1&kokyakuId=1";
+    location.href = "kanseizu/show?konyuRirekiId=240000001&kokyakuId=2400001";
 });
 </script>
