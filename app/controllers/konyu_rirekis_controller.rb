@@ -343,7 +343,7 @@ class KonyuRirekisController < ApplicationController
   end
 
   def str_sql_concat *strs
-    adapter = ActiveRecord::Base.configurations[Rails.env]['adapter']
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
     if adapter == "mysql2" then
       "concat(#{strs.join(',')})"
     else

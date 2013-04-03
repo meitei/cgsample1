@@ -81,7 +81,7 @@ class ToukeisController < ApplicationController
     logger.debug(conditions)
 
     # get db adapter
-    adapter = ActiveRecord::Base.configurations[Rails.env]['adapter']
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
 
     if params[:outCond] == "1" then
       # 月別
@@ -491,7 +491,7 @@ class ToukeisController < ApplicationController
   end
 
   def str_sql_concat *strs
-    adapter = ActiveRecord::Base.configurations[Rails.env]['adapter']
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
     if adapter == "mysql2" then
       "concat(#{strs.join(',')})"
     else
