@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326125150) do
+ActiveRecord::Schema.define(:version => 20130403103740) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -86,35 +86,35 @@ ActiveRecord::Schema.define(:version => 20130326125150) do
 
   create_table "konyu_rirekis", :force => true do |t|
     t.decimal  "konyuRirekiId",                             :precision => 11, :scale => 0
-    t.integer  "kokyakuId"
+    t.integer  "kokyakuId",                                                                :null => false
     t.integer  "byoinCd"
-    t.string   "mitsumoriTantoEigyoCd"
+    t.string   "mitsumoriTantoEigyoCd", :limit => 10
     t.date     "mitsumoriDt"
-    t.string   "shohinNm"
+    t.string   "shohinNm",              :limit => 100
     t.decimal  "kin",                                       :precision => 10, :scale => 0
     t.decimal  "seikyuKin",                                 :precision => 10, :scale => 0
-    t.string   "shohinShiyoBiko"
-    t.string   "uketsukeSesakuTantoCd"
+    t.string   "shohinShiyoBiko",       :limit => 200
+    t.string   "uketsukeSesakuTantoCd", :limit => 10
     t.date     "juchuDt"
-    t.string   "kariAwaseTantoCd"
+    t.string   "kariAwaseTantoCd",      :limit => 10
     t.date     "kariAwaseDt"
-    t.string   "nohinTantoCd"
+    t.string   "nohinTantoCd",          :limit => 10
     t.date     "nohinDt"
     t.date     "kofuDt"
     t.date     "kannoDt"
     t.date     "nyukinDt"
     t.date     "oshiinDt"
     t.date     "kanryoDt"
-    t.integer  "koshinshaId"
-    t.integer  "torokushaId"
+    t.integer  "koshinshaId",                                                              :null => false
+    t.integer  "torokushaId",                                                              :null => false
     t.datetime "created_at",                                                               :null => false
     t.datetime "updated_at",                                                               :null => false
-    t.string   "ishiNm1"
-    t.string   "ishiNm2"
-    t.string   "rigakuRyohoNm1"
-    t.string   "rigakuRyohoNm2"
-    t.string   "sagyoRyohoNm1"
-    t.string   "sagyoRyohoNm2"
+    t.string   "ishiNm1",               :limit => 50
+    t.string   "ishiNm2",               :limit => 50
+    t.string   "rigakuRyohoNm1",        :limit => 50
+    t.string   "rigakuRyohoNm2",        :limit => 50
+    t.string   "sagyoRyohoNm1",         :limit => 50
+    t.string   "sagyoRyohoNm2",         :limit => 50
     t.integer  "shubetsuKn"
     t.integer  "seihinId"
     t.integer  "hokenShubetsuCd1"

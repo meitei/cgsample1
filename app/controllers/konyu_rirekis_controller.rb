@@ -239,10 +239,10 @@ class KonyuRirekisController < ApplicationController
     select << ",byoins.\"byoinNm\""
     select << ",kokyakus.\"kokyakuNm\""
     select << ",kokyakus.\"kokyakuNmKana\""
-    select << ",ust.myoji||' '||ust.name \"uketsukeSesakuTantoNm\""
-    select << ",kat.myoji||' '||kat.name \"kariAwaseTantoNm\""
-    select << ",nt.myoji||' '||nt.name \"nohinTantoNm\""
-    select << ",mt.myoji||' '||mt.name \"mitsumoriTantoEigyoNm\""
+    select << ",#{str_sql_concat("ust.myoji","' '","ust.name")} \"uketsukeSesakuTantoNm\""
+    select << ",#{str_sql_concat("kat.myoji","' '","kat.name")} \"kariAwaseTantoNm\""
+    select << ",#{str_sql_concat("nt.myoji","' '","nt.name")} \"nohinTantoNm\""
+    select << ",#{str_sql_concat("mt.myoji","' '","mt.name")} \"mitsumoriTantoEigyoNm\""
     select << ",seihins.\"hinmeiNm\""
     select << ",hs1.\"hokenShubetsuNm\" \"hokenShubetsuNm1\""
     select << ",hs2.\"hokenShubetsuNm\" \"hokenShubetsuNm2\""
@@ -276,7 +276,8 @@ class KonyuRirekisController < ApplicationController
 
   def add_condition_userNm(conditions, tableNm, itemId)
     itemValue = params[:konyu_rireki][itemId]
-    conditions = conditions.where("#{tableNm}.myoji||#{tableNm}.name LIKE ? ", "%" + itemValue.gsub(/(\s|　)+/, '') + "%") if not itemValue.blank?
+    user_name_stmt = str_sql_concat(tableNm + ".myoji", tableNm + ".name")
+    conditions = conditions.where("#{user_name_stmt} LIKE ? ", "%" + itemValue.gsub(/(\s|　)+/, '') + "%") if not itemValue.blank?
     conditions
   end
 
@@ -341,6 +342,15 @@ class KonyuRirekisController < ApplicationController
     end
   end
 
-  private :get_select_stmt, :get_nend, :add_condition_userNm, :add_condition_date, :is_date?, :set_image_to_model
+  def str_sql_concat *strs
+    adapter = ActiveRecord::Base.configurations[Rails.env]['adapter']
+    if adapter == "mysql2" then
+      "concat(#{strs.join(',')})"
+    else
+      strs.join("||")
+    end
+  end
+
+  private :get_select_stmt, :get_nend, :add_condition_userNm, :add_condition_date, :is_date?, :set_image_to_model, :str_sql_concat
 
 end
