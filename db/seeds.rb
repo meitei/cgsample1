@@ -57,11 +57,11 @@ end
 ############################################################
 # Test Data
 ############################################################
-#Kokyaku.destroy_all(["1 = ?", 1])
+# Kokyaku.destroy_all(["1 = ?", 1])
 @kokyakus = Kokyaku.find(:all)
 if @kokyakus.empty?
 	Kokyaku.create(
-		:kokyakuId => 1,
+		:kokyakuId => 2400001,
 		:kokyakuNm => '顧客　太郎',
 		:torokushaId => 1,
 		:koshinshaId => 1
@@ -90,9 +90,9 @@ end
 @konyuRirekis = KonyuRireki.find(:all)
 if @konyuRirekis.empty?
 	KonyuRireki.create(
-		:konyuRirekiId => 1,
-		:kokyakuId => 1,
-		:mitsumoriDt => '2013/03/20',
+		:konyuRirekiId => 240000001,
+		:kokyakuId => 2400001,
+		:mitsumoriDt => '2013/04/01',
 		:mitsumoriTantoEigyoCd => 1,
 		:seihinId => 1,
 		:torokushaId => 1,
@@ -105,8 +105,8 @@ end
 @mitsumoris = Mitsumori.find(:all)
 if @mitsumoris.empty?
 	Mitsumori.create(
-		:konyuRirekiId => 1,
-		:kokyakuId => 1,
+		:konyuRirekiId => 240000001,
+		:kokyakuId => 2400001,
 		:mitsumoriNo => 1,
 		:torokushaId => 1,
 		:koshinshaId => 1,
@@ -258,23 +258,23 @@ if @mitsumoris.empty?
 end
 
 
-# imageDir = File.join(Rails.root, 'public', 'images' , 'items')
-imageDir = File.join(Rails.root, 'db', 'import', 'images')
+# # imageDir = File.join(Rails.root, 'public', 'images' , 'items')
+# imageDir = File.join(Rails.root, 'db', 'import', 'images')
 
-# TestImage.destroy_all(["1 = ?", 1])
-@testImages = TestImage.find(:all)
-if @testImages.empty?
-	TestImage.create(
-		:mitsumoriNo => 1,
-		:text => "Sample Text",
-	 	:mainImage1 => File.read(File.join(imageDir, 'image002.jpg')),
-	 	:mainImage2 => File.read(File.join(imageDir, 'image010.jpg')),
-	 	:subImage1  => File.read(File.join(imageDir, 'image018.jpg')),
-	 	:subImage2  => File.read(File.join(imageDir, 'image024.jpg')),
-	 	:subImage3  => File.read(File.join(imageDir, 'image034.jpg')),
-	 	:subImage4  => File.read(File.join(imageDir, 'image038.jpg'))
-	)
-end
+# # TestImage.destroy_all(["1 = ?", 1])
+# @testImages = TestImage.find(:all)
+# if @testImages.empty?
+# 	TestImage.create(
+# 		:mitsumoriNo => 1,
+# 		:text => "Sample Text",
+# 	 	:mainImage1 => File.read(File.join(imageDir, 'image002.jpg')),
+# 	 	:mainImage2 => File.read(File.join(imageDir, 'image010.jpg')),
+# 	 	:subImage1  => File.read(File.join(imageDir, 'image018.jpg')),
+# 	 	:subImage2  => File.read(File.join(imageDir, 'image024.jpg')),
+# 	 	:subImage3  => File.read(File.join(imageDir, 'image034.jpg')),
+# 	 	:subImage4  => File.read(File.join(imageDir, 'image038.jpg'))
+# 	)
+# end
 
 
 MitsumoriSeihin.destroy_all(["1 = ?", 1])
@@ -289,7 +289,7 @@ MitsumoriSeihin.destroy_all(["1 = ?", 1])
 	# 数量=>1～5までを順番に設定
 	num =  i % 5 + 1
 	tanka = row["tanka"]
-	tax = (tanka * num * row["tax"]).truncate
+	tax = (tanka * row["tax"]).truncate
 	kin = tanka * num
 	MitsumoriSeihin.create(:mitsumoriNo => 1, :seihinNo => row["seihinNo"], :tanka => tanka, :suryo => num, :tax => tax, :kin => kin, :torokushaId => 1, :koshinshaId => 1)
 end
