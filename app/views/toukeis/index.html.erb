@@ -80,29 +80,37 @@ $(function() {
       // }
     });
 
-    $('#btnPrev').addClass('disabled');
-    $('#btnNext').addClass('disabled');
+    $('#btnPrev,#btnNext').addClass('disabled');
+    // $('#btnNext').addClass('disabled');
+    // $('a .disabled').click(function(){
+    //   alert("a");
+    //   return false;
+    // });
 
-});
+    $("a#btnToukeiSearch").click(function() {
+        searchToukei();
+        return false;
+    });
 
-$("a#btnToukeiSearch").click(function() {
-    searchToukei();
-    return false;
-});
+    $("a#btnToukeiClear").click(function() {
+        $('#toukeiSearchForm input[type="text"]').val('');
+        return false;
+    });
 
-$("a#btnToukeiClear").click(function() {
-    $('#toukeiSearchForm input[type="text"]').val('');
-    return false;
-});
+    $("a#btnPrev").click(function() {
+      if (!$(this).hasClass('disabled')) {
+        searchToukei('prev');
+      }
+      return false;
+    });
 
-$("a#btnPrev").click(function() {
-    searchToukei('prev');
-  return false;
-});
+    $("a#btnNext").click(function() {
+      if (!$(this).hasClass('disabled')) {
+        searchToukei('next');
+      }
+      return false;
+    });
 
-$("a#btnNext").click(function() {
-    searchToukei('next');
-  return false;
 });
 
 // $("a#btnShowGraph").click(function() {
@@ -132,6 +140,8 @@ function searchToukei(direction) {
       url = "toukeis/search.json";
     }
     $("#searchToukeiGrid").clearGridData();
+    var func_disable = function () {return false;}
+    var func_enable = function () {return true;}
     var param = {
         datatype: "json",
         url: url,
@@ -145,8 +155,11 @@ function searchToukei(direction) {
         },
         beforeRequest: function() {
           $('#outCondYear').html('');
-          $('#btnPrev').addClass('disabled');
-          $('#btnNext').addClass('disabled');
+          $('#btnPrev,#btnNext').addClass('disabled');
+          // $('#btnNext').addClass('disabled');
+          $('a.disabled').click(function(){
+            return false;
+          })
         },
         loadComplete : function(data) {
 
@@ -165,15 +178,15 @@ function searchToukei(direction) {
 
           // 前へボタンの制御
           if (data.cond.has_prev) {
-            $('#btnPrev').removeClass('disabled');
+            $('#btnPrev').removeClass('disabled').click(func_enable);
           } else {
-            $('#btnPrev').addClass('disabled');
+            $('#btnPrev').addClass('disabled').click(func_disable);
           }
           // 次へボタンの制御
           if (data.cond.has_next) {
-            $('#btnNext').removeClass('disabled');
+            $('#btnNext').removeClass('disabled').click(func_enable);
           } else {
-            $('#btnNext').addClass('disabled');
+            $('#btnNext').addClass('disabled').click(func_disable);
           }
 
         }

@@ -15,8 +15,8 @@ class ToukeisController < ApplicationController
   # GET /toukeis/search.json
   def search
 
-    targetSpnFrom = Date.strptime(params[:targetSpnFrom], "%Y/%m/%d") if isDate(params[:targetSpnFrom])
-    targetSpnTo = Date.strptime(params[:targetSpnTo], "%Y/%m/%d") if isDate(params[:targetSpnTo])
+    targetSpnFrom = Date.strptime(params[:targetSpnFrom], "%Y/%m/%d") if is_date?(params[:targetSpnFrom])
+    targetSpnTo = Date.strptime(params[:targetSpnTo], "%Y/%m/%d") if is_date?(params[:targetSpnTo])
     today = Date.today
 
     # outCondYear = params[:outCondYear]
@@ -76,8 +76,8 @@ class ToukeisController < ApplicationController
     # end
 
     conditions = KonyuRireki.where("1 = ?", 1)
-    conditions = conditions.where("\"mitsumoriDt\" >= ?", targetSpnFrom) if targetSpnFrom
-    conditions = conditions.where("\"mitsumoriDt\" <= ?", targetSpnTo) if targetSpnTo
+    conditions = conditions.where("\"kanryoDt\" >= ?", targetSpnFrom) if targetSpnFrom
+    conditions = conditions.where("\"kanryoDt\" <= ?", targetSpnTo) if targetSpnTo
     logger.debug(conditions)
 
     # get db adapter
@@ -87,25 +87,25 @@ class ToukeisController < ApplicationController
       # 月別
       if adapter == "sqlite3" then
         # SQLite
-        sumCndKey = "strftime('%Y%m', \"mitsumoriDt\")"
+        sumCndKey = "strftime('%Y%m', \"kanryoDt\")"
       elsif adapter == "mysql2" then
         # MySQL
-        sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y%m')"
+        sumCndKey = "DATE_FORMAT(\"kanryoDt\",'%Y%m')"
       else
         # PostgreSQL
-        sumCndKey = "to_char(\"mitsumoriDt\", 'YYYYMM')"
+        sumCndKey = "to_char(\"kanryoDt\", 'YYYYMM')"
       end
     elsif params[:outCond] == "2" then
       # 年度別
       if adapter == "sqlite3" then
         # SQLite
-        sumCndKey = "strftime('%Y', \"mitsumoriDt\")"
+        sumCndKey = "strftime('%Y', \"kanryoDt\")"
       elsif adapter == "mysql2" then
         # MySQL
-        sumCndKey = "DATE_FORMAT(\"mitsumoriDt\",'%Y')"
+        sumCndKey = "DATE_FORMAT(\"kanryoDt\",'%Y')"
       else
         # PostgreSQL
-        sumCndKey = "to_char(\"mitsumoriDt\", 'YYYY')"
+        sumCndKey = "to_char(\"kanryoDt\", 'YYYY')"
       end
     else
       # 総合計
@@ -133,16 +133,16 @@ class ToukeisController < ApplicationController
     # }
 
     # FIXME: 検索結果に対して位置を指定できるようにする
-    records = conditions.count
-    limit = params[:rows].to_i
-    page = params[:page].to_i
-    if records > 0
-      n = records.quo(limit)
-      total_pages = n.ceil
-    else
-      total_pages = 0
-    end
-    start = limit * page - limit;
+    # records = conditions.count
+    # limit = params[:rows].to_i
+    # page = params[:page].to_i
+    # if records > 0
+    #   n = records.quo(limit)
+    #   total_pages = n.ceil
+    # else
+    #   total_pages = 0
+    # end
+    # start = limit * page - limit;
     # FIXME: ここまで
 
     @konyu_rirekis = conditions.find(
@@ -150,8 +150,8 @@ class ToukeisController < ApplicationController
       :select => "#{sumCndKey} \"sumCndKey\", #{sumUnt.keyCd} \"sumUntKey\", #{sumUnt.keyLabel} \"sumUnt\", sum(kin) kingaku, count(*) daisu ",
       :joins => sumUnt.joins,
       :group  => "\"sumCndKey\", \"sumUntKey\" ",
-      :offset => start,
-      :limit  => limit,
+      # :offset => start,
+      # :limit  => limit,
       :order  => "\"sumCndKey\", \"sumUntKey\" ASC")
 
     # 検索結果をSessionに保存
@@ -168,68 +168,86 @@ class ToukeisController < ApplicationController
       cndKeys << row["sumCndKey"] if not row["sumCndKey"].blank?
     }
     logger.debug(cndKeys)
-    cndKeys.uniq!.sort! if cndKeys.size > 1
+    cndKeys = cndKeys.uniq.sort if cndKeys.size > 1
     logger.debug(cndKeys)
 
     has_prev = false
     has_next = false
     outCondYear = outCondMonth = ""
 
-    if not cndKeys.empty? then
-      today_year = today.year.to_s
-      today_month = sprintf("%02d", today.month)
-      if params[:outCond] == "1" then
-        # 月別
-        if cndKeys.index(today_year+today_month) then
-          outCondYear = today_year
-          outCondMonth = today_month
-        else
-          if cndKeys.first > today_year+today_month then
-            # 本日が検索結果の年月より過去の場合
-            outCondYear = cndKeys.first[0..3]
-            outCondMonth = cndKeys.first[4..5]
-          else
-            # 本日が検索結果の年月より未来の場合
-            outCondYear = cndKeys.last[0..3]
-            outCondMonth = cndKeys.last[4..5]
-          end
-        end
+    if not cndKeys.empty? and params[:outCond] != "3" then
+      outCondYear = cndKeys.first[0..3]
+      outCondMonth = cndKeys.first[4..5] if cndKeys.first.length == 6
+    end
+      # today_year = today.ye
+      # today_month = sprintf("%02d", today.month)
+      # if params[:outCond] == "1" then
+      #   # 月別
+      #   if cndKeys.index(today_year+today_month) then
+      #     outCondYear = today_year
+      #     outCondMonth = today_month
+      #   else
+      #     if cndKeys.first > today_year+today_month then
+      #       # 本日が検索結果の年月より過去の場合
+      #       outCondYear = cndKeys.first[0..3]
+      #       outCondMonth = cndKeys.first[4..5]
+      #     else
+      #       # 本日が検索結果の年月より未来の場合
+      #       outCondYear = cndKeys.last[0..3]
+      #       outCondMonth = cndKeys.last[4..5]
+      #     end
+      #   end
 
         # outCondDate = Date.parse(outCondYear+outCondMonth+"01")
         # prev_date = outCondDate << 1
         # next_date = outCondDate >> 1
         # has_prev = true if cndKeys.index(prev_date.strftime("%y%m"))
         # has_next = true if cndKeys.index(next_date.strftime("%Y%m"))
-      elsif params[:outCond] == "2" then
-        # 年度別
-        if cndKeys.index(today_year) then
-          outCondYear = today_year
-        else
-          if cndKeys.first > today_year then
-            # 本日が検索結果の年より過去の場合
-            outCondYear = cndKeys.first
-          else
-            # 本日が検索結果の年より未来の場合
-            outCondYear = cndKeys.last
-          end
-        end
-        # has_prev = true if cndKeys.index(outCondYear.to_i.next.to_s)
-        # has_next = true if cndKeys.index(outCondYear.to_i.pred.to_s)
-      else
-        # 総合計
-      end
-      cndPos = cndKeys.index(outCondYear+outCondMonth)
-      if cndPos and cndPos >= 0 then
-        has_prev = true if cndPos > 0
-        has_next = true if cndPos < (cndKeys.size - 1)
-      end
-    end
-    logger.debug("outCondYear => #{outCondYear}, outCondMonth => #{outCondMonth}")
+      # elsif params[:outCond] == "2" then
+      #   # 年度別
+      #   if cndKeys.index(today_year) then
+      #     outCondYear = today_year
+      #   else
+      #     if cndKeys.first > today_year then
+      #       # 本日が検索結果の年より過去の場合
+      #       outCondYear = cndKeys.first
+      #     else
+      #       # 本日が検索結果の年より未来の場合
+      #       outCondYear = cndKeys.last
+      #     end
+      #   end
+      #   # has_prev = true if cndKeys.index(outCondYear.to_i.next.to_s)
+      #   # has_next = true if cndKeys.index(outCondYear.to_i.pred.to_s)
+      # else
+      #   # 総合計
+      # end
+    #   cndPos = cndKeys.index(outCondYear+outCondMonth)
+    #   if cndPos and cndPos >= 0 then
+    #     has_prev = true if cndPos > 0
+    #     has_next = true if cndPos < (cndKeys.size - 1)
+    #   end
+    # end
+
+    # 次のページが存在するか？
+    has_next = true if cndKeys.size > 1
+    # logger.debug("outCondYear => #{outCondYear}, outCondMonth => #{outCondMonth}")
 
     # 表示中の年月以外は結果から除外する
     @konyu_rirekis.delete_if {|item|
       item["sumCndKey"] != outCondYear+outCondMonth and item["sumCndKey"] != "dummy"
     }
+
+    records = @konyu_rirekis.size
+    limit = params[:rows].to_i
+    page = params[:page].to_i
+    if records > 0
+      n = records.quo(limit)
+      total_pages = n.ceil
+    else
+      total_pages = 0
+    end
+    start = limit * page - limit;
+    @konyu_rirekis = @konyu_rirekis[start, limit]
 
     @responce = {
       total: total_pages.to_s,
@@ -265,10 +283,9 @@ class ToukeisController < ApplicationController
     # 集計単位のリストを作成する
     cndKeys = []
     @konyu_rirekis.each {|row|
-      cndKeys << row["sumCndKey"]
+      cndKeys << row["sumCndKey"] if not row["sumCndKey"].blank?
     }
-    cndKeys.uniq!.sort!
-    logger.debug(cndKeys)
+    cndKeys = cndKeys.uniq.sort if cndKeys.size > 1
 
     has_prev = false
     has_next = false
@@ -478,7 +495,7 @@ class ToukeisController < ApplicationController
   end
 
   private
-  def isDate strDate
+  def is_date? strDate
     if strDate then
       match = /(\d+)\/(\d+)\/(\d+)/.match(strDate)
       if match then

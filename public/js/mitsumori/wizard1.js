@@ -41,5 +41,9 @@
       step = 2;
       $("div.statuslabel span").text("<span>STEP 2</span>");
     });
-    $("input#1-COL1_1").click();
+
+    $("#estimateForm").wizard();
+    $("#btnEstimateRegist").hide();
+    $("div#step1").load("/mitsumori/step_01.html", wizard1);
+    //clearNavi("1");
   }

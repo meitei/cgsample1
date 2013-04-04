@@ -42,6 +42,7 @@
       $("div#step15").load("/mitsumori/step_20.html");
       $("li#step15 a").attr("href", "#step15");
       $("li#step15 span").text("オプション");
+      $("li#step16").hide();
     });
     // リクライニング式選択
     $("input#2-COL5_1").click(function(){
