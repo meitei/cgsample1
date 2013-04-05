@@ -42,8 +42,8 @@
       $("div.statuslabel span").text("<span>STEP 2</span>");
     });
 
-    $("#estimateForm").wizard();
-    $("#btnEstimateRegist").hide();
-    $("div#step1").load("/mitsumori/step_01.html", wizard1);
+    // $("#estimateForm").wizard();
+    // $("#btnEstimateRegist").hide();
+    // $("div#step1").load("/mitsumori/step_01.html", wizard1);
     //clearNavi("1");
   }
