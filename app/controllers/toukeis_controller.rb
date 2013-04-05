@@ -81,7 +81,7 @@ class ToukeisController < ApplicationController
       :all,
       :select => "#{sumCndKey} \"sumCndKey\", #{sumUnt.keyCd} \"sumUntKey\", #{sumUnt.keyLabel} \"sumUnt\", sum(kin) kingaku, count(*) daisu ",
       :joins => sumUnt.joins,
-      :group  => "\"sumCndKey\", \"sumUntKey\" ",
+      :group  => "\"sumCndKey\", \"sumUntKey\", \"sumUnt\" ",
       :order  => "\"sumCndKey\", \"sumUntKey\" ASC")
 
     # 検索結果をSessionに保存
