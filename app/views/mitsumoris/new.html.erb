@@ -5,8 +5,12 @@
 <%= render 'form' %>
 <script>
   var step = 1;
-  var data = {};
+  var mitsumoriData = {};
+  var productsData = {};
   var tanka = {};
+  var konyuRirekiId = 1;
+  var kokyakuId = 1;
+  var mitsumoriNo = 1;
 
   $(document).ready(function(){
     $.ajax({
@@ -25,6 +29,10 @@
     $("#estimateForm").wizard();
     $("#btnEstimateRegist").hide();
     $("div#step1").load("/mitsumori/step_01.html", wizard1);
+    // 見積データを用意する
+    mitsumoriData["konyuRirekiId"] = konyuRirekiId;
+    mitsumoriData["kokyakuId"] = kokyakuId;
+    mitsumoriData["mitsumoriNo"] = mitsumoriNo;
     //clearNavi("1");
   });
 
@@ -77,6 +85,28 @@
    */
   function parseFloatEx(val) {
     return val ? parseFloat(val) : 0;
+  }
+
+  function updateUnitPrice(step){
+        // 単価を書き換え
+    for(var i=0; i<tanka.length; i++) {
+      $("div#" + step + " td#1-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#" + step + " td#1-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#" + step + " input#1-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#" + step + " td#2-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#" + step + " td#2-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#" + step + " input#2-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#" + step + " td#3-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#" + step + " td#3-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#" + step + " input#3-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+      $("div#" + step + " td#4-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
+      $("div#" + step + " td#4-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#" + step + " input#4-" + tanka[i]["seihinNo"] + "_tax").val(
+        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+    }
   }
 
   function clearNavi(step) {
@@ -135,6 +165,20 @@
   }
 
 </script>
-<script src="/js/mitsumori/wizard3.js" type="text/javascript"></script>
-<script src="/js/mitsumori/wizard2.js" type="text/javascript"></script>
-<script src="/js/mitsumori/wizard1.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard17.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard16.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard15.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard14.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard13.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard12.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard11.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard10.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard09.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard08.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard07.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard06.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard05.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard04.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard03.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard02.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard01.js" type="text/javascript"></script>

@@ -1,5 +1,5 @@
-  // 介護用グリップ選定
-  function wizard3a(){
+  // シート（座面）
+  function wizard4a(){
     //
     $("input#1-COL2_1").click(function(){
     });
@@ -21,8 +21,8 @@
     });
   }
 
-  // バックサポート選定
-  function wizard3b(){
+  // シート（座面）
+  function wizard4b(){
     //
     $("input#1-COL2_1").click(function(){
     });
@@ -44,8 +44,8 @@
     });
   }
 
-  // シートベルト選定
-  function wizard3c(){
+  // バックサポート
+  function wizard4c(){
     //
     $("input#1-COL2_1").click(function(){
     });
@@ -67,8 +67,8 @@
     });
   }
 
-  // バックサポート選定
-  function wizard3d(){
+  // シート（座面）
+  function wizard4d(){
     //
     $("input#1-COL2_1").click(function(){
     });
@@ -90,8 +90,8 @@
     });
   }
 
-  // メインフレーム機構選定
-  function wizard3e(){
+  // 使用場所・車輪
+  function wizard4e(){
     //
     $("input#1-COL2_1").click(function(){
     });

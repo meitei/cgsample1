@@ -1,5 +1,5 @@
-  // 介護用グリップ選定
-  function wizard3a(){
+  // アームサポート
+  function wizard7a(){
     //
     $("input#1-COL2_1").click(function(){
     });
@@ -21,8 +21,8 @@
     });
   }
 
-  // バックサポート選定
-  function wizard3b(){
+  // 上肢支持部
+  function wizard7b(){
     //
     $("input#1-COL2_1").click(function(){
     });
@@ -44,8 +44,8 @@
     });
   }
 
-  // シートベルト選定
-  function wizard3c(){
+  // テーブル
+  function wizard7d(){
     //
     $("input#1-COL2_1").click(function(){
     });
@@ -67,31 +67,8 @@
     });
   }
 
-  // バックサポート選定
-  function wizard3d(){
-    //
-    $("input#1-COL2_1").click(function(){
-    });
-    //
-    $("input#2-COL2_1").click(function(){
-    });
-    //
-    $("input#3-COL2_1").click(function(){
-    });
-    // 次へ
-    $("button.jqwizard_next").click(function() {
-      step = 4;
-      $("div.statuslabel span").replaceWith("<span>STEP 4</span>");
-    });
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 2;
-      $("div.statuslabel span").replaceWith("<span>STEP 2</span>");
-    });
-  }
-
-  // メインフレーム機構選定
-  function wizard3e(){
+  // バックサポート
+  function wizard7e(){
     //
     $("input#1-COL2_1").click(function(){
     });
