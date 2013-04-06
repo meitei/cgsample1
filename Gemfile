@@ -46,7 +46,7 @@ end
 gem 'jquery-rails', '= 2.0.2'
 gem 'jquery-ui-rails'
 gem 'thinreports'
-#gem 'rmagick', :require => 'RMagick'
+gem 'rmagick', :require => 'RMagick'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
