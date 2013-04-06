@@ -108,7 +108,7 @@ class KokyakusController < ApplicationController
     # 現在日付から年度を取得する
     nend = get_nend()
 
-    # 購入履歴IDの最大を取得する
+    # 顧客IDの年度内最大値を取得する
     maxId = Kokyaku.maximum(:kokyakuId, :conditions => ["\"kokyakuId\" BETWEEN ? AND ?", (nend.to_s + "00000").to_i, (nend.to_s + "99999").to_i])
     if maxId.blank? then
       maxId = 0;

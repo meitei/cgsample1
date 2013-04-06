@@ -1,15 +1,18 @@
 <%= form_tag sessions_path, :method => :post do %>
-  <div class="field">
-    <label for="username">ログインID</label>
-    <%= text_field_tag :username %>
-  </div>
-  <div class="field">
-    <label for="password">ログインパスワード</label>
-    <%= password_field_tag :password %>
-  </div>
-  <div class="actions">
-    <%= submit_tag "ログイン" %>
-  </div>
+  <div class="container" id="login_box">
+      <div class="tit_login">ユーザー ログイン</div>
+      <dl>
+        <dt>ユーザーID</dt>
+        <dd>
+          <%= text_field_tag :username %>
+        </dd>
+          <dt>パスワード</dt>
+          <dd>
+            <%= password_field_tag :password %>
+          </dd>
+        </dl>
+      <input type="image" src="images/btn_login.png" />
+    </div>
 <% end %>
 <script>
 $(function() {
