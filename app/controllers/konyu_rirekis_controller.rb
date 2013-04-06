@@ -131,18 +131,21 @@ class KonyuRirekisController < ApplicationController
     @konyuRireki = KonyuRireki.new(params[:konyu_rireki])
     set_image_to_model
 
-    # 購入履歴IDの最大を取得する
-    maxId = KonyuRireki.maximum(:konyuRirekiId);
+    # 現在日付から年度を取得する
+    nend = get_nend()
+
+    # 購入履歴IDの年度内最大値を取得する
+    maxId = KonyuRireki.maximum(:konyuRirekiId, :conditions => ["\"konyuRirekiId\" BETWEEN ? AND ?", (nend.to_s + "0000000").to_i, (nend.to_s + "9999999").to_i])
     if maxId.blank? then
-      maxId = 1;
+      maxId = 0;
     end
     maxId_s = maxId.to_s
-    if maxId_s.size > 9 then
-      maxId = maxId_s[(maxId_s.size - 9),9].to_i
+    if maxId_s.size > 7 then
+      maxId = maxId_s[(maxId_s.size - 7),7].to_i
     end
 
-    # 購入履歴IDを生成する
-    @konyuRireki.konyuRirekiId = "#{get_nend}#{format("%09d",(maxId + 1))}".to_i
+    # 購入履歴IDを生成する -> 年度下2桁+7桁の連番
+    @konyuRireki.konyuRirekiId = "#{nend}#{format("%07d",(maxId + 1))}".to_i
 
     respond_to do |format|
       if @konyuRireki.save
