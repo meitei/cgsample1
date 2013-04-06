@@ -90,78 +90,94 @@
   function updateUnitPrice(step){
         // 単価を書き換え
     for(var i=0; i<tanka.length; i++) {
-      $("div#" + step + " td#1-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
-      $("div#" + step + " td#1-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+      $("div#" + step + " td#1-" + tanka[i]["seihinNo"] + "_tan").text(formatComma(tanka[i]["tanka"]));
+      $("div#" + step + " td#1-" + tanka[i]["seihinNo"] + "_kin").text(formatComma(tanka[i]["tanka"]));
       $("div#" + step + " input#1-" + tanka[i]["seihinNo"] + "_tax").val(
-        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
-      $("div#" + step + " td#2-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
-      $("div#" + step + " td#2-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+        formatComma(parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0)));
+      $("div#" + step + " td#2-" + tanka[i]["seihinNo"] + "_tan").text(formatComma(tanka[i]["tanka"]));
+      $("div#" + step + " td#2-" + tanka[i]["seihinNo"] + "_kin").text(formatComma(tanka[i]["tanka"]));
       $("div#" + step + " input#2-" + tanka[i]["seihinNo"] + "_tax").val(
-        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
-      $("div#" + step + " td#3-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
-      $("div#" + step + " td#3-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+        formatComma(parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0)));
+      $("div#" + step + " td#3-" + tanka[i]["seihinNo"] + "_tan").text(formatComma(tanka[i]["tanka"]));
+      $("div#" + step + " td#3-" + tanka[i]["seihinNo"] + "_kin").text(formatComma(tanka[i]["tanka"]));
       $("div#" + step + " input#3-" + tanka[i]["seihinNo"] + "_tax").val(
-        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
-      $("div#" + step + " td#4-" + tanka[i]["seihinNo"] + "_tan").text(tanka[i]["tanka"]);
-      $("div#" + step + " td#4-" + tanka[i]["seihinNo"] + "_kin").text(tanka[i]["tanka"]);
+        formatComma(parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0)));
+      $("div#" + step + " td#4-" + tanka[i]["seihinNo"] + "_tan").text(formatComma(tanka[i]["tanka"]));
+      $("div#" + step + " td#4-" + tanka[i]["seihinNo"] + "_kin").text(formatComma(tanka[i]["tanka"]));
       $("div#" + step + " input#4-" + tanka[i]["seihinNo"] + "_tax").val(
-        parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0));
+        formatComma(parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0)));
     }
   }
 
-  function clearNavi(step) {
+  function initNavi(step) {
     if(step == "1") {
       $("div#step2").empty();
       $("li#step2 a").attr("href", "");
       $("li#step2 span").html("&nbsp;");
+      $("li#step2").show();
     }
     if(step == "2") {
       $("div#step3").empty();
       $("li#step3 a").attr("href", "");
       $("li#step3 span").html("&nbsp;");
+      $("li#step3").show();
     }
     $("div#step4").empty();
     $("li#step4 a").attr("href", "");
     $("li#step4 span").html("&nbsp;");
+    $("li#step4").show();
     $("div#step5").empty();
     $("li#step5 a").attr("href", "");
     $("li#step5 span").html("&nbsp;");
+    $("li#step5").show();
     $("div#step6").empty();
     $("li#step6 a").attr("href", "");
     $("li#step6 span").html("&nbsp;");
+    $("li#step6").show();
     $("div#step7").empty();
     $("li#step7 a").attr("href", "");
     $("li#step7 span").html("&nbsp;");
+    $("li#step7").show();
     $("div#step8").empty();
     $("li#step8 a").attr("href", "");
     $("li#step8 span").html("&nbsp;");
+    $("li#step8").show();
     $("div#step9").empty();
     $("li#step9 a").attr("href", "");
     $("li#step9 span").html("&nbsp;");
+    $("li#step9").show();
     $("div#step10").empty();
     $("li#step10 a").attr("href", "");
     $("li#step10 span").html("&nbsp;");
+    $("li#step10").show();
     $("div#step11").empty();
     $("li#step11 a").attr("href", "");
     $("li#step11 span").html("&nbsp;");
+    $("li#step11").show();
     $("div#step12").empty();
     $("li#step12 a").attr("href", "");
     $("li#step12 span").html("&nbsp;");
+    $("li#step12").show();
     $("div#step13").empty();
     $("li#step13 a").attr("href", "");
     $("li#step13 span").html("&nbsp;");
+    $("li#step13").show();
     $("div#step14").empty();
     $("li#step14 a").attr("href", "");
     $("li#step14 span").html("&nbsp;");
+    $("li#step14").show();
     $("div#step15").empty();
     $("li#step15 a").attr("href", "");
     $("li#step15 span").html("&nbsp;");
+    $("li#step15").show();
     $("div#step16").empty();
     $("li#step16 a").attr("href", "");
     $("li#step16 span").html("&nbsp;");
+    $("li#step16").show();
     $("div#step17").empty();
     $("li#step17 a").attr("href", "");
     $("li#step17 span").html("&nbsp;");
+    $("li#step17").show();
   }
 
 </script>

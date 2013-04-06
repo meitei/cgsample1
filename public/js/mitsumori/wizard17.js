@@ -1,22 +1,11 @@
   // OPオーダー座位保持装置
   function wizard17e(){
-    //
-    $("input#1-COL2_1").click(function(){
-    });
-    //
-    $("input#2-COL2_1").click(function(){
-    });
-    //
-    $("input#3-COL2_1").click(function(){
-    });
-    // 次へ
-    $("button.jqwizard_next").click(function() {
-      step = 4;
-      $("div.statuslabel span").replaceWith("<span>STEP 4</span>");
-    });
+    $("button.jqwizard_next").removeAttr("disabled");
     // 戻る
     $("button.jqwizard_previous").click(function() {
-      step = 2;
-      $("div.statuslabel span").replaceWith("<span>STEP 2</span>");
+      step = 16;
+      $("div.statuslabel").html("<span>STEP 16</span>" + $("div#step16 > div#title").text());
     });
+    // 単価を書き換え
+    updateUnitPrice("step17");
   }

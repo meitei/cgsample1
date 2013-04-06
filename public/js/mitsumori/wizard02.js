@@ -1,6 +1,6 @@
   /* 構造フレーム選定 */
   function wizard2a(){
-    //clearNavi("2");
+    initNavi("2");
     // 固定型選択
     $("input#1-COL5_1").change(function(){
       $("div#step3").load("/mitsumori/step_06.html", wizard3a);
@@ -115,27 +115,34 @@
       $("div#step3").load("/mitsumori/step_07.html", wizard3d);
       $("li#step3 a").attr("href", "#step3");
       $("li#step3 span").text("バックサポート");
-      $("div#step4").load("/mitsumori/step_08.html");
+      $("div#step4").load("/mitsumori/step_08.html", wizard4d);
       $("li#step4 a").attr("href", "#step4");
       $("li#step4 span").text("シート");
-      $("div#step5").load("/mitsumori/step_09.html");
+      $("div#step5").load("/mitsumori/step_09.html", wizard5d);
       $("li#step5 a").attr("href", "#step5");
       $("li#step5 span").text("ヘッドサポート");
-      $("div#step6").load("/mitsumori/step_14.html");
+      $("div#step6").load("/mitsumori/step_14.html", wizard6d);
       $("li#step6 a").attr("href", "#step6");
       $("li#step6 span").text("上肢サポート");
-      $("div#step7").load("/mitsumori/step_15.html");
+      $("div#step7").load("/mitsumori/step_15.html", wizard7d);
       $("li#step7 a").attr("href", "#step7");
       $("li#step7 span").text("テーブル");
-      $("div#step8").load("/mitsumori/step_16.html");
+      $("div#step8").load("/mitsumori/step_16.html", wizard8d);
       $("li#step8 a").attr("href", "#step8");
       $("li#step8 span").text("シートベルト");
-      $("div#step9").load("/mitsumori/step_17.html");
+      $("div#step9").load("/mitsumori/step_17.html", wizard9d);
       $("li#step9 a").attr("href", "#step9");
       $("li#step9 span").text("パッド");
-      $("div#step10").load("/mitsumori/step_18.html");
+      $("div#step10").load("/mitsumori/step_18.html", wizard10d);
       $("li#step10 a").attr("href", "#step10");
       $("li#step10 span").text("オプション");
+      $("li#step11").hide();
+      $("li#step12").hide();
+      $("li#step13").hide();
+      $("li#step14").hide();
+      $("li#step15").hide();
+      $("li#step16").hide();
+      $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
     });
     // 次へ
@@ -160,7 +167,7 @@
 
   // メインフレーム材質選定
   function wizard2e(){
-    //clearNavi("2");
+    initNavi("2");
     // アルミニューム選択
     $("input#1-COL2_1").change(function(){
       $("div#step3").load("/mitsumori/step_03.html", wizard3e);
@@ -265,6 +272,20 @@
       $("div#step3").load("/mitsumori/step_22.html", wizard3f);
       $("li#step3 a").attr("href", "#step3");
       $("li#step3 span").text("木製");
+      $("li#step4").hide();
+      $("li#step5").hide();
+      $("li#step6").hide();
+      $("li#step7").hide();
+      $("li#step8").hide();
+      $("li#step9").hide();
+      $("li#step10").hide();
+      $("li#step11").hide();
+      $("li#step12").hide();
+      $("li#step13").hide();
+      $("li#step14").hide();
+      $("li#step15").hide();
+      $("li#step16").hide();
+      $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
     });
     // 次へ
@@ -286,7 +307,7 @@
 
   // 既製品
   function wizard2g(){
-    //clearNavi("2");
+    initNavi("2");
     // 戻る
     $("button.jqwizard_previous").click(function() {
       step = 1;
@@ -298,7 +319,7 @@
 
   // 既製品
   function wizard2h(){
-    //clearNavi("2");
+    initNavi("2");
     // 戻る
     $("button.jqwizard_previous").click(function() {
       step = 1;
@@ -310,7 +331,7 @@
 
   // 既製品
   function wizard2i(){
-    //clearNavi("2");
+    initNavi("2");
     // 戻る
     $("button.jqwizard_previous").click(function() {
       step = 1;

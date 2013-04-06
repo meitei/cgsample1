@@ -20,6 +20,21 @@
         $("div#step2").load("/mitsumori/step_23.html", wizard2g);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("木製座位");
+        $("li#step3").hide();
+        $("li#step4").hide();
+        $("li#step5").hide();
+        $("li#step6").hide();
+        $("li#step7").hide();
+        $("li#step8").hide();
+        $("li#step9").hide();
+        $("li#step10").hide();
+        $("li#step11").hide();
+        $("li#step12").hide();
+        $("li#step13").hide();
+        $("li#step14").hide();
+        $("li#step15").hide();
+        $("li#step16").hide();
+        $("li#step17").hide();
         $("button#jqwizard_next").removeAttr("disabled");
       }
     });
@@ -29,6 +44,21 @@
         $("div#step2").load("/mitsumori/step_24.html", wizard2h);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("トイレット");
+        $("li#step3").hide();
+        $("li#step4").hide();
+        $("li#step5").hide();
+        $("li#step6").hide();
+        $("li#step7").hide();
+        $("li#step8").hide();
+        $("li#step9").hide();
+        $("li#step10").hide();
+        $("li#step11").hide();
+        $("li#step12").hide();
+        $("li#step13").hide();
+        $("li#step14").hide();
+        $("li#step15").hide();
+        $("li#step16").hide();
+        $("li#step17").hide();
         $("button#jqwizard_next").removeAttr("disabled");
       }
     });
@@ -38,6 +68,21 @@
         $("div#step2").load("/mitsumori/step_25.html", wizard2i);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("シャワー");
+        $("li#step3").hide();
+        $("li#step4").hide();
+        $("li#step5").hide();
+        $("li#step6").hide();
+        $("li#step7").hide();
+        $("li#step8").hide();
+        $("li#step9").hide();
+        $("li#step10").hide();
+        $("li#step11").hide();
+        $("li#step12").hide();
+        $("li#step13").hide();
+        $("li#step14").hide();
+        $("li#step15").hide();
+        $("li#step16").hide();
+        $("li#step17").hide();
         $("button#jqwizard_next").removeAttr("disabled");
       }
     });
