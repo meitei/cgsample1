@@ -244,9 +244,20 @@ class ReportController < ApplicationController
 
       @@mitsumoriTankas = MitsumoriTanka.where(:buhinCd == nil)
 
-      @@mitsumoriSeihins = MitsumoriSeihin.where(:mitsumoriNo == mitsumoriNo)
+      sqlstr =  "SELECT ms.\"seihinNo\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
+      sqlstr += "FROM mitsumori_seihins ms "
+      sqlstr += "LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
+      sqlstr += "WHERE ms.\"mitsumoriNo\" == " + mitsumoriNo.to_s
+      @@mitsumoriSeihins = ActiveRecord::Base.connection.execute(sqlstr)
 
-      sqlstr = "SELECT * FROM (SELECT kn.\"buhinCd\", kn.\"buhinNm\", ms.tanka, ms.suryo, ms.tax, ms.kin FROM mitsumori_seihins ms LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" LEFT JOIN kansei_buhins kn ON mt.\"buhinCd\" = kn.\"buhinCd\") kb WHERE kb.\"buhinCd\" IS NOT NULL"
+      sqlstr =  "SELECT * FROM ( "
+      sqlstr += "  SELECT kb.\"buhinCd\", kb.\"buhinNm\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
+      sqlstr += "  FROM mitsumori_seihins ms "
+      sqlstr += "  LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
+      sqlstr += "  LEFT JOIN kansei_buhins kb ON mt.\"buhinCd\" = kb.\"buhinCd\" "
+      sqlstr += "  WHERE ms.\"mitsumoriNo\" == " + mitsumoriNo.to_s
+      sqlstr += ") kanseibuhins "
+      sqlstr += "WHERE kanseibuhins.\"buhinCd\" IS NOT NULL"
       @@kanseiBuhins = ActiveRecord::Base.connection.execute(sqlstr)
     end
 
@@ -276,6 +287,13 @@ class ReportController < ApplicationController
         item(:name3).value(@@tanto)
 
         # 集計項目
+        # 3%集計
+        subtotal_3per = 0
+        taxtotal_3per = 0
+        # 5%集計
+        subtotal_5per = 0
+        taxtotal_5per = 0
+        # 集計
         subtotal = 0
         taxtotal = 0
         total = 0
@@ -331,8 +349,16 @@ class ReportController < ApplicationController
             # 採型分
             if @@hash0.key?(row["seihinNo"])
               # 集計
-              subtotal += row["kin"]
-              taxtotal += row["tax"] * row["suryo"]
+              if row["tax_rate"].to_s == 0.03.to_s
+                subtotal_3per += row["kin"].to_i
+                taxtotal_3per += row["tax"].to_i * row["suryo"].to_i
+              elsif row["tax_rate"].to_s == 0.05.to_s
+                subtotal_5per += row["kin"].to_i
+                taxtotal_5per += row["tax"].to_i * row["suryo"].to_i
+              end
+
+              subtotal += row["kin"].to_i
+              taxtotal += row["tax"].to_i * row["suryo"].to_i
 
               line = @@hash0[row["seihinNo"]]
 
@@ -349,8 +375,16 @@ class ReportController < ApplicationController
             # 採寸分
             if @@hash1.key?(row["seihinNo"])
               # 集計
-              subtotal += row["kin"]
-              taxtotal += row["tax"] * row["suryo"]
+              if row["tax_rate"].to_s == 0.03.to_s
+                subtotal_3per += row["kin"].to_i
+                taxtotal_3per += row["tax"].to_i * row["suryo"].to_i
+              elsif row["tax_rate"].to_s == 0.05.to_s
+                subtotal_5per += row["kin"].to_i
+                taxtotal_5per += row["tax"].to_i * row["suryo"].to_i
+              end
+
+              subtotal += row["kin"].to_i
+              taxtotal += row["tax"].to_i * row["suryo"].to_i
 
               line = @@hash1[row["seihinNo"]]
 
@@ -367,8 +401,16 @@ class ReportController < ApplicationController
             # 2列目の処理
             if @@hash2.key?(row["seihinNo"])
               # 集計
-              subtotal += row["kin"]
-              taxtotal += row["tax"] * row["suryo"]
+              if row["tax_rate"].to_s == 0.03.to_s
+                subtotal_3per += row["kin"].to_i
+                taxtotal_3per += row["tax"].to_i * row["suryo"].to_i
+              elsif row["tax_rate"].to_s == 0.05.to_s
+                subtotal_5per += row["kin"].to_i
+                taxtotal_5per += row["tax"].to_i * row["suryo"].to_i
+              end
+
+              subtotal += row["kin"].to_i
+              taxtotal += row["tax"].to_i * row["suryo"].to_i
 
               line = @@hash2[row["seihinNo"]]
 
@@ -381,8 +423,16 @@ class ReportController < ApplicationController
             # 3行目分も集計に加える
             if @@hash3.key?(row["seihinNo"])
               # 集計
-              subtotal += row["kin"]
-              taxtotal += row["tax"] * row["suryo"]
+              if row["tax_rate"].to_s == 0.03.to_s
+                subtotal_3per += row["kin"].to_i
+                taxtotal_3per += row["tax"].to_i * row["suryo"].to_i
+              elsif row["tax_rate"].to_s == 0.05.to_s
+                subtotal_5per += row["kin"].to_i
+                taxtotal_5per += row["tax"].to_i * row["suryo"].to_i
+              end
+
+              subtotal += row["kin"].to_i
+              taxtotal += row["tax"].to_i * row["suryo"].to_i
             end
           }
         end
@@ -393,6 +443,14 @@ class ReportController < ApplicationController
             # 仕様：最大28行目まで
             if i < 28
               # 集計
+              if row["tax_rate"].to_s == 0.03.to_s
+                subtotal_3per += row["kin"].to_i
+                taxtotal_3per += row["tax"].to_i * row["suryo"].to_i
+              elsif row["tax_rate"].to_s == 0.05.to_s
+                subtotal_5per += row["kin"].to_i
+                taxtotal_5per += row["tax"].to_i * row["suryo"].to_i
+              end
+
               subtotal += row["kin"].to_i
               taxtotal += row["tax"].to_i * row["suryo"].to_i
             else
@@ -405,8 +463,10 @@ class ReportController < ApplicationController
         # 集計項目
         ###########################
         total = subtotal + taxtotal
-        item(:subtotal).value(number_format(subtotal.truncate))
-        item(:taxtotal).value(number_format(taxtotal.truncate))
+        item(:taxtotal_3per).value(number_format(taxtotal_3per.truncate))
+        item(:subtotal_3per).value(number_format(subtotal_3per.truncate))
+        item(:taxtotal_5per).value(number_format(taxtotal_5per.truncate))
+        item(:subtotal_5per).value(number_format(subtotal_5per.truncate))
         item(:total).value(number_format(total.truncate))
         item(:charge).value('\ ' + number_format(total.truncate))
 
