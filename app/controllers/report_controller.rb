@@ -248,7 +248,7 @@ class ReportController < ApplicationController
       sqlstr += "FROM mitsumori_seihins ms "
       sqlstr += "LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" == mt.\"seihinNo\" "
       sqlstr += "WHERE ms.\"mitsumoriNo\" == ? "
-      args = [sqlstr, mitsumoriNo.to_i]
+      args = [sqlstr, mitsumoriNo.to_s]
       sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
       @@mitsumoriSeihins = ActiveRecord::Base.connection.execute(sql)
 
@@ -260,7 +260,7 @@ class ReportController < ApplicationController
       sqlstr += "  WHERE ms.\"mitsumoriNo\" == ? "
       sqlstr += ") kanseibuhins "
       sqlstr += "WHERE kanseibuhins.\"buhinCd\" IS NOT NULL"
-      args = [sqlstr, mitsumoriNo.to_i]
+      args = [sqlstr, mitsumoriNo.to_s]
       sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
       @@kanseiBuhins = ActiveRecord::Base.connection.execute(sql)
     end
