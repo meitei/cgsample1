@@ -18,8 +18,56 @@ class KokyakusController < ApplicationController
     conditions = conditions.where("\"kokyakuNm\" LIKE ?", "%" + params[:kokyaku][:kokyakuNm] + "%") if params[:kokyaku][:kokyakuNm] != ""
     conditions = conditions.where("\"kokyakuNmKana\" LIKE ?", "%" + params[:kokyaku][:kokyakuNmKana] + "%") if params[:kokyaku][:kokyakuNmKana] != ""
     conditions = conditions.where("\"seibetsu\" = ?", params[:kokyaku][:seibetsu]) if params[:kokyaku][:seibetsu] != ""
-    conditions = conditions.where("\"tanjoDt\" >= ?", params[:kokyaku][:tanjoDtFrom]) if params[:kokyaku][:tanjoDtFrom] != ""
-    conditions = conditions.where("\"tanjoDt\" <= ?", params[:kokyaku][:tanjoDtTo]) if params[:kokyaku][:tanjoDtTo] != ""
+
+    # 生年月日は「元号」「年」「月」「日」を連結して比較する
+    tanjoDtCondition = str_sql_concat("\"tanjoGengo\"", "\"tanjoYear\"", "\"tanjoMonth\"", "\"tanjoDay\"")
+
+    if params[:kokyaku][:tanjoGengoFrom].present? || params[:kokyaku][:tanjoYearFrom].present? || params[:kokyaku][:tanjoMonthFrom].present? || params[:kokyaku][:tanjoDayFrom].present?
+      tanjoGengoFrom = "0"
+      tanjoYearFrom  = "00"
+      tanjoMonthFrom = "00"
+      tanjoDayFrom   = "00"
+
+      if params[:kokyaku][:tanjoGengoFrom].present?
+        tanjoGengoFrom = params[:kokyaku][:tanjoGengoFrom]
+      end
+      if params[:kokyaku][:tanjoYearFrom].present?
+        tanjoYearFrom = format("%02d", params[:kokyaku][:tanjoYearFrom])
+      end
+      if params[:kokyaku][:tanjoMonthFrom].present?
+        tanjoMonthFrom = format("%02d", params[:kokyaku][:tanjoMonthFrom])
+      end
+      if params[:kokyaku][:tanjoDayFrom].present?
+        tanjoDayFrom = format("%02d", params[:kokyaku][:tanjoDayFrom])
+      end
+
+      tanjoDtFrom = tanjoGengoFrom + tanjoYearFrom + tanjoMonthFrom + tanjoDayFrom
+      conditions = conditions.where(tanjoDtCondition + " >= ?", tanjoDtFrom)
+    end
+
+    if params[:kokyaku][:tanjoGengoTo].present? || params[:kokyaku][:tanjoYearTo].present? || params[:kokyaku][:tanjoMonthTo].present? || params[:kokyaku][:tanjoDayTo].present?
+      tanjoGengoTo = "9"
+      tanjoYearTo  = "99"
+      tanjoMonthTo = "99"
+      tanjoDayTo   = "99"
+
+      if params[:kokyaku][:tanjoGengoTo].present?
+        tanjoGengoTo = params[:kokyaku][:tanjoGengoTo]
+      end
+      if params[:kokyaku][:tanjoYearTo].present?
+        tanjoYearTo = format("%92d", params[:kokyaku][:tanjoYearTo])
+      end
+      if params[:kokyaku][:tanjoMonthTo].present?
+        tanjoMonthTo = format("%92d", params[:kokyaku][:tanjoMonthTo])
+      end
+      if params[:kokyaku][:tanjoDayTo].present?
+        tanjoDayTo = format("%92d", params[:kokyaku][:tanjoDayTo])
+      end
+
+      tanjoDtTo = tanjoGengoTo + tanjoYearTo + tanjoMonthTo + tanjoDayTo
+      conditions = conditions.where(tanjoDtCondition + " <= ?", tanjoDtTo)
+    end
+
     conditions = conditions.where("\"postNo\" LIKE ?", params[:kokyaku][:postNo] + "%") if params[:kokyaku][:postNo] != ""
     conditions = conditions.where("address1 LIKE ?", "%" + params[:kokyaku][:address1] + "%") if params[:kokyaku][:address1] != ""
     conditions = conditions.where("address2 LIKE ?", "%" + params[:kokyaku][:address2] + "%") if params[:kokyaku][:address2] != ""
@@ -166,7 +214,12 @@ class KokyakusController < ApplicationController
   end
 
   def get_select_stmt
+    # 生年月日は「元号」「年」「月」「日」を連結して表示する
+    tanjoGengoStr = "CASE kokyakus.\"tanjoGengo\" WHEN 1 THEN '大正' WHEN 2 THEN '昭和' WHEN 3 THEN '平成' ELSE NULL END "
+    tanjoDt = str_sql_concat(tanjoGengoStr, "kokyakus.\"tanjoYear\"", "'年'" , "kokyakus.\"tanjoMonth\"", "'月'", "kokyakus.\"tanjoDay\"", "'日' AS \"tanjoDt\"")
+
     select = "kokyakus.*"
+    select << "," + tanjoDt
     select << ",sb1.\"shobyoNm\" \"shobyoNm1\""
     select << ",sb2.\"shobyoNm\" \"shobyoNm2\""
     select << ",sb3.\"shobyoNm\" \"shobyoNm3\""
@@ -201,6 +254,15 @@ class KokyakusController < ApplicationController
     return year - 1988
   end
 
-  private :get_select_stmt, :get_nend
+  def str_sql_concat *strs
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+    if adapter == "mysql2" then
+      "concat(#{strs.join(',')})"
+    else
+      strs.join("||")
+    end
+  end
+
+  private :get_select_stmt, :get_nend, :str_sql_concat
 
 end

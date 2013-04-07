@@ -3,7 +3,7 @@
     <table>
       <tr>
         <th style="width:80px;">顧客コード</th>
-        <td style="width:175px;">
+        <td style="width:210px;">
           <input style="width:60px;" type="text" id="kokyakuIdFrom" name="kokyaku[kokyakuIdFrom]" tabindex="2" />&nbsp;〜
           <input style="width:60px;" type="text" id="kokyakuIdTo" name="kokyaku[kokyakuIdTo]" tabindex="4" />
         </td>
@@ -56,9 +56,16 @@
       </tr>
       <tr>
         <th>生年月日</th>
-        <td>
-          <input style="width:50px;" type="text" id="tanjoDtFrom" name="kokyaku[tanjoDtFrom]" tabindex="18" />&nbsp;〜
-          <input style="width:50px;" type="text" id="tanjoDtTo" name="kokyaku[tanjoDtTo]" tabindex="26" />
+        <td>　
+          <%= select :kokyaku, :tanjoGengoFrom, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :class => "aaa", :include_blank => true %>
+          <input style="width:20px;" type="text" id="tanjoYearFrom" name="kokyaku[tanjoYearFrom]" tabindex="99" />年
+          <input style="width:20px;" type="text" id="tanjoMonthFrom" name="kokyaku[tanjoMonthFrom]" tabindex="99" />月
+          <input style="width:20px;" type="text" id="tanjoDayFrom" name="kokyaku[tanjoDayFrom]" tabindex="99" />日
+          <br />〜
+          <%= select :kokyaku, :tanjoGengoTo, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :class => "aaa", :include_blank => true %>
+          <input style="width:20px;" type="text" id="tanjoYearTo" name="kokyaku[tanjoYearTo]" tabindex="99" />年
+          <input style="width:20px;" type="text" id="tanjoMonthTo" name="kokyaku[tanjoMonthTo]" tabindex="99" />月
+          <input style="width:20px;" type="text" id="tanjoDayTo" name="kokyaku[tanjoDayTo]" tabindex="99" />日
         </td>
         <th style="width:80px;">携帯番号</th>
         <td style="width:175px;">
@@ -74,3 +81,7 @@
   <div>
   </div>
   </form>
+<script type="text/javascript">
+  $("#kokyaku_tanjoGengoFrom").css("width", "60px").attr("tabindex", "99"); //TODO:tabindex
+  $("#kokyaku_tanjoGengoTo").css("width", "60px").attr("tabindex", "99"); //TODO:tabindex
+</script>
