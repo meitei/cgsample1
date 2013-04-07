@@ -145,22 +145,6 @@
       $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
     });
-    // 次へ
-    $("button.jqwizard_next").click(function() {
-      // 見積データ保存
-      mitsumoriData["COL5_1"] = $("input[name='COL5_1']:checked").val();
-      mitsumoriData["COL5_2"] = $("input[name='COL5_2']:checked").val();
-      mitsumoriData["COL5_3"] = $("input[name='COL5_3']:checked").val();
-      mitsumoriData["COL5_4"] = $("input[name='COL5_4']:checked").val();
-      step = 3;
-      $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
-    });
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 1;
-      $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
-    });
     // 単価を書き換え
     updateUnitPrice("step2");
   }
@@ -288,19 +272,6 @@
       $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
     });
-    // 次へ
-    $("button.jqwizard_next").click(function() {
-      // 見積データ保存
-      mitsumoriData["COL2_1"] = $("input[name='COL2_1']:checked").val();
-      step = 3;
-      $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
-    });
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 1;
-      $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
-    });
     // 単価を書き換え
     updateUnitPrice("step2");
   }
@@ -308,35 +279,6 @@
   // 既製品
   function wizard2g(){
     initNavi("2");
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 1;
-      $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
-    });
-    // 単価を書き換え
-    updateUnitPrice("step2");
-  }
-
-  // 既製品
-  function wizard2h(){
-    initNavi("2");
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 1;
-      $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
-    });
-    // 単価を書き換え
-    updateUnitPrice("step2");
-  }
-
-  // 既製品
-  function wizard2i(){
-    initNavi("2");
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 1;
-      $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
-    });
     // 単価を書き換え
     updateUnitPrice("step2");
   }

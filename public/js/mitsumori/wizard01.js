@@ -41,7 +41,7 @@
     // 既製品選択/トイレットチェア
     $("input#2-COL1_2").change(function(){
       if($("input#3-COL1_1").attr("checked", "checked")) {
-        $("div#step2").load("/mitsumori/step_24.html", wizard2h);
+        $("div#step2").load("/mitsumori/step_24.html", wizard2g);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("トイレット");
         $("li#step3").hide();
@@ -65,7 +65,7 @@
     // 既製品選択/シャワーチェア
     $("input#3-COL1_2").change(function(){
       if($("input#3-COL1_1").attr("checked", "checked")) {
-        $("div#step2").load("/mitsumori/step_25.html", wizard2i);
+        $("div#step2").load("/mitsumori/step_25.html", wizard2g);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("シャワー");
         $("li#step3").hide();
@@ -86,17 +86,7 @@
         $("button#jqwizard_next").removeAttr("disabled");
       }
     });
-    // 次へ
-    $("button#jqwizard_next").click(function() {
-      // 見積データ保存
-      mitsumoriData["COL1_1"] = $("input[name='COL1_1']:checked").val();
-      mitsumoriData["COL1_2"] = $("input[name='COL1_2']:checked").val();
-      step = 2;
-      $("div.statuslabel").html("<span>STEP 2</span>" + $("div#step2 > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
-      $("button#jqwizard_previous").removeAttr("disabled");
-    });
 
     $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
+    $("button#jqwizard_next").attr("disabled", "disabled");
   }

@@ -17,18 +17,18 @@
       $("button.jqwizard_next").removeAttr("disabled");
     });
     // 次へ
-    $("button.jqwizard_next").click(function() {
-      // 見積データ保存
-      mitsumoriData["COL8_1"] = $("input[name='COL8_1']:checked").val();
-      step = 5;
-      $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
-    });
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 3;
-      $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
-    });
+    // $("button.jqwizard_next").click(function() {
+    //   // 見積データ保存
+    //   mitsumoriData["COL8_1"] = $("input[name='COL8_1']:checked").val();
+    //   step = 5;
+    //   $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
+    //   $("button#jqwizard_next").attr("disabled", "disabled");
+    // });
+    // // 戻る
+    // $("button.jqwizard_previous").click(function() {
+    //   step = 3;
+    //   $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
+    // });
     // 単価を書き換え
     updateUnitPrice("step4");
   }
@@ -52,18 +52,18 @@
       $("button.jqwizard_next").removeAttr("disabled");
     });
     // 次へ
-    $("button.jqwizard_next").click(function() {
-      // 見積データ保存
-      mitsumoriData["COL8_1"] = $("input[name='COL8_1']:checked").val();
-      step = 5;
-      $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
-    });
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 3;
-      $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
-    });
+    // $("button.jqwizard_next").click(function() {
+    //   // 見積データ保存
+    //   mitsumoriData["COL8_1"] = $("input[name='COL8_1']:checked").val();
+    //   step = 5;
+    //   $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
+    //   $("button#jqwizard_next").attr("disabled", "disabled");
+    // });
+    // // 戻る
+    // $("button.jqwizard_previous").click(function() {
+    //   step = 3;
+    //   $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
+    // });
     // 単価を書き換え
     updateUnitPrice("step4");
   }
@@ -87,18 +87,18 @@
       $("button.jqwizard_next").removeAttr("disabled");
     });
     // 次へ
-    $("button.jqwizard_next").click(function() {
-      // 見積データ保存
-      mitsumoriData["COL7_1"] = $("input[name='COL7_1']:checked").val();
-      step = 5;
-      $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
-    });
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 3;
-      $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
-    });
+    // $("button.jqwizard_next").click(function() {
+    //   // 見積データ保存
+    //   mitsumoriData["COL7_1"] = $("input[name='COL7_1']:checked").val();
+    //   step = 5;
+    //   $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
+    //   $("button#jqwizard_next").attr("disabled", "disabled");
+    // });
+    // // 戻る
+    // $("button.jqwizard_previous").click(function() {
+    //   step = 3;
+    //   $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
+    // });
     // 単価を書き換え
     updateUnitPrice("step4");
   }
@@ -122,18 +122,18 @@
       $("button.jqwizard_next").removeAttr("disabled");
     });
     // 次へ
-    $("button.jqwizard_next").click(function() {
-      // 見積データ保存
-      mitsumoriData["COL8_1"] = $("input[name='COL8_1']:checked").val();
-      step = 5;
-      $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
-    });
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 3;
-      $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
-    });
+    // $("button.jqwizard_next").click(function() {
+    //   // 見積データ保存
+    //   mitsumoriData["COL8_1"] = $("input[name='COL8_1']:checked").val();
+    //   step = 5;
+    //   $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
+    //   $("button#jqwizard_next").attr("disabled", "disabled");
+    // });
+    // // 戻る
+    // $("button.jqwizard_previous").click(function() {
+    //   step = 3;
+    //   $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
+    // });
     // 単価を書き換え
     updateUnitPrice("step4");
   }
@@ -161,18 +161,18 @@
       $("button.jqwizard_next").removeAttr("disabled");
     });
     // 次へ
-    $("button.jqwizard_next").click(function() {
-      // 見積データ保存
-      mitsumoriData["COL4_1"] = $("input[name='COL4_1']:checked").val();
-      step = 5;
-      $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
-    });
-    // 戻る
-    $("button.jqwizard_previous").click(function() {
-      step = 3;
-      $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
-    });
+    // $("button.jqwizard_next").click(function() {
+    //   // 見積データ保存
+    //   mitsumoriData["COL4_1"] = $("input[name='COL4_1']:checked").val();
+    //   step = 5;
+    //   $("div.statuslabel").html("<span>STEP 5</span>" + $("div#step5 > div#title").text());
+    //   $("button#jqwizard_next").attr("disabled", "disabled");
+    // });
+    // // 戻る
+    // $("button.jqwizard_previous").click(function() {
+    //   step = 3;
+    //   $("div.statuslabel").html("<span>STEP 3</span>" + $("div#step3 > div#title").text());
+    // });
     // 単価を書き換え
     updateUnitPrice("step4");
   }
