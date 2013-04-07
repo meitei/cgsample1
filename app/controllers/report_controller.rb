@@ -246,7 +246,7 @@ class ReportController < ApplicationController
 
       sqlstr =  "SELECT ms.\"seihinNo\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
       sqlstr += "FROM mitsumori_seihins ms "
-      sqlstr += "LEFT JOIN mitsumori_tankas mt ON CAST(ms.\"seihinNo\" AS text) == CAST(mt.\"seihinNo\" AS text) "
+      sqlstr += "LEFT JOIN mitsumori_tankas mt ON CAST(ms.\"seihinNo\" AS text) = CAST(mt.\"seihinNo\" AS text) "
       sqlstr += "WHERE ms.\"mitsumoriNo\" == ? "
       args = [sqlstr, mitsumoriNo.to_i]
       sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
@@ -255,7 +255,7 @@ class ReportController < ApplicationController
       sqlstr =  "SELECT * FROM ( "
       sqlstr += "  SELECT kb.\"buhinCd\", kb.\"buhinNm\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
       sqlstr += "  FROM mitsumori_seihins ms "
-      sqlstr += "  LEFT JOIN mitsumori_tankas mt ON CAST(ms.\"seihinNo\" AS text) == CAST(mt.\"seihinNo\" AS text) "
+      sqlstr += "  LEFT JOIN mitsumori_tankas mt ON CAST(ms.\"seihinNo\" AS text) = CAST(mt.\"seihinNo\" AS text) "
       sqlstr += "  LEFT JOIN kansei_buhins kb ON mt.\"buhinCd\" == kb.\"buhinCd\" "
       sqlstr += "  WHERE ms.\"mitsumoriNo\" == ? "
       sqlstr += ") kanseibuhins "
