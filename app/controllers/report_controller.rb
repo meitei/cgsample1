@@ -246,8 +246,8 @@ class ReportController < ApplicationController
 
       sqlstr =  "SELECT ms.\"seihinNo\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
       sqlstr += "FROM mitsumori_seihins ms "
-      sqlstr += "LEFT JOIN mitsumori_tankas mt ON CAST(ms.\"seihinNo\" AS integer) = CAST(mt.\"seihinNo\" AS integer) "
-      sqlstr += "WHERE CAST(ms.\"mitsumoriNo\" AS integer) = CAST(? AS integer) "
+      sqlstr += "LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
+      sqlstr += "WHERE ms.\"mitsumoriNo\" = ? "
       args = [sqlstr, mitsumoriNo.to_i]
       sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
       @@mitsumoriSeihins = ActiveRecord::Base.connection.execute(sql)
@@ -255,9 +255,9 @@ class ReportController < ApplicationController
       sqlstr =  "SELECT * FROM ( "
       sqlstr += "  SELECT kb.\"buhinCd\", kb.\"buhinNm\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
       sqlstr += "  FROM mitsumori_seihins ms "
-      sqlstr += "  LEFT JOIN mitsumori_tankas mt ON CAST(ms.\"seihinNo\" AS integer) = CAST(mt.\"seihinNo\" AS integer) "
+      sqlstr += "  LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
       sqlstr += "  LEFT JOIN kansei_buhins kb ON mt.\"buhinCd\" = kb.\"buhinCd\" "
-      sqlstr += "  WHERE CAST(ms.\"mitsumoriNo\" AS integer) = CAST(? AS integer) "
+      sqlstr += "  WHERE ms.\"mitsumoriNo\" = ? "
       sqlstr += ") kanseibuhins "
       sqlstr += "WHERE kanseibuhins.\"buhinCd\" IS NOT NULL"
       args = [sqlstr, mitsumoriNo.to_i]
