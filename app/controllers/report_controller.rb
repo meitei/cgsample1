@@ -2,15 +2,11 @@
 require 'thinreports'
 require 'time'
 require 'date'
-require 'RMagick'
 require 'open-uri'
 
 class ReportController < ApplicationController
 
   def report
-    konyuRirekiId = params[:konyuRirekiId]
-    kokyakuId = params[:kokyakuId]
-
     ###########################
     # 1列目
     ###########################
@@ -216,8 +212,13 @@ class ReportController < ApplicationController
     ###########################
     # ヘッダ項目データ取得
     ###########################
+    ## 購入履歴情報取得
+    konyuRireki = KonyuRireki.find(params[:id].to_i)
+
+    konyuRirekiId = konyuRireki["konyuRirekiId"].to_i
+    kokyakuId     = konyuRireki["kokyakuId"].to_i
+
     ## ヘッダ項目：見積日付
-    konyuRireki = KonyuRireki.find(:first, :conditions => ["\"konyuRirekiId\" = ? and \"kokyakuId\" = ?", konyuRirekiId.to_i, kokyakuId.to_i])
     @@mitsumoriDt = konyuRireki["mitsumoriDt"]
 
     ## ヘッダ項目：宛名
@@ -506,12 +507,8 @@ class ReportController < ApplicationController
       format.json { render json: fileInfo }
     end
   end
-
-  def number_format value
-    value.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
-  end
-
-  private :number_format
-
 end
 
+def number_format value
+  value.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
+end

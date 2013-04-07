@@ -41,7 +41,6 @@ JqgridSample::Application.routes.draw do
   get "report/report"
 
   get "kanseizu/show"
-  get "kanseizu/get_image"
 
   resources :items do
     get 'report', :on => :collection

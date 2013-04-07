@@ -44,7 +44,7 @@ $(function() {
         //}
     });
     var isLoaded = false;
-    var colNames = ["","ID","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","",""];
+    var colNames = ["","ID","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
         {name:"kokyakuId", index:"kokyakuId",width:50},
@@ -75,6 +75,8 @@ $(function() {
         {name:"koshinshaId", index:"koshinshaId", hidden:true},
         {name:"torokushaId", index:"torokushaId", hidden:true},
         {name:"id", index:"id", hidden:true},
+        {name:'reportImg', index:'reportImg', align:'center', width:20, formatter: reportFormatter},
+        {name:'mitsumoriKanseizuImg', index:'mitsumoriKanseizuImg', align:'center', width:20, formatter: mitsumoriKanseizuFormatter},
         {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
         {name:'deleteImg', index:'deleteImg', align:'center', width:20, formatter: deleteFormatter}
     ];
@@ -230,6 +232,14 @@ $("a#btnKonyuRirekiClear").click(function() {
     return false;
 });
 
+function reportFormatter(cellval, options, rowdata) {
+    return "<img src='/images/pdf.png' onclick='showReport(" + rowdata['id'] + ")' title='見積書出力' style='width:16px; height:16px'>";
+}
+
+function mitsumoriKanseizuFormatter(cellval, options, rowdata) {
+    return "<img src='/images/image.png' onclick='showMitsumoriKanseizu(" + rowdata['id'] + ")' title='見積完成図表示' style='width:16px; height:16px'>";
+}
+
 function updateFormatter(cellval, options, rowdata) {
     return "<img src='/images/database-reload-alt-1.png' onclick='modifyKokyaku(" + rowdata['id'] + ")' title='更新' style='width:16px; height:16px'>";
 }
@@ -260,6 +270,31 @@ function searchKonyuRireki() {
         }
     };
     $("#searchKonyuRirekiGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// 見積書PDF出力用メソッド
+function showReport(id) {
+    var url = "report/report.json";
+    url += "?id=" + id;
+    $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: url,
+        //data: data,
+        dataType: "json",
+        success: function(result) {
+            if (result != null){
+                window.open(result.fileName, "帳票出力");
+            }
+        }
+    });
+}
+
+// 見積完成図表示用メソッド
+function showMitsumoriKanseizu(id) {
+    url = "kanseizu/show?id=" + id;
+    window.open(url,'_blank')
+    return false;
 }
 
 // 更新用メソッド

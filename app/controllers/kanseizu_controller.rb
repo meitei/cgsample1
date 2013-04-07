@@ -1,8 +1,10 @@
 class KanseizuController < ApplicationController
 
   def show
-    konyuRirekiId = params[:konyuRirekiId].to_i
-    kokyakuId = params[:kokyakuId].to_i
+    konyuRireki = KonyuRireki.find(params[:id].to_i)
+
+    konyuRirekiId = konyuRireki["konyuRirekiId"].to_i
+    kokyakuId     = konyuRireki["kokyakuId"].to_i
 
     @mitsumori = Mitsumori.find(:first, :conditions => ["\"konyuRirekiId\" = ? and \"kokyakuId\" = ?", konyuRirekiId, kokyakuId])
 
