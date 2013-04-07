@@ -162,5 +162,11 @@
         </tr>
     </table>
 </label>
-
+<script type="text/javascript">
+    var submitItem1 = function() {
+      // 見積データ保存
+      this.mitsumoriData["COL1_1"] = $("input[name='COL1_1']:checked").val();
+      this.mitsumoriData["COL1_2"] = $("input[name='COL1_2']:checked").val();
+    }
+</script>
 

@@ -4,20 +4,25 @@
     <div class="statuslabel"><span>STEP 1</span>使用環境　座位保持装置製作方法の選定</div>
 <%= render 'form' %>
 <script>
-  var step = 1;
-  var mitsumoriData = {};
-  var productsData = {};
+  var WizardManager = function() {
+    // this.test = function() {
+    //   alert("test");
+    // }
+    this.step = 1;
+    this.mitsumoriData = {};
+    this.productsData = {};
+  }
   var tanka = {};
   var konyuRirekiId = 1;
   var kokyakuId = 1;
   var mitsumoriNo = 1;
+  var wm = new WizardManager();
 
   $(document).ready(function(){
     $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
         url: "/mitsumori_tankas.json",
-        //data: postData,
         root: "mitsumori_tankas",
         dataType: "json",
         success: function(result) {
@@ -30,91 +35,90 @@
     $("#btnEstimateRegist").hide();
     $("div#step1").load("/mitsumori/step_01.html", wizard1);
     // 見積データを用意する
-    mitsumoriData["konyuRirekiId"] = konyuRirekiId;
-    mitsumoriData["kokyakuId"] = kokyakuId;
-    mitsumoriData["mitsumoriNo"] = mitsumoriNo;
+    wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
+    wm.mitsumoriData["kokyakuId"] = kokyakuId;
+    wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
     //clearNavi("1");
     // 次へ
     $("button.jqwizard_next").click(function() {
-      // 見積データ保存
-      //mitsumoriData["COL8_1"] = $("input[name='COL8_1']:checked").val();
-      step = step + 1;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.next();
+      wm.step++;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
       $("button#jqwizard_next").attr("disabled", "disabled");
     });
     // 戻る
     $("button.jqwizard_previous").click(function() {
-      step = step - 1;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step--;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
 
     $("li#step1").click(function() {
-      step = 1;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 1;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step2").click(function() {
-      step = 2;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step3").click(function() {
-      step = 3;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step4").click(function() {
-      step = 4;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 4;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step5").click(function() {
-      step = 5;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 5;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step6").click(function() {
-      step = 6;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 6;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step7").click(function() {
-      step = 7;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 7;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step8").click(function() {
-      step = 8;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 8;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step9").click(function() {
-      step = 9;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 9;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step10").click(function() {
-      step = 10;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 10;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step11").click(function() {
-      step = 11;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 11;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step12").click(function() {
-      step = 12;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 12;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step13").click(function() {
-      step = 13;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 13;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step14").click(function() {
-      step = 14;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 14;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step15").click(function() {
-      step = 15;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 15;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step16").click(function() {
-      step = 16;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 16;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
     $("li#step17").click(function() {
-      step = 17;
-      $("div.statuslabel").html("<span>STEP " + step + "</span>" + $("div#step" + step + " > div#title").text());
+      wm.step = 17;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     });
   });
 
@@ -170,24 +174,39 @@
   }
 
   function updateUnitPrice(step){
-        // 単価を書き換え
+    // 単価を書き換え
+    var s;
+    var t;
+    var x;
+    var kingaku;
     for(var i=0; i<tanka.length; i++) {
-      $("div#" + step + " td#1-" + tanka[i]["seihinNo"] + "_tan").text(formatComma(tanka[i]["tanka"]));
-      $("div#" + step + " td#1-" + tanka[i]["seihinNo"] + "_kin").text(formatComma(tanka[i]["tanka"]));
-      $("div#" + step + " input#1-" + tanka[i]["seihinNo"] + "_tax").val(
-        formatComma(parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0)));
-      $("div#" + step + " td#2-" + tanka[i]["seihinNo"] + "_tan").text(formatComma(tanka[i]["tanka"]));
-      $("div#" + step + " td#2-" + tanka[i]["seihinNo"] + "_kin").text(formatComma(tanka[i]["tanka"]));
-      $("div#" + step + " input#2-" + tanka[i]["seihinNo"] + "_tax").val(
-        formatComma(parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0)));
-      $("div#" + step + " td#3-" + tanka[i]["seihinNo"] + "_tan").text(formatComma(tanka[i]["tanka"]));
-      $("div#" + step + " td#3-" + tanka[i]["seihinNo"] + "_kin").text(formatComma(tanka[i]["tanka"]));
-      $("div#" + step + " input#3-" + tanka[i]["seihinNo"] + "_tax").val(
-        formatComma(parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0)));
-      $("div#" + step + " td#4-" + tanka[i]["seihinNo"] + "_tan").text(formatComma(tanka[i]["tanka"]));
-      $("div#" + step + " td#4-" + tanka[i]["seihinNo"] + "_kin").text(formatComma(tanka[i]["tanka"]));
-      $("div#" + step + " input#4-" + tanka[i]["seihinNo"] + "_tax").val(
-        formatComma(parseFloatEx(getFormatAmount(tanka[i]["tanka"]) * parseFloatEx(tanka[i]["tax"]), 1, 0)));
+      s = tanka[i]["seihinNo"];
+      t = parseFloatEx(tanka[i]["tanka"]);
+      x = parseFloatEx(tanka[i]["tax"]);
+      kingaku = t * parseFloatEx($("div#" + step + " td#1-" + s + "_su").text());
+      $("div#" + step + " td#1-" + s + "_tan").text(formatComma(t));
+      $("div#" + step + " td#1-" + s + "_kin").text(formatComma(kingaku));
+      $("div#" + step + " input#1-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
+      kingaku = t * parseFloatEx($("div#" + step + " td#2-" + s + "_su").text());
+      $("div#" + step + " td#2-" + s + "_tan").text(formatComma(t));
+      $("div#" + step + " td#2-" + s + "_kin").text(formatComma(kingaku));
+      $("div#" + step + " input#2-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
+      kingaku = t * parseFloatEx($("div#" + step + " td#3-" + s + "_su").text());
+      $("div#" + step + " td#3-" + s + "_tan").text(formatComma(t));
+      $("div#" + step + " td#3-" + s + "_kin").text(formatComma(kingaku));
+      $("div#" + step + " input#3-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
+      kingaku = t * parseFloatEx($("div#" + step + " td#4-" + s + "_su").text());
+      $("div#" + step + " td#4-" + s + "_tan").text(formatComma(t));
+      $("div#" + step + " td#4-" + s + "_kin").text(formatComma(kingaku));
+      $("div#" + step + " input#4-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
+      kingaku = t * parseFloatEx($("div#" + step + " td#5-" + s + "_su").text());
+      $("div#" + step + " td#5-" + s + "_tan").text(formatComma(t));
+      $("div#" + step + " td#5-" + s + "_kin").text(formatComma(kingaku));
+      $("div#" + step + " input#5-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
+      kingaku = t * parseFloatEx($("div#" + step + " td#6-" + s + "_su").text());
+      $("div#" + step + " td#6-" + s + "_tan").text(formatComma(t));
+      $("div#" + step + " td#6-" + s + "_kin").text(formatComma(kingaku));
+      $("div#" + step + " input#6-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
     }
   }
 
