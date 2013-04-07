@@ -246,15 +246,15 @@ class ReportController < ApplicationController
 
       sqlstr =  "SELECT ms.\"seihinNo\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
       sqlstr += "FROM mitsumori_seihins ms "
-      sqlstr += "LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
+      sqlstr += "LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" == mt.\"seihinNo\" "
       sqlstr += "WHERE ms.\"mitsumoriNo\" == " + mitsumoriNo.to_s
       @@mitsumoriSeihins = ActiveRecord::Base.connection.execute(sqlstr)
 
       sqlstr =  "SELECT * FROM ( "
       sqlstr += "  SELECT kb.\"buhinCd\", kb.\"buhinNm\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
       sqlstr += "  FROM mitsumori_seihins ms "
-      sqlstr += "  LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
-      sqlstr += "  LEFT JOIN kansei_buhins kb ON mt.\"buhinCd\" = kb.\"buhinCd\" "
+      sqlstr += "  LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" == mt.\"seihinNo\" "
+      sqlstr += "  LEFT JOIN kansei_buhins kb ON mt.\"buhinCd\" == kb.\"buhinCd\" "
       sqlstr += "  WHERE ms.\"mitsumoriNo\" == " + mitsumoriNo.to_s
       sqlstr += ") kanseibuhins "
       sqlstr += "WHERE kanseibuhins.\"buhinCd\" IS NOT NULL"
