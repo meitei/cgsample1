@@ -94,6 +94,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
+    WizardManager.prototype.addProduct = submitItem3;
   }
 
     // オーダー対応木製

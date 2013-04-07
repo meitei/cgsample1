@@ -147,6 +147,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step2");
+    WizardManager.prototype.addProduct = submitItem5;
   }
 
   // メインフレーム材質選定
@@ -274,6 +275,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step2");
+    WizardManager.prototype.addProduct = submitItem2;
   }
 
   // 既製品
