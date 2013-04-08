@@ -311,7 +311,7 @@ class ReportController < ApplicationController
             # 1列目の処理
             # 採型分
             if @@hash0.key?(row["seihinNo"].to_i)
-              line = @@hash0[row["seihinNo"]]
+              line = @@hash0[row["seihinNo"].to_i]
 
               @@headers1.each {|header|
                 if header == 'tanka'
@@ -323,7 +323,7 @@ class ReportController < ApplicationController
 
             # 採寸分
             if @@hash1.key?(row["seihinNo"].to_i)
-              line = @@hash1[row["seihinNo"]]
+              line = @@hash1[row["seihinNo"].to_i]
 
               @@headers1.each {|header|
                 if header == 'tanka'
@@ -335,7 +335,7 @@ class ReportController < ApplicationController
 
             # 2列目の処理
             if @@hash2.key?(row["seihinNo"].to_i)
-              line = @@hash2[row["seihinNo"]]
+              line = @@hash2[row["seihinNo"].to_i]
 
               @@headers2.each {|header|
                 if header == 'tanka'
@@ -365,7 +365,7 @@ class ReportController < ApplicationController
               subtotal += row["kin"].to_i
               taxtotal += row["tax"].to_i * row["suryo"].to_i
 
-              line = @@hash0[row["seihinNo"]]
+              line = @@hash0[row["seihinNo"].to_i]
 
               @@headers1.each {|header|
                 if header == 'tanka'
@@ -391,7 +391,7 @@ class ReportController < ApplicationController
               subtotal += row["kin"].to_i
               taxtotal += row["tax"].to_i * row["suryo"].to_i
 
-              line = @@hash1[row["seihinNo"]]
+              line = @@hash1[row["seihinNo"].to_i]
 
               @@headers1.each {|header|
                 if header == 'tanka'
@@ -417,7 +417,7 @@ class ReportController < ApplicationController
               subtotal += row["kin"].to_i
               taxtotal += row["tax"].to_i * row["suryo"].to_i
 
-              line = @@hash2[row["seihinNo"]]
+              line = @@hash2[row["seihinNo"].to_i]
 
               @@headers2.each {|header|
                 id = header + '_2_' + line.to_s
@@ -489,7 +489,7 @@ class ReportController < ApplicationController
         if @@mitsumoriTankas.present?
           @@mitsumoriTankas.each {|row|
             if @@hash3.key?(row["seihinNo"].to_i)
-              line = @@hash3[row["seihinNo"]]
+              line = @@hash3[row["seihinNo"].to_i]
 
               @@headers3.each {|header|
                 if header == 'tanka'
@@ -505,7 +505,7 @@ class ReportController < ApplicationController
           # 3列目の処理
           @@mitsumoriSeihins.each {|row|
             if @@hash3.key?(row["seihinNo"].to_i)
-              line = @@hash3[row["seihinNo"]]
+              line = @@hash3[row["seihinNo"].to_i]
               @@headers3.each {|header|
                 id = header + '_3_' + line.to_s
                 item(id).value(number_format(row[header]))
