@@ -134,3 +134,36 @@
     </table>
 </label>
 
+<script type="text/javascript">
+    var submitItem6 = function() {
+        var selected = $("input[name='COL6_1']:checked").val();
+        var product = {};
+        if(selected == "1") {
+
+        } else if(selected == "2") {
+
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "31";
+            product["tanka"] = removeComma($("#2-31_tan").text());
+            product["suryo"] = removeComma($("#2-31_su").text());
+            product["tax"] = removeComma($("#2-31_tax").val());
+            product["kin"] = removeComma($("#2-31_kin").text());
+            this.productsData["2-31"] = product;
+
+        } else if(selected == "3") {
+
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "31";
+            product["tanka"] = removeComma($("#3-31_tan").text());
+            product["suryo"] = removeComma($("#3-31_su").text());
+            product["tax"] = removeComma($("#3-31_tax").val());
+            product["kin"] = removeComma($("#3-31_kin").text());
+            this.productsData["3-31"] = product;
+
+        } else {
+            return;
+        }
+    }
+</script>
