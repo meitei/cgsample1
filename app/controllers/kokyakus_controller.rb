@@ -20,7 +20,7 @@ class KokyakusController < ApplicationController
     conditions = conditions.where("\"seibetsu\" = ?", params[:kokyaku][:seibetsu]) if params[:kokyaku][:seibetsu] != ""
 
     # 生年月日は「元号」「年」「月」「日」を連結して比較する
-    tanjoDtCondition = str_sql_concat("\"tanjoGengo\"", "\"tanjoYear\"", "\"tanjoMonth\"", "\"tanjoDay\"")
+    tanjoDtCondition = str_sql_concat("CAST(\"tanjoGengo\" AS text)", "CAST(\"tanjoYear\" AS text)", "CAST(\"tanjoMonth\" AS text)", "CAST(\"tanjoDay\" AS text)")
 
     if params[:kokyaku][:tanjoGengoFrom].present? || params[:kokyaku][:tanjoYearFrom].present? || params[:kokyaku][:tanjoMonthFrom].present? || params[:kokyaku][:tanjoDayFrom].present?
       tanjoGengoFrom = "0"
