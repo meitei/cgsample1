@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20130403103740) do
     t.string   "katashikiNm", :limit => 50
     t.integer  "kakaku",                     :null => false
     t.string   "shiyoBuhin",  :limit => 50
-    t.string   "biko",        :limit => 200
+    t.text     "biko",        :limit => 200
     t.integer  "koshinshaId",                :null => false
     t.integer  "torokushaId",                :null => false
     t.datetime "created_at",                 :null => false
@@ -142,8 +142,8 @@ ActiveRecord::Schema.define(:version => 20130403103740) do
     t.integer  "tanka",                     :null => false
     t.float    "tax",                       :null => false
     t.integer  "buhinCd"
-    t.integer  "torokushaId",               :null => false
     t.integer  "koshinshaId",               :null => false
+    t.integer  "torokushaId",               :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
@@ -316,10 +316,10 @@ ActiveRecord::Schema.define(:version => 20130403103740) do
   end
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id",                    :null => false
-    t.text     "data",       :limit => 2097152
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
