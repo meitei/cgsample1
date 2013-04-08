@@ -222,7 +222,7 @@ class ReportController < ApplicationController
     @@mitsumoriDt = konyuRireki["mitsumoriDt"]
 
     ## ヘッダ項目：宛名
-    kokyaku = Kokyaku.find(konyuRireki["kokyakuId"])
+    kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => kokyakuId})
     @@kokyakuNm = kokyaku["kokyakuNm"]
 
     ## ヘッダ項目：型式
@@ -310,7 +310,7 @@ class ReportController < ApplicationController
           @@mitsumoriTankas.each {|row|
             # 1列目の処理
             # 採型分
-            if @@hash0.key?(row["seihinNo"])
+            if @@hash0.key?(row["seihinNo"].to_i)
               line = @@hash0[row["seihinNo"]]
 
               @@headers1.each {|header|
@@ -322,7 +322,7 @@ class ReportController < ApplicationController
             end
 
             # 採寸分
-            if @@hash1.key?(row["seihinNo"])
+            if @@hash1.key?(row["seihinNo"].to_i)
               line = @@hash1[row["seihinNo"]]
 
               @@headers1.each {|header|
@@ -334,7 +334,7 @@ class ReportController < ApplicationController
             end
 
             # 2列目の処理
-            if @@hash2.key?(row["seihinNo"])
+            if @@hash2.key?(row["seihinNo"].to_i)
               line = @@hash2[row["seihinNo"]]
 
               @@headers2.each {|header|
@@ -352,7 +352,7 @@ class ReportController < ApplicationController
 
             # 1列目の処理
             # 採型分
-            if @@hash0.key?(row["seihinNo"])
+            if @@hash0.key?(row["seihinNo"].to_i)
               # 集計
               if row["tax_rate"].to_s == 0.03.to_s
                 subtotal_3per += row["kin"].to_i
@@ -378,7 +378,7 @@ class ReportController < ApplicationController
             end
 
             # 採寸分
-            if @@hash1.key?(row["seihinNo"])
+            if @@hash1.key?(row["seihinNo"].to_i)
               # 集計
               if row["tax_rate"].to_s == 0.03.to_s
                 subtotal_3per += row["kin"].to_i
@@ -404,7 +404,7 @@ class ReportController < ApplicationController
             end
 
             # 2列目の処理
-            if @@hash2.key?(row["seihinNo"])
+            if @@hash2.key?(row["seihinNo"].to_i)
               # 集計
               if row["tax_rate"].to_s == 0.03.to_s
                 subtotal_3per += row["kin"].to_i
@@ -426,7 +426,7 @@ class ReportController < ApplicationController
             end
 
             # 3行目分も集計に加える
-            if @@hash3.key?(row["seihinNo"])
+            if @@hash3.key?(row["seihinNo"].to_i)
               # 集計
               if row["tax_rate"].to_s == 0.03.to_s
                 subtotal_3per += row["kin"].to_i
@@ -488,7 +488,7 @@ class ReportController < ApplicationController
         # 3列目の処理
         if @@mitsumoriTankas.present?
           @@mitsumoriTankas.each {|row|
-            if @@hash3.key?(row["seihinNo"])
+            if @@hash3.key?(row["seihinNo"].to_i)
               line = @@hash3[row["seihinNo"]]
 
               @@headers3.each {|header|
@@ -504,7 +504,7 @@ class ReportController < ApplicationController
         if @@mitsumoriSeihins.present?
           # 3列目の処理
           @@mitsumoriSeihins.each {|row|
-            if @@hash3.key?(row["seihinNo"])
+            if @@hash3.key?(row["seihinNo"].to_i)
               line = @@hash3[row["seihinNo"]]
               @@headers3.each {|header|
                 id = header + '_3_' + line.to_s
