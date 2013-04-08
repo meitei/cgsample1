@@ -58,9 +58,9 @@
         <th>生年月日</th>
         <td>　
           <%= select :kokyaku, :tanjoGengoFrom, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
-          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYearFrom" name="kokyaku[tanjoYearFrom]" tabindex="99" />年
-          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonthFrom" name="kokyaku[tanjoMonthFrom]" tabindex="99" />月
-          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDayFrom" name="kokyaku[tanjoDayFrom]" tabindex="99" />日
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYearFrom" name="kokyaku[tanjoYearFrom]" maxlength="2" tabindex="99" />年
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonthFrom" name="kokyaku[tanjoMonthFrom]" maxlength="2" tabindex="99" />月
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDayFrom" name="kokyaku[tanjoDayFrom]" maxlength="2" tabindex="99" />日
           <br />〜
           <%= select :kokyaku, :tanjoGengoTo, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
           <input style="width:20px;" type="text" id="tanjoYearTo" name="kokyaku[tanjoYearTo]" tabindex="99" />年
