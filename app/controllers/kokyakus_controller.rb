@@ -27,7 +27,7 @@ class KokyakusController < ApplicationController
       tanjoDtCondition = str_sql_concat("SUBSTR('0'||\"tanjoGengo\",-1,1)", "SUBSTR('00'||\"tanjoYear\",-2,2)", "SUBSTR('00'||\"tanjoMonth\",-2,2)", "SUBSTR('00'||\"tanjoDay\",-2,2)")
     else
       # for mysql、postgres
-      tanjoDtCondition = str_sql_concat("LPAD(\"tanjoGengo\", 1, '0') ", "LPAD(\"tanjoYear\", 2, '0') ", "LPAD(\"tanjoMonth\", 2, '0') ", "LPAD(\"tanjoDay\", 2, '0') ")
+      tanjoDtCondition = str_sql_concat("LPAD(CAST(\"tanjoGengo\" AS text), 1, '0') ", " LPAD(CAST(\"tanjoYear\" AS text), 2, '0') ", " LPAD(CAST(\"tanjoMonth\" AS text), 2, '0') ", " LPAD(CAST(\"tanjoDay\" AS text), 2, '0')")
     end
 
     if params[:kokyaku][:tanjoGengoFrom].present? || params[:kokyaku][:tanjoYearFrom].present? || params[:kokyaku][:tanjoMonthFrom].present? || params[:kokyaku][:tanjoDayFrom].present?
