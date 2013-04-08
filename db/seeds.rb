@@ -108,6 +108,7 @@ if @mitsumoris.empty?
 		:konyuRirekiId => 240000001,
 		:kokyakuId => 2400001,
 		:mitsumoriNo => 1,
+		:mitsumoriId => 1,
 		:torokushaId => 1,
 		:koshinshaId => 1,
 

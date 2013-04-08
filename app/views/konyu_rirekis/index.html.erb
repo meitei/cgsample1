@@ -233,11 +233,21 @@ $("a#btnKonyuRirekiClear").click(function() {
 });
 
 function reportFormatter(cellval, options, rowdata) {
-    return "<img src='/images/pdf.png' onclick='showReport(" + rowdata['id'] + ")' title='見積書出力' style='width:16px; height:16px'>";
+    if(rowdata['mitsumoriId'] > 0) {
+        visible = "display:block;";
+    } else {
+        visible = "display:none;";
+    }
+    return "<img src='/images/pdf.png' onclick='showReport(" + rowdata['id'] + ")' title='見積書出力' style='width:16px; height:16px; " + visible + "'>";
 }
 
 function mitsumoriKanseizuFormatter(cellval, options, rowdata) {
-    return "<img src='/images/image.png' onclick='showMitsumoriKanseizu(" + rowdata['id'] + ")' title='見積完成図表示' style='width:16px; height:16px'>";
+    if(rowdata['mitsumoriId'] > 0) {
+        visible = "display:block;";
+    } else {
+        visible = "display:none;";
+    }
+    return "<img src='/images/image.png' onclick='showMitsumoriKanseizu(" + rowdata['id'] + ")' title='見積完成図表示' style='width:16px; height:16px; " + visible + "'>";
 }
 
 function updateFormatter(cellval, options, rowdata) {
