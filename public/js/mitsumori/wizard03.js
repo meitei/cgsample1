@@ -14,6 +14,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
+    WizardManager.prototype.addProduct = submitItem6;
   }
 
   // バックサポート選定
@@ -36,6 +37,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
+    WizardManager.prototype.addProduct = submitItem7;
   }
 
   // シートベルト選定
