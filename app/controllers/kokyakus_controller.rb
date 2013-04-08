@@ -27,7 +27,7 @@ class KokyakusController < ApplicationController
       tanjoDtCondition = str_sql_concat("SUBSTR('0'||\"tanjoGengo\",-1,1)", "SUBSTR('00'||\"tanjoYear\",-2,2)", "SUBSTR('00'||\"tanjoMonth\",-2,2)", "SUBSTR('00'||\"tanjoDay\",-2,2)")
     else
       # for mysql、postgres
-      tanjoDtCondition = str_sql_concat("LPAD(\"tanjoGengo\", 1, '0')", "LPAD(\"tanjoYear\", 2, '0')", "LPAD(\"tanjoMonth\", 2, '0')", "LPAD(\"tanjoDay\", 2, '0')")
+      tanjoDtCondition = str_sql_concat("LPAD(\"tanjoGengo\", 1, '0') ", "LPAD(\"tanjoYear\", 2, '0') ", "LPAD(\"tanjoMonth\", 2, '0') ", "LPAD(\"tanjoDay\", 2, '0') ")
     end
 
     if params[:kokyaku][:tanjoGengoFrom].present? || params[:kokyaku][:tanjoYearFrom].present? || params[:kokyaku][:tanjoMonthFrom].present? || params[:kokyaku][:tanjoDayFrom].present?
@@ -37,7 +37,7 @@ class KokyakusController < ApplicationController
       tanjoDayFrom   = "00"
 
       if params[:kokyaku][:tanjoGengoFrom].present?
-        tanjoGengoFrom = params[:kokyaku][:tanjoGengoFrom].to_s
+        tanjoGengoFrom = format("%01d", params[:kokyaku][:tanjoGengoFrom])
       end
       if params[:kokyaku][:tanjoYearFrom].present?
         tanjoYearFrom = format("%02d", params[:kokyaku][:tanjoYearFrom])
@@ -49,8 +49,8 @@ class KokyakusController < ApplicationController
         tanjoDayFrom = format("%02d", params[:kokyaku][:tanjoDayFrom])
       end
 
-      tanjoDtFrom = (tanjoGengoFrom + tanjoYearFrom + tanjoMonthFrom + tanjoDayFrom).to_i
-      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS integer) >= ?", tanjoDtFrom.to_i)
+      tanjoDtFrom = (tanjoGengoFrom.to_s + tanjoYearFrom.to_s + tanjoMonthFrom.to_s + tanjoDayFrom.to_s).to_i
+      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS integer) >= ?", tanjoDtFrom)
     end
 
     if params[:kokyaku][:tanjoGengoTo].present? || params[:kokyaku][:tanjoYearTo].present? || params[:kokyaku][:tanjoMonthTo].present? || params[:kokyaku][:tanjoDayTo].present?
@@ -60,20 +60,20 @@ class KokyakusController < ApplicationController
       tanjoDayTo   = "99"
 
       if params[:kokyaku][:tanjoGengoTo].present?
-        tanjoGengoTo = params[:kokyaku][:tanjoGengoTo].to_s
+        tanjoGengoTo = format("%01d", params[:kokyaku][:tanjoGengoTo])
       end
       if params[:kokyaku][:tanjoYearTo].present?
-        tanjoYearTo = format("%92d", params[:kokyaku][:tanjoYearTo])
+        tanjoYearTo = format("%02d", params[:kokyaku][:tanjoYearTo])
       end
       if params[:kokyaku][:tanjoMonthTo].present?
-        tanjoMonthTo = format("%92d", params[:kokyaku][:tanjoMonthTo])
+        tanjoMonthTo = format("%02d", params[:kokyaku][:tanjoMonthTo])
       end
       if params[:kokyaku][:tanjoDayTo].present?
-        tanjoDayTo = format("%92d", params[:kokyaku][:tanjoDayTo])
+        tanjoDayTo = format("%02d", params[:kokyaku][:tanjoDayTo])
       end
 
-      tanjoDtTo = (tanjoGengoTo + tanjoYearTo + tanjoMonthTo + tanjoDayTo).to_i
-      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS integer) <= ?", tanjoDtTo.to_i)
+      tanjoDtTo = (tanjoGengoTo.to_s + tanjoYearTo.to_s + tanjoMonthTo.to_s + tanjoDayTo.to_s).to_i
+      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS integer) <= ?", tanjoDtTo)
     end
 
     conditions = conditions.where("\"postNo\" LIKE ?", params[:kokyaku][:postNo] + "%") if params[:kokyaku][:postNo] != ""
