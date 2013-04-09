@@ -76,5 +76,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step8");
-    WizardManager.prototype.addProduct = submitItem2;
+    WizardManager.prototype.addProduct = submitItem9;
   }

@@ -20,7 +20,15 @@ class KokyakusController < ApplicationController
     conditions = conditions.where("\"seibetsu\" = ?", params[:kokyaku][:seibetsu]) if params[:kokyaku][:seibetsu] != ""
 
     # 生年月日は「元号」「年」「月」「日」を連結して比較する
-    tanjoDtCondition = str_sql_concat("CAST(\"tanjoGengo\" AS text)", "CAST(\"tanjoYear\" AS text)", "CAST(\"tanjoMonth\" AS text)", "CAST(\"tanjoDay\" AS text)")
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+    logger.debug(adapter)
+    if adapter == "sqlite3" then
+      # for sqlite
+      tanjoDtCondition = str_sql_concat("SUBSTR('0'||\"tanjoGengo\",-1,1)", "SUBSTR('00'||\"tanjoYear\",-2,2)", "SUBSTR('00'||\"tanjoMonth\",-2,2)", "SUBSTR('00'||\"tanjoDay\",-2,2)")
+    else
+      # for mysql、postgres
+      tanjoDtCondition = str_sql_concat("LPAD(CAST(\"tanjoGengo\" AS text), 1, '0') ", " LPAD(CAST(\"tanjoYear\" AS text), 2, '0') ", " LPAD(CAST(\"tanjoMonth\" AS text), 2, '0') ", " LPAD(CAST(\"tanjoDay\" AS text), 2, '0')")
+    end
 
     if params[:kokyaku][:tanjoGengoFrom].present? || params[:kokyaku][:tanjoYearFrom].present? || params[:kokyaku][:tanjoMonthFrom].present? || params[:kokyaku][:tanjoDayFrom].present?
       tanjoGengoFrom = "0"
@@ -29,7 +37,7 @@ class KokyakusController < ApplicationController
       tanjoDayFrom   = "00"
 
       if params[:kokyaku][:tanjoGengoFrom].present?
-        tanjoGengoFrom = params[:kokyaku][:tanjoGengoFrom]
+        tanjoGengoFrom = format("%01d", params[:kokyaku][:tanjoGengoFrom])
       end
       if params[:kokyaku][:tanjoYearFrom].present?
         tanjoYearFrom = format("%02d", params[:kokyaku][:tanjoYearFrom])
@@ -41,8 +49,8 @@ class KokyakusController < ApplicationController
         tanjoDayFrom = format("%02d", params[:kokyaku][:tanjoDayFrom])
       end
 
-      tanjoDtFrom = tanjoGengoFrom + tanjoYearFrom + tanjoMonthFrom + tanjoDayFrom
-      conditions = conditions.where(tanjoDtCondition + " >= ?", tanjoDtFrom)
+      tanjoDtFrom = (tanjoGengoFrom.to_s + tanjoYearFrom.to_s + tanjoMonthFrom.to_s + tanjoDayFrom.to_s).to_i
+      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS integer) >= ?", tanjoDtFrom)
     end
 
     if params[:kokyaku][:tanjoGengoTo].present? || params[:kokyaku][:tanjoYearTo].present? || params[:kokyaku][:tanjoMonthTo].present? || params[:kokyaku][:tanjoDayTo].present?
@@ -52,20 +60,20 @@ class KokyakusController < ApplicationController
       tanjoDayTo   = "99"
 
       if params[:kokyaku][:tanjoGengoTo].present?
-        tanjoGengoTo = params[:kokyaku][:tanjoGengoTo]
+        tanjoGengoTo = format("%01d", params[:kokyaku][:tanjoGengoTo])
       end
       if params[:kokyaku][:tanjoYearTo].present?
-        tanjoYearTo = format("%92d", params[:kokyaku][:tanjoYearTo])
+        tanjoYearTo = format("%02d", params[:kokyaku][:tanjoYearTo])
       end
       if params[:kokyaku][:tanjoMonthTo].present?
-        tanjoMonthTo = format("%92d", params[:kokyaku][:tanjoMonthTo])
+        tanjoMonthTo = format("%02d", params[:kokyaku][:tanjoMonthTo])
       end
       if params[:kokyaku][:tanjoDayTo].present?
-        tanjoDayTo = format("%92d", params[:kokyaku][:tanjoDayTo])
+        tanjoDayTo = format("%02d", params[:kokyaku][:tanjoDayTo])
       end
 
-      tanjoDtTo = tanjoGengoTo + tanjoYearTo + tanjoMonthTo + tanjoDayTo
-      conditions = conditions.where(tanjoDtCondition + " <= ?", tanjoDtTo)
+      tanjoDtTo = (tanjoGengoTo.to_s + tanjoYearTo.to_s + tanjoMonthTo.to_s + tanjoDayTo.to_s).to_i
+      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS integer) <= ?", tanjoDtTo)
     end
 
     conditions = conditions.where("\"postNo\" LIKE ?", params[:kokyaku][:postNo] + "%") if params[:kokyaku][:postNo] != ""

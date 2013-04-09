@@ -464,3 +464,114 @@
         </tr>
     </table>
 </label>
+
+<script type="text/javascript">
+    var submitItem10 = function() {
+        var selected = $("input[name='COL10_1']:checked").val();
+        var product = {};
+        if(selected == "1") {
+            // 不要
+        } else if(selected == "2") {
+
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "69";
+            product["tanka"] = removeComma($("#2-69_tan").text());
+            product["suryo"] = removeComma($("#2-69_su").text());
+            product["tax"] = removeComma($("#2-69_tax").val());
+            product["kin"] = removeComma($("#2-69_kin").text());
+            this.productsData["2-69"] = product;
+
+            if ($("input#2-COL10_2").attr('checked')) {
+                product["seihinNo"] = "67";
+                product["tanka"] = removeComma($("#2-67_tan").text());
+                product["suryo"] = removeComma($("#2-67_su").text());
+                product["tax"] = removeComma($("#2-67_tax").val());
+                product["kin"] = removeComma($("#2-67_kin").text());
+                this.productsData["2-67"] = product;
+            }
+
+            if ($("input#2-COL10_4").attr('checked')) {
+                product["seihinNo"] = "68";
+                product["tanka"] = removeComma($("#2-68_tan").text());
+                product["suryo"] = removeComma($("#2-68_su").text());
+                product["tax"] = removeComma($("#2-68_tax").val());
+                product["kin"] = removeComma($("#2-68_kin").text());
+                this.productsData["2-68"] = product;
+            }
+
+        } else if(selected == "3") {
+
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "70";
+            product["tanka"] = removeComma($("#3-70_tan").text());
+            product["suryo"] = removeComma($("#3-70_su").text());
+            product["tax"] = removeComma($("#3-70_tax").val());
+            product["kin"] = removeComma($("#3-70_kin").text());
+            this.productsData["3-70"] = product;
+
+            product["seihinNo"] = "71";
+            product["tanka"] = removeComma($("#3-71_tan").text());
+            product["suryo"] = removeComma($("#3-71_su").text());
+            product["tax"] = removeComma($("#3-71_tax").val());
+            product["kin"] = removeComma($("#3-71_kin").text());
+            this.productsData["3-71"] = product;
+
+            product["seihinNo"] = "72";
+            product["tanka"] = removeComma($("#3-72_tan").text());
+            product["suryo"] = removeComma($("#3-72_su").text());
+            product["tax"] = removeComma($("#3-72_tax").val());
+            product["kin"] = removeComma($("#3-72_kin").text());
+            this.productsData["3-72"] = product;
+
+            if ($("input#3-COL10_2").attr('checked')) {
+                product["seihinNo"] = "67";
+                product["tanka"] = removeComma($("#3-67_tan").text());
+                product["suryo"] = removeComma($("#3-67_su").text());
+                product["tax"] = removeComma($("#3-67_tax").val());
+                product["kin"] = removeComma($("#3-67_kin").text());
+                this.productsData["2-67"] = product;
+            }
+
+            if ($("input#3-COL10_4").attr('checked')) {
+                product["seihinNo"] = "68";
+                product["tanka"] = removeComma($("#3-68_tan").text());
+                product["suryo"] = removeComma($("#3-68_su").text());
+                product["tax"] = removeComma($("#3-68_tax").val());
+                product["kin"] = removeComma($("#3-68_kin").text());
+                this.productsData["3-68"] = product;
+            }
+
+        } else if(selected == "4") {
+
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "70";
+            product["tanka"] = removeComma($("#4-70_tan").text());
+            product["suryo"] = removeComma($("#4-70_su").text());
+            product["tax"] = removeComma($("#4-70_tax").val());
+            product["kin"] = removeComma($("#4-70_kin").text());
+            this.productsData["4-70"] = product;
+
+            product["seihinNo"] = "71";
+            product["tanka"] = removeComma($("#4-71_tan").text());
+            product["suryo"] = removeComma($("#4-71_su").text());
+            product["tax"] = removeComma($("#4-71_tax").val());
+            product["kin"] = removeComma($("#4-71_kin").text());
+            this.productsData["4-71"] = product;
+
+            if ($("input#4-COL10_2").attr('checked')) {
+                product["seihinNo"] = "67";
+                product["tanka"] = removeComma($("#4-67_tan").text());
+                product["suryo"] = removeComma($("#4-67_su").text());
+                product["tax"] = removeComma($("#4-67_tax").val());
+                product["kin"] = removeComma($("#4-67_kin").text());
+                this.productsData["4-67"] = product;
+            }
+
+        } else {
+            return;
+        }
+    }
+</script>

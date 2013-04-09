@@ -167,3 +167,28 @@
         </tr>
     </table>
 </label>
+
+<script type="text/javascript">
+    var submitItem12 = function() {
+        var selected = $("input[name='COL12_1']:checked").val();
+        var product = {};
+        if(selected == "1") {
+
+        } else if(selected == "2") {
+
+        } else if(selected == "3") {
+
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "80";
+            product["tanka"] = removeComma($("#3-80_tan").text());
+            product["suryo"] = removeComma($("#3-80_su").text());
+            product["tax"] = removeComma($("#3-80_tax").val());
+            product["kin"] = removeComma($("#3-80_kin").text());
+            this.productsData["3-80"] = product;
+
+        } else {
+            return;
+        }
+    }
+</script>

@@ -249,6 +249,7 @@ class KonyuRirekisController < ApplicationController
     select << ",seihins.\"hinmeiNm\""
     select << ",hs1.\"hokenShubetsuNm\" \"hokenShubetsuNm1\""
     select << ",hs2.\"hokenShubetsuNm\" \"hokenShubetsuNm2\""
+    select << ",mitsumoris.\"mitsumoriId\""
     select << ",CASE \"shubetsuKn\" WHEN 0 THEN '新規' WHEN 1 THEN '修理' ELSE NULL END \"shubetsuKnNm\""
 
     joins = ""
@@ -261,6 +262,7 @@ class KonyuRirekisController < ApplicationController
     joins << "LEFT OUTER JOIN seihins ON seihins.\"seihinId\" = konyu_rirekis.\"seihinId\" "
     joins << "LEFT OUTER JOIN hoken_shubetsus hs1 ON hs1.\"hokenShubetsuCd\" = konyu_rirekis.\"hokenShubetsuCd1\" "
     joins << "LEFT OUTER JOIN hoken_shubetsus hs2 ON hs2.\"hokenShubetsuCd\" = konyu_rirekis.\"hokenShubetsuCd2\" "
+    joins << "LEFT OUTER JOIN mitsumoris ON mitsumoris.\"konyuRirekiId\" = konyu_rirekis.\"konyuRirekiId\" AND mitsumoris.\"kokyakuId\" = konyu_rirekis.\"kokyakuId\" "
 
     return select, joins
   end
