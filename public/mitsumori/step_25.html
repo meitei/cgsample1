@@ -58,3 +58,32 @@
         <td class="td5"><div><img src="../images/items/image161.jpg" alt="" /></div></td>
     </tr>
 </table>
+
+<script type="text/javascript">
+    var submitItem25= function() {
+        var selected = $("input[name='1-COL25_1']:checked").val();
+        var product = {};
+
+        if(selected == "1") {
+
+            product["seihinNo"] = "200";
+            product["tanka"] = removeComma($("#1-200_tan").val());
+            product["suryo"] = removeComma($("#1-200_su").val());
+            product["tax"] = removeComma($("#1-200_tax").val());
+            product["kin"] = removeComma($("#1-200_kin").text());
+            this.productsData["1-200"] = product;
+
+        } else if(selected == "2") {
+
+            product["seihinNo"] = "201";
+            product["tanka"] = removeComma($("#1-201_tan").val());
+            product["suryo"] = removeComma($("#1-201_su").val());
+            product["tax"] = removeComma($("#1-201_tax").val());
+            product["kin"] = removeComma($("#1-201_kin").text());
+            this.productsData["1-201"] = product;
+
+        } else {
+            return;
+        }
+    }
+</script>
