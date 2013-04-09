@@ -14,6 +14,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step8");
+    WizardManager.prototype.addProduct = submitItem12;
   }
 
   // テーブル
@@ -36,6 +37,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step8");
+    WizardManager.prototype.addProduct = submitItem15;
   }
 
   // シートベルト
@@ -50,6 +52,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step8");
+    WizardManager.prototype.addProduct = submitItem16;
   }
 
   // ヘッドサポート

@@ -76,6 +76,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step5");
+    WizardManager.prototype.addProduct = submitItem21;
   }
 
   // ヘッドサポート
@@ -121,5 +122,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step5");
-    WizardManager.prototype.addProduct = submitItem2;
+    WizardManager.prototype.addProduct = submitItem6;
   }

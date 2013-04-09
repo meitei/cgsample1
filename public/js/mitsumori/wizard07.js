@@ -18,6 +18,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step7");
+    WizardManager.prototype.addProduct = submitItem10;
   }
 
   // 上肢支持部
@@ -36,6 +37,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step7");
+    WizardManager.prototype.addProduct = submitItem14;
   }
 
   // テーブル
@@ -58,6 +60,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step7");
+    WizardManager.prototype.addProduct = submitItem15;
   }
 
   // バックサポート

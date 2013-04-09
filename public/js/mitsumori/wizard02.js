@@ -283,4 +283,21 @@
     initNavi("2");
     // 単価を書き換え
     updateUnitPrice("step2");
+    WizardManager.prototype.addProduct = submitItem23;
+  }
+
+    // 既製品
+  function wizard2h(){
+    initNavi("2");
+    // 単価を書き換え
+    updateUnitPrice("step2");
+    WizardManager.prototype.addProduct = submitItem24;
+  }
+
+    // 既製品
+  function wizard2i(){
+    initNavi("2");
+    // 単価を書き換え
+    updateUnitPrice("step2");
+    WizardManager.prototype.addProduct = submitItem25;
   }

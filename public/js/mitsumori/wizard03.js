@@ -52,6 +52,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
+    WizardManager.prototype.addProduct = submitItem16;
   }
 
   // バックサポート選定
@@ -74,6 +75,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
+    WizardManager.prototype.addProduct = submitItem7;
   }
 
   // メインフレーム機構選定
@@ -111,4 +113,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
+    WizardManager.prototype.addProduct = submitItem22;
   }

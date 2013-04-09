@@ -1,24 +1,10 @@
 
+<script src="/js/mitsumori/WizardManager.js" type="text/javascript"></script>
 <div class="container">
 	<div class="title">見積入力</div>
     <div class="statuslabel"><span>STEP 1</span>使用環境　座位保持装置製作方法の選定</div>
 <%= render 'form' %>
 <script>
-  var WizardManager = function() {
-    this.step = 1;
-    this.mitsumoriData = {};
-    this.productsData = {};
-    // 見積情報保存
-    this.addEstimate = function() {
-      var m = $("#estimateForm").serializeArray();
-      var data = {};
-      $.each(m, function() {
-        data[this.name] = this.value;
-      });
-      //console.log(data);
-      this.mitsumoriData["step" + this.step] = data;
-    }
-  }
   var tanka = {};
   var konyuRirekiId = 1;
   var kokyakuId = 1;

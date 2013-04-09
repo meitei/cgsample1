@@ -41,6 +41,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step6");
+    WizardManager.prototype.addProduct = submitItem12;
   }
 
   // 上肢支持部
@@ -59,6 +60,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step6");
+    WizardManager.prototype.addProduct = submitItem14;
   }
 
   // シート座面
