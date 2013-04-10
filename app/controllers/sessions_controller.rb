@@ -12,7 +12,9 @@ class SessionsController < ApplicationController
         format.html { redirect_back_or_to(:root, :notice => 'Login successful.') }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else
-        logout
+        if @user.present?
+          logout
+        end
         format.html { flash.now[:alert] = "ログインに失敗しました。"; render :action => "new" }
         # format.html { flash.now[:alert] = "Login failed."; render :action => "new" }
         format.xml { render :xml => @user.errors, :status => :unprocessable_entity }
