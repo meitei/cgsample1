@@ -1,18 +1,21 @@
 <%= form_tag sessions_path, :method => :post do %>
   <div class="container" id="login_box">
-      <div class="tit_login">ユーザー ログイン</div>
-      <dl>
-        <dt>ユーザーID</dt>
-        <dd>
-          <%= text_field_tag :username %>
-        </dd>
-          <dt>パスワード</dt>
-          <dd>
-            <%= password_field_tag :password %>
-          </dd>
-        </dl>
-      <input type="image" src="images/btn_login.png" />
-    </div>
+    <div class="tit_login">ユーザー ログイン</div>
+    <dl>
+      <dt>ユーザーID</dt>
+      <dd>
+        <%= text_field_tag :username, '', :style => 'ime-mode:disabled;' %>
+      </dd>
+      <dt>パスワード</dt>
+      <dd>
+        <%= password_field_tag :password, '', :style => 'ime-mode:disabled;' %>
+      </dd>
+    </dl>
+    <input type="image" src="images/btn_login.png" />
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}", :style => 'color:red; clear:both;' %>
+    <% end %>
+  </div>
 <% end %>
 <script>
 $(function() {
