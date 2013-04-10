@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SessionsController < ApplicationController
   skip_before_filter :require_login, :except => [:destroy]
   def new
@@ -8,10 +9,12 @@ class SessionsController < ApplicationController
     respond_to do |format|
       @user = login(params[:username],params[:password],)
       if @user.present? && @user['manageFlg'] != 9
-          format.html { redirect_back_or_to(:root, :notice => 'Login successful.') }
-          format.xml { render :xml => @user, :status => :created, :location => @user }
+        format.html { redirect_back_or_to(:root, :notice => 'Login successful.') }
+        format.xml { render :xml => @user, :status => :created, :location => @user }
       else
-        format.html { flash.now[:alert] = "Login failed."; render :action => "new" }
+        logout
+        format.html { flash.now[:alert] = "ログインに失敗しました。"; render :action => "new" }
+        # format.html { flash.now[:alert] = "Login failed."; render :action => "new" }
         format.xml { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
@@ -19,6 +22,7 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to(:login, :notice => 'Logged out!')
+    # redirect_to(:login, :notice => 'Logged out!')
+    redirect_to(:login)
   end 
 end
