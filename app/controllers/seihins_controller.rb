@@ -94,11 +94,11 @@ class SeihinsController < ApplicationController
 
     # 検索条件設定
     conditions = Seihin.where("1 = ?", 1)
-    conditions = conditions.where("\"bunruiCd\" = ?", params[:bunruiCd].to_i) if params[:bunruiCd] !=""
+    conditions = conditions.where("\"bunruiCd\" = ?", params[:bunruiCd]) if params[:bunruiCd] !=""
     conditions = conditions.where("\"bunruiNm\" LIKE ?", params[:bunruiNm] + "%") if params[:bunruiNm] != ""
-    conditions = conditions.where("\"hinmeiCd\" = ?", params[:hinmeiCd].to_i) if params[:hinmeiCd] !=""
+    conditions = conditions.where("\"hinmeiCd\" = ?", params[:hinmeiCd]) if params[:hinmeiCd] !=""
     conditions = conditions.where("\"hinmeiNm\" LIKE ?", params[:hinmeiNm] + "%") if params[:hinmeiNm] != ""
-    conditions = conditions.where("\"katashikiCd\" = ?", params[:katashikiCd].to_i) if params[:katashikiCd] !=""
+    conditions = conditions.where("\"katashikiCd\" = ?", params[:katashikiCd]) if params[:katashikiCd] !=""
     conditions = conditions.where("\"katashikiNm\" LIKE ?", params[:katashikiNm] + "%") if params[:katashikiNm] != ""
     logger.debug(conditions)
 
