@@ -14,7 +14,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
-    WizardManager.prototype.addProduct = submitItem6;
+    wm.submitItems[3] = submitItem6;
   }
 
   // バックサポート選定
@@ -37,7 +37,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
-    WizardManager.prototype.addProduct = submitItem7;
+    wm.submitItems[3] = submitItem7;
   }
 
   // シートベルト選定
@@ -52,7 +52,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
-    WizardManager.prototype.addProduct = submitItem16;
+    wm.submitItems[3] = submitItem16;
   }
 
   // バックサポート選定
@@ -75,7 +75,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
-    WizardManager.prototype.addProduct = submitItem7;
+    wm.submitItems[3] = submitItem7;
   }
 
   // メインフレーム機構選定
@@ -98,7 +98,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
-    WizardManager.prototype.addProduct = submitItem3;
+    wm.submitItems[3] = submitItem3;
   }
 
     // オーダー対応木製
@@ -113,5 +113,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step3");
-    WizardManager.prototype.addProduct = submitItem22;
+    wm.submitItems[3] = submitItem22;
   }

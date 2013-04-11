@@ -89,5 +89,5 @@
 
     $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
     $("button#jqwizard_next").attr("disabled", "disabled");
-    WizardManager.prototype.addProduct = submitItem1;
+    wm.submitItems[1] = submitItem1;
   }

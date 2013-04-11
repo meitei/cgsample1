@@ -14,7 +14,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step11");
-    WizardManager.prototype.addProduct = submitItem14;
+    wm.submitItems[1] = submitItem14;
   }
 
   // OPPW
@@ -22,7 +22,7 @@
     $("button.jqwizard_next").removeAttr("disabled");
     // 単価を書き換え
     updateUnitPrice("step11");
-    WizardManager.prototype.addProduct = submitItem18;
+    wm.submitItems[1] = submitItem18;
   }
 
   // レッグサポート
@@ -45,5 +45,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step11");
-    WizardManager.prototype.addProduct = submitItem11;
+    wm.submitItems[1] = submitItem11;
   }

@@ -5,6 +5,7 @@
     <div class="statuslabel"><span>STEP 1</span>使用環境　座位保持装置製作方法の選定</div>
 <%= render 'form' %>
 <script>
+  var submitItem = {};
   var tanka = {};
   var konyuRirekiId = 1;
   var kokyakuId = 1;
@@ -34,7 +35,8 @@
     //clearNavi("1");
     // 次へ
     $("button.jqwizard_next").click(function() {
-      wm.addProduct();
+      WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
+      //wm.addProduct();
       wm.addEstimate();
       wm.step++;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
