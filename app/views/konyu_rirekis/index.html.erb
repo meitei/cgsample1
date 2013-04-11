@@ -44,7 +44,7 @@ $(function() {
         //}
     });
     var isLoaded = false;
-    var colNames = ["","ID","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","","","",""];
+    var colNames = ["","ID","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
         {name:"kokyakuId", index:"kokyakuId",width:50},
@@ -75,6 +75,7 @@ $(function() {
         {name:"koshinshaId", index:"koshinshaId", hidden:true},
         {name:"torokushaId", index:"torokushaId", hidden:true},
         {name:"id", index:"id", hidden:true},
+        {name:'registImg', index:'registImg', align:'center', width:20, formatter: registFormatter},
         {name:'reportImg', index:'reportImg', align:'center', width:20, formatter: reportFormatter},
         {name:'mitsumoriKanseizuImg', index:'mitsumoriKanseizuImg', align:'center', width:20, formatter: mitsumoriKanseizuFormatter},
         {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
@@ -232,6 +233,15 @@ $("a#btnKonyuRirekiClear").click(function() {
     return false;
 });
 
+function registFormatter(cellval, options, rowdata) {
+    if(rowdata['mitsumoriId'] > 0) {
+        title = "見積編集";
+    } else {
+        title = "見積登録";
+    }
+    return "<img src='/images/regist.png' onclick='registMitsumori(" + rowdata['mitsumoriId'] + ", " + rowdata['id'] + ")' title='" + title + "' style='width:16px; height:16px;'>";
+}
+
 function reportFormatter(cellval, options, rowdata) {
     if(rowdata['mitsumoriId'] > 0) {
         visible = "display:block;";
@@ -280,6 +290,17 @@ function searchKonyuRireki() {
         }
     };
     $("#searchKonyuRirekiGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// 見積登録/編集画面遷移用メソッド
+function registMitsumori(mitsumoriId, id) {
+    saveConditions();
+    if(mitsumoriId > 0) {
+        location.href = "mitsumoris/" + mitsumoriId + "/edit";
+    } else {
+        location.href = "mitsumoris/new?id=" + id;
+    }
+    return false;
 }
 
 // 見積書PDF出力用メソッド

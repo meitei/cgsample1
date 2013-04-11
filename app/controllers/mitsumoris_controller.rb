@@ -26,6 +26,10 @@ class MitsumorisController < ApplicationController
   def new
     @mitsumori = Mitsumori.new
 
+    @konyuRireki = KonyuRireki.find(params[:id])
+    @mitsumori.konyuRirekiId = @konyuRireki['konyuRirekiId']
+    @mitsumori.kokyakuId = @konyuRireki['kokyakuId']
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @mitsumori }
