@@ -18,7 +18,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step10");
-    WizardManager.prototype.addProduct = submitItem13;
+    wm.submitItems[1] = submitItem13;
   }
 
   // パッド
@@ -33,7 +33,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step10");
-    WizardManager.prototype.addProduct = submitItem17;
+    wm.submitItems[1] = submitItem17;
   }
 
   // OP車椅子フレーム
@@ -54,7 +54,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step10");
-    WizardManager.prototype.addProduct = submitItem19;
+    wm.submitItems[1] = submitItem19;
   }
 
   // アームパッド
@@ -73,5 +73,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step10");
-    WizardManager.prototype.addProduct = submitItem12;
+    wm.submitItems[1] = submitItem12;
   }

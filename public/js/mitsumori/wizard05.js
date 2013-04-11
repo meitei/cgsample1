@@ -18,7 +18,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step5");
-    WizardManager.prototype.addProduct = submitItem7;
+    wm.submitItems[1] = submitItem7;
   }
 
   // ヘッドサポート
@@ -45,7 +45,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step5");
-    WizardManager.prototype.addProduct = submitItem9;
+    wm.submitItems[1] = submitItem9;
   }
 
   // OPAR
@@ -76,7 +76,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step5");
-    WizardManager.prototype.addProduct = submitItem21;
+    wm.submitItems[1] = submitItem21;
   }
 
   // ヘッドサポート
@@ -103,7 +103,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step5");
-    WizardManager.prototype.addProduct = submitItem9;
+    wm.submitItems[1] = submitItem9;
   }
 
   // 介助用グリップ
@@ -122,5 +122,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step5");
-    WizardManager.prototype.addProduct = submitItem6;
+    wm.submitItems[1] = submitItem6;
   }

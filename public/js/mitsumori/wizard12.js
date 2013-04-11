@@ -18,7 +18,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step12");
-    WizardManager.prototype.addProduct = submitItem15;
+    wm.submitItems[1] = submitItem15;
   }
 
   // フットサポート
@@ -41,5 +41,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step12");
-    WizardManager.prototype.addProduct = submitItem13;
+    wm.submitItems[1] = submitItem13;
   }

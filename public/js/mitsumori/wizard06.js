@@ -22,7 +22,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step6");
-    WizardManager.prototype.addProduct = submitItem9;
+    wm.submitItems[1] = submitItem9;
   }
 
   // アームパッド
@@ -41,7 +41,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step6");
-    WizardManager.prototype.addProduct = submitItem12;
+    wm.submitItems[1] = submitItem12;
   }
 
   // 上肢支持部
@@ -60,7 +60,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step6");
-    WizardManager.prototype.addProduct = submitItem14;
+    wm.submitItems[1] = submitItem14;
   }
 
   // シート座面
@@ -83,5 +83,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step6");
-    WizardManager.prototype.addProduct = submitItem8;
+    wm.submitItems[1] = submitItem8;
   }
