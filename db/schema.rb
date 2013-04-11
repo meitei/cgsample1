@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403103740) do
+ActiveRecord::Schema.define(:version => 20130407194737) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -54,18 +54,18 @@ ActiveRecord::Schema.define(:version => 20130403103740) do
     t.string   "katashikiNm", :limit => 50
     t.integer  "kakaku",                     :null => false
     t.string   "shiyoBuhin",  :limit => 50
-    t.string   "biko",        :limit => 200
+    t.text     "biko",        :limit => 200
     t.integer  "koshinshaId",                :null => false
     t.integer  "torokushaId",                :null => false
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
 
-  create_table "kokyakus", :primary_key => "kokyakuId", :force => true do |t|
+  create_table "kokyakus", :id => false, :force => true do |t|
+    t.integer  "kokyakuId"
     t.string   "kokyakuNm",     :limit => 100
     t.string   "kokyakuNmKana", :limit => 100
     t.integer  "seibetsu"
-    t.date     "tanjoDt"
     t.string   "postNo",        :limit => 8
     t.string   "address1",      :limit => 100
     t.string   "address2",      :limit => 100
@@ -82,6 +82,10 @@ ActiveRecord::Schema.define(:version => 20130403103740) do
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
     t.integer  "delFlg",                       :default => 0, :null => false
+    t.integer  "tanjoGengo"
+    t.integer  "tanjoYear"
+    t.integer  "tanjoMonth"
+    t.integer  "tanjoDay"
   end
 
   create_table "konyu_rirekis", :force => true do |t|
@@ -142,8 +146,8 @@ ActiveRecord::Schema.define(:version => 20130403103740) do
     t.integer  "tanka",                     :null => false
     t.float    "tax",                       :null => false
     t.integer  "buhinCd"
-    t.integer  "torokushaId",               :null => false
     t.integer  "koshinshaId",               :null => false
+    t.integer  "torokushaId",               :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
@@ -316,10 +320,10 @@ ActiveRecord::Schema.define(:version => 20130403103740) do
   end
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id",                    :null => false
-    t.text     "data",       :limit => 2097152
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
