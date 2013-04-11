@@ -234,16 +234,16 @@ $("a#btnKonyuRirekiClear").click(function() {
 });
 
 function registFormatter(cellval, options, rowdata) {
-    if(rowdata['mitsumoriId'] > 0) {
+    if(rowdata['mitsumorisRowId'] > 0) {
         title = "見積編集";
     } else {
         title = "見積登録";
     }
-    return "<img src='/images/regist.png' onclick='registMitsumori(" + rowdata['mitsumoriId'] + ", " + rowdata['id'] + ")' title='" + title + "' style='width:16px; height:16px;'>";
+    return "<img src='/images/regist.png' onclick='registMitsumori(" + rowdata['mitsumorisRowId'] + ", " + rowdata['id'] + ")' title='" + title + "' style='width:16px; height:16px;'>";
 }
 
 function reportFormatter(cellval, options, rowdata) {
-    if(rowdata['mitsumoriId'] > 0) {
+    if(rowdata['mitsumorisRowId'] > 0) {
         visible = "display:block;";
     } else {
         visible = "display:none;";
@@ -252,7 +252,7 @@ function reportFormatter(cellval, options, rowdata) {
 }
 
 function mitsumoriKanseizuFormatter(cellval, options, rowdata) {
-    if(rowdata['mitsumoriId'] > 0) {
+    if(rowdata['mitsumorisRowId'] > 0) {
         visible = "display:block;";
     } else {
         visible = "display:none;";
@@ -293,10 +293,10 @@ function searchKonyuRireki() {
 }
 
 // 見積登録/編集画面遷移用メソッド
-function registMitsumori(mitsumoriId, id) {
+function registMitsumori(mitsumorisRowId, id) {
     saveConditions();
-    if(mitsumoriId > 0) {
-        location.href = "mitsumoris/" + mitsumoriId + "/edit";
+    if(mitsumorisRowId > 0) {
+        location.href = "mitsumoris/" + mitsumorisRowId + "/edit";
     } else {
         location.href = "mitsumoris/new?id=" + id;
     }

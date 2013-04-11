@@ -249,7 +249,7 @@ class KonyuRirekisController < ApplicationController
     select << ",seihins.\"hinmeiNm\""
     select << ",hs1.\"hokenShubetsuNm\" \"hokenShubetsuNm1\""
     select << ",hs2.\"hokenShubetsuNm\" \"hokenShubetsuNm2\""
-    select << ",mitsumoris.\"mitsumoriId\""
+    select << ",mitsumoris.\"id\" AS \"mitsumorisRowId\""
     select << ",CASE \"shubetsuKn\" WHEN 0 THEN '新規' WHEN 1 THEN '修理' ELSE NULL END \"shubetsuKnNm\""
 
     joins = ""
