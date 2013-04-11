@@ -369,6 +369,8 @@
 </label>
 <script type="text/javascript">
     var submitItem5 = function() {
+        // 見積データ保存
+        this.mitsumoriData["COL5_1"] = $("input[name='COL5_1']:checked").val();
         var selected = $("input[name='COL5_1']:checked").val();
         var product = {};
         var selected2;
@@ -383,6 +385,8 @@
             this.productsData["1-13"] = product;
 
         } else if(selected == "2") {
+            // 見積データ保存
+            this.mitsumoriData["2-COL5_2"] = $("input[name='2-COL5_2']:checked").val();
             // 製品データ保存
             selected2 = $("input[name='2-COL5_2']:checked").val();
 
@@ -433,7 +437,8 @@
             this.productsData["3-18"] = product;
 
         } else if (selected == "4"){
-
+            // 見積データ保存
+            this.mitsumoriData["4-COL5_4"] = $("input[name='4-COL5_4']:checked").val();
             // 製品データ保存
             selected2 = $("input[name='4-COL5_4']:checked").val();
 

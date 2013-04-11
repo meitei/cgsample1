@@ -97,7 +97,7 @@ class ShainsController < ApplicationController
 
     # 検索条件設定
     conditions = User.where("1 = ?", 1)
-    conditions = conditions.where("\"shainCd\" = ?", params[:shainCd].to_i) if params[:shainCd] !=""
+    conditions = conditions.where("\"shainCd\" = ?", params[:shainCd]) if params[:shainCd] !=""
     conditions = conditions.where("\"myoji\" LIKE ?", params[:myoji] + "%") if params[:myoji] != ""
     conditions = conditions.where("\"name\" LIKE ?", params[:name] + "%") if params[:name] != ""
     conditions = conditions.where("\"myojiFuri\" LIKE ?", params[:myojiFuri] + "%") if params[:myojiFuri] != ""
