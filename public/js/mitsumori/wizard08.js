@@ -14,7 +14,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step8");
-    WizardManager.prototype.addProduct = submitItem12;
+    wm.submitItems[1] = submitItem12;
   }
 
   // テーブル
@@ -37,7 +37,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step8");
-    WizardManager.prototype.addProduct = submitItem15;
+    wm.submitItems[1] = submitItem15;
   }
 
   // シートベルト
@@ -52,7 +52,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step8");
-    WizardManager.prototype.addProduct = submitItem16;
+    wm.submitItems[1] = submitItem16;
   }
 
   // ヘッドサポート
@@ -79,5 +79,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step8");
-    WizardManager.prototype.addProduct = submitItem9;
+    wm.submitItems[1] = submitItem9;
   }

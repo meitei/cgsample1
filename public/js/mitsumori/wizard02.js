@@ -147,7 +147,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem5;
+    wm.submitItems[2] = submitItem5;
   }
 
   // メインフレーム材質選定
@@ -275,7 +275,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem2;
+    wm.submitItems[2] = submitItem2;
   }
 
   // 既製品
@@ -283,7 +283,7 @@
     initNavi("2");
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem23;
+    wm.submitItems[2] = submitItem23;
   }
 
     // 既製品
@@ -291,7 +291,7 @@
     initNavi("2");
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem24;
+    wm.submitItems[2] = submitItem24;
   }
 
     // 既製品
@@ -299,5 +299,5 @@
     initNavi("2");
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem25;
+    wm.submitItems[2] = submitItem25;
   }
