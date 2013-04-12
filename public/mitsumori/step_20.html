@@ -612,7 +612,20 @@
 <script type="text/javascript">
     var submitItem20= function() {
         var product = {};
-
+        
+        this.mitsumoriData["COL20_1"] = 0;
+        this.mitsumoriData["COL20_2"] = 0;
+        this.mitsumoriData["COL20_3"] = 0;
+        this.mitsumoriData["COL20_4"] = 0;
+        this.mitsumoriData["COL20_5"] = 0;
+        this.mitsumoriData["COL20_6"] = 0;
+        this.mitsumoriData["COL20_7"] = 0;
+        this.mitsumoriData["COL20_8"] = 0;
+        this.mitsumoriData["COL20_9"] = 0;
+        this.mitsumoriData["COL20_10"] = 0;
+        this.mitsumoriData["COL20_11"] = 0;
+        this.mitsumoriData["COL20_12"] = 0;
+        
         if ($("input#1-COL20_1").attr('checked')) {
             product["seihinNo"] = "149";
             product["tanka"] = removeComma($("#1-149_tan").text());
@@ -620,6 +633,8 @@
             product["tax"] = removeComma($("#1-149_tax").val());
             product["kin"] = removeComma($("#1-149_kin").text());
             this.productsData["1-149"] = product;
+            
+            this.mitsumoriData["COL20_1"] = 1;
         }
 
         if ($("input#2-COL20_2").attr('checked')) {
@@ -629,6 +644,8 @@
             product["tax"] = removeComma($("#2-150_tax").val());
             product["kin"] = removeComma($("#2-150_kin").text());
             this.productsData["2-150"] = product;
+            
+            this.mitsumoriData["COL20_2"] = 1;
         }
 
         if ($("input#3-COL20_3").attr('checked')) {
@@ -638,6 +655,8 @@
             product["tax"] = removeComma($("#4-151_tax").val());
             product["kin"] = removeComma($("#4-151_kin").text());
             this.productsData["4-151"] = product;
+            
+            this.mitsumoriData["COL20_3"] = 1;
         }
 
         if ($("input#4-COL20_4").attr('checked')) {
@@ -647,6 +666,8 @@
             product["tax"] = removeComma($("#4-152_tax").val());
             product["kin"] = removeComma($("#4-152_kin").text());
             this.productsData["4-152"] = product;
+            
+            this.mitsumoriData["COL20_4"] = 1;
         }
 
         if ($("input#5-COL20_5").attr('checked')) {
@@ -656,6 +677,8 @@
             product["tax"] = removeComma($("#5-153_tax").val());
             product["kin"] = removeComma($("#5-153_kin").text());
             this.productsData["5-153"] = product;
+            
+            this.mitsumoriData["COL20_5"] = 1;
         }
 
         if ($("input#6-COL20_6").attr('checked')) {
@@ -665,6 +688,8 @@
             product["tax"] = removeComma($("#6-154_tax").val());
             product["kin"] = removeComma($("#6-154_kin").text());
             this.productsData["6-154"] = product;
+            
+            this.mitsumoriData["COL20_6"] = 1;
         }
 
         if ($("input#7-COL20_7").attr('checked')) {
@@ -674,6 +699,8 @@
             product["tax"] = removeComma($("#7-155_tax").val());
             product["kin"] = removeComma($("#7-155_kin").text());
             this.productsData["7-155"] = product;
+            
+            this.mitsumoriData["COL20_7"] = 1;
         }
 
         if ($("input#8-COL20_8").attr('checked')) {
@@ -683,6 +710,8 @@
             product["tax"] = removeComma($("#8-156_tax").val());
             product["kin"] = removeComma($("#8-156_kin").text());
             this.productsData["8-156"] = product;
+            
+            this.mitsumoriData["COL20_8"] = 1;
         }
 
         if ($("input#9-COL20_9").attr('checked')) {
@@ -692,6 +721,8 @@
             product["tax"] = removeComma($("#9-157_tax").val());
             product["kin"] = removeComma($("#9-157_kin").text());
             this.productsData["9-157"] = product;
+            
+            this.mitsumoriData["COL20_9"] = 1;
         }
 
         if ($("input#10-COL20_10").attr('checked')) {
@@ -701,6 +732,8 @@
             product["tax"] = removeComma($("#10-158_tax").val());
             product["kin"] = removeComma($("#10-158_kin").text());
             this.productsData["10-158"] = product;
+            
+            this.mitsumoriData["COL20_10"] = 1;
         }
 
         if ($("input#11-COL20_11").attr('checked')) {
@@ -710,6 +743,8 @@
             product["tax"] = removeComma($("#11-159_tax").val());
             product["kin"] = removeComma($("#11-159_kin").text());
             this.productsData["11-159"] = product;
+            
+            this.mitsumoriData["COL20_11"] = 1;
         }
 
         if ($("input#12-COL20_12").attr('checked')) {
@@ -719,6 +754,8 @@
             product["tax"] = removeComma($("#12-160_tax").val());
             product["kin"] = removeComma($("#12-160_kin").text());
             this.productsData["12-160"] = product;
+            
+            this.mitsumoriData["COL20_12"] = 1;
         }
 
     }

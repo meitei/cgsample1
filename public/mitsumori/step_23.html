@@ -458,10 +458,20 @@
     var submitItem23= function() {
         var selected = $("input[name='COL23_1']:checked").val();
         var selected2;
+        
+        this.mitsumoriData["COL23_1"] = selected;
+        this.mitsumoriData["COL23_2"] = 0;
+        this.mitsumoriData["COL23_3"] = 0;
+        this.mitsumoriData["COL23_4"] = 0;
+        this.mitsumoriData["COL23_5"] = 0;
+        this.mitsumoriData["COL23_6"] = 0;
+
         var product = {};
         if(selected == "1") {
 
             selected2 = $("input[name='1-COL23_2']:checked").val();
+
+            this.mitsumoriData["COL23_2"] = selected2;
 
             if (selected2 == "1"){
 
@@ -498,6 +508,8 @@
 
             selected2 = $("input[name='3-COL23_3']:checked").val();
 
+            this.mitsumoriData["COL23_3"] = selected2;
+
             if (selected2 == "1"){
 
                 product["seihinNo"] = "176";
@@ -529,6 +541,8 @@
 
             selected2 = $("input[name='4-COL23_4']:checked").val();
 
+            this.mitsumoriData["COL23_4"] = selected2;
+
             if (selected2 == "1"){
 
                 product["seihinNo"] = "179";
@@ -553,6 +567,8 @@
         } else if(selected == "5") {
 
             selected2 = $("input[name='5-COL23_5']:checked").val();
+
+            this.mitsumoriData["COL23_5"] = selected2;
 
             if (selected2 == "1"){
 
@@ -583,7 +599,41 @@
 
             } else
             }
+            
+        } else if(selected == "6") {
 
+            selected2 = $("input[name='6-COL23_6']:checked").val();
+            this.mitsumoriData["COL23_6"] = selected2;
+
+            if (selected2 == "1"){
+
+                product["seihinNo"] = "184";
+                product["tanka"] = removeComma($("#6-184_tan").val());
+                product["suryo"] = removeComma($("#6-184_su").val());
+                product["tax"] = removeComma($("#6-184_tax").val());
+                product["kin"] = removeComma($("#6-184_kin").text());
+                this.productsData["6-184"] = product;
+
+            } else if(selected2 == "2") {
+
+                product["seihinNo"] = "185";
+                product["tanka"] = removeComma($("#6-185_tan").val());
+                product["suryo"] = removeComma($("#6-185_su").val());
+                product["tax"] = removeComma($("#6-185_tax").val());
+                product["kin"] = removeComma($("#6-185_kin").text());
+                this.productsData["6-185"] = product;
+
+            } else if(selected2 == "3") {
+
+                product["seihinNo"] = "163";
+                product["tanka"] = removeComma($("#6-186_tan").val());
+                product["suryo"] = removeComma($("#6-186_su").val());
+                product["tax"] = removeComma($("#6-186_tax").val());
+                product["kin"] = removeComma($("#6-186_kin").text());
+                this.productsData["6-186"] = product;
+
+            } else
+            }
         } else {
             return;
         }

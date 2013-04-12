@@ -63,6 +63,8 @@
     var submitItem25= function() {
         var selected = $("input[name='1-COL25_1']:checked").val();
         var product = {};
+        
+        this.mitsumoriData["COL25_1"] = selected;
 
         if(selected == "1") {
 
