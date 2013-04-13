@@ -170,7 +170,7 @@ class KanseizuController < ApplicationController
             1 => "image011.jpg",
             2 => "image012.jpg"
         },
-        "COL_23_1" => {
+        "COL23_1" => {
             1 => "image145.jpg",
             2 => "image148.jpg",
             3 => "image149.jpg",
