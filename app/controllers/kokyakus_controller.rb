@@ -15,8 +15,10 @@ class KokyakusController < ApplicationController
     conditions = Kokyaku.where("\"delFlg\" = ?", 0)
     conditions = conditions.where("\"kokyakuId\" >= ?", params[:kokyaku][:kokyakuIdFrom].to_i) if params[:kokyaku][:kokyakuIdFrom] != ""
     conditions = conditions.where("\"kokyakuId\" <= ?", params[:kokyaku][:kokyakuIdTo].to_i) if params[:kokyaku][:kokyakuIdTo] != ""
-    conditions = conditions.where("\"kokyakuNm\" LIKE ?", "%" + params[:kokyaku][:kokyakuNm] + "%") if params[:kokyaku][:kokyakuNm] != ""
-    conditions = conditions.where("\"kokyakuNmKana\" LIKE ?", "%" + params[:kokyaku][:kokyakuNmKana] + "%") if params[:kokyaku][:kokyakuNmKana] != ""
+    conditions = conditions.where("\"kokyakuNm1\" LIKE ?", "%" + params[:kokyaku][:kokyakuNm1] + "%") if params[:kokyaku][:kokyakuNm1] != ""
+    conditions = conditions.where("\"kokyakuNm2\" LIKE ?", "%" + params[:kokyaku][:kokyakuNm2] + "%") if params[:kokyaku][:kokyakuNm2] != ""
+    conditions = conditions.where("\"kokyakuNmKana1\" LIKE ?", "%" + params[:kokyaku][:kokyakuNmKana1] + "%") if params[:kokyaku][:kokyakuNmKana1] != ""
+    conditions = conditions.where("\"kokyakuNmKana2\" LIKE ?", "%" + params[:kokyaku][:kokyakuNmKana2] + "%") if params[:kokyaku][:kokyakuNmKana2] != ""
     conditions = conditions.where("\"seibetsu\" = ?", params[:kokyaku][:seibetsu]) if params[:kokyaku][:seibetsu] != ""
 
     # 生年月日は「元号」「年」「月」「日」を連結して比較する
