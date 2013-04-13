@@ -18,7 +18,7 @@
 $(function() {
 
     var isLoaded = false;
-    var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","管理者フラグ","",""];
+    var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","管理者フラグ","管理者フラグ","",""];
     var colModelSettings = [
             {name:"id", index:"id", hidden:true},
             {name:"shainCd", index:"shainCd"},
@@ -27,7 +27,6 @@ $(function() {
             {name:"myojiFuri", index:"myojiFuri"},
             {name:"nameFuri", index:"nameFuri"},
             {name:"username", index:"username"},
-            {name:"password", index:"password"},
             {name:"manageFlg", index:"manageFlg",hidden:true},
             {name:"manageName", index:"manageName"},
             {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
@@ -137,8 +136,8 @@ function executeShain(shainId) {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
-    data["koshinshaId"] = 1;
-    data["torokushaId"] = 1;
+    data["koshinshaId"] = $("#loginId").val();
+    data["torokushaId"] = $("#loginId").val();
 
     postData["shain"] = data;
     postData["id"] = shainId;
@@ -151,9 +150,21 @@ function executeShain(shainId) {
         dataType: "json",
         success: function(result) {
             searchShain();
+            $("#shainFormDialog").dialog("close");
+            $('#shainForm input[type="text"], select, textarea').val('');
+            $('#shainForm input[type="password"], select, textarea').val('');
+            $("#shainErrorMessage").text("");
+            $("#shainForm").validate().resetForm();
+        },
+        error: function(result){
+            if (result.status == 422){
+                $("#shainErrorMessage").text("社員コードまたは、ログインIDは既に登録されています。");
+            } else {
+
+            }
+            return false;
         }
     });
-    $("#shainFormDialog").dialog("close");
     return false;
 }
 
@@ -181,7 +192,7 @@ function showShainFormDialog(shainId) {
                     //FIXME: IDがDB定義と合っていないので修正する
                     $("#shainForm #username").val(result["username"]);
                     $("#shainForm #loginId").val(result["loginId"]);
-                    $("#shainForm #loginPassword").val(result["loginPassword"]);
+                    $("#shainForm #password").val("");
                     $("#shainForm #manageFlg").val(result["manageFlg"]);
                 }
                 return false;
@@ -201,6 +212,7 @@ function showShainFormDialog(shainId) {
                 class : "btn_white",
                 click : function(){
                     $('#shainForm input[type="text"], select, textarea').val('');
+                    $('#shainForm input[type="password"], select, textarea').val('');
                     $("#shainForm").validate().resetForm();
                     $(this).dialog('close');
                     return false;
@@ -216,8 +228,6 @@ function showShainFormDialog(shainId) {
                          return false;
                      }
                     executeShain(shainId);
-                    $('#shainForm input[type="text"], select, textarea').val('');
-                    $(this).dialog('close');
                 }
             },
         },

@@ -134,8 +134,8 @@ function executeSeihin(seihinId) {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
-    data["koshinshaId"] = 1;
-    data["torokushaId"] = 1;
+    data["koshinshaId"] = $("#loginId").val();
+    data["torokushaId"] = $("#loginId").val();
 
     postData["seihin"] = data;
     postData["id"] = seihinId;
@@ -147,10 +147,21 @@ function executeSeihin(seihinId) {
         root: "seihin",
         dataType: "json",
         success: function(result) {
+            $('#seihinForm input[type="text"], select, textarea').val('');
+            $("#seihinErrorMessage").text("");
+            $("#seihinForm").validate().resetForm();
+            $("#seihinFormDialog").dialog("close");
             searchSeihin();
+        },
+        error: function(result){
+            if (result.status == 422){
+                $("#seihinErrorMessage").text("分類コード、品名コード、型式コードの組み合わせは、既に登録されています。");
+            } else {
+                
+            }
+            return false;
         }
     });
-    $("#seihinFormDialog").dialog("close");
     return false;
 }
 
@@ -176,6 +187,7 @@ function showSeihinFormDialog(seihinId) {
                     $("#seihinForm #hinmeiNm").val(result["hinmeiNm"]);
                     $("#seihinForm #katashikiCd").val(result["katashikiCd"]);
                     $("#seihinForm #katashikiNm").val(result["katashikiNm"]);
+                    $("#seihinErrorMessage").text("");
                 }
                 return false;
             }
@@ -194,6 +206,7 @@ function showSeihinFormDialog(seihinId) {
                 class : "btn_white",
                 click : function(){
                     $('#seihinForm input[type="text"], select, textarea').val('');
+                    $("#seihinErrorMessage").text("");
                     $("#seihinForm").validate().resetForm();
                     $(this).dialog('close');
                     return false;
@@ -209,8 +222,6 @@ function showSeihinFormDialog(seihinId) {
                          return false;
                      }
                     executeSeihin(seihinId);
-                    $('#seihinForm input[type="text"], select, textarea').val('');
-                    $(this).dialog('close');
                 }
             },
         },
@@ -242,5 +253,4 @@ function removeSeihin(seihinId) {
     });
     return false;
 }
-
 </script>
