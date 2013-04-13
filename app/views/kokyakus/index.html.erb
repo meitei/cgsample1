@@ -136,6 +136,8 @@ $(function() {
         }
     });
 
+    // 修正画面から遷移した場合、再検索を行う
+    setConditions();
 });
 
 $("a#btnCustomerSearch").click(function() {
@@ -186,6 +188,7 @@ function searchKokyaku() {
 
 // 更新用メソッド
 function modifyKokyaku(kokyakuId) {
+    saveConditions();
     location.href = "kokyakus/" + kokyakuId + "/edit";
     return false;
 }
@@ -208,6 +211,24 @@ function removeKokyaku(kokyakuId) {
     });
     searchKokyaku();
     return false;
+}
+
+function saveConditions() {
+    $.cookie.json = true;
+    var data = $("#kokyakuSearchForm").serializeArray();
+    $.cookie('kokyaku_conditions', data);
+}
+
+function setConditions() {
+    if (location.search.match(/reload=on/g)) {
+        var conditions = $.cookie('kokyaku_conditions');
+        $.removeCookie('kokyaku_conditions');
+        if (conditions) {
+            $("#kokyakuSearchForm")
+                .deserialize($.parseJSON(conditions));
+        }
+        searchKokyaku();
+    }
 }
 
 </script>
