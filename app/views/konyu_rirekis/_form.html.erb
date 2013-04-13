@@ -192,30 +192,31 @@ $(function() {
       $(element).removeClass(errorClass);
     },
     rules: {
-        ishiNm1: {maxlength:50},
-        ishiNm2: {maxlength:50},
-        rigakuRyohoNm1: {maxlength:50},
-        rigakuRyohoNm2: {maxlength:50},
-        sagyoRyohoNm1: {maxlength:50},
-        sagyoRyohoNm2: {maxlength:50},
-        juchuDtFrom: {date:true},
-        juchuDtTo: {date:true},
-        kariAwaseDtFrom: {date:true},
-        kariAwaseDtTo: {date:true},
-        nohinDtFrom: {date:true},
-        nohinDtTo: {date:true},
-        kofuDtFrom: {date:true},
-        kofuDtTo: {date:true},
-        nyukinDtFrom: {date:true},
-        nyukinDtTo: {date:true},
-        oshiinDtFrom: {date:true},
-        oshiinDtTo: {date:true},
-        kanryoDtFrom: {date:true},
-        kanryoDtTo: {date:true},
-        mitsumoriDtFrom: {date:true},
-        mitsumoriDtTo: {date:true},
-        shohinNm: {maxlength:100},
-        shohinShiyoBiko: {maxlength:200},
+        "konyu_rireki[kokyakuId]": {required:true, maxlength:7},
+        "konyu_rireki[ishiNm1]": {maxlength:50},
+        "konyu_rireki[ishiNm2]": {maxlength:50},
+        "konyu_rireki[rigakuRyohoNm1]": {maxlength:50},
+        "konyu_rireki[rigakuRyohoNm2]": {maxlength:50},
+        "konyu_rireki[sagyoRyohoNm1]": {maxlength:50},
+        "konyu_rireki[sagyoRyohoNm2]": {maxlength:50},
+        "konyu_rireki[juchuDtFrom]": {date:true},
+        "konyu_rireki[juchuDtTo]": {date:true},
+        "konyu_rireki[kariAwaseDtFrom]": {date:true},
+        "konyu_rireki[kariAwaseDtTo]": {date:true},
+        "konyu_rireki[nohinDtFrom]": {date:true},
+        "konyu_rireki[nohinDtTo]": {date:true},
+        "konyu_rireki[kofuDtFrom]": {date:true},
+        "konyu_rireki[kofuDtTo]": {date:true},
+        "konyu_rireki[nyukinDtFrom]": {date:true},
+        "konyu_rireki[nyukinDtTo]": {date:true},
+        "konyu_rireki[oshiinDtFrom]": {date:true},
+        "konyu_rireki[oshiinDtTo]": {date:true},
+        "konyu_rireki[kanryoDtFrom]": {date:true},
+        "konyu_rireki[kanryoDtTo]": {date:true},
+        "konyu_rireki[mitsumoriDtFrom]": {date:true},
+        "konyu_rireki[mitsumoriDtTo]": {date:true},
+        "konyu_rireki[shohinNm]": {maxlength:100},
+        "konyu_rireki[shohinShiyoBiko]": {maxlength:200}
     }
   });
   $("#konyu_rireki_shubetsuKn").css("width", "100px").attr("tabindex", "6");
@@ -384,28 +385,23 @@ $(function() {
 
 });
 
-// 更新用メソッド
-function executeKonyuRireki(id) {
+// Submit前処理用メソッド
+function executeKonyuRireki() {
   // クライアントバリデーション
   if ($("#konyuRirekiForm").valid() == false) {
      return false;
   }
+  var id = $("#id").val();
   //var action;
   //var method;
-  if(id != null) {
-    $("#koshinshaId").val("1");
+  if(id != null && id != undefined && id != "") {
+    $("#koshinshaId").val($("#loginId").val());
     $("#konyuRirekiForm").attr("action", "/konyu_rirekis/" + id);
-    //$("#kokyakuForm").attr("method", "PUT");
     $("#httpMethod").val("put");
-      //url = "../../kokyakus/" + kokyakuId + ".json";
-      //type = "PUT";
   } else {
-    $("#koshinshaId").val("1");
-    $("#torokushaId").val("1");
-      //url = "../kokyakus.json";
-      //type = "POST";
+    $("#koshinshaId").val($("#loginId").val());
+    $("#torokushaId").val($("#loginId").val());
     $("#konyuRirekiForm").attr("action", "/konyu_rirekis");
-    //$("#kokyakuForm").attr("method", "POST");
     $("#httpMethod").val("post");
   }
   $("#konyuRirekiForm").submit();
