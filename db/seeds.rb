@@ -63,6 +63,8 @@ if @kokyakus.empty?
 	Kokyaku.create(
 		:kokyakuId => 2400001,
 		:kokyakuNm => '顧客　太郎',
+		# :kokyakuNm1 => '顧客',
+		# :kokyakuNm2 => '太郎',
 		:torokushaId => 1,
 		:koshinshaId => 1
 	)
@@ -239,7 +241,7 @@ if @mitsumoris.empty?
 		:COL22_1 => 1,
 		# :COL22_2 => 1,
 		# :COL22_3 => 1,
-		:COL_23_1 => 1,
+		:COL23_1 => 1,
 		# :COL23_2 => 1,
 		# :COL23_3 => 1,
 		# :COL23_4 => 1,
