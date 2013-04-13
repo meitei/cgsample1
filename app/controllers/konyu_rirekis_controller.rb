@@ -242,6 +242,10 @@ class KonyuRirekisController < ApplicationController
     }
     select = main_cols.join(",")
     select << ",byoins.\"byoinNm\""
+    select << ",kokyakus.\"kokyakuNm1\""
+    select << ",kokyakus.\"kokyakuNm2\""
+    select << ",kokyakus.\"kokyakuNmKana1\""
+    select << ",kokyakus.\"kokyakuNmKana2\""
     select << ",#{str_sql_concat("kokyakus.\"kokyakuNm1\"","' '","kokyakus.\"kokyakuNm2\"")} \"kokyakuNm\""
     select << ",#{str_sql_concat("kokyakus.\"kokyakuNmKana1\"","' '","kokyakus.\"kokyakuNmKana2\"")} \"kokyakuNmKana\""
     select << ",#{str_sql_concat("ust.myoji","' '","ust.name")} \"uketsukeSesakuTantoNm\""
