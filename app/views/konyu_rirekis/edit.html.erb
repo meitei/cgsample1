@@ -1,6 +1,6 @@
 <div class="container">
-	<div class="title">顧客管理：顧客編集</div>
-	<div class="statuslabel"><span>顧客編集</span>コメント　無ければ削除</div>
+	<div class="title">購入履歴管理：購入履歴編集</div>
+	<div class="statuslabel"><span>購入履歴編集</span>コメント　無ければ削除</div>
 	<div id="konyuRirekiSearch" class="Tourokuform cf">
 		<%= render 'form' %>
 	</div>
@@ -44,7 +44,7 @@ $(function() {
 	// 	});
 	// }
 	$("a#btnKonyuRirekiRegist").click(function() {
-	    executeKonyuRireki($("#id").val());
+	    executeKonyuRireki();
 	    return false;
 	});
 
