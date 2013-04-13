@@ -21,7 +21,7 @@ if @users.empty?
 		:username => 'admin',
 		:email => 'admin@aaaaa.co.jp',
 		:password => 'admin',
-		:password_confirmation => 'admin',
+		# :password_confirmation => 'admin',
 		:shainCd => 1,
 		:koshinshaId => 1,
 		:torokushaId => 1,
