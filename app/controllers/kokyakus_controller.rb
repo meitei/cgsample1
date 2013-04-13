@@ -231,7 +231,16 @@ class KokyakusController < ApplicationController
   def get_select_stmt
     # 生年月日は「元号」「年」「月」「日」を連結して表示する
     tanjoGengoStr = "CASE kokyakus.\"tanjoGengo\" WHEN 1 THEN '大正' WHEN 2 THEN '昭和' WHEN 3 THEN '平成' ELSE NULL END "
-    tanjoDt = str_sql_concat(tanjoGengoStr, "kokyakus.\"tanjoYear\"", "'年'" , "kokyakus.\"tanjoMonth\"", "'月'", "kokyakus.\"tanjoDay\"", "'日' AS \"tanjoDt\"")
+
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+    logger.debug(adapter)
+    if adapter == "sqlite3" then
+      # for sqlite
+      tanjoDt = str_sql_concat(tanjoGengoStr, "SUBSTR('00'||kokyakus.\"tanjoYear\",-2,2)", "'年'" , "SUBSTR('00'||kokyakus.\"tanjoMonth\",-2,2)", "'月'", "SUBSTR('00'||kokyakus.\"tanjoDay\",-2,2)", "'日' AS \"tanjoDt\"")
+    else
+      # for mysql、postgres
+      tanjoDt = str_sql_concat(tanjoGengoStr, "LPAD(CAST(kokyakus.\"tanjoYear\" AS text), 2, '0') ", "'年'" , "LPAD(CAST(kokyakus.\"tanjoMonth\" AS text), 2, '0') ", "'月'", "LPAD(CAST(kokyakus.\"tanjoDay\" AS text), 2, '0') ", "'日' AS \"tanjoDt\"")
+    end
 
     select = "kokyakus.*"
     select << "," + tanjoDt
