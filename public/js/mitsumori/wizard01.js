@@ -41,7 +41,7 @@
     // 既製品選択/トイレットチェア
     $("input#2-COL1_2").change(function(){
       if($("input#3-COL1_1").attr("checked", "checked")) {
-        $("div#step2").load("/mitsumori/step_24.html", wizard2g);
+        $("div#step2").load("/mitsumori/step_24.html", wizard2h);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("トイレット");
         $("li#step3").hide();
@@ -65,7 +65,7 @@
     // 既製品選択/シャワーチェア
     $("input#3-COL1_2").change(function(){
       if($("input#3-COL1_1").attr("checked", "checked")) {
-        $("div#step2").load("/mitsumori/step_25.html", wizard2g);
+        $("div#step2").load("/mitsumori/step_25.html", wizard2i);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("シャワー");
         $("li#step3").hide();
