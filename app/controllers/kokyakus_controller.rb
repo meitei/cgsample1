@@ -235,6 +235,8 @@ class KokyakusController < ApplicationController
 
     select = "kokyakus.*"
     select << "," + tanjoDt
+    select << ",kokyakus.\"kokyakuNm1\" || ' ' || kokyakus.\"kokyakuNm2\" AS \"kokyakuNm\""
+    select << ",kokyakus.\"kokyakuNmKana1\" || ' ' || kokyakus.\"kokyakuNmKana2\" AS \"kokyakuNmKana\""
     select << ",sb1.\"shobyoNm\" \"shobyoNm1\""
     select << ",sb2.\"shobyoNm\" \"shobyoNm2\""
     select << ",sb3.\"shobyoNm\" \"shobyoNm3\""
