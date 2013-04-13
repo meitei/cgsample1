@@ -128,7 +128,8 @@ class KokyakusController < ApplicationController
   # GET /kokyakus/1
   # GET /kokyakus/1.json
   def show
-    @kokyaku = Kokyaku.find(params[:id])
+    # @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:id]})
 
     respond_to do |format|
       format.html # show.html.erb
@@ -151,7 +152,8 @@ class KokyakusController < ApplicationController
   # GET /kokyakus/1/edit
   def edit
     logger.debug(params)
-    @kokyaku = Kokyaku.find(params[:id])
+    # @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:id]})
     @shobyo = Shobyo.all
   end
 
@@ -191,10 +193,12 @@ class KokyakusController < ApplicationController
   # PUT /kokyakus/1
   # PUT /kokyakus/1.json
   def update
-    @kokyaku = Kokyaku.find(params[:id])
+    # @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = Kokyaku.where(:kokyakuId => params[:id]).first
 
     respond_to do |format|
-      if @kokyaku.update_attributes(params[:kokyaku])
+      # if @kokyaku.update_attributes(params[:kokyaku])
+      if @kokyaku.update_attributes(params[:kokyaku], {:kokyakuId => params[:id]})
         format.html { redirect_to action: "index", notice: 'Kokyaku was successfully updated.' }
         format.json { head :no_content }
       else
@@ -207,7 +211,8 @@ class KokyakusController < ApplicationController
   # DELETE /kokyakus/1
   # DELETE /kokyakus/1.json
   def destroy
-    @kokyaku = Kokyaku.find(params[:id])
+    # @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:id]})
     #@kokyaku.destroy
     logger.debug(@kokyaku)
     respond_to do |format|

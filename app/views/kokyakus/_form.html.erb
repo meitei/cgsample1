@@ -6,9 +6,9 @@
 <div style="width:866px;">
   <table>
     <tr>
-      <th style="width:75px;">顧客名称</th>
+      <th style="width:75px;">顧客コード</th>
       <td style="width:205px;">
-        <input style="width:150px;" type="text" id="kokyakuNm" name="kokyaku[kokyakuNm]" value="<%= @kokyaku.kokyakuNm %>" tabindex="2" />
+        <div id="kokyakuId" style="width:150px;" class="input-xlarge uneditable-input"><%= @kokyaku.kokyakuId %></div>
       </td>
       <th style="width:75px;">郵便番号</th>
       <td style="width:150px;">
@@ -21,9 +21,9 @@
       </td>
     </tr>
     <tr>
-      <th>カナ名称</th>
+      <th>顧客名称</th>
       <td>
-        <input style="width:150px;" type="text" id="kokyakuNmKana" name="kokyaku[kokyakuNmKana]" value="<%= @kokyaku.kokyakuNmKana %>" tabindex="4" />
+        <input style="width:150px;" type="text" id="kokyakuNm" name="kokyaku[kokyakuNm]" value="<%= @kokyaku.kokyakuNm %>" tabindex="2" />
       </td>
       <th>住所１</th>
       <td>
@@ -35,9 +35,9 @@
       </td>
     </tr>
     <tr>
-      <th>性別</th>
+      <th>カナ名称</th>
       <td>
-        <%= select :kokyaku, :seibetsu, [["男性", "0"], ["女性", "1"]], :include_blank => true %>
+        <input style="width:150px;" type="text" id="kokyakuNmKana" name="kokyaku[kokyakuNmKana]" value="<%= @kokyaku.kokyakuNmKana %>" tabindex="4" />
       </td>
       <th>住所２</th>
       <td>
@@ -49,12 +49,9 @@
       </td>
     </tr>
     <tr>
-      <th>生年月日</th>
+      <th>性別</th>
       <td>
-        <%= select :kokyaku, :tanjoGengo, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
-        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYear" name="kokyaku[tanjoYear]" value="<%= @kokyaku.tanjoYear %>" maxlength="2" tabindex="99" />年
-        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonth" name="kokyaku[tanjoMonth]" value="<%= @kokyaku.tanjoMonth %>" maxlength="2" tabindex="99" />月
-        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDay" name="kokyaku[tanjoDay]" value="<%= @kokyaku.tanjoDay %>" maxlength="2" tabindex="99" />日
+        <%= select :kokyaku, :seibetsu, [["男性", "0"], ["女性", "1"]], :include_blank => true %>
       </td>
       <th>電話番号</th>
       <td>
@@ -66,8 +63,13 @@
       </td>
     </tr>
     <tr>
-      <th></th>
-      <td></td>
+      <th>生年月日</th>
+      <td>
+        <%= select :kokyaku, :tanjoGengo, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
+        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYear" name="kokyaku[tanjoYear]" value="<%= @kokyaku.tanjoYear %>" maxlength="2" tabindex="99" />年
+        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonth" name="kokyaku[tanjoMonth]" value="<%= @kokyaku.tanjoMonth %>" maxlength="2" tabindex="99" />月
+        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDay" name="kokyaku[tanjoDay]" value="<%= @kokyaku.tanjoDay %>" maxlength="2" tabindex="99" />日
+      </td>
       <th>携帯番号</th>
       <td>
         <input style="width:150px;" type="text" id="tel2" name="kokyaku[tel2]" value="<%= @kokyaku.tel2 %>" tabindex="18" />
@@ -118,7 +120,7 @@ $(function() {
         tel2: {mobilenum:true, maxlength:13},
         fax: {telnum:true, maxlength:12},
         gakkoNm: {maxlength:20},
-        biko: {maxlength:100},
+        biko: {maxlength:100}
     }
   });
   $("a#searchAddress").click(function() {
