@@ -18,7 +18,7 @@
         <!--
         <input style="width:100px;" type="text" id="kokyakuNm" name="konyuRireki[kokyakuNm]" value="<%= @konyu_rireki.kokyakuNm %>" tabindex="10" />
         -->
-        <div id="kokyakuNm"><%= @konyu_rireki.kokyakuNm %></div>
+        <div id="kokyakuNm"><%= @konyu_rireki.kokyakuNm1 %>&amp;<%= @konyu_rireki.kokyakuNm2 %></div>
         <!-- <span id="kokyakuNm" class="input-xlarge uneditable-input"><%= @konyu_rireki.kokyakuNm %></span> -->
       </td>
     </tr>
@@ -258,7 +258,7 @@ $(function() {
         success: function(data) {
           response($.map(data, function(item) {
             return {
-              label: item.kokyakuNm+' - '+item.kokyakuId,
+              label: item.kokyakuNm1+' '+item.kokyakuNm2+' - '+item.kokyakuId,
               value: item.kokyakuId
             }
           }))

@@ -40,7 +40,8 @@ $(function() {
             mitsumoriDtTo: {date:true}
         }
         //messages: {
-        //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //    kokyakuNm1: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //    kokyakuNm2: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
         //}
     });
     var isLoaded = false;
@@ -116,7 +117,7 @@ $(function() {
                 success: function(data) {
                   response($.map(data, function(item) {
                     return {
-                      label: item.kokyakuNm+' - '+item.kokyakuId,
+                      label: item.kokyakuNm1+' '+item.kokyakuNm2+' - '+item.kokyakuId,
                       value: item.kokyakuId
                     }
                   }))
@@ -155,9 +156,9 @@ $(function() {
             success: function(data) {
               response($.map(data, function(item) {
                 return {
-                  label: item.kokyakuNm+' - '+item.kokyakuId,
+                  label: item.kokyakuNm1+' - '+item.kokyakuNm2+' - '+item.kokyakuId,
                   value: item.kokyakuNm
-                }
+                }//TODO:value: item.kokyakuNm？
               }))
             }
           })
