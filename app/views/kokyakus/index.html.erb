@@ -46,10 +46,10 @@ $(function() {
         //}
     });
     var isLoaded = false;
-    var colNames = ["","ID","顧客名","顧客カナ","","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名","学校名・施設名","備考","","","",""];
+    var colNames = ["","顧客コード","顧客名","顧客カナ","","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名","学校名・施設名","備考","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
-        {name:"kokyakuId", index:"kokyakuId",width:60},
+        {name:"kokyakuId", index:"kokyakuId",width:50},
         {name:"kokyakuNm", index:"kokyakuNm",width:80},
         {name:"kokyakuNmKana", index:"kokyakuNmKana",width:100},
         {name:"seibetsu", index:"seibetsu",hidden:true},
