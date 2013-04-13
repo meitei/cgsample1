@@ -61,9 +61,12 @@
       var postData = {};
       var url = "/mitsumoris.json";
       var type = "POST";
-      // 更新ユーザー、登録ユーザーを設定する
-      //data["koshinshaId"] = 1;
-      //data["torokushaId"] = 1;
+      wm.mitsumoriData["koshinshaId"] = $("#loginId").val();
+      wm.mitsumoriData["torokushaId"] = $("#loginId").val();
+      for(var products in wm.productsData) {
+        wm.productsData[products]["koshinshaId"] = $("#loginId").val();
+        wm.productsData[products]["torokushaId"] = $("#loginId").val();        
+      }
       postData["mitsumoriData"] = wm.mitsumoriData;
       postData["productsData"] = wm.productsData;
       $.ajax({

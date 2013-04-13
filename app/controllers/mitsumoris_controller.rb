@@ -50,25 +50,23 @@ class MitsumorisController < ApplicationController
       return
     end
     @mitsumori_data = params[:mitsumoriData]
-    logger.debug(@mitsumori_data)
+    #logger.debug(@mitsumori_data)
     max_id = Mitsumori.maximum("mitsumoriNo", :conditions => {:konyuRirekiId => @mitsumori_data[:konyuRirekiId], :kokyakuId => @mitsumori_data[:kokyakuId]})
     if max_id.nil? then
       max_id = 0
     end
-    logger.debug(max_id)
+    #logger.debug(max_id)
     @mitsumori_data[:mitsumoriNo] = max_id + 1
     @mitsumori = Mitsumori.new(@mitsumori_data)
     @result = @mitsumori.save
 
     @products_data = params[:productsData]
-    #if @puroductsData != nil then
-      logger.debug(@products_data)
-      @products_data.each do |key, value|
-        value[:mitsumoriNo] = max_id + 1
-        @seihin = MitsumoriSeihin.new(value)
-        @result = @seihin.save
-      end
-    #end
+    #logger.debug(@products_data)
+    @products_data.each do |key, value|
+      value[:mitsumoriNo] = max_id + 1
+      @seihin = MitsumoriSeihin.new(value)
+      @result = @seihin.save
+    end
 
     respond_to do |format|
       if @result
