@@ -223,7 +223,7 @@ class ReportController < ApplicationController
 
     ## ヘッダ項目：宛名
     kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => kokyakuId})
-    @@kokyakuNm = kokyaku["kokyakuNm"]
+    @@kokyakuNm = kokyaku["kokyakuNm1"] + " " + kokyaku["kokyakuNm2"]
 
     ## ヘッダ項目：型式
     seihin = Seihin.find(konyuRireki["seihinId"])

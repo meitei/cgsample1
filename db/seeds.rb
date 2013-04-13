@@ -62,9 +62,8 @@ end
 if @kokyakus.empty?
 	Kokyaku.create(
 		:kokyakuId => 2400001,
-		:kokyakuNm => '顧客　太郎',
-		# :kokyakuNm1 => '顧客',
-		# :kokyakuNm2 => '太郎',
+		:kokyakuNm1 => '顧客',
+		:kokyakuNm2 => '太郎',
 		:torokushaId => 1,
 		:koshinshaId => 1
 	)

@@ -23,7 +23,8 @@
     <tr>
       <th>顧客名称</th>
       <td>
-        <input style="width:150px;" type="text" id="kokyakuNm" name="kokyaku[kokyakuNm]" value="<%= @kokyaku.kokyakuNm %>" tabindex="2" />
+        <input style="width:150px;" type="text" id="kokyakuNm1" name="kokyaku[kokyakuNm1]" value="<%= @kokyaku.kokyakuNm1 %>" tabindex="2" />
+        <input style="width:150px;" type="text" id="kokyakuNm2" name="kokyaku[kokyakuNm2]" value="<%= @kokyaku.kokyakuNm2 %>" tabindex="2" />
       </td>
       <th>住所１</th>
       <td>
@@ -37,7 +38,8 @@
     <tr>
       <th>カナ名称</th>
       <td>
-        <input style="width:150px;" type="text" id="kokyakuNmKana" name="kokyaku[kokyakuNmKana]" value="<%= @kokyaku.kokyakuNmKana %>" tabindex="4" />
+        <input style="width:150px;" type="text" id="kokyakuNmKana1" name="kokyaku[kokyakuNmKana1]" value="<%= @kokyaku.kokyakuNmKana1 %>" tabindex="4" />
+        <input style="width:150px;" type="text" id="kokyakuNmKana2" name="kokyaku[kokyakuNmKana2]" value="<%= @kokyaku.kokyakuNmKana2 %>" tabindex="4" />
       </td>
       <th>住所２</th>
       <td>
@@ -108,8 +110,10 @@ $(function() {
       $(element).removeClass(errorClass); 
     },
     rules: {
-        kokyakuNm: {required:true, maxlength:10},
-        kokyakuNmKana: {katakana:true, maxlength:10},
+        kokyakuNm1: {required:true, maxlength:10},
+        kokyakuNm2: {required:true, maxlength:10},
+        kokyakuNmKana1: {katakana:true, maxlength:10},
+        kokyakuNmKana2: {katakana:true, maxlength:10},
         tanjoYear: {number:true, maxlength:2},
         tanjoMonth: {number:true, maxlength:2},
         tanjoDay: {number:true, maxlength:2},
