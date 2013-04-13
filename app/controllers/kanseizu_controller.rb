@@ -31,7 +31,7 @@ class KanseizuController < ApplicationController
             4 => "image028.jpg",
             5 => "image030.jpg"
         },
-        "COL5_1" => {
+        "COL5_1" => { #TODO:見直し
             1 => "image032.jpg",
             2 => "image034.jpg",
             3 => "image036.jpg"
@@ -63,7 +63,7 @@ class KanseizuController < ApplicationController
             3 => "image072.jpg",
             4 => "image074.jpg"
         },
-        "COL10_3" => {
+        "COL10_3" => { #TODO:見直し
             2 => "image076.jpg"
         },
         "COL11_1" => {
@@ -79,14 +79,26 @@ class KanseizuController < ApplicationController
         "COL13_1" => {
             2 => "image090.jpg"
         },
-        # "COL13_3" => {
-        #     3 => "image092.jpg",
-        #     3 => "image094.jpg",
-        #     4 => "image096.jpg",
-        #     4 => "image098.jpg"
-        # },
+
+
+# TODO: COL13_1が
+#         3：角度調整 で
+#             COL13_3 が
+#                 #     1 => "image092.jpg",
+#                 #     2 => "image094.jpg",
+#         4：開閉機構
+#             COL13_3 が
+#                 #     1 => "image096.jpg",
+#                 #     2 => "image098.jpg"
+
+
+#         # "COL13_3" => {
+#         # },
+
+
+
         "COL14_1" => {
-             # => "image100.jpg",
+            2 => "image100.jpg",
             3 => "image102.jpg"
         },
         "COL15_1" => {
@@ -94,78 +106,78 @@ class KanseizuController < ApplicationController
             3 => "image106.jpg",
             4 => "image108.jpg"
         },
-        # "COL16_2" => {
-        #      => "image110.jpg"
-        # },
-        # "COL16_3" => {
-        #      => "image112.jpg"
-        # },
-        # "COL16_4" => {
-        #      => "image114.jpg"
-        # },
-        # "COL16_13" => {
-        #      => "image115.jpg"
-        # },
-        # "COL16_9" => {
-        #      => "image117.jpg"
-        # },
-        # "COL16_12" => {
-        #      => "image119.jpg"
-        # },
-        # "COL17_2" => {
-        #      => "image121.jpg"
-        # },
-        # "COL17_3" => {
-        #      => "image123.jpg"
-        # },
-        # "COL17_4" => {
-        #      => "image125.jpg"
-        # },
-        # "COL17_5" => {
-        #      => "image127.jpg"
-        # },
-        # "COL17_6" => {
-        #      => "image129.jpg"
-        # },
-        # "COL17_11" => {
-        #      => "image123.jpg"
-        # },
-        # "COL17_12" => {
-        #      => "image123.jpg"
-        # },
-        # "COL17_13" => {
-        #      => "image133.jpg"
-        # },
-        # "COL17_15" => {
-        #      => "image135.jpg"
-        # },
-        # "COL18_2" => {
-        #      => "image137.jpg"
-        # },
-        # "COL19_2" => {
-        #      => "image137.jpg"
-        # },
-        # "COL19_5" => {
-        #      => "image139.jpg"
-        # },
-        # "COL19_13" => {
-        #      => "image141.jpg"
-        # },
-        # "COL19_14" => {
-        #      => "image143.jpg"
-        # },
-        # "COL20_2" => {
-        #      => "image137.jpg"
-        # },
-        # "COL20_8" => {
-        #      => "image141.jpg"
-        # },
-        # "COL20_9" => {
-        #      => "image143.jpg"
-        # },
-        # "COL21_2" => {
-        #      => "image137.jpg"
-        # },
+        "COL16_2" => {
+            1 => "image110.jpg"
+        },
+        "COL16_3" => {
+            1 => "image112.jpg"
+        },
+        "COL16_4" => {
+            1 => "image114.jpg"
+        },
+        "COL16_13" => {
+            1 => "image115.jpg"
+        },
+        "COL16_9" => {
+            1 => "image117.jpg"
+        },
+        "COL16_12" => {
+            1 => "image119.jpg"
+        },
+        "COL17_2" => {
+            1 => "image121.jpg"
+        },
+        "COL17_3" => {
+            1 => "image123.jpg"
+        },
+        "COL17_4" => {
+            1 => "image125.jpg"
+        },
+        "COL17_5" => {
+            1 => "image127.jpg"
+        },
+        "COL17_6" => {
+            1 => "image129.jpg"
+        },
+        "COL17_11" => {
+            1 => "image123.jpg"
+        },
+        "COL17_12" => {
+            1 => "image123.jpg"
+        },
+        "COL17_13" => {
+            1 => "image133.jpg"
+        },
+        "COL17_15" => {
+            1 => "image135.jpg"
+        },
+        "COL18_2" => {
+            1 => "image137.jpg"
+        },
+        "COL19_2" => {
+            1 => "image137.jpg"
+        },
+        "COL19_5" => {
+            1 => "image139.jpg"
+        },
+        "COL19_13" => {
+            1 => "image141.jpg"
+        },
+        "COL19_14" => {
+            1 => "image143.jpg"
+        },
+        "COL20_2" => {
+            1 => "image137.jpg"
+        },
+        "COL20_8" => {
+            1 => "image141.jpg"
+        },
+        "COL20_9" => {
+            1 => "image143.jpg"
+        },
+        "COL21_2" => {
+            1 => "image137.jpg"
+        },
         "COL22_1" => {
             1 => "image011.jpg",
             2 => "image012.jpg"
@@ -178,19 +190,19 @@ class KanseizuController < ApplicationController
             5 => "image152.jpg",
             6 => "image153.jpg"
         },
-        "COL24_2" => {
+        "COL24_2" => { #TODO:見直し
             1 => "image156.jpg",
             2 => "image155.jpg",
             3 => "image154.jpg",
             4 => "image154.jpg",
             5 => "image154.jpg"
         },
-        "COL24_3" => {
+        "COL24_3" => { #TODO:見直し
             1 => "image159.jpg",
             2 => "image159.jpg"
-        # },
-        # "COL25_1" => {
-        #      => "image161.jpg"
+        },
+        "COL25_1" => { #TODO:見直し
+            1 => "image161.jpg"
         }
     }
 
