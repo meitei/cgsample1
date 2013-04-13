@@ -49,6 +49,7 @@ class SeihinsController < ApplicationController
       else
         format.html { render action: "new" }
         format.json { render json: @seihin.errors, status: :unprocessable_entity }
+        logger.debug(@seihin.errors);
       end
     end
   end
