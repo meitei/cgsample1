@@ -69,6 +69,20 @@ if @kokyakus.empty?
 	)
 end
 
+# Shobyo.destroy_all(["1 = ?", 1])
+@shobyos = Shobyo.find(:all)
+if @shobyos.empty?
+	Shobyo.create(
+		:shobyoCd => 1,
+		:shobyoNm => '傷病名称１',
+		:shobyoNmKana => 'ショウビョウメイショウイチ',
+		:icd10Cd => 'ICD-10_CODE',
+		:shusaiDt => '2013/04/01',
+		# :haishiDt => '2013/04/01',
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+end
 
 # Seihin.destroy_all(["1 = ?", 1])
 @seihins = Seihin.find(:all)
