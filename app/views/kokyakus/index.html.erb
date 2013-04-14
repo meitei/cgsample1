@@ -10,6 +10,10 @@
 <div class="btn_new">
     <a class="btn_new_kokyaku" id="btnCustomerNew" href="/kokyakus/new">新規追加</a>
 </div>
+<form id="konyuRirekiSearchForm">
+    <input type="hidden" name="konyu_rireki[kokyakuIdFrom]" value="" />
+    <input type="hidden" name="konyu_rireki[kokyakuIdTo]" value="" />
+</form>
 <script>
 $(function() {
     $("#kokyakuForm").validate({
@@ -138,7 +142,7 @@ $(function() {
         }
     });
 
-    // 修正画面から遷移した場合、再検索を行う
+    // 登録/修正画面から遷移した場合、再検索を行う
     setConditions();
 });
 
@@ -171,7 +175,6 @@ function showKonyurRirekiFormatter(cellval, options, rowdata) {
 
 function registKonyurRirekiFormatter(cellval, options, rowdata) {
     return "<img src='/images/regist.png' onclick='registKonyurRireki(" + rowdata['kokyakuId'] + ")' title='購入履歴入力' style='width:16px; height:16px'>";
-    // return "<input type='button' onclick='registKonyurRireki(" + rowdata['kokyakuId'] + ")' title='購入履歴入力' style='height:16px'>";
 }
 
 // 検索用メソッド
@@ -226,14 +229,14 @@ function removeKokyaku(kokyakuId) {
 
 // 購入履歴一覧画面遷移用メソッド
 function showKonyurRireki(kokyakuId) {
-    saveConditions();
-    location.href = "konyu_rirekis";
+    // 購入履歴一覧での検索条件にセットするため、Cookieに顧客IDを保持しておく
+    saveKonyuRirekiConditions(kokyakuId);
+    location.href = "konyu_rirekis?kokyakuId=" + kokyakuId + "&reload=on";
     return false;
 }
 
 // 購入履歴登録画面遷移用メソッド
 function registKonyurRireki(kokyakuId) {
-    saveConditions();
     location.href = "konyu_rirekis/new?kokyakuId=" + kokyakuId;
     return false;
 }
@@ -256,4 +259,11 @@ function setConditions() {
     }
 }
 
+function saveKonyuRirekiConditions(kokyakuId) {
+    $('input[name="konyu_rireki[kokyakuIdFrom]"]').val(kokyakuId);
+    $('input[name="konyu_rireki[kokyakuIdTo]"]').val(kokyakuId);
+    $.cookie.json = true;
+    var data = $("#konyuRirekiSearchForm").serializeArray();
+    $.cookie('conditions', data);
+}
 </script>
