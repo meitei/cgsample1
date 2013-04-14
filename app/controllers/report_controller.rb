@@ -222,7 +222,7 @@ class ReportController < ApplicationController
     @@mitsumoriDt = konyuRireki["mitsumoriDt"]
 
     ## ヘッダ項目：宛名
-    kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => kokyakuId})
+    kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => kokyakuId, :delflg => 0})
     @@kokyakuNm = kokyaku["kokyakuNm1"] + " " + kokyaku["kokyakuNm2"]
 
     ## ヘッダ項目：型式

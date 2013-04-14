@@ -91,6 +91,15 @@ class KonyuRirekisController < ApplicationController
     @konyu_rireki = KonyuRireki.new
     @konyu_rireki.class_eval("attr_accessor :kokyakuNm1, :kokyakuNm2, :uketsukeSesakuTantoNm, :byoinNm, :kariAwaseTantoNm, :nohinTantoNm, :mitsumoriTantoEigyoNm, :hinmeiNm")
 
+    # 顧客一覧からの遷移時は顧客IDが渡される
+    if params[:kokyakuId].present?
+      logger.debug(params[:kokyakuId])
+      @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:kokyakuId], :delflg => 0})
+      @konyu_rireki.kokyakuId = @kokyaku.kokyakuId
+      @konyu_rireki.kokyakuNm1 = @kokyaku.kokyakuNm1
+      @konyu_rireki.kokyakuNm2 = @kokyaku.kokyakuNm2
+    end
+
     @hoken_shubetsu = HokenShubetsu.all
     session.delete(:files) if session.has_key? :files
     respond_to do |format|
