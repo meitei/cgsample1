@@ -198,9 +198,10 @@ class KokyakusController < ApplicationController
     # @kokyaku = Kokyaku.find(params[:id])
     @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:id], :delFlg => 0})
 
-    respond_to do |format|
+    respond_to do |format| # TODO:ローカルでエラーになる…
       # if @kokyaku.update_attributes(params[:kokyaku])
       if @kokyaku.update_attributes(params[:kokyaku], {:kokyakuId => params[:id]})
+      # if @kokyaku.update_attributes(params[:kokyaku], {:kokyakuId => params[:id], :delFlg => 0})
         format.html { redirect_to action: "index", notice: 'Kokyaku was successfully updated.', reload: 'on' }
         format.json { head :no_content }
       else
