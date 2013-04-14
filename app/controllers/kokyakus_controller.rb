@@ -183,7 +183,7 @@ class KokyakusController < ApplicationController
 
     respond_to do |format|
       if @kokyaku.save
-        format.html { redirect_to action: "index", notice: 'Kokyaku was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Kokyaku was successfully created.', reload: 'on' }
         format.json { render json: @kokyaku, status: :created, location: @kokyaku }
       else
         format.html { render action: "new" }
@@ -201,7 +201,7 @@ class KokyakusController < ApplicationController
     respond_to do |format|
       # if @kokyaku.update_attributes(params[:kokyaku])
       if @kokyaku.update_attributes(params[:kokyaku], {:kokyakuId => params[:id]})
-        format.html { redirect_to action: "index", notice: 'Kokyaku was successfully updated.' }
+        format.html { redirect_to action: "index", notice: 'Kokyaku was successfully updated.', reload: 'on' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
