@@ -32,6 +32,9 @@
    * digits 小数点以下の桁数（0：なし、1：１桁、2：２桁）
    */
   function getFormatAmount(kingaku, round, digits) {
+    if(kingaku == 0) {
+      return kingaku;
+    }
     // 絶対値を取得
     var abs = Math.abs(kingaku);
     // 桁数処理用数値
@@ -96,30 +99,32 @@
       s = tanka[i]["seihinNo"];
       t = parseFloatEx(tanka[i]["tanka"]);
       x = parseFloatEx(tanka[i]["tax"]);
-      kingaku = t * parseFloatEx($("div#" + step + " #1-" + s + "_su").text());
-      $("div#" + step + " td#1-" + s + "_tan").text(formatComma(t));
-      $("div#" + step + " td#1-" + s + "_kin").text(formatComma(kingaku));
-      $("div#" + step + " input#1-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
-      kingaku = t * parseFloatEx($("div#" + step + " #2-" + s + "_su").text());
-      $("div#" + step + " td#2-" + s + "_tan").text(formatComma(t));
-      $("div#" + step + " td#2-" + s + "_kin").text(formatComma(kingaku));
-      $("div#" + step + " input#2-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
-      kingaku = t * parseFloatEx($("div#" + step + " #3-" + s + "_su").text());
-      $("div#" + step + " td#3-" + s + "_tan").text(formatComma(t));
-      $("div#" + step + " td#3-" + s + "_kin").text(formatComma(kingaku));
-      $("div#" + step + " input#3-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
-      kingaku = t * parseFloatEx($("div#" + step + " #4-" + s + "_su").text());
-      $("div#" + step + " td#4-" + s + "_tan").text(formatComma(t));
-      $("div#" + step + " td#4-" + s + "_kin").text(formatComma(kingaku));
-      $("div#" + step + " input#4-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
-      kingaku = t * parseFloatEx($("div#" + step + " #5-" + s + "_su").text());
-      $("div#" + step + " td#5-" + s + "_tan").text(formatComma(t));
-      $("div#" + step + " td#5-" + s + "_kin").text(formatComma(kingaku));
-      $("div#" + step + " input#5-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
-      kingaku = t * parseFloatEx($("div#" + step + " #6-" + s + "_su").text());
-      $("div#" + step + " td#6-" + s + "_tan").text(formatComma(t));
-      $("div#" + step + " td#6-" + s + "_kin").text(formatComma(kingaku));
-      $("div#" + step + " input#6-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x), 1, 0));
+      for(var j=1; j<20; j++) {
+        kingaku = t * parseFloatEx($("div#" + step + " #" + j + "-" + s + "_su").text());
+        $("div#" + step + " td#" + j + "-" + s + "_tan").text(formatComma(t));
+        $("div#" + step + " td#" + j + "-" + s + "_kin").text(formatComma(kingaku));
+        $("div#" + step + " input#" + j + "-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));        
+      }
+      // kingaku = t * parseFloatEx($("div#" + step + " #2-" + s + "_su").text());
+      // $("div#" + step + " td#2-" + s + "_tan").text(formatComma(t));
+      // $("div#" + step + " td#2-" + s + "_kin").text(formatComma(kingaku));
+      // $("div#" + step + " input#2-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
+      // kingaku = t * parseFloatEx($("div#" + step + " #3-" + s + "_su").text());
+      // $("div#" + step + " td#3-" + s + "_tan").text(formatComma(t));
+      // $("div#" + step + " td#3-" + s + "_kin").text(formatComma(kingaku));
+      // $("div#" + step + " input#3-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
+      // kingaku = t * parseFloatEx($("div#" + step + " #4-" + s + "_su").text());
+      // $("div#" + step + " td#4-" + s + "_tan").text(formatComma(t));
+      // $("div#" + step + " td#4-" + s + "_kin").text(formatComma(kingaku));
+      // $("div#" + step + " input#4-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
+      // kingaku = t * parseFloatEx($("div#" + step + " #5-" + s + "_su").text());
+      // $("div#" + step + " td#5-" + s + "_tan").text(formatComma(t));
+      // $("div#" + step + " td#5-" + s + "_kin").text(formatComma(kingaku));
+      // $("div#" + step + " input#5-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
+      // kingaku = t * parseFloatEx($("div#" + step + " #6-" + s + "_su").text());
+      // $("div#" + step + " td#6-" + s + "_tan").text(formatComma(t));
+      // $("div#" + step + " td#6-" + s + "_kin").text(formatComma(kingaku));
+      // $("div#" + step + " input#6-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
     }
   }
 

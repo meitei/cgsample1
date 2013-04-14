@@ -51,7 +51,7 @@ class MitsumorisController < ApplicationController
     end
     @mitsumori_data = params[:mitsumoriData]
     #logger.debug(@mitsumori_data)
-    max_id = Mitsumori.maximum("mitsumoriNo", :conditions => {:konyuRirekiId => @mitsumori_data[:konyuRirekiId], :kokyakuId => @mitsumori_data[:kokyakuId]})
+    max_id = Mitsumori.maximum("mitsumoriNo")
     if max_id.nil? then
       max_id = 0
     end

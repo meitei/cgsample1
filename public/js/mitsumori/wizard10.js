@@ -42,7 +42,7 @@
     // 次へ
     $("button.jqwizard_next").click(function() {
       // 見積データ保存
-      mitsumoriData["COL19_1"] = $("input[name='COL19_1']:checked").val();
+      wm.mitsumoriData["COL19_1"] = $("input[name='COL19_1']:checked").val();
       step = 11;
       $("div.statuslabel").html("<span>STEP 11</span>" + $("div#step11 > div#title").text());
       $("button#jqwizard_next").attr("disabled", "disabled");

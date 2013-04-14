@@ -1,6 +1,6 @@
   /* 構造フレーム選定 */
   function wizard2a(){
-    // 固定型選択
+    // 屋内用
     $("input#1-COL5_1").change(function(){
       $("div#step3").load("/mitsumori/step_06.html", wizard3a);
       $("li#step3 a").attr("href", "#step3");
@@ -41,12 +41,15 @@
       $("div#step15").load("/mitsumori/step_20.html", wizard15a);
       $("li#step15 a").attr("href", "#step15");
       $("li#step15 span").text("オプション");
+      for(var i=1; i<18; i++) {
+        $("li#step" + i).show();  
+      }
       $("li#step16").hide();
       $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 15;
     });
-    // リクライニング式選択
+    // 屋外用
     $("input#2-COL5_1").change(function(){
       $("div#step3").load("/mitsumori/step_07.html", wizard3b);
       $("li#step3 a").attr("href", "#step3");
@@ -84,7 +87,7 @@
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 11;
     });
-    // ティルト式選択
+    // リクライニングティルト式選択
     $("input#3-COL5_1").change(function(){
       $("div#step3").load("/mitsumori/step_16.html", wizard3c);
       $("li#step3 a").attr("href", "#step3");
@@ -95,6 +98,9 @@
       $("div#step5").load("/mitsumori/step_21.html", wizard5c);
       $("li#step5 a").attr("href", "#step5");
       $("li#step5 span").text("オプション");
+      for(var i=1; i<18; i++) {
+        $("li#step" + i).show();  
+      }
       $("li#step6").hide();
       $("li#step7").hide();
       $("li#step8").hide();
@@ -110,7 +116,7 @@
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 5;
     });
-    // リクライニング・ティルト式選択
+    // 車椅選択
     $("input#4-COL5_1").change(function(){
       $("div#step3").load("/mitsumori/step_07.html", wizard3d);
       $("li#step3 a").attr("href", "#step3");
@@ -133,9 +139,12 @@
       $("div#step9").load("/mitsumori/step_17.html", wizard9d);
       $("li#step9 a").attr("href", "#step9");
       $("li#step9 span").text("パッド");
-      $("div#step10").load("/mitsumori/step_18.html", wizard10d);
+      $("div#step10").load("/mitsumori/step_19.html", wizard10d);
       $("li#step10 a").attr("href", "#step10");
       $("li#step10 span").text("オプション");
+      for(var i=1; i<18; i++) {
+        $("li#step" + i).show();  
+      }
       $("li#step11").hide();
       $("li#step12").hide();
       $("li#step13").hide();
@@ -200,6 +209,9 @@
       $("div#step17").load("/mitsumori/step_20.html", wizard17e);
       $("li#step17 a").attr("href", "#step17");
       $("li#step17 span").text("オプション");
+      for(var i=1; i<18; i++) {
+        $("li#step" + i).show();  
+      }
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 17;
     });
@@ -250,6 +262,9 @@
       $("div#step17").load("/mitsumori/step_20.html", wizard17e);
       $("li#step17 a").attr("href", "#step17");
       $("li#step17 span").text("オプション");
+      for(var i=1; i<18; i++) {
+        $("li#step" + i).show();  
+      }
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 17;
     });
@@ -259,6 +274,9 @@
       $("div#step3").load("/mitsumori/step_22.html", wizard3f);
       $("li#step3 a").attr("href", "#step3");
       $("li#step3 span").text("木製");
+      for(var i=1; i<18; i++) {
+        $("li#step" + i).show();  
+      }
       $("li#step4").hide();
       $("li#step5").hide();
       $("li#step6").hide();

@@ -20,6 +20,9 @@
         $("div#step2").load("/mitsumori/step_23.html", wizard2g);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("木製座位");
+        for(var i=1; i<18; i++) {
+            $("li#step" + i).show();  
+        }
         $("li#step3").hide();
         $("li#step4").hide();
         $("li#step5").hide();
@@ -44,6 +47,9 @@
         $("div#step2").load("/mitsumori/step_24.html", wizard2h);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("トイレット");
+        for(var i=1; i<18; i++) {
+            $("li#step" + i).show();  
+        }
         $("li#step3").hide();
         $("li#step4").hide();
         $("li#step5").hide();
@@ -68,6 +74,9 @@
         $("div#step2").load("/mitsumori/step_25.html", wizard2i);
         $("li#step2 a").attr("href", "#step2");
         $("li#step2 span").text("シャワー");
+        for(var i=1; i<18; i++) {
+            $("li#step" + i).show();  
+        }
         $("li#step3").hide();
         $("li#step4").hide();
         $("li#step5").hide();
