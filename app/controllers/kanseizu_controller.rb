@@ -31,7 +31,7 @@ class KanseizuController < ApplicationController
             4 => "image028.jpg",
             5 => "image030.jpg"
         },
-        "COL5_1" => { #TODO:見直し
+        "COL5_1" => {
             1 => "image032.jpg",
             2 => "image034.jpg",
             3 => "image036.jpg"
@@ -63,8 +63,8 @@ class KanseizuController < ApplicationController
             3 => "image072.jpg",
             4 => "image074.jpg"
         },
-        "COL10_3" => { #TODO:見直し
-            2 => "image076.jpg"
+        "COL10_3" => {
+            1 => "image076.jpg"
         },
         "COL11_1" => {
             2 => "image078.jpg",
@@ -79,24 +79,10 @@ class KanseizuController < ApplicationController
         "COL13_1" => {
             2 => "image090.jpg"
         },
-
-
-# TODO: COL13_1が
-#         3：角度調整 で
-#             COL13_3 が
-#                 #     1 => "image092.jpg",
-#                 #     2 => "image094.jpg",
-#         4：開閉機構
-#             COL13_3 が
-#                 #     1 => "image096.jpg",
-#                 #     2 => "image098.jpg"
-
-
-#         # "COL13_3" => {
-#         # },
-
-
-
+        "COL13_3" => { # ※COL13_3はCOL13_1の値によって出力画像が変動する。
+                    1 => ["image092.jpg", "image096.jpg"],
+                    2 => ["image094.jpg", "image098.jpg"]
+        },
         "COL14_1" => {
             2 => "image100.jpg",
             3 => "image102.jpg"
@@ -190,19 +176,26 @@ class KanseizuController < ApplicationController
             5 => "image152.jpg",
             6 => "image153.jpg"
         },
-        "COL24_2" => { #TODO:見直し
+        "COL24_2" => {
             1 => "image156.jpg",
-            2 => "image155.jpg",
-            3 => "image154.jpg",
-            4 => "image154.jpg",
-            5 => "image154.jpg"
+            2 => "image156.jpg",
+            3 => "image155.jpg",
+            4 => "image155.jpg",
+            5 => "image154.jpg",
+            6 => "image154.jpg",
+            7 => "image154.jpg",
+            8 => "image154.jpg",
+            9 => "image154.jpg",
+            10 => "image154.jpg"
         },
-        "COL24_3" => { #TODO:見直し
+        "COL24_3" => {
             1 => "image159.jpg",
-            2 => "image159.jpg"
+            2 => "image159.jpg",
+            3 => "image159.jpg"
         },
-        "COL25_1" => { #TODO:見直し
-            1 => "image161.jpg"
+        "COL25_1" => {
+            1 => "image161.jpg",
+            2 => "image161.jpg"
         }
     }
 
@@ -213,13 +206,24 @@ class KanseizuController < ApplicationController
     @hash0.each_pair {|column, _hash|
       if @mitsumori[column].present? && @mitsumori[column] > 0
         _hash.each_pair {|key, value|
-          if @mitsumori[column] == key
-            if value.is_a?(Array)
-              value.each {|value2|
-                @array.push value2
-              }
-            else
-              @array.push value
+          # COL13_3の場合、COL13_1の値によって出力画像が変動する
+          if column == "COL13_3"
+            # COL13_1=3：角度調整の場合
+            if @mitsumori["COL13_1"] == 3
+              @array.push value[0]
+            # COL13_1=4：開閉機構の場合
+            elsif @mitsumori["COL13_1"] == 4
+              @array.push value[1]
+            end
+          else
+            if @mitsumori[column] == key
+              if value.is_a?(Array)
+                value.each {|value2|
+                  @array.push value2
+                }
+              else
+                @array.push value
+              end
             end
           end
         }
