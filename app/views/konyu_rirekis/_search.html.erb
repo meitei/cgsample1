@@ -4,66 +4,64 @@
       <tr>
         <th style="width:80px;">顧客コード</th>
         <td style="width:175px;">
-          <input style="width:50px;" type="text" id="kokyakuIdFrom" name="konyu_rireki[kokyakuIdFrom]" tabindex="2" />&nbsp;〜
-          <input style="width:50px;" type="text" id="kokyakuIdTo" name="konyu_rireki[kokyakuIdTo]" tabindex="4" />
+          <input style="width:50px; ime-mode: disabled;" type="text" id="kokyakuIdFrom" name="konyu_rireki[kokyakuIdFrom]" maxlength="7" />&nbsp;〜
+          <input style="width:50px; ime-mode: disabled;" type="text" id="kokyakuIdTo" name="konyu_rireki[kokyakuIdTo]" maxlength="7" />
         </td>
         <th style="width:70px;">保険種別１</th>
         <td style="width:175px;">
-          <!-- <input style="width:130px;" type="text" id="hokenShubetsuCd1" name="konyu_rireki[hokenShubetsuCd1]" tabindex="28" /> -->
           <%= select :konyu_rireki, :hokenShubetsuCd1, @hoken_shubetsu.map{|t| [t.hokenShubetsuNm, t.hokenShubetsuCd]}, :include_blank => true %>
         </td>
         <th style="width:60px;">受注日</th>
         <td style="width:200px;">
-          <input style="width:80px;" type="text" id="juchuDtFrom" name="konyu_rireki[juchuDtFrom]" tabindex="18" />&nbsp;〜
-          <input style="width:80px;" type="text" id="juchuDtTo" name="konyu_rireki[juchuDtTo]" tabindex="26" />
+          <input style="width:80px; ime-mode: disabled;" type="text" id="juchuDtFrom" name="konyu_rireki[juchuDtFrom]" />&nbsp;〜
+          <input style="width:80px; ime-mode: disabled;" type="text" id="juchuDtTo" name="konyu_rireki[juchuDtTo]" />
         </td>
       </tr>
       <tr>
         <th>病院</th>
         <td>
-          <input style="width:130px;" type="text" id="byoinNm" name="konyu_rireki[byoinNm]" tabindex="6" />
+          <input style="width:130px;" type="text" id="byoinNm" name="konyu_rireki[byoinNm]" />
         </td>
         <th>保険種別２</th>
         <td>
-          <!-- <input style="width:130px;" type="text" id="hokenShubetsuCd2" name="konyu_rireki[hokenShubetsuCd2]" tabindex="30" /> -->
           <%= select :konyu_rireki, :hokenShubetsuCd2, @hoken_shubetsu.map{|t| [t.hokenShubetsuNm, t.hokenShubetsuCd]}, :include_blank => true %>
         </td>
         <th>仮合日</th>
         <td>
-          <input style="width:80px;" type="text" id="kariAwaseDtFrom" name="konyu_rireki[kariAwaseDtFrom]" tabindex="18" />&nbsp;〜
-          <input style="width:80px;" type="text" id="kariAwaseDtTo" name="konyu_rireki[kariAwaseDtTo]" tabindex="26" />
+          <input style="width:80px; ime-mode: disabled;" type="text" id="kariAwaseDtFrom" name="konyu_rireki[kariAwaseDtFrom]" />&nbsp;〜
+          <input style="width:80px; ime-mode: disabled;" type="text" id="kariAwaseDtTo" name="konyu_rireki[kariAwaseDtTo]" />
         </td>
       </tr>
       <tr>
         <th>顧客名</th>
         <td>
-          <input style="width:65px;" type="text" id="kokyakuNm1" name="konyu_rireki[kokyakuNm1]" tabindex="6" />
-          <input style="width:65px;" type="text" id="kokyakuNm2" name="konyu_rireki[kokyakuNm2]" tabindex="6" />
+          <input style="width:65px;" type="text" id="kokyakuNm1" name="konyu_rireki[kokyakuNm1]" />
+          <input style="width:65px;" type="text" id="kokyakuNm2" name="konyu_rireki[kokyakuNm2]" />
         </td>
         <th>商品名</th>
         <td>
-          <input style="width:130px;" type="text" id="shohinNm" name="konyu_rireki[shohinNm]" tabindex="30" />
+          <input style="width:130px;" type="text" id="shohinNm" name="konyu_rireki[shohinNm]" />
         </td>
         <th>納品日</th>
         <td>
-          <input style="width:80px;" type="text" id="nohinDtFrom" name="konyu_rireki[nohinDtFrom]" tabindex="18" />&nbsp;〜
-          <input style="width:80px;" type="text" id="nohinDtTo" name="konyu_rireki[nohinDtTo]" tabindex="26" />
+          <input style="width:80px; ime-mode: disabled;" type="text" id="nohinDtFrom" name="konyu_rireki[nohinDtFrom]" />&nbsp;〜
+          <input style="width:80px; ime-mode: disabled;" type="text" id="nohinDtTo" name="konyu_rireki[nohinDtTo]" />
         </td>
       </tr>
       <tr>
         <th>顧客カナ</th>
         <td>
-          <input style="width:130px;" type="text" id="kokyakuNmKana1" name="konyu_rireki[kokyakuNmKana1]" tabindex="8" />
-          <input style="width:130px;" type="text" id="kokyakuNmKana2" name="konyu_rireki[kokyakuNmKana2]" tabindex="8" />
+          <input style="width:65px;" type="text" id="kokyakuNmKana1" name="konyu_rireki[kokyakuNmKana1]" />
+          <input style="width:65px;" type="text" id="kokyakuNmKana2" name="konyu_rireki[kokyakuNmKana2]" />
         </td>
         <th>受付担当</th>
         <td>
-          <input style="width:130px;" type="text" id="uketsukeSesakuTantoNm" name="konyu_rireki[uketsukeSesakuTantoNm]" tabindex="32" />
+          <input style="width:130px;" type="text" id="uketsukeSesakuTantoNm" name="konyu_rireki[uketsukeSesakuTantoNm]" />
         </td>
         <th>交付日</th>
         <td>
-          <input style="width:80px;" type="text" id="kofuDtFrom" name="konyu_rireki[kofuDtFrom]" tabindex="18" />&nbsp;〜
-          <input style="width:80px;" type="text" id="kofuDtTo" name="konyu_rireki[kofuDtTo]" tabindex="26" />
+          <input style="width:80px; ime-mode: disabled;" type="text" id="kofuDtFrom" name="konyu_rireki[kofuDtFrom]" />&nbsp;〜
+          <input style="width:80px; ime-mode: disabled;" type="text" id="kofuDtTo" name="konyu_rireki[kofuDtTo]" />
         </td>
       </tr>
       <tr>
@@ -73,28 +71,28 @@
         </td>
         <th>仮合担当</th>
         <td>
-          <input style="width:130px;" type="text" id="kariAwaseTantoNm" name="konyu_rireki[kariAwaseTantoNm]" tabindex="34" />
+          <input style="width:130px;" type="text" id="kariAwaseTantoNm" name="konyu_rireki[kariAwaseTantoNm]" />
         </td>
         <th>入金日</th>
         <td>
-          <input style="width:80px;" type="text" id="nyukinDtFrom" name="konyu_rireki[nyukinDtFrom]" tabindex="18" />&nbsp;〜
-          <input style="width:80px;" type="text" id="nyukinDtTo" name="konyu_rireki[nyukinDtTo]" tabindex="26" />
+          <input style="width:80px; ime-mode: disabled;" type="text" id="nyukinDtFrom" name="konyu_rireki[nyukinDtFrom]" />&nbsp;〜
+          <input style="width:80px; ime-mode: disabled;" type="text" id="nyukinDtTo" name="konyu_rireki[nyukinDtTo]" />
         </td>
       </tr>
 
       <tr>
         <th>見積製品項目</th>
         <td>
-          <input style="width:130px;" type="text" id="hinmeiNm" name="konyu_rireki[hinmeiNm]" tabindex="8" />
+          <input style="width:130px;" type="text" id="hinmeiNm" name="konyu_rireki[hinmeiNm]" />
         </td>
         <th>納品担当</th>
         <td>
-          <input style="width:130px;" type="text" id="nohinTantoNm" name="konyu_rireki[nohinTantoNm]" tabindex="32" />
+          <input style="width:130px;" type="text" id="nohinTantoNm" name="konyu_rireki[nohinTantoNm]" />
         </td>
         <th>押印日</th>
         <td>
-          <input style="width:80px;" type="text" id="oshiinDtFrom" name="konyu_rireki[oshiinDtFrom]" tabindex="18" />&nbsp;〜
-          <input style="width:80px;" type="text" id="oshiinDtTo" name="konyu_rireki[oshiinDtTo]" tabindex="26" />
+          <input style="width:80px; ime-mode: disabled;" type="text" id="oshiinDtFrom" name="konyu_rireki[oshiinDtFrom]" />&nbsp;〜
+          <input style="width:80px; ime-mode: disabled;" type="text" id="oshiinDtTo" name="konyu_rireki[oshiinDtTo]" />
         </td>
       </tr>
 
@@ -103,12 +101,12 @@
         <td><br/></td>
         <th>見積担当</th>
         <td>
-          <input style="width:130px;" type="text" id="mitsumoriTantoEigyoNm" name="konyu_rireki[mitsumoriTantoEigyoNm]" tabindex="32" />
+          <input style="width:130px;" type="text" id="mitsumoriTantoEigyoNm" name="konyu_rireki[mitsumoriTantoEigyoNm]" />
         </td>
         <th>完了日</th>
         <td>
-          <input style="width:80px;" type="text" id="kanryoDtFrom" name="konyu_rireki[kanryoDtFrom]" tabindex="18" />&nbsp;〜
-          <input style="width:80px;" type="text" id="kanryoDtTo" name="konyu_rireki[kanryoDtTo]" tabindex="26" />
+          <input style="width:80px; ime-mode: disabled;" type="text" id="kanryoDtFrom" name="konyu_rireki[kanryoDtFrom]" />&nbsp;〜
+          <input style="width:80px; ime-mode: disabled;" type="text" id="kanryoDtTo" name="konyu_rireki[kanryoDtTo]" />
         </td>
       </tr>
       <tr>
@@ -118,15 +116,15 @@
         <td><br/></td>
         <th>見積日</th>
         <td>
-          <input style="width:80px;" type="text" id="mitsumoriDtFrom" name="konyu_rireki[mitsumoriDtFrom]" tabindex="18" />&nbsp;〜
-          <input style="width:80px;" type="text" id="mitsumoriDtTo" name="konyu_rireki[mitsumoriDtTo]" tabindex="26" />
+          <input style="width:80px; ime-mode: disabled;" type="text" id="mitsumoriDtFrom" name="konyu_rireki[mitsumoriDtFrom]" />&nbsp;〜
+          <input style="width:80px; ime-mode: disabled;" type="text" id="mitsumoriDtTo" name="konyu_rireki[mitsumoriDtTo]" />
         </td>
       </tr>
 
     </table>
     <div class="btn_submit">
-      <div><a class="btn_search" id="btnKonyuRirekiSearch" href="#" tabindex="44" />検索</a></div>
-      <div><a class="btn_clear" id="btnKonyuRirekiClear" href="#" tabindex="46" />条件クリア</a></div>
+      <div><a class="btn_search" id="btnKonyuRirekiSearch" href="#" />検索</a></div>
+      <div><a class="btn_clear" id="btnKonyuRirekiClear" href="#" />条件クリア</a></div>
     </div>
   </div>
   <div>
