@@ -2,7 +2,7 @@
 require 'thinreports'
 require 'time'
 require 'date'
-require 'RMagick'
+#require 'RMagick'
 require 'open-uri'
 
 class ItemsController < ApplicationController

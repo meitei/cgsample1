@@ -95,36 +95,25 @@
     var t;
     var x;
     var kingaku;
+    var amount;
     for(var i=0; i<tanka.length; i++) {
       s = tanka[i]["seihinNo"];
       t = parseFloatEx(tanka[i]["tanka"]);
       x = parseFloatEx(tanka[i]["tax"]);
-      for(var j=1; j<20; j++) {
-        kingaku = t * parseFloatEx($("div#" + step + " #" + j + "-" + s + "_su").text());
+      for(var j=1; j<7; j++) {
+        if($("div#" + step + " #" + j + "-" + s + "_su").attr("type") == "hidden") {
+          amount = parseFloatEx($("div#" + step + " #" + j + "-" + s + "_su").val());
+        } else {
+          amount = parseFloatEx($("div#" + step + " #" + j + "-" + s + "_su").text());
+        }
+        kingaku = t * amount;
         $("div#" + step + " td#" + j + "-" + s + "_tan").text(formatComma(t));
+        $("div#" + step + " input#" + j + "-" + s + "_tan").val(t);
         $("div#" + step + " td#" + j + "-" + s + "_kin").text(formatComma(kingaku));
-        $("div#" + step + " input#" + j + "-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));        
+        $("div#" + step + " input#" + j + "-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
+        $("div#" + step + " td#" + j + "-" + s + "_tax_v").text((x * 100) + "%");
+        console.log("製品番号：" + s + " 単価：" + t + " 数量：" + amount + " 税率：" + x);
       }
-      // kingaku = t * parseFloatEx($("div#" + step + " #2-" + s + "_su").text());
-      // $("div#" + step + " td#2-" + s + "_tan").text(formatComma(t));
-      // $("div#" + step + " td#2-" + s + "_kin").text(formatComma(kingaku));
-      // $("div#" + step + " input#2-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
-      // kingaku = t * parseFloatEx($("div#" + step + " #3-" + s + "_su").text());
-      // $("div#" + step + " td#3-" + s + "_tan").text(formatComma(t));
-      // $("div#" + step + " td#3-" + s + "_kin").text(formatComma(kingaku));
-      // $("div#" + step + " input#3-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
-      // kingaku = t * parseFloatEx($("div#" + step + " #4-" + s + "_su").text());
-      // $("div#" + step + " td#4-" + s + "_tan").text(formatComma(t));
-      // $("div#" + step + " td#4-" + s + "_kin").text(formatComma(kingaku));
-      // $("div#" + step + " input#4-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
-      // kingaku = t * parseFloatEx($("div#" + step + " #5-" + s + "_su").text());
-      // $("div#" + step + " td#5-" + s + "_tan").text(formatComma(t));
-      // $("div#" + step + " td#5-" + s + "_kin").text(formatComma(kingaku));
-      // $("div#" + step + " input#5-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
-      // kingaku = t * parseFloatEx($("div#" + step + " #6-" + s + "_su").text());
-      // $("div#" + step + " td#6-" + s + "_tan").text(formatComma(t));
-      // $("div#" + step + " td#6-" + s + "_kin").text(formatComma(kingaku));
-      // $("div#" + step + " input#6-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
     }
   }
 
