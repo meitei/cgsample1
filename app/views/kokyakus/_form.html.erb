@@ -111,8 +111,8 @@ $(function() {
       $(element).removeClass(errorClass); 
     },
     rules: {
-        "kokyaku[kokyakuNm1]": {required:true, maxlength:50},
-        "kokyaku[kokyakuNm2]": {maxlength:50},
+        "kokyaku[kokyakuNm1]": {required:true, number:true, maxlength:50},
+        "kokyaku[kokyakuNm2]": {number:true, maxlength:50},
         "kokyaku[kokyakuNmKana1]": {required:true, katakana:true, maxlength:50},
         "kokyaku[kokyakuNmKana2]": {katakana:true, maxlength:50},
         "kokyaku[tanjoGengo]": {required:true},
