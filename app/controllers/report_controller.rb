@@ -213,7 +213,7 @@ class ReportController < ApplicationController
     # ヘッダ項目データ取得
     ###########################
     ## 購入履歴情報取得
-    konyuRireki = KonyuRireki.find(:first, :conditions => {:konyuRirekiId => params[:id].to_i, :delFlg => 0})
+    konyuRireki = KonyuRireki.find(:first, :conditions => {:id => params[:id].to_i, :delFlg => 0})
 
     konyuRirekiId = konyuRireki["konyuRirekiId"].to_i
     kokyakuId     = konyuRireki["kokyakuId"].to_i
