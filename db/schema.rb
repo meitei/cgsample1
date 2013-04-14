@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130407194737) do
+=======
+ActiveRecord::Schema.define(:version => 20130413063715) do
+>>>>>>> 325ef72f3aba01f3c27b818c51547f052fa67b17
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -63,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
 
   create_table "kokyakus", :id => false, :force => true do |t|
     t.integer  "kokyakuId"
+<<<<<<< HEAD
     t.string   "kokyakuNm",     :limit => 100
     t.string   "kokyakuNmKana", :limit => 100
     t.integer  "seibetsu"
@@ -82,10 +87,36 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
     t.integer  "delFlg",                       :default => 0, :null => false
+=======
+    t.integer  "seibetsu"
+    t.string   "postNo",         :limit => 8
+    t.string   "address1",       :limit => 100
+    t.string   "address2",       :limit => 100
+    t.string   "tel1",           :limit => 13
+    t.string   "tel2",           :limit => 13
+    t.string   "fax",            :limit => 13
+    t.integer  "shobyouCd1"
+    t.integer  "shobyouCd2"
+    t.integer  "shobyouCd3"
+    t.string   "gakkoNm",        :limit => 100
+    t.string   "biko",           :limit => 200
+    t.integer  "koshinshaId",                                  :null => false
+    t.integer  "torokushaId",                                  :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.integer  "delFlg",                        :default => 0, :null => false
+>>>>>>> 325ef72f3aba01f3c27b818c51547f052fa67b17
     t.integer  "tanjoGengo"
     t.integer  "tanjoYear"
     t.integer  "tanjoMonth"
     t.integer  "tanjoDay"
+<<<<<<< HEAD
+=======
+    t.string   "kokyakuNm1",     :limit => 50
+    t.string   "kokyakuNm2",     :limit => 50
+    t.string   "kokyakuNmKana1", :limit => 50
+    t.string   "kokyakuNmKana2", :limit => 50
+>>>>>>> 325ef72f3aba01f3c27b818c51547f052fa67b17
   end
 
   create_table "konyu_rirekis", :force => true do |t|
@@ -286,7 +317,6 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
     t.integer  "COL22_1"
     t.integer  "COL22_2"
     t.integer  "COL22_3"
-    t.integer  "COL_23_1"
     t.integer  "COL23_2"
     t.integer  "COL23_3"
     t.integer  "COL23_4"
@@ -304,6 +334,8 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
     t.integer  "COL25_1"
     t.integer  "torokushaId"
     t.integer  "koshinshaId"
+    t.integer  "COL1_2"
+    t.integer  "COL23_1"
   end
 
   create_table "seihins", :primary_key => "seihinId", :force => true do |t|

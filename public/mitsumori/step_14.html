@@ -183,6 +183,8 @@
 <script type="text/javascript">
     var submitItem14= function() {
         var selected = $("input[name='COL14_1']:checked").val();
+        this.mitsumoriData["COL14_1"] = selected;
+        this.mitsumoriData["COL14_2"] = 0;
         var product = {};
         if(selected == "1") {
             // 不要
@@ -214,6 +216,7 @@
             this.productsData["2-91"] = product;
 
             if ($("input#2-COL14_2").attr('checked')) {
+                this.mitsumoriData["COL14_2"] = 1;
                 product["seihinNo"] = "92";
                 product["tanka"] = removeComma($("#2-92_tan").text());
                 product["suryo"] = removeComma($("#2-92_su").text());

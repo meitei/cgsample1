@@ -302,7 +302,7 @@ class ItemsController < ApplicationController
     @@mitsumoriDt = @@konyuRireki["mitsumoriDt"]
     
     kokyaku = Kokyaku.find(@@konyuRireki["kokyakuId"])
-    @@atena = kokyaku["kokyakuNm"]
+    @@atena = kokyaku["kokyakuNm1"] + " " + kokyaku["kokyakuNm2"]
 
     eigyo = User.find(@@konyuRireki["mitsumoriTantoEigyoCd"])
     @@tanto = eigyo["myoji"] + " " + eigyo["name"]

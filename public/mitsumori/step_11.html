@@ -415,6 +415,10 @@
 <script type="text/javascript">
     var submitItem11 = function() {
         var selected = $("input[name='COL11_1']:checked").val();
+        this.mitsumoriData["COL11_1"] = selected;
+        this.mitsumoriData["COL11_2"] = 0;
+        this.mitsumoriData["COL11_3"] = 0;
+        this.mitsumoriData["COL11_4"] = 0;
         var product = {};
         if(selected == "1") {
             // 不要
@@ -454,6 +458,7 @@
             this.productsData["2-76"] = product;
 
             if ($("input#2-COL11_2").attr('checked')) {
+                this.mitsumoriData["COL11_2"] = 1;
                 product["seihinNo"] = "77";
                 product["tanka"] = removeComma($("#2-77_tan").text());
                 product["suryo"] = removeComma($("#2-77_su").text());
@@ -498,6 +503,7 @@
             this.productsData["3-76"] = product;
 
             if ($("input#3-COL11_2").attr('checked')) {
+                this.mitsumoriData["COL11_2"] = 1;
                 product["seihinNo"] = "77";
                 product["tanka"] = removeComma($("#3-77_tan").text());
                 product["suryo"] = removeComma($("#3-77_su").text());
@@ -550,10 +556,19 @@
             this.productsData["4-76"] = product;
 
             if ($("input#4-COL11_2").attr('checked')) {
+                this.mitsumoriData["COL11_2"] = 1;
                 product["seihinNo"] = "77";
                 product["tanka"] = removeComma($("#4-77_tan").text());
                 product["suryo"] = removeComma($("#4-77_su").text());
                 product["tax"] = removeComma($("#4-77_tax").val());
                 product["kin"] = removeComma($("#4-77_kin").text());
                 this.productsData["4-67"] = product;
-            
+            }
+            this.mitsumoriData["COL11_3"] = $("#4-COL11_3").val();
+            this.mitsumoriData["COL11_4"] = $("#4-COL11_4").val();
+
+        } else {
+            return;
+        }
+    }
+</script>

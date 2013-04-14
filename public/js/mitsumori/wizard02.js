@@ -1,6 +1,5 @@
   /* 構造フレーム選定 */
   function wizard2a(){
-    initNavi("2");
     // 固定型選択
     $("input#1-COL5_1").change(function(){
       $("div#step3").load("/mitsumori/step_06.html", wizard3a);
@@ -45,6 +44,7 @@
       $("li#step16").hide();
       $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 15;
     });
     // リクライニング式選択
     $("input#2-COL5_1").change(function(){
@@ -82,6 +82,7 @@
       $("li#step16").hide();
       $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 11;
     });
     // ティルト式選択
     $("input#3-COL5_1").change(function(){
@@ -91,12 +92,10 @@
       $("div#step4").load("/mitsumori/step_07.html", wizard4c);
       $("li#step4 a").attr("href", "#step4");
       $("li#step4 span").text("パッド");
-      $("div#step5").load("/mitsumori/step_04.html", wizard5c);
+      $("div#step5").load("/mitsumori/step_21.html", wizard5c);
       $("li#step5 a").attr("href", "#step5");
       $("li#step5 span").text("オプション");
-      $("div#step6").load("/mitsumori/step_21.html", wizard6c);
-      $("li#step6 a").attr("href", "#step6");
-      $("li#step6 span").text("オプション");
+      $("li#step6").hide();
       $("li#step7").hide();
       $("li#step8").hide();
       $("li#step9").hide();
@@ -109,6 +108,7 @@
       $("li#step16").hide();
       $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 5;
     });
     // リクライニング・ティルト式選択
     $("input#4-COL5_1").change(function(){
@@ -144,15 +144,15 @@
       $("li#step16").hide();
       $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 10;
     });
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem5;
+    wm.submitItems[2] = submitItem5;
   }
 
   // メインフレーム材質選定
-  function wizard2e(){
-    initNavi("2");
+  function wizard2e() {
     // アルミニューム選択
     $("input#1-COL2_1").change(function(){
       $("div#step3").load("/mitsumori/step_03.html", wizard3e);
@@ -201,6 +201,7 @@
       $("li#step17 a").attr("href", "#step17");
       $("li#step17 span").text("オプション");
       $("button.jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 17;
     });
     // ステンレス選択
     $("input#2-COL2_1").change(function(){
@@ -250,6 +251,7 @@
       $("li#step17 a").attr("href", "#step17");
       $("li#step17 span").text("オプション");
       $("button.jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 17;
     });
     // 木製選択
     $("input#3-COL2_1").change(function(){
@@ -272,32 +274,33 @@
       $("li#step16").hide();
       $("li#step17").hide();
       $("button.jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 3;
     });
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem2;
+    wm.submitItems[2] = submitItem2;
   }
 
   // 既製品
   function wizard2g(){
-    initNavi("2");
+      wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem23;
+    wm.submitItems[2] = submitItem23;
   }
 
     // 既製品
   function wizard2h(){
-    initNavi("2");
+      wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem24;
+    wm.submitItems[2] = submitItem24;
   }
 
     // 既製品
   function wizard2i(){
-    initNavi("2");
+      wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
-    WizardManager.prototype.addProduct = submitItem25;
+    wm.submitItems[2] = submitItem25;
   }

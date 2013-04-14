@@ -15,8 +15,10 @@ class KokyakusController < ApplicationController
     conditions = Kokyaku.where("\"delFlg\" = ?", 0)
     conditions = conditions.where("\"kokyakuId\" >= ?", params[:kokyaku][:kokyakuIdFrom].to_i) if params[:kokyaku][:kokyakuIdFrom] != ""
     conditions = conditions.where("\"kokyakuId\" <= ?", params[:kokyaku][:kokyakuIdTo].to_i) if params[:kokyaku][:kokyakuIdTo] != ""
-    conditions = conditions.where("\"kokyakuNm\" LIKE ?", "%" + params[:kokyaku][:kokyakuNm] + "%") if params[:kokyaku][:kokyakuNm] != ""
-    conditions = conditions.where("\"kokyakuNmKana\" LIKE ?", "%" + params[:kokyaku][:kokyakuNmKana] + "%") if params[:kokyaku][:kokyakuNmKana] != ""
+    conditions = conditions.where("\"kokyakuNm1\" LIKE ?", "%" + params[:kokyaku][:kokyakuNm1] + "%") if params[:kokyaku][:kokyakuNm1] != ""
+    conditions = conditions.where("\"kokyakuNm2\" LIKE ?", "%" + params[:kokyaku][:kokyakuNm2] + "%") if params[:kokyaku][:kokyakuNm2] != ""
+    conditions = conditions.where("\"kokyakuNmKana1\" LIKE ?", "%" + params[:kokyaku][:kokyakuNmKana1] + "%") if params[:kokyaku][:kokyakuNmKana1] != ""
+    conditions = conditions.where("\"kokyakuNmKana2\" LIKE ?", "%" + params[:kokyaku][:kokyakuNmKana2] + "%") if params[:kokyaku][:kokyakuNmKana2] != ""
     conditions = conditions.where("\"seibetsu\" = ?", params[:kokyaku][:seibetsu]) if params[:kokyaku][:seibetsu] != ""
 
     # 生年月日は「元号」「年」「月」「日」を連結して比較する
@@ -128,7 +130,8 @@ class KokyakusController < ApplicationController
   # GET /kokyakus/1
   # GET /kokyakus/1.json
   def show
-    @kokyaku = Kokyaku.find(params[:id])
+    # @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:id]})
 
     respond_to do |format|
       format.html # show.html.erb
@@ -151,7 +154,8 @@ class KokyakusController < ApplicationController
   # GET /kokyakus/1/edit
   def edit
     logger.debug(params)
-    @kokyaku = Kokyaku.find(params[:id])
+    # @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:id]})
     @shobyo = Shobyo.all
   end
 
@@ -191,10 +195,12 @@ class KokyakusController < ApplicationController
   # PUT /kokyakus/1
   # PUT /kokyakus/1.json
   def update
-    @kokyaku = Kokyaku.find(params[:id])
+    # @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = Kokyaku.where(:kokyakuId => params[:id]).first
 
     respond_to do |format|
-      if @kokyaku.update_attributes(params[:kokyaku])
+      # if @kokyaku.update_attributes(params[:kokyaku])
+      if @kokyaku.update_attributes(params[:kokyaku], {:kokyakuId => params[:id]})
         format.html { redirect_to action: "index", notice: 'Kokyaku was successfully updated.' }
         format.json { head :no_content }
       else
@@ -207,7 +213,8 @@ class KokyakusController < ApplicationController
   # DELETE /kokyakus/1
   # DELETE /kokyakus/1.json
   def destroy
-    @kokyaku = Kokyaku.find(params[:id])
+    # @kokyaku = Kokyaku.find(params[:id])
+    @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:id]})
     #@kokyaku.destroy
     logger.debug(@kokyaku)
     respond_to do |format|
@@ -224,10 +231,21 @@ class KokyakusController < ApplicationController
   def get_select_stmt
     # 生年月日は「元号」「年」「月」「日」を連結して表示する
     tanjoGengoStr = "CASE kokyakus.\"tanjoGengo\" WHEN 1 THEN '大正' WHEN 2 THEN '昭和' WHEN 3 THEN '平成' ELSE NULL END "
-    tanjoDt = str_sql_concat(tanjoGengoStr, "kokyakus.\"tanjoYear\"", "'年'" , "kokyakus.\"tanjoMonth\"", "'月'", "kokyakus.\"tanjoDay\"", "'日' AS \"tanjoDt\"")
+
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+    logger.debug(adapter)
+    if adapter == "sqlite3" then
+      # for sqlite
+      tanjoDt = str_sql_concat(tanjoGengoStr, "SUBSTR('00'||kokyakus.\"tanjoYear\",-2,2)", "'年'" , "SUBSTR('00'||kokyakus.\"tanjoMonth\",-2,2)", "'月'", "SUBSTR('00'||kokyakus.\"tanjoDay\",-2,2)", "'日' AS \"tanjoDt\"")
+    else
+      # for mysql、postgres
+      tanjoDt = str_sql_concat(tanjoGengoStr, "LPAD(CAST(kokyakus.\"tanjoYear\" AS text), 2, '0') ", "'年'" , "LPAD(CAST(kokyakus.\"tanjoMonth\" AS text), 2, '0') ", "'月'", "LPAD(CAST(kokyakus.\"tanjoDay\" AS text), 2, '0') ", "'日' AS \"tanjoDt\"")
+    end
 
     select = "kokyakus.*"
     select << "," + tanjoDt
+    select << ",kokyakus.\"kokyakuNm1\" || ' ' || kokyakus.\"kokyakuNm2\" AS \"kokyakuNm\""
+    select << ",kokyakus.\"kokyakuNmKana1\" || ' ' || kokyakus.\"kokyakuNmKana2\" AS \"kokyakuNmKana\""
     select << ",sb1.\"shobyoNm\" \"shobyoNm1\""
     select << ",sb2.\"shobyoNm\" \"shobyoNm2\""
     select << ",sb3.\"shobyoNm\" \"shobyoNm3\""

@@ -370,6 +370,10 @@
 <script type="text/javascript">
     var submitItem5 = function() {
         var selected = $("input[name='COL5_1']:checked").val();
+        this.mitsumoriData["COL5_1"] = selected;
+        this.mitsumoriData["COL5_2"] = 0;
+        this.mitsumoriData["COL5_3"] = 0;
+        this.mitsumoriData["COL5_4"] = 0;
         var product = {};
         var selected2;
         if(selected == "1") {
@@ -385,7 +389,7 @@
         } else if(selected == "2") {
             // 製品データ保存
             selected2 = $("input[name='2-COL5_2']:checked").val();
-
+            this.mitsumoriData["COL5_2"] = selected2;
             if (selected2 == "1") {
                 product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "14";
@@ -436,6 +440,7 @@
 
             // 製品データ保存
             selected2 = $("input[name='4-COL5_4']:checked").val();
+            this.mitsumoriData["COL5_4"] = selected2;
 
             if (selected2 == "1") {
 

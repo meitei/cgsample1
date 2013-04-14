@@ -3,5 +3,5 @@
     $("button.jqwizard_next").removeAttr("disabled");
     // 単価を書き換え
     updateUnitPrice("step17");
-    WizardManager.prototype.addProduct = submitItem20;
+    wm.submitItems[17] = submitItem20;
   }

@@ -19,7 +19,8 @@
       <tr>
         <th>顧客名</th>
         <td>
-          <input style="width:130px;" type="text" id="kokyakuNm" name="kokyaku[kokyakuNm]" tabindex="6" />
+          <input style="width:65px;" type="text" id="kokyakuNm1" name="kokyaku[kokyakuNm1]" tabindex="6" />
+          <input style="width:65px;" type="text" id="kokyakuNm2" name="kokyaku[kokyakuNm2]" tabindex="6" />
         </td>
         <th>住所１</th>
         <td>
@@ -33,7 +34,8 @@
       <tr>
         <th>顧客カナ</th>
         <td>
-          <input style="width:130px;" type="text" id="kokyakuNmKana" name="kokyaku[kokyakuNmKana]" tabindex="8" />
+          <input style="width:65px;" type="text" id="kokyakuNmKana1" name="kokyaku[kokyakuNmKana1]" tabindex="8" />
+          <input style="width:65px;" type="text" id="kokyakuNmKana2" name="kokyaku[kokyakuNmKana2]" tabindex="8" />
         </td>
         <th>住所２</th>
         <td>
@@ -53,24 +55,24 @@
         <td>
           <input style="width:130px;" type="text" id="tel1" name="kokyaku[tel1]" tabindex="34" />
         </td>
-      </tr>
-      <tr>
-        <th>生年月日</th>
-        <td>　
-          <%= select :kokyaku, :tanjoGengoFrom, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
-          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYearFrom" name="kokyaku[tanjoYearFrom]" maxlength="2" tabindex="99" />年
-          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonthFrom" name="kokyaku[tanjoMonthFrom]" maxlength="2" tabindex="99" />月
-          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDayFrom" name="kokyaku[tanjoDayFrom]" maxlength="2" tabindex="99" />日
-          <br />〜
-          <%= select :kokyaku, :tanjoGengoTo, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
-          <input style="width:20px;" type="text" id="tanjoYearTo" name="kokyaku[tanjoYearTo]" tabindex="99" />年
-          <input style="width:20px;" type="text" id="tanjoMonthTo" name="kokyaku[tanjoMonthTo]" tabindex="99" />月
-          <input style="width:20px;" type="text" id="tanjoDayTo" name="kokyaku[tanjoDayTo]" tabindex="99" />日
-        </td>
         <th style="width:80px;">携帯番号</th>
         <td style="width:175px;">
           <input style="width:130px;" type="text" id="tel2" name="kokyaku[tel2]" tabindex="36" />
         </td>
+      </tr>
+      <tr>
+        <th>生年月日</th>
+        <td colspan="4" style="text-align:left;">　
+          <%= select :kokyaku, :tanjoGengoFrom, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYearFrom" name="kokyaku[tanjoYearFrom]" maxlength="2" tabindex="99" />&nbsp;年
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonthFrom" name="kokyaku[tanjoMonthFrom]" maxlength="2" tabindex="99" />&nbsp;月
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDayFrom" name="kokyaku[tanjoDayFrom]" maxlength="2" tabindex="99" />&nbsp;日&nbsp;〜&nbsp;
+          <%= select :kokyaku, :tanjoGengoTo, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
+          <input style="width:20px;" type="text" id="tanjoYearTo" name="kokyaku[tanjoYearTo]" tabindex="99" />&nbsp;年
+          <input style="width:20px;" type="text" id="tanjoMonthTo" name="kokyaku[tanjoMonthTo]" tabindex="99" />&nbsp;月
+          <input style="width:20px;" type="text" id="tanjoDayTo" name="kokyaku[tanjoDayTo]" tabindex="99" />&nbsp;日
+        </td>
+        
       </tr>
     </table>
     <div class="btn_submit">

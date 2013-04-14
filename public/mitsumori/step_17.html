@@ -799,6 +799,22 @@
 <script type="text/javascript">
     var submitItem17= function() {
         var selected = $("input[name='COL17_1']:checked").val();
+        this.mitsumoriData["COL17_1"] = selected;
+        this.mitsumoriData["COL17_2"] = 0;
+        this.mitsumoriData["COL17_3"] = 0;
+        this.mitsumoriData["COL17_4"] = 0;
+        this.mitsumoriData["COL17_5"] = 0;
+        this.mitsumoriData["COL17_6"] = 0;
+        this.mitsumoriData["COL17_7"] = 0;
+        this.mitsumoriData["COL17_8"] = 0;
+        this.mitsumoriData["COL17_9"] = 0;
+        this.mitsumoriData["COL17_10"] = 0;
+        this.mitsumoriData["COL17_11"] = 0;
+        this.mitsumoriData["COL17_12"] = 0;
+        this.mitsumoriData["COL17_13"] = 0;
+        this.mitsumoriData["COL17_14"] = 0;
+        this.mitsumoriData["COL17_15"] = 0;
+        
         var product = {};
         if(selected == "1") {
             // 不要
@@ -811,6 +827,9 @@
                 product["tax"] = removeComma($("#2-113_tax").val());
                 product["kin"] = removeComma($("#2-113_kin").text());
                 this.productsData["2-113"] = product;
+                
+                this.mitsumoriData["COL17_2"] = 1;
+                
             }
 
             if ($("input#2-COL17_3").attr('checked')) {
@@ -820,6 +839,8 @@
                 product["tax"] = removeComma($("#2-115_tax").val());
                 product["kin"] = removeComma($("#2-115_kin").text());
                 this.productsData["2-115"] = product;
+                
+                this.mitsumoriData["COL17_3"] = 1;
             }
 
             if ($("input#2-COL17_4").attr('checked')) {
@@ -829,6 +850,8 @@
                 product["tax"] = removeComma($("#2-102_tax").val());
                 product["kin"] = removeComma($("#2-102_kin").text());
                 this.productsData["2-102"] = product;
+                
+                this.mitsumoriData["COL17_4"] = 1;
             }
 
             if ($("input#2-COL17_5").attr('checked')) {
@@ -838,6 +861,8 @@
                 product["tax"] = removeComma($("#2-109_tax").val());
                 product["kin"] = removeComma($("#2-109_kin").text());
                 this.productsData["2-109"] = product;
+                
+                this.mitsumoriData["COL17_5"] = 1;
             }
 
             if ($("input#2-COL17_6").attr('checked')) {
@@ -847,6 +872,8 @@
                 product["tax"] = removeComma($("#2-110_tax").val());
                 product["kin"] = removeComma($("#2-110_kin").text());
                 this.productsData["2-110"] = product;
+                
+                this.mitsumoriData["COL17_6"] = 1;
             }
 
             if ($("input#2-COL17_7").attr('checked')) {
@@ -856,6 +883,8 @@
                 product["tax"] = removeComma($("#2-111_tax").val());
                 product["kin"] = removeComma($("#2-111_kin").text());
                 this.productsData["2-111"] = product;
+                
+                this.mitsumoriData["COL17_7"] = 1;
             }
 
             if ($("input#2-COL17_8").attr('checked')) {
@@ -865,6 +894,8 @@
                 product["tax"] = removeComma($("#2-112_tax").val());
                 product["kin"] = removeComma($("#2-112_kin").text());
                 this.productsData["2-112"] = product;
+                
+                this.mitsumoriData["COL17_8"] = 1;
             }
 
             if ($("input#2-COL17_9").attr('checked')) {
@@ -874,6 +905,8 @@
                 product["tax"] = removeComma($("#2-114_tax").val());
                 product["kin"] = removeComma($("#2-114_kin").text());
                 this.productsData["2-114"] = product;
+                
+                this.mitsumoriData["COL17_9"] = 1;
             }
 
             if ($("input#2-COL17_10").attr('checked')) {
@@ -883,6 +916,8 @@
                 product["tax"] = removeComma($("#2-116_tax").val());
                 product["kin"] = removeComma($("#2-116_kin").text());
                 this.productsData["2-116"] = product;
+                
+                this.mitsumoriData["COL17_10"] = 1;
             }
 
             if ($("input#2-COL17_11").attr('checked')) {
@@ -892,6 +927,8 @@
                 product["tax"] = removeComma($("#2-117_tax").val());
                 product["kin"] = removeComma($("#2-117_kin").text());
                 this.productsData["2-117"] = product;
+                
+                this.mitsumoriData["COL17_11"] = 1;
             }
 
             if ($("input#2-COL17_12").attr('checked')) {
@@ -901,6 +938,8 @@
                 product["tax"] = removeComma($("#2-118_tax").val());
                 product["kin"] = removeComma($("#2-118_kin").text());
                 this.productsData["2-118"] = product;
+                
+                this.mitsumoriData["COL17_12"] = 1;
             }
 
             if ($("input#2-COL17_13").attr('checked')) {
@@ -910,6 +949,8 @@
                 product["tax"] = removeComma($("#2-119_tax").val());
                 product["kin"] = removeComma($("#2-119_kin").text());
                 this.productsData["2-119"] = product;
+                
+                this.mitsumoriData["COL17_13"] = 1;
             }
 
             if ($("input#2-COL17_14").attr('checked')) {
@@ -919,6 +960,8 @@
                 product["tax"] = removeComma($("#2-120_tax").val());
                 product["kin"] = removeComma($("#2-120_kin").text());
                 this.productsData["2-120"] = product;
+                
+                this.mitsumoriData["COL17_14"] = 1;
             }
 
             if ($("input#2-COL17_15").attr('checked')) {
@@ -928,6 +971,8 @@
                 product["tax"] = removeComma($("#2-121_tax").val());
                 product["kin"] = removeComma($("#2-121_kin").text());
                 this.productsData["2-121"] = product;
+                
+                this.mitsumoriData["COL17_15"] = 1;
             }
 
         } else {

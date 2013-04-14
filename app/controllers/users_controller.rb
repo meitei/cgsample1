@@ -54,6 +54,15 @@ class UsersController < ApplicationController
     #end  
   end
 
+  # def create_initdata
+  #   @user = User.new(params[:user])
+  #   if @user.save
+  #     redirect_to root_url, :notice => "Signed up!"
+  #   else
+  #     render :new
+  #   end
+  # end
+
   def update
     @user = User.find(params[:id])
 

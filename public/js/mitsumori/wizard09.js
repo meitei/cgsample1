@@ -18,7 +18,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step9");
-    WizardManager.prototype.addProduct = submitItem11;
+    wm.submitItems[9] = submitItem11;
   }
 
   // シートベルト
@@ -33,7 +33,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step9");
-    WizardManager.prototype.addProduct = submitItem16;
+    wm.submitItems[9] = submitItem16;
   }
 
   // パッド
@@ -48,7 +48,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step9");
-    WizardManager.prototype.addProduct = submitItem17;
+    wm.submitItems[9] = submitItem17;
   }
 
   // アームサポート
@@ -71,5 +71,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step9");
-    WizardManager.prototype.addProduct = submitItem10;
+    wm.submitItems[9] = submitItem10;
   }

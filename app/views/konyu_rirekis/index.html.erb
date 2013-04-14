@@ -40,14 +40,15 @@ $(function() {
             mitsumoriDtTo: {date:true}
         }
         //messages: {
-        //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //    kokyakuNm1: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //    kokyakuNm2: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
         //}
     });
     var isLoaded = false;
-    var colNames = ["","ID","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","","","",""];
+    var colNames = ["","顧客コード","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
-        {name:"kokyakuId", index:"kokyakuId",width:50},
+        {name:"kokyakuId", index:"kokyakuId",width:60},
         {name:"byoinNm", index:"byoinNm",width:80},
         {name:"kokyakuNm", index:"kokyakuNm",width:80},
         {name:"kokyakuNmKana", index:"kokyakuNmKana",width:80},
@@ -75,6 +76,7 @@ $(function() {
         {name:"koshinshaId", index:"koshinshaId", hidden:true},
         {name:"torokushaId", index:"torokushaId", hidden:true},
         {name:"id", index:"id", hidden:true},
+        {name:'registImg', index:'registImg', align:'center', width:20, formatter: registFormatter},
         {name:'reportImg', index:'reportImg', align:'center', width:20, formatter: reportFormatter},
         {name:'mitsumoriKanseizuImg', index:'mitsumoriKanseizuImg', align:'center', width:20, formatter: mitsumoriKanseizuFormatter},
         {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
@@ -115,7 +117,7 @@ $(function() {
                 success: function(data) {
                   response($.map(data, function(item) {
                     return {
-                      label: item.kokyakuNm+' - '+item.kokyakuId,
+                      label: item.kokyakuNm1+' '+item.kokyakuNm2+' - '+item.kokyakuId,
                       value: item.kokyakuId
                     }
                   }))
@@ -154,9 +156,9 @@ $(function() {
             success: function(data) {
               response($.map(data, function(item) {
                 return {
-                  label: item.kokyakuNm+' - '+item.kokyakuId,
+                  label: item.kokyakuNm1+' - '+item.kokyakuNm2+' - '+item.kokyakuId,
                   value: item.kokyakuNm
-                }
+                }//TODO:value: item.kokyakuNm？
               }))
             }
           })
@@ -232,8 +234,17 @@ $("a#btnKonyuRirekiClear").click(function() {
     return false;
 });
 
+function registFormatter(cellval, options, rowdata) {
+    if(rowdata['mitsumorisRowId'] > 0) {
+        title = "見積編集";
+    } else {
+        title = "見積登録";
+    }
+    return "<img src='/images/regist.png' onclick='registMitsumori(" + rowdata['mitsumorisRowId'] + ", " + rowdata['id'] + ")' title='" + title + "' style='width:16px; height:16px;'>";
+}
+
 function reportFormatter(cellval, options, rowdata) {
-    if(rowdata['mitsumoriId'] > 0) {
+    if(rowdata['mitsumorisRowId'] > 0) {
         visible = "display:block;";
     } else {
         visible = "display:none;";
@@ -242,7 +253,7 @@ function reportFormatter(cellval, options, rowdata) {
 }
 
 function mitsumoriKanseizuFormatter(cellval, options, rowdata) {
-    if(rowdata['mitsumoriId'] > 0) {
+    if(rowdata['mitsumorisRowId'] > 0) {
         visible = "display:block;";
     } else {
         visible = "display:none;";
@@ -280,6 +291,17 @@ function searchKonyuRireki() {
         }
     };
     $("#searchKonyuRirekiGrid").setGridParam(param).trigger("reloadGrid");
+}
+
+// 見積登録/編集画面遷移用メソッド
+function registMitsumori(mitsumorisRowId, id) {
+    saveConditions();
+    if(mitsumorisRowId > 0) {
+        location.href = "mitsumoris/" + mitsumorisRowId + "/edit";
+    } else {
+        location.href = "mitsumoris/new?id=" + id;
+    }
+    return false;
 }
 
 // 見積書PDF出力用メソッド

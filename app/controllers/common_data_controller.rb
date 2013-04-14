@@ -9,7 +9,7 @@ class CommonDataController < ApplicationController
     sqlbind_i = params[:kokyakuId].to_i if has_key and params[:kokyakuId] =~ /\d+/
     sqlstat = []
     sqlstat << "\"kokyakuId\" = ? "
-    sqlstat << "\"kokyakuNm\" LIKE ? "
+    sqlstat << "\"kokyakuNm1\" || \"kokyakuNm2\" LIKE ? "
 
     conditions = Kokyaku.where("1 = ?", 1)
     conditions = conditions.where(sqlstat.join(" OR "), sqlbind_i, sqlbind_s) if has_key
@@ -127,5 +127,16 @@ class CommonDataController < ApplicationController
       format.json { render json: @shobyos }
     end
   end
+
+  def str_sql_concat *strs
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+    if adapter == "mysql2" then
+      "concat(#{strs.join(',')})"
+    else
+      strs.join("||")
+    end
+  end
+
+  private :str_sql_concat
 
 end
