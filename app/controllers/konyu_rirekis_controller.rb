@@ -13,7 +13,7 @@ class KonyuRirekisController < ApplicationController
   # GET /konyu_rirekis/search
   # GET /konyu_rirekis/search.json
   def search
-    conditions = KonyuRireki.where("\"delFlg\" = ?", 0)
+    conditions = KonyuRireki.where("konyu_rirekis.\"delFlg\" = ?", 0)
     conditions = add_condition_int(conditions, "konyu_rirekis.\"kokyakuId\"", :kokyakuIdFrom, :kokyakuIdTo)
     conditions = add_condition_int(conditions, "konyu_rirekis.\"hokenShubetsuCd1\"", :hokenShubetsuCd1)
     conditions = add_condition_int(conditions, "konyu_rirekis.\"hokenShubetsuCd2\"", :hokenShubetsuCd2)
