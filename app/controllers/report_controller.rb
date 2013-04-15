@@ -219,19 +219,28 @@ class ReportController < ApplicationController
     kokyakuId     = konyuRireki["kokyakuId"].to_i
 
     ## ヘッダ項目：見積日付
-    @@mitsumoriDt = konyuRireki["mitsumoriDt"]
+    @@mitsumoriDt = nil
+    if konyuRireki["mitsumoriDt"].present?
+      @@mitsumoriDt = konyuRireki["mitsumoriDt"]
+    end
 
     ## ヘッダ項目：宛名
     kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => kokyakuId, :delFlg => 0})
     @@kokyakuNm = kokyaku["kokyakuNm1"] + " " + kokyaku["kokyakuNm2"]
 
     ## ヘッダ項目：型式
-    seihin = Seihin.find(konyuRireki["seihinId"])
-    @@katashiki = seihin["katashikiNm"]
+    @@katashiki = nil
+    if konyuRireki["seihinId"].present?
+      seihin = Seihin.find(konyuRireki["seihinId"])
+      @@katashiki = seihin["katashikiNm"]
+    end
 
     ## ヘッダ項目：担当者
-    eigyo = User.find(konyuRireki["mitsumoriTantoEigyoCd"])
-    @@tanto = eigyo["myoji"] + " " + eigyo["name"]
+    @@tanto = nil
+    if konyuRireki["mitsumoriTantoEigyoCd"].present?
+      eigyo = User.find(konyuRireki["mitsumoriTantoEigyoCd"])
+      @@tanto = eigyo["myoji"] + " " + eigyo["name"]
+    end
 
 
     ###########################
@@ -282,14 +291,23 @@ class ReportController < ApplicationController
     report.start_new_page :layout => :first do
 
       if @@mitsumori.present?
-        t = @@mitsumoriDt
-        strDate = "平成" + (t.strftime("%y").to_i + 12).to_s + t.strftime("年%m月%d日")
-        item(:date).value(strDate)
+
+        if @@mitsumoriDt.present?
+          t = @@mitsumoriDt
+          strDate = "平成" + (t.strftime("%y").to_i + 12).to_s + t.strftime("年%m月%d日")
+          item(:date).value(strDate)
+        end
 
         item(:name1).value('')  #仕様：空欄とする
         item(:name2).value(@@kokyakuNm)
-        item(:model).value(@@katashiki)
-        item(:name3).value(@@tanto)
+
+        if @@katashiki.present?
+          item(:model).value(@@katashiki)
+        end
+
+        if @@tanto.present?
+          item(:name3).value(@@tanto)
+        end
 
         # 集計項目
         # 3%集計
