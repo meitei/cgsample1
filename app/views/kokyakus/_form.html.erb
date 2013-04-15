@@ -111,8 +111,8 @@ $(function() {
       $(element).removeClass(errorClass); 
     },
     rules: {
-        "kokyaku[kokyakuNm1]": {required:true, number:true, maxlength:50},
-        "kokyaku[kokyakuNm2]": {number:true, maxlength:50},
+        "kokyaku[kokyakuNm1]": {required:true, maxlength:50},
+        "kokyaku[kokyakuNm2]": {maxlength:50},
         "kokyaku[kokyakuNmKana1]": {required:true, katakana:true, maxlength:50},
         "kokyaku[kokyakuNmKana2]": {katakana:true, maxlength:50},
         "kokyaku[tanjoGengo]": {required:true},
@@ -123,7 +123,7 @@ $(function() {
         "kokyaku[address1]": {required:true, maxlength:100},
         "kokyaku[address2]": {maxlength:100},
         "kokyaku[tel1]": {required:true, telnum:true, maxlength:12},
-        "kokyaku[tel2]": {required:true, mobilenum:true, maxlength:13},
+        "kokyaku[tel2]": {mobilenum:true, maxlength:13},
         "kokyaku[fax]": {telnum:true, telnum:true, maxlength:12},
         "kokyaku[shobyouCd1]": {required:true},
         "kokyaku[gakkoNm]": {maxlength:100},
