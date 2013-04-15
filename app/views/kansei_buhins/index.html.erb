@@ -136,8 +136,8 @@ function executeKanseiBuhin(buhinCd) {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
-    data["koshinshaId"] = 1;
-    data["torokushaId"] = 1;
+    data["koshinshaId"] = $("#loginId").val();
+    data["torokushaId"] = $("#loginId").val();
 
     postData["kansei_buhin"] = data;
     postData["id"] = buhinCd;

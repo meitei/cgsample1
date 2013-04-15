@@ -342,11 +342,18 @@
 <script type="text/javascript">
     var submitItem24= function() {
         var selected = $("input[name='COL24_1']:checked").val();
+        
+        this.mitsumoriData["COL24_1"] = selected;
+        this.mitsumoriData["COL24_2"] = 0;
+        this.mitsumoriData["COL24_3"] = 0;
+
         var selected2;
         var product = {};
         if(selected == "1") {
 
             selected2 = $("input[name='1-COL24_2']:checked").val();
+
+            this.mitsumoriData["COL24_2"] = selected2;
 
             if (selected2 == "1"){
 
@@ -438,12 +445,14 @@
                 product["kin"] = removeComma($("#1-196_kin").text());
                 this.productsData["1-196"] = product;
 
-            } else
+            } else {
             }
 
         } else if(selected == "2") {
 
             selected2 = $("input[name='2-COL24_3']:checked").val();
+
+            this.mitsumoriData["COL24_3"] = selected2;
 
             if (selected2 == "1"){
 
@@ -472,7 +481,7 @@
                 product["kin"] = removeComma($("#2-199_kin").text());
                 this.productsData["2-199"] = product;
 
-            } else
+            } else {
             }
 
         } else {

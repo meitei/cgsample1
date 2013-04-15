@@ -4,44 +4,46 @@
       <tr>
         <th style="width:80px;">顧客コード</th>
         <td style="width:210px;">
-          <input style="width:60px;" type="text" id="kokyakuIdFrom" name="kokyaku[kokyakuIdFrom]" tabindex="2" />&nbsp;〜
-          <input style="width:60px;" type="text" id="kokyakuIdTo" name="kokyaku[kokyakuIdTo]" tabindex="4" />
+          <input style="width:60px; ime-mode: disabled;" type="text" id="kokyakuIdFrom" name="kokyaku[kokyakuIdFrom]" maxlength="7" />&nbsp;〜
+          <input style="width:60px; ime-mode: disabled;" type="text" id="kokyakuIdTo" name="kokyaku[kokyakuIdTo]" maxlength="7" />
         </td>
         <th style="width:80px;">郵便番号</th>
         <td style="width:175px;">
-          <input style="width:130px;" type="text" id="postNo" name="kokyaku[postNo]" tabindex="28" />
+          <input style="width:130px; ime-mode: disabled;" type="text" id="postNo" name="kokyaku[postNo]" maxlength="8" />
         </td>
-        <th>FAX番号</th>
-        <td>
-          <input style="width:130px;" type="text" id="fax" name="kokyaku[fax]" tabindex="38" />
+        <th style="width:80px;">携帯番号</th>
+        <td style="width:175px;">
+          <input style="width:130px; ime-mode: disabled;" type="text" id="tel2" name="kokyaku[tel2]" maxlength="13" />
         </td>
       </tr>
       <tr>
         <th>顧客名</th>
         <td>
-          <input style="width:130px;" type="text" id="kokyakuNm" name="kokyaku[kokyakuNm]" tabindex="6" />
+          <input style="width:65px;" type="text" id="kokyakuNm1" name="kokyaku[kokyakuNm1]" />
+          <input style="width:65px;" type="text" id="kokyakuNm2" name="kokyaku[kokyakuNm2]" />
         </td>
         <th>住所１</th>
         <td>
-          <input style="width:130px;" type="text" id="address1" name="kokyaku[address1]" tabindex="30" />
+          <input style="width:130px;" type="text" id="address1" name="kokyaku[address1]" />
         </td>
-        <th>傷病名</th>
+        <th>FAX番号</th>
         <td>
-          <input style="width:130px;" type="text" id="shobyouNm" name="kokyaku[shobyoNm]" tabindex="40" />
+          <input style="width:130px; ime-mode: disabled;" type="text" id="fax" name="kokyaku[fax]" maxlength="12" />
         </td>
       </tr>
       <tr>
         <th>顧客カナ</th>
         <td>
-          <input style="width:130px;" type="text" id="kokyakuNmKana" name="kokyaku[kokyakuNmKana]" tabindex="8" />
+          <input style="width:65px;" type="text" id="kokyakuNmKana1" name="kokyaku[kokyakuNmKana1]" />
+          <input style="width:65px;" type="text" id="kokyakuNmKana2" name="kokyaku[kokyakuNmKana2]" />
         </td>
         <th>住所２</th>
         <td>
-          <input style="width:130px;" type="text" id="address2" name="kokyaku[address2]" tabindex="32" />
+          <input style="width:130px;" type="text" id="address2" name="kokyaku[address2]" />
         </td>
-        <th>学校名</th>
+        <th>傷病名</th>
         <td>
-          <input style="width:130px;" type="text" id="gakkoNm" name="kokyaku[gakkoNm]" tabindex="42" />
+          <input style="width:130px;" type="text" id="shobyouNm" name="kokyaku[shobyoNm]" />
         </td>
       </tr>
       <tr>
@@ -51,37 +53,71 @@
         </td>
         <th>電話番号</th>
         <td>
-          <input style="width:130px;" type="text" id="tel1" name="kokyaku[tel1]" tabindex="34" />
+          <input style="width:130px; ime-mode: disabled;" type="text" id="tel1" name="kokyaku[tel1]" maxlength="12" />
+        </td>
+        <th>学校名</th>
+        <td>
+          <input style="width:130px;" type="text" id="gakkoNm" name="kokyaku[gakkoNm]" />
         </td>
       </tr>
       <tr>
         <th>生年月日</th>
-        <td>　
+        <td colspan="4">
           <%= select :kokyaku, :tanjoGengoFrom, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
-          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYearFrom" name="kokyaku[tanjoYearFrom]" maxlength="2" tabindex="99" />年
-          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonthFrom" name="kokyaku[tanjoMonthFrom]" maxlength="2" tabindex="99" />月
-          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDayFrom" name="kokyaku[tanjoDayFrom]" maxlength="2" tabindex="99" />日
-          <br />〜
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYearFrom" name="kokyaku[tanjoYearFrom]" maxlength="2" />&nbsp;年
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonthFrom" name="kokyaku[tanjoMonthFrom]" maxlength="2" />&nbsp;月
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDayFrom" name="kokyaku[tanjoDayFrom]" maxlength="2" />&nbsp;日
+          &nbsp;～&nbsp;
           <%= select :kokyaku, :tanjoGengoTo, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
-          <input style="width:20px;" type="text" id="tanjoYearTo" name="kokyaku[tanjoYearTo]" tabindex="99" />年
-          <input style="width:20px;" type="text" id="tanjoMonthTo" name="kokyaku[tanjoMonthTo]" tabindex="99" />月
-          <input style="width:20px;" type="text" id="tanjoDayTo" name="kokyaku[tanjoDayTo]" tabindex="99" />日
-        </td>
-        <th style="width:80px;">携帯番号</th>
-        <td style="width:175px;">
-          <input style="width:130px;" type="text" id="tel2" name="kokyaku[tel2]" tabindex="36" />
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYearTo" name="kokyaku[tanjoYearTo]" maxlength="2" />&nbsp;年
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonthTo" name="kokyaku[tanjoMonthTo]" maxlength="2" />&nbsp;月
+          <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDayTo" name="kokyaku[tanjoDayTo]" maxlength="2" />&nbsp;日
         </td>
       </tr>
     </table>
     <div class="btn_submit">
-      <div><a class="btn_search" id="btnCustomerSearch" href="#" tabindex="44" />検索</a></div>
-      <div><a class="btn_clear" id="btnCustomerClear" href="#" tabindex="46" />条件クリア</a></div>
+      <div><a class="btn_search" id="btnCustomerSearch" href="#" />検索</a></div>
+      <div><a class="btn_clear" id="btnCustomerClear" href="#" />条件クリア</a></div>
     </div>
   </div>
   <div>
   </div>
   </form>
 <script type="text/javascript">
-  $("#kokyaku_tanjoGengoFrom").css("width", "60px").attr("tabindex", "99"); //TODO:tabindex
-  $("#kokyaku_tanjoGengoTo").css("width", "60px").attr("tabindex", "99"); //TODO:tabindex
+  $("#kokyaku_tanjoGengoFrom").css("width", "60px");
+  $("#kokyaku_tanjoGengoTo").css("width", "60px");
+  $("#kokyakuSearchForm td").css("text-align", "left");
+
+  // tabindex一括設定
+  var items = new Array(
+      "#kokyakuIdFrom",
+      "#kokyakuIdTo",
+      "#kokyakuNm1",
+      "#kokyakuNm2",
+      "#kokyakuNmKana1",
+      "#kokyakuNmKana2",
+      "#kokyaku_seibetsu",
+      "#kokyaku_tanjoGengoFrom",
+      "#tanjoYearFrom",
+      "#tanjoMonthFrom",
+      "#tanjoDayFrom",
+      "#kokyaku_tanjoGengoTo",
+      "#tanjoYearTo",
+      "#tanjoMonthTo",
+      "#tanjoDayTo",
+      "#postNo",
+      "#address1",
+      "#address2",
+      "#tel1",
+      "#tel2",
+      "#fax",
+      "#shobyouNm",
+      "#gakkoNm",
+      "#btnCustomerSearch",
+      "#btnCustomerClear"
+  );
+  for(i=0 ; i<items.length; i++) {
+    $(items[i]).attr("tabindex", i+1);
+  }
+  $(items[0]).select();
 </script>

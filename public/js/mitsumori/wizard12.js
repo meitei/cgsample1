@@ -18,7 +18,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step12");
-    wm.submitItems[1] = submitItem15;
+    wm.submitItems[12] = submitItem15;
   }
 
   // フットサポート
@@ -41,5 +41,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step12");
-    wm.submitItems[1] = submitItem13;
+    wm.submitItems[12] = submitItem13;
   }

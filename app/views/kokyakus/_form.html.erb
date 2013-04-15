@@ -6,13 +6,13 @@
 <div style="width:866px;">
   <table>
     <tr>
-      <th style="width:75px;">顧客名称</th>
+      <th style="width:75px;">顧客コード</th>
       <td style="width:205px;">
-        <input style="width:150px;" type="text" id="kokyakuNm" name="kokyaku[kokyakuNm]" value="<%= @kokyaku.kokyakuNm %>" tabindex="2" />
+        <div id="kokyakuId" style="width:150px;" class="input-xlarge uneditable-input"><%= @kokyaku.kokyakuId %></div>
       </td>
       <th style="width:75px;">郵便番号</th>
       <td style="width:150px;">
-        <input style="width:80px;" type="text" id="postNo" name="kokyaku[postNo]" value="<%= @kokyaku.postNo %>" tabindex="10" />
+        <input style="width:80px; ime-mode: disabled;" type="text" id="postNo" name="kokyaku[postNo]" value="<%= @kokyaku.postNo %>" maxlength="8" />
         <a id="searchAddress" href="#">住所表示</a>
       </td>
       <th style="width:100px;" scope="row">病名・障害名１</th>
@@ -21,13 +21,14 @@
       </td>
     </tr>
     <tr>
-      <th>カナ名称</th>
+      <th>顧客名称</th>
       <td>
-        <input style="width:150px;" type="text" id="kokyakuNmKana" name="kokyaku[kokyakuNmKana]" value="<%= @kokyaku.kokyakuNmKana %>" tabindex="4" />
+        <input style="width:75px;" type="text" id="kokyakuNm1" name="kokyaku[kokyakuNm1]" value="<%= @kokyaku.kokyakuNm1 %>" />
+        <input style="width:75px;" type="text" id="kokyakuNm2" name="kokyaku[kokyakuNm2]" value="<%= @kokyaku.kokyakuNm2 %>" />
       </td>
       <th>住所１</th>
       <td>
-        <input style="width:150px;" type="text" id="address1" name="kokyaku[address1]" value="<%= @kokyaku.address1 %>" tabindex="12" />
+        <input style="width:150px;" type="text" id="address1" name="kokyaku[address1]" value="<%= @kokyaku.address1 %>" />
       </td>
       <th>病名・障害名２</th>
       <td>
@@ -35,13 +36,14 @@
       </td>
     </tr>
     <tr>
-      <th>性別</th>
+      <th>カナ名称</th>
       <td>
-        <%= select :kokyaku, :seibetsu, [["男性", "0"], ["女性", "1"]], :include_blank => true %>
+        <input style="width:75px;" type="text" id="kokyakuNmKana1" name="kokyaku[kokyakuNmKana1]" value="<%= @kokyaku.kokyakuNmKana1 %>" />
+        <input style="width:75px;" type="text" id="kokyakuNmKana2" name="kokyaku[kokyakuNmKana2]" value="<%= @kokyaku.kokyakuNmKana2 %>" />
       </td>
       <th>住所２</th>
       <td>
-        <input style="width:150px;" type="text" id="address2" name="kokyaku[address2]" value="<%= @kokyaku.address2 %>" tabindex="14" />
+        <input style="width:150px;" type="text" id="address2" name="kokyaku[address2]" value="<%= @kokyaku.address2 %>" />
       </td>
       <th>病名・障害名３</th>
       <td>
@@ -49,28 +51,30 @@
       </td>
     </tr>
     <tr>
-      <th>生年月日</th>
+      <th>性別</th>
       <td>
-        <%= select :kokyaku, :tanjoGengo, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
-        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYear" name="kokyaku[tanjoYear]" value="<%= @kokyaku.tanjoYear %>" maxlength="2" tabindex="99" />年
-        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonth" name="kokyaku[tanjoMonth]" value="<%= @kokyaku.tanjoMonth %>" maxlength="2" tabindex="99" />月
-        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDay" name="kokyaku[tanjoDay]" value="<%= @kokyaku.tanjoDay %>" maxlength="2" tabindex="99" />日
+        <%= select :kokyaku, :seibetsu, [["男性", "0"], ["女性", "1"]], :include_blank => true %>
       </td>
       <th>電話番号</th>
       <td>
-       <input style="width:150px;" type="text" id="tel1" name="kokyaku[tel1]" value="<%= @kokyaku.tel1 %>" tabindex="16" />
+       <input style="width:150px; ime-mode: disabled;" type="text" id="tel1" name="kokyaku[tel1]" value="<%= @kokyaku.tel1 %>" maxlength="12" />
       </td>
       <th>学校名</th>
       <td>
-        <input type="text" id="gakkoNm" name="kokyaku[gakkoNm]" value="<%= @kokyaku.gakkoNm %>" tabindex="28" />
+        <input type="text" id="gakkoNm" name="kokyaku[gakkoNm]" value="<%= @kokyaku.gakkoNm %>" />
       </td>
     </tr>
     <tr>
-      <th></th>
-      <td></td>
+      <th>生年月日</th>
+      <td>
+        <%= select :kokyaku, :tanjoGengo, [["大正", "1"], ["昭和", "2"], ["平成", "3"]], :include_blank => true %>
+        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoYear" name="kokyaku[tanjoYear]" value="<%= @kokyaku.tanjoYear %>" maxlength="2" />年
+        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoMonth" name="kokyaku[tanjoMonth]" value="<%= @kokyaku.tanjoMonth %>" maxlength="2" />月
+        <input style="width:20px; ime-mode: disabled;" type="text" id="tanjoDay" name="kokyaku[tanjoDay]" value="<%= @kokyaku.tanjoDay %>" maxlength="2" />日
+      </td>
       <th>携帯番号</th>
       <td>
-        <input style="width:150px;" type="text" id="tel2" name="kokyaku[tel2]" value="<%= @kokyaku.tel2 %>" tabindex="18" />
+        <input style="width:150px; ime-mode: disabled;" type="text" id="tel2" name="kokyaku[tel2]" value="<%= @kokyaku.tel2 %>" maxlength="13" />
       </td>
       <th></th>
       <td></td>
@@ -80,7 +84,7 @@
       <td></td>
       <th>FAX番号</th>
       <td>
-        <input style="width:150px;" type="text" id="fax" name="kokyaku[fax]" value="<%= @kokyaku.fax %>" tabindex="20" />
+        <input style="width:150px; ime-mode: disabled;" type="text" id="fax" name="kokyaku[fax]" value="<%= @kokyaku.fax %>" maxlength="12" />
       </td>
       <th></th>
       <td></td>
@@ -88,12 +92,13 @@
     <tr>
       <th style="width:100px;">備考</th>
       <td colspan="5">
-        <textarea style="width:500px;" id="biko" name="kokyaku[biko]" rows="3" cols="250" tabindex="30"><%= @kokyaku.biko %></textarea>
+        <textarea style="width:500px;" id="biko" name="kokyaku[biko]" rows="3" cols="250" @kokyaku.biko %></textarea>
       </td>
     </tr>
   </table>
 </div>
 </form>
+
 <script>
 $(function() {
   $("#kokyakuForm").validate({
@@ -106,21 +111,26 @@ $(function() {
       $(element).removeClass(errorClass); 
     },
     rules: {
-        kokyakuNm: {required:true, maxlength:10},
-        kokyakuNmKana: {katakana:true, maxlength:10},
-        tanjoYear: {number:true, maxlength:2},
-        tanjoMonth: {number:true, maxlength:2},
-        tanjoDay: {number:true, maxlength:2},
-        postNo: {postnum:true, maxlength:8},
-        address1: {maxlength:100},
-        address2: {maxlength:100},
-        tel1: {telnum:true, maxlength:12},
-        tel2: {mobilenum:true, maxlength:13},
-        fax: {telnum:true, maxlength:12},
-        gakkoNm: {maxlength:20},
-        biko: {maxlength:100},
+        "kokyaku[kokyakuNm1]": {required:true, number:true, maxlength:50},
+        "kokyaku[kokyakuNm2]": {number:true, maxlength:50},
+        "kokyaku[kokyakuNmKana1]": {required:true, katakana:true, maxlength:50},
+        "kokyaku[kokyakuNmKana2]": {katakana:true, maxlength:50},
+        "kokyaku[tanjoGengo]": {required:true},
+        "kokyaku[tanjoYear]": {required:true, number:true, maxlength:2, min:1, max:64},
+        "kokyaku[tanjoMonth]": {required:true, number:true, maxlength:2, min:1, max:12},
+        "kokyaku[tanjoDay]": {required:true, number:true, maxlength:2, min:1, max:31},
+        "kokyaku[postNo]": {required:true, postnum:true, maxlength:8},
+        "kokyaku[address1]": {required:true, maxlength:100},
+        "kokyaku[address2]": {maxlength:100},
+        "kokyaku[tel1]": {required:true, telnum:true, maxlength:12},
+        "kokyaku[tel2]": {required:true, mobilenum:true, maxlength:13},
+        "kokyaku[fax]": {telnum:true, telnum:true, maxlength:12},
+        "kokyaku[shobyouCd1]": {required:true},
+        "kokyaku[gakkoNm]": {maxlength:100},
+        "kokyaku[biko]": {maxlength:200}
     }
   });
+
   $("a#searchAddress").click(function() {
     var zipCode = $("#postNo").val();
     if(zipCode == "") { return false; }
@@ -137,22 +147,54 @@ $(function() {
     });
     return false;
   });
-  $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "6");
-  $("#kokyaku_tanjoGengo").css("width", "60px").attr("tabindex", "99"); //TODO:tabindex
-  $("#kokyaku_shobyouCd1").css("width", "100px").attr("tabindex", "22");
-  $("#kokyaku_shobyouCd2").css("width", "100px").attr("tabindex", "24");
-  $("#kokyaku_shobyouCd3").css("width", "100px").attr("tabindex", "26");
+  $("#kokyaku_seibetsu").css("width", "100px");
+  $("#kokyaku_tanjoGengo").css("width", "60px");
+  $("#kokyaku_shobyouCd1").css("width", "100px");
+  $("#kokyaku_shobyouCd2").css("width", "100px");
+  $("#kokyaku_shobyouCd3").css("width", "100px");
+
+  // tabindex一括設定
+  var items = new Array(
+      "#kokyakuNm1",
+      "#kokyakuNm2",
+      "#kokyakuNmKana1",
+      "#kokyakuNmKana2",
+      "#kokyaku_seibetsu",
+      "#kokyaku_tanjoGengo",
+      "#tanjoYear",
+      "#tanjoMonth",
+      "#tanjoDay",
+      "#postNo",
+      "#searchAddress",
+      "#address1",
+      "#address2",
+      "#tel1",
+      "#tel2",
+      "#fax",
+      "#kokyaku_shobyouCd1",
+      "#kokyaku_shobyouCd2",
+      "#kokyaku_shobyouCd3",
+      "#gakkoNm",
+      "#biko",
+      "#btnCustomerReturn",
+      "#btnCustomerRegist"
+  );
+  for(i=0 ; i<items.length; i++) {
+    $(items[i]).attr("tabindex", i+1);
+  }
+  $(items[0]).select();
 });
 
-// 更新用メソッド
-function executeKokyaku(kokyakuId) {
+// Submit前処理用メソッド
+function executeKokyaku() {
   // クライアントバリデーション
   if ($("#kokyakuForm").valid() == false) {
      return false;
   }
+  var kokyakuId = $("#kokyakuId").val();
   //var action;
   //var method;
-  if(kokyakuId != null) {
+  if(kokyakuId != null && kokyakuId != undefined && kokyakuId != "") {
     $("#koshinshaId").val($("#loginId").val());
     $("#kokyakuForm").attr("action", "/kokyakus/" + kokyakuId);
     $("#httpMethod").val("put");

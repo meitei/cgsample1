@@ -237,6 +237,7 @@
 <script type="text/javascript">
     var submitItem15= function() {
         var selected = $("input[name='COL15_1']:checked").val();
+        this.mitsumoriData["COL15_1"] = selected;
         var product = {};
         if(selected == "1") {
             // 不要

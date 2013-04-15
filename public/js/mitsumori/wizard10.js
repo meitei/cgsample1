@@ -18,7 +18,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step10");
-    wm.submitItems[1] = submitItem13;
+    wm.submitItems[10] = submitItem13;
   }
 
   // パッド
@@ -33,7 +33,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step10");
-    wm.submitItems[1] = submitItem17;
+    wm.submitItems[10] = submitItem17;
   }
 
   // OP車椅子フレーム
@@ -42,7 +42,7 @@
     // 次へ
     $("button.jqwizard_next").click(function() {
       // 見積データ保存
-      mitsumoriData["COL19_1"] = $("input[name='COL19_1']:checked").val();
+      wm.mitsumoriData["COL19_1"] = $("input[name='COL19_1']:checked").val();
       step = 11;
       $("div.statuslabel").html("<span>STEP 11</span>" + $("div#step11 > div#title").text());
       $("button#jqwizard_next").attr("disabled", "disabled");
@@ -54,7 +54,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step10");
-    wm.submitItems[1] = submitItem19;
+    wm.submitItems[10] = submitItem19;
   }
 
   // アームパッド
@@ -73,5 +73,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step10");
-    wm.submitItems[1] = submitItem12;
+    wm.submitItems[10] = submitItem12;
   }

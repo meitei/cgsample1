@@ -18,7 +18,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step7");
-    wm.submitItems[1] = submitItem10;
+    wm.submitItems[7] = submitItem10;
   }
 
   // 上肢支持部
@@ -37,7 +37,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step7");
-    wm.submitItems[1] = submitItem14;
+    wm.submitItems[7] = submitItem14;
   }
 
   // テーブル
@@ -60,7 +60,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step7");
-    wm.submitItems[1] = submitItem15;
+    wm.submitItems[7] = submitItem15;
   }
 
   // バックサポート
@@ -83,5 +83,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step7");
-    wm.submitItems[1] = submitItem7;
+    wm.submitItems[7] = submitItem7;
   }

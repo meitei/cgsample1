@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130407194737) do
+ActiveRecord::Schema.define(:version => 20130414183440) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -63,34 +63,36 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
 
   create_table "kokyakus", :id => false, :force => true do |t|
     t.integer  "kokyakuId"
-    t.string   "kokyakuNm",     :limit => 100
-    t.string   "kokyakuNmKana", :limit => 100
     t.integer  "seibetsu"
-    t.string   "postNo",        :limit => 8
-    t.string   "address1",      :limit => 100
-    t.string   "address2",      :limit => 100
-    t.string   "tel1",          :limit => 13
-    t.string   "tel2",          :limit => 13
-    t.string   "fax",           :limit => 13
+    t.string   "postNo",         :limit => 8
+    t.string   "address1",       :limit => 100
+    t.string   "address2",       :limit => 100
+    t.string   "tel1",           :limit => 13
+    t.string   "tel2",           :limit => 13
+    t.string   "fax",            :limit => 13
     t.integer  "shobyouCd1"
     t.integer  "shobyouCd2"
     t.integer  "shobyouCd3"
-    t.string   "gakkoNm",       :limit => 100
-    t.string   "biko",          :limit => 200
-    t.integer  "koshinshaId",                                 :null => false
-    t.integer  "torokushaId",                                 :null => false
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.integer  "delFlg",                       :default => 0, :null => false
+    t.string   "gakkoNm",        :limit => 100
+    t.string   "biko",           :limit => 200
+    t.integer  "koshinshaId",                                  :null => false
+    t.integer  "torokushaId",                                  :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.integer  "delFlg",                        :default => 0, :null => false
     t.integer  "tanjoGengo"
     t.integer  "tanjoYear"
     t.integer  "tanjoMonth"
     t.integer  "tanjoDay"
+    t.string   "kokyakuNm1",     :limit => 50
+    t.string   "kokyakuNm2",     :limit => 50
+    t.string   "kokyakuNmKana1", :limit => 50
+    t.string   "kokyakuNmKana2", :limit => 50
   end
 
   create_table "konyu_rirekis", :force => true do |t|
     t.integer  "konyuRirekiId",         :limit => 11
-    t.integer  "kokyakuId",                                :null => false
+    t.integer  "kokyakuId",                                               :null => false
     t.integer  "byoinCd"
     t.string   "mitsumoriTantoEigyoCd", :limit => 10
     t.date     "mitsumoriDt"
@@ -109,10 +111,10 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
     t.date     "nyukinDt"
     t.date     "oshiinDt"
     t.date     "kanryoDt"
-    t.integer  "koshinshaId",                              :null => false
-    t.integer  "torokushaId",                              :null => false
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.integer  "koshinshaId",                                             :null => false
+    t.integer  "torokushaId",                                             :null => false
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
     t.string   "ishiNm1",               :limit => 50
     t.string   "ishiNm2",               :limit => 50
     t.string   "rigakuRyohoNm1",        :limit => 50
@@ -126,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
     t.binary   "kanseiImg",             :limit => 1048576
     t.binary   "kanseiTmbImg",          :limit => 1048576
     t.string   "kanseiImgName"
+    t.integer  "delFlg",                                   :default => 0, :null => false
   end
 
   create_table "mitsumori_seihins", :force => true do |t|
@@ -153,7 +156,6 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
   end
 
   create_table "mitsumoris", :force => true do |t|
-    t.integer  "mitsumoriId"
     t.integer  "kokyakuId"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
@@ -286,7 +288,6 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
     t.integer  "COL22_1"
     t.integer  "COL22_2"
     t.integer  "COL22_3"
-    t.integer  "COL_23_1"
     t.integer  "COL23_2"
     t.integer  "COL23_3"
     t.integer  "COL23_4"
@@ -304,6 +305,8 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
     t.integer  "COL25_1"
     t.integer  "torokushaId"
     t.integer  "koshinshaId"
+    t.integer  "COL1_2"
+    t.integer  "COL23_1"
   end
 
   create_table "seihins", :primary_key => "seihinId", :force => true do |t|
@@ -355,19 +358,6 @@ ActiveRecord::Schema.define(:version => 20130407194737) do
     t.integer  "torokushaId",                :null => false
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
-  end
-
-  create_table "test_images", :force => true do |t|
-    t.integer  "mitsumoriNo",                    :null => false
-    t.string   "text"
-    t.binary   "mainImage1",  :limit => 1048576
-    t.binary   "mainImage2",  :limit => 1048576
-    t.binary   "subImage1",   :limit => 1048576
-    t.binary   "subImage2",   :limit => 1048576
-    t.binary   "subImage3",   :limit => 1048576
-    t.binary   "subImage4",   :limit => 1048576
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
   end
 
   create_table "users", :force => true do |t|

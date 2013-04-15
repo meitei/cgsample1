@@ -64,7 +64,7 @@ class KanseizuController < ApplicationController
             4 => "image074.jpg"
         },
         "COL10_3" => {
-            2 => "image076.jpg"
+            1 => "image076.jpg"
         },
         "COL11_1" => {
             2 => "image078.jpg",
@@ -79,14 +79,12 @@ class KanseizuController < ApplicationController
         "COL13_1" => {
             2 => "image090.jpg"
         },
-        # "COL13_3" => {
-        #     3 => "image092.jpg",
-        #     3 => "image094.jpg",
-        #     4 => "image096.jpg",
-        #     4 => "image098.jpg"
-        # },
+        "COL13_3" => { # ※COL13_3はCOL13_1の値によって出力画像が変動する。
+                    1 => ["image092.jpg", "image096.jpg"],
+                    2 => ["image094.jpg", "image098.jpg"]
+        },
         "COL14_1" => {
-             # => "image100.jpg",
+            2 => "image100.jpg",
             3 => "image102.jpg"
         },
         "COL15_1" => {
@@ -94,83 +92,83 @@ class KanseizuController < ApplicationController
             3 => "image106.jpg",
             4 => "image108.jpg"
         },
-        # "COL16_2" => {
-        #      => "image110.jpg"
-        # },
-        # "COL16_3" => {
-        #      => "image112.jpg"
-        # },
-        # "COL16_4" => {
-        #      => "image114.jpg"
-        # },
-        # "COL16_13" => {
-        #      => "image115.jpg"
-        # },
-        # "COL16_9" => {
-        #      => "image117.jpg"
-        # },
-        # "COL16_12" => {
-        #      => "image119.jpg"
-        # },
-        # "COL17_2" => {
-        #      => "image121.jpg"
-        # },
-        # "COL17_3" => {
-        #      => "image123.jpg"
-        # },
-        # "COL17_4" => {
-        #      => "image125.jpg"
-        # },
-        # "COL17_5" => {
-        #      => "image127.jpg"
-        # },
-        # "COL17_6" => {
-        #      => "image129.jpg"
-        # },
-        # "COL17_11" => {
-        #      => "image123.jpg"
-        # },
-        # "COL17_12" => {
-        #      => "image123.jpg"
-        # },
-        # "COL17_13" => {
-        #      => "image133.jpg"
-        # },
-        # "COL17_15" => {
-        #      => "image135.jpg"
-        # },
-        # "COL18_2" => {
-        #      => "image137.jpg"
-        # },
-        # "COL19_2" => {
-        #      => "image137.jpg"
-        # },
-        # "COL19_5" => {
-        #      => "image139.jpg"
-        # },
-        # "COL19_13" => {
-        #      => "image141.jpg"
-        # },
-        # "COL19_14" => {
-        #      => "image143.jpg"
-        # },
-        # "COL20_2" => {
-        #      => "image137.jpg"
-        # },
-        # "COL20_8" => {
-        #      => "image141.jpg"
-        # },
-        # "COL20_9" => {
-        #      => "image143.jpg"
-        # },
-        # "COL21_2" => {
-        #      => "image137.jpg"
-        # },
+        "COL16_2" => {
+            1 => "image110.jpg"
+        },
+        "COL16_3" => {
+            1 => "image112.jpg"
+        },
+        "COL16_4" => {
+            1 => "image114.jpg"
+        },
+        "COL16_13" => {
+            1 => "image115.jpg"
+        },
+        "COL16_9" => {
+            1 => "image117.jpg"
+        },
+        "COL16_12" => {
+            1 => "image119.jpg"
+        },
+        "COL17_2" => {
+            1 => "image121.jpg"
+        },
+        "COL17_3" => {
+            1 => "image123.jpg"
+        },
+        "COL17_4" => {
+            1 => "image125.jpg"
+        },
+        "COL17_5" => {
+            1 => "image127.jpg"
+        },
+        "COL17_6" => {
+            1 => "image129.jpg"
+        },
+        "COL17_11" => {
+            1 => "image123.jpg"
+        },
+        "COL17_12" => {
+            1 => "image123.jpg"
+        },
+        "COL17_13" => {
+            1 => "image133.jpg"
+        },
+        "COL17_15" => {
+            1 => "image135.jpg"
+        },
+        "COL18_2" => {
+            1 => "image137.jpg"
+        },
+        "COL19_2" => {
+            1 => "image137.jpg"
+        },
+        "COL19_5" => {
+            1 => "image139.jpg"
+        },
+        "COL19_13" => {
+            1 => "image141.jpg"
+        },
+        "COL19_14" => {
+            1 => "image143.jpg"
+        },
+        "COL20_2" => {
+            1 => "image137.jpg"
+        },
+        "COL20_8" => {
+            1 => "image141.jpg"
+        },
+        "COL20_9" => {
+            1 => "image143.jpg"
+        },
+        "COL21_2" => {
+            1 => "image137.jpg"
+        },
         "COL22_1" => {
             1 => "image011.jpg",
             2 => "image012.jpg"
         },
-        "COL_23_1" => {
+        "COL23_1" => {
             1 => "image145.jpg",
             2 => "image148.jpg",
             3 => "image149.jpg",
@@ -180,17 +178,24 @@ class KanseizuController < ApplicationController
         },
         "COL24_2" => {
             1 => "image156.jpg",
-            2 => "image155.jpg",
-            3 => "image154.jpg",
-            4 => "image154.jpg",
-            5 => "image154.jpg"
+            2 => "image156.jpg",
+            3 => "image155.jpg",
+            4 => "image155.jpg",
+            5 => "image154.jpg",
+            6 => "image154.jpg",
+            7 => "image154.jpg",
+            8 => "image154.jpg",
+            9 => "image154.jpg",
+            10 => "image154.jpg"
         },
         "COL24_3" => {
             1 => "image159.jpg",
-            2 => "image159.jpg"
-        # },
-        # "COL25_1" => {
-        #      => "image161.jpg"
+            2 => "image159.jpg",
+            3 => "image159.jpg"
+        },
+        "COL25_1" => {
+            1 => "image161.jpg",
+            2 => "image161.jpg"
         }
     }
 
@@ -201,13 +206,24 @@ class KanseizuController < ApplicationController
     @hash0.each_pair {|column, _hash|
       if @mitsumori[column].present? && @mitsumori[column] > 0
         _hash.each_pair {|key, value|
-          if @mitsumori[column] == key
-            if value.is_a?(Array)
-              value.each {|value2|
-                @array.push value2
-              }
-            else
-              @array.push value
+          # COL13_3の場合、COL13_1の値によって出力画像が変動する
+          if column == "COL13_3"
+            # COL13_1=3：角度調整の場合
+            if @mitsumori["COL13_1"] == 3
+              @array.push value[0]
+            # COL13_1=4：開閉機構の場合
+            elsif @mitsumori["COL13_1"] == 4
+              @array.push value[1]
+            end
+          else
+            if @mitsumori[column] == key
+              if value.is_a?(Array)
+                value.each {|value2|
+                  @array.push value2
+                }
+              else
+                @array.push value
+              end
             end
           end
         }

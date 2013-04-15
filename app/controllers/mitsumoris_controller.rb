@@ -44,10 +44,32 @@ class MitsumorisController < ApplicationController
   # POST /mitsumoris
   # POST /mitsumoris.json
   def create
-    @mitsumori = Mitsumori.new(params[:mitsumori])
+    logger.debug(params)
+
+    if params[:mitsumoriData].nil? then
+      return
+    end
+    @mitsumori_data = params[:mitsumoriData]
+    #logger.debug(@mitsumori_data)
+    max_id = Mitsumori.maximum("mitsumoriNo")
+    if max_id.nil? then
+      max_id = 0
+    end
+    #logger.debug(max_id)
+    @mitsumori_data[:mitsumoriNo] = max_id + 1
+    @mitsumori = Mitsumori.new(@mitsumori_data)
+    @result = @mitsumori.save
+
+    @products_data = params[:productsData]
+    #logger.debug(@products_data)
+    @products_data.each do |key, value|
+      value[:mitsumoriNo] = max_id + 1
+      @seihin = MitsumoriSeihin.new(value)
+      @result = @seihin.save
+    end
 
     respond_to do |format|
-      if @mitsumori.save
+      if @result
         format.html { redirect_to @mitsumori, notice: 'Mitsumori was successfully created.' }
         format.json { render json: @mitsumori, status: :created, location: @mitsumori }
       else

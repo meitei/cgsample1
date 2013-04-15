@@ -40,14 +40,15 @@ $(function() {
             mitsumoriDtTo: {date:true}
         }
         //messages: {
-        //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //    kokyakuNm1: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //    kokyakuNm2: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
         //}
     });
     var isLoaded = false;
-    var colNames = ["","ID","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","","","","",""];
+    var colNames = ["","顧客コード","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
-        {name:"kokyakuId", index:"kokyakuId",width:50},
+        {name:"kokyakuId", index:"kokyakuId",width:60},
         {name:"byoinNm", index:"byoinNm",width:80},
         {name:"kokyakuNm", index:"kokyakuNm",width:80},
         {name:"kokyakuNmKana", index:"kokyakuNmKana",width:80},
@@ -116,7 +117,7 @@ $(function() {
                 success: function(data) {
                   response($.map(data, function(item) {
                     return {
-                      label: item.kokyakuNm+' - '+item.kokyakuId,
+                      label: item.kokyakuNm1+' '+item.kokyakuNm2+' - '+item.kokyakuId,
                       value: item.kokyakuId
                     }
                   }))
@@ -155,9 +156,9 @@ $(function() {
             success: function(data) {
               response($.map(data, function(item) {
                 return {
-                  label: item.kokyakuNm+' - '+item.kokyakuId,
+                  label: item.kokyakuNm1+' - '+item.kokyakuNm2+' - '+item.kokyakuId,
                   value: item.kokyakuNm
-                }
+                }//TODO:value: item.kokyakuNm？
               }))
             }
           })
@@ -218,7 +219,7 @@ $(function() {
     $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px").attr("tabindex", "10");
     $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px").attr("tabindex", "10");
 
-    // 修正画面から遷移した場合、再検索を行う
+    // 登録/修正/顧客一覧画面から遷移した場合、再検索を行う
     setConditions();
 
 });
@@ -230,6 +231,7 @@ $("a#btnKonyuRirekiSearch").click(function() {
 
 $("a#btnKonyuRirekiClear").click(function() {
     $('#konyuRirekiSearchForm input[type="text"]').val('');
+    $('#konyuRirekiSearchForm select').val('');
     return false;
 });
 

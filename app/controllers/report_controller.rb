@@ -213,7 +213,7 @@ class ReportController < ApplicationController
     # ヘッダ項目データ取得
     ###########################
     ## 購入履歴情報取得
-    konyuRireki = KonyuRireki.find(params[:id].to_i)
+    konyuRireki = KonyuRireki.find(:first, :conditions => {:id => params[:id].to_i, :delFlg => 0})
 
     konyuRirekiId = konyuRireki["konyuRirekiId"].to_i
     kokyakuId     = konyuRireki["kokyakuId"].to_i
@@ -222,8 +222,8 @@ class ReportController < ApplicationController
     @@mitsumoriDt = konyuRireki["mitsumoriDt"]
 
     ## ヘッダ項目：宛名
-    kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => kokyakuId})
-    @@kokyakuNm = kokyaku["kokyakuNm"]
+    kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => kokyakuId, :delFlg => 0})
+    @@kokyakuNm = kokyaku["kokyakuNm1"] + " " + kokyaku["kokyakuNm2"]
 
     ## ヘッダ項目：型式
     seihin = Seihin.find(konyuRireki["seihinId"])

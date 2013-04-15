@@ -10,5 +10,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step16");
-    wm.submitItems[1] = submitItem17;
+    wm.submitItems[16] = submitItem17;
   }

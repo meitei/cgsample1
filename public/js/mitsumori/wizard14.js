@@ -10,7 +10,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step13");
-    wm.submitItems[1] = submitItem17;
+    wm.submitItems[14] = submitItem17;
   }
 
   // テーブル
@@ -33,5 +33,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step13");
-    wm.submitItems[1] = submitItem15;
+    wm.submitItems[14] = submitItem15;
   }

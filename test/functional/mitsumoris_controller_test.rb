@@ -18,7 +18,7 @@ class MitsumorisControllerTest < ActionController::TestCase
 
   test "should create mitsumori" do
     assert_difference('Mitsumori.count') do
-      post :create, mitsumori: { kokyakuId: @mitsumori.kokyakuId, mitsumoriId: @mitsumori.mitsumoriId }
+      post :create, mitsumori: { kokyakuId: @mitsumori.kokyakuId, mitsumoriNo: @mitsumori.mitsumoriNo }
     end
 
     assert_redirected_to mitsumori_path(assigns(:mitsumori))
@@ -35,7 +35,7 @@ class MitsumorisControllerTest < ActionController::TestCase
   end
 
   test "should update mitsumori" do
-    put :update, id: @mitsumori, mitsumori: { kokyakuId: @mitsumori.kokyakuId, mitsumoriId: @mitsumori.mitsumoriId }
+    put :update, id: @mitsumori, mitsumori: { kokyakuId: @mitsumori.kokyakuId, mitsumoriNo: @mitsumori.mitsumoriNo }
     assert_redirected_to mitsumori_path(assigns(:mitsumori))
   end
 

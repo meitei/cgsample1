@@ -305,7 +305,15 @@
     </table>
 </label>
 <script type="text/javascript">
-    var submitItem21= function() {
+    var submitItem21 = function() {
+    
+        this.mitsumoriData["COL21_1"] = 0;
+        this.mitsumoriData["COL21_2"] = 0;
+        this.mitsumoriData["COL21_3"] = 0;
+        this.mitsumoriData["COL21_4"] = 0;
+        this.mitsumoriData["COL21_5"] = 0;
+        this.mitsumoriData["COL21_6"] = 0;
+
         var product = {};
 
         if ($("input#1-COL21_1").attr('checked')) {
@@ -315,6 +323,8 @@
             product["tax"] = removeComma($("#1-161_tax").val());
             product["kin"] = removeComma($("#1-161_kin").text());
             this.productsData["1-161"] = product;
+            
+            this.mitsumoriData["COL21_1"] = 1;
         }
 
         if ($("input#2-COL21_2").attr('checked')) {
@@ -324,6 +334,8 @@
             product["tax"] = removeComma($("#2-162_tax").val());
             product["kin"] = removeComma($("#2-162_kin").text());
             this.productsData["2-162"] = product;
+            
+            this.mitsumoriData["COL21_2"] = 1;
         }
 
         if ($("input#3-COL21_3").attr('checked')) {
@@ -333,6 +345,8 @@
             product["tax"] = removeComma($("#4-163_tax").val());
             product["kin"] = removeComma($("#4-163_kin").text());
             this.productsData["4-163"] = product;
+            
+            this.mitsumoriData["COL21_3"] = 1;
         }
 
         if ($("input#4-COL21_4").attr('checked')) {
@@ -342,6 +356,8 @@
             product["tax"] = removeComma($("#4-164_tax").val());
             product["kin"] = removeComma($("#4-164_kin").text());
             this.productsData["4-164"] = product;
+            
+            this.mitsumoriData["COL21_4"] = 1;
         }
 
         if ($("input#5-COL21_5").attr('checked')) {
@@ -351,6 +367,8 @@
             product["tax"] = removeComma($("#5-165_tax").val());
             product["kin"] = removeComma($("#5-165_kin").text());
             this.productsData["5-165"] = product;
+            
+            this.mitsumoriData["COL21_5"] = 1;
         }
 
         if ($("input#6-COL21_6").attr('checked')) {
@@ -360,6 +378,8 @@
             product["tax"] = removeComma($("#6-166_tax").val());
             product["kin"] = removeComma($("#6-166_kin").text());
             this.productsData["6-166"] = product;
+            
+            this.mitsumoriData["COL21_6"] = 1;
         }
 
     }

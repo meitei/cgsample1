@@ -18,7 +18,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step4");
-    wm.submitItems[1] = submitItem8;
+    wm.submitItems[4] = submitItem8;
   }
 
   // シート（座面）
@@ -41,7 +41,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step4");
-    wm.submitItems[1] = submitItem8;
+    wm.submitItems[4] = submitItem8;
   }
 
   // バックサポート
@@ -64,7 +64,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step4");
-    wm.submitItems[1] = submitItem7;
+    wm.submitItems[4] = submitItem7;
   }
 
   // シート（座面）
@@ -87,7 +87,7 @@
     });
     // 単価を書き換え
     updateUnitPrice("step4");
-    wm.submitItems[1] = submitItem8;
+    wm.submitItems[4] = submitItem8;
   }
 
   // 使用場所・車輪
@@ -114,5 +114,5 @@
     });
     // 単価を書き換え
     updateUnitPrice("step4");
-    wm.submitItems[1] = submitItem4;
+    wm.submitItems[4] = submitItem4;
   }
