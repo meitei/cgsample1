@@ -18,8 +18,10 @@
         <% if @konyu_rireki.kokyakuId.present? %>
           <div id="displayKokyakuId" style="width:70px;" class="input-xlarge uneditable-input"><%= @konyu_rireki.kokyakuId %></div>
           <input type="hidden" id="kokyakuId" name="konyu_rireki[kokyakuId]" value="<%= @konyu_rireki.kokyakuId %>" />
+          <script type="text/javascript">var tab_start_index = 1;</script>
         <% else %>
           <input style="width:70px; ime-mode: disabled;" type="text" id="kokyakuId" name="konyu_rireki[kokyakuId]" value="<%= @konyu_rireki.kokyakuId %>" />
+          <script type="text/javascript">var tab_start_index = 0;</script>
         <% end %>
         <div id="kokyakuNm"><%= @konyu_rireki.kokyakuNm1 %>&nbsp;<%= @konyu_rireki.kokyakuNm2 %></div>
       </td>
@@ -212,9 +214,49 @@ $(function() {
         "konyu_rireki[kanryoDt]": {date:true},
     }
   });
-  $("#konyu_rireki_shubetsuKn").css("width", "100px").attr("tabindex", "6");
-  $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px").attr("tabindex", "6");
-  $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px").attr("tabindex", "6");
+  $("#konyu_rireki_shubetsuKn").css("width", "100px");
+  $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px");
+  $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px");
+
+  // tabindex一括設定
+  var items = new Array(
+    "#kokyakuId",
+    "#byoinCd",
+    "#ishiNm1",
+    "#ishiNm2",
+    "#rigakuRyohoNm1",
+    "#rigakuRyohoNm2",
+    "#sagyoRyohoNm1",
+    "#sagyoRyohoNm2",
+    "#mitsumoriTantoEigyoCd",
+    "#mitsumoriDt",
+    "#konyu_rireki_shubetsuKn",
+    "#seihinId",
+    "#shohinNm",
+    "#konyu_rireki_hokenShubetsuCd1",
+    "#konyu_rireki_hokenShubetsuCd2",
+    "#kin",
+    "#seikyuKin",
+    "#shohinShiyoBiko",
+    "#uketsukeSesakuTantoCd",
+    "#juchuDt",
+    "#kariAwaseTantoCd",
+    "#kariAwaseDt",
+    "#nohinTantoCd",
+    "#nohinDt",
+    "#kofuDt",
+    "#nyukinDt",
+    "#oshiinDt",
+    "#kanryoDt",
+    "#uploaded_image",
+    "#fileupload",
+    "#btnKonyuRirekiReturn",
+    "#btnKonyuRirekiRegist"
+  );
+  for(i=tab_start_index ; i<items.length; i++) {
+    $(items[i]).attr("tabindex", i+1);
+  }
+  $(items[tab_start_index]).select();
 
   // 日付項目のフォーマットを設定する
   var dateItems = new Array("juchuDt", "kariAwaseDt", "nohinDt", "kofuDt", "nyukinDt", "oshiinDt", "kanryoDt", "mitsumoriDt");
