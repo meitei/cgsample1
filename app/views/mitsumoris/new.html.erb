@@ -57,6 +57,7 @@
     $("button.jqwizard_previous").click(function() {
       wm.step--;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_next").show(); 
       if(wm.step == 1) {
         $("button#jqwizard_previous").hide();  
       }
@@ -93,10 +94,14 @@
     $("li#step1").click(function() {
       wm.step = 1;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").hide();
+      $("button#jqwizard_next").show(); 
     });
     $("li#step2").click(function() {
       wm.step = 2;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
     });
     $("li#step3").click(function() {
       wm.step = 3;
