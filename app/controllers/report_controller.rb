@@ -226,7 +226,10 @@ class ReportController < ApplicationController
 
     ## ヘッダ項目：宛名
     kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => kokyakuId, :delFlg => 0})
-    @@kokyakuNm = kokyaku["kokyakuNm1"] + " " + kokyaku["kokyakuNm2"]
+    @@kokyakuNm = kokyaku["kokyakuNm1"]
+    if kokyaku["kokyakuNm2"].present?
+      @@kokyakuNm += " " + kokyaku["kokyakuNm2"]
+    end
 
     ## ヘッダ項目：型式
     @@katashiki = nil

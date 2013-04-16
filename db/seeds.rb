@@ -53,7 +53,6 @@ CSV.foreach('db/import/MitsumoriTankas.csv') do |row|
   end
 end
 
-
 ############################################################
 # Test Data
 ############################################################
@@ -64,6 +63,30 @@ if @kokyakus.empty?
 		:kokyakuId => 2400001,
 		:kokyakuNm1 => '顧客',
 		:kokyakuNm2 => '太郎',
+		:delFlg => 0,
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+end
+
+# Byoin.destroy_all(["1 = ?", 1])
+@byoins = Byoin.find(:all)
+if @byoins.empty?
+	Byoin.create(
+		:byoinCd => 1,
+		:byoinNm => '九州病院',
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+end
+
+# HokenShubetsu.destroy_all(["1 = ?", 1])
+@hoken_shubetsus = HokenShubetsu.find(:all)
+if @hoken_shubetsus.empty?
+	HokenShubetsu.create(
+		:hokenShubetsuCd => 1,
+		:hokenShubetsuNm => '九州病院',
+		:hyojiJun => 1,
 		:torokushaId => 1,
 		:koshinshaId => 1
 	)
