@@ -13,6 +13,18 @@
   	var wm = new WizardManager();
 
   	$(document).ready(function(){
+      $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: "/mitsumoris/" + mitsumoriNo + ".json",
+        root: "mitsumori",
+        dataType: "json",
+        success: function(result) {
+          if(result != null) {
+            wm.mitsumoriData = result;
+          }
+        }
+      });
     	$("#estimateForm").wizard();
     	$("#btnEstimateRegist").hide();
     	$("button#jqwizard_previous").hide();
@@ -22,6 +34,7 @@
     	wm.mitsumoriData["kokyakuId"] = kokyakuId;
     	wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
     	//clearNavi("1");
+      $("input[name='COL1_1']").val(wm.mitsumoriData["COL1_1"]);
     	// 次へ
     	$("button.jqwizard_next").click(function() {
     		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
