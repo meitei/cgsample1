@@ -4,8 +4,170 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+user01:
+    username: admin
+    email: admin@aaaaa.co.jp
+    crypted_password: $2a$10$DMCLYY.aXolLgD1Tiu3vVO7ED/Y660yBCFDuU/bHOm3vMnKKlodgy
+    salt: H2djZbt2bs4Hu8ZYMzZo
+    shainCd: 1
+    myoji: システム
+    name: 管理者
+    myojiFuri: システム
+    nameFuri: カンリシャ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user02:
+    username: user2
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 102
+    myoji: ユーザ名字２
+    name: ユーザ名２
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user03:
+    username: user3
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 103
+    myoji: ユーザ名字３
+    name: ユーザ名３
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user04:
+    username: user4
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 104
+    myoji: ユーザ名字４
+    name: ユーザ名４
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user05:
+    username: user5
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 105
+    myoji: ユーザ名字５
+    name: ユーザ名５
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user06:
+    username: user6
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 106
+    myoji: ユーザ名字６
+    name: ユーザ名６
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user07:
+    username: user7
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 107
+    myoji: ユーザ名字７
+    name: ユーザ名７
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user08:
+    username: user8
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 108
+    myoji: ユーザ名字８
+    name: ユーザ名８
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user09:
+    username: user9
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 109
+    myoji: ユーザ名字９
+    name: ユーザ名９
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user10:
+    username: user10
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 110
+    myoji: ユーザ名字１０
+    name: ユーザ名１０
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user11:
+    username: user11
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 111
+    myoji: ユーザ名字１１
+    name: ユーザ名１１
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test
+
+user12:
+    username: user12
+    email:
+    crypted_password: xx
+    salt:
+    shainCd: 112
+    myoji: ユーザ名字１２
+    name: ユーザ名１２
+    myojiFuri: ユーザミョウジ
+    nameFuri: ユーザメイ
+    manageFlg: 2
+    koshinshaId: test
+    torokushaId: test

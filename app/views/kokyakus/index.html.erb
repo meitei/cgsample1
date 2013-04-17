@@ -10,6 +10,10 @@
 <div class="btn_new">
     <a class="btn_new_kokyaku" id="btnCustomerNew" href="/kokyakus/new">新規追加</a>
 </div>
+<form id="konyuRirekiSearchForm">
+    <input type="hidden" name="konyu_rireki[kokyakuIdFrom]" value="" />
+    <input type="hidden" name="konyu_rireki[kokyakuIdTo]" value="" />
+</form>
 <script>
 $(function() {
     $("#kokyakuForm").validate({
@@ -22,10 +26,12 @@ $(function() {
             $(element).removeClass(errorClass);
         },
         rules: {
-            kokyakuNm: {required:true, maxlength:10},
-            kokyakuNmKana: {katakana:true, maxlength:10},
+            kokyakuNm1: {required:true, maxlength:10},
+            kokyakuNm2: {required:true, maxlength:10},
+            kokyakuNmKana1: {katakana:true, maxlength:10},
+            kokyakuNmKana2: {katakana:true, maxlength:10},
             //seibetsu: {required:true, maxlength:10},
-            tanjoDt: {date:true},
+            // tanjoDt: {date:true},
             postNo: {postnum:true, maxlength:8},
             address1: {maxlength:100},
             address2: {maxlength:100},
@@ -36,22 +42,24 @@ $(function() {
             //shobyouCd2: {required:true, maxlength:10},
             //shobyouCd3: {required:true, maxlength:10},
             gakkoNm: {maxlength:20},
-            biko: {maxlength:100},
+            biko: {maxlength:100}
         }
         //messages: {
-        //    kokyakuNm: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //    kokyakuNm1: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
+        //    kokyakuNm2: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
         //}
     });
     var isLoaded = false;
-    var colNames = ["","ID","顧客名","顧客カナ","","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名","学校名・施設名","備考","","","",""];
+    var colNames = ["","顧客コード","顧客名","顧客カナ","","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名","学校名・施設名","備考","","","","","",""];
     var colModelSettings = [
         {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
-        {name:"kokyakuId", index:"kokyakuId",width:30},
+        {name:"kokyakuId", index:"kokyakuId",width:60},
         {name:"kokyakuNm", index:"kokyakuNm",width:80},
         {name:"kokyakuNmKana", index:"kokyakuNmKana",width:100},
         {name:"seibetsu", index:"seibetsu",hidden:true},
         {name:"seibetsuNm", index:"seibetsuNm",width:35},
-        {name:"tanjoDt", index:"tanjoDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
+        // {name:"tanjoDt", index:"tanjoDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
+        {name:"tanjoDt", index:"tanjoDt",width:120},
         {name:"postNo", index:"postNo",width:80},
         {name:"address1", index:"address1",width:100},
         {name:"address2", index:"address2",width:100},
@@ -64,7 +72,9 @@ $(function() {
         {name:"koshinshaId", index:"koshinshaId", hidden:true},
         {name:"torokushaId", index:"torokushaId", hidden:true},
         {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
-        {name:'deleteImg', index:'deleteImg', align:'center', width:20, formatter: deleteFormatter}
+        {name:'deleteImg', index:'deleteImg', align:'center', width:20, formatter: deleteFormatter},
+        {name:'listImg', index:'listImg', align:'center', width:20, formatter: showKonyurRirekiFormatter},
+        {name:'insertImg', index:'insertImg', align:'center', width:20, formatter: registKonyurRirekiFormatter}
     ];
     $("#searchCustomerGrid").jqGrid({
         datatype: "local",
@@ -103,7 +113,7 @@ $(function() {
                 success: function(data) {
                   response($.map(data, function(item) {
                     return {
-                      label: item.kokyakuNm+' - '+item.kokyakuId,
+                      label: item.kokyakuNm1+' '+item.kokyakuNm2+' - '+item.kokyakuId,
                       value: item.kokyakuId
                     }
                   }))
@@ -132,6 +142,8 @@ $(function() {
         }
     });
 
+    // 登録/修正画面から遷移した場合、再検索を行う
+    setConditions();
 });
 
 $("a#btnCustomerSearch").click(function() {
@@ -141,6 +153,7 @@ $("a#btnCustomerSearch").click(function() {
 
 $("a#btnCustomerClear").click(function() {
     $('#kokyakuSearchForm input[type="text"]').val('');
+    $('#kokyakuSearchForm select').val('');
     return false;
 });
 
@@ -155,6 +168,14 @@ function updateFormatter(cellval, options, rowdata) {
 
 function deleteFormatter(cellval, options, rowdata) {
     return "<img src = '/images/database-remove-alt-1.png' onclick='removeKokyaku(" + rowdata['kokyakuId'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+function showKonyurRirekiFormatter(cellval, options, rowdata) {
+    return "<img src='/images/regist.png' onclick='showKonyurRireki(" + rowdata['kokyakuId'] + ")' title='購入履歴一覧' style='width:16px; height:16px'>";
+}
+
+function registKonyurRirekiFormatter(cellval, options, rowdata) {
+    return "<img src='/images/regist.png' onclick='registKonyurRireki(" + rowdata['kokyakuId'] + ")' title='購入履歴入力' style='width:16px; height:16px'>";
 }
 
 // 検索用メソッド
@@ -182,6 +203,7 @@ function searchKokyaku() {
 
 // 更新用メソッド
 function modifyKokyaku(kokyakuId) {
+    saveConditions();
     location.href = "kokyakus/" + kokyakuId + "/edit";
     return false;
 }
@@ -206,4 +228,43 @@ function removeKokyaku(kokyakuId) {
     return false;
 }
 
+// 購入履歴一覧画面遷移用メソッド
+function showKonyurRireki(kokyakuId) {
+    // 購入履歴一覧での検索条件にセットするため、Cookieに顧客IDを保持しておく
+    saveKonyuRirekiConditions(kokyakuId);
+    location.href = "konyu_rirekis?kokyakuId=" + kokyakuId + "&reload=on";
+    return false;
+}
+
+// 購入履歴登録画面遷移用メソッド
+function registKonyurRireki(kokyakuId) {
+    location.href = "konyu_rirekis/new?kokyakuId=" + kokyakuId;
+    return false;
+}
+
+function saveConditions() {
+    $.cookie.json = true;
+    var data = $("#kokyakuSearchForm").serializeArray();
+    $.cookie('kokyaku_conditions', data);
+}
+
+function setConditions() {
+    if (location.search.match(/reload=on/g)) {
+        var conditions = $.cookie('kokyaku_conditions');
+        $.removeCookie('kokyaku_conditions');
+        if (conditions) {
+            $("#kokyakuSearchForm")
+                .deserialize($.parseJSON(conditions));
+        }
+        searchKokyaku();
+    }
+}
+
+function saveKonyuRirekiConditions(kokyakuId) {
+    $('input[name="konyu_rireki[kokyakuIdFrom]"]').val(kokyakuId);
+    $('input[name="konyu_rireki[kokyakuIdTo]"]').val(kokyakuId);
+    $.cookie.json = true;
+    var data = $("#konyuRirekiSearchForm").serializeArray();
+    $.cookie('conditions', data);
+}
 </script>

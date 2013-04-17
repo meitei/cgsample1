@@ -1,13 +1,11 @@
 <div class="container" id="mainmenu_box" style="padding:20px 35px 0px;">
-  <div class="title_master">見積完成図Sample</div>
+  <div class="title_master">見積完成図</div>
+
   <div class="mainmenu_inner cf">
     <ul>
-      <li style="margin-bottom:5px;"><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :jpg, :id => 1, :column => 1), :id => "imgKanseizu_1_" + "1", :name => "kanseizu", :title => "完成図１", :alt => "完成図１", :size => "200x200") %></li>
-      <li style="margin-bottom:5px;"><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :jpg, :id => 1, :column => 2), :id => "imgKanseizu_2_" + "1", :name => "kanseizu", :title => "完成図２", :alt => "完成図２", :size => "200x200") %></li>
-      <li style="margin-bottom:5px;"><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :jpg, :id => 1, :column => 3), :id => "imgKanseizu_3_" + "1", :name => "kanseizu", :title => "完成図３", :alt => "完成図３", :size => "200x200") %></li>
-      <li style="margin-bottom:5px;"><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :jpg, :id => 1, :column => 4), :id => "imgKanseizu_4_" + "1", :name => "kanseizu", :title => "完成図４", :alt => "完成図４", :size => "200x200") %></li>
-      <li style="margin-bottom:5px;"><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :jpg, :id => 1, :column => 5), :id => "imgKanseizu_5_" + "1", :name => "kanseizu", :title => "完成図５", :alt => "完成図５", :size => "200x200") %></li>
-      <li style="margin-bottom:5px;"><%= image_tag(url_for(:controller => 'kanseizu', :action => 'get_image', :format => :jpg, :id => 1, :column => 6), :id => "imgKanseizu_6_" + "1", :name => "kanseizu", :title => "完成図６", :alt => "完成図６", :size => "200x200") %></li>
+      <% @array.each_with_index do |row, i| %>
+       <li style="margin-bottom:5px;"><%= image_tag("/images/items/" + row , :id => "kanseizu_" + (i+1).to_s, :name => "kanseizu", :size => "200x200") %></li>
+      <% end %>
     </ul>
   </div>
 </div>

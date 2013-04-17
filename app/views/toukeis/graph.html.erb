@@ -20,7 +20,7 @@ $(function() {
       success: function(data) {
         response($.map(data.list, function(item) {
           return {
-            label: item.kokyakuNm+' - '+item.kokyakuId,
+            label: item.kokyakuNm1+' '+item.kokyakuNm2+' - '+item.kokyakuId,
             value: item.kokyakuId
           }
         }))

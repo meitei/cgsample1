@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  mitsumoriId: 1
+  mitsumoriNo: 1
   kokyakuId: 1
 
 two:
-  mitsumoriId: 1
+  mitsumoriNo: 1
   kokyakuId: 1

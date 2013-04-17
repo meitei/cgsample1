@@ -108,8 +108,6 @@ function searchByoin() {
     $("#searchByoinGrid").setGridParam(param).trigger("reloadGrid");
 }
 
-
-
 // ##############################
 // 更新用メソッド
 // param:
@@ -133,8 +131,8 @@ function executeByoin(byoinCd) {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
-    data["koshinshaId"] = 1;
-    data["torokushaId"] = 1;
+    data["koshinshaId"] = $("#loginId").val();
+    data["torokushaId"] = $("#loginId").val();
 
     postData["byoin"] = data;
     postData["id"] = byoinCd;
@@ -208,9 +206,10 @@ function showByoinFormDialog(byoinCd) {
                 }
             },
         },
-        open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
+        open:function(event, ui){
+            $(".ui-dialog-titlebar-close").hide();
+        }
     });
-    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     $("#byoinFormDialog").focus();
 }
 

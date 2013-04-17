@@ -19,8 +19,10 @@ $(function() {
             $(element).removeClass(errorClass); 
         },
         rules: {
-            kokyakuNm: {required:true, maxlength:10},
-            kokyakuNmKana: {katakana:true, maxlength:10},
+            kokyakuNm1: {required:true, maxlength:10},
+            kokyakuNm2: {required:true, maxlength:10},
+            kokyakuNmKana1: {katakana:true, maxlength:10},
+            kokyakuNmKana2: {katakana:true, maxlength:10},
             //seibetsu: {required:true, maxlength:10},
             tanjoDt: {date:true},
             postNo: {postnum:true, maxlength:8},
@@ -185,8 +187,10 @@ function showEstimateFormDialog(kokyakuId) {
             dataType: "json",
             success: function(result) {
                 if(result) {
-                    $("#estimateForm #kokyakuNm").val(result["kokyakuNm"]);
-                    $("#estimateForm #kokyakuNmKana").val(result["kokyakuNmKana"]);
+                    $("#estimateForm #kokyakuNm1").val(result["kokyakuNm1"]);
+                    $("#estimateForm #kokyakuNm2").val(result["kokyakuNm2"]);
+                    $("#estimateForm #kokyakuNmKana1").val(result["kokyakuNmKana1"]);
+                    $("#estimateForm #kokyakuNmKana2").val(result["kokyakuNmKana2"]);
                     $("#estimateForm #seibetsu").val(result["seibetsu"]);
                     $("#estimateForm #tanjoDt").val(result["tanjoDt"]);
                     $("#estimateForm #postNo").val(result["postNo"]);

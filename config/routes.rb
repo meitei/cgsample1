@@ -18,6 +18,8 @@ JqgridSample::Application.routes.draw do
 
   resources :mitsumoris
 
+  resources :mitsumori_tankas  
+
   resources :hoken_shubetsus do
     get 'search', :on => :collection
   end
@@ -39,7 +41,6 @@ JqgridSample::Application.routes.draw do
   get "report/report"
 
   get "kanseizu/show"
-  get "kanseizu/get_image"
 
   resources :items do
     get 'report', :on => :collection

@@ -132,8 +132,8 @@ function executeHokenShubetsu(hokenShubetsuCd) {
         data[this.name] = this.value;
     });
     // 更新ユーザー、登録ユーザーを設定する
-    data["koshinshaId"] = 1;
-    data["torokushaId"] = 1;
+    data["koshinshaId"] = $("#loginId").val();
+    data["torokushaId"] = $("#loginId").val();
 
     postData["hoken_shubetsu"] = data;
     postData["id"] = hokenShubetsuCd;
@@ -211,7 +211,6 @@ function showHokenShubetsuFormDialog(hokenShubetsuCd) {
         },
         open:function(event, ui){ $(".ui-dialog-titlebar-close").hide();}
     });
-    $(".ui-dialog-buttonset > button").addClass("btn").addClass("btn-primary");
     $("#hokenShubetsuFormDialog").focus();
 }
 

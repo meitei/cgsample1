@@ -1,11 +1,33 @@
-<div id="estimateForm" class="jqwizard">
+<form id="estimateForm" class="jqwizard">
+    <input type="hidden" id="konyuRirekiId" value="<%= @mitsumori.konyuRirekiId %>" />
+    <input type="hidden" id="kokyakuId" value="<%= @mitsumori.kokyakuId %>" />
+    <input type="hidden" id="mitsumoriNo" value="<%= @mitsumori.mitsumoriNo %>" />
     <div class="jqwizard_panel">
         <div class="jqwizard_content" id="step1"></div>
         <div class="jqwizard_content" id="step2" style="display: none;"></div>
+        <div class="jqwizard_content" id="step3" style="display: none;"></div>
+        <div class="jqwizard_content" id="step4" style="display: none;"></div>
+        <div class="jqwizard_content" id="step5" style="display: none;"></div>
+        <div class="jqwizard_content" id="step6" style="display: none;"></div>
+        <div class="jqwizard_content" id="step7" style="display: none;"></div>
+        <div class="jqwizard_content" id="step8" style="display: none;"></div>
+        <div class="jqwizard_content" id="step9" style="display: none;"></div>
+        <div class="jqwizard_content" id="step10" style="display: none;"></div>
+        <div class="jqwizard_content" id="step11" style="display: none;"></div>
+        <div class="jqwizard_content" id="step12" style="display: none;"></div>
+        <div class="jqwizard_content" id="step13" style="display: none;"></div>
+        <div class="jqwizard_content" id="step14" style="display: none;"></div>
+        <div class="jqwizard_content" id="step15" style="display: none;"></div>
+        <div class="jqwizard_content" id="step16" style="display: none;"></div>
+        <div class="jqwizard_content" id="step17" style="display: none;"></div>
     </div>
     <div class="jqwizard_buttons">
-        <button type="button" class="jqwizard_previous"><img src="/images/btn_back.png" alt="戻る" /></button>
-        <button type="button" class="jqwizard_next"><img src="/images/btn_next.png" alt="次へ"/></button>
+        <button type="button" id="jqwizard_previous" class="jqwizard_previous" disabled="disabled">
+            <img src="/images/btn_back.png" alt="戻る" />
+        </button>
+        <button type="button" id="jqwizard_next" class="jqwizard_next" disabled="disabled">
+            <img src="/images/btn_next.png" alt="次へ"/>
+        </button>
     </div>
     <div class="jqwizard_navi cf">
         <ul id="jqwizard_list">
@@ -28,9 +50,12 @@
             <li id="step17"><a href="#"><em>Step 17</em><span>&nbsp;</span></a></li>
         </ul>
     </div>
-</div>
-    <div class="btn_box">
-      <a id="btnEstimateBack" href="/mitsumoris" class="btn_back2" /><img src="/images/btn_back2_mitsumori.png" alt="戻る" /></a>
-      <a id="btnEstimateRegist" href="#" class="btn_add2" /><img src="/images/btn_add2.png" alt="登録" /></a>
-    </div>
+</form>
+<div class="btn_box">
+    <a id="btnEstimateBack" href="/mitsumoris" class="btn_back2" />
+        <img src="/images/btn_back2_mitsumori.png" alt="戻る" />
+    </a>
+    <a id="btnEstimateRegist" href="#" class="btn_add2" />
+        <img src="/images/btn_add2.png" alt="登録" />
+    </a>
 </div>

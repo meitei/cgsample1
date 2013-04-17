@@ -91,7 +91,7 @@ class ShobyosController < ApplicationController
 
     # 検索条件設定
     conditions = Shobyo.where("1 = ?", 1)
-    conditions = conditions.where("\"shobyoNm\" LIKE ?", params[:syobyoNm] + "%") if params[:shobyoNm] != ""
+    conditions = conditions.where("\"shobyoNm\" LIKE ?", params[:shobyoNm] + "%") if params[:shobyoNm] != ""
     conditions = conditions.where("\"shobyoNmKana\" LIKE ?", params[:shobyoNmKana] + "%") if params[:shobyoNmKana] != ""
     logger.debug(conditions)
 
@@ -120,7 +120,7 @@ class ShobyosController < ApplicationController
       records: records.to_s,
       rows: @shobyos
     }
-    #logger.debug(@responce)
+    logger.debug(@responce)
 
     respond_to do |format|
       format.html # index.html.erb

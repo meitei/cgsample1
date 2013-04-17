@@ -1,0 +1,808 @@
+<div id="title" style="display: none;">メインフレーム機構</div>
+<table class="jqwizard_label">
+    <tr><td class="td1"></td>
+    <td class="td2">選択</td>
+    <td class="td3">制作方法を選んでください</td>
+    <td class="td4">注文書チェック項目</td>
+    <td class="td5">写真</td></tr>
+</table>
+<!--固定型-->
+<label for="step1">
+    <table class="jqwizard_item">
+        <tr>
+            <td class="td1">
+                <div><input type="radio" name="COL3_1" id="1-COL3_1" value="1"></div>
+            </td>
+            <td class="detail">
+                <table class="jqwizard_item_detail">
+                    <tr>
+                        <td class="td3" colspan="6">
+                            <span class="tit_item">固定型</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">説明</td>
+                        <td class="td3" colspan="4">
+                            支持部（座面とバックサポート）の角度を一定に保持します
+                        </td>
+                        <td class="td4">
+                            背座間角度&nbsp;角度調整金具<br>
+                            金具本数<br>
+                            背座間角度&nbsp;角度調整金具
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">対象</td>
+                        <td class="td3" colspan="4">
+                            頭部・体幹のコントロールが可能<br>
+                            歩行が可能
+                        </td>
+                        <td class="td4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">見積</td>
+                        <td class="mitsumori_td1">内訳</td>
+                        <td class="mitsumori_td2">数量</td>
+                        <td class="mitsumori_td3">単価</td>
+                        <td class="mitsumori_td4">金額</td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">構造フレーム<br>金属・木材</td>
+                        <td class="mitsumori_td2" id="1-1_su">1</td>
+                        <td class="mitsumori_td3" id="1-1_tan">0</td>
+                        <td class="mitsumori_td4" id="1-1_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="1-1_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">支持部の連結<br>遊動&nbsp;腰部</td>
+                        <td class="mitsumori_td2" id="1-2_su">2</td>
+                        <td class="mitsumori_td3" id="1-2_tan">0</td>
+                        <td class="mitsumori_td4" id="1-2_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="1-2_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">前座高（※床から支持部（膝窩部）までの高さ）</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">
+                            <input type="text" style="width:40px;" id="1-COL3_13" value="0">mm
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">座角の選択</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">
+                            <select id="1-COL3_4" style="width:80px;">
+                                <option selected value="0">水平</option>
+                                <option value="5">5度</option>
+                                <option value="10">10度</option>
+                            </select>
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">背座間角度の選択</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">
+                            <select id="1-COL3_2" style="width:80px;">
+                                <option selected value="1">直角</option>
+                                <option value="2">95度</option>
+                                <option value="3">100度</option>
+                                <option value="4">105度</option>
+                                <option value="5">110度</option>
+                            </select>
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="td5">
+                <div><img src="../images/items/image016.jpg" alt="" /></div>
+            </td>
+        </tr>
+    </table>
+</label>
+
+<!--リクライニング式-->
+<label for="step2">
+    <table class="jqwizard_item">
+        <tr>
+            <td class="td1">
+                <div><input type="radio" name="COL3_1" id="2-COL3_1" value="2"></div>
+            </td>
+            <td class="detail">
+                <table class="jqwizard_item_detail">
+                    <tr>
+                        <td class="td3" colspan="6">
+                            <span class="tit_item">リクライニング式</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">説明</td>
+                        <td class="td3" colspan="4">
+                            バックサポートの角度を調節出来ます
+                        </td>
+                        <td class="td4">
+                            機構・構造&nbsp;リクライニング<br>
+                            金具本数<br>
+                            背座間角度&nbsp;角度調整金具
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">対象</td>
+                        <td class="td3" colspan="4">
+                            頭部・体幹のコントロールが困難<br>
+                            頭部のコントロールは可能だが、安楽姿勢が必要<br>
+                            腰椎後弯を有する
+                        </td>
+                        <td class="td4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">見積</td>
+                        <td class="mitsumori_td1">内訳</td>
+                        <td class="mitsumori_td2">数量</td>
+                        <td class="mitsumori_td3">単価</td>
+                        <td class="mitsumori_td4">金額</td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">構造フレーム<br>金属・木材</td>
+                        <td class="mitsumori_td2" id="2-1_su">1</td>
+                        <td class="mitsumori_td3" id="2-1_tan">0</td>
+                        <td class="mitsumori_td4" id="2-1_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="2-1_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">支持部の連結<br>遊動&nbsp;腰部</td>
+                        <td class="mitsumori_td2" id="2-2_su">2</td>
+                        <td class="mitsumori_td3" id="2-2_tan">0</td>
+                        <td class="mitsumori_td4" id="2-2_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="2-2_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">
+                            支持部の連結<br>角度調整部品&nbsp;機械式
+                        </td>
+                        <td class="mitsumori_td2">
+                            <select id="2-3_su" style="width:60px;">
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </td>
+                        <td class="mitsumori_td3" id="2-3_tan">0</td>
+                        <td class="mitsumori_td4" id="2-3_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="2-3_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">前座高（※床から支持部（膝窩部）までの高さ）</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">
+                            <input id="2-COL3_13" type="text" style="width:40px;" value="0">mm
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">座角の選択</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">
+                            <select id="2-COL3_4" style="width:80px;">
+                                <option selected value="0">水平</option>
+                                <option value="5">5度</option>
+                                <option value="10">10度</option>
+                            </select>
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">可動域（背フレーム）開始</td>
+                        <td colspan="2" class="mitsumori_td2">可動域&nbsp;終了</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">
+                            <input type="text" style="width:40px;" id="2-COL3_6" value="0">mm
+                        </td>
+                        <td colspan="2" class="mitsumori_td2">
+                            <input type="text" style="width:40px;" id="2-COL3_7" value="0">mm
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">可動域（座フレーム）開始</td>
+                        <td colspan="2" class="mitsumori_td2">可動域&nbsp;終了</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">
+                            <input type="text" style="width:40px;" id="2-COL3_8" value="0">mm
+                        </td>
+                        <td colspan="2" class="mitsumori_td2">
+                            <input type="text" style="width:40px;" id="2-COL3_9" value="0">mm
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="td2"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="2-COL3_5" id="2-1-COL3_5" value="1">
+                        </td>
+                        <td colspan="5" class="mitsumori_td1">
+                            バックサポート幅（内寸）340mm未満→金具本数1本<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="2-COL3_5" id="2-2-COL3_5" value="2">
+                        </td>
+                        <td colspan="5" class="mitsumori_td1">
+                            バックサポート幅（内寸）340mm以上→金具本数2本<br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="td5">
+                <div><img src="../images/items/image018.jpg" alt="" /></div>
+            </td>
+        </tr>
+    </table>
+</label>
+
+<!--ティルト式-->
+<label for="step3">
+    <table class="jqwizard_item">
+        <tr>
+            <td class="td1">
+                <div><input type="radio" name="COL3_1" id="3-COL3_1" value="3"></div>
+            </td>
+            <td class="detail">
+                <table class="jqwizard_item_detail">
+                    <tr>
+                        <td class="td3" colspan="6">
+                            <span class="tit_item">ティルト式</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">説明</td>
+                        <td class="td3" colspan="4">
+                            座面とバックサポートの角度を保ちつつ、椅子全体が後方に倒れます
+                        </td>
+                        <td class="td4">
+                            金具本数<br>
+                            背座間角度&nbsp;角度調整金具
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">対象</td>
+                        <td class="td3" colspan="4">
+                            頭部・体幹のコントロールが困難<br>
+                            頭部のコントロールは可能だが、安楽姿勢が必要<br>
+                            腰椎後弯を有する
+                        </td>
+                        <td class="td4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">見積</td>
+                        <td class="mitsumori_td1">内訳</td>
+                        <td class="mitsumori_td2">数量</td>
+                        <td class="mitsumori_td3">単価</td>
+                        <td class="mitsumori_td4">金額</td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">構造フレーム<br>金属・木材</td>
+                        <td class="mitsumori_td2" id="3-1_su">1</td>
+                        <td class="mitsumori_td3" id="3-1_tan">0</td>
+                        <td class="mitsumori_td4" id="3-1_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="3-1_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">構造フレーム<br>ティルト機構</td>
+                        <td class="mitsumori_td2" id="3-4_su">1</td>
+                        <td class="mitsumori_td3" id="3-4_tan">0</td>
+                        <td class="mitsumori_td4" id="3-4_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="3-4_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">支持部の連結<br>遊動&nbsp;腰部</td>
+                        <td class="mitsumori_td2" id="3-2_su">2</td>
+                        <td class="mitsumori_td3" id="3-2_tan">0</td>
+                        <td class="mitsumori_td4" id="3-2_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="3-2_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">
+                            支持部の連結<br>角度調整部品&nbsp;機械式
+                        </td>
+                        <td class="mitsumori_td2">
+                            <select id="3-3_su" style="width:60px;">
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </td>
+                        <td class="mitsumori_td3" id="3-3_tan">0</td>
+                        <td class="mitsumori_td4" id="3-3_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="3-3_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">前座高（※床から支持部（膝窩部）までの高さ）</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">
+                            <input type="text" style="width:40px;" id="3-COL3_13" value="0">mm
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">背座間角度の選択</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">
+                            <select id="3-COL3_3" style="width:80px;">
+                                <option selected value="1">直角</option>
+                                <option value="2">95度</option>
+                                <option value="3">100度</option>
+                                <option value="4">105度</option>
+                                <option value="5">110度</option>
+                            </select>
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">可動域（座フレーム）開始</td>
+                        <td colspan="2" class="mitsumori_td2">可動域&nbsp;終了</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">
+                            <input type="text" style="width:40px;" id="3-COL3_8" value="0">mm
+                        </td>
+                        <td colspan="2" class="mitsumori_td2">
+                            <input type="text" style="width:40px;" id="3-COL3_9" value="0">mm
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="td2"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="3-COL3_10" id="3-1-COL3_10" value="1">
+                        </td>
+                        <td colspan="5" class="mitsumori_td1">
+                            バックサポート幅（内寸）340mm未満→金具本数1本<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="3-COL3_10" id="3-2-COL3_10" value="2">
+                        </td>
+                        <td colspan="5" class="mitsumori_td1">
+                            バックサポート幅（内寸）340mm以上→金具本数2本<br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="td5">
+                <div><img src="../images/items/image020.jpg" alt="" /></div>
+            </td>
+        </tr>
+    </table>
+</label>
+
+<!--リクライニング・ティルト式-->
+<label for="step4">
+    <table class="jqwizard_item">
+        <tr>
+            <td class="td1">
+                <div><input type="radio" name="COL3_1" id="4-COL3_1" value="4"></div>
+            </td>
+            <td class="detail">
+                <table class="jqwizard_item_detail">
+                    <tr>
+                        <td class="td3" colspan="6">
+                            <span class="tit_item">リクライニング式</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">説明</td>
+                        <td class="td3" colspan="4">
+                            リクライニングとティルト両方の機能があります
+                        </td>
+                        <td class="td4">
+                            機構・構造&nbsp;リクライニング・ティルト<br>
+                            リク金具本数<br>
+                            ティル金具本数<br>
+                            背座間角度&nbsp;角度調整金具
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">対象</td>
+                        <td class="td3" colspan="4">
+                            座位姿勢が困難であり、臥位姿勢を必要とする<br>
+                            頭部・体幹のコントロールが困難<br>
+                            股関節に屈曲制限を有する<br>
+                            椅子上でのオムツ替えを行う
+                        </td>
+                        <td class="td4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">見積</td>
+                        <td class="mitsumori_td1">内訳</td>
+                        <td class="mitsumori_td2">数量</td>
+                        <td class="mitsumori_td3">単価</td>
+                        <td class="mitsumori_td4">金額</td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">構造フレーム<br>金属・木材</td>
+                        <td class="mitsumori_td2" id="4-1_su">1</td>
+                        <td class="mitsumori_td3" id="4-1_tan">0</td>
+                        <td class="mitsumori_td4" id="4-1_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="4-1_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">支持部の連結<br>遊動&nbsp;腰部</td>
+                        <td class="mitsumori_td2" id="4-2_su">2</td>
+                        <td class="mitsumori_td3" id="4-2_tan">0</td>
+                        <td class="mitsumori_td4" id="4-2_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="4-2_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">
+                            支持部の連結<br>角度調整部品&nbsp;機械式
+                        </td>
+                        <td class="mitsumori_td2">
+                            <select id="4-3_su" style="width:60px;">
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </td>
+                        <td class="mitsumori_td3" id="4-3_tan">0</td>
+                        <td class="mitsumori_td4" id="4-3_kin">0</td>
+                        <td class="td4"></td>
+                        <input type="hidden" id="4-3_tax"/>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">前座高（※床から支持部（膝窩部）までの高さ）</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td colspan="3" class="mitsumori_td1">
+                            <input type="text" style="width:40px;" id="4-COL3_13" value="0">mm
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">可動域（背フレーム）開始</td>
+                        <td colspan="2" class="mitsumori_td2">可動域&nbsp;終了</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">
+                            <input type="text" style="width:40px;" id="4-COL3_6" value="0">mm
+                        </td>
+                        <td colspan="2" class="mitsumori_td2">
+                            <input type="text" style="width:40px;" id="4-COL3_7" value="0">mm
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">可動域（座フレーム）開始</td>
+                        <td colspan="2" class="mitsumori_td2">可動域&nbsp;終了</td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2"></td>
+                        <td class="mitsumori_td1">
+                            <input type="text" style="width:40px;" id="4-COL3_8" value="0">mm
+                        </td>
+                        <td colspan="2" class="mitsumori_td2">
+                            <input type="text" style="width:40px;" id="4-COL3_9" value="0">mm
+                        </td>
+                        <td class="mitsumori_td4"></td>
+                        <td class="td4"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="td2"></td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="4-COL3_11" id="4-1-COL3_11" value="1">
+                        </td>
+                        <td colspan="5" class="mitsumori_td1">
+                            バックサポート幅（内寸）340mm未満→リク金具本数1本<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="4-COL3_11" id="4-2-COL3_11" value="2">
+                        </td>
+                        <td colspan="5" class="mitsumori_td1">
+                            バックサポート幅（内寸）340mm以上380未満→リク金具本数1本<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="4-COL3_11" id="4-3-COL3_11" value="3">
+                        </td>
+                        <td colspan="5" class="mitsumori_td1">
+                            バックサポート幅（内寸）380以上→リク金具本数2本<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="4-COL3_12" id="4-1-COL3_12" value="1">
+                        </td>
+                        <td colspan="5" class="mitsumori_td1">
+                            バックサポート幅（内寸）340mm未満→ティル金具本数1本<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="4-COL3_12" id="4-2-COL3_12" value="2">
+                        </td>
+                        <td colspan="6" class="mitsumori_td1">
+                            バックサポート幅（内寸）340mm以上380未満→ティル金具本数2本<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td2">
+                            <input type="radio" name="4-COL3_12" id="4-3-COL3_12" value="3">
+                        </td>
+                        <td colspan="6" class="mitsumori_td1">
+                            バックサポート幅（内寸）380以上→ティル金具本数2本<br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="td5">
+                <div><img src="../images/items/image022.jpg" alt="" /></div>
+            </td>
+        </tr>
+    </table>
+</label>
+<script type="text/javascript">
+    var submitItem3 = function() {
+        var selected = $("input[name='COL3_1']:checked").val();
+        this.mitsumoriData["COL3_1"] = 0;
+        this.mitsumoriData["COL3_2"] = 0;
+        this.mitsumoriData["COL3_3"] = 0;
+        this.mitsumoriData["COL3_4"] = 0;
+        this.mitsumoriData["COL3_5"] = 0;
+        this.mitsumoriData["COL3_6"] = 0;
+        this.mitsumoriData["COL3_7"] = 0;
+        this.mitsumoriData["COL3_8"] = 0;
+        this.mitsumoriData["COL3_9"] = 0;
+        this.mitsumoriData["COL3_10"] = 0;
+        this.mitsumoriData["COL3_11"] = 0;
+        this.mitsumoriData["COL3_12"] = 0;
+        this.mitsumoriData["COL3_13"] = 0;
+        
+        var product = {};
+        if(selected == "1") {
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "1";
+            product["tanka"] = removeComma($("#1-1_tan").text());
+            product["suryo"] = removeComma($("#1-1_su").text());
+            product["tax"] = removeComma($("#1-1_tax").val());
+            product["kin"] = removeComma($("#1-1_kin").text());
+            this.productsData["1-1"] = product;
+
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "2";
+            product["tanka"] = removeComma($("#1-2_tan").text());
+            product["suryo"] = removeComma($("#1-2_su").text());
+            product["tax"] = removeComma($("#1-2_tax").val());
+            product["kin"] = removeComma($("#1-2_kin").text());
+            this.productsData["1-2"] = product;
+            
+            this.mitsumoriData["COL3_13"] = $("#1-COL3_13").val();
+            this.mitsumoriData["COL3_4"] = $("#1-COL3_4").val();
+            this.mitsumoriData["COL3_2"] = $("#1-COL3_2").val();
+            
+        } else if(selected == "2") {
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "1";
+            product["tanka"] = removeComma($("#2-1_tan").text());
+            product["suryo"] = removeComma($("#2-1_su").text());
+            product["tax"] = removeComma($("#2-1_tax").val());
+            product["kin"] = removeComma($("#2-1_kin").text());
+            this.productsData["2-1"] = product;
+
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "2";
+            product["tanka"] = removeComma($("#2-2_tan").text());
+            product["suryo"] = removeComma($("#2-2_su").text());
+            product["tax"] = removeComma($("#2-2_tax").val());
+            product["kin"] = removeComma($("#2-2_kin").text());
+            this.productsData["2-2"] = product;
+
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "3";
+            product["tanka"] = removeComma($("#2-3_tan").text());
+            product["suryo"] = removeComma($("#2-3_su").text());
+            product["tax"] = removeComma($("#2-3_tax").val());
+            product["kin"] = removeComma($("#2-3_kin").text());
+            this.productsData["2-3"] = product;
+            
+            this.mitsumoriData["COL3_13"] = $("#2-COL3_13").val();
+            this.mitsumoriData["COL3_4"] = $("#2-COL3_4").val();
+            this.mitsumoriData["COL3_6"] = $("#2-COL3_6").val();
+            this.mitsumoriData["COL3_7"] = $("#2-COL3_7").val();
+            this.mitsumoriData["COL3_8"] = $("#2-COL3_8").val();
+            this.mitsumoriData["COL3_9"] = $("#2-COL3_9").val();
+            this.mitsumoriData["COL3_5"] = $("input[name='2-COL3_5']:checked").val();
+            
+        } else if(selected == "3") {
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "1";
+            product["tanka"] = removeComma($("#3-1_tan").text());
+            product["suryo"] = removeComma($("#3-1_su").text());
+            product["tax"] = removeComma($("#3-1_tax").val());
+            product["kin"] = removeComma($("#3-1_kin").text());
+            this.productsData["3-1"] = product;
+
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "4";
+            product["tanka"] = removeComma($("#3-4_tan").text());
+            product["suryo"] = removeComma($("#3-4_su").text());
+            product["tax"] = removeComma($("#3-4_tax").val());
+            product["kin"] = removeComma($("#3-4_kin").text());
+            this.productsData["3-4"] = product;
+
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "2";
+            product["tanka"] = removeComma($("#3-2_tan").text());
+            product["suryo"] = removeComma($("#3-2_su").text());
+            product["tax"] = removeComma($("#3-2_tax").val());
+            product["kin"] = removeComma($("#3-2_kin").text());
+            this.productsData["3-2"] = product;
+
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "3";
+            product["tanka"] = removeComma($("#3-3_tan").text());
+            product["suryo"] = removeComma($("#3-3_su").text());
+            product["tax"] = removeComma($("#3-3_tax").val());
+            product["kin"] = removeComma($("#3-3_kin").text());
+            this.productsData["3-3"] = product;
+            
+            this.mitsumoriData["COL3_13"] = $("#3-COL3_13").val();
+            this.mitsumoriData["COL3_3"] = $("#3-COL3_3").val();
+            this.mitsumoriData["COL3_8"] = $("#3-COL3_8").val();
+            this.mitsumoriData["COL3_9"] = $("#3-COL3_9").val();
+            this.mitsumoriData["COL3_10"] = $("input[name='3-COL3_10']:checked").val();
+            
+        } else if(selected == "4") {
+            // 製品データ保存
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "1";
+            product["tanka"] = removeComma($("#4-1_tan").text());
+            product["suryo"] = removeComma($("#4-1_su").text());
+            product["tax"] = removeComma($("#4-1_tax").val());
+            product["kin"] = removeComma($("#4-1_kin").text());
+            this.productsData["4-1"] = product;
+
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "2";
+            product["tanka"] = removeComma($("#4-2_tan").text());
+            product["suryo"] = removeComma($("#4-2_su").text());
+            product["tax"] = removeComma($("#4-2_tax").val());
+            product["kin"] = removeComma($("#4-2_kin").text());
+            this.productsData["4-2"] = product;
+
+            product["mitsumoriNo"] = mitsumoriNo;
+            product["seihinNo"] = "3";
+            product["tanka"] = removeComma($("#4-3_tan").text());
+            product["suryo"] = removeComma($("#4-3_su").text());
+            product["tax"] = removeComma($("#4-3_tax").val());
+            product["kin"] = removeComma($("#4-3_kin").text());
+            this.productsData["4-3"] = product;
+            
+            this.mitsumoriData["COL3_13"] = $("#4-COL3_13").val();
+            this.mitsumoriData["COL3_6"] = $("#4-COL3_6").val();
+            this.mitsumoriData["COL3_7"] = $("#4-COL3_7").val();
+            this.mitsumoriData["COL3_8"] = $("#4-COL3_8").val();
+            this.mitsumoriData["COL3_9"] = $("#4-COL3_9").val();
+            this.mitsumoriData["COL3_11"] = $("input[name='4-COL3_11']:checked").val();
+            this.mitsumoriData["COL3_12"] = $("input[name='4-COL3_12']:checked").val();
+            
+        } else {
+            return;
+        }
+    }
+</script>
