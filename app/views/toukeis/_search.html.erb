@@ -49,7 +49,9 @@
       <input type="hidden" id="outCondYear" name="outCondYear" />
       <input type="hidden" id="outCondMonth" name="outCondMonth" />
     </div>
-    <div style="text-align:right;"><a class="btn_graf" style="margin-left:auto; margin-right:22px; text-align:left ;" id="btnShowGraph" href="toukeis/graph" />グラフ表示</a></div>
+    <div style="text-align:right;">
+      <a class="btn_graf" style="margin-left:auto; margin-right:22px; text-align:left ;" id="btnShowGraph" href="#" />グラフ表示</a>
+    </div>
   </div>
   </form>
 </div>
@@ -57,6 +59,15 @@
 $(function() {
   $("#targetSpnFrom").datepicker();
   $("#targetSpnTo").datepicker();
+
+  $("a#btnShowGraph").click(function() {
+    $("#toukeiSearchForm")
+      .attr("action", "toukeis/graph")
+      .attr("method", "post")
+      .submit();
+    return false;
+  });
+
 });
 
 </script>
