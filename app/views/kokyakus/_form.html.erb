@@ -302,10 +302,19 @@ $(function() {
 
 // Submit前処理用メソッド
 function executeKokyaku() {
+  // 2重Submit防止
+  $("a#btnCustomerRegist").unbind('click');
+
   // クライアントバリデーション
   if ($("#kokyakuForm").valid() == false) {
-     return false;
+    // 登録ボタンclickイベント再attach
+    $("a#btnCustomerRegist").click(function() {
+        executeKokyaku();
+        return false;
+    });
+    return false;
   }
+
   var kokyakuId = $("#kokyakuId").val();
   //var action;
   //var method;

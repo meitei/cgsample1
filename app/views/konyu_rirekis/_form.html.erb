@@ -614,9 +614,17 @@ $(function() {
 
 // Submit前処理用メソッド
 function executeKonyuRireki() {
+  // 2重Submit防止
+  $("a#btnKonyuRirekiRegist").unbind('click');
+
   // クライアントバリデーション
   if ($("#konyuRirekiForm").valid() == false) {
-     return false;
+    // 登録ボタンclickイベント再attach
+    $("a#btnKonyuRirekiRegist").click(function() {
+        executeKonyuRireki();
+        return false;
+    });
+    return false;
   }
   var id = $("#id").val();
   //var action;
