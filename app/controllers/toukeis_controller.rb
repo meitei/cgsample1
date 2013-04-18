@@ -233,8 +233,104 @@ class ToukeisController < ApplicationController
   # GET /toukeis/graph
   # GET /toukeis/graph.json
   def graph
+    logger.debug("graph: " + params.to_yaml)
+    @graph_cond = {
+      sumUnt: params[:sumUnt],
+      outCnd: params[:outCond],
+      outYm: params[:outCondYear] + params[:outCondMonth],
+      targetSpnFrom: params[:targetSpnFrom],
+      targetSpnTo: params[:targetSpnTo]
+    }
     respond_to do |format|
       format.html # index.html.erb
+      # format.json { render json: @responce }
+    end
+
+  end
+
+  # POST /toukeis/graph_data.json
+  def graph_data
+    logger.debug(params)
+
+    targetSpnFrom = Date.strptime(params[:targetSpnFrom], "%Y/%m/%d") if is_date?(params[:targetSpnFrom])
+    targetSpnTo = Date.strptime(params[:targetSpnTo], "%Y/%m/%d") if is_date?(params[:targetSpnTo])
+    # today = Date.today
+
+    conditions = KonyuRireki.where("1 = ?", 1)
+    conditions = conditions.where("\"kanryoDt\" >= ?", targetSpnFrom) if targetSpnFrom
+    conditions = conditions.where("\"kanryoDt\" <= ?", targetSpnTo) if targetSpnTo
+    logger.debug(conditions)
+
+    # get db adapter
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+
+    if params[:outCnd] == "1" then
+      # 月別
+      if adapter == "sqlite3" then
+        # SQLite
+        sumCndKey = "strftime('%Y%m', \"kanryoDt\")"
+      elsif adapter == "mysql2" then
+        # MySQL
+        sumCndKey = "DATE_FORMAT(\"kanryoDt\",'%Y%m')"
+      else
+        # PostgreSQL
+        sumCndKey = "to_char(\"kanryoDt\", 'YYYYMM')"
+      end
+    elsif params[:outCnd] == "2" then
+      # 年度別
+      if adapter == "sqlite3" then
+        # SQLite
+        sumCndKey = "strftime('%Y', \"kanryoDt\")"
+      elsif adapter == "mysql2" then
+        # MySQL
+        sumCndKey = "DATE_FORMAT(\"kanryoDt\",'%Y')"
+      else
+        # PostgreSQL
+        sumCndKey = "to_char(\"kanryoDt\", 'YYYY')"
+      end
+    else
+      # 総合計
+      sumCndKey = "'dummy'"
+    end
+
+    # Pending...
+    sumUnts = {
+      1 => SumUnts.new(
+        "\"uketsukeSesakuTantoCd\"",
+        # "users.myoji||' '||users.name",
+        # "concat(users.myoji,' ',users.name)",
+        str_sql_concat("users.myoji","' '","users.name"),
+        "left outer join users on users.\"shainCd\" = konyu_rirekis.\"uketsukeSesakuTantoCd\"")
+    }
+    sumUnts.default = sumUnts[1]
+    sumUnt = sumUnts[params[:sumUnt].to_i];
+
+    # sumUnts = {
+    #   1 => "uketsukeSesakuTantoCd",
+    #   2 => "byoinCd",
+    #   3 => "shohinNm",
+    #   4 => "shubetsuCd",
+    #   5 => "mitsumoriKomokuCd"
+    # }
+
+    toukeis = conditions.find(
+      :all,
+      :select => "#{sumCndKey} \"sumCndKey\", #{sumUnt.keyCd} \"sumUntKey\", #{sumUnt.keyLabel} \"sumUnt\", sum(kin) kingaku, count(*) daisu ",
+      :joins => sumUnt.joins,
+      :group  => "\"sumCndKey\", \"sumUntKey\", \"sumUnt\" ",
+      :order  => "\"sumCndKey\", \"sumUntKey\" ASC")
+
+    # 表示中の年月以外は結果から除外する
+    toukeis.delete_if {|item|
+      item["sumCndKey"] != params[:outYm] and item["sumCndKey"] != "dummy"
+    }
+
+    @responce = {
+      rsdata: toukeis
+    }
+    logger.debug("graph_data_response: " + @responce.to_yaml)
+    respond_to do |format|
+      # format.html # index.html.erb
       format.json { render json: @responce }
     end
 

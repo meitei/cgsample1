@@ -22,7 +22,7 @@
         success: function(result) {
           if(result != null) {
             wm.mitsumoriData = result;
-            $("div#step1").load("/mitsumori/step_01.html", setWizard1);
+            $("div#step1").load("/mitsumori/step_01.html", wizard1);
           }
         }
       });

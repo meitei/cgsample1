@@ -2,6 +2,12 @@
 <hr/>
 <%= render 'form2' %>
 
+<%= hidden_field_tag 'graph_cond[sumUnt]', @graph_cond[:sumUnt] %>
+<%= hidden_field_tag 'graph_cond[outCnd]', @graph_cond[:outCnd] %>
+<%= hidden_field_tag 'graph_cond[outYm]', @graph_cond[:outYm] %>
+<%= hidden_field_tag 'graph_cond[targetSpnFrom]', @graph_cond[:targetSpnFrom] %>
+<%= hidden_field_tag 'graph_cond[targetSpnTo]', @graph_cond[:targetSpnTo] %>
+
 <script>
 $(function() {
 
@@ -11,24 +17,30 @@ $(function() {
       dataType: "json",
       root: "list",
       data: {
-        'outCnd' : $('#outCnd').val(),
-        'outUnt' : $('#outUnt').val(),
-        'sumUnt' : $('#sumUnt').val(),
-        'targetSpnFrom' : $('#targetSpnFrom').val(),
-        'targetSpnTo' : $('#targetSpnTo').val()
+        'sumUnt' : $('#graph_cond_sumUnt').val(),
+        'outCnd' : $('#graph_cond_outCnd').val(),
+        'outYm' : $('#graph_cond_outYm').val(),
+        'targetSpnFrom' : $('#graph_cond_targetSpnFrom').val(),
+        'targetSpnTo' : $('#graph_cond_targetSpnTo').val()
       },
       success: function(data) {
-        response($.map(data.list, function(item) {
-          return {
-            label: item.kokyakuNm1+' '+item.kokyakuNm2+' - '+item.kokyakuId,
-            value: item.kokyakuId
-          }
-        }))
+        var values = [];
+        var ticks = [];
+        $.each(data.rsdata, function(index, item) {
+          ticks.push(item.sumUnt);
+          values.push(_to_num(item.kingaku));
+        })
+        // 金額のグラフを表示する
+        $("#chart_kingaku").width(700).height(50+(50 * values.length));;
+        show_kingaku_graph(values, ticks);
       }
     })
 
-    var values = [200, 600, 700, 1000];
-    var ticks = ["太郎", "次郎", "花子", "陽子"];
+});
+
+function show_kingaku_graph(values, ticks) {
+    // var values = [200, 600, 700, 1000];
+    // var ticks = ["太郎", "次郎", "花子", "陽子"];
     // Horizontal bar chart
     var plot_kin = $.jqplot('chart_kingaku', [values], {
         seriesDefaults: {
@@ -62,5 +74,16 @@ $(function() {
 
     });
 
-});
+    // グラフのサイズを変更する
+    // $("#chart_kingaku").css("width", "700px", "height", "600px");
+    // $("#chart_kingaku").width(700).height(600);
+}
+
+function _to_num(val) {
+  if(val) {
+    return parseInt(val);
+  } else {
+    return 0;
+  }
+}
 </script>
