@@ -4,7 +4,7 @@ class CommonDataController < ApplicationController
   def kokyaku_list
 
     has_key = (params[:kokyakuId] != nil and params[:kokyakuId] != "")
-    sqlbind_s = "%" + params[:kokyakuId] + "%" if has_key
+    sqlbind_s = "%" + params[:kokyakuId].gsub(/(\s|　)+/, '') + "%" if has_key
     # sqlbind_i = -1
     # sqlbind_i = params[:kokyakuId].to_i if has_key and params[:kokyakuId] =~ /\d+/
     sqlstat = []
