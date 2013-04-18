@@ -452,6 +452,11 @@ $(function() {
   }
   $(items[tab_start_index]).select();
 
+  // 2重Submit防止
+  $('form').submit(function () {
+    $(this).find(':submit').attr('disabled', 'disabled');
+  });
+
   // 日付項目のフォーマットを設定する
   var dateItems = new Array("juchuDt", "kariAwaseDt", "nohinDt", "kofuDt", "nyukinDt", "oshiinDt", "kanryoDt", "mitsumoriDt");
   $.each(dateItems,function(i) {

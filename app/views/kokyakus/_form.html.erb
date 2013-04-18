@@ -298,6 +298,11 @@ $(function() {
     $(items[i]).attr("tabindex", i+1);
   }
   $(items[0]).select();
+
+  // 2重Submit防止
+  $('form').submit(function () {
+    $(this).find(':submit').attr('disabled', 'disabled');
+  });
 });
 
 // Submit前処理用メソッド
