@@ -10,9 +10,16 @@
 <div class="btn_new">
     <a class="btn_new_kokyaku" id="btnCustomerNew" href="/kokyakus/new">新規追加</a>
 </div>
+<div class="btn_del">
+    <a class="btn_del_kokyaku" id="btnCustomerDel" href="#">一括削除</a>
+</div>
 <form id="konyuRirekiSearchForm">
     <input type="hidden" name="konyu_rireki[kokyakuIdFrom]" value="" />
     <input type="hidden" name="konyu_rireki[kokyakuIdTo]" value="" />
+</form>
+<form id="konyuRirekiDeleteForm">
+    <input type="hidden" id="deleteIdList" name="deleteIdList" value="" />
+    <input type="hidden" id="koshinshaId" name="koshinshaId" value="" />
 </form>
 <script>
 $(function() {
@@ -52,7 +59,7 @@ $(function() {
     var isLoaded = false;
     var colNames = ["","顧客コード","顧客名","顧客カナ","","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名","学校名・施設名","備考","","","","","",""];
     var colModelSettings = [
-        {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
+        {name:'deleteCheck', index:'deleteCheck', align:'center', width:20, formatter: checkboxFormatter},
         {name:"kokyakuId", index:"kokyakuId",width:60},
         {name:"kokyakuNm", index:"kokyakuNm",width:80},
         {name:"kokyakuNmKana", index:"kokyakuNmKana",width:100},
@@ -157,10 +164,35 @@ $("a#btnCustomerClear").click(function() {
     return false;
 });
 
+$("a#btnCustomerDel").click(function() {
+    if (confirm("選択されたレコードを一括削除します。よろしいですか？") == false) {
+        return false;
+    }
+
+    var delArray = new Array;
+    $('#searchCustomerGrid input[name="deleteCheck"]:checked').map(function() {
+        delArray.push($(this).val());
+    });
+
+    $("#deleteIdList").val(delArray.toString());
+
+    $("#koshinshaId").val($("#loginId").val());
+
+    $("#konyuRirekiDeleteForm").attr("action", "kokyakus/delete_list")
+                               .attr("method", "post")
+                               .submit();
+
+    return false;
+});
+
 // $("a#btnCustomerNew").click(function() {
 //     showKokyakuFormDialog();
 //     return false;
 // });
+
+function checkboxFormatter(cellval, options, rowdata) {
+    return "<input type='checkbox' name='deleteCheck' value='" + rowdata['kokyakuId'] + "'>";
+}
 
 function updateFormatter(cellval, options, rowdata) {
     return "<img src='/images/database-reload-alt-1.png' onclick='modifyKokyaku(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";

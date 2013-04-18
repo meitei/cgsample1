@@ -230,6 +230,22 @@ class KokyakusController < ApplicationController
     end
   end
 
+  # POST /kokyakus/delete_list
+  # POST /kokyakus/delete_list.json
+  def delete_list
+    logger.debug(params[:deleteIdList])
+
+    if params[:deleteIdList].present?
+      # 一括削除実行
+      Kokyaku.update_all("\"delFlg\"=1, \"koshinshaId\"=" + params[:koshinshaId], "\"kokyakuId\" IN (" + params[:deleteIdList] + ")")
+    end
+
+    respond_to do |format|
+      format.html { redirect_to action: "index", notice: 'Kokyaku was successfully list deleted.', reload: 'on' }
+      format.json { head :no_content }
+    end
+  end
+
   def get_select_stmt
     # 生年月日は「元号」「年」「月」「日」を連結して表示する
     tanjoGengoStr = "CASE kokyakus.\"tanjoGengo\" WHEN 1 THEN '大正' WHEN 2 THEN '昭和' WHEN 3 THEN '平成' ELSE NULL END "

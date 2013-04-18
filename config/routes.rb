@@ -34,6 +34,7 @@ JqgridSample::Application.routes.draw do
 
   resources :kokyakus do
     get 'search', :on => :collection
+    post 'delete_list', :on => :collection
   end
 
   get "item_extend/search"
