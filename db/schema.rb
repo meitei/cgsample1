@@ -91,48 +91,26 @@ ActiveRecord::Schema.define(:version => 20130414183440) do
   end
 
   create_table "konyu_rirekis", :force => true do |t|
-<<<<<<< HEAD
-    t.integer  "konyuRirekiId"
-    t.integer  "kokyakuId"
-    t.integer  "byoinCd"
-    t.integer  "mitsumoriTantoEigyoCd"
-=======
     t.integer  "konyuRirekiId",         :limit => 11
     t.integer  "kokyakuId",                                               :null => false
     t.integer  "byoinCd"
     t.string   "mitsumoriTantoEigyoCd", :limit => 10
->>>>>>> 13913204db1ee6ed0b7861a1c04a76c18202d89d
     t.date     "mitsumoriDt"
     t.string   "shohinNm",              :limit => 100
     t.decimal  "kin"
     t.decimal  "seikyuKin"
-<<<<<<< HEAD
-    t.string   "shohinSiyoBiko"
-    t.integer  "uketsukeSesakuTantoCd"
-    t.date     "juchuDt"
-    t.integer  "kariAwaseTantoCd"
-    t.date     "kariAwaseDt"
-    t.integer  "nohinTantoCd"
-=======
     t.string   "shohinShiyoBiko",       :limit => 200
     t.string   "uketsukeSesakuTantoCd", :limit => 10
     t.date     "juchuDt"
     t.string   "kariAwaseTantoCd",      :limit => 10
     t.date     "kariAwaseDt"
     t.string   "nohinTantoCd",          :limit => 10
->>>>>>> 13913204db1ee6ed0b7861a1c04a76c18202d89d
     t.date     "nohinDt"
     t.date     "kofuDt"
     t.date     "kannoDt"
     t.date     "nyukinDt"
     t.date     "oshiinDt"
     t.date     "kanryoDt"
-<<<<<<< HEAD
-    t.integer  "koshinshaId"
-    t.integer  "torokushaId"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-=======
     t.integer  "koshinshaId",                                             :null => false
     t.integer  "torokushaId",                                             :null => false
     t.datetime "created_at",                                              :null => false
@@ -151,7 +129,6 @@ ActiveRecord::Schema.define(:version => 20130414183440) do
     t.binary   "kanseiTmbImg",          :limit => 1048576
     t.string   "kanseiImgName"
     t.integer  "delFlg",                                   :default => 0, :null => false
->>>>>>> 13913204db1ee6ed0b7861a1c04a76c18202d89d
   end
 
   create_table "mitsumori_seihins", :force => true do |t|
@@ -346,10 +323,10 @@ ActiveRecord::Schema.define(:version => 20130414183440) do
   end
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id",                    :null => false
-    t.text     "data",       :limit => 2097152
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"

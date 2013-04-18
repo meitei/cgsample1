@@ -99,6 +99,28 @@
     $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
     $("button#jqwizard_next").attr("disabled", "disabled");
     wm.submitItems[1] = submitItem1;
-      $("input[name='COL1_1']").val(wm.mitsumoriData["COL1_1"]);
-      //$("#1-COL1_1").attr("checked", true);
+  }
+
+  function setWizard1(){
+    var col1Value = wm.mitsumoriData["COL1_1"];
+    //$("input[name='COL1_1']").val(col1Value);
+    // セミオーダーメイド選択
+    if(col1Value == "1"){
+        $("input#1-COL1_1").attr("checked", true);
+      $("div#step2").load("/mitsumori/step_05.html", wizard2a);
+      $("li#step2 a").attr("href", "#step2");
+      $("li#step2 span").text("構造フレーム");
+      //$("button#jqwizard_next").removeAttr("disabled");
+    }
+    // オーダーメイド選択
+    if(col1Value == "2"){
+      $("div#step2").load("/mitsumori/step_02.html", wizard2e);
+      $("li#step2 a").attr("href", "#step2");
+      $("li#step2 span").text("フレーム材質");
+      //$("button#jqwizard_next").removeAttr("disabled");
+    }
+
+    $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
+    //$("button#jqwizard_next").attr("disabled", "disabled");
+    //wm.submitItems[1] = submitItem1;
   }
