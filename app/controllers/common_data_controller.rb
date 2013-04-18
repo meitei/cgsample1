@@ -11,7 +11,7 @@ class CommonDataController < ApplicationController
     sqlstat << "\"kokyakuId\" = ? "
     sqlstat << "\"kokyakuNm1\" || \"kokyakuNm2\" LIKE ? "
 
-    conditions = Kokyaku.where("1 = ?", 1)
+    conditions = Kokyaku.where("\"delFlg\" = ?", 0)
     conditions = conditions.where(sqlstat.join(" OR "), sqlbind_i, sqlbind_s) if has_key
     logger.debug(conditions)
 
