@@ -452,11 +452,6 @@ $(function() {
   }
   $(items[tab_start_index]).select();
 
-  // 2重Submit防止
-  $('form').submit(function () {
-    $(this).find(':submit').attr('disabled', 'disabled');
-  });
-
   // 日付項目のフォーマットを設定する
   var dateItems = new Array("juchuDt", "kariAwaseDt", "nohinDt", "kofuDt", "nyukinDt", "oshiinDt", "kanryoDt", "mitsumoriDt");
   $.each(dateItems,function(i) {
@@ -619,9 +614,17 @@ $(function() {
 
 // Submit前処理用メソッド
 function executeKonyuRireki() {
+  // 2重Submit防止
+  $("a#btnKonyuRirekiRegist").unbind('click');
+
   // クライアントバリデーション
   if ($("#konyuRirekiForm").valid() == false) {
-     return false;
+    // 登録ボタンclickイベント再attach
+    $("a#btnKonyuRirekiRegist").click(function() {
+        executeKonyuRireki();
+        return false;
+    });
+    return false;
   }
   var id = $("#id").val();
   //var action;
