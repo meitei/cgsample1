@@ -8,7 +8,7 @@ class CommonDataController < ApplicationController
     # sqlbind_i = -1
     # sqlbind_i = params[:kokyakuId].to_i if has_key and params[:kokyakuId] =~ /\d+/
     sqlstat = []
-    sqlstat << "CAST(\"kokyakuId\" AS text) LIKE ? "
+    sqlstat << "\"kokyakuId\" LIKE ? "
     sqlstat << "\"kokyakuNm1\" || \"kokyakuNm2\" LIKE ? "
 
     conditions = Kokyaku.where("\"delFlg\" = ?", 0)
@@ -58,7 +58,7 @@ class CommonDataController < ApplicationController
     # sqlbind_i = params[:byoinCd].to_i if has_key and params[:byoinCd] =~ /\d+/
 
     sqlstat = []
-    sqlstat << "CAST(\"byoinCd\" AS text) LIKE ? "
+    sqlstat << "\"byoinCd\" LIKE ? "
     sqlstat << "\"byoinNm\" LIKE ? "
 
     conditions = Byoin.where("1 = ?", 1)
@@ -84,7 +84,7 @@ class CommonDataController < ApplicationController
     # sqlbind_i = params[:seihinId].to_i if has_key and params[:seihinId] =~ /\d+/
 
     sqlstat = []
-    sqlstat << "CAST(\"seihinId\" AS text) LIKE ? "
+    sqlstat << "\"seihinId\" LIKE ? "
     sqlstat << "\"hinmeiNm\" LIKE ? "
 
     conditions = Seihin.where("1 = ?", 1)
@@ -110,7 +110,7 @@ class CommonDataController < ApplicationController
     # sqlbind_i = params[:shobyoCd].to_i if has_key and params[:shobyoCd] =~ /\d+/
 
     sqlstat = []
-    sqlstat << "CAST(\"shobyoCd\" AS text) LIKE ? "
+    sqlstat << "\"shobyoCd\" LIKE ? "
     sqlstat << "\"shobyoNm\" LIKE ? "
 
     conditions = Shobyo.where("1 = ?", 1)
