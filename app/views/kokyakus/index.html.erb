@@ -10,6 +10,17 @@
 <div class="btn_new">
     <a class="btn_new_kokyaku" id="btnCustomerNew" href="/kokyakus/new">新規追加</a>
 </div>
+<div class="btn_del">
+    <a class="btn_del_kokyaku" id="btnCustomerDel" href="#">一括削除</a>
+</div>
+<form id="konyuRirekiSearchForm">
+    <input type="hidden" name="konyu_rireki[kokyakuIdFrom]" value="" />
+    <input type="hidden" name="konyu_rireki[kokyakuIdTo]" value="" />
+</form>
+<form id="konyuRirekiDeleteForm">
+    <input type="hidden" id="deleteIdList" name="deleteIdList" value="" />
+    <input type="hidden" id="koshinshaId" name="koshinshaId" value="" />
+</form>
 <script>
 $(function() {
     $("#kokyakuForm").validate({
@@ -38,7 +49,7 @@ $(function() {
             //shobyouCd2: {required:true, maxlength:10},
             //shobyouCd3: {required:true, maxlength:10},
             gakkoNm: {maxlength:20},
-            biko: {maxlength:100},
+            biko: {maxlength:100}
         }
         //messages: {
         //    kokyakuNm1: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
@@ -46,9 +57,9 @@ $(function() {
         //}
     });
     var isLoaded = false;
-    var colNames = ["","顧客コード","顧客名","顧客カナ","","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名","学校名・施設名","備考","","","",""];
+    var colNames = ["","顧客コード","顧客名","顧客カナ","","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名","学校名・施設名","備考","","","","","",""];
     var colModelSettings = [
-        {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
+        {name:'deleteCheck', index:'deleteCheck', align:'center', width:20, formatter: checkboxFormatter},
         {name:"kokyakuId", index:"kokyakuId",width:60},
         {name:"kokyakuNm", index:"kokyakuNm",width:80},
         {name:"kokyakuNmKana", index:"kokyakuNmKana",width:100},
@@ -68,7 +79,9 @@ $(function() {
         {name:"koshinshaId", index:"koshinshaId", hidden:true},
         {name:"torokushaId", index:"torokushaId", hidden:true},
         {name:'updateImg', index:'updateImg', align:'center', width:20, formatter: updateFormatter},
-        {name:'deleteImg', index:'deleteImg', align:'center', width:20, formatter: deleteFormatter}
+        {name:'deleteImg', index:'deleteImg', align:'center', width:20, formatter: deleteFormatter},
+        {name:'listImg', index:'listImg', align:'center', width:20, formatter: showKonyurRirekiFormatter},
+        {name:'insertImg', index:'insertImg', align:'center', width:20, formatter: registKonyurRirekiFormatter}
     ];
     $("#searchCustomerGrid").jqGrid({
         datatype: "local",
@@ -136,7 +149,7 @@ $(function() {
         }
     });
 
-    // 修正画面から遷移した場合、再検索を行う
+    // 登録/修正画面から遷移した場合、再検索を行う
     setConditions();
 });
 
@@ -147,6 +160,28 @@ $("a#btnCustomerSearch").click(function() {
 
 $("a#btnCustomerClear").click(function() {
     $('#kokyakuSearchForm input[type="text"]').val('');
+    $('#kokyakuSearchForm select').val('');
+    return false;
+});
+
+$("a#btnCustomerDel").click(function() {
+    if (confirm("選択されたレコードを一括削除します。よろしいですか？") == false) {
+        return false;
+    }
+
+    var delArray = new Array;
+    $('#searchCustomerGrid input[name="deleteCheck"]:checked').map(function() {
+        delArray.push($(this).val());
+    });
+
+    $("#deleteIdList").val(delArray.toString());
+
+    $("#koshinshaId").val($("#loginId").val());
+
+    $("#konyuRirekiDeleteForm").attr("action", "kokyakus/delete_list")
+                               .attr("method", "post")
+                               .submit();
+
     return false;
 });
 
@@ -155,12 +190,24 @@ $("a#btnCustomerClear").click(function() {
 //     return false;
 // });
 
+function checkboxFormatter(cellval, options, rowdata) {
+    return "<input type='checkbox' name='deleteCheck' value='" + rowdata['kokyakuId'] + "'>";
+}
+
 function updateFormatter(cellval, options, rowdata) {
     return "<img src='/images/database-reload-alt-1.png' onclick='modifyKokyaku(" + rowdata['kokyakuId'] + ")' title='更新' style='width:16px; height:16px'>";
 }
 
 function deleteFormatter(cellval, options, rowdata) {
     return "<img src = '/images/database-remove-alt-1.png' onclick='removeKokyaku(" + rowdata['kokyakuId'] + ")' title='削除' style='width:16px; height:16px'>";
+}
+
+function showKonyurRirekiFormatter(cellval, options, rowdata) {
+    return "<img src='/images/list.png' onclick='showKonyurRireki(" + rowdata['kokyakuId'] + ")' title='購入履歴一覧' style='width:16px; height:16px'>";
+}
+
+function registKonyurRirekiFormatter(cellval, options, rowdata) {
+    return "<img src='/images/regist.png' onclick='registKonyurRireki(" + rowdata['kokyakuId'] + ")' title='購入履歴入力' style='width:16px; height:16px'>";
 }
 
 // 検索用メソッド
@@ -213,6 +260,20 @@ function removeKokyaku(kokyakuId) {
     return false;
 }
 
+// 購入履歴一覧画面遷移用メソッド
+function showKonyurRireki(kokyakuId) {
+    // 購入履歴一覧での検索条件にセットするため、Cookieに顧客IDを保持しておく
+    saveKonyuRirekiConditions(kokyakuId);
+    location.href = "konyu_rirekis?kokyakuId=" + kokyakuId + "&reload=on";
+    return false;
+}
+
+// 購入履歴登録画面遷移用メソッド
+function registKonyurRireki(kokyakuId) {
+    location.href = "konyu_rirekis/new?kokyakuId=" + kokyakuId;
+    return false;
+}
+
 function saveConditions() {
     $.cookie.json = true;
     var data = $("#kokyakuSearchForm").serializeArray();
@@ -231,4 +292,11 @@ function setConditions() {
     }
 }
 
+function saveKonyuRirekiConditions(kokyakuId) {
+    $('input[name="konyu_rireki[kokyakuIdFrom]"]').val(kokyakuId);
+    $('input[name="konyu_rireki[kokyakuIdTo]"]').val(kokyakuId);
+    $.cookie.json = true;
+    var data = $("#konyuRirekiSearchForm").serializeArray();
+    $.cookie('conditions', data);
+}
 </script>

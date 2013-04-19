@@ -219,7 +219,7 @@ $(function() {
     $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px").attr("tabindex", "10");
     $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px").attr("tabindex", "10");
 
-    // 修正画面から遷移した場合、再検索を行う
+    // 登録/修正/顧客一覧画面から遷移した場合、再検索を行う
     setConditions();
 
 });
@@ -231,6 +231,7 @@ $("a#btnKonyuRirekiSearch").click(function() {
 
 $("a#btnKonyuRirekiClear").click(function() {
     $('#konyuRirekiSearchForm input[type="text"]').val('');
+    $('#konyuRirekiSearchForm select').val('');
     return false;
 });
 

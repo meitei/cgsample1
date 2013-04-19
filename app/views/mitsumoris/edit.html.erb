@@ -1,6 +1,180 @@
-<h1>Editing mitsumori</h1>
 
+<script src="/js/mitsumori/mitsumori.js" type="text/javascript"></script>
+<div class="container">
+	<div class="title">見積入力</div>
+    <div class="statuslabel"><span>STEP 1</span>使用環境　座位保持装置製作方法の選定</div>
 <%= render 'form' %>
+<script>
+  	//var submitItem = {};
+  	var tanka = {};
+  	var konyuRirekiId = $("#konyuRirekiId").val();
+  	var kokyakuId = $("#kokyakuId").val();
+  	var mitsumoriNo = $("#mitsumoriNo").val();
+  	var wm = new WizardManager();
 
-<%= link_to 'Show', @mitsumori %> |
-<%= link_to 'Back', mitsumoris_path %>
+  	$(document).ready(function(){
+      $.ajax({
+        scriptCharset:"UTF-8",
+        type: "GET",
+        url: "/mitsumoris/" + mitsumoriNo + ".json",
+        root: "mitsumori",
+        dataType: "json",
+        success: function(result) {
+          if(result != null) {
+            wm.mitsumoriData = result;
+            $("div#step1").load("/mitsumori/step_01.html", wizard1);
+          }
+        }
+      });
+    	$("#estimateForm").wizard();
+    	$("#btnEstimateRegist").hide();
+    	$("button#jqwizard_previous").hide();
+    	// 見積データを用意する
+    	wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
+    	wm.mitsumoriData["kokyakuId"] = kokyakuId;
+    	wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
+    	//clearNavi("1");
+    	// 次へ
+    	$("button.jqwizard_next").click(function() {
+    		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
+    		wm.addEstimate();
+    		console.dir(wm.productsData);
+    		console.dir(wm.mitsumoriData);
+    		wm.step++;
+    		$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+    		if(wm.step == wm.lastStep) {
+        		$("#btnEstimateRegist").show();
+        		$("button#jqwizard_next").hide();
+      		} else {
+        		$("button#jqwizard_next").show();
+      		}
+      		if(wm.step > 1) {
+        		$("button#jqwizard_previous").show();  
+      		}
+      		$("button#jqwizard_next").attr("disabled", "disabled");
+    	});
+    	// 戻る
+    	$("button.jqwizard_previous").click(function() {
+    		wm.step--;
+    		$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_next").show();
+    		if(wm.step == 1) {
+        		$("button#jqwizard_previous").hide();  
+     		}
+    	});
+    	// 登録
+    	$("#btnEstimateRegist").click(function() {
+    		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
+    		wm.addEstimate();
+    		console.dir(wm.productsData);
+    		console.dir(wm.mitsumoriData);
+    		var postData = {};
+    		var url = "/mitsumoris.json";
+    		var type = "POST";
+    		wm.mitsumoriData["koshinshaId"] = $("#loginId").val();
+     		wm.mitsumoriData["torokushaId"] = $("#loginId").val();
+     		for(var products in wm.productsData) {
+        		wm.productsData[products]["koshinshaId"] = $("#loginId").val();
+        		wm.productsData[products]["torokushaId"] = $("#loginId").val();        
+      		}
+      		postData["mitsumoriData"] = wm.mitsumoriData;
+      		postData["productsData"] = wm.productsData;
+      		$.ajax({
+        		scriptCharset:"UTF-8",
+          		type: type,
+          		url: url,
+          		data: postData,
+          		dataType: "json",
+          		success: function(result) {
+            		location.href = "/mitsumoris/" + result["id"];
+          		}
+      		});
+    	});
+
+	    $("li#step1").click(function() {
+	      	wm.step = 1;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step2").click(function() {
+	      	wm.step = 2;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step3").click(function() {
+	      	wm.step = 3;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step4").click(function() {
+	      	wm.step = 4;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step5").click(function() {
+	      	wm.step = 5;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step6").click(function() {
+	      	wm.step = 6;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step7").click(function() {
+	      	wm.step = 7;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step8").click(function() {
+	      	wm.step = 8;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step9").click(function() {
+	      	wm.step = 9;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step10").click(function() {
+	      	wm.step = 10;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step11").click(function() {
+	      	wm.step = 11;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step12").click(function() {
+	      	wm.step = 12;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step13").click(function() {
+	      	wm.step = 13;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step14").click(function() {
+	      	wm.step = 14;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step15").click(function() {
+	      	wm.step = 15;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step16").click(function() {
+	      	wm.step = 16;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+	    $("li#step17").click(function() {
+	      	wm.step = 17;
+	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+	    });
+  	});
+</script>
+<script src="/js/mitsumori/wizard17.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard16.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard15.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard14.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard13.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard12.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard11.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard10.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard09.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard08.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard07.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard06.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard05.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard04.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard03.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard02.js" type="text/javascript"></script>
+<script src="/js/mitsumori/wizard01.js" type="text/javascript"></script>

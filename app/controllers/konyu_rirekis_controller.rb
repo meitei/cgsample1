@@ -13,7 +13,7 @@ class KonyuRirekisController < ApplicationController
   # GET /konyu_rirekis/search
   # GET /konyu_rirekis/search.json
   def search
-    conditions = KonyuRireki.where("1 = 1")
+    conditions = KonyuRireki.where("konyu_rirekis.\"delFlg\" = ?", 0)
     conditions = add_condition_int(conditions, "konyu_rirekis.\"kokyakuId\"", :kokyakuIdFrom, :kokyakuIdTo)
     conditions = add_condition_int(conditions, "konyu_rirekis.\"hokenShubetsuCd1\"", :hokenShubetsuCd1)
     conditions = add_condition_int(conditions, "konyu_rirekis.\"hokenShubetsuCd2\"", :hokenShubetsuCd2)
@@ -90,6 +90,15 @@ class KonyuRirekisController < ApplicationController
   def new
     @konyu_rireki = KonyuRireki.new
     @konyu_rireki.class_eval("attr_accessor :kokyakuNm1, :kokyakuNm2, :uketsukeSesakuTantoNm, :byoinNm, :kariAwaseTantoNm, :nohinTantoNm, :mitsumoriTantoEigyoNm, :hinmeiNm")
+
+    # 顧客一覧からの遷移時は顧客IDが渡される
+    if params[:kokyakuId].present?
+      logger.debug(params[:kokyakuId])
+      @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:kokyakuId], :delFlg => 0})
+      @konyu_rireki.kokyakuId = @kokyaku.kokyakuId
+      @konyu_rireki.kokyakuNm1 = @kokyaku.kokyakuNm1
+      @konyu_rireki.kokyakuNm2 = @kokyaku.kokyakuNm2
+    end
 
     @hoken_shubetsu = HokenShubetsu.all
     session.delete(:files) if session.has_key? :files
@@ -181,12 +190,16 @@ class KonyuRirekisController < ApplicationController
   # DELETE /konyu_rirekis/1.json
   def destroy
     @konyuRireki = KonyuRireki.find(params[:id])
-    @konyuRireki.destroy
-
+    # @konyuRireki.destroy
     logger.debug(@konyuRireki)
     respond_to do |format|
-      format.html { redirect_to @konyuRireki, notice: 'KonyuRireki was successfully deleted.' }
-      format.json { head :no_content }
+      if @konyuRireki.update_attribute(:delFlg, 1)
+        format.html { redirect_to @konyuRireki, notice: 'KonyuRireki was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @konyuRireki.errors, status: :unprocessable_entity }
+      end
     end
   end
 

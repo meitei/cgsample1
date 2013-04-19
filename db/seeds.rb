@@ -53,7 +53,6 @@ CSV.foreach('db/import/MitsumoriTankas.csv') do |row|
   end
 end
 
-
 ############################################################
 # Test Data
 ############################################################
@@ -64,11 +63,49 @@ if @kokyakus.empty?
 		:kokyakuId => 2400001,
 		:kokyakuNm1 => '顧客',
 		:kokyakuNm2 => '太郎',
+		:delFlg => 0,
 		:torokushaId => 1,
 		:koshinshaId => 1
 	)
 end
 
+# Byoin.destroy_all(["1 = ?", 1])
+@byoins = Byoin.find(:all)
+if @byoins.empty?
+	Byoin.create(
+		:byoinCd => 1,
+		:byoinNm => '九州病院',
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+end
+
+# HokenShubetsu.destroy_all(["1 = ?", 1])
+@hoken_shubetsus = HokenShubetsu.find(:all)
+if @hoken_shubetsus.empty?
+	HokenShubetsu.create(
+		:hokenShubetsuCd => 1,
+		:hokenShubetsuNm => '九州病院',
+		:hyojiJun => 1,
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+end
+
+# Shobyo.destroy_all(["1 = ?", 1])
+@shobyos = Shobyo.find(:all)
+if @shobyos.empty?
+	Shobyo.create(
+		:shobyoCd => 1,
+		:shobyoNm => '傷病名称１',
+		:shobyoNmKana => 'ショウビョウメイショウイチ',
+		:icd10Cd => 'ICD-10_CODE',
+		:shusaiDt => '2013/04/01',
+		# :haishiDt => '2013/04/01',
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+end
 
 # Seihin.destroy_all(["1 = ?", 1])
 @seihins = Seihin.find(:all)
@@ -109,7 +146,6 @@ if @mitsumoris.empty?
 		:konyuRirekiId => 240000001,
 		:kokyakuId => 2400001,
 		:mitsumoriNo => 1,
-		:mitsumoriId => 1,
 		:torokushaId => 1,
 		:koshinshaId => 1,
 
@@ -117,53 +153,53 @@ if @mitsumoris.empty?
 		:COL1_2 => 1,
 		:COL2_1 => 3,
 		:COL3_1 => 1,
-		# :COL3_2 => 1,
-		# :COL3_3 => 1,
-		# :COL3_4 => 1,
-		# :COL3_5 => 1,
-		# :COL3_6 => 1,
-		# :COL3_7 => 1,
-		# :COL3_8 => 1,
-		# :COL3_9 => 1,
-		# :COL3_10 => 1,
-		# :COL3_11 => 1,
-		# :COL3_12 => 1,
-		# :COL3_13 => 1,
+		:COL3_2 => 1,
+		:COL3_3 => 1,
+		:COL3_4 => 1,
+		:COL3_5 => 1,
+		:COL3_6 => 1,
+		:COL3_7 => 1,
+		:COL3_8 => 1,
+		:COL3_9 => 1,
+		:COL3_10 => 1,
+		:COL3_11 => 1,
+		:COL3_12 => 1,
+		:COL3_13 => 1,
 		:COL4_1 => 2,
 		:COL5_1 => 1,
-		# :COL5_2 => 1,
-		# :COL5_3 => 1,
-		# :COL5_4 => 1,
+		:COL5_2 => 1,
+		:COL5_3 => 1,
+		:COL5_4 => 1,
 		:COL6_1 => 2,
 		:COL7_1 => 1,
-		# :COL7_2 => 1,
-		# :COL7_3 => 1,
-		# :COL7_4 => 1,
-		# :COL7_5 => 1,
-		# :COL7_6 => 1,
-		# :COL7_7 => 1,
+		:COL7_2 => 1,
+		:COL7_3 => 1,
+		:COL7_4 => 1,
+		:COL7_5 => 1,
+		:COL7_6 => 1,
+		:COL7_7 => 1,
 		:COL8_1 => 1,
-		# :COL8_2 => 1,
-		# :COL8_3 => 1,
+		:COL8_2 => 1,
+		:COL8_3 => 1,
 		:COL9_1 => 2,
-		# :COL9_2 => 1,
-		# :COL9_3 => 1,
+		:COL9_2 => 1,
+		:COL9_3 => 1,
 		:COL10_1 => 2,
-		# :COL10_2 => 1,
+		:COL10_2 => 1,
 		:COL10_3 => 2,
-		# :COL10_4 => 1,
+		:COL10_4 => 1,
 		:COL11_1 => 2,
-		# :COL11_2 => 1,
-		# :COL11_3 => 1,
-		# :COL11_4 => 1,
+		:COL11_2 => 1,
+		:COL11_3 => 1,
+		:COL11_4 => 1,
 		:COL12_1 => 1,
-		:COL13_1 => 2,
-		# :COL13_2 => 1,
+		:COL13_1 => 4,
+		:COL13_2 => 1,
 		:COL13_3 => 2,
-		# :COL13_4 => 1,
-		# :COL13_5 => 1,
+		:COL13_4 => 1,
+		:COL13_5 => 1,
 		:COL14_1 => 2,
-		# :COL14_2 => 1,
+		:COL14_2 => 1,
 		:COL15_1 => 2,
 		:COL16_1 => 1,
 		:COL16_2 => 1,
@@ -239,23 +275,23 @@ if @mitsumoris.empty?
 		:COL21_5 => 1,
 		:COL21_6 => 1,
 		:COL22_1 => 1,
-		# :COL22_2 => 1,
-		# :COL22_3 => 1,
+		:COL22_2 => 1,
+		:COL22_3 => 1,
 		:COL23_1 => 1,
-		# :COL23_2 => 1,
-		# :COL23_3 => 1,
-		# :COL23_4 => 1,
-		# :COL23_5 => 1,
-		# :COL23_6 => 1,
-		# :COL24_1 => 1,
+		:COL23_2 => 1,
+		:COL23_3 => 1,
+		:COL23_4 => 1,
+		:COL23_5 => 1,
+		:COL23_6 => 1,
+		:COL24_1 => 1,
 		:COL24_2 => 1,
 		:COL24_3 => 1,
-		# :COL24_4 => 1,
-		# :COL24_5 => 1,
-		# :COL24_6 => 1,
-		# :COL24_7 => 1,
-		# :COL24_8 => 1,
-		# :COL24_9 => 1,
+		:COL24_4 => 1,
+		:COL24_5 => 1,
+		:COL24_6 => 1,
+		:COL24_7 => 1,
+		:COL24_8 => 1,
+		:COL24_9 => 1,
 		:COL25_1 => 1
 	)
 end

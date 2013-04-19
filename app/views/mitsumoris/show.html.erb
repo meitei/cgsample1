@@ -1,15 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Mitsumoriid:</b>
-  <%= @mitsumori.mitsumoriId %>
-</p>
-
-<p>
-  <b>Kokyakuid:</b>
-  <%= @mitsumori.kokyakuId %>
-</p>
-
-
-<%= link_to 'Edit', edit_mitsumori_path(@mitsumori) %> |
-<%= link_to 'Back', mitsumoris_path %>
+<div class="container" id="mainmenu_box">
+  <div>見積登録が完了いたしました</div>
+    <div class="mainmenu_inner cf">
+      <ul>
+        <li class="menulist01"><a href="/kokyakus">顧客管理</a></li>
+        <li class="menulist02"><a href="/konyu_rirekis">購入履歴管理</a></li>
+        <li class="menulist04"><a href="/toukeis">売上管理</a></li>
+      </ul>
+  </div>
+</div>

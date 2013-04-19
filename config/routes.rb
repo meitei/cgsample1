@@ -18,7 +18,7 @@ JqgridSample::Application.routes.draw do
 
   resources :mitsumoris
 
-  resources :mitsumori_tankas  
+  resources :mitsumori_tankas
 
   resources :hoken_shubetsus do
     get 'search', :on => :collection
@@ -34,6 +34,7 @@ JqgridSample::Application.routes.draw do
 
   resources :kokyakus do
     get 'search', :on => :collection
+    post 'delete_list', :on => :collection
   end
 
   get "item_extend/search"
@@ -50,8 +51,7 @@ JqgridSample::Application.routes.draw do
   resources :toukeis do
     get 'search', :on => :collection
     get 'move_page', :on => :collection
-    get 'kokyaku_list', :on => :collection
-    get 'graph', :on => :collection
+    post 'graph', :on => :collection
     get 'graph_data', :on => :collection
   end
 

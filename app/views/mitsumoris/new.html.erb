@@ -9,7 +9,7 @@
   var tanka = {};
   var konyuRirekiId = $("#konyuRirekiId").val();
   var kokyakuId = $("#kokyakuId").val();
-  //var mitsumoriNo = 1;
+  var mitsumoriNo = 0;
   var wm = new WizardManager();
 
   $(document).ready(function(){
@@ -27,6 +27,7 @@
     });
     $("#estimateForm").wizard();
     $("#btnEstimateRegist").hide();
+    $("button#jqwizard_previous").hide();
     $("div#step1").load("/mitsumori/step_01.html", wizard1);
     // 見積データを用意する
     wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
@@ -36,21 +37,30 @@
     // 次へ
     $("button.jqwizard_next").click(function() {
       WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-      //wm.addProduct();
       wm.addEstimate();
       console.dir(wm.productsData);
       console.dir(wm.mitsumoriData);
       wm.step++;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_next").attr("disabled", "disabled");
       if(wm.step == wm.lastStep) {
         $("#btnEstimateRegist").show();
+        $("button#jqwizard_next").hide();
+      } else {
+        $("button#jqwizard_next").show();
       }
+      if(wm.step > 1) {
+        $("button#jqwizard_previous").show();  
+      }
+      $("button#jqwizard_next").attr("disabled", "disabled");
     });
     // 戻る
     $("button.jqwizard_previous").click(function() {
       wm.step--;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_next").show(); 
+      if(wm.step == 1) {
+        $("button#jqwizard_previous").hide();  
+      }
     });
     // 登録
     $("#btnEstimateRegist").click(function() {
@@ -74,10 +84,9 @@
           type: type,
           url: url,
           data: postData,
-          //root: "byoin",
           dataType: "json",
           success: function(result) {
-            alert("登録しました");
+            location.href = "/mitsumoris/" + result["id"];
           }
       });
     });
@@ -85,10 +94,14 @@
     $("li#step1").click(function() {
       wm.step = 1;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").hide();
+      $("button#jqwizard_next").show(); 
     });
     $("li#step2").click(function() {
       wm.step = 2;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
     });
     $("li#step3").click(function() {
       wm.step = 3;

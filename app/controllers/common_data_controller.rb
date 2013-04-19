@@ -5,14 +5,14 @@ class CommonDataController < ApplicationController
 
     has_key = (params[:kokyakuId] != nil and params[:kokyakuId] != "")
     sqlbind_s = "%" + params[:kokyakuId] + "%" if has_key
-    sqlbind_i = -1
-    sqlbind_i = params[:kokyakuId].to_i if has_key and params[:kokyakuId] =~ /\d+/
+    # sqlbind_i = -1
+    # sqlbind_i = params[:kokyakuId].to_i if has_key and params[:kokyakuId] =~ /\d+/
     sqlstat = []
-    sqlstat << "\"kokyakuId\" = ? "
+    sqlstat << "CAST(\"kokyakuId\" AS text) LIKE ? "
     sqlstat << "\"kokyakuNm1\" || \"kokyakuNm2\" LIKE ? "
 
-    conditions = Kokyaku.where("1 = ?", 1)
-    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_i, sqlbind_s) if has_key
+    conditions = Kokyaku.where("\"delFlg\" = ?", 0)
+    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_s, sqlbind_s) if has_key
     logger.debug(conditions)
 
     @kokyakus = conditions.find(
@@ -54,15 +54,15 @@ class CommonDataController < ApplicationController
 
     has_key = (params[:byoinCd] != nil and params[:byoinCd] != "")
     sqlbind_s = "%" + params[:byoinCd] + "%" if has_key
-    sqlbind_i = -1
-    sqlbind_i = params[:byoinCd].to_i if has_key and params[:byoinCd] =~ /\d+/
+    # sqlbind_i = -1
+    # sqlbind_i = params[:byoinCd].to_i if has_key and params[:byoinCd] =~ /\d+/
 
     sqlstat = []
-    sqlstat << "\"byoinCd\" = ? "
+    sqlstat << "CAST(\"byoinCd\" AS text) LIKE ? "
     sqlstat << "\"byoinNm\" LIKE ? "
 
     conditions = Byoin.where("1 = ?", 1)
-    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_i, sqlbind_s) if has_key
+    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_s, sqlbind_s) if has_key
     logger.debug(conditions)
 
     @byoins = conditions.find(
@@ -80,15 +80,15 @@ class CommonDataController < ApplicationController
 
     has_key = (params[:seihinId] != nil and params[:seihinId] != "")
     sqlbind_s = "%" + params[:seihinId] + "%" if has_key
-    sqlbind_i = -1
-    sqlbind_i = params[:seihinId].to_i if has_key and params[:seihinId] =~ /\d+/
+    # sqlbind_i = -1
+    # sqlbind_i = params[:seihinId].to_i if has_key and params[:seihinId] =~ /\d+/
 
     sqlstat = []
-    sqlstat << "\"seihinId\" = ? "
+    sqlstat << "CAST(\"seihinId\" AS text) LIKE ? "
     sqlstat << "\"hinmeiNm\" LIKE ? "
 
     conditions = Seihin.where("1 = ?", 1)
-    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_i, sqlbind_s) if has_key
+    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_s, sqlbind_s) if has_key
     logger.debug(conditions)
 
     @seihins = conditions.find(
@@ -106,15 +106,15 @@ class CommonDataController < ApplicationController
 
     has_key = (params[:shobyoCd] != nil and params[:shobyoCd] != "")
     sqlbind_s = "%" + params[:shobyoCd] + "%" if has_key
-    sqlbind_i = -1
-    sqlbind_i = params[:shobyoCd].to_i if has_key and params[:shobyoCd] =~ /\d+/
+    # sqlbind_i = -1
+    # sqlbind_i = params[:shobyoCd].to_i if has_key and params[:shobyoCd] =~ /\d+/
 
     sqlstat = []
-    sqlstat << "\"shobyoCd\" = ? "
+    sqlstat << "CAST(\"shobyoCd\" AS text) LIKE ? "
     sqlstat << "\"shobyoNm\" LIKE ? "
 
     conditions = Shobyo.where("1 = ?", 1)
-    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_i, sqlbind_s) if has_key
+    conditions = conditions.where(sqlstat.join(" OR "), sqlbind_s, sqlbind_s) if has_key
     logger.debug(conditions)
 
     @shobyos = conditions.find(

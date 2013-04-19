@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413063715) do
+ActiveRecord::Schema.define(:version => 20130414183440) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(:version => 20130413063715) do
 
   create_table "konyu_rirekis", :force => true do |t|
     t.integer  "konyuRirekiId",         :limit => 11
-    t.integer  "kokyakuId",                                :null => false
+    t.integer  "kokyakuId",                                               :null => false
     t.integer  "byoinCd"
     t.string   "mitsumoriTantoEigyoCd", :limit => 10
     t.date     "mitsumoriDt"
@@ -111,10 +111,10 @@ ActiveRecord::Schema.define(:version => 20130413063715) do
     t.date     "nyukinDt"
     t.date     "oshiinDt"
     t.date     "kanryoDt"
-    t.integer  "koshinshaId",                              :null => false
-    t.integer  "torokushaId",                              :null => false
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.integer  "koshinshaId",                                             :null => false
+    t.integer  "torokushaId",                                             :null => false
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
     t.string   "ishiNm1",               :limit => 50
     t.string   "ishiNm2",               :limit => 50
     t.string   "rigakuRyohoNm1",        :limit => 50
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20130413063715) do
     t.binary   "kanseiImg",             :limit => 1048576
     t.binary   "kanseiTmbImg",          :limit => 1048576
     t.string   "kanseiImgName"
+    t.integer  "delFlg",                                   :default => 0, :null => false
   end
 
   create_table "mitsumori_seihins", :force => true do |t|
@@ -155,7 +156,6 @@ ActiveRecord::Schema.define(:version => 20130413063715) do
   end
 
   create_table "mitsumoris", :force => true do |t|
-    t.integer  "mitsumoriId"
     t.integer  "kokyakuId"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
@@ -358,19 +358,6 @@ ActiveRecord::Schema.define(:version => 20130413063715) do
     t.integer  "torokushaId",                :null => false
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
-  end
-
-  create_table "test_images", :force => true do |t|
-    t.integer  "mitsumoriNo",                    :null => false
-    t.string   "text"
-    t.binary   "mainImage1",  :limit => 1048576
-    t.binary   "mainImage2",  :limit => 1048576
-    t.binary   "subImage1",   :limit => 1048576
-    t.binary   "subImage2",   :limit => 1048576
-    t.binary   "subImage3",   :limit => 1048576
-    t.binary   "subImage4",   :limit => 1048576
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
   end
 
   create_table "users", :force => true do |t|
