@@ -122,23 +122,61 @@
     }
   }
 
-  // 既製品
+  // 木製座位保持装置
   function wizard2g(){
       wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
     wm.submitItems[2] = submitItem23;
+    // 更新時、DBの値をセット
+    var col1Value = wm.mitsumoriData["COL23_1"];
+    //$("input[name='COL1_1']").val(col1Value);
+    // アルミニューム選択
+    if(col1Value == "1"){
+      $("input#1-COL23_1").attr("checked", true);
+    }
+    // ステンレス選択
+    if(col1Value == "2"){
+      $("input#2-COL23_1").attr("checked", true);
+    }
+    // 木製選択
+    if(col1Value == "3"){
+      $("input#3-COL23_1").attr("checked", true);
+    }
+    // アルミニューム選択
+    if(col1Value == "4"){
+      $("input#4-COL23_1").attr("checked", true);
+    }
+    // ステンレス選択
+    if(col1Value == "5"){
+      $("input#5-COL23_1").attr("checked", true);
+    }
+    // 木製選択
+    if(col1Value == "6"){
+      $("input#6-COL23_1").attr("checked", true);
+    }
   }
 
-    // 既製品
+    // トイレットチェア
   function wizard2h(){
       wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
     wm.submitItems[2] = submitItem24;
+    // 更新時、DBの値をセット
+    var col1Value = wm.mitsumoriData["COL24_1"];
+    //$("input[name='COL1_1']").val(col1Value);
+    // アルミニューム選択
+    if(col1Value == "1"){
+      $("input#1-COL24_1").attr("checked", true);
+    }
+    // ステンレス選択
+    if(col1Value == "2"){
+      $("input#2-COL24_1").attr("checked", true);
+    }
   }
 
-    // 既製品
+    // シャワーチェア
   function wizard2i(){
       wm.lastStep = 2;
     // 単価を書き換え
