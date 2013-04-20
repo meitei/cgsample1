@@ -1,6 +1,6 @@
 class ToukeisController < ApplicationController
 
-  SumUnts = Struct.new(:keyCd, :keyLabel, :joins)
+  SumUnts = Struct.new(:keyCd, :keyLabel, :joins, :kingaku, :count)
 
   # GET /toukeis
   # GET /toukeiss.json
@@ -16,128 +16,64 @@ class ToukeisController < ApplicationController
   def search
     logger.debug(params)
 
-    targetSpnFrom = Date.strptime(params[:targetSpnFrom], "%Y/%m/%d") if is_date?(params[:targetSpnFrom])
-    targetSpnTo = Date.strptime(params[:targetSpnTo], "%Y/%m/%d") if is_date?(params[:targetSpnTo])
-    today = Date.today
-
-    conditions = KonyuRireki.where("1 = ?", 1)
-    conditions = conditions.where("\"kanryoDt\" >= ?", targetSpnFrom) if targetSpnFrom
-    conditions = conditions.where("\"kanryoDt\" <= ?", targetSpnTo) if targetSpnTo
-    logger.debug(conditions)
-
-    # get db adapter
-    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
-
-    if params[:outCond] == "1" then
-      # 月別
-      if adapter == "sqlite3" then
-        # SQLite
-        sumCndKey = "strftime('%Y%m', \"kanryoDt\")"
-      elsif adapter == "mysql2" then
-        # MySQL
-        sumCndKey = "DATE_FORMAT(\"kanryoDt\",'%Y%m')"
-      else
-        # PostgreSQL
-        sumCndKey = "to_char(\"kanryoDt\", 'YYYYMM')"
-      end
-    elsif params[:outCond] == "2" then
-      # 年度別
-      if adapter == "sqlite3" then
-        # SQLite
-        sumCndKey = "strftime('%Y', \"kanryoDt\")"
-      elsif adapter == "mysql2" then
-        # MySQL
-        sumCndKey = "DATE_FORMAT(\"kanryoDt\",'%Y')"
-      else
-        # PostgreSQL
-        sumCndKey = "to_char(\"kanryoDt\", 'YYYY')"
-      end
-    else
-      # 総合計
-      sumCndKey = "'dummy'"
-    end
-
-    # Pending...
-    sumUnts = {
-      1 => SumUnts.new(
-        "\"uketsukeSesakuTantoCd\"",
-        # "users.myoji||' '||users.name",
-        # "concat(users.myoji,' ',users.name)",
-        str_sql_concat("users.myoji","' '","users.name"),
-        "left outer join users on users.\"shainCd\" = konyu_rirekis.\"uketsukeSesakuTantoCd\"")
-    }
-    sumUnts.default = sumUnts[1]
-    sumUnt = sumUnts[params[:sumUnt].to_i];
-
-    # sumUnts = {
-    #   1 => "uketsukeSesakuTantoCd",
-    #   2 => "byoinCd",
-    #   3 => "shohinNm",
-    #   4 => "shubetsuCd",
-    #   5 => "mitsumoriKomokuCd"
-    # }
-
-    @konyu_rirekis = conditions.find(
-      :all,
-      :select => "#{sumCndKey} \"sumCndKey\", #{sumUnt.keyCd} \"sumUntKey\", #{sumUnt.keyLabel} \"sumUnt\", sum(kin) kingaku, count(*) daisu ",
-      :joins => sumUnt.joins,
-      :group  => "\"sumCndKey\", \"sumUntKey\", \"sumUnt\" ",
-      :order  => "\"sumCndKey\", \"sumUntKey\" ASC")
+    # 検索を実行する
+    @toukeis = search_data
 
     # 検索結果をSessionに保存
-    session[:konyu_rirekis] = @konyu_rirekis.clone
+    session[:toukeis] = @toukeis.clone
 
-    # 集計単位のリストを作成する
-    cndKeys = []
-    @konyu_rirekis.each {|row|
-      cndKeys << row["sumCndKey"] if not row["sumCndKey"].blank?
-    }
-    logger.debug(cndKeys)
-    cndKeys = cndKeys.uniq.sort if cndKeys.size > 1
-    logger.debug(cndKeys)
+    # # 集計単位のリストを作成する
+    # cndKeys = []
+    # @toukeis.each {|row|
+    #   cndKeys << row["sumCndKey"] if not row["sumCndKey"].blank?
+    # }
+    # cndKeys = cndKeys.uniq.sort if cndKeys.size > 1
+    # logger.debug(cndKeys)
 
-    has_prev = false
-    has_next = false
-    outCondYear = outCondMonth = ""
+    # has_prev = false
+    # has_next = false
+    # outCondYear = outCondMonth = ""
 
-    if not cndKeys.empty? and params[:outCond] != "3" then
-      outCondYear = cndKeys.first[0..3]
-      outCondMonth = cndKeys.first[4..5] if cndKeys.first.length == 6
-    end
+    # if not cndKeys.empty? and params[:outCond] != "3" then
+    #   outCondYear = cndKeys.first[0..3]
+    #   outCondMonth = cndKeys.first[4..5] if cndKeys.first.length == 6
+    # end
 
-    # 次のページが存在するか？
-    has_next = true if cndKeys.size > 1
-    # logger.debug("outCondYear => #{outCondYear}, outCondMonth => #{outCondMonth}")
+    # # 次のページが存在するか？
+    # has_next = true if cndKeys.size > 1
 
-    # 表示中の年月以外は結果から除外する
-    @konyu_rirekis.delete_if {|item|
-      item["sumCndKey"] != outCondYear+outCondMonth and item["sumCndKey"] != "dummy"
-    }
+    # # 表示中の年月以外は結果から除外する
+    # @toukeis.delete_if {|item|
+    #   item["sumCndKey"] != outCondYear+outCondMonth and item["sumCndKey"] != "dummy"
+    # }
 
-    records = @konyu_rirekis.size
-    limit = params[:rows].to_i
-    page = params[:page].to_i
-    if records > 0
-      n = records.quo(limit)
-      total_pages = n.ceil
-    else
-      total_pages = 0
-    end
-    start = limit * page - limit;
-    @konyu_rirekis = @konyu_rirekis[start, limit]
+    # records = @toukeis.size
+    # limit = params[:rows].to_i
+    # page = params[:page].to_i
+    # if records > 0
+    #   n = records.quo(limit)
+    #   total_pages = n.ceil
+    # else
+    #   total_pages = 0
+    # end
+    # start = limit * page - limit;
+    # @toukeis = @toukeis[start, limit]
 
-    @responce = {
-      total: total_pages.to_s,
-      page: params[:page],
-      records: records.to_s,
-      rows: @konyu_rirekis,
-      cond: {
-        outCondYear: outCondYear,
-        outCondMonth: outCondMonth,
-        has_prev: has_prev,
-        has_next: has_next
-      }
-    }
+    # @responce = {
+    #   total: total_pages.to_s,
+    #   page: params[:page],
+    #   records: records.to_s,
+    #   rows: @toukeis,
+    #   cond: {
+    #     outCondYear: outCondYear,
+    #     outCondMonth: outCondMonth,
+    #     has_prev: has_prev,
+    #     has_next: has_next
+    #   }
+    # }
+
+    # レスポンスの編集
+    edit_response
 
     respond_to do |format|
       format.html # index.html.erb
@@ -151,77 +87,76 @@ class ToukeisController < ApplicationController
 
     logger.debug("move_page: " + params.to_yaml)
 
-    outCondYear = params[:outCondYear]
-    outCondMonth = params[:outCondMonth]
-    direction = params[:direction]
-
     # 検索結果をSessionから取得
-    @konyu_rirekis = session[:konyu_rirekis].clone
+    @toukeis = session[:toukeis].clone
 
-    # 集計単位のリストを作成する
-    cndKeys = []
-    @konyu_rirekis.each {|row|
-      cndKeys << row["sumCndKey"] if not row["sumCndKey"].blank?
-    }
-    cndKeys = cndKeys.uniq.sort if cndKeys.size > 1
+    # # 集計単位のリストを作成する
+    # cndKeys = []
+    # @toukeis.each {|row|
+    #   cndKeys << row["sumCndKey"] if not row["sumCndKey"].blank?
+    # }
+    # cndKeys = cndKeys.uniq.sort if cndKeys.size > 1
 
-    has_prev = false
-    has_next = false
-    if not cndKeys.empty? then
+    # has_prev = false
+    # has_next = false
+    # if not cndKeys.empty? then
 
-      outCondKey = outCondYear
-      outCondKey = outCondKey + outCondMonth if outCondMonth
+    #   outCondKey = outCondYear
+    #   outCondKey = outCondKey + outCondMonth if outCondMonth
 
-      cndPos = cndKeys.index(outCondKey)
-      if direction == 'prev' and cndPos > 0 then
-        outCondKey = cndKeys[cndPos - 1]
-      elsif direction == 'next' and cndPos < (cndKeys.size - 1) then
-        outCondKey = cndKeys[cndPos + 1]
-      end
+    #   cndPos = cndKeys.index(outCondKey)
+    #   if direction == 'prev' and cndPos > 0 then
+    #     outCondKey = cndKeys[cndPos - 1]
+    #   elsif direction == 'next' and cndPos < (cndKeys.size - 1) then
+    #     outCondKey = cndKeys[cndPos + 1]
+    #   end
 
-      cndPos = cndKeys.index(outCondKey)
-      if cndPos and cndPos >= 0 then
-        has_prev = true if cndPos > 0
-        has_next = true if cndPos < (cndKeys.size - 1)
-      end
+    #   cndPos = cndKeys.index(outCondKey)
+    #   if cndPos and cndPos >= 0 then
+    #     has_prev = true if cndPos > 0
+    #     has_next = true if cndPos < (cndKeys.size - 1)
+    #   end
 
-      if outCondYear then
-        outCondYear = outCondKey[0..3]
-        if outCondMonth then
-          outCondMonth = outCondKey[4..5]
-        end
-      end
-    end
+    #   if outCondYear then
+    #     outCondYear = outCondKey[0..3]
+    #     if outCondMonth then
+    #       outCondMonth = outCondKey[4..5]
+    #     end
+    #   end
+    # end
 
-    # 表示中の年月以外は結果から除外する
-    @konyu_rirekis.delete_if {|item|
-      item["sumCndKey"] != outCondKey and item["sumCndKey"] != "dummy"
-    }
+    # # 表示中の年月以外は結果から除外する
+    # @toukeis.delete_if {|item|
+    #   item["sumCndKey"] != outCondKey and item["sumCndKey"] != "dummy"
+    # }
 
-    records = @konyu_rirekis.size
-    limit = params[:rows].to_i
-    page = params[:page].to_i
-    if records > 0
-      n = records.quo(limit)
-      total_pages = n.ceil
-    else
-      total_pages = 0
-    end
-    start = limit * page - limit;
-    @konyu_rirekis = @konyu_rirekis[start, limit]
+    # records = @toukeis.size
+    # limit = params[:rows].to_i
+    # page = params[:page].to_i
+    # if records > 0
+    #   n = records.quo(limit)
+    #   total_pages = n.ceil
+    # else
+    #   total_pages = 0
+    # end
+    # start = limit * page - limit;
+    # @toukeis = @toukeis[start, limit]
 
-    @responce = {
-      total: total_pages.to_s,
-      page: params[:page],
-      records: records.to_s,
-      rows: @konyu_rirekis,
-      cond: {
-        outCondYear: outCondYear,
-        outCondMonth: outCondMonth,
-        has_prev: has_prev,
-        has_next: has_next
-      }
-    }
+    # @responce = {
+    #   total: total_pages.to_s,
+    #   page: params[:page],
+    #   records: records.to_s,
+    #   rows: @toukeis,
+    #   cond: {
+    #     outCondYear: outCondYear,
+    #     outCondMonth: outCondMonth,
+    #     has_prev: has_prev,
+    #     has_next: has_next
+    #   }
+    # }
+
+    # レスポンスの編集
+    edit_response(first: false)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -236,7 +171,7 @@ class ToukeisController < ApplicationController
     logger.debug("graph: " + params.to_yaml)
     @graph_cond = {
       sumUnt: params[:sumUnt],
-      outCnd: params[:outCond],
+      outCond: params[:outCond],
       outYm: params[:outCondYear] + params[:outCondMonth],
       targetSpnFrom: params[:targetSpnFrom],
       targetSpnTo: params[:targetSpnTo]
@@ -252,78 +187,14 @@ class ToukeisController < ApplicationController
   def graph_data
     logger.debug(params)
 
-    targetSpnFrom = Date.strptime(params[:targetSpnFrom], "%Y/%m/%d") if is_date?(params[:targetSpnFrom])
-    targetSpnTo = Date.strptime(params[:targetSpnTo], "%Y/%m/%d") if is_date?(params[:targetSpnTo])
-    # today = Date.today
-
-    conditions = KonyuRireki.where("1 = ?", 1)
-    conditions = conditions.where("\"kanryoDt\" >= ?", targetSpnFrom) if targetSpnFrom
-    conditions = conditions.where("\"kanryoDt\" <= ?", targetSpnTo) if targetSpnTo
-    logger.debug(conditions)
-
-    # get db adapter
-    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
-
-    if params[:outCnd] == "1" then
-      # 月別
-      if adapter == "sqlite3" then
-        # SQLite
-        sumCndKey = "strftime('%Y%m', \"kanryoDt\")"
-      elsif adapter == "mysql2" then
-        # MySQL
-        sumCndKey = "DATE_FORMAT(\"kanryoDt\",'%Y%m')"
-      else
-        # PostgreSQL
-        sumCndKey = "to_char(\"kanryoDt\", 'YYYYMM')"
-      end
-    elsif params[:outCnd] == "2" then
-      # 年度別
-      if adapter == "sqlite3" then
-        # SQLite
-        sumCndKey = "strftime('%Y', \"kanryoDt\")"
-      elsif adapter == "mysql2" then
-        # MySQL
-        sumCndKey = "DATE_FORMAT(\"kanryoDt\",'%Y')"
-      else
-        # PostgreSQL
-        sumCndKey = "to_char(\"kanryoDt\", 'YYYY')"
-      end
-    else
-      # 総合計
-      sumCndKey = "'dummy'"
-    end
-
-    # Pending...
-    sumUnts = {
-      1 => SumUnts.new(
-        "\"uketsukeSesakuTantoCd\"",
-        # "users.myoji||' '||users.name",
-        # "concat(users.myoji,' ',users.name)",
-        str_sql_concat("users.myoji","' '","users.name"),
-        "left outer join users on users.\"shainCd\" = konyu_rirekis.\"uketsukeSesakuTantoCd\"")
-    }
-    sumUnts.default = sumUnts[1]
-    sumUnt = sumUnts[params[:sumUnt].to_i];
-
-    # sumUnts = {
-    #   1 => "uketsukeSesakuTantoCd",
-    #   2 => "byoinCd",
-    #   3 => "shohinNm",
-    #   4 => "shubetsuCd",
-    #   5 => "mitsumoriKomokuCd"
-    # }
-
-    toukeis = conditions.find(
-      :all,
-      :select => "#{sumCndKey} \"sumCndKey\", #{sumUnt.keyCd} \"sumUntKey\", #{sumUnt.keyLabel} \"sumUnt\", sum(kin) kingaku, count(*) daisu ",
-      :joins => sumUnt.joins,
-      :group  => "\"sumCndKey\", \"sumUntKey\", \"sumUnt\" ",
-      :order  => "\"sumCndKey\", \"sumUntKey\" ASC")
+    # 検索を実行する
+    toukeis = search_data
 
     # 表示中の年月以外は結果から除外する
     toukeis.delete_if {|item|
       item["sumCndKey"] != params[:outYm] and item["sumCndKey"] != "dummy"
     }
+    logger.debug(params[:outYm])
 
     @responce = {
       rsdata: toukeis
@@ -357,6 +228,192 @@ class ToukeisController < ApplicationController
     else
       strs.join("||")
     end
+  end
+
+  def get_sum_cnd_unt
+    # get db adapter
+    adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+
+    if params[:outCond] == "1" then
+      # 月別
+      if adapter == "sqlite3" then
+        # SQLite
+        sumCndKey = "strftime('%Y%m', \"juchuDt\")"
+      elsif adapter == "mysql2" then
+        # MySQL
+        sumCndKey = "DATE_FORMAT(\"juchuDt\",'%Y%m')"
+      else
+        # PostgreSQL
+        sumCndKey = "to_char(\"juchuDt\", 'YYYYMM')"
+      end
+    elsif params[:outCond] == "2" then
+      # 年度別
+      if adapter == "sqlite3" then
+        # SQLite
+        sumCndKey = "strftime('%Y', \"juchuDt\")"
+      elsif adapter == "mysql2" then
+        # MySQL
+        sumCndKey = "DATE_FORMAT(\"juchuDt\",'%Y')"
+      else
+        # PostgreSQL
+        sumCndKey = "to_char(\"juchuDt\", 'YYYY')"
+      end
+    else
+      # 総合計
+      sumCndKey = "'dummy'"
+    end
+
+    # Pending...
+    sumUnts = {
+      1 => SumUnts.new(
+        "konyu_rirekis.\"uketsukeSesakuTantoCd\"",
+        str_sql_concat("users.myoji","' '","users.name"),
+        "inner join users on users.\"shainCd\" = konyu_rirekis.\"uketsukeSesakuTantoCd\"",
+        "sum(konyu_rirekis.kin)",
+        "count(*)"
+        ),
+      2 => SumUnts.new(
+        "konyu_rirekis.\"byoinCd\"",
+        "byoins.\"byoinNm\"",
+        "inner join byoins on byoins.\"byoinCd\" = konyu_rirekis.\"byoinCd\"",
+        "sum(konyu_rirekis.kin)",
+        "count(*)"
+        ),
+      3 => SumUnts.new(
+        "konyu_rirekis.\"shohinNm\"",
+        "konyu_rirekis.\"shohinNm\"",
+        nil,
+        "sum(konyu_rirekis.kin)",
+        "count(*)"
+        ),
+      4 => SumUnts.new(
+        "msh.\"seihinNo\"",
+        "mtk.\"seihinName\"",
+        "inner join mitsumoris mit on mit.\"konyuRirekiId\" = konyu_rirekis.\"konyuRirekiId\" and mit.\"kokyakuId\" = konyu_rirekis.\"kokyakuId\" " + "left outer join mitsumori_seihins msh on msh.\"mitsumoriNo\" = mit.\"mitsumoriNo\" " + "left outer join mitsumori_tankas mtk on mtk.\"seihinNo\" = msh.\"seihinNo\" ",
+        "sum(msh.kin + msh.tax)",
+        "sum(msh.suryo)"
+        ),
+      5 => SumUnts.new(
+        "konyu_rirekis.\"seihinId\"",
+        "\"hinmeiNm\"",
+        "inner join seihins on seihins.\"seihinId\" = konyu_rirekis.\"seihinId\"",
+        "sum(konyu_rirekis.kin)",
+        "count(*)"
+        )
+    }
+    sumUnts.default = sumUnts[1]
+    sumUnt = sumUnts[params[:sumUnt].to_i];
+
+    return sumCndKey, sumUnt
+  end
+
+  def search_data
+    targetSpnFrom = Date.strptime(params[:targetSpnFrom], "%Y/%m/%d") if is_date?(params[:targetSpnFrom])
+    targetSpnTo = Date.strptime(params[:targetSpnTo], "%Y/%m/%d") if is_date?(params[:targetSpnTo])
+    # today = Date.today
+
+    conditions = KonyuRireki.where("1 = ?", 1)
+    conditions = conditions.where("\"juchuDt\" >= ?", targetSpnFrom) if targetSpnFrom
+    conditions = conditions.where("\"juchuDt\" <= ?", targetSpnTo) if targetSpnTo
+    logger.debug(conditions)
+
+    # 集計条件、集権単位を取得する
+    sumCndKey, sumUnt = get_sum_cnd_unt
+
+    conditions.find(
+      :all,
+      :select => "#{sumCndKey} \"sumCndKey\", #{sumUnt.keyCd} \"sumUntKey\", #{sumUnt.keyLabel} \"sumUnt\", #{sumUnt.kingaku} kingaku, #{sumUnt.count} daisu ",
+      :joins => sumUnt.joins,
+      :group  => "\"sumCndKey\", \"sumUntKey\", \"sumUnt\" ",
+      :order  => "\"sumCndKey\", \"sumUntKey\" ASC")
+  end
+
+  def edit_response (options = {:first => true})
+    logger.debug(options)
+
+    # 集計単位のリストを作成する
+    cndKeys = []
+    @toukeis.each {|row|
+      cndKeys << row["sumCndKey"] if not row["sumCndKey"].blank?
+    }
+    cndKeys = cndKeys.uniq.sort if cndKeys.size > 1
+    logger.debug(cndKeys)
+
+    has_prev = false
+    has_next = false
+    outCondYear = outCondMonth = ""
+
+    if options[:first] == true then
+      # 初回検索時
+      if not cndKeys.empty? and params[:outCond] != "3" then
+        outCondYear = cndKeys.first[0..3]
+        outCondMonth = cndKeys.first[4..5] if cndKeys.first.length == 6
+      end
+
+      # 次のページが存在するか？
+      has_next = true if cndKeys.size > 1
+    else
+      # 次ページ検索時
+      if not cndKeys.empty? then
+
+        outCondYear = params[:outCondYear]
+        outCondMonth = params[:outCondMonth]
+        direction = params[:direction]
+
+        outCondKey = outCondYear
+        outCondKey = outCondKey + outCondMonth if outCondMonth
+
+        cndPos = cndKeys.index(outCondKey)
+        if direction == 'prev' and cndPos > 0 then
+          outCondKey = cndKeys[cndPos - 1]
+        elsif direction == 'next' and cndPos < (cndKeys.size - 1) then
+          outCondKey = cndKeys[cndPos + 1]
+        end
+
+        cndPos = cndKeys.index(outCondKey)
+        if cndPos and cndPos >= 0 then
+          has_prev = true if cndPos > 0
+          has_next = true if cndPos < (cndKeys.size - 1)
+        end
+
+        if outCondYear then
+          outCondYear = outCondKey[0..3]
+          if outCondMonth then
+            outCondMonth = outCondKey[4..5]
+          end
+        end
+      end
+    end
+
+    # 表示中の年月以外は結果から除外する
+    @toukeis.delete_if {|item|
+      item["sumCndKey"] != outCondYear+outCondMonth and item["sumCndKey"] != "dummy"
+    }
+
+    records = @toukeis.size
+    limit = params[:rows].to_i
+    page = params[:page].to_i
+    if records > 0
+      n = records.quo(limit)
+      total_pages = n.ceil
+    else
+      total_pages = 0
+    end
+    start = limit * page - limit;
+    @toukeis = @toukeis[start, limit]
+
+    @responce = {
+      total: total_pages.to_s,
+      page: params[:page],
+      records: records.to_s,
+      rows: @toukeis,
+      cond: {
+        outCondYear: outCondYear,
+        outCondMonth: outCondMonth,
+        has_prev: has_prev,
+        has_next: has_next
+      }
+    }
   end
 
 end
