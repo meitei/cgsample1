@@ -2,34 +2,37 @@
   function wizard2a(){
     // 屋内用
     $("input#1-COL5_1").change(function(){
-      load2a();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2a();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 15;
     });
     // 屋外用
     $("input#2-COL5_1").change(function(){
+      for(var i=1; i<18; i++) {
+        $("li#step" + i).show();  
+      }
       load2b();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 11;
     });
     // リクライニングティルト式選択
     $("input#3-COL5_1").change(function(){
-      load2c();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2c();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 5;
     });
     // 車椅選択
     $("input#4-COL5_1").change(function(){
-      load2d();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2d();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 10;
     });
@@ -70,28 +73,28 @@
   function wizard2e() {
     // アルミニューム選択
     $("input#1-COL2_1").change(function(){
-      load2e();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2e();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 17;
     });
     // ステンレス選択
     $("input#2-COL2_1").change(function(){
-      load2e();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2e();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 17;
     });
     // 木製選択
     $("input#3-COL2_1").change(function(){
-      load2f();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2f();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 3;
     });
