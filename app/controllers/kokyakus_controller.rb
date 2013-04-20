@@ -84,7 +84,7 @@ class KokyakusController < ApplicationController
     conditions = conditions.where("tel1 LIKE ?", params[:kokyaku][:tel1] + "%") if params[:kokyaku][:tel1] != ""
     conditions = conditions.where("tel2 LIKE ?", params[:kokyaku][:tel2] + "%") if params[:kokyaku][:tel2] != ""
     conditions = conditions.where("fax LIKE ?", params[:kokyaku][:fax] + "%") if params[:kokyaku][:fax] != ""
-    conditions = conditions.where(str_sql_concat("COALESCE(\"shobyoNm1\", '') ", "COALESCE(\"shobyoNm2\", '') ", "COALESCE(\"shobyoNm3\", '') ") + " LIKE ?", "%" + params[:kokyaku][:shobyoNm] + "%") if params[:kokyaku][:shobyoNm] != ""
+    conditions = conditions.where(str_sql_concat("COALESCE(sb1.\"shobyoNm\", '') ", "COALESCE(sb2.\"shobyoNm\", '') ", "COALESCE(sb3.\"shobyoNm\", '') ") + " LIKE ?", "%" + params[:kokyaku][:shobyoNm] + "%") if params[:kokyaku][:shobyoNm] != ""
     conditions = conditions.where("\"gakkoNm\" LIKE ?", "%" + params[:kokyaku][:gakkoNm] + "%") if params[:kokyaku][:gakkoNm] != ""
     #logger.debug(conditions)
 
@@ -92,7 +92,8 @@ class KokyakusController < ApplicationController
     # 検索に必要なSQL文を取得する
     select, joins = get_select_stmt
 
-    records = conditions.count
+    records = conditions.count(:joins => joins)
+
     limit = params[:rows].to_i
     page = params[:page].to_i
     if records > 0
