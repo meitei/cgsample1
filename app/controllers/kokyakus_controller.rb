@@ -29,7 +29,7 @@ class KokyakusController < ApplicationController
       tanjoDtCondition = str_sql_concat("SUBSTR('0'||\"tanjoGengo\",-1,1)", "SUBSTR('00'||\"tanjoYear\",-2,2)", "SUBSTR('00'||\"tanjoMonth\",-2,2)", "SUBSTR('00'||\"tanjoDay\",-2,2)")
     else
       # for mysql、postgres
-      tanjoDtCondition = str_sql_concat("LPAD(CAST(\"tanjoGengo\" AS text), 1, '0') ", " LPAD(CAST(\"tanjoYear\" AS text), 2, '0') ", " LPAD(CAST(\"tanjoMonth\" AS text), 2, '0') ", " LPAD(CAST(\"tanjoDay\" AS text), 2, '0')")
+      tanjoDtCondition = str_sql_concat("LPAD(CAST(\"tanjoGengo\" AS char), 1, '0') ", " LPAD(CAST(\"tanjoYear\" AS char), 2, '0') ", " LPAD(CAST(\"tanjoMonth\" AS char), 2, '0') ", " LPAD(CAST(\"tanjoDay\" AS char), 2, '0')")
     end
 
     if params[:kokyaku][:tanjoGengoFrom].present? || params[:kokyaku][:tanjoYearFrom].present? || params[:kokyaku][:tanjoMonthFrom].present? || params[:kokyaku][:tanjoDayFrom].present?
@@ -254,20 +254,20 @@ class KokyakusController < ApplicationController
     logger.debug(adapter)
     if adapter == "sqlite3" then
       # for sqlite
-      tanjoDt = str_sql_concat(tanjoGengoStr, "SUBSTR('00'||kokyakus.\"tanjoYear\",-2,2)", "'年'" , "SUBSTR('00'||kokyakus.\"tanjoMonth\",-2,2)", "'月'", "SUBSTR('00'||kokyakus.\"tanjoDay\",-2,2)", "'日' AS \"tanjoDt\"")
+      tanjoDt = str_sql_concat(tanjoGengoStr, "SUBSTR('00'||kokyakus.\"tanjoYear\",-2,2)", "'年'" , "SUBSTR('00'||kokyakus.\"tanjoMonth\",-2,2)", "'月'", "SUBSTR('00'||kokyakus.\"tanjoDay\",-2,2)", "'日' ")
     else
       # for mysql、postgres
-      tanjoDt = str_sql_concat(tanjoGengoStr, "LPAD(CAST(kokyakus.\"tanjoYear\" AS text), 2, '0') ", "'年'" , "LPAD(CAST(kokyakus.\"tanjoMonth\" AS text), 2, '0') ", "'月'", "LPAD(CAST(kokyakus.\"tanjoDay\" AS text), 2, '0') ", "'日' AS \"tanjoDt\"")
+      tanjoDt = str_sql_concat(tanjoGengoStr, "LPAD(CAST(kokyakus.\"tanjoYear\" AS char), 2, '0') ", "'年'" , "LPAD(CAST(kokyakus.\"tanjoMonth\" AS char), 2, '0') ", "'月'", "LPAD(CAST(kokyakus.\"tanjoDay\" AS char), 2, '0') ", "'日' ")
     end
 
     select = "kokyakus.*"
-    select << "," + tanjoDt
-    select << ",kokyakus.\"kokyakuNm1\" || ' ' || kokyakus.\"kokyakuNm2\" AS \"kokyakuNm\""
-    select << ",kokyakus.\"kokyakuNmKana1\" || ' ' || kokyakus.\"kokyakuNmKana2\" AS \"kokyakuNmKana\""
-    select << ",sb1.\"shobyoNm\" \"shobyoNm1\""
-    select << ",sb2.\"shobyoNm\" \"shobyoNm2\""
-    select << ",sb3.\"shobyoNm\" \"shobyoNm3\""
-    select << ",CASE seibetsu WHEN 0 THEN '男性' WHEN 1 THEN '女性' ELSE NULL END \"seibetsuNm\""
+    select << "," + tanjoDt + " AS \"tanjoDt\""
+    select << ", " + str_sql_concat("kokyakus.\"kokyakuNm1\"", "' '", "kokyakus.\"kokyakuNm2\"") + " AS \"kokyakuNm\""
+    select << ", " + str_sql_concat("kokyakus.\"kokyakuNmKana1\"", "' '", "kokyakus.\"kokyakuNmKana2\"") + " AS \"kokyakuNmKana\""
+    select << ",sb1.\"shobyoNm\" AS \"shobyoNm1\""
+    select << ",sb2.\"shobyoNm\" AS \"shobyoNm2\""
+    select << ",sb3.\"shobyoNm\" AS \"shobyoNm3\""
+    select << ",CASE seibetsu WHEN 0 THEN '男性' WHEN 1 THEN '女性' ELSE NULL END AS \"seibetsuNm\""
 
     joins = ""
     joins << "LEFT OUTER JOIN shobyos sb1 ON sb1.\"shobyoCd\" = kokyakus.\"shobyouCd1\" "
