@@ -84,7 +84,7 @@ class KokyakusController < ApplicationController
     conditions = conditions.where("tel1 LIKE ?", params[:kokyaku][:tel1] + "%") if params[:kokyaku][:tel1] != ""
     conditions = conditions.where("tel2 LIKE ?", params[:kokyaku][:tel2] + "%") if params[:kokyaku][:tel2] != ""
     conditions = conditions.where("fax LIKE ?", params[:kokyaku][:fax] + "%") if params[:kokyaku][:fax] != ""
-    conditions = conditions.where("\"shobyoNm1\"||\"shobyoNm2\"||\"shobyoNm3\" LIKE ?", "%" + params[:kokyaku][:shobyoNm] + "%") if params[:kokyaku][:shobyoNm] != ""
+    conditions = conditions.where(str_sql_concat("COALESCE(\"shobyoNm1\", '') ", "COALESCE(\"shobyoNm2\", '') ", "COALESCE(\"shobyoNm3\", '') ") + " LIKE ?", "%" + params[:kokyaku][:shobyoNm] + "%") if params[:kokyaku][:shobyoNm] != ""
     conditions = conditions.where("\"gakkoNm\" LIKE ?", "%" + params[:kokyaku][:gakkoNm] + "%") if params[:kokyaku][:gakkoNm] != ""
     #logger.debug(conditions)
 
@@ -221,7 +221,7 @@ class KokyakusController < ApplicationController
     logger.debug(@kokyaku)
     respond_to do |format|
       if @kokyaku.update_attribute(:delFlg, 1)
-        format.html { redirect_to @kokyaku, notice: 'Kokyaku was successfully updated.' }
+        format.html { redirect_to @kokyaku, notice: 'Kokyaku was successfully logical deleted.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -241,7 +241,7 @@ class KokyakusController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to action: "index", notice: 'Kokyaku was successfully list deleted.', reload: 'on' }
+      format.html { redirect_to action: "index", notice: 'Kokyaku was successfully bulk logical deleted.', reload: 'on' }
       format.json { head :no_content }
     end
   end

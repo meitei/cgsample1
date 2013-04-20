@@ -194,12 +194,28 @@ class KonyuRirekisController < ApplicationController
     logger.debug(@konyuRireki)
     respond_to do |format|
       if @konyuRireki.update_attribute(:delFlg, 1)
-        format.html { redirect_to @konyuRireki, notice: 'KonyuRireki was successfully updated.' }
+        format.html { redirect_to @konyuRireki, notice: 'KonyuRireki was successfully logical deleted.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @konyuRireki.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # POST /kokyakus/delete_list
+  # POST /kokyakus/delete_list.json
+  def delete_list
+    logger.debug(params[:deleteIdList])
+
+    if params[:deleteIdList].present?
+      # 一括削除実行
+      KonyuRireki.update_all("\"delFlg\"=1, \"koshinshaId\"=" + params[:koshinshaId], "\"id\" IN (" + params[:deleteIdList] + ")")
+    end
+
+    respond_to do |format|
+      format.html { redirect_to action: "index", notice: 'KonyuRireki was successfully bulk logical deleted.', reload: 'on' }
+      format.json { head :no_content }
     end
   end
 
