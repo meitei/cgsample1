@@ -100,7 +100,7 @@
       s = tanka[i]["seihinNo"];
       t = parseFloatEx(tanka[i]["tanka"]);
       x = parseFloatEx(tanka[i]["tax"]);
-      for(var j=1; j<7; j++) {
+      for(var j=1; j<20; j++) {
         if($("div#" + step + " #" + j + "-" + s + "_su").attr("type") == "hidden") {
           amount = parseFloatEx($("div#" + step + " #" + j + "-" + s + "_su").val());
         } else {
