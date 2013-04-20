@@ -85,7 +85,7 @@ end
 if @hoken_shubetsus.empty?
 	HokenShubetsu.create(
 		:hokenShubetsuCd => 1,
-		:hokenShubetsuNm => '九州病院',
+		:hokenShubetsuNm => '保険種別１',
 		:hyojiJun => 1,
 		:torokushaId => 1,
 		:koshinshaId => 1
