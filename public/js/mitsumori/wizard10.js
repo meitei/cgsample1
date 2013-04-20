@@ -221,7 +221,7 @@
     updateUnitPrice("step10");
     wm.submitItems[10] = submitItem12;
 
-        // 更新時、DBの値をセット
+    // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL12_1"];
     //$("input[name='COL1_1']").val(col1Value);
     // 不要
