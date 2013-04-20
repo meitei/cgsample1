@@ -20,7 +20,7 @@
     updateUnitPrice("step10");
     wm.submitItems[10] = submitItem13;
 
-        if (wm.mitsumoriData["COL13_1"] == "1") {
+    if (wm.mitsumoriData["COL13_1"] == "1") {
 
       $("input#1-COL13_1").attr("checked", true);
 
@@ -68,7 +68,7 @@
 
       $("input#4-COL13_4").val(wm.mitsumoriData["COL13_4"]);
       $("input#4-COL13_5").val(wm.mitsumoriData["COL13_5"]);
-
+    }
   }
 
   // パッド

@@ -102,4 +102,5 @@
 
       $("input#4-COL13_4").val(wm.mitsumoriData["COL13_4"]);
       $("input#4-COL13_5").val(wm.mitsumoriData["COL13_5"]);
+    }
   }
