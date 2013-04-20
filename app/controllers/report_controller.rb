@@ -241,7 +241,8 @@ class ReportController < ApplicationController
     ## ヘッダ項目：担当者
     @@tanto = nil
     if konyuRireki["mitsumoriTantoEigyoCd"].present?
-      eigyo = User.find(konyuRireki["mitsumoriTantoEigyoCd"])
+      # eigyo = User.find(konyuRireki["mitsumoriTantoEigyoCd"])
+      eigyo = User.find(:first, :conditions => ["\"shainCd\" = ?", konyuRireki["mitsumoriTantoEigyoCd"]])
       @@tanto = eigyo["myoji"] + " " + eigyo["name"]
     end
 
