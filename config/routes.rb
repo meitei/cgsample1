@@ -56,9 +56,10 @@ JqgridSample::Application.routes.draw do
   end
 
   resources :konyu_rirekis do
-      post 'search', :on => :collection
-      post 'file_upload', :on => :collection
-      get 'get_image', :on => :collection
+    post 'search', :on => :collection
+    post 'file_upload', :on => :collection
+    get 'get_image', :on => :collection
+    post 'delete_list', :on => :collection
   end
   # match ':controller(/:action(/:id))(.:format)', :to => 'konyu_rirekis#get_image'
   match 'konyu_rirekis(/get_image(/:id))(.:format)', :to => 'konyu_rirekis#get_image'

@@ -221,7 +221,7 @@ class KokyakusController < ApplicationController
     logger.debug(@kokyaku)
     respond_to do |format|
       if @kokyaku.update_attribute(:delFlg, 1)
-        format.html { redirect_to @kokyaku, notice: 'Kokyaku was successfully updated.' }
+        format.html { redirect_to @kokyaku, notice: 'Kokyaku was successfully logical deleted.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -241,7 +241,7 @@ class KokyakusController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to action: "index", notice: 'Kokyaku was successfully list deleted.', reload: 'on' }
+      format.html { redirect_to action: "index", notice: 'Kokyaku was successfully bulk logical deleted.', reload: 'on' }
       format.json { head :no_content }
     end
   end
