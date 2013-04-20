@@ -17,6 +17,7 @@
 //= require jquery.validate.japlugin
 
 //= require jquery.jqplot
+//= require excanvas
 //= require ./plugins/jqplot.barRenderer
 //= require ./plugins/jqplot.categoryAxisRenderer
 //= require ./plugins/jqplot.pointLabels
