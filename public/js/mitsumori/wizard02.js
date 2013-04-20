@@ -42,6 +42,8 @@
 
     // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL5_1"];
+    var col2Value = wm.mitsumoriData["COL5_2"];
+    var col4Value = wm.mitsumoriData["COL5_4"];
     //$("input[name='COL1_1']").val(col1Value);
     // 屋内用
     if(col1Value == "1"){
@@ -54,6 +56,18 @@
       $("input#2-COL5_1").attr("checked", true);
       load2b();
       $("button#jqwizard_next").removeAttr("disabled");
+      if(col2Value == "1"){
+        $("input#2-1-COL5_2").attr("checked", true);
+      }
+      if(col2Value == "2"){
+        $("input#2-2-COL5_2").attr("checked", true);
+      }
+      if(col2Value == "3"){
+        $("input#2-3-COL5_2").attr("checked", true);
+      }
+      if(col2Value == "4"){
+        $("input#2-4-COL5_2").attr("checked", true);
+      }
     }
     // リクライニングティルト式選択
     if(col1Value == "3"){
@@ -66,6 +80,42 @@
       $("input#4-COL5_1").attr("checked", true);
       load2d();
       $("button#jqwizard_next").removeAttr("disabled");
+      if(col4Value == "1"){
+        $("input#4-1-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "2"){
+        $("input#4-2-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "3"){
+        $("input#4-3-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "4"){
+        $("input#4-4-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "5"){
+        $("input#4-5-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "6"){
+        $("input#4-6-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "7"){
+        $("input#4-7-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "8"){
+        $("input#4-8-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "9"){
+        $("input#4-9-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "10"){
+        $("input#4-10-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "11"){
+        $("input#4-11-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "12"){
+        $("input#4-12-COL5_4").attr("checked", true);
+      }
     }
   }
 
