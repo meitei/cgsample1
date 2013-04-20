@@ -253,6 +253,7 @@ class ReportController < ApplicationController
     @@mitsumori = Mitsumori.find(:first, :conditions => ["\"konyuRirekiId\" = ? and \"kokyakuId\" = ?", konyuRirekiId.to_i, kokyakuId.to_i])
 
     if @@mitsumori.present?
+
       mitsumoriNo = @@mitsumori["mitsumoriNo"]
 
       @@mitsumoriTankas = MitsumoriTanka.where(:buhinCd == nil)
@@ -263,6 +264,7 @@ class ReportController < ApplicationController
       sqlstr += "WHERE ms.\"mitsumoriNo\" = ? "
       args = [sqlstr, mitsumoriNo.to_i]
       sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
+      # logger.debug(sql)
       @@mitsumoriSeihins = ActiveRecord::Base.connection.execute(sql)
 
       sqlstr =  "SELECT * FROM ( "
@@ -275,10 +277,21 @@ class ReportController < ApplicationController
       sqlstr += "WHERE kanseibuhins.\"buhinCd\" IS NOT NULL"
       args = [sqlstr, mitsumoriNo.to_i]
       sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
+      # logger.debug(sql)
       @@kanseiBuhins = ActiveRecord::Base.connection.execute(sql)
+
+
+      # DB判定
+      adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+      logger.debug(adapter)
+
+      if adapter == "mysql2" then
+        # MySQLの場合、ResultSetをそのまま扱えない
+        @@mitsumoriSeihins.each(:as => :hash)
+        @@kanseiBuhins.each(:as => :hash)
+      end
+
     end
-
-
 
     ###########################
     # 帳票埋め込み
