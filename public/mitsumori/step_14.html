@@ -190,6 +190,7 @@
             // 不要
         } else if(selected == "2") {
 
+            var product = {};
             // 製品データ保存
             product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "89";
@@ -199,6 +200,7 @@
             product["kin"] = removeComma($("#2-89_kin").text());
             this.productsData["2-89"] = product;
 
+            var product = {};
             product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "90";
             product["tanka"] = removeComma($("#2-90_tan").text());
@@ -207,6 +209,7 @@
             product["kin"] = removeComma($("#2-90_kin").text());
             this.productsData["2-90"] = product;
 
+            var product = {};
             product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "91";
             product["tanka"] = removeComma($("#2-91_tan").text());
@@ -217,6 +220,7 @@
 
             if ($("input#2-COL14_2").attr('checked')) {
                 this.mitsumoriData["COL14_2"] = 1;
+                var product = {};
                 product["seihinNo"] = "92";
                 product["tanka"] = removeComma($("#2-92_tan").text());
                 product["suryo"] = removeComma($("#2-92_su").text());
@@ -227,6 +231,7 @@
 
         } else if(selected == "3") {
 
+            var product = {};
             // 製品データ保存
             product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "93";
