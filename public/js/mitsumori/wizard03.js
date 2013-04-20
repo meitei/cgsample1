@@ -110,7 +110,9 @@
     var col7Value = wm.mitsumoriData["COL16_7"];
     var col8Value = wm.mitsumoriData["COL16_8"];
     var col9Value = wm.mitsumoriData["COL16_9"];
+    var col10Value = wm.mitsumoriData["COL16_10"];
     var col11Value = wm.mitsumoriData["COL16_11"];
+    var col12Value = wm.mitsumoriData["COL16_12"];
     //$("input[name='COL1_1']").val(col1Value);
     // 不要
     if(col1Value == "1"){
@@ -153,7 +155,7 @@
     if(col10Value == "1"){
       $("input#2-COL16_10").attr("checked", true);
     }
-    if(col2Value == "12"){
+    if(col10Value == "12"){
       $("input#2-COL16_12").attr("checked", true);
     }
   }
