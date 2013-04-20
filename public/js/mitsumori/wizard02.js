@@ -2,34 +2,37 @@
   function wizard2a(){
     // 屋内用
     $("input#1-COL5_1").change(function(){
-      load2a();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2a();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 15;
     });
     // 屋外用
     $("input#2-COL5_1").change(function(){
+      for(var i=1; i<18; i++) {
+        $("li#step" + i).show();  
+      }
       load2b();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 11;
     });
     // リクライニングティルト式選択
     $("input#3-COL5_1").change(function(){
-      load2c();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2c();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 5;
     });
     // 車椅選択
     $("input#4-COL5_1").change(function(){
-      load2d();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2d();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 10;
     });
@@ -39,6 +42,8 @@
 
     // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL5_1"];
+    var col2Value = wm.mitsumoriData["COL5_2"];
+    var col4Value = wm.mitsumoriData["COL5_4"];
     //$("input[name='COL1_1']").val(col1Value);
     // 屋内用
     if(col1Value == "1"){
@@ -51,6 +56,18 @@
       $("input#2-COL5_1").attr("checked", true);
       load2b();
       $("button#jqwizard_next").removeAttr("disabled");
+      if(col2Value == "1"){
+        $("input#2-1-COL5_2").attr("checked", true);
+      }
+      if(col2Value == "2"){
+        $("input#2-2-COL5_2").attr("checked", true);
+      }
+      if(col2Value == "3"){
+        $("input#2-3-COL5_2").attr("checked", true);
+      }
+      if(col2Value == "4"){
+        $("input#2-4-COL5_2").attr("checked", true);
+      }
     }
     // リクライニングティルト式選択
     if(col1Value == "3"){
@@ -63,6 +80,42 @@
       $("input#4-COL5_1").attr("checked", true);
       load2d();
       $("button#jqwizard_next").removeAttr("disabled");
+      if(col4Value == "1"){
+        $("input#4-1-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "2"){
+        $("input#4-2-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "3"){
+        $("input#4-3-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "4"){
+        $("input#4-4-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "5"){
+        $("input#4-5-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "6"){
+        $("input#4-6-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "7"){
+        $("input#4-7-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "8"){
+        $("input#4-8-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "9"){
+        $("input#4-9-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "10"){
+        $("input#4-10-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "11"){
+        $("input#4-11-COL5_4").attr("checked", true);
+      }
+      if(col4Value == "12"){
+        $("input#4-12-COL5_4").attr("checked", true);
+      }
     }
   }
 
@@ -70,28 +123,28 @@
   function wizard2e() {
     // アルミニューム選択
     $("input#1-COL2_1").change(function(){
-      load2e();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2e();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 17;
     });
     // ステンレス選択
     $("input#2-COL2_1").change(function(){
-      load2e();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2e();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 17;
     });
     // 木製選択
     $("input#3-COL2_1").change(function(){
-      load2f();
       for(var i=1; i<18; i++) {
         $("li#step" + i).show();  
       }
+      load2f();
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 3;
     });

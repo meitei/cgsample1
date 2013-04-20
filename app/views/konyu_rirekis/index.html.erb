@@ -10,6 +10,10 @@
 <div class="btn_new">
     <a class="btn_new_mast" id="btnKonyuRirekiNew" href="/konyu_rirekis/new">新規追加</a>
 </div>
+<form id="konyuRirekiDeleteForm">
+    <input type="hidden" id="deleteIdList" name="deleteIdList" value="" />
+    <input type="hidden" id="koshinshaId" name="koshinshaId" value="" />
+</form>
 <script>
 $(function() {
     $("#konyuRirekiForm").validate({
@@ -47,7 +51,7 @@ $(function() {
     var isLoaded = false;
     var colNames = ["","顧客コード","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","","","","",""];
     var colModelSettings = [
-        {name:"check",index:"check",width:20,align:"center",edittype:"checkbox",formatter:"checkbox",editable:true},
+        {name:'deleteCheck', index:'deleteCheck', align:'center', width:20, formatter: checkboxFormatter},
         {name:"kokyakuId", index:"kokyakuId",width:60},
         {name:"byoinNm", index:"byoinNm",width:80},
         {name:"kokyakuNm", index:"kokyakuNm",width:80},
@@ -234,6 +238,37 @@ $("a#btnKonyuRirekiClear").click(function() {
     $('#konyuRirekiSearchForm select').val('');
     return false;
 });
+
+// 一括削除
+$("a#btnKonyuRirekiDel").click(function() {
+    var delArray = new Array;
+    $('#searchKonyuRirekiGrid input[name="deleteCheck"]:checked').map(function() {
+        delArray.push($(this).val());
+    });
+
+    if (delArray.length == 0) {
+        alert("対象が選択されていません。");
+        return false;
+    }
+
+    if (confirm("選択されたレコードを一括削除します。よろしいですか？") == false) {
+        return false;
+    }
+
+    $("#deleteIdList").val(delArray.toString());
+
+    $("#koshinshaId").val($("#loginId").val());
+
+    $("#konyuRirekiDeleteForm").attr("action", "konyu_rirekis/delete_list")
+                               .attr("method", "post")
+                               .submit();
+
+    return false;
+});
+
+function checkboxFormatter(cellval, options, rowdata) {
+    return "<input type='checkbox' name='deleteCheck' value='" + rowdata['id'] + "'>";
+}
 
 function registFormatter(cellval, options, rowdata) {
     if(rowdata['mitsumorisRowId'] > 0) {

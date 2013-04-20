@@ -302,17 +302,11 @@
 	opacity:0.8;
 }
 
-.btn_del{
-	position:absolute;
-	top:85px;
-	right:199px;
-}
-
 .btn_del .btn_del_kokyaku{
 	display:block;
 	width:148px;
 	height:38px;
-	background:url(../images/btn_new_kokyaku.png) left top no-repeat;
+	background:url(../images/btn_del.png) left top no-repeat;
 	text-indent:-10000em;
 	overflow:hidden;
 }

@@ -112,7 +112,7 @@
         $("div#" + step + " td#" + j + "-" + s + "_kin").text(formatComma(kingaku));
         $("div#" + step + " input#" + j + "-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
         $("div#" + step + " td#" + j + "-" + s + "_tax_v").text((x * 100) + "%");
-        //console.log("製品番号：" + s + " 単価：" + t + " 数量：" + amount + " 税率：" + x);
+        //console.log("製品番号：" + s + " 単価：" + t + " 数量：" + amount + " 税率：" + x + " 金額：" + kingaku);
       }
     }
   }

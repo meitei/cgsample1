@@ -10,14 +10,11 @@
 <div class="btn_new">
     <a class="btn_new_kokyaku" id="btnCustomerNew" href="/kokyakus/new">新規追加</a>
 </div>
-<div class="btn_del">
-    <a class="btn_del_kokyaku" id="btnCustomerDel" href="#">一括削除</a>
-</div>
 <form id="konyuRirekiSearchForm">
     <input type="hidden" name="konyu_rireki[kokyakuIdFrom]" value="" />
     <input type="hidden" name="konyu_rireki[kokyakuIdTo]" value="" />
 </form>
-<form id="konyuRirekiDeleteForm">
+<form id="kokyakuDeleteForm">
     <input type="hidden" id="deleteIdList" name="deleteIdList" value="" />
     <input type="hidden" id="koshinshaId" name="koshinshaId" value="" />
 </form>
@@ -164,21 +161,27 @@ $("a#btnCustomerClear").click(function() {
     return false;
 });
 
+// 一括削除
 $("a#btnCustomerDel").click(function() {
-    if (confirm("選択されたレコードを一括削除します。よろしいですか？") == false) {
-        return false;
-    }
-
     var delArray = new Array;
     $('#searchCustomerGrid input[name="deleteCheck"]:checked').map(function() {
         delArray.push($(this).val());
     });
 
+    if (delArray.length == 0) {
+        alert("対象が選択されていません。");
+        return false;
+    }
+
+    if (confirm("選択されたレコードを一括削除します。よろしいですか？") == false) {
+        return false;
+    }
+
     $("#deleteIdList").val(delArray.toString());
 
     $("#koshinshaId").val($("#loginId").val());
 
-    $("#konyuRirekiDeleteForm").attr("action", "kokyakus/delete_list")
+    $("#kokyakuDeleteForm").attr("action", "kokyakus/delete_list")
                                .attr("method", "post")
                                .submit();
 

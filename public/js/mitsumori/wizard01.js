@@ -6,6 +6,7 @@ function wizard1(){
       $("li#step2 a").attr("href", "#step2");
       $("li#step2 span").text("構造フレーム");
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 17;
     });
     // オーダーメイド選択
     $("input#2-COL1_1").change(function(){
@@ -13,6 +14,7 @@ function wizard1(){
       $("li#step2 a").attr("href", "#step2");
       $("li#step2 span").text("フレーム材質");
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 17;
     });
     // 既製品選択/木製座位保持装置
     $("input#1-COL1_2").change(function(){
@@ -39,6 +41,7 @@ function wizard1(){
         $("li#step16").hide();
         $("li#step17").hide();
         $("button#jqwizard_next").removeAttr("disabled");
+        wm.lastStep = 17;
       }
     });
     // 既製品選択/トイレットチェア
@@ -66,6 +69,7 @@ function wizard1(){
         $("li#step16").hide();
         $("li#step17").hide();
         $("button#jqwizard_next").removeAttr("disabled");
+        wm.lastStep = 17;
       }
     });
     // 既製品選択/シャワーチェア
@@ -93,6 +97,7 @@ function wizard1(){
         $("li#step16").hide();
         $("li#step17").hide();
         $("button#jqwizard_next").removeAttr("disabled");
+        wm.lastStep = 17;
       }
     });
 

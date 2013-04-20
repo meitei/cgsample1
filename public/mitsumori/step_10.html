@@ -480,6 +480,7 @@
             // 不要
         } else if(selected == "2") {
 
+            var product = {};
             // 製品データ保存
             product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "69";
@@ -491,6 +492,8 @@
 
             if ($("input#2-COL10_2").attr('checked')) {
                 this.mitsumoriData["COL10_2"] = 1;
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "67";
                 product["tanka"] = removeComma($("#2-67_tan").text());
                 product["suryo"] = removeComma($("#2-67_su").text());
@@ -501,6 +504,8 @@
 
             if ($("input#2-COL10_3").attr('checked')) {
                 this.mitsumoriData["COL10_3"] = 1;
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "68";
                 product["tanka"] = removeComma($("#2-68_tan").text());
                 product["suryo"] = removeComma($("#2-68_su").text());
@@ -511,7 +516,7 @@
             this.mitsumoriData["COL10_4"] = $("#2-COL10-4").val();
 
         } else if(selected == "3") {
-
+            var product = {};
             // 製品データ保存
             product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "70";
@@ -521,6 +526,8 @@
             product["kin"] = removeComma($("#3-70_kin").text());
             this.productsData["3-70"] = product;
 
+            var product = {};
+            product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "71";
             product["tanka"] = removeComma($("#3-71_tan").text());
             product["suryo"] = removeComma($("#3-71_su").text());
@@ -528,6 +535,8 @@
             product["kin"] = removeComma($("#3-71_kin").text());
             this.productsData["3-71"] = product;
 
+            var product = {};
+            product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "72";
             product["tanka"] = removeComma($("#3-72_tan").text());
             product["suryo"] = removeComma($("#3-72_su").text());
@@ -537,6 +546,8 @@
 
             if ($("input#3-COL10_2").attr('checked')) {
                 this.mitsumoriData["COL10_2"] = 1;
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "67";
                 product["tanka"] = removeComma($("#3-67_tan").text());
                 product["suryo"] = removeComma($("#3-67_su").text());
@@ -547,6 +558,8 @@
 
             if ($("input#3-COL10_3").attr('checked')) {
                 this.mitsumoriData["COL10_3"] = 1;
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "68";
                 product["tanka"] = removeComma($("#3-68_tan").text());
                 product["suryo"] = removeComma($("#3-68_su").text());
@@ -557,7 +570,7 @@
             this.mitsumoriData["COL10_4"] = $("#3-COL10-4").val();
 
         } else if(selected == "4") {
-
+            var product = {};
             // 製品データ保存
             product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "70";
@@ -567,6 +580,8 @@
             product["kin"] = removeComma($("#4-70_kin").text());
             this.productsData["4-70"] = product;
 
+            var product = {};
+            product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "71";
             product["tanka"] = removeComma($("#4-71_tan").text());
             product["suryo"] = removeComma($("#4-71_su").text());
@@ -576,6 +591,8 @@
 
             if ($("input#4-COL10_2").attr('checked')) {
                 this.mitsumoriData["COL10_2"] = 1;
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "67";
                 product["tanka"] = removeComma($("#4-67_tan").text());
                 product["suryo"] = removeComma($("#4-67_su").text());
