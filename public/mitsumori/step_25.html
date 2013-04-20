@@ -82,7 +82,8 @@
         this.mitsumoriData["COL25_1"] = selected;
 
         if(selected == "1") {
-
+            var product = {};
+            product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "200";
             product["tanka"] = removeComma($("#1-200_tan").val());
             product["suryo"] = removeComma($("#1-200_su").val());
@@ -91,7 +92,8 @@
             this.productsData["1-200"] = product;
 
         } else if(selected == "2") {
-
+            var product = {};
+            product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "201";
             product["tanka"] = removeComma($("#1-201_tan").val());
             product["suryo"] = removeComma($("#1-201_su").val());
