@@ -100,7 +100,7 @@
       s = tanka[i]["seihinNo"];
       t = parseFloatEx(tanka[i]["tanka"]);
       x = parseFloatEx(tanka[i]["tax"]);
-      for(var j=1; j<7; j++) {
+      for(var j=1; j<20; j++) {
         if($("div#" + step + " #" + j + "-" + s + "_su").attr("type") == "hidden") {
           amount = parseFloatEx($("div#" + step + " #" + j + "-" + s + "_su").val());
         } else {
@@ -112,7 +112,7 @@
         $("div#" + step + " td#" + j + "-" + s + "_kin").text(formatComma(kingaku));
         $("div#" + step + " input#" + j + "-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
         $("div#" + step + " td#" + j + "-" + s + "_tax_v").text((x * 100) + "%");
-        //console.log("製品番号：" + s + " 単価：" + t + " 数量：" + amount + " 税率：" + x);
+        //console.log("製品番号：" + s + " 単価：" + t + " 数量：" + amount + " 税率：" + x + " 金額：" + kingaku);
       }
     }
   }

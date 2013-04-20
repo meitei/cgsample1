@@ -54,7 +54,7 @@
                 <td class="mitsumori_td3" id="1-200_kin">0</td>
                 <td class="mitsumori_td4" id="1-200_tax_v">0%</td>
                 <td class="td4"></td>
-                <input type="hidden" id="1-200_su"/>
+                <input type="hidden" id="1-200_su" value="1"/>
                 <input type="hidden" id="1-200_tan"/>
                 <input type="hidden" id="1-200_tax"/>
               </tr>
@@ -65,7 +65,7 @@
                 <td class="mitsumori_td3" id="1-201_kin">0</td>
                 <td class="mitsumori_td4" id="1-201_tax_v"0%</td>
                 <td class="td4"></td>
-                <input type="hidden" id="1-201_su"/>
+                <input type="hidden" id="1-201_su" value="1"/>
                 <input type="hidden" id="1-201_tan"/>
                 <input type="hidden" id="1-201_tax"/>
               </tr>
@@ -82,7 +82,8 @@
         this.mitsumoriData["COL25_1"] = selected;
 
         if(selected == "1") {
-
+            var product = {};
+            product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "200";
             product["tanka"] = removeComma($("#1-200_tan").val());
             product["suryo"] = removeComma($("#1-200_su").val());
@@ -91,7 +92,8 @@
             this.productsData["1-200"] = product;
 
         } else if(selected == "2") {
-
+            var product = {};
+            product["mitsumoriNo"] = mitsumoriNo;
             product["seihinNo"] = "201";
             product["tanka"] = removeComma($("#1-201_tan").val());
             product["suryo"] = removeComma($("#1-201_su").val());

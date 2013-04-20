@@ -54,7 +54,7 @@
                         <td class="mitsumori_td3" id="1-167_kin">0</td>
                         <td class="mitsumori_td4" id="1-167_tax_v">0%</td>
                         <td class="td4"></td>
-                        <input type="hidden" id="1-167_su"/>
+                        <input type="hidden" id="1-167_su" value="1"/>
                         <input type="hidden" id="1-167_tan"/>
                         <input type="hidden" id="1-167_tax"/>
                     </tr>
@@ -74,7 +74,7 @@
                         <td class="mitsumori_td3" id="1-169_kin">0</td>
                         <td class="mitsumori_td4" id="1-169_tax_v">0%</td>
                         <td class="td4"></td>
-                        <input type="hidden" id="1-169_su"/>
+                        <input type="hidden" id="1-169_su" value="1"/>
                         <input type="hidden" id="1-169_tan"/>
                         <input type="hidden" id="1-169_tax"/>
                     </tr>
@@ -133,7 +133,7 @@
                         <td class="mitsumori_td3" id="2-170_kin">0</td>
                         <td class="mitsumori_td4" id="2-170_tax_v">0%</td>
                         <td class="td4"></td>
-                        <input type="hidden" id="2-170_su"/>
+                        <input type="hidden" id="2-170_su" value="1"/>
                         <input type="hidden" id="2-170_tan"/>
                         <input type="hidden" id="2-170_tax"/>
                     </tr>
@@ -143,7 +143,7 @@
                         <td class="mitsumori_td3" id="2-171_kin">0</td>
                         <td class="mitsumori_td4" id="2-171_tax_v">0%</td>
                         <td class="td4"></td>
-                        <input type="hidden" id="2-171_su"/>
+                        <input type="hidden" id="2-171_su" value="1"/>
                         <input type="hidden" id="2-171_tan"/>
                         <input type="hidden" id="2-171_tax"/>
                     </tr>
@@ -153,7 +153,7 @@
                         <td class="mitsumori_td3" id="2-172_kin">0</td>
                         <td class="mitsumori_td4" id="2-172_tax_v">0%</td>
                         <td class="td4"></td>
-                        <input type="hidden" id="2-172_su"/>
+                        <input type="hidden" id="2-172_su" value="1"/>
                         <input type="hidden" id="2-172_tan"/>
                         <input type="hidden" id="2-172_tax"/>
                     </tr>
@@ -183,6 +183,8 @@
             this.mitsumoriData["COL22_2"] = selected2;
 
             if (selected2 == "1"){
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "167";
                 product["tanka"] = removeComma($("#1-167_tan").val());
                 product["suryo"] = removeComma($("#1-167_su").val());
@@ -191,7 +193,8 @@
                 this.productsData["1-167"] = product;
 
             } else if(selected2 == "2") {
-
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "168";
                 product["tanka"] = removeComma($("#1-168_tan").val());
                 product["suryo"] = removeComma($("#1-168_su").val());
@@ -200,7 +203,8 @@
                 this.productsData["1-168"] = product;
 
             } else if(selected2 == "3") {
-
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "169";
                 product["tanka"] = removeComma($("#1-169_tan").val());
                 product["suryo"] = removeComma($("#1-169_su").val());
@@ -218,7 +222,8 @@
             this.mitsumoriData["COL22_3"] = selected2;
 
             if (selected2 == "1"){
-
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "170";
                 product["tanka"] = removeComma($("#2-170_tan").val());
                 product["suryo"] = removeComma($("#2-170_su").val());
@@ -227,7 +232,8 @@
                 this.productsData["2-170"] = product;
 
             } else if(selected2 == "2") {
-
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "171";
                 product["tanka"] = removeComma($("#2-171_tan").val());
                 product["suryo"] = removeComma($("#2-171_su").val());
@@ -236,7 +242,8 @@
                 this.productsData["2-171"] = product;
 
             } else if(selected2 == "3") {
-
+                var product = {};
+                product["mitsumoriNo"] = mitsumoriNo;
                 product["seihinNo"] = "172";
                 product["tanka"] = removeComma($("#2-172_tan").val());
                 product["suryo"] = removeComma($("#2-172_su").val());

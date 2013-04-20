@@ -3,7 +3,7 @@
 <%= render 'form2' %>
 
 <%= hidden_field_tag 'graph_cond[sumUnt]', @graph_cond[:sumUnt] %>
-<%= hidden_field_tag 'graph_cond[outCnd]', @graph_cond[:outCnd] %>
+<%= hidden_field_tag 'graph_cond[outCond]', @graph_cond[:outCond] %>
 <%= hidden_field_tag 'graph_cond[outYm]', @graph_cond[:outYm] %>
 <%= hidden_field_tag 'graph_cond[targetSpnFrom]', @graph_cond[:targetSpnFrom] %>
 <%= hidden_field_tag 'graph_cond[targetSpnTo]', @graph_cond[:targetSpnTo] %>
@@ -18,52 +18,62 @@ $(function() {
       root: "list",
       data: {
         'sumUnt' : $('#graph_cond_sumUnt').val(),
-        'outCnd' : $('#graph_cond_outCnd').val(),
+        'outCond' : $('#graph_cond_outCond').val(),
         'outYm' : $('#graph_cond_outYm').val(),
         'targetSpnFrom' : $('#graph_cond_targetSpnFrom').val(),
         'targetSpnTo' : $('#graph_cond_targetSpnTo').val()
       },
       success: function(data) {
-        var values = [];
+        var kingaku = [];
+        var daisu = [];
         var ticks = [];
         $.each(data.rsdata, function(index, item) {
           ticks.push(item.sumUnt);
-          values.push(_to_num(item.kingaku));
+          kingaku.push(_to_num(item.kingaku));
+          daisu.push(_to_num(item.daisu));
         })
-        // 金額のグラフを表示する
-        $("#chart_kingaku").width(700).height(50+(50 * values.length));;
-        show_kingaku_graph(values, ticks);
+
+        var kingaku_min = Math.min.apply(null, kingaku);
+        var daisu_min = Math.min.apply(null, daisu);
+
+        // 金額・台数のグラフを表示する
+        show_graph('chart_kingaku', kingaku, ticks, '金額', get_interval(kingaku));
+        show_graph('chart_daisu', daisu, ticks, '台数', get_interval(daisu));
       }
     })
 
 });
 
-function show_kingaku_graph(values, ticks) {
-    // var values = [200, 600, 700, 1000];
-    // var ticks = ["太郎", "次郎", "花子", "陽子"];
-    // Horizontal bar chart
-    var plot_kin = $.jqplot('chart_kingaku', [values], {
+function get_interval(array) {
+    var min_val = Math.max.apply(null, array);
+    var interval = null;
+    if (min_val < 10) {interval = 1}
+    return interval;
+}
+
+function show_graph(chart_id, values, ticks, label, interval) {
+    $("#" + chart_id).width(900).height(50+(40 * values.length));;
+    var plot_kin = $.jqplot(chart_id, [values], {
         seriesDefaults: {
             renderer: $.jqplot.BarRenderer,
-            // Show point labels to the right ('e'ast) of each bar.
-            // edgeTolerance of -15 allows labels flow outside the grid
-            // up to 15 pixels.  If they flow out more than that, they
-            // will be hidden.
             pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
-            // Rotate the bar shadow as if bar is lit from top right.
             shadowAngle: 135,
-            // Here's where we tell the chart it is oriented horizontally.
             rendererOptions: {
                 barDirection: 'horizontal'
             }
         },
         series:[
-            {label:'金額'}
+            {label: label}
         ],
         axes: {
             yaxis: {
                 renderer: $.jqplot.CategoryAxisRenderer,
                 ticks: ticks
+            },
+            xaxis: {
+                min: 0,
+                tickInterval: interval,
+                tickOptions: { formatString: "%'d" }
             }
         },
         legend: {
@@ -73,10 +83,6 @@ function show_kingaku_graph(values, ticks) {
         }
 
     });
-
-    // グラフのサイズを変更する
-    // $("#chart_kingaku").css("width", "700px", "height", "600px");
-    // $("#chart_kingaku").width(700).height(600);
 }
 
 function _to_num(val) {
