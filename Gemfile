@@ -15,7 +15,7 @@ gem 'sorcery'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg', :group => :production
+gem 'mysql2', :group => :production
 
 group :development do
   gem 'sqlite3'
@@ -25,10 +25,6 @@ group :development do
   gem 'capistrano-ext'
   gem 'capistrano_colors'
   gem 'rvm-capistrano'
-end
-
-group :staging do
-  gem 'mysql2'
 end
 
 # Gems used only for assets and not required
