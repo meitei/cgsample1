@@ -237,12 +237,24 @@ $(function() {
         "kokyaku[postNo]": {required:true, postnum:true, maxlength:8},
         "kokyaku[address1]": {required:true, maxlength:100},
         "kokyaku[address2]": {maxlength:100},
-        "kokyaku[tel1]": {required:true, telnum:true, maxlength:12},
-        "kokyaku[tel2]": {mobilenum:true, maxlength:13},
-        "kokyaku[fax]": {telnum:true, telnum:true, maxlength:12},
+        "kokyaku[tel1]": {required:function(element) {
+                            return $("#tel2").val() == "";
+                          }, telnum:true, maxlength:12},
+        "kokyaku[tel2]": {required:function(element) {
+                            return $("#tel1").val() == "";
+                          }, mobilenum:true, maxlength:13},
+        "kokyaku[fax]": {telnum:true, maxlength:12},
         "kokyaku[shobyouCd1]": {required:true},
         "kokyaku[gakkoNm]": {maxlength:100},
         "kokyaku[biko]": {maxlength:200}
+    },
+    messages: {
+      "kokyaku[tel1]": {
+        required: "電話番号/携帯番号のいずれかは入力必須です。"
+      },
+      "kokyaku[tel2]": {
+        required: "電話番号/携帯番号のいずれかは入力必須です。"
+      }
     }
   });
 

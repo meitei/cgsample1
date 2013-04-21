@@ -378,7 +378,7 @@ $(function() {
     unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass(errorClass);
     },
-    rules: { // TODO:maxlength:99の桁数修正
+    rules: {
         "konyu_rireki[kokyakuId]": {required:true, number:true, maxlength:7},
         "konyu_rireki[byoinCd]": {required:true, number:true, maxlength:99},
         "konyu_rireki[ishiNm1]": {required:true, maxlength:50},
