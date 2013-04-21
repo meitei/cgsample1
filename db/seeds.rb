@@ -85,8 +85,15 @@ end
 if @hoken_shubetsus.empty?
 	HokenShubetsu.create(
 		:hokenShubetsuCd => 1,
-		:hokenShubetsuNm => '保険種別１',
+		:hokenShubetsuNm => '保険１',
 		:hyojiJun => 1,
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+	HokenShubetsu.create(
+		:hokenShubetsuCd => 2,
+		:hokenShubetsuNm => '保険２',
+		:hyojiJun => 2,
 		:torokushaId => 1,
 		:koshinshaId => 1
 	)
