@@ -15,7 +15,7 @@ gem 'sorcery'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2', :group => :production
+gem 'pg', :group => :production
 
 group :development do
   gem 'sqlite3'
