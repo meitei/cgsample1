@@ -16,38 +16,6 @@
 </form>
 <script>
 $(function() {
-    $("#konyuRirekiForm").validate({
-        errorClass:'error',
-        errorElement:'label',
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass(errorClass);
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass(errorClass);
-        },
-        rules: {
-            juchuDtFrom: {date:true},
-            juchuDtTo: {date:true},
-            kariAwaseDtFrom: {date:true},
-            kariAwaseDtTo: {date:true},
-            nohinDtFrom: {date:true},
-            nohinDtTo: {date:true},
-            kofuDtFrom: {date:true},
-            kofuDtTo: {date:true},
-            nyukinDtFrom: {date:true},
-            nyukinDtTo: {date:true},
-            oshiinDtFrom: {date:true},
-            oshiinDtTo: {date:true},
-            kanryoDtFrom: {date:true},
-            kanryoDtTo: {date:true},
-            mitsumoriDtFrom: {date:true},
-            mitsumoriDtTo: {date:true}
-        }
-        //messages: {
-        //    kokyakuNm1: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
-        //    kokyakuNm2: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
-        //}
-    });
     var isLoaded = false;
     var colNames = ["","顧客コード","病院","顧客名","顧客カナ","保険種別１","保険種別２","商品名","金額","請求金額（負担金）","受付担当","受注日","仮合担当","仮合日","納品担当","納品日","交付日","入金日","押印日","完了日","見積担当","見積日","種別","見積製品項目","","","","","","","","",""];
     var colModelSettings = [
@@ -62,7 +30,6 @@ $(function() {
         {name:"kin", index:"kin",width:80, formatter:"currency", align:"right"},
         {name:"seikyuKin", index:"seikyuKin",width:80, formatter:"currency", align:"right"},
         {name:"uketsukeSesakuTantoNm", index:"uketsukeSesakuTantoNm",width:80},
-        //{name:"juchuDt", index:"juchuDt",width:80, datefmt:"yyyy/mm/dd"},
         {name:"juchuDt", index:"juchuDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
         {name:"kariAwaseTantoNm", index:"kariAwaseTantoNm",width:80},
         {name:"kariAwaseDt", index:"kariAwaseDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
@@ -219,9 +186,9 @@ $(function() {
         $("#" + this + "To").datepicker();
     });
 
-    $("#konyu_rireki_shubetsuKn").css("width", "100px").attr("tabindex", "10");
-    $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px").attr("tabindex", "10");
-    $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px").attr("tabindex", "10");
+    $("#konyu_rireki_shubetsuKn").css("width", "100px");
+    $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px");
+    $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px");
 
     // 登録/修正/顧客一覧画面から遷移した場合、再検索を行う
     setConditions();
