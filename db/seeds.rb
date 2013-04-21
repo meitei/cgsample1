@@ -105,6 +105,26 @@ if @shobyos.empty?
 		:torokushaId => 1,
 		:koshinshaId => 1
 	)
+	Shobyo.create(
+		:shobyoCd => 2,
+		:shobyoNm => '傷病名称２',
+		:shobyoNmKana => 'ショウビョウメイショウニ',
+		:icd10Cd => 'ICD-10_CODE',
+		:shusaiDt => '2013/04/02',
+		# :haishiDt => '2013/04/02',
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+	Shobyo.create(
+		:shobyoCd => 3,
+		:shobyoNm => '傷病名称３',
+		:shobyoNmKana => 'ショウビョウメイショウサン',
+		:icd10Cd => 'ICD-10_CODE',
+		:shusaiDt => '2013/04/03',
+		# :haishiDt => '2013/04/03',
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
 end
 
 # Seihin.destroy_all(["1 = ?", 1])

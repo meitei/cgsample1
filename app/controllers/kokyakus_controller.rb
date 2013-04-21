@@ -196,6 +196,7 @@ class KokyakusController < ApplicationController
   # PUT /kokyakus/1
   # PUT /kokyakus/1.json
   def update
+    logger.debug(params[:kokyaku])
     # @kokyaku = Kokyaku.find(params[:id])
     @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:id], :delFlg => 0})
 
