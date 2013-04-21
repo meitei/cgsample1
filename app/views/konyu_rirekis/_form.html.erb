@@ -618,7 +618,7 @@ function executeKonyuRireki() {
   $("a#btnKonyuRirekiRegist").unbind('click');
 
   // クライアントバリデーション
-  if ($("#konyuRirekiForm").valid() == false) {
+  if ($("#konyuRirekiForm").valid() == false || (confirm("登録します。よろしいですか？") == false)) {
     // 登録ボタンclickイベント再attach
     $("a#btnKonyuRirekiRegist").click(function() {
         executeKonyuRireki();
@@ -626,6 +626,7 @@ function executeKonyuRireki() {
     });
     return false;
   }
+
   var id = $("#id").val();
   //var action;
   //var method;

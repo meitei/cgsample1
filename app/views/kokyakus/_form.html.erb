@@ -318,7 +318,7 @@ function executeKokyaku() {
   $("a#btnCustomerRegist").unbind('click');
 
   // クライアントバリデーション
-  if ($("#kokyakuForm").valid() == false) {
+  if ($("#kokyakuForm").valid() == false || (confirm("登録します。よろしいですか？") == false)) {
     // 登録ボタンclickイベント再attach
     $("a#btnCustomerRegist").click(function() {
         executeKokyaku();
