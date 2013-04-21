@@ -63,6 +63,8 @@ if @kokyakus.empty?
 		:kokyakuId => 2400001,
 		:kokyakuNm1 => '顧客',
 		:kokyakuNm2 => '太郎',
+		:kokyakuNmKana1 => 'コキャク',
+		:kokyakuNmKana2 => 'タロウ',
 		:delFlg => 0,
 		:torokushaId => 1,
 		:koshinshaId => 1
