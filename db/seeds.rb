@@ -1,5 +1,5 @@
 # coding: utf-8
-
+String.force_encoding("UTF-8")
 require "csv"
 
 # This file should contain all the record creation needed to seed the database with its default values.
