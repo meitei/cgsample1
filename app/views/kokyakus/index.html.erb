@@ -8,7 +8,7 @@
     <div id="searchCustomerPager"></div>
 </div>
 <div class="btn_new">
-    <a class="btn_new_kokyaku" id="btnCustomerNew" href="/kokyakus/new">新規追加</a>
+    <a class="btn_new_kokyaku" id="btnCustomerNew" href="#">新規追加</a>
 </div>
 <form id="konyuRirekiSearchForm">
     <input type="hidden" name="konyu_rireki[kokyakuIdFrom]" value="" />
@@ -112,12 +112,17 @@ $(function() {
         }
     });
 
-    // 登録/修正画面から遷移した場合、再検索を行う
+    // 画面遷移時の再検索
     setConditions();
 });
 
 $("a#btnCustomerSearch").click(function() {
     searchKokyaku();
+    return false;
+});
+
+$("a#btnCustomerNew").click(function() {
+    createKokyaku();
     return false;
 });
 
@@ -142,6 +147,8 @@ $("a#btnCustomerDel").click(function() {
     if (confirm("選択されたレコードを一括削除します。よろしいですか？") == false) {
         return false;
     }
+
+    saveConditions();
 
     $("#deleteIdList").val(delArray.toString());
 
@@ -202,6 +209,13 @@ function searchKokyaku() {
     $("#searchCustomerGrid").setGridParam(param).trigger("reloadGrid");
 }
 
+// 新規登録用メソッド
+function createKokyaku() {
+    saveConditions();
+    location.href = "kokyakus/new";
+    return false;
+}
+
 // 更新用メソッド
 function modifyKokyaku(kokyakuId) {
     saveConditions();
@@ -214,6 +228,7 @@ function removeKokyaku(kokyakuId) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
+    saveConditions();
     var url = "kokyakus/" + kokyakuId + ".json";
     var type = "DELETE";
     $.ajax({

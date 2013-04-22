@@ -8,7 +8,7 @@
     <div id="searchKonyuRirekiPager"></div>
 </div>
 <div class="btn_new">
-    <a class="btn_new_mast" id="btnKonyuRirekiNew" href="/konyu_rirekis/new">新規追加</a>
+    <a class="btn_new_mast" id="btnKonyuRirekiNew" href="#">新規追加</a>
 </div>
 <form id="konyuRirekiDeleteForm">
     <input type="hidden" id="deleteIdList" name="deleteIdList" value="" />
@@ -190,13 +190,18 @@ $(function() {
     $("#konyu_rireki_hokenShubetsuCd1").css("width", "100px");
     $("#konyu_rireki_hokenShubetsuCd2").css("width", "100px");
 
-    // 登録/修正/顧客一覧画面から遷移した場合、再検索を行う
+    // 画面遷移時の再検索
     setConditions();
 
 });
 
 $("a#btnKonyuRirekiSearch").click(function() {
     searchKonyuRireki();
+    return false;
+});
+
+$("a#btnKonyuRirekiNew").click(function() {
+    createKonyuRireki();
     return false;
 });
 
@@ -221,6 +226,8 @@ $("a#btnKonyuRirekiDel").click(function() {
     if (confirm("選択されたレコードを一括削除します。よろしいですか？") == false) {
         return false;
     }
+
+    saveConditions();
 
     $("#deleteIdList").val(delArray.toString());
 
@@ -296,6 +303,13 @@ function searchKonyuRireki() {
     $("#searchKonyuRirekiGrid").setGridParam(param).trigger("reloadGrid");
 }
 
+// 新規登録用メソッド
+function createKonyuRireki() {
+    saveConditions();
+    location.href = "konyu_rirekis/new";
+    return false;
+}
+
 // 見積登録/編集画面遷移用メソッド
 function registMitsumori(mitsumorisRowId, id) {
     saveConditions();
@@ -344,6 +358,7 @@ function removeKokyaku(konyuRirekiId) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
+    saveConditions();
     var url = "konyu_rirekis/" + konyuRirekiId + ".json";
     var type = "DELETE";
     $.ajax({
