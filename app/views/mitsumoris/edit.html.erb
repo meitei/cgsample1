@@ -63,7 +63,7 @@
       		if(wm.step > 1) {
         		$("button#jqwizard_previous").show();  
       		}
-      		$("button#jqwizard_next").attr("disabled", "disabled");
+      		//$("button#jqwizard_next").attr("disabled", "disabled");
     	});
     	// 戻る
     	$("button.jqwizard_previous").click(function() {
@@ -74,33 +74,35 @@
         		$("button#jqwizard_previous").hide();  
      		}
     	});
-    	// 登録
+    	// 更新
     	$("#btnEstimateRegist").click(function() {
     		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
     		wm.addEstimate();
-    		console.dir(wm.productsData);
-    		console.dir(wm.mitsumoriData);
+    		//console.dir(wm.productsData);
+    		//console.dir(wm.mitsumoriData);
     		var postData = {};
-    		var url = "/mitsumoris.json";
+    		var url = "/mitsumoris/" + wm.mitsumoriData["id"] + ".json";
     		var type = "POST";
     		wm.mitsumoriData["koshinshaId"] = $("#loginId").val();
-     		wm.mitsumoriData["torokushaId"] = $("#loginId").val();
+     		//wm.mitsumoriData["torokushaId"] = $("#loginId").val();
      		for(var products in wm.productsData) {
         		wm.productsData[products]["koshinshaId"] = $("#loginId").val();
-        		wm.productsData[products]["torokushaId"] = $("#loginId").val();        
-      		}
-      		postData["mitsumoriData"] = wm.mitsumoriData;
-      		postData["productsData"] = wm.productsData;
-      		$.ajax({
-        		scriptCharset:"UTF-8",
-          		type: type,
-          		url: url,
-          		data: postData,
-          		dataType: "json",
-          		success: function(result) {
-            		location.href = "/mitsumoris/" + result["id"];
-          		}
-      		});
+        		//wm.productsData[products]["torokushaId"] = $("#loginId").val();        
+    		}
+    		postData["mitsumoriData"] = wm.mitsumoriData;
+    		postData["productsData"] = wm.productsData;
+        postData["_method"] = "put";
+    		$.ajax({
+      		scriptCharset:"UTF-8",
+        		type: type,
+        		url: url,
+        		data: postData,
+        		dataType: "json",
+        		success: function(result) {
+          		location.href = "/mitsumoris/" + result["id"];
+        		}
+    		});
+        $("a#btnEstimateRegist").unbind('click');
     	});
 
 	    $("li#step1").click(function() {

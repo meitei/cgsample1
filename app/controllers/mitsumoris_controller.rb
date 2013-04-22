@@ -82,12 +82,26 @@ class MitsumorisController < ApplicationController
   # PUT /mitsumoris/1
   # PUT /mitsumoris/1.json
   def update
-    @mitsumori = Mitsumori.find(params[:id])
+    if params[:mitsumoriData].nil? then
+      return
+    end
+    @mitsumori_data = params[:mitsumoriData]
+    @mitsumori = Mitsumori.find(@mitsumori_data[:id])
+    @result = @mitsumori.update_attributes(@mitsumori_data)
 
+    @products_data = params[:productsData]
+    #logger.debug(@products_data)
+    # @products = MitsumoriSeihin.find(:all, :conditions => {:mitsumoriNo => @mitsumori_data[:mitsumoriNo]})
+    # @products.destroy_all
+    # @products_data.each do |key, value|
+    #   value[:mitsumoriNo] = @mitsumori_data[:mitsumoriNo]
+    #   @seihin = MitsumoriSeihin.new(value)
+    #   @result = @seihin.save
+    # end
     respond_to do |format|
-      if @mitsumori.update_attributes(params[:mitsumori])
+      if @result
         format.html { redirect_to @mitsumori, notice: 'Mitsumori was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @mitsumori, status: :created, location: @mitsumori }
       else
         format.html { render action: "edit" }
         format.json { render json: @mitsumori.errors, status: :unprocessable_entity }
