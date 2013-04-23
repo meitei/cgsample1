@@ -64,6 +64,9 @@
     });
     // 登録
     $("#btnEstimateRegist").click(function() {
+      if (confirm("登録します。よろしいですか？") == false) {
+        return false;
+      }
       WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
       wm.addEstimate();
       //console.dir(wm.productsData);

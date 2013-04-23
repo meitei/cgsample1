@@ -50,12 +50,14 @@
       $("input#1-COL5_1").attr("checked", true);
       load2a();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 15;
     }
     // 屋外用
     if(col1Value == "2"){
       $("input#2-COL5_1").attr("checked", true);
       load2b();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 11;
       if(col2Value == "1"){
         $("input#2-1-COL5_2").attr("checked", true);
       }
@@ -74,12 +76,14 @@
       $("input#3-COL5_1").attr("checked", true);
       load2c();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 5;
     }
     // 車椅選択
     if(col1Value == "4"){
       $("input#4-COL5_1").attr("checked", true);
       load2d();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 10;
       if(col4Value == "1"){
         $("input#4-1-COL5_4").attr("checked", true);
       }
@@ -160,18 +164,21 @@
       $("input#1-COL2_1").attr("checked", true);
       load2e();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 17;
     }
     // ステンレス選択
     if(col1Value == "2"){
       $("input#2-COL2_1").attr("checked", true);
       load2e();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 17;
     }
     // 木製選択
     if(col1Value == "3"){
       $("input#3-COL2_1").attr("checked", true);
       load2f();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 3;
     }
   }
 

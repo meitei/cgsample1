@@ -10,6 +10,7 @@
   	var konyuRirekiId = $("#konyuRirekiId").val();
   	var kokyakuId = $("#kokyakuId").val();
   	var mitsumoriNo = $("#mitsumoriNo").val();
+    var mitsumoriId = $("#mitsumoriId").val();
   	var wm = new WizardManager();
 
   	$(document).ready(function(){
@@ -28,7 +29,7 @@
       $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
-        url: "/mitsumoris/" + mitsumoriNo + ".json",
+        url: "/mitsumoris/" + mitsumoriId + ".json",
         root: "mitsumori",
         dataType: "json",
         success: function(result) {
@@ -76,6 +77,9 @@
     	});
     	// 更新
     	$("#btnEstimateRegist").click(function() {
+      if (confirm("更新します。よろしいですか？") == false) {
+        return false;
+      }
     		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
     		wm.addEstimate();
     		//console.dir(wm.productsData);
@@ -84,10 +88,10 @@
     		var url = "/mitsumoris/" + wm.mitsumoriData["id"] + ".json";
     		var type = "POST";
     		wm.mitsumoriData["koshinshaId"] = $("#loginId").val();
-     		//wm.mitsumoriData["torokushaId"] = $("#loginId").val();
+     		wm.mitsumoriData["torokushaId"] = $("#torokushaId").val();
      		for(var products in wm.productsData) {
         		wm.productsData[products]["koshinshaId"] = $("#loginId").val();
-        		//wm.productsData[products]["torokushaId"] = $("#loginId").val();        
+        		wm.productsData[products]["torokushaId"] = $("#torokushaId").val();        
     		}
     		postData["mitsumoriData"] = wm.mitsumoriData;
     		postData["productsData"] = wm.productsData;
