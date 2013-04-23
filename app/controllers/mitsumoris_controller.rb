@@ -89,15 +89,21 @@ class MitsumorisController < ApplicationController
     @mitsumori = Mitsumori.find(@mitsumori_data[:id])
     @result = @mitsumori.update_attributes(@mitsumori_data)
 
-    @products_data = params[:productsData]
-    #logger.debug(@products_data)
+
+    
+    MitsumoriSeihin.destroy_all(["mitsumoriNo = ?", @mitsumori_data[:mitsumoriNo]])
     # @products = MitsumoriSeihin.find(:all, :conditions => {:mitsumoriNo => @mitsumori_data[:mitsumoriNo]})
-    # @products.destroy_all
-    # @products_data.each do |key, value|
-    #   value[:mitsumoriNo] = @mitsumori_data[:mitsumoriNo]
-    #   @seihin = MitsumoriSeihin.new(value)
-    #   @result = @seihin.save
+    # logger.debug(@products.count)
+    # if @products.count > 0 then
+    #   @products.destroy_all
     # end
+    @products_data = params[:productsData]
+    logger.debug(@products_data)
+    @products_data.each do |key, value|
+      value[:mitsumoriNo] = @mitsumori_data[:mitsumoriNo]
+      @seihin = MitsumoriSeihin.new(value)
+      @result = @seihin.save
+    end
     respond_to do |format|
       if @result
         format.html { redirect_to @mitsumori, notice: 'Mitsumori was successfully updated.' }
