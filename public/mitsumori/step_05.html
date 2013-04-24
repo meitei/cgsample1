@@ -57,7 +57,7 @@
                         <td class="mitsumori_td3" id="1-13_tan">0</td>
                         <td class="mitsumori_td4" id="1-13_kin">0</td>
                         <td class="td4"></td>
-                        <input type="hidden" id="13_tax" name="1-13_tax"/>
+                        <input type="hidden" id="1-13_tax" name="1-13_tax"/>
                     </tr>
                 </table>
             </td>
@@ -379,7 +379,7 @@
             // 製品データ保存
             var product = {};
             product["mitsumoriNo"] = mitsumoriNo;
-            product["seihinNo"] = "1";
+            product["seihinNo"] = "13";
             product["tanka"] = removeComma($("#1-13_tan").text());
             product["suryo"] = removeComma($("#1-13_su").text());
             product["tax"] = removeComma($("#1-13_tax").val());
