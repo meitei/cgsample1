@@ -1,5 +1,12 @@
   // OPオーダー座位保持装置
   function wizard15a(){
+    // STEPボタンクリック
+    $("li#step15").click(function() {
+      wm.step = 15;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     $("button.jqwizard_next").removeAttr("disabled");
     // 単価を書き換え
     updateUnitPrice("step15");
@@ -45,6 +52,13 @@
 
   // シートベルト
   function wizard15e(){
+    // STEPボタンクリック
+    $("li#step15").click(function() {
+      wm.step = 15;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL16_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");

@@ -1,5 +1,12 @@
   // 介護用グリップ選定
   function wizard3a(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     // 不要
     $("input#1-COL6_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -34,6 +41,13 @@
 
   // バックサポート選定
   function wizard3b(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL7_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -89,6 +103,13 @@
 
   // シートベルト選定
   function wizard3c(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL16_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -162,6 +183,13 @@
 
   // バックサポート選定
   function wizard3d(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL7_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -217,6 +245,13 @@
 
   // メインフレーム機構選定
   function wizard3e(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL3_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -299,6 +334,13 @@
 
     // オーダー対応木製
   function wizard3f(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL22_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");

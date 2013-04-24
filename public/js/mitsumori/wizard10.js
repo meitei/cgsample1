@@ -1,5 +1,12 @@
   // フットサポート
   function wizard10a(){
+    // STEPボタンクリック
+    $("li#step10").click(function() {
+      wm.step = 10;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL13_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -73,6 +80,13 @@
 
   // パッド
   function wizard10b(){
+    // STEPボタンクリック
+    $("li#step10").click(function() {
+      wm.step = 10;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL17_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -138,6 +152,13 @@
 
   // OP車椅子フレーム
   function wizard10d(){
+    // STEPボタンクリック
+    $("li#step10").click(function() {
+      wm.step = 10;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     $("button.jqwizard_next").removeAttr("disabled");
     // 単価を書き換え
     updateUnitPrice("step10");
@@ -205,6 +226,13 @@
 
   // アームパッド
   function wizard10e(){
+    // STEPボタンクリック
+    $("li#step10").click(function() {
+      wm.step = 10;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL12_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");

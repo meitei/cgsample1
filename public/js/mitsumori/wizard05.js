@@ -1,5 +1,12 @@
   // バックサポート
   function wizard5a(){
+    // STEPボタンクリック
+    $("li#step5").click(function() {
+      wm.step = 5;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL7_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -55,6 +62,13 @@
 
   // ヘッドサポート
   function wizard5b(){
+    // STEPボタンクリック
+    $("li#step5").click(function() {
+      wm.step = 5;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL9_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -146,6 +160,13 @@
 
   // OPAR
   function wizard5c(){
+    // STEPボタンクリック
+    $("li#step5").click(function() {
+      wm.step = 5;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL21_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -209,6 +230,13 @@
 
   // ヘッドサポート
   function wizard5d(){
+    // STEPボタンクリック
+    $("li#step5").click(function() {
+      wm.step = 5;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL9_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -300,6 +328,13 @@
 
   // 介助用グリップ
   function wizard5e(){
+    // STEPボタンクリック
+    $("li#step5").click(function() {
+      wm.step = 5;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL6_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");

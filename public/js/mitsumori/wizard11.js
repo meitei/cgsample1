@@ -1,5 +1,12 @@
   // 上肢支持部
   function wizard11a(){
+    // STEPボタンクリック
+    $("li#step11").click(function() {
+      wm.step = 11;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL14_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -30,6 +37,13 @@
 
   // OPPW
   function wizard11b(){
+    // STEPボタンクリック
+    $("li#step11").click(function() {
+      wm.step = 11;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     $("button.jqwizard_next").removeAttr("disabled");
     // 単価を書き換え
     updateUnitPrice("step11");
@@ -64,6 +78,13 @@
 
   // レッグサポート
   function wizard11e(){
+    // STEPボタンクリック
+    $("li#step11").click(function() {
+      wm.step = 11;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL11_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");

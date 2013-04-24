@@ -1,5 +1,12 @@
   // パッド
   function wizard14a(){
+    // STEPボタンクリック
+    $("li#step14").click(function() {
+      wm.step = 14;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL17_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -9,7 +16,7 @@
       $("button.jqwizard_next").removeAttr("disabled");
     });
     // 単価を書き換え
-    updateUnitPrice("step13");
+    updateUnitPrice("step14");
     wm.submitItems[14] = submitItem17;
 
     if (wm.mitsumoriData["COL17_1"] == "1") {
@@ -63,6 +70,13 @@
 
   // テーブル
   function wizard14e(){
+    // STEPボタンクリック
+    $("li#step14").click(function() {
+      wm.step = 14;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL15_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -80,7 +94,7 @@
       $("button.jqwizard_next").removeAttr("disabled");
     });
     // 単価を書き換え
-    updateUnitPrice("step13");
+    updateUnitPrice("step14");
     wm.submitItems[14] = submitItem15;
 
     if (wm.mitsumoriData["COL15_1"] == "1"){

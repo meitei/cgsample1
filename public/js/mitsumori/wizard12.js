@@ -1,5 +1,12 @@
   // テーブル
   function wizard12a(){
+    // STEPボタンクリック
+    $("li#step12").click(function() {
+      wm.step = 12;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL15_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -34,6 +41,13 @@
 
   // フットサポート
   function wizard12e(){
+    // STEPボタンクリック
+    $("li#step12").click(function() {
+      wm.step = 12;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL13_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
