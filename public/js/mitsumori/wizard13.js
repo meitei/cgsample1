@@ -1,5 +1,12 @@
   // シートベルト
   function wizard13a(){
+    // STEPボタンクリック
+    $("li#step13").click(function() {
+      wm.step = 13;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL16_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -57,6 +64,13 @@
 
   // 上肢支持部
   function wizard13e(){
+    // STEPボタンクリック
+    $("li#step13").click(function() {
+      wm.step = 13;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL14_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");

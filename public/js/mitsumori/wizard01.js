@@ -1,5 +1,12 @@
 // 座位保持装置の選択
 function wizard1(){
+    // STEPボタンクリック
+    $("li#step1").click(function() {
+      wm.step = 1;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").hide();
+      $("button#jqwizard_next").show(); 
+    });
     // セミオーダーメイド選択
     $("input#1-COL1_1").change(function(){
       $("div#step2").load("/mitsumori/step_05.html", wizard2a);

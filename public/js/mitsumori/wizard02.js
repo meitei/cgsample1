@@ -1,5 +1,12 @@
   /* 構造フレーム選定 */
   function wizard2a(){
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     // 屋内用
     $("input#1-COL5_1").change(function(){
       for(var i=1; i<18; i++) {
@@ -125,6 +132,13 @@
 
   // メインフレーム材質選定
   function wizard2e() {
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     // アルミニューム選択
     $("input#1-COL2_1").change(function(){
       for(var i=1; i<18; i++) {
@@ -184,6 +198,13 @@
 
   // 木製座位保持装置
   function wizard2g(){
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
       wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
@@ -219,6 +240,13 @@
 
     // トイレットチェア
   function wizard2h(){
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
       wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
@@ -238,6 +266,13 @@
 
     // シャワーチェア
   function wizard2i(){
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
       wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
@@ -329,7 +364,7 @@ function load2c() {
   $("div#step3").load("/mitsumori/step_16.html", wizard3c);
   $("li#step3 a").attr("href", "#step3");
   $("li#step3 span").text("シートベルト");
-  $("div#step4").load("/mitsumori/step_07.html", wizard4c);
+  $("div#step4").load("/mitsumori/step_17.html", wizard4c);
   $("li#step4 a").attr("href", "#step4");
   $("li#step4 span").text("パッド");
   $("div#step5").load("/mitsumori/step_21.html", wizard5c);

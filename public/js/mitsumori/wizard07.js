@@ -1,5 +1,12 @@
   // アームサポート
   function wizard7a(){
+    // STEPボタンクリック
+    $("li#step7").click(function() {
+      wm.step = 7;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL10_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -59,6 +66,13 @@
 
   // 上肢支持部
   function wizard7b(){
+    // STEPボタンクリック
+    $("li#step7").click(function() {
+      wm.step = 7;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL14_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -97,6 +111,13 @@
 
   // テーブル
   function wizard7d(){
+    // STEPボタンクリック
+    $("li#step7").click(function() {
+      wm.step = 7;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL15_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -139,6 +160,13 @@
 
   // バックサポート
   function wizard7e(){
+    // STEPボタンクリック
+    $("li#step7").click(function() {
+      wm.step = 7;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL7_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");

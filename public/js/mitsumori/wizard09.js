@@ -1,5 +1,12 @@
   // レッグサポート
   function wizard9a(){
+    // STEPボタンクリック
+    $("li#step9").click(function() {
+      wm.step = 9;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL11_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -54,6 +61,13 @@
 
   // シートベルト
   function wizard9b(){
+    // STEPボタンクリック
+    $("li#step9").click(function() {
+      wm.step = 9;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL16_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -127,6 +141,13 @@
 
   // パッド
   function wizard9d(){
+    // STEPボタンクリック
+    $("li#step9").click(function() {
+      wm.step = 9;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL17_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -191,6 +212,13 @@
 
   // アームサポート
   function wizard9e(){
+    // STEPボタンクリック
+    $("li#step9").click(function() {
+      wm.step = 9;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL10_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");

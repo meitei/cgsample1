@@ -1,5 +1,12 @@
   // ヘッドサポート
   function wizard6a(){
+    // STEPボタンクリック
+    $("li#step6").click(function() {
+      wm.step = 6;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL9_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -91,6 +98,13 @@
 
   // アームパッド
   function wizard6b(){
+    // STEPボタンクリック
+    $("li#step6").click(function() {
+      wm.step = 6;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL12_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -125,6 +139,13 @@
 
   // 上肢支持部
   function wizard6d(){
+    // STEPボタンクリック
+    $("li#step6").click(function() {
+      wm.step = 6;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL14_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -163,6 +184,13 @@
 
   // シート座面
   function wizard6e(){
+    // STEPボタンクリック
+    $("li#step6").click(function() {
+      wm.step = 6;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL8_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
