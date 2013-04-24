@@ -11,6 +11,14 @@
 <script>
 $(function() {
 
+    var loading = $("<img src='/images/loading.gif'></img>")
+      .wrap("<div id='busy'>")
+      .parent("#busy")
+        .appendTo('#toukeiGraphDialog');
+        // .prependTo('#toukeiGraphDialog');
+    // $("<div id='busy'></div>")
+    // $('#busy').activity();
+
     // Get graph data.
     $.ajax({
       url: "/toukeis/graph_data.json",
@@ -39,6 +47,9 @@ $(function() {
         // 金額・台数のグラフを表示する
         show_graph('chart_kingaku', kingaku, ticks, '金額', get_interval(kingaku));
         show_graph('chart_daisu', daisu, ticks, '台数', get_interval(daisu));
+      },
+      complete: function(xhr, status) {
+        // $("#busy").remove();
       }
     })
 
