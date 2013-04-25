@@ -117,6 +117,14 @@
     }
   }
 
+  function getSeihinInfo(seihinNo){
+    for(var i=0; i<tanka.length; i++) {
+      if(tanka[i]["seihinNo"] == seihinNo) {
+        return tanka[i];
+      }
+    }
+  }
+
   function initNavi() {
     if(wm.step < 3) {
       if(wm.step == 1) {

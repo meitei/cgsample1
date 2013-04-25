@@ -64,6 +64,182 @@
     $("input#4-COL13_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
     });
+    $("select#2-81_su").change(function() {
+      var m_tanka = getSeihinInfo("81");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-81_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-81_kin").text(formatComma(kingaku));
+      $("input#2-81_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-82_su").change(function() {
+      var m_tanka = getSeihinInfo("82");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-82_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-82_kin").text(formatComma(kingaku));
+      $("input#2-82_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-83_su").change(function() {
+      var m_tanka = getSeihinInfo("83");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-83_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-83_kin").text(formatComma(kingaku));
+      $("input#2-83_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-85_su").change(function() {
+      var m_tanka = getSeihinInfo("85");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-85_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-85_kin").text(formatComma(kingaku));
+      $("input#2-85_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-86_su").change(function() {
+      var m_tanka = getSeihinInfo("86");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-86_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-86_kin").text(formatComma(kingaku));
+      $("input#2-86_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#3-81_su").change(function() {
+      var m_tanka = getSeihinInfo("81");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-81_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#3-81_kin").text(formatComma(kingaku));
+      $("input#3-81_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#3-87_su").change(function() {
+      var m_tanka = getSeihinInfo("87");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-87_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#3-87_kin").text(formatComma(kingaku));
+      $("input#3-87_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#3-83_su").change(function() {
+      var m_tanka = getSeihinInfo("83");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-83_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#3-83_kin").text(formatComma(kingaku));
+      $("input#3-83_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#3-85_su").change(function() {
+      var m_tanka = getSeihinInfo("85");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-85_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#3-85_kin").text(formatComma(kingaku));
+      $("input#3-85_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#3-86_su").change(function() {
+      var m_tanka = getSeihinInfo("86");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-86_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#3-86_kin").text(formatComma(kingaku));
+      $("input#3-86_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#4-81_su").change(function() {
+      var m_tanka = getSeihinInfo("81");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#4-81_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#4-81_kin").text(formatComma(kingaku));
+      $("input#4-81_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#4-82_su").change(function() {
+      var m_tanka = getSeihinInfo("82");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#4-82_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#4-82_kin").text(formatComma(kingaku));
+      $("input#4-82_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#4-83_su").change(function() {
+      var m_tanka = getSeihinInfo("83");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#4-83_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#4-83_kin").text(formatComma(kingaku));
+      $("input#4-83_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#4-85_su").change(function() {
+      var m_tanka = getSeihinInfo("85");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#4-85_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#4-85_kin").text(formatComma(kingaku));
+      $("input#4-85_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#4-86_su").change(function() {
+      var m_tanka = getSeihinInfo("86");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#4-86_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#4-86_kin").text(formatComma(kingaku));
+      $("input#4-86_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#4-88_su").change(function() {
+      var m_tanka = getSeihinInfo("88");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#4-88_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#4-88_kin").text(formatComma(kingaku));
+      $("input#4-88_tax").val(formatComma(zeigaku));
+      return false;
+    });
     // 単価を書き換え
     updateUnitPrice("step12");
     wm.submitItems[12] = submitItem13;
