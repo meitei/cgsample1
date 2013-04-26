@@ -13,11 +13,7 @@ $(function() {
 
     var loading = $("<img src='/images/loading.gif'></img>")
       .wrap("<div id='busy'>")
-      .parent("#busy")
-        .appendTo('#toukeiGraphDialog');
-        // .prependTo('#toukeiGraphDialog');
-    // $("<div id='busy'></div>")
-    // $('#busy').activity();
+      .parent("#busy").appendTo('#toukeiGraphDialog');
 
     // Get graph data.
     $.ajax({
@@ -49,7 +45,8 @@ $(function() {
         show_graph('chart_daisu', daisu, ticks, '台数', get_interval(daisu));
       },
       complete: function(xhr, status) {
-        // $("#busy").remove();
+        // lodingの削除
+        $("#busy").remove();
       }
     })
 
