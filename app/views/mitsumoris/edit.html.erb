@@ -51,8 +51,8 @@
     	$("button.jqwizard_next").click(function() {
     		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
     		wm.addEstimate();
-    		console.dir(wm.productsData);
-    		console.dir(wm.mitsumoriData);
+    		//console.dir(wm.productsData);
+    		//console.dir(wm.mitsumoriData);
     		wm.step++;
     		$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
     		if(wm.step == wm.lastStep) {
