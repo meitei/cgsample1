@@ -652,6 +652,11 @@
 <script type="text/javascript">
     var submitItem16= function() {
         var selected = $("input[name='COL16_1']:checked").val();
+        if(selected == undefined) {
+            alert("不要／必要のいずれかを選択してください。");
+            return false;
+        }
+
         this.mitsumoriData["COL16_1"] = selected;
         this.mitsumoriData["COL16_2"] = 0;
         this.mitsumoriData["COL16_3"] = 0;

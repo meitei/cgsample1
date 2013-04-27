@@ -457,8 +457,40 @@
 <script type="text/javascript">
     var submitItem23= function() {
         var selected = $("input[name='COL23_1']:checked").val();
-        var selected2;
+
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if (selected == "1") {
+            if ($("input[name='1-COL23_2']:checked").val() == undefined) {
+                alert("OcBuranchサイズを選択してください。");
+                return false;
+            }
+        } else if (selected == "2") {
+        } else if (selected == "3") {
+            if ($("input[name='3-COL23_3']:checked").val() == undefined) {
+                alert("OcTwinkleサイズを選択してください。");
+                return false;
+            }
+        } else if (selected == "4") {
+            if ($("input[name='4-COL23_4']:checked").val() == undefined) {
+                alert("MIUライトサイズを選択してください。");
+                return false;
+            }
+        } else if (selected == "5") {
+            if ($("input[name='5-COL23_5']:checked").val() == undefined) {
+                alert("ニューオルソチェアサイズを選択してください。");
+                return false;
+            }
+        } else if (selected == "6") {
+            if ($("input[name='6-COL23_6']:checked").val() == undefined) {
+                alert("ライトチェアサイズを選択してください。");
+                return false;
+            }
+        }
         
+        var selected2;
+
         this.mitsumoriData["COL23_1"] = selected;
         this.mitsumoriData["COL23_2"] = 0;
         this.mitsumoriData["COL23_3"] = 0;

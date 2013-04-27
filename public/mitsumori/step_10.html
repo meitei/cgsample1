@@ -469,6 +469,34 @@
     var submitItem10 = function() {
         var selected = $("input[name='COL10_1']:checked").val();
 
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if (selected == "1") {
+
+        } else if (selected == "2") {
+            if ($("input#2-COL10_2").attr('checked')) {
+                if ($("#2-COL10_4").val() == "" || isNaN($("#2-COL10_4").val())) {
+                    alert("高さは数値で入力してください。");
+                    return false;
+                }
+            }
+        } else if (selected == "3") {
+            if ($("input#3-COL10_2").attr('checked')) {
+                if ($("#3-COL10_4").val() == "" || isNaN($("#3-COL10_4").val())) {
+                    alert("高さは数値で入力してください。");
+                    return false;
+                }
+            }
+        } else if (selected == "4") {
+            if ($("input#4-COL10_2").attr('checked')) {
+                if ($("#4-COL10_4").val() == "" || isNaN($("#4-COL10_4").val())) {
+                    alert("高さは数値で入力してください。");
+                    return false;
+                }
+            }
+        }
+
         // 見積データの格納
         this.mitsumoriData["COL10_1"] = selected;
         this.mitsumoriData["COL10_2"] = 0;
