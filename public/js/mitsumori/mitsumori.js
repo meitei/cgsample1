@@ -10,23 +10,6 @@
     this.submitItems = {};
     // 最後のステップ
     this.lastStep = 0;
-
-    // 見積情報保存
-    //this.addEstimate = function() {
-    //   var m = $("#estimateForm").serializeArray();
-    //   var data = {};
-    //   $.each(m, function() {
-    //     data[this.name] = this.value;
-    //   });
-    //   //console.log(data);
-    //   this.mitsumoriData["step" + this.step] = data;
-    //  return;
-    //};
-  };
-
-  var WizardValidation = function() {
-    // ウィザードステップ数
-    this.execute = function() {};
   };
 
   /*

@@ -86,14 +86,14 @@
     //   //$("button#jqwizard_next").attr("disabled", "disabled");
     // });
     // 戻る
-    $("button.jqwizard_previous").click(function() {
-      wm.step--;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_next").show(); 
-      if(wm.step == 1) {
-        $("button#jqwizard_previous").hide();  
-      }
-    });
+    // $("button.jqwizard_previous").click(function() {
+    //   wm.step--;
+    //   $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+    //   $("button#jqwizard_next").show(); 
+    //   if(wm.step == 1) {
+    //     $("button#jqwizard_previous").hide();  
+    //   }
+    // });
     // 登録
     $("#btnEstimateRegist").click(function() {
       if (confirm("登録します。よろしいですか？") == false) {
