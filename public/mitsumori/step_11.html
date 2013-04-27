@@ -415,6 +415,27 @@
 <script type="text/javascript">
     var submitItem11 = function() {
         var selected = $("input[name='COL11_1']:checked").val();
+
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if (selected == "1") {
+
+        } else if (selected == "2") {
+
+        } else if (selected == "3") {
+
+        } else if (selected == "4") {
+            if ($("#4-COL11_3").val() == "" || isNaN($("#4-COL11_3").val())) {
+                alert("エレベーティング(開始)は数値で入力してください。");
+                return false;
+            }
+            if ($("#4-COL11_4").val() == "" || isNaN($("#4-COL11_4").val())) {
+                alert("エレベーティング(終了)は数値で入力してください。");
+                return false;
+            }
+        }
+
         this.mitsumoriData["COL11_1"] = selected;
         this.mitsumoriData["COL11_2"] = 0;
         this.mitsumoriData["COL11_3"] = 0;
