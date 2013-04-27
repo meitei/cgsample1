@@ -24,6 +24,11 @@
     //};
   };
 
+  var WizardValidation = function() {
+    // ウィザードステップ数
+    this.execute = function() {};
+  };
+
   /*
    * 丸めモード、小数点以下の桁数を指定して、数値をフォーマットする。
    *  

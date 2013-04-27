@@ -12,6 +12,7 @@
   	var mitsumoriNo = $("#mitsumoriNo").val();
     var mitsumoriId = $("#mitsumoriId").val();
   	var wm = new WizardManager();
+    $.wizard.prototype.loadnext = function () {};
 
   	$(document).ready(function(){
     $.ajax({
