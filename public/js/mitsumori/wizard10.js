@@ -93,7 +93,7 @@
       var m_tanka = getSeihinInfo("87");
       var tanka = parseFloatEx(m_tanka["tanka"]);
       var tax = parseFloatEx(m_tanka["tax"]);
-      var amount = parseFloatEx($("select#2-87_su").val());
+      var amount = parseFloatEx($("select#3-87_su").val());
       var kingaku = tanka * amount;
       var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
       $("td#3-87_kin").text(formatComma(kingaku));
@@ -304,6 +304,17 @@
       $("input#2-108_tax").val(formatComma(zeigaku));
       return false;
     });
+    $("select#2-109_su").change(function() {
+      var m_tanka = getSeihinInfo("109");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-109_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-109_kin").text(formatComma(kingaku));
+      $("input#2-109_tax").val(formatComma(zeigaku));
+      return false;
+    });
     $("select#2-110_su").change(function() {
       var m_tanka = getSeihinInfo("110");
       var tanka = parseFloatEx(m_tanka["tanka"]);
@@ -434,6 +445,19 @@
       $("button#jqwizard_previous").show();
       $("button#jqwizard_next").show(); 
     });
+
+    $("select#7-136_su").change(function() {
+      var m_tanka = getSeihinInfo("136");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#7-136_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#7-136_kin").text(formatComma(kingaku));
+      $("input#7-136_tax").val(formatComma(zeigaku));
+      return false;
+    });
+
     $("button.jqwizard_next").removeAttr("disabled");
     // 単価を書き換え
     updateUnitPrice("step10");

@@ -134,7 +134,7 @@
       var m_tanka = getSeihinInfo("87");
       var tanka = parseFloatEx(m_tanka["tanka"]);
       var tax = parseFloatEx(m_tanka["tax"]);
-      var amount = parseFloatEx($("select#2-87_su").val());
+      var amount = parseFloatEx($("select#3-87_su").val());
       var kingaku = tanka * amount;
       var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
       $("td#3-87_kin").text(formatComma(kingaku));
