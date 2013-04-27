@@ -66,13 +66,11 @@
     wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
     // 登録
     $("#btnEstimateRegist").click(function() {
+      WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
+      if(wm.addEstimate() == false) { return false; };
       if (confirm("登録します。よろしいですか？") == false) {
         return false;
       }
-      WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-      if(wm.addEstimate() == false) { return false; };
-      //console.dir(wm.productsData);
-      //console.dir(wm.mitsumoriData);
       var postData = {};
       var url = "/mitsumoris.json";
       var type = "POST";

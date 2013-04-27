@@ -77,44 +77,13 @@
     	wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
     	wm.mitsumoriData["kokyakuId"] = kokyakuId;
     	wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
-    	//clearNavi("1");
-    	// 次へ
-    	$("button.jqwizard_next").click(function() {
-    		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-    		wm.addEstimate();
-    		//console.dir(wm.productsData);
-    		//console.dir(wm.mitsumoriData);
-    		wm.step++;
-    		$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-    		if(wm.step == wm.lastStep) {
-        		$("#btnEstimateRegist").show();
-        		$("button#jqwizard_next").hide();
-      		} else {
-        		$("button#jqwizard_next").show();
-      		}
-      		if(wm.step > 1) {
-        		$("button#jqwizard_previous").show();  
-      		}
-      		//$("button#jqwizard_next").attr("disabled", "disabled");
-    	});
-    	// 戻る
-    	$("button.jqwizard_previous").click(function() {
-    		wm.step--;
-    		$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-        $("button#jqwizard_next").show();
-    		if(wm.step == 1) {
-        		$("button#jqwizard_previous").hide();  
-     		}
-    	});
     	// 更新
     	$("#btnEstimateRegist").click(function() {
-      if (confirm("更新します。よろしいですか？") == false) {
-        return false;
-      }
     		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-    		wm.addEstimate();
-    		//console.dir(wm.productsData);
-    		//console.dir(wm.mitsumoriData);
+    		wm.addEstimate();      
+        if (confirm("更新します。よろしいですか？") == false) {
+          return false;
+        }
     		var postData = {};
     		var url = "/mitsumoris/" + wm.mitsumoriData["id"] + ".json";
     		var type = "POST";
