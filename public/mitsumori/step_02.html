@@ -138,6 +138,10 @@
 </label>
 <script type="text/javascript">
     var submitItem2 = function() {
+        if($("input[name='COL2_1']:checked").val() == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        }
         this.mitsumoriData["COL2_1"] = $("input[name='COL2_1']:checked").val();
         return;
     }

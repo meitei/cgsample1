@@ -658,21 +658,158 @@
 </label>
 <script type="text/javascript">
     var submitItem3 = function() {
-        if($("input[name='COL3_1']:checked").val() == undefined) {
-            alert("アイテムを選択してください。");
+        var selected = $("input[name='COL3_1']:checked").val();
+        if(selected == undefined) {
+            alert("種別を選択してください。");
             return false;
-        } else if($("input[name='COL3_1']:checked").val() == "1") {
-            if(isNaN($("#1-COL3_13").val())) {
-                alert("数値を入力してください。");
+        } else if(selected == "1") {
+            if($("#1-COL3_13").val() != "") {
+                if(isNaN($("#1-COL3_13").val())) {
+                    alert("前座高は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("前座高は数値で入力してください。");
                 return false;
             }
-        } else if($("input[name='COL3_1']:checked").val() == "2") {
-            if($("input[name='COL1_2']:checked").val() == undefined) {
-                alert("アイテムを選択してください。");
+        } else if(selected == "2") {
+            if($("#2-COL3_13").val() != "") {
+                if(isNaN($("#2-COL3_13").val())) {
+                    alert("前座高は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("前座高は数値で入力してください。");
                 return false;
-            }   
+            }
+            if($("#2-COL3_6").val() != "") {
+                if(isNaN($("#2-COL3_6").val())) {
+                    alert("可動域 背フレーム(開始)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 背フレーム(開始)は数値で入力してください。");
+                return false;
+            }
+            if($("#2-COL3_7").val() != "") {
+                if(isNaN($("#2-COL3_7").val())) {
+                    alert("可動域 背フレーム(終了)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 背フレーム(終了)は数値で入力してください。");
+                return false;
+            }
+            if($("#2-COL3_8").val() != "") {
+                if(isNaN($("#2-COL3_8").val())) {
+                    alert("可動域 座フレーム(開始)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 座フレーム(開始)は数値で入力してください。");
+                return false;
+            }
+            if($("#2-COL3_9").val() != "") {
+                if(isNaN($("#2-COL3_9").val())) {
+                    alert("可動域 座フレーム(終了)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 座フレーム(終了)は数値で入力してください。");
+                return false;
+            }
+            if($("input[name='2-COL3_5']:checked").val() == undefined) {
+                alert("リクライニング式金具本数を選択してください。");
+                return false;
+            }
+        } else if(selected == "3") {
+            if($("#3-COL3_13").val() != "") {
+                if(isNaN($("#3-COL3_13").val())) {
+                    alert("前座高は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("前座高は数値で入力してください。");
+                return false;
+            }
+            if($("#3-COL3_8").val() != "") {
+                if(isNaN($("#3-COL3_8").val())) {
+                    alert("可動域 座フレーム(開始)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 座フレーム(開始)は数値で入力してください。");
+                return false;
+            }
+            if($("#3-COL3_9").val() != "") {
+                if(isNaN($("#3-COL3_9").val())) {
+                    alert("可動域 座フレーム(終了)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 座フレーム(終了)は数値で入力してください。");
+                return false;
+            }
+            if($("input[name='3-COL3_10']:checked").val() == undefined) {
+                alert("ティルト式金具本数を選択してください。");
+                return false;
+            }
+        } else if(selected == "4") {
+            if($("#4-COL3_13").val() != "") {
+                if(isNaN($("#4-COL3_13").val())) {
+                    alert("前座高は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("前座高は数値で入力してください。");
+                return false;
+            }
+            if($("#4-COL3_6").val() != "") {
+                if(isNaN($("#4-COL3_6").val())) {
+                    alert("可動域 背フレーム(開始)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 背フレーム(開始)は数値で入力してください。");
+                return false;
+            }
+            if($("#4-COL3_7").val() != "") {
+                if(isNaN($("#4-COL3_7").val())) {
+                    alert("可動域 背フレーム(終了)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 背フレーム(終了)は数値で入力してください。");
+                return false;
+            }
+            if($("#4-COL3_8").val() != "") {
+                if(isNaN($("#4-COL3_8").val())) {
+                    alert("可動域 座フレーム(開始)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 座フレーム(開始)は数値で入力してください。");
+                return false;
+            }
+            if($("#4-COL3_9").val() != "") {
+                if(isNaN($("#4-COL3_9").val())) {
+                    alert("可動域 座フレーム(終了)は数値で入力してください。");
+                    return false;
+                }
+            } else {
+                alert("可動域 座フレーム(終了)は数値で入力してください。");
+                return false;
+            }
+            if($("input[name='4-COL3_11']:checked").val() == undefined) {
+                alert("リクライニングティルト式金具本数リク金具を選択してください。");
+                return false;
+            }
+            if($("input[name='4-COL3_12']:checked").val() == undefined) {
+                alert("リクライニングティルト式金具本数ティル金具を選択してください。");
+                return false;
+            }
         }
-        var selected = $("input[name='COL3_1']:checked").val();
+
         this.mitsumoriData["COL3_1"] = 0;
         this.mitsumoriData["COL3_2"] = 0;
         this.mitsumoriData["COL3_3"] = 0;
