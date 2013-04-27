@@ -658,6 +658,20 @@
 </label>
 <script type="text/javascript">
     var submitItem3 = function() {
+        if($("input[name='COL3_1']:checked").val() == undefined) {
+            alert("アイテムを選択してください。");
+            return false;
+        } else if($("input[name='COL3_1']:checked").val() == "1") {
+            if(isNaN($("#1-COL3_13").val())) {
+                alert("数値を入力してください。");
+                return false;
+            }
+        } else if($("input[name='COL3_1']:checked").val() == "2") {
+            if($("input[name='COL1_2']:checked").val() == undefined) {
+                alert("アイテムを選択してください。");
+                return false;
+            }   
+        }
         var selected = $("input[name='COL3_1']:checked").val();
         this.mitsumoriData["COL3_1"] = 0;
         this.mitsumoriData["COL3_2"] = 0;
