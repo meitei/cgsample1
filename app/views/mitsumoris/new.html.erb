@@ -11,7 +11,7 @@
   var kokyakuId = $("#kokyakuId").val();
   var mitsumoriNo = 0;
   var wm = new WizardManager();
-
+  // 次へ
   $.wizard.prototype.loadnext = function () {
     WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
     if(wm.addEstimate() == false) { return false; };
@@ -30,7 +30,7 @@
       this.load(this.current_index + 1);
     }
   };
-
+  // 戻る
   $.wizard.prototype.loadprev = function () {
     wm.step--;
     $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
@@ -64,36 +64,6 @@
     wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
     wm.mitsumoriData["kokyakuId"] = kokyakuId;
     wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
-    //clearNavi("1");
-    // 次へ
-    // $("button.jqwizard_next").click(function() {
-    //   WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-    //   if(wm.addEstimate() == false) { return false; };
-    //   //console.dir(wm.productsData);
-    //   //console.dir(wm.mitsumoriData);
-    //   wm.step++;
-    //   loadnext();
-    //   $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-    //   if(wm.step == wm.lastStep) {
-    //     $("#btnEstimateRegist").show();
-    //     $("button#jqwizard_next").hide();
-    //   } else {
-    //     $("button#jqwizard_next").show();
-    //   }
-    //   if(wm.step > 1) {
-    //     $("button#jqwizard_previous").show();  
-    //   }
-    //   //$("button#jqwizard_next").attr("disabled", "disabled");
-    // });
-    // 戻る
-    // $("button.jqwizard_previous").click(function() {
-    //   wm.step--;
-    //   $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-    //   $("button#jqwizard_next").show(); 
-    //   if(wm.step == 1) {
-    //     $("button#jqwizard_previous").hide();  
-    //   }
-    // });
     // 登録
     $("#btnEstimateRegist").click(function() {
       if (confirm("登録します。よろしいですか？") == false) {

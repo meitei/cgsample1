@@ -12,7 +12,37 @@
   	var mitsumoriNo = $("#mitsumoriNo").val();
     var mitsumoriId = $("#mitsumoriId").val();
   	var wm = new WizardManager();
-    $.wizard.prototype.loadnext = function () {};
+    // 次へ
+    $.wizard.prototype.loadnext = function () {
+      WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
+      wm.addEstimate();
+      wm.step++;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      if(wm.step == wm.lastStep) {
+        $("#btnEstimateRegist").show();
+        $("button#jqwizard_next").hide();
+      } else {
+        $("button#jqwizard_next").show();
+      }
+      if(wm.step > 1) {
+        $("button#jqwizard_previous").show();  
+      }
+      if (this.current_index != this.max_index) {
+        this.load(this.current_index + 1);
+      }
+    };
+    // 戻る
+    $.wizard.prototype.loadprev = function () {
+      wm.step--;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_next").show();
+      if(wm.step == 1) {
+          $("button#jqwizard_previous").hide();  
+      }
+      if (this.current_index != 0) {
+        this.load(this.current_index - 1);
+      }
+    };
 
   	$(document).ready(function(){
     $.ajax({
