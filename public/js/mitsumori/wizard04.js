@@ -58,6 +58,7 @@
         $("input#4-COL8_2").attr("checked", true);
       }
     }
+    $("div#step5").load("/mitsumori/step_07.html", wizard5a);
   }
 
   // シート（座面）
@@ -120,6 +121,7 @@
         $("input#4-COL8_2").attr("checked", true);
       }
     }
+    $("div#step5").load("/mitsumori/step_09.html", wizard5b);
   }
 
   // バックサポート
@@ -300,6 +302,7 @@
     if (wm.mitsumoriData["COL17_15"] == "1") {
       $("input#2-COL17_15").attr("checked", true);
     }
+    $("div#step5").load("/mitsumori/step_21.html", wizard5c);
   }
 
   // シート（座面）
@@ -362,6 +365,7 @@
         $("input#4-COL8_2").attr("checked", true);
       }
     }
+    $("div#step5").load("/mitsumori/step_09.html", wizard5d);
   }
 
   // 使用場所・車輪
@@ -420,4 +424,5 @@
     if(col1Value == "4"){
       $("input#4-COL4_1").attr("checked", true);
     }
+    $("div#step5").load("/mitsumori/step_06.html", wizard5e);
   }

@@ -37,6 +37,7 @@
     if(col1Value == "3"){
       $("input#3-COL6_1").attr("checked", true);
     }
+    $("div#step4").load("/mitsumori/step_08.html", wizard4a);
   }
 
   // バックサポート選定
@@ -99,6 +100,7 @@
         $("input#4-COL7_2").attr("checked", true);
       }
     }
+    $("div#step4").load("/mitsumori/step_08.html", wizard4b);
   }
 
   // シートベルト選定
@@ -278,6 +280,7 @@
     if(col10Value == "12"){
       $("input#2-COL16_12").attr("checked", true);
     }
+    $("div#step4").load("/mitsumori/step_17.html", wizard4c);
   }
 
   // バックサポート選定
@@ -340,6 +343,7 @@
         $("input#4-COL7_2").attr("checked", true);
       }
     }
+    $("div#step4").load("/mitsumori/step_08.html", wizard4d);
   }
 
   // メインフレーム機構選定
@@ -462,6 +466,7 @@
         $("input#4-6-COL3_12").attr("checked", true);
       }
     }
+    $("div#step4").load("/mitsumori/step_04.html", wizard4e);
   }
 
     // オーダー対応木製

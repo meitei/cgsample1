@@ -37,6 +37,7 @@
     if(col1Value == "3"){
       $("input#3-COL12_1").attr("checked", true);
     }
+    $("div#step9").load("/mitsumori/step_11.html", wizard9a);
   }
 
   // テーブル
@@ -86,6 +87,7 @@
     if(col1Value == "4"){
       $("input#4-COL15_1").attr("checked", true);
     }
+    $("div#step9").load("/mitsumori/step_16.html", wizard9b);
   }
 
   // シートベルト
@@ -265,6 +267,7 @@
     if(col10Value == "12"){
       $("input#2-COL16_12").attr("checked", true);
     }
+    $("div#step9").load("/mitsumori/step_17.html", wizard9d);
   }
 
   // ヘッドサポート
@@ -363,4 +366,5 @@
         $("input#5-3-COL9_3").attr("checked", true);
       }
     }
+    $("div#step9").load("/mitsumori/step_10.html", wizard9e);
   }

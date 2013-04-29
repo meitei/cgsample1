@@ -200,6 +200,7 @@
       $("input#4-COL11_3").val(wm.mitsumoriData["COL11_3"]);
       $("input#4-COL11_4").val(wm.mitsumoriData["COL11_4"]);
     }
+    $("div#step10").load("/mitsumori/step_13.html", wizard10a);
   }
 
   // シートベルト
@@ -379,6 +380,7 @@
     if(col10Value == "12"){
       $("input#2-COL16_12").attr("checked", true);
     }
+    $("div#step10").load("/mitsumori/step_17.html", wizard10b);
   }
 
   // パッド
@@ -560,6 +562,7 @@
     if (wm.mitsumoriData["COL17_15"] == "1") {
       $("input#2-COL17_15").attr("checked", true);
     }
+    $("div#step10").load("/mitsumori/step_19.html", wizard10d);
   }
 
   // アームサポート
@@ -626,4 +629,5 @@
         $("input#4-COL10_2").attr("checked", true);
       }
     }
+    $("div#step10").load("/mitsumori/step_12.html", wizard10e);
   }

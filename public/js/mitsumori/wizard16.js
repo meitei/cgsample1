@@ -177,5 +177,5 @@
     if (wm.mitsumoriData["COL17_15"] == "1") {
       $("input#2-COL17_15").attr("checked", true);
     }
-
+    $("div#step17").load("/mitsumori/step_20.html", wizard17e);
   }

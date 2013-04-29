@@ -45,18 +45,18 @@
     };
 
   	$(document).ready(function(){
-    $.ajax({
-        scriptCharset:"UTF-8",
-        type: "GET",
-        url: "/mitsumori_tankas.json",
-        root: "mitsumori_tankas",
-        dataType: "json",
-        success: function(result) {
-            if(result != null) {
-                tanka = result;
-            }
-        }
-    });
+      $.ajax({
+          scriptCharset:"UTF-8",
+          type: "GET",
+          url: "/mitsumori_tankas.json",
+          root: "mitsumori_tankas",
+          dataType: "json",
+          success: function(result) {
+              if(result != null) {
+                  tanka = result;
+              }
+          }
+      });
       $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",

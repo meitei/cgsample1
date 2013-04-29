@@ -62,6 +62,7 @@
         $("input#4-COL10_2").attr("checked", true);
       }
     }
+    $("div#step8").load("/mitsumori/step_12.html", wizard8a);
   }
 
   // 上肢支持部
@@ -107,6 +108,7 @@
     if(col1Value == "3"){
       $("input#3-COL14_1").attr("checked", true);
     }
+    $("div#step8").load("/mitsumori/step_15.html", wizard8b);
   }
 
   // テーブル
@@ -156,6 +158,7 @@
     if(col1Value == "4"){
       $("input#4-COL15_1").attr("checked", true);
     }
+    $("div#step8").load("/mitsumori/step_16.html", wizard8d);
   }
 
   // バックサポート
@@ -218,4 +221,5 @@
         $("input#4-COL7_2").attr("checked", true);
       }
     }
+    $("div#step8").load("/mitsumori/step_09.html", wizard8e);
   }

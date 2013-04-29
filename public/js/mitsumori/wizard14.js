@@ -176,6 +176,7 @@
     if (wm.mitsumoriData["COL17_15"] == "1") {
       $("input#2-COL17_15").attr("checked", true);
     }
+    $("div#step15").load("/mitsumori/step_20.html", wizard15a);
   }
 
   // テーブル
@@ -216,4 +217,5 @@
     } else if (wm.mitsumoriData["COL15_1"] == "4"){
       $("input#4-COL15_1").attr("checked", true);
     }
+    $("div#step15").load("/mitsumori/step_16.html", wizard15e);
   }

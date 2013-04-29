@@ -33,6 +33,7 @@
     } else if (wm.mitsumoriData["COL14_1"] == "3"){
       $("input#3-COL14_1").attr("checked", true);
     }
+    $("div#step12").load("/mitsumori/step_15.html", wizard12a);
   }
 
   // OPPW
@@ -275,10 +276,8 @@
       if (wm.mitsumoriData["COL11_2"] == "1") {
         $("input#4-COL11_2").attr("checked", true);
       }
-
       $("input#4-COL11_3").val(wm.mitsumoriData["COL11_3"]);
       $("input#4-COL11_4").val(wm.mitsumoriData["COL11_4"]);
-
     }
-
+    $("div#step12").load("/mitsumori/step_13.html", wizard12e);
   }

@@ -252,6 +252,7 @@
       $("input#4-COL13_4").val(wm.mitsumoriData["COL13_4"]);
       $("input#4-COL13_5").val(wm.mitsumoriData["COL13_5"]);
     }
+    $("div#step11").load("/mitsumori/step_14.html", wizard11a);
   }
 
   // パッド
@@ -433,7 +434,7 @@
     if (wm.mitsumoriData["COL17_15"] == "1") {
       $("input#2-COL17_15").attr("checked", true);
     }
-
+    $("div#step11").load("/mitsumori/step_18.html", wizard11b);
   }
 
   // OP車椅子フレーム
@@ -563,5 +564,5 @@
     if(col1Value == "3"){
       $("input#3-COL12_1").attr("checked", true);
     }
-
+    $("div#step11").load("/mitsumori/step_11.html", wizard11e);
   }

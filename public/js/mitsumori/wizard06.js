@@ -94,6 +94,7 @@
         $("input#5-3-COL9_3").attr("checked", true);
       }
     }
+    $("div#step7").load("/mitsumori/step_10.html", wizard7a);
   }
 
   // アームパッド
@@ -135,6 +136,7 @@
     if(col1Value == "3"){
       $("input#3-COL12_1").attr("checked", true);
     }
+    $("div#step7").load("/mitsumori/step_14.html", wizard7b);
   }
 
   // 上肢支持部
@@ -180,6 +182,7 @@
     if(col1Value == "3"){
       $("input#3-COL14_1").attr("checked", true);
     }
+    $("div#step7").load("/mitsumori/step_15.html", wizard7d);
   }
 
   // シート座面
@@ -242,4 +245,5 @@
         $("input#4-COL8_2").attr("checked", true);
       }
     }
+    $("div#step7").load("/mitsumori/step_07.html", wizard7e);
   }

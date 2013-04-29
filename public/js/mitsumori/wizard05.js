@@ -58,6 +58,7 @@
         $("input#4-COL7_2").attr("checked", true);
       }
     }
+    $("div#step6").load("/mitsumori/step_09.html", wizard6a);
   }
 
   // ヘッドサポート
@@ -156,6 +157,7 @@
         $("input#5-3-COL9_3").attr("checked", true);
       }
     }
+    $("div#step6").load("/mitsumori/step_12.html", wizard6b);
   }
 
   // OPAR
@@ -324,6 +326,7 @@
         $("input#5-3-COL9_3").attr("checked", true);
       }
     }
+    $("div#step6").load("/mitsumori/step_14.html", wizard6d);
   }
 
   // 介助用グリップ
@@ -365,4 +368,5 @@
     if(col1Value == "3"){
       $("input#3-COL6_1").attr("checked", true);
     }
+    $("div#step6").load("/mitsumori/step_08.html", wizard6e);
   }

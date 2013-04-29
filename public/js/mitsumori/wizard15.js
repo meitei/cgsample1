@@ -219,4 +219,5 @@
     if (wm.mitsumoriData["COL16_12"] == "1") {
       $("input#2-COL16_12").attr("checked", true);
     }
+    $("div#step16").load("/mitsumori/step_17.html", wizard16e);
   }

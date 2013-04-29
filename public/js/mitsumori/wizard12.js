@@ -36,6 +36,7 @@
     } else if (wm.mitsumoriData["COL15_1"] == "4"){
       $("input#4-COL15_1").attr("checked", true);
     }
+    $("div#step13").load("/mitsumori/step_16.html", wizard13a);
 
   }
 
@@ -293,4 +294,5 @@
       $("input#4-COL13_4").val(wm.mitsumoriData["COL13_4"]);
       $("input#4-COL13_5").val(wm.mitsumoriData["COL13_5"]);
     }
+    $("div#step13").load("/mitsumori/step_14.html", wizard13e);
   }

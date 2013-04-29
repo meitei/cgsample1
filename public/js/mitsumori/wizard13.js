@@ -159,6 +159,7 @@
     if (wm.mitsumoriData["COL16_12"] == "1") {
       $("input#2-COL16_12").attr("checked", true);
     }
+    $("div#step14").load("/mitsumori/step_17.html", wizard14a);
   }
 
   // 上肢支持部
@@ -196,4 +197,5 @@
     } else if (wm.mitsumoriData["COL14_1"] == "3"){
       $("input#3-COL14_1").attr("checked", true);
     }
+    $("div#step14").load("/mitsumori/step_15.html", wizard14e);
   }
