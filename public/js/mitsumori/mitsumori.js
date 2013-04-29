@@ -10,18 +10,6 @@
     this.submitItems = {};
     // 最後のステップ
     this.lastStep = 0;
-
-    // 見積情報保存
-    //this.addEstimate = function() {
-    //   var m = $("#estimateForm").serializeArray();
-    //   var data = {};
-    //   $.each(m, function() {
-    //     data[this.name] = this.value;
-    //   });
-    //   //console.log(data);
-    //   this.mitsumoriData["step" + this.step] = data;
-    //  return;
-    //};
   };
 
   /*
@@ -113,6 +101,14 @@
         $("div#" + step + " input#" + j + "-" + s + "_tax").val(formatComma(getFormatAmount(kingaku * x, 1, 0)));
         $("div#" + step + " td#" + j + "-" + s + "_tax_v").text((x * 100) + "%");
         //console.log("製品番号：" + s + " 単価：" + t + " 数量：" + amount + " 税率：" + x + " 金額：" + kingaku);
+      }
+    }
+  }
+
+  function getSeihinInfo(seihinNo){
+    for(var i=0; i<tanka.length; i++) {
+      if(tanka[i]["seihinNo"] == seihinNo) {
+        return tanka[i];
       }
     }
   }

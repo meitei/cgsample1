@@ -237,6 +237,12 @@
 <script type="text/javascript">
     var submitItem15= function() {
         var selected = $("input[name='COL15_1']:checked").val();
+
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        }
+
         this.mitsumoriData["COL15_1"] = selected;
         var product = {};
         if(selected == "1") {

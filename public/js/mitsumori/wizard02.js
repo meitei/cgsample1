@@ -1,5 +1,12 @@
   /* 構造フレーム選定 */
   function wizard2a(){
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     // 屋内用
     $("input#1-COL5_1").change(function(){
       for(var i=1; i<18; i++) {
@@ -50,12 +57,14 @@
       $("input#1-COL5_1").attr("checked", true);
       load2a();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 15;
     }
     // 屋外用
     if(col1Value == "2"){
       $("input#2-COL5_1").attr("checked", true);
       load2b();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 11;
       if(col2Value == "1"){
         $("input#2-1-COL5_2").attr("checked", true);
       }
@@ -74,12 +83,14 @@
       $("input#3-COL5_1").attr("checked", true);
       load2c();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 5;
     }
     // 車椅選択
     if(col1Value == "4"){
       $("input#4-COL5_1").attr("checked", true);
       load2d();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 10;
       if(col4Value == "1"){
         $("input#4-1-COL5_4").attr("checked", true);
       }
@@ -121,6 +132,13 @@
 
   // メインフレーム材質選定
   function wizard2e() {
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     // アルミニューム選択
     $("input#1-COL2_1").change(function(){
       for(var i=1; i<18; i++) {
@@ -160,23 +178,33 @@
       $("input#1-COL2_1").attr("checked", true);
       load2e();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 17;
     }
     // ステンレス選択
     if(col1Value == "2"){
       $("input#2-COL2_1").attr("checked", true);
       load2e();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 17;
     }
     // 木製選択
     if(col1Value == "3"){
       $("input#3-COL2_1").attr("checked", true);
       load2f();
       $("button#jqwizard_next").removeAttr("disabled");
+      wm.lastStep = 3;
     }
   }
 
   // 木製座位保持装置
   function wizard2g(){
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
       wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
@@ -212,6 +240,13 @@
 
     // トイレットチェア
   function wizard2h(){
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
       wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
@@ -231,6 +266,13 @@
 
     // シャワーチェア
   function wizard2i(){
+    // STEPボタンクリック
+    $("li#step2").click(function() {
+      wm.step = 2;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
       wm.lastStep = 2;
     // 単価を書き換え
     updateUnitPrice("step2");
@@ -322,7 +364,7 @@ function load2c() {
   $("div#step3").load("/mitsumori/step_16.html", wizard3c);
   $("li#step3 a").attr("href", "#step3");
   $("li#step3 span").text("シートベルト");
-  $("div#step4").load("/mitsumori/step_07.html", wizard4c);
+  $("div#step4").load("/mitsumori/step_17.html", wizard4c);
   $("li#step4 a").attr("href", "#step4");
   $("li#step4 span").text("パッド");
   $("div#step5").load("/mitsumori/step_21.html", wizard5c);

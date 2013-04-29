@@ -8,7 +8,7 @@
     <div id="searchCustomerPager"></div>
 </div>
 <div class="btn_new">
-    <a class="btn_new_kokyaku" id="btnCustomerNew" href="/kokyakus/new">新規追加</a>
+    <a class="btn_new_kokyaku" id="btnCustomerNew" href="#">新規追加</a>
 </div>
 <form id="konyuRirekiSearchForm">
     <input type="hidden" name="konyu_rireki[kokyakuIdFrom]" value="" />
@@ -20,39 +20,6 @@
 </form>
 <script>
 $(function() {
-    $("#kokyakuForm").validate({
-        errorClass:'error',
-        errorElement:'label',
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass(errorClass);
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass(errorClass);
-        },
-        rules: {
-            kokyakuNm1: {required:true, maxlength:10},
-            kokyakuNm2: {required:true, maxlength:10},
-            kokyakuNmKana1: {katakana:true, maxlength:10},
-            kokyakuNmKana2: {katakana:true, maxlength:10},
-            //seibetsu: {required:true, maxlength:10},
-            // tanjoDt: {date:true},
-            postNo: {postnum:true, maxlength:8},
-            address1: {maxlength:100},
-            address2: {maxlength:100},
-            tel1: {telnum:true, maxlength:12},
-            tel2: {mobilenum:true, maxlength:13},
-            fax: {telnum:true, maxlength:12},
-            //shobyouCd1: {required:true, maxlength:10},
-            //shobyouCd2: {required:true, maxlength:10},
-            //shobyouCd3: {required:true, maxlength:10},
-            gakkoNm: {maxlength:20},
-            biko: {maxlength:100}
-        }
-        //messages: {
-        //    kokyakuNm1: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
-        //    kokyakuNm2: {required:"顧客名を入力してください", maxlength:"10文字を超えてます"}
-        //}
-    });
     var isLoaded = false;
     var colNames = ["","顧客コード","顧客名","顧客カナ","","性別","生年月日","郵便番号","住所１","住所２","電話番号","携帯番号","FAX番号","傷病名","学校名・施設名","備考","","","","","",""];
     var colModelSettings = [
@@ -62,7 +29,6 @@ $(function() {
         {name:"kokyakuNmKana", index:"kokyakuNmKana",width:100},
         {name:"seibetsu", index:"seibetsu",hidden:true},
         {name:"seibetsuNm", index:"seibetsuNm",width:35},
-        // {name:"tanjoDt", index:"tanjoDt",width:80, formatter:'date', formatoptions:{srcformat: 'Y-m-d',newformat: 'Y/m/d'}},
         {name:"tanjoDt", index:"tanjoDt",width:120},
         {name:"postNo", index:"postNo",width:80},
         {name:"address1", index:"address1",width:100},
@@ -84,7 +50,7 @@ $(function() {
         datatype: "local",
         //url: "kokyakus.json",
         width: "940",
-        height: "240",
+        height: "250",
         cellEdit: false,
         rowNum: 10,
         //rowList:[10,20,30],
@@ -101,7 +67,7 @@ $(function() {
 
     }).navGrid('#searchCustomerPager',{edit:false, add:false, del:false, search:false});
 
-    $("#kokyaku_seibetsu").css("width", "100px").attr("tabindex", "10");
+    $("#kokyaku_seibetsu").css("width", "100px");
 
     var kokyakuItems = ["kokyakuIdFrom","kokyakuIdTo"];
     $.each(kokyakuItems, function(i) {
@@ -146,12 +112,17 @@ $(function() {
         }
     });
 
-    // 登録/修正画面から遷移した場合、再検索を行う
+    // 画面遷移時の再検索
     setConditions();
 });
 
 $("a#btnCustomerSearch").click(function() {
     searchKokyaku();
+    return false;
+});
+
+$("a#btnCustomerNew").click(function() {
+    createKokyaku();
     return false;
 });
 
@@ -176,6 +147,8 @@ $("a#btnCustomerDel").click(function() {
     if (confirm("選択されたレコードを一括削除します。よろしいですか？") == false) {
         return false;
     }
+
+    saveConditions();
 
     $("#deleteIdList").val(delArray.toString());
 
@@ -236,6 +209,13 @@ function searchKokyaku() {
     $("#searchCustomerGrid").setGridParam(param).trigger("reloadGrid");
 }
 
+// 新規登録用メソッド
+function createKokyaku() {
+    saveConditions();
+    location.href = "kokyakus/new";
+    return false;
+}
+
 // 更新用メソッド
 function modifyKokyaku(kokyakuId) {
     saveConditions();
@@ -248,6 +228,7 @@ function removeKokyaku(kokyakuId) {
     if (confirm("削除します。よろしいですか？") == false) {
         return false;
     }
+    saveConditions();
     var url = "kokyakus/" + kokyakuId + ".json";
     var type = "DELETE";
     $.ajax({

@@ -10,7 +10,39 @@
   	var konyuRirekiId = $("#konyuRirekiId").val();
   	var kokyakuId = $("#kokyakuId").val();
   	var mitsumoriNo = $("#mitsumoriNo").val();
+    var mitsumoriId = $("#mitsumoriId").val();
   	var wm = new WizardManager();
+    // 次へ
+    $.wizard.prototype.loadnext = function () {
+      WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
+      wm.addEstimate();
+      wm.step++;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      if(wm.step == wm.lastStep) {
+        $("#btnEstimateRegist").show();
+        $("button#jqwizard_next").hide();
+      } else {
+        $("button#jqwizard_next").show();
+      }
+      if(wm.step > 1) {
+        $("button#jqwizard_previous").show();  
+      }
+      if (this.current_index != this.max_index) {
+        this.load(this.current_index + 1);
+      }
+    };
+    // 戻る
+    $.wizard.prototype.loadprev = function () {
+      wm.step--;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_next").show();
+      if(wm.step == 1) {
+          $("button#jqwizard_previous").hide();  
+      }
+      if (this.current_index != 0) {
+        this.load(this.current_index - 1);
+      }
+    };
 
   	$(document).ready(function(){
     $.ajax({
@@ -28,7 +60,7 @@
       $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
-        url: "/mitsumoris/" + mitsumoriNo + ".json",
+        url: "/mitsumoris/" + mitsumoriId + ".json",
         root: "mitsumori",
         dataType: "json",
         success: function(result) {
@@ -45,132 +77,37 @@
     	wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
     	wm.mitsumoriData["kokyakuId"] = kokyakuId;
     	wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
-    	//clearNavi("1");
-    	// 次へ
-    	$("button.jqwizard_next").click(function() {
-    		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-    		wm.addEstimate();
-    		console.dir(wm.productsData);
-    		console.dir(wm.mitsumoriData);
-    		wm.step++;
-    		$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-    		if(wm.step == wm.lastStep) {
-        		$("#btnEstimateRegist").show();
-        		$("button#jqwizard_next").hide();
-      		} else {
-        		$("button#jqwizard_next").show();
-      		}
-      		if(wm.step > 1) {
-        		$("button#jqwizard_previous").show();  
-      		}
-      		$("button#jqwizard_next").attr("disabled", "disabled");
-    	});
-    	// 戻る
-    	$("button.jqwizard_previous").click(function() {
-    		wm.step--;
-    		$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-        $("button#jqwizard_next").show();
-    		if(wm.step == 1) {
-        		$("button#jqwizard_previous").hide();  
-     		}
-    	});
-    	// 登録
+    	// 更新
     	$("#btnEstimateRegist").click(function() {
     		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-    		wm.addEstimate();
-    		console.dir(wm.productsData);
-    		console.dir(wm.mitsumoriData);
+    		wm.addEstimate();      
+        if (confirm("更新します。よろしいですか？") == false) {
+          return false;
+        }
     		var postData = {};
-    		var url = "/mitsumoris.json";
+    		var url = "/mitsumoris/" + wm.mitsumoriData["id"] + ".json";
     		var type = "POST";
     		wm.mitsumoriData["koshinshaId"] = $("#loginId").val();
-     		wm.mitsumoriData["torokushaId"] = $("#loginId").val();
+     		wm.mitsumoriData["torokushaId"] = $("#torokushaId").val();
      		for(var products in wm.productsData) {
         		wm.productsData[products]["koshinshaId"] = $("#loginId").val();
-        		wm.productsData[products]["torokushaId"] = $("#loginId").val();        
-      		}
-      		postData["mitsumoriData"] = wm.mitsumoriData;
-      		postData["productsData"] = wm.productsData;
-      		$.ajax({
-        		scriptCharset:"UTF-8",
-          		type: type,
-          		url: url,
-          		data: postData,
-          		dataType: "json",
-          		success: function(result) {
-            		location.href = "/mitsumoris/" + result["id"];
-          		}
-      		});
+        		wm.productsData[products]["torokushaId"] = $("#torokushaId").val();        
+    		}
+    		postData["mitsumoriData"] = wm.mitsumoriData;
+    		postData["productsData"] = wm.productsData;
+        postData["_method"] = "put";
+    		$.ajax({
+      		scriptCharset:"UTF-8",
+        		type: type,
+        		url: url,
+        		data: postData,
+        		dataType: "json",
+        		success: function(result) {
+          		location.href = "/mitsumoris/" + result["id"];
+        		}
+    		});
+        $("a#btnEstimateRegist").unbind('click');
     	});
-
-	    $("li#step1").click(function() {
-	      	wm.step = 1;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step2").click(function() {
-	      	wm.step = 2;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step3").click(function() {
-	      	wm.step = 3;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step4").click(function() {
-	      	wm.step = 4;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step5").click(function() {
-	      	wm.step = 5;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step6").click(function() {
-	      	wm.step = 6;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step7").click(function() {
-	      	wm.step = 7;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step8").click(function() {
-	      	wm.step = 8;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step9").click(function() {
-	      	wm.step = 9;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step10").click(function() {
-	      	wm.step = 10;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step11").click(function() {
-	      	wm.step = 11;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step12").click(function() {
-	      	wm.step = 12;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step13").click(function() {
-	      	wm.step = 13;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step14").click(function() {
-	      	wm.step = 14;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step15").click(function() {
-	      	wm.step = 15;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step16").click(function() {
-	      	wm.step = 16;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
-	    $("li#step17").click(function() {
-	      	wm.step = 17;
-	      	$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-	    });
   	});
 </script>
 <script src="/js/mitsumori/wizard17.js" type="text/javascript"></script>

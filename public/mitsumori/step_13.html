@@ -412,7 +412,7 @@
                         </td>
                         <td class="td4">
                             開閉式フットサポート
-                        </td>ß
+                        </td>
                     </tr>
                     <tr>
                         <td class="td2">
@@ -569,6 +569,49 @@
 <script type="text/javascript">
     var submitItem13 = function() {
         var selected = $("input[name='COL13_1']:checked").val();
+
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if (selected == "1") {
+
+        } else if (selected == "2") {
+            if ($("#2-COL13_4").val() == "" || isNaN($("#2-COL13_4").val())) {
+                alert("高さは数値で入力してください。");
+                return false;
+            }
+            if ($("#2-COL13_5").val() == "" || isNaN($("#2-COL13_5").val())) {
+                alert("奥行は数値で入力してください。");
+                return false;
+            }
+        } else if (selected == "3") {
+            if ($("input[name='3-COL13_3']:checked").val() == undefined) {
+                alert("フットサポートを選択してください。");
+                return false;
+            }
+            if ($("#3-COL13_4").val() == "" || isNaN($("#3-COL13_4").val())) {
+                alert("高さは数値で入力してください。");
+                return false;
+            }
+            if ($("#3-COL13_5").val() == "" || isNaN($("#3-COL13_5").val())) {
+                alert("奥行は数値で入力してください。");
+                return false;
+            }
+        } else if (selected == "4") {
+            if ($("input[name='4-COL13_3']:checked").val() == undefined) {
+                alert("フットサポートを選択してください。");
+                return false;
+            }
+            if ($("#4-COL13_4").val() == "" || isNaN($("#4-COL13_4").val())) {
+                alert("高さは数値で入力してください。");
+                return false;
+            }
+            if ($("#4-COL13_5").val() == "" || isNaN($("#4-COL13_5").val())) {
+                alert("奥行は数値で入力してください。");
+                return false;
+            }
+        }
+
         this.mitsumoriData["COL13_1"] = selected;
         this.mitsumoriData["COL13_2"] = 0;
         this.mitsumoriData["COL13_3"] = 0;

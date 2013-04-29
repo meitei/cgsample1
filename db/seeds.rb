@@ -33,23 +33,34 @@ if @users.empty?
 	)
 end
 
-
 ############################################################
 # Master Data
 ############################################################
+adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
+
 # add records from CSV file
 MitsumoriTanka.destroy_all(["1 = ?", 1])
+
+if adapter == "mysql2" then
+  ActiveRecord::Base.connection.execute('ALTER TABLE mitsumori_tankas AUTO_INCREMENT = 1')
+end
+
 CSV.foreach('db/import/MitsumoriTankas.csv') do |row|
   MitsumoriTanka.create(:seihinNo => row[0], :seihinName => row[1], :tanka => row[2], :tax => row[3], :buhinCd => row[4], :torokushaId => 1, :koshinshaId => 1)
 end
 
 
-# TODO:完成部品マスタ(仮)
+# 完成部品マスタ
 # add records from CSV file
 KanseiBuhin.destroy_all(["1 = ?", 1])
+
+if adapter == "mysql2" then
+  ActiveRecord::Base.connection.execute('ALTER TABLE kansei_buhins AUTO_INCREMENT = 1')
+end
+
 CSV.foreach('db/import/MitsumoriTankas.csv') do |row|
   if row[4].present?
-    KanseiBuhin.create(:buhinCd => row[4], :buhinNm => row[1], :kakaku => row[2], :katashikiCd => row[4], :katashikiNm => row[4].to_s + "型", :shiyoBuhin => row[1], :biko => row[0], :torokushaId => 1, :koshinshaId => 1)
+    KanseiBuhin.create(:buhinCd => row[4], :buhinNm => row[1], :kakaku => row[2], :katashikiCd => row[4], :shiyoBuhin => row[1], :torokushaId => 1, :koshinshaId => 1)
   end
 end
 
@@ -63,6 +74,8 @@ if @kokyakus.empty?
 		:kokyakuId => 2400001,
 		:kokyakuNm1 => '顧客',
 		:kokyakuNm2 => '太郎',
+		:kokyakuNmKana1 => 'コキャク',
+		:kokyakuNmKana2 => 'タロウ',
 		:delFlg => 0,
 		:torokushaId => 1,
 		:koshinshaId => 1
@@ -85,8 +98,15 @@ end
 if @hoken_shubetsus.empty?
 	HokenShubetsu.create(
 		:hokenShubetsuCd => 1,
-		:hokenShubetsuNm => '保険種別１',
+		:hokenShubetsuNm => '保険１',
 		:hyojiJun => 1,
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+	HokenShubetsu.create(
+		:hokenShubetsuCd => 2,
+		:hokenShubetsuNm => '保険２',
+		:hyojiJun => 2,
 		:torokushaId => 1,
 		:koshinshaId => 1
 	)
@@ -99,9 +119,29 @@ if @shobyos.empty?
 		:shobyoCd => 1,
 		:shobyoNm => '傷病名称１',
 		:shobyoNmKana => 'ショウビョウメイショウイチ',
-		:icd10Cd => 'ICD-10_CODE',
+		:icd10Cd => 'ICD-10_CODE_1',
 		:shusaiDt => '2013/04/01',
 		# :haishiDt => '2013/04/01',
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+	Shobyo.create(
+		:shobyoCd => 2,
+		:shobyoNm => '傷病名称２',
+		:shobyoNmKana => 'ショウビョウメイショウニ',
+		:icd10Cd => 'ICD-10_CODE_2',
+		:shusaiDt => '2013/04/02',
+		# :haishiDt => '2013/04/02',
+		:torokushaId => 1,
+		:koshinshaId => 1
+	)
+	Shobyo.create(
+		:shobyoCd => 3,
+		:shobyoNm => '傷病名称３',
+		:shobyoNmKana => 'ショウビョウメイショウサン',
+		:icd10Cd => 'ICD-10_CODE_3',
+		:shusaiDt => '2013/04/03',
+		# :haishiDt => '2013/04/03',
 		:torokushaId => 1,
 		:koshinshaId => 1
 	)

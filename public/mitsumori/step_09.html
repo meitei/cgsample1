@@ -623,6 +623,31 @@
     var submitItem9 = function() {
         var selected = $("input[name='COL9_1']:checked").val();
         
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if (selected == "1") {
+
+        } else if (selected == "2") {
+
+        } else if (selected == "3") {
+            if ($("input[name='3-COL9_3']:checked").val() == undefined) {
+                alert("ヘッド継手部品を選択してください。");
+                return false;
+            }
+        } else if (selected == "4") {
+            if ($("input[name='4-COL9_3']:checked").val() == undefined) {
+                alert("ヘッド継手部品を選択してください。");
+                return false;
+            }
+        } else if (selected == "5") {
+            if ($("input[name='5-COL9_3']:checked").val() == undefined) {
+                alert("ヘッド継手部品を選択してください。");
+                return false;
+            }
+        }
+
+
         this.mitsumoriData["COL9_1"] = selected;
         this.mitsumoriData["COL9_2"] = 0;
         this.mitsumoriData["COL9_3"] = 0;

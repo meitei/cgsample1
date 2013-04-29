@@ -2,6 +2,8 @@
     <input type="hidden" id="konyuRirekiId" value="<%= @mitsumori.konyuRirekiId %>" />
     <input type="hidden" id="kokyakuId" value="<%= @mitsumori.kokyakuId %>" />
     <input type="hidden" id="mitsumoriNo" value="<%= @mitsumori.mitsumoriNo %>" />
+    <input type="hidden" id="mitsumoriId" value="<%= @mitsumori.id %>" />
+    <input type="hidden" id="torokushaId" value="<%= @mitsumori.torokushaId %>" />
     <div class="jqwizard_panel">
         <div class="jqwizard_content" id="step1"></div>
         <div class="jqwizard_content" id="step2" style="display: none;"></div>
@@ -22,10 +24,10 @@
         <div class="jqwizard_content" id="step17" style="display: none;"></div>
     </div>
     <div class="jqwizard_buttons">
-        <button type="button" id="jqwizard_previous" class="jqwizard_previous" disabled="disabled">
+        <button type="button" id="jqwizard_previous" class="jqwizard_previous">
             <img src="/images/btn_back.png" alt="戻る" />
         </button>
-        <button type="button" id="jqwizard_next" class="jqwizard_next" disabled="disabled">
+        <button type="button" id="jqwizard_next" class="jqwizard_next">
             <img src="/images/btn_next.png" alt="次へ"/>
         </button>
     </div>

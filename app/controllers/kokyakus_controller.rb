@@ -32,6 +32,14 @@ class KokyakusController < ApplicationController
       tanjoDtCondition = str_sql_concat("LPAD(CAST(\"tanjoGengo\" AS char), 1, '0') ", " LPAD(CAST(\"tanjoYear\" AS char), 2, '0') ", " LPAD(CAST(\"tanjoMonth\" AS char), 2, '0') ", " LPAD(CAST(\"tanjoDay\" AS char), 2, '0')")
     end
 
+    if adapter == "mysql2" then
+      # for mysql
+      strIntegerType = "SIGNED"
+    else
+      # for sqlite、postgres
+      strIntegerType = "INTEGER"
+    end
+
     if params[:kokyaku][:tanjoGengoFrom].present? || params[:kokyaku][:tanjoYearFrom].present? || params[:kokyaku][:tanjoMonthFrom].present? || params[:kokyaku][:tanjoDayFrom].present?
       tanjoGengoFrom = "0"
       tanjoYearFrom  = "00"
@@ -52,7 +60,7 @@ class KokyakusController < ApplicationController
       end
 
       tanjoDtFrom = (tanjoGengoFrom.to_s + tanjoYearFrom.to_s + tanjoMonthFrom.to_s + tanjoDayFrom.to_s).to_i
-      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS integer) >= ?", tanjoDtFrom)
+      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS " + strIntegerType + " ) >= ?", tanjoDtFrom)
     end
 
     if params[:kokyaku][:tanjoGengoTo].present? || params[:kokyaku][:tanjoYearTo].present? || params[:kokyaku][:tanjoMonthTo].present? || params[:kokyaku][:tanjoDayTo].present?
@@ -75,7 +83,7 @@ class KokyakusController < ApplicationController
       end
 
       tanjoDtTo = (tanjoGengoTo.to_s + tanjoYearTo.to_s + tanjoMonthTo.to_s + tanjoDayTo.to_s).to_i
-      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS integer) <= ?", tanjoDtTo)
+      conditions = conditions.where("CAST(" + tanjoDtCondition + " AS " + strIntegerType + " ) <= ?", tanjoDtTo)
     end
 
     conditions = conditions.where("\"postNo\" LIKE ?", params[:kokyaku][:postNo] + "%") if params[:kokyaku][:postNo] != ""
@@ -196,6 +204,7 @@ class KokyakusController < ApplicationController
   # PUT /kokyakus/1
   # PUT /kokyakus/1.json
   def update
+    logger.debug(params[:kokyaku])
     # @kokyaku = Kokyaku.find(params[:id])
     @kokyaku = Kokyaku.find(:first, :conditions => {:kokyakuId => params[:id], :delFlg => 0})
 

@@ -169,6 +169,22 @@
 <script type="text/javascript">
     var submitItem22= function() {
         var selected = $("input[name='COL22_1']:checked").val();
+
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if (selected == "1") {
+            if ($("input[name='1-COL22_2']:checked").val() == undefined) {
+                alert("ニューオルソチェアサイズを選択してください。");
+                return false;
+            }
+        } else if (selected == "2") {
+            if ($("input[name='2-COL22_3']:checked").val() == undefined) {
+                alert("ライトチェアサイズを選択してください。");
+                return false;
+            }
+        }
+
         var selected2;
 
         this.mitsumoriData["COL22_1"] = selected;
@@ -212,7 +228,7 @@
                 product["kin"] = removeComma($("#1-169_kin").text());
                 this.productsData["1-169"] = product;
 
-            } else
+            } else {
             }
 
         } else if(selected == "2") {
@@ -251,7 +267,7 @@
                 product["kin"] = removeComma($("#2-172_kin").text());
                 this.productsData["2-172"] = product;
 
-            } else
+            } else {
             }
 
         } else {

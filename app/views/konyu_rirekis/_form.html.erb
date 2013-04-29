@@ -72,7 +72,7 @@
           <tr>
             <th style="width:100px;">受注日</th>
             <td>
-              <input style="width:70px;" type="text" id="juchuDt" name="konyu_rireki[juchuDt]" value="<%= @konyu_rireki.juchuDt %>" />
+              <input style="width:80px;" type="text" id="juchuDt" name="konyu_rireki[juchuDt]" value="<%= @konyu_rireki.juchuDt %>" />
             </td>
           </tr>
         </table>
@@ -358,7 +358,7 @@
           <tr>
             <th><br></th>
             <td>
-              <input id="fileupload" type="file" name="files[]" data-url="/konyu_rirekis/file_upload.json" multiple>
+              <input id="fileupload" type="file" name="files[]" data-url="/konyu_rirekis/file_upload.json">
             </td>
           </tr>
         </table>
@@ -378,7 +378,7 @@ $(function() {
     unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass(errorClass);
     },
-    rules: { // TODO:maxlength:99の桁数修正
+    rules: {
         "konyu_rireki[kokyakuId]": {required:true, number:true, maxlength:7},
         "konyu_rireki[byoinCd]": {required:true, number:true, maxlength:99},
         "konyu_rireki[ishiNm1]": {required:true, maxlength:50},
@@ -618,7 +618,7 @@ function executeKonyuRireki() {
   $("a#btnKonyuRirekiRegist").unbind('click');
 
   // クライアントバリデーション
-  if ($("#konyuRirekiForm").valid() == false) {
+  if ($("#konyuRirekiForm").valid() == false || (confirm("登録します。よろしいですか？") == false)) {
     // 登録ボタンclickイベント再attach
     $("a#btnKonyuRirekiRegist").click(function() {
         executeKonyuRireki();
@@ -626,6 +626,7 @@ function executeKonyuRireki() {
     });
     return false;
   }
+
   var id = $("#id").val();
   //var action;
   //var method;

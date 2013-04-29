@@ -57,7 +57,7 @@
                         <td class="mitsumori_td3" id="1-13_tan">0</td>
                         <td class="mitsumori_td4" id="1-13_kin">0</td>
                         <td class="td4"></td>
-                        <input type="hidden" id="13_tax" name="1-13_tax"/>
+                        <input type="hidden" id="1-13_tax" name="1-13_tax"/>
                     </tr>
                 </table>
             </td>
@@ -370,6 +370,26 @@
 <script type="text/javascript">
     var submitItem5 = function() {
         var selected = $("input[name='COL5_1']:checked").val();
+
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if (selected == "1") {
+
+        } else if (selected == "2") {
+             if ($("input[name='2-COL5_2']:checked").val() == undefined) {
+                alert("きさくPW-2完成部品を選択してください。");
+                return false;
+            }
+        } else if (selected == "3") {
+
+        } else if (selected == "4") {
+            if ($("input[name='4-COL5_4']:checked").val() == undefined) {
+                alert("車椅子フレームを選択してください。");
+                return false;
+            }
+        }
+
         this.mitsumoriData["COL5_1"] = selected;
         this.mitsumoriData["COL5_2"] = 0;
         this.mitsumoriData["COL5_3"] = 0;
@@ -379,7 +399,7 @@
             // 製品データ保存
             var product = {};
             product["mitsumoriNo"] = mitsumoriNo;
-            product["seihinNo"] = "1";
+            product["seihinNo"] = "13";
             product["tanka"] = removeComma($("#1-13_tan").text());
             product["suryo"] = removeComma($("#1-13_su").text());
             product["tax"] = removeComma($("#1-13_tax").val());

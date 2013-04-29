@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="title">顧客管理：顧客編集</div>
-	<div class="statuslabel"><span>顧客編集</span>コメント　無ければ削除</div>
+	<div class="statuslabel"><span>顧客編集</span>顧客名称／カナ名称、生年月日、郵便番号、住所１、電話番号、病名・障害名１は必須項目です。</div>
 	<div id="kokyakuSearch" class="Tourokuform cf">
 		<%= render 'form' %>
 	</div>
@@ -49,7 +49,7 @@ $(function() {
 	});
 
 	$("a#btnCustomerReturn").click(function() {
-    location.href = "/kokyakus";
+    location.href = "/kokyakus?reload=on";
 	    return false;
 	});
 });

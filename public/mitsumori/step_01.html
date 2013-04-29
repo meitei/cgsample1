@@ -162,11 +162,20 @@
         </tr>
     </table>
 </label>
-<script type="text/javascript">
+<script>
     var submitItem1 = function() {
-      // 見積データ保存
-      this.mitsumoriData["COL1_1"] = $("input[name='COL1_1']:checked").val();
-      this.mitsumoriData["COL1_2"] = $("input[name='COL1_2']:checked").val();
-    }
+        if($("input[name='COL1_1']:checked").val() == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if($("input[name='COL1_1']:checked").val() == "3") {
+            if($("input[name='COL1_2']:checked").val() == undefined) {
+                alert("規格タイプを選択してください。");
+                return false;
+            }   
+        }
+        // 見積データ保存
+        this.mitsumoriData["COL1_1"] = $("input[name='COL1_1']:checked").val();
+        this.mitsumoriData["COL1_2"] = $("input[name='COL1_2']:checked").val();
+    };
 </script>
 

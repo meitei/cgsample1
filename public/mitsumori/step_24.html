@@ -11,7 +11,7 @@
         <tr>
             <td class="td1">
                 <div>
-                    <input type="radio" name="COL24_1" id="1-COL24_1">
+                    <input type="radio" name="COL24_1" id="1-COL24_1" value="1">
                 </div>
             </td>
             <td class="detail">
@@ -236,7 +236,7 @@
     <table class="jqwizard_item">
         <tr>
             <td class="td1">
-                <div><input type="radio" name="COL24_1" id="2-COL24_1"></div>
+                <div><input type="radio" name="COL24_1" id="2-COL24_1" value="2"></div>
             </td>
             <td class="detail">
                 <table class="jqwizard_item_detail">
@@ -341,8 +341,24 @@
 
 <script type="text/javascript">
     var submitItem24= function() {
+
         var selected = $("input[name='COL24_1']:checked").val();
-        
+
+        if(selected == undefined) {
+            alert("対象を選択してください。");
+            return false;
+        } else if (selected == "1") {
+            if ($("input[name='1-COL24_2']:checked").val() == undefined) {
+                alert("製品を選択してください。");
+                return false;
+            }
+        } else if (selected == "2") {
+            if ($("input[name='2-COL24_3']:checked").val() == undefined) {
+                alert("製品を選択してください。");
+                return false;
+            }
+        }
+
         this.mitsumoriData["COL24_1"] = selected;
         this.mitsumoriData["COL24_2"] = 0;
         this.mitsumoriData["COL24_3"] = 0;

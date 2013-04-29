@@ -1,5 +1,12 @@
 // 座位保持装置の選択
 function wizard1(){
+    // STEPボタンクリック
+    $("li#step1").click(function() {
+      wm.step = 1;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").hide();
+      $("button#jqwizard_next").show(); 
+    });
     // セミオーダーメイド選択
     $("input#1-COL1_1").change(function(){
       $("div#step2").load("/mitsumori/step_05.html", wizard2a);
@@ -102,7 +109,7 @@ function wizard1(){
     });
 
     $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
-    $("button#jqwizard_next").attr("disabled", "disabled");
+    //$("button#jqwizard_next").attr("disabled", "disabled");
     wm.submitItems[1] = submitItem1;
     // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL1_1"];
@@ -162,4 +169,5 @@ function wizard1(){
         $("li#step17").hide();
         $("button#jqwizard_next").removeAttr("disabled");
     }
+    //$.wizard.prototype.loadnext = validate1;
 }

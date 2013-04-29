@@ -130,7 +130,7 @@
           <table>
             <tr>
               <th style="width:75px;">郵便番号</th>
-              <td style="width:60px;">
+              <td>
                 <input style="width:80px; ime-mode: disabled;" type="text" id="postNo" name="kokyaku[postNo]" value="<%= @kokyaku.postNo %>" maxlength="8" />
               </td>
               <td style="align:left;">
@@ -139,12 +139,12 @@
             </tr>
           </table>
         </td>
-        <td>
+        <td rowspan="6" style="vertical-align:top;">
           <table>
             <tr>
-              <th style="width:100px;">備考</th>
-              <td colspan="5">
-                <textarea style="width:200px;" id="biko" name="kokyaku[biko]"  @kokyaku.biko %></textarea>
+              <th style="width:100px; vertical-align:top;">備考</th>
+              <td>
+                <textarea style="width:200px;" rows="5" id="biko" name="kokyaku[biko]" ><%= @kokyaku.biko %></textarea>
               </td>
             </tr>
           </table>
@@ -237,12 +237,24 @@ $(function() {
         "kokyaku[postNo]": {required:true, postnum:true, maxlength:8},
         "kokyaku[address1]": {required:true, maxlength:100},
         "kokyaku[address2]": {maxlength:100},
-        "kokyaku[tel1]": {required:true, telnum:true, maxlength:12},
-        "kokyaku[tel2]": {mobilenum:true, maxlength:13},
-        "kokyaku[fax]": {telnum:true, telnum:true, maxlength:12},
+        "kokyaku[tel1]": {required:function(element) {
+                            return $("#tel2").val() == "";
+                          }, telnum:true, maxlength:12},
+        "kokyaku[tel2]": {required:function(element) {
+                            return $("#tel1").val() == "";
+                          }, mobilenum:true, maxlength:13},
+        "kokyaku[fax]": {telnum:true, maxlength:12},
         "kokyaku[shobyouCd1]": {required:true},
         "kokyaku[gakkoNm]": {maxlength:100},
         "kokyaku[biko]": {maxlength:200}
+    },
+    messages: {
+      "kokyaku[tel1]": {
+        required: "電話番号/携帯番号のいずれかは入力必須です。"
+      },
+      "kokyaku[tel2]": {
+        required: "電話番号/携帯番号のいずれかは入力必須です。"
+      }
     }
   });
 
@@ -306,7 +318,7 @@ function executeKokyaku() {
   $("a#btnCustomerRegist").unbind('click');
 
   // クライアントバリデーション
-  if ($("#kokyakuForm").valid() == false) {
+  if ($("#kokyakuForm").valid() == false || (confirm("登録します。よろしいですか？") == false)) {
     // 登録ボタンclickイベント再attach
     $("a#btnCustomerRegist").click(function() {
         executeKokyaku();

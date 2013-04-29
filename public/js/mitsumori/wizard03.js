@@ -1,5 +1,12 @@
   // 介護用グリップ選定
   function wizard3a(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     // 不要
     $("input#1-COL6_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -34,6 +41,13 @@
 
   // バックサポート選定
   function wizard3b(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL7_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -89,6 +103,13 @@
 
   // シートベルト選定
   function wizard3c(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL16_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -96,6 +117,105 @@
     //
     $("input#2-COL16_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
+    });
+    $("select#2-101_su").change(function() {
+      var m_tanka = getSeihinInfo("101");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-101_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-101_kin").text(formatComma(kingaku));
+      $("input#2-101_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-102_su").change(function() {
+      var m_tanka = getSeihinInfo("102");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-102_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-102_kin").text(formatComma(kingaku));
+      $("input#2-102_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-97_su").change(function() {
+      var m_tanka = getSeihinInfo("97");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-97_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-97_kin").text(formatComma(kingaku));
+      $("input#2-97_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-98_su").change(function() {
+      var m_tanka = getSeihinInfo("98");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-98_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-98_kin").text(formatComma(kingaku));
+      $("input#2-98_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-99_su").change(function() {
+      var m_tanka = getSeihinInfo("99");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-99_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-99_kin").text(formatComma(kingaku));
+      $("input#2-99_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-103_su").change(function() {
+      var m_tanka = getSeihinInfo("103");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-103_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-103_kin").text(formatComma(kingaku));
+      $("input#2-103_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-104_su").change(function() {
+      var m_tanka = getSeihinInfo("104");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-104_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-104_kin").text(formatComma(kingaku));
+      $("input#2-104_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-105_su").change(function() {
+      var m_tanka = getSeihinInfo("105");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-105_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-105_kin").text(formatComma(kingaku));
+      $("input#2-105_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#2-106_su").change(function() {
+      var m_tanka = getSeihinInfo("106");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-106_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-106_kin").text(formatComma(kingaku));
+      $("input#2-106_tax").val(formatComma(zeigaku));
+      return false;
     });
     // 単価を書き換え
     updateUnitPrice("step3");
@@ -162,6 +282,13 @@
 
   // バックサポート選定
   function wizard3d(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL7_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -217,6 +344,13 @@
 
   // メインフレーム機構選定
   function wizard3e(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL3_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
@@ -232,6 +366,39 @@
     //
     $("input#4-COL3_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
+    });
+    $("select#2-3_su").change(function() {
+      var m_tanka = getSeihinInfo("3");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#2-3_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#2-3_kin").text(formatComma(kingaku));
+      $("input#2-3_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#3-3_su").change(function() {
+      var m_tanka = getSeihinInfo("3");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#3-3_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#3-3_kin").text(formatComma(kingaku));
+      $("input#3-3_tax").val(formatComma(zeigaku));
+      return false;
+    });
+    $("select#4-3_su").change(function() {
+      var m_tanka = getSeihinInfo("3");
+      var tanka = parseFloatEx(m_tanka["tanka"]);
+      var tax = parseFloatEx(m_tanka["tax"]);
+      var amount = parseFloatEx($("select#4-3_su").val());
+      var kingaku = tanka * amount;
+      var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
+      $("td#4-3_kin").text(formatComma(kingaku));
+      $("input#4-3_tax").val(formatComma(zeigaku));
+      return false;
     });
     // 単価を書き換え
     updateUnitPrice("step3");
@@ -299,6 +466,13 @@
 
     // オーダー対応木製
   function wizard3f(){
+    // STEPボタンクリック
+    $("li#step3").click(function() {
+      wm.step = 3;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_previous").show();
+      $("button#jqwizard_next").show(); 
+    });
     //
     $("input#1-COL22_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
