@@ -183,8 +183,57 @@
     $("input#3-COL14_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
     });
-    // 単価を書き換え
-    updateUnitPrice("step13");
+    var tanka89 = getSeihinInfo("89");
+    var tanka90 = getSeihinInfo("90");
+    var tanka91 = getSeihinInfo("91");
+    var tanka92 = getSeihinInfo("92");
+    var tanka93 = getSeihinInfo("93");
+    // 単価をセット
+    var t = parseFloatEx(tanka89["tanka"]);
+    var x = parseFloatEx(tanka89["tax"]);
+    var a = parseFloatEx($("td#2-89_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-89_tan").text(formatComma(t));
+    $("td#2-89_kin").text(formatComma(k));
+    $("input#2-89_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka90["tanka"]);
+    var x = parseFloatEx(tanka90["tax"]);
+    var a = parseFloatEx($("td#2-90_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-90_tan").text(formatComma(t));
+    $("td#2-90_kin").text(formatComma(k));
+    $("input#2-90_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka91["tanka"]);
+    var x = parseFloatEx(tanka91["tax"]);
+    var a = parseFloatEx($("td#2-91_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-91_tan").text(formatComma(t));
+    $("td#2-91_kin").text(formatComma(k));
+    $("input#2-91_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka92["tanka"]);
+    var x = parseFloatEx(tanka92["tax"]);
+    var a = parseFloatEx($("td#2-92_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-92_tan").text(formatComma(t));
+    $("td#2-92_kin").text(formatComma(k));
+    $("input#2-92_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka93["tanka"]);
+    var x = parseFloatEx(tanka93["tax"]);
+    var a = parseFloatEx($("td#3-93_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#3-93_tan").text(formatComma(t));
+    $("td#3-93_kin").text(formatComma(k));
+    $("input#3-93_tax").val(formatComma(z));
+
     wm.submitItems[13] = submitItem14;
 
     if (wm.mitsumoriData["COL14_1"] == "1") {

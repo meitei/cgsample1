@@ -350,8 +350,26 @@
     $("input#3-COL6_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
     });
-    // 単価を書き換え
-    updateUnitPrice("step5");
+    var tanka31 = getSeihinInfo("31");
+    // 単価をセット
+    var t = parseFloatEx(tanka31["tanka"]);
+    var x = parseFloatEx(tanka31["tax"]);
+    var a = parseFloatEx($("td#2-31_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-31_tan").text(formatComma(t));
+    $("td#2-31_kin").text(formatComma(k));
+    $("input#2-31_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka31["tanka"]);
+    var x = parseFloatEx(tanka31["tax"]);
+    var a = parseFloatEx($("td#3-31_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#3-31_tan").text(formatComma(t));
+    $("td#3-31_kin").text(formatComma(k));
+    $("input#3-31_tax").val(formatComma(z));
+
     wm.submitItems[5] = submitItem6;
     // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL6_1"];

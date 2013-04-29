@@ -545,8 +545,17 @@
     $("input#3-COL12_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
     });
-    // 単価を書き換え
-    updateUnitPrice("step10");
+    var tanka80 = getSeihinInfo("80");
+    // 単価をセット
+    var t = parseFloatEx(tanka80["tanka"]);
+    var x = parseFloatEx(tanka80["tax"]);
+    var a = parseFloatEx($("td#3-80_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#3-80_tan").text(formatComma(t));
+    $("td#3-80_kin").text(formatComma(k));
+    $("input#3-80_tax").val(formatComma(z));
+
     wm.submitItems[10] = submitItem12;
 
     // 更新時、DBの値をセット
