@@ -38,7 +38,7 @@
                 </table>
             </td>
             <td class="td5">
-                <div><img src="/images/items/image002.jpg" alt="" /></div>
+                <div><img class="lazy" src="" data-original="/images/items/image002.jpg" alt="" /></div>
             </td>
         </tr>
     </table>
@@ -73,7 +73,7 @@
                 </table>
             </td>
             <td class="td5">
-                <div><img src="/images/items/image004.jpg" alt="" /></div>
+                <div><img class="lazy" src="" data-original="/images/items/image004.jpg" alt="" /></div>
             </td>
         </tr>
     </table>
@@ -157,12 +157,13 @@
                 </table>
             </td>
             <td class="td5">
-                <div><img src="/images/items/image006.gif" alt="" /></div>
+                <div><img class="lazy" src="" data-original="/images/items/image006.gif" alt="" /></div>
             </td>
         </tr>
     </table>
 </label>
 <script type="text/javascript">
+    $(".lazy").lazyload();
     var submitItem1 = function() {
       // 見積データ保存
       this.mitsumoriData["COL1_1"] = $("input[name='COL1_1']:checked").val();
