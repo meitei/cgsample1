@@ -21,7 +21,7 @@
     var z = getFormatAmount(k * x, 1, 0);
     $("td#1-149_tan").text(formatComma(t));
     $("td#1-149_kin").text(formatComma(k));
-    $("td#1-149_tax_v").text(formatComma(x));
+    $("td#1-149_tax_v").text((x * 100) + "%");
     $("input#1-149_tax").val(formatComma(z));
 
     var t = parseFloatEx(tanka150["tanka"]);
@@ -31,7 +31,7 @@
     var z = getFormatAmount(k * x, 1, 0);
     $("td#2-150_tan").text(formatComma(t));
     $("td#2-150_kin").text(formatComma(k));
-    $("td#2-150_tax_v").text(formatComma(x));
+    $("td#2-150_tax_v").text((x * 100) + "%");
     $("input#2-150_tax").val(formatComma(z));
 
     var t = parseFloatEx(tanka151["tanka"]);
@@ -41,7 +41,7 @@
     var z = getFormatAmount(k * x, 1, 0);
     $("td#3-151_tan").text(formatComma(t));
     $("td#3-151_kin").text(formatComma(k));
-    $("td#2-151_tax_v").text(formatComma(x));
+    $("td#3-151_tax_v").text((x * 100) + "%");
     $("input#3-151_tax").val(formatComma(z));
 
     var t = parseFloatEx(tanka152["tanka"]);
@@ -50,7 +50,7 @@
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#4-152_tan").text(formatComma(t));
-    $("td#2-152_tax_v").text(formatComma(x));
+    $("td#4-152_tax_v").text((x * 100) + "%");
     $("td#4-152_kin").text(formatComma(k));
     $("input#4-152_tax").val(formatComma(z));
 
@@ -60,7 +60,7 @@
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#5-153_tan").text(formatComma(t));
-    $("td#2-153_tax_v").text(formatComma(x));
+    $("td#5-153_tax_v").text((x * 100) + "%");
     $("td#5-153_kin").text(formatComma(k));
     $("input#5-153_tax").val(formatComma(z));
 
@@ -70,7 +70,7 @@
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#6-154_tan").text(formatComma(t));
-    $("td#2-154_tax_v").text(formatComma(x));
+    $("td#6-154_tax_v").text((x * 100) + "%");
     $("td#6-154_kin").text(formatComma(k));
     $("input#6-154_tax").val(formatComma(z));
 
@@ -80,7 +80,7 @@
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#7-155_tan").text(formatComma(t));
-    $("td#2-155_tax_v").text(formatComma(x));
+    $("td#7-155_tax_v").text((x * 100) + "%");
     $("td#7-155_kin").text(formatComma(k));
     $("input#7-155_tax").val(formatComma(z));
 
@@ -90,7 +90,7 @@
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#8-156_tan").text(formatComma(t));
-    $("td#2-156_tax_v").text(formatComma(x));
+    $("td#8-156_tax_v").text((x * 100) + "%");
     $("td#8-156_kin").text(formatComma(k));
     $("input#8-156_tax").val(formatComma(z));
 
@@ -100,7 +100,7 @@
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#9-157_tan").text(formatComma(t));
-    $("td#2-157_tax_v").text(formatComma(x));
+    $("td#9-157_tax_v").text((x * 100) + "%");
     $("td#9-157_kin").text(formatComma(k));
     $("input#9-157_tax").val(formatComma(z));
 
@@ -110,7 +110,7 @@
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#10-158_tan").text(formatComma(t));
-    $("td#2-158_tax_v").text(formatComma(x));
+    $("td#10-158_tax_v").text((x * 100) + "%");
     $("td#10-158_kin").text(formatComma(k));
     $("input#10-158_tax").val(formatComma(z));
 
@@ -120,7 +120,7 @@
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#11-159_tan").text(formatComma(t));
-    $("td#2-159_tax_v").text(formatComma(x));
+    $("td#11-159_tax_v").text((x * 100) + "%");
     $("td#11-159_kin").text(formatComma(k));
     $("input#11-159_tax").val(formatComma(z));
 
@@ -130,7 +130,7 @@
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#12-160_tan").text(formatComma(t));
-    $("td#2-160_tax_v").text(formatComma(x));
+    $("td#12-160_tax_v").text((x * 100) + "%");
     $("td#12-160_kin").text(formatComma(k));
     $("input#12-160_tax").val(formatComma(z));
 

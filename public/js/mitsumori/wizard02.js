@@ -43,8 +43,187 @@
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 10;
     });
-    // 単価を書き換え
-    updateUnitPrice("step2");
+    var tanka13 = getSeihinInfo("13");
+    var tanka14 = getSeihinInfo("14");
+    var tanka15 = getSeihinInfo("15");
+    var tanka16 = getSeihinInfo("16");
+    var tanka17 = getSeihinInfo("17");
+    var tanka18 = getSeihinInfo("18");
+    var tanka19 = getSeihinInfo("19");
+    var tanka20 = getSeihinInfo("20");
+    var tanka21 = getSeihinInfo("21");
+    var tanka22 = getSeihinInfo("22");
+    var tanka23 = getSeihinInfo("23");
+    var tanka24 = getSeihinInfo("24");
+    var tanka25 = getSeihinInfo("25");
+    var tanka26 = getSeihinInfo("26");
+    var tanka27 = getSeihinInfo("27");
+    var tanka28 = getSeihinInfo("28");
+    var tanka29 = getSeihinInfo("29");
+    var tanka30 = getSeihinInfo("30");
+    // 単価をセット
+    var t = parseFloatEx(tanka13["tanka"]);
+    var x = parseFloatEx(tanka13["tax"]);
+    var a = parseFloatEx($("td#1-13_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-13_tan").text(formatComma(t));
+    $("td#1-13_kin").text(formatComma(k));
+    $("input#1-13_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka14["tanka"]);
+    var x = parseFloatEx(tanka14["tax"]);
+    var a = parseFloatEx($("td#2-14_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-14_tan").text(formatComma(t));
+    $("td#2-14_kin").text(formatComma(k));
+    $("input#2-14_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka15["tanka"]);
+    var x = parseFloatEx(tanka15["tax"]);
+    var a = parseFloatEx($("td#2-15_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-15_tan").text(formatComma(t));
+    $("td#2-15_kin").text(formatComma(k));
+    $("input#2-15_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka16["tanka"]);
+    var x = parseFloatEx(tanka16["tax"]);
+    var a = parseFloatEx($("td#2-16_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-16_tan").text(formatComma(t));
+    $("td#2-16_kin").text(formatComma(k));
+    $("input#2-16_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka17["tanka"]);
+    var x = parseFloatEx(tanka17["tax"]);
+    var a = parseFloatEx($("td#2-17_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-17_tan").text(formatComma(t));
+    $("td#2-17_kin").text(formatComma(k));
+    $("input#2-17_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka18["tanka"]);
+    var x = parseFloatEx(tanka18["tax"]);
+    var a = parseFloatEx($("td#3-18_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#3-18_tan").text(formatComma(t));
+    $("td#3-18_kin").text(formatComma(k));
+    $("input#3-18_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka19["tanka"]);
+    var x = parseFloatEx(tanka19["tax"]);
+    var a = parseFloatEx($("td#4-19_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-19_tan").text(formatComma(t));
+    $("td#4-19_kin").text(formatComma(k));
+    $("input#4-19_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka20["tanka"]);
+    var x = parseFloatEx(tanka20["tax"]);
+    var a = parseFloatEx($("td#4-20_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-20_tan").text(formatComma(t));
+    $("td#4-20_kin").text(formatComma(k));
+    $("input#4-20_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka21["tanka"]);
+    var x = parseFloatEx(tanka21["tax"]);
+    var a = parseFloatEx($("td#4-21_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-21_tan").text(formatComma(t));
+    $("td#4-21_kin").text(formatComma(k));
+    $("input#4-21_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka22["tanka"]);
+    var x = parseFloatEx(tanka22["tax"]);
+    var a = parseFloatEx($("td#4-22_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-22_tan").text(formatComma(t));
+    $("td#4-22_kin").text(formatComma(k));
+    $("input#4-22_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka23["tanka"]);
+    var x = parseFloatEx(tanka23["tax"]);
+    var a = parseFloatEx($("td#4-23_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-23_tan").text(formatComma(t));
+    $("td#4-23_kin").text(formatComma(k));
+    $("input#4-23_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka24["tanka"]);
+    var x = parseFloatEx(tanka24["tax"]);
+    var a = parseFloatEx($("td#4-24_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-24_tan").text(formatComma(t));
+    $("td#4-24_kin").text(formatComma(k));
+    $("input#4-24_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka25["tanka"]);
+    var x = parseFloatEx(tanka25["tax"]);
+    var a = parseFloatEx($("td#4-25_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-25_tan").text(formatComma(t));
+    $("td#4-25_kin").text(formatComma(k));
+    $("input#4-25_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka26["tanka"]);
+    var x = parseFloatEx(tanka26["tax"]);
+    var a = parseFloatEx($("td#4-26_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-26_tan").text(formatComma(t));
+    $("td#4-26_kin").text(formatComma(k));
+    $("input#4-26_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka27["tanka"]);
+    var x = parseFloatEx(tanka27["tax"]);
+    var a = parseFloatEx($("td#4-27_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-27_tan").text(formatComma(t));
+    $("td#4-27_kin").text(formatComma(k));
+    $("input#4-27_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka28["tanka"]);
+    var x = parseFloatEx(tanka28["tax"]);
+    var a = parseFloatEx($("td#4-28_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-28_tan").text(formatComma(t));
+    $("td#4-28_kin").text(formatComma(k));
+    $("input#4-28_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka29["tanka"]);
+    var x = parseFloatEx(tanka29["tax"]);
+    var a = parseFloatEx($("td#4-29_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-29_tan").text(formatComma(t));
+    $("td#4-29_kin").text(formatComma(k));
+    $("input#4-29_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka30["tanka"]);
+    var x = parseFloatEx(tanka30["tax"]);
+    var a = parseFloatEx($("td#4-30_su").text());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-30_tan").text(formatComma(t));
+    $("td#4-30_kin").text(formatComma(k));
+    $("input#4-30_tax").val(formatComma(z));
+
     wm.submitItems[2] = submitItem5;
 
     // 更新時、DBの値をセット
@@ -166,8 +345,6 @@
       $("button.jqwizard_next").removeAttr("disabled");
       wm.lastStep = 3;
     });
-    // 単価を書き換え
-    updateUnitPrice("step2");
     wm.submitItems[2] = submitItem2;
 
     // 更新時、DBの値をセット
@@ -205,9 +382,163 @@
       $("button#jqwizard_previous").show();
       $("button#jqwizard_next").show(); 
     });
-      wm.lastStep = 2;
-    // 単価を書き換え
-    updateUnitPrice("step2");
+    wm.lastStep = 2;
+
+    var tanka173 = getSeihinInfo("173");
+    var tanka174 = getSeihinInfo("174");
+    var tanka175 = getSeihinInfo("175");
+    var tanka176 = getSeihinInfo("176");
+    var tanka177 = getSeihinInfo("177");
+    var tanka178 = getSeihinInfo("178");
+    var tanka179 = getSeihinInfo("179");
+    var tanka180 = getSeihinInfo("180");
+    var tanka181 = getSeihinInfo("181");
+    var tanka182 = getSeihinInfo("182");
+    var tanka183 = getSeihinInfo("183");
+    var tanka184 = getSeihinInfo("184");
+    var tanka185 = getSeihinInfo("185");
+    var tanka186 = getSeihinInfo("186");
+    // 単価をセット
+    var t = parseFloatEx(tanka173["tanka"]);
+    var x = parseFloatEx(tanka173["tax"]);
+    var a = parseFloatEx($("input#1-173_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-173_tan").text(formatComma(t));
+    $("td#1-173_kin").text(formatComma(k));
+    $("td#1-173_tax_v").text((x * 100) + "%");
+    $("input#1-173_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka174["tanka"]);
+    var x = parseFloatEx(tanka174["tax"]);
+    var a = parseFloatEx($("input#1-174_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-174_tan").text(formatComma(t));
+    $("td#1-174_kin").text(formatComma(k));
+    $("td#1-174_tax_v").text((x * 100) + "%");
+    $("input#1-174_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka175["tanka"]);
+    var x = parseFloatEx(tanka175["tax"]);
+    var a = parseFloatEx($("input#2-175_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-175_tan").text(formatComma(t));
+    $("td#2-175_kin").text(formatComma(k));
+    $("td#2-175_tax_v").text((x * 100) + "%");
+    $("input#2-175_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka176["tanka"]);
+    var x = parseFloatEx(tanka176["tax"]);
+    var a = parseFloatEx($("input#3-176_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#3-176_tan").text(formatComma(t));
+    $("td#3-176_kin").text(formatComma(k));
+    $("td#3-176_tax_v").text((x * 100) + "%");
+    $("input#3-176_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka177["tanka"]);
+    var x = parseFloatEx(tanka177["tax"]);
+    var a = parseFloatEx($("input#3-177_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#3-177_tan").text(formatComma(t));
+    $("td#3-177_kin").text(formatComma(k));
+    $("td#3-177_tax_v").text((x * 100) + "%");
+    $("input#3-177_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka178["tanka"]);
+    var x = parseFloatEx(tanka178["tax"]);
+    var a = parseFloatEx($("input#3-178_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#3-178_tan").text(formatComma(t));
+    $("td#3-178_kin").text(formatComma(k));
+    $("td#3-178_tax_v").text((x * 100) + "%");
+    $("input#3-178_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka179["tanka"]);
+    var x = parseFloatEx(tanka179["tax"]);
+    var a = parseFloatEx($("input#4-179_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-179_tan").text(formatComma(t));
+    $("td#4-179_kin").text(formatComma(k));
+    $("td#4-179_tax_v").text((x * 100) + "%");
+    $("input#4-179_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka180["tanka"]);
+    var x = parseFloatEx(tanka180["tax"]);
+    var a = parseFloatEx($("input#4-180_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#4-180_tan").text(formatComma(t));
+    $("td#4-180_kin").text(formatComma(k));
+    $("td#4-180_tax_v").text((x * 100) + "%");
+    $("input#4-180_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka181["tanka"]);
+    var x = parseFloatEx(tanka181["tax"]);
+    var a = parseFloatEx($("input#5-181_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#5-181_tan").text(formatComma(t));
+    $("td#5-181_kin").text(formatComma(k));
+    $("td#5-181_tax_v").text((x * 100) + "%");
+    $("input#5-181_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka182["tanka"]);
+    var x = parseFloatEx(tanka182["tax"]);
+    var a = parseFloatEx($("input#5-182_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#5-182_tan").text(formatComma(t));
+    $("td#5-182_kin").text(formatComma(k));
+    $("td#5-182_tax_v").text((x * 100) + "%");
+    $("input#5-182_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka183["tanka"]);
+    var x = parseFloatEx(tanka183["tax"]);
+    var a = parseFloatEx($("input#5-183_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#5-183_tan").text(formatComma(t));
+    $("td#5-183_kin").text(formatComma(k));
+    $("td#5-183_tax_v").text((x * 100) + "%");
+    $("input#5-183_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka184["tanka"]);
+    var x = parseFloatEx(tanka184["tax"]);
+    var a = parseFloatEx($("input#6-184_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#6-184_tan").text(formatComma(t));
+    $("td#6-184_kin").text(formatComma(k));
+    $("td#6-184_tax_v").text((x * 100) + "%");
+    $("input#6-184_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka185["tanka"]);
+    var x = parseFloatEx(tanka185["tax"]);
+    var a = parseFloatEx($("input#6-185_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#6-185_tan").text(formatComma(t));
+    $("td#6-185_kin").text(formatComma(k));
+    $("td#6-185_tax_v").text((x * 100) + "%");
+    $("input#6-185_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka186["tanka"]);
+    var x = parseFloatEx(tanka186["tax"]);
+    var a = parseFloatEx($("input#6-186_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#6-186_tan").text(formatComma(t));
+    $("td#6-186_kin").text(formatComma(k));
+    $("td#6-186_tax_v").text((x * 100) + "%");
+    $("input#6-186_tax").val(formatComma(z));
+
     wm.submitItems[2] = submitItem23;
     // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL23_1"];
@@ -248,8 +579,150 @@
       $("button#jqwizard_next").show(); 
     });
       wm.lastStep = 2;
-    // 単価を書き換え
-    updateUnitPrice("step2");
+    var tanka187 = getSeihinInfo("187");
+    var tanka188 = getSeihinInfo("188");
+    var tanka189 = getSeihinInfo("189");
+    var tanka190 = getSeihinInfo("190");
+    var tanka191 = getSeihinInfo("191");
+    var tanka192 = getSeihinInfo("192");
+    var tanka193 = getSeihinInfo("193");
+    var tanka194 = getSeihinInfo("194");
+    var tanka195 = getSeihinInfo("195");
+    var tanka196 = getSeihinInfo("196");
+    var tanka197 = getSeihinInfo("197");
+    var tanka198 = getSeihinInfo("198");
+    var tanka199 = getSeihinInfo("199");
+    // 単価をセット
+    var t = parseFloatEx(tanka187["tanka"]);
+    var x = parseFloatEx(tanka187["tax"]);
+    var a = parseFloatEx($("input#1-187_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-187_tan").text(formatComma(t));
+    $("td#1-187_kin").text(formatComma(k));
+    $("td#1-187_tax_v").text((x * 100) + "%");
+    $("input#1-187_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka188["tanka"]);
+    var x = parseFloatEx(tanka188["tax"]);
+    var a = parseFloatEx($("input#1-188_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-188_tan").text(formatComma(t));
+    $("td#1-188_kin").text(formatComma(k));
+    $("td#1-188_tax_v").text((x * 100) + "%");
+    $("input#1-188_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka189["tanka"]);
+    var x = parseFloatEx(tanka189["tax"]);
+    var a = parseFloatEx($("input#1-189_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-189_tan").text(formatComma(t));
+    $("td#1-189_kin").text(formatComma(k));
+    $("td#1-189_tax_v").text((x * 100) + "%");
+    $("input#1-189_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka190["tanka"]);
+    var x = parseFloatEx(tanka190["tax"]);
+    var a = parseFloatEx($("input#1-190_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-190_tan").text(formatComma(t));
+    $("td#1-190_kin").text(formatComma(k));
+    $("td#1-190_tax_v").text((x * 100) + "%");
+    $("input#1-190_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka191["tanka"]);
+    var x = parseFloatEx(tanka191["tax"]);
+    var a = parseFloatEx($("input#1-191_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-191_tan").text(formatComma(t));
+    $("td#1-191_kin").text(formatComma(k));
+    $("td#1-191_tax_v").text((x * 100) + "%");
+    $("input#1-191_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka192["tanka"]);
+    var x = parseFloatEx(tanka192["tax"]);
+    var a = parseFloatEx($("input#1-192_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-192_tan").text(formatComma(t));
+    $("td#1-192_kin").text(formatComma(k));
+    $("td#1-192_tax_v").text((x * 100) + "%");
+    $("input#1-192_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka193["tanka"]);
+    var x = parseFloatEx(tanka193["tax"]);
+    var a = parseFloatEx($("input#1-193_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-193_tan").text(formatComma(t));
+    $("td#1-193_kin").text(formatComma(k));
+    $("td#1-193_tax_v").text((x * 100) + "%");
+    $("input#1-193_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka194["tanka"]);
+    var x = parseFloatEx(tanka194["tax"]);
+    var a = parseFloatEx($("input#1-194_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-194_tan").text(formatComma(t));
+    $("td#1-194_kin").text(formatComma(k));
+    $("td#1-194_tax_v").text((x * 100) + "%");
+    $("input#1-194_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka195["tanka"]);
+    var x = parseFloatEx(tanka195["tax"]);
+    var a = parseFloatEx($("input#1-195_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-195_tan").text(formatComma(t));
+    $("td#1-195_kin").text(formatComma(k));
+    $("td#1-195_tax_v").text((x * 100) + "%");
+    $("input#1-195_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka196["tanka"]);
+    var x = parseFloatEx(tanka196["tax"]);
+    var a = parseFloatEx($("input#1-196_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-196_tan").text(formatComma(t));
+    $("td#1-196_kin").text(formatComma(k));
+    $("td#1-196_tax_v").text((x * 100) + "%");
+    $("input#1-196_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka197["tanka"]);
+    var x = parseFloatEx(tanka197["tax"]);
+    var a = parseFloatEx($("input#2-197_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-197_tan").text(formatComma(t));
+    $("td#2-197_kin").text(formatComma(k));
+    $("td#2-197_tax_v").text((x * 100) + "%");
+    $("input#2-197_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka198["tanka"]);
+    var x = parseFloatEx(tanka198["tax"]);
+    var a = parseFloatEx($("input#2-198_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-198_tan").text(formatComma(t));
+    $("td#2-198_kin").text(formatComma(k));
+    $("td#2-198_tax_v").text((x * 100) + "%");
+    $("input#2-198_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka199["tanka"]);
+    var x = parseFloatEx(tanka199["tax"]);
+    var a = parseFloatEx($("input#2-199_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#2-199_tan").text(formatComma(t));
+    $("td#2-199_kin").text(formatComma(k));
+    $("td#2-199_tax_v").text((x * 100) + "%");
+    $("input#2-199_tax").val(formatComma(z));
+
     wm.submitItems[2] = submitItem24;
     // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL24_1"];
@@ -273,9 +746,31 @@
       $("button#jqwizard_previous").show();
       $("button#jqwizard_next").show(); 
     });
-      wm.lastStep = 2;
-    // 単価を書き換え
-    updateUnitPrice("step2");
+    wm.lastStep = 2;
+
+    var tanka200 = getSeihinInfo("200");
+    var tanka201 = getSeihinInfo("201");
+    // 単価をセット
+    var t = parseFloatEx(tanka200["tanka"]);
+    var x = parseFloatEx(tanka200["tax"]);
+    var a = parseFloatEx($("input#1-200_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-200_tan").text(formatComma(t));
+    $("td#1-200_kin").text(formatComma(k));
+    $("td#1-200_tax_v").text((x * 100) + "%");
+    $("input#1-200_tax").val(formatComma(z));
+
+    var t = parseFloatEx(tanka201["tanka"]);
+    var x = parseFloatEx(tanka201["tax"]);
+    var a = parseFloatEx($("input#1-201_su").val());
+    var k = t * a;
+    var z = getFormatAmount(k * x, 1, 0);
+    $("td#1-201_tan").text(formatComma(t));
+    $("td#1-201_kin").text(formatComma(k));
+    $("td#1-201_tax_v").text((x * 100) + "%");
+    $("input#1-201_tax").val(formatComma(z));
+
     wm.submitItems[2] = submitItem25;
   }
 
