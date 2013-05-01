@@ -599,7 +599,7 @@ class ReportController < ApplicationController
     report.generate_file(File.join(saveDir,fileName))
 
     # http://serverName/tmp/fileName.pdf で読み込まれるようにする
-    fileInfo = {'fileName' =>"tmp/" + fileName}
+    fileInfo = {'fileName' =>"/tmp/" + fileName}
 
     # render :json => fileInfo
     respond_to do |format|
