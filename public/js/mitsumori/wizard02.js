@@ -5,7 +5,10 @@
       wm.step = 2;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
       $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      $("button#jqwizard_next").show();
+      if(wm.step < wm.lastStep) {
+        $("#btnEstimateRegist").hide();
+      }
     });
     // 屋内用
     $("input#1-COL5_1").change(function(){

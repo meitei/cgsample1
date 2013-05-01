@@ -5,7 +5,8 @@ function wizard1(){
       wm.step = 1;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
       $("button#jqwizard_previous").hide();
-      $("button#jqwizard_next").show(); 
+      $("button#jqwizard_next").show();
+      $("#btnEstimateRegist").hide();
     });
     // セミオーダーメイド選択
     $("input#1-COL1_1").change(function(){

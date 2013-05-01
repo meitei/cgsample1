@@ -5,7 +5,10 @@
       wm.step = 4;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
       $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      $("button#jqwizard_next").show();
+      if(wm.step < wm.lastStep) {
+        $("#btnEstimateRegist").hide();
+      }
     });
     //
     $("input#1-COL8_1").click(function(){
