@@ -321,6 +321,12 @@
 <script type="text/javascript">
     var submitItem4 = function() {
         var selected = $("input[name='COL4_1']:checked").val();
+
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } 
+
         this.mitsumoriData["COL4_1"] = selected;
         if(selected == "1") {
             // 製品データ保存

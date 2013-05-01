@@ -542,6 +542,61 @@
 <script type="text/javascript">
     var submitItem7 = function() {
         var selected = $("input[name='COL7_1']:checked").val();
+        
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if (selected == "1") {
+            if ($("#1-COL7_3").val() == "" || isNaN($("#1-COL7_3").val())) {
+                alert("高さは数値で入力してください。");
+                return false;
+            }
+            if ($("#1-COL7_4").val() == "" || isNaN($("#1-COL7_4").val())) {
+                alert("幅（内寸）は数値で入力してください。");
+                return false;
+            }
+        } else if (selected == "2") {
+            if ($("#2-COL7_3").val() == "" || isNaN($("#2-COL7_3").val())) {
+                alert("高さは数値で入力してください。");
+                return false;
+            }
+            if ($("#2-COL7_4").val() == "" || isNaN($("#2-COL7_4").val())) {
+                alert("幅（内寸）は数値で入力してください。");
+                return false;
+            }
+            if ($("#2-COL7_5").val() == "" || isNaN($("#2-COL7_5").val())) {
+                alert("フレームオフセットは数値で入力してください。");
+                return false;
+            }
+            if ($("#2-COL7_6").val() == "" || isNaN($("#2-COL7_6").val())) {
+                alert("下部フレーム高さは数値で入力してください。");
+                return false;
+            }
+            if ($("#2-COL7_7").val() == "" || isNaN($("#2-COL7_7").val())) {
+                alert("中間フレーム長さは数値で入力してください。");
+                return false;
+            }
+        } else if (selected == "3") {
+            if ($("#3-COL7_3").val() == "" || isNaN($("#3-COL7_3").val())) {
+                alert("高さは数値で入力してください。");
+                return false;
+            }
+            if ($("#3-COL7_4").val() == "" || isNaN($("#3-COL7_4").val())) {
+                alert("幅（内寸）は数値で入力してください。");
+                return false;
+            }
+        } else if (selected == "4") {
+            if ($("#4-COL7_3").val() == "" || isNaN($("#4-COL7_3").val())) {
+                alert("高さは数値で入力してください。");
+                return false;
+            }
+            if ($("#4-COL7_4").val() == "" || isNaN($("#4-COL7_4").val())) {
+                alert("幅（内寸）は数値で入力してください。");
+                return false;
+            }
+        }
+
+
         this.mitsumoriData["COL7_1"] = selected;
         this.mitsumoriData["COL7_2"] = 0;
         this.mitsumoriData["COL7_3"] = 0;

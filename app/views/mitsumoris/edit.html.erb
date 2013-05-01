@@ -12,20 +12,55 @@
   	var mitsumoriNo = $("#mitsumoriNo").val();
     var mitsumoriId = $("#mitsumoriId").val();
   	var wm = new WizardManager();
+    // 次へ
+    $.wizard.prototype.loadnext = function () {
+      WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
+    if(wm.addEstimate() == false) { return false; };
+      wm.step++;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      if(wm.step == wm.lastStep) {
+        $("#btnEstimateRegist").show();
+        $("button#jqwizard_next").hide();
+      } else {
+        $("#btnEstimateRegist").hide();
+        $("button#jqwizard_next").show();
+      }
+      if(wm.step > 1) {
+        $("button#jqwizard_previous").show();  
+      }
+      if (this.current_index != this.max_index) {
+        this.load(this.current_index + 1);
+      }
+    };
+    // 戻る
+    $.wizard.prototype.loadprev = function () {
+      wm.step--;
+      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+      $("button#jqwizard_next").show();
+      if(wm.step == 1) {
+          $("button#jqwizard_previous").hide();  
+      }
+      if(wm.step < wm.lastStep) {
+        $("#btnEstimateRegist").hide();
+      }
+      if (this.current_index != 0) {
+        this.load(this.current_index - 1);
+      }
+    };
 
   	$(document).ready(function(){
-    $.ajax({
-        scriptCharset:"UTF-8",
-        type: "GET",
-        url: "/mitsumori_tankas.json",
-        root: "mitsumori_tankas",
-        dataType: "json",
-        success: function(result) {
-            if(result != null) {
-                tanka = result;
-            }
-        }
-    });
+      $.ajax({
+          scriptCharset:"UTF-8",
+          type: "GET",
+          url: "/mitsumori_tankas.json",
+          root: "mitsumori_tankas",
+          dataType: "json",
+          success: function(result) {
+              if(result != null) {
+                  tanka = result;
+              }
+          }
+      });
       $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
@@ -46,44 +81,13 @@
     	wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
     	wm.mitsumoriData["kokyakuId"] = kokyakuId;
     	wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
-    	//clearNavi("1");
-    	// 次へ
-    	$("button.jqwizard_next").click(function() {
-    		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-    		wm.addEstimate();
-    		console.dir(wm.productsData);
-    		console.dir(wm.mitsumoriData);
-    		wm.step++;
-    		$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-    		if(wm.step == wm.lastStep) {
-        		$("#btnEstimateRegist").show();
-        		$("button#jqwizard_next").hide();
-      		} else {
-        		$("button#jqwizard_next").show();
-      		}
-      		if(wm.step > 1) {
-        		$("button#jqwizard_previous").show();  
-      		}
-      		//$("button#jqwizard_next").attr("disabled", "disabled");
-    	});
-    	// 戻る
-    	$("button.jqwizard_previous").click(function() {
-    		wm.step--;
-    		$("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-        $("button#jqwizard_next").show();
-    		if(wm.step == 1) {
-        		$("button#jqwizard_previous").hide();  
-     		}
-    	});
     	// 更新
     	$("#btnEstimateRegist").click(function() {
-      if (confirm("更新します。よろしいですか？") == false) {
-        return false;
-      }
     		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-    		wm.addEstimate();
-    		//console.dir(wm.productsData);
-    		//console.dir(wm.mitsumoriData);
+    		wm.addEstimate();      
+        if (confirm("更新します。よろしいですか？") == false) {
+          return false;
+        }
     		var postData = {};
     		var url = "/mitsumoris/" + wm.mitsumoriData["id"] + ".json";
     		var type = "POST";

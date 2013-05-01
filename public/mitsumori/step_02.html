@@ -34,7 +34,7 @@
                         <td class="td3" colspan="4">
                             体重の目安23kg未満<br>
                             低緊張<br>
-                            弛緩姓麻痺
+                            弛緩性麻痺
                         </td>
                         <td class="td4">
                         </td>
@@ -138,6 +138,10 @@
 </label>
 <script type="text/javascript">
     var submitItem2 = function() {
+        if($("input[name='COL2_1']:checked").val() == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        }
         this.mitsumoriData["COL2_1"] = $("input[name='COL2_1']:checked").val();
         return;
     }

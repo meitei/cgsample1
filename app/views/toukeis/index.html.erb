@@ -189,7 +189,14 @@ function searchToukei(direction) {
           } else {
             $('#btnNext').addClass('disabled').click(func_disable);
           }
-
+          //グラフ表示ボタンの制御
+          if (data.total > 0) {
+            $("a#btnShowGraph").css("display","block");
+            $("p#dummySpace").css("display","none");
+          } else {
+            $("a#btnShowGraph").css("display","none");
+            $("p#dummySpace").css("display","block");
+          }
         }
     };
     $("#searchToukeiGrid").setGridParam(param).trigger("reloadGrid");

@@ -559,6 +559,31 @@
     var submitItem8 = function() {
         var selected = $("input[name='COL8_1']:checked").val();
         
+        if(selected == undefined) {
+            alert("種別を選択してください。");
+            return false;
+        } else if (selected == "1") {
+            if ($("#1-COL8_3").val() == "" || isNaN($("#1-COL8_3").val())) {
+                alert("奥行は数値で入力してください。");
+                return false;
+            }
+        } else if (selected == "2") {
+            if ($("#2-COL8_3").val() == "" || isNaN($("#2-COL8_3").val())) {
+                alert("奥行は数値で入力してください。");
+                return false;
+            }
+        } else if (selected == "3") {
+            if ($("#3-COL8_3").val() == "" || isNaN($("#3-COL8_3").val())) {
+                alert("奥行は数値で入力してください。");
+                return false;
+            }
+        } else if (selected == "4") {
+            if ($("#4-COL8_3").val() == "" || isNaN($("#4-COL8_3").val())) {
+                alert("奥行は数値で入力してください。");
+                return false;
+            }
+        }
+
         this.mitsumoriData["COL8_1"] = selected;
         this.mitsumoriData["COL8_2"] = 0;
         this.mitsumoriData["COL8_3"] = 0;

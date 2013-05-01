@@ -109,7 +109,7 @@ function wizard1(){
     });
 
     $("div.statuslabel").html("<span>STEP 1</span>" + $("div#step1 > div#title").text());
-    $("button#jqwizard_next").attr("disabled", "disabled");
+    //$("button#jqwizard_next").attr("disabled", "disabled");
     wm.submitItems[1] = submitItem1;
     // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL1_1"];
@@ -169,4 +169,5 @@ function wizard1(){
         $("li#step17").hide();
         $("button#jqwizard_next").removeAttr("disabled");
     }
+    //$.wizard.prototype.loadnext = validate1;
 }
