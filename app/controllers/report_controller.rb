@@ -53,8 +53,8 @@ class ReportController < ApplicationController
       2 => 22,
       78 => 23,
       87 => 24,
-      3 => 25,
-      79 => 25,
+      3 => 25,  # 25:累計項目
+      79 => 25,  # 25:累計項目
       1 => 28,
       4 => 29,
       94 => 31,
@@ -105,12 +105,12 @@ class ReportController < ApplicationController
       50 => 11,
       76 => 12,
       83 => 13,
-      35 => 14,
-      46 => 14,
-      59 => 14,
-      77 => 14,
-      84 => 14,
-      92 => 14,
+      35 => 14,  # 69:累計項目
+      46 => 14,  # 69:累計項目
+      59 => 14,  # 69:累計項目
+      77 => 14,  # 69:累計項目
+      84 => 14,  # 69:累計項目
+      92 => 14,  # 69:累計項目
       80 => 15,
       95 => 16,
       5 => 23,
@@ -396,6 +396,12 @@ class ReportController < ApplicationController
           }
         end
 
+        # 累計項目
+        ruikei_25_suryo = 0
+        ruikei_25_kin = 0
+        ruikei_69_suryo = 0
+        ruikei_69_kin = 0
+
         if @@mitsumoriSeihins.present?
           @@mitsumoriSeihins.each {|row|
 
@@ -442,6 +448,12 @@ class ReportController < ApplicationController
 
               line = @@hash1[row["seihinNo"].to_i]
 
+              # 累計処理
+              if line == 25
+                ruikei_25_suryo += row["suryo"].to_i
+                ruikei_25_kin += row["kin"].to_i
+              end
+
               @@headers1.each {|header|
                 if header == 'tanka'
                   id = 'saisun' + '_1_' + line.to_s
@@ -468,6 +480,12 @@ class ReportController < ApplicationController
 
               line = @@hash2[row["seihinNo"].to_i]
 
+              # 累計処理
+              if line == 14
+                ruikei_69_suryo += row["suryo"].to_i
+                ruikei_69_kin += row["kin"].to_i
+              end
+
               @@headers2.each {|header|
                 id = header + '_2_' + line.to_s
                 item(id).value(number_format(row[header]))
@@ -489,6 +507,17 @@ class ReportController < ApplicationController
               taxtotal += row["tax"].to_i * row["suryo"].to_i
             end
           }
+        end
+
+        # 累計項目の出力
+        if ruikei_25_suryo > 0
+          item('suryo_1_25').value(number_format(ruikei_25_suryo))
+          item('kin_1_25').value(number_format(ruikei_25_kin))
+        end
+
+        if ruikei_69_suryo > 0
+          item('suryo_2_14').value(number_format(ruikei_69_suryo))
+          item('kin_2_14').value(number_format(ruikei_69_kin))
         end
 
         # 4行目分も集計に加える
