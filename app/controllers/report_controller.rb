@@ -258,28 +258,37 @@ class ReportController < ApplicationController
 
       @@mitsumoriTankas = MitsumoriTanka.where(:buhinCd == nil)
 
-      sqlstr =  "SELECT ms.\"seihinNo\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
-      sqlstr += "FROM mitsumori_seihins ms "
-      sqlstr += "LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
-      sqlstr += "WHERE ms.\"mitsumoriNo\" = ? "
-      args = [sqlstr, mitsumoriNo.to_i]
-      sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
-      # logger.debug(sql)
-      @@mitsumoriSeihins = ActiveRecord::Base.connection.execute(sql)
 
-      sqlstr =  "SELECT * FROM ( "
-      sqlstr += "  SELECT kb.\"buhinCd\", kb.\"buhinNm\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
-      sqlstr += "  FROM mitsumori_seihins ms "
-      sqlstr += "  LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
-      sqlstr += "  LEFT JOIN kansei_buhins kb ON mt.\"buhinCd\" = kb.\"buhinCd\" "
-      sqlstr += "  WHERE ms.\"mitsumoriNo\" = ? "
-      sqlstr += ") kanseibuhins "
-      sqlstr += "WHERE kanseibuhins.\"buhinCd\" IS NOT NULL"
-      args = [sqlstr, mitsumoriNo.to_i]
-      sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
-      # logger.debug(sql)
-      @@kanseiBuhins = ActiveRecord::Base.connection.execute(sql)
+      # 規格品タイプの場合、4列目のみを出力する
+      if @@mitsumori["COL1_1"] == 3
+        @@mitsumoriSeihins = nil
 
+        sqlstr =  "SELECT * FROM ( "
+        sqlstr += "  SELECT kb.\"buhinCd\", kb.\"buhinNm\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
+        sqlstr += "  FROM mitsumori_seihins ms "
+        sqlstr += "  LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
+        sqlstr += "  LEFT JOIN kansei_buhins kb ON mt.\"buhinCd\" = kb.\"buhinCd\" "
+        sqlstr += "  WHERE ms.\"mitsumoriNo\" = ? "
+        sqlstr += ") kanseibuhins "
+        sqlstr += "WHERE kanseibuhins.\"buhinCd\" IS NOT NULL"
+        args = [sqlstr, mitsumoriNo.to_i]
+        sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
+        # logger.debug(sql)
+        @@kanseiBuhins = ActiveRecord::Base.connection.execute(sql)
+
+      # セミオーダorフルオーダの場合、1～3列目を出力する
+      elsif
+        sqlstr =  "SELECT ms.\"seihinNo\", ms.tanka, ms.suryo, ms.tax, ms.kin, mt.tax AS tax_rate "
+        sqlstr += "FROM mitsumori_seihins ms "
+        sqlstr += "LEFT JOIN mitsumori_tankas mt ON ms.\"seihinNo\" = mt.\"seihinNo\" "
+        sqlstr += "WHERE ms.\"mitsumoriNo\" = ? "
+        args = [sqlstr, mitsumoriNo.to_i]
+        sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
+        # logger.debug(sql)
+        @@mitsumoriSeihins = ActiveRecord::Base.connection.execute(sql)
+
+        @@kanseiBuhins = nil
+      end
 
       # DB判定
       adapter = Rails.configuration.database_configuration[Rails.env]['adapter']
@@ -287,8 +296,13 @@ class ReportController < ApplicationController
 
       if adapter == "mysql2" then
         # MySQLの場合、ResultSetをそのまま扱えない
-        @@mitsumoriSeihins.each(:as => :hash)
-        @@kanseiBuhins.each(:as => :hash)
+        if @@mitsumoriSeihins.present?
+          @@mitsumoriSeihins.each(:as => :hash)
+        end
+
+        if @@kanseiBuhins.present?
+          @@kanseiBuhins.each(:as => :hash)
+        end
       end
 
     end
