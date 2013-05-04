@@ -141,7 +141,7 @@
       $("input#1-COL20_1").attr("checked", true);
     }
     if (wm.mitsumoriData["COL20_2"] == "1") {
-      $("input#2-COL20_1").attr("checked", true);
+      $("input#2-COL20_2").attr("checked", true);
     }
     if (wm.mitsumoriData["COL20_3"] == "1") {
       $("input#3-COL20_3").attr("checked", true);
