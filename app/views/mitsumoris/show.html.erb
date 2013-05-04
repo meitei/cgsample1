@@ -3,15 +3,15 @@
     <div class="mainmenu_inner cf">
       <ul>
         <a href="/konyu_rirekis">購入履歴管理</a>
-        <a href="#" onclick="showReport(<%= @mitsumori.id %>)">見積書出力</a>
-        <a href="#" onclick="showMitsumoriKanseizu(<%= @mitsumori.id %>)">見積完成図表示</a>
+        <a href="#" onclick="showReport(<%= @mitsumori.konyuRirekiId %>)">見積書出力</a>
+        <a href="#" onclick="showMitsumoriKanseizu(<%= @mitsumori.konyuRirekiId %>)">見積完成図表示</a>
       </ul>
   </div>
 </div>
 <script type="text/javascript">
 	// 見積書PDF出力用メソッド
 	function showReport(id) {
-	  var url = "/report/report.json";
+	  var url = "/report/report_mitsumori.json";
 	  url += "?id=" + id;
 	  $.ajax({
 	      scriptCharset:"UTF-8",
@@ -29,7 +29,7 @@
 
 	// 見積完成図表示用メソッド
 	function showMitsumoriKanseizu(id) {
-	    url = "/kanseizu/show?id=" + id;
+	    url = "/kanseizu/show_mitsumori?id=" + id;
 	    window.open(url,'_blank')
 	    return false;
 	}

@@ -621,6 +621,12 @@ class ReportController < ApplicationController
       format.json { render json: fileInfo }
     end
   end
+
+  def report_mitsumori
+    @konyuRireki = KonyuRireki.find(:first, :conditions => {:konyuRirekiId => params[:id]})
+    redirect_to "/report/report?id=" + @konyuRireki["id"].to_s
+  end
+
 end
 
 def number_format value

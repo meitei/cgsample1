@@ -211,7 +211,7 @@ class KanseizuController < ApplicationController
             # COL13_1=3：角度調整の場合
             if @mitsumori["COL13_1"] == 3
               @array.push value[0]
-            # COL13_1=4：開閉機構の場合
+            # COL13_1=4：開閉機構の場合w
             elsif @mitsumori["COL13_1"] == 4
               @array.push value[1]
             end
@@ -234,6 +234,11 @@ class KanseizuController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @array }
     end
+  end
+
+  def show_mitsumori
+    @konyuRireki = KonyuRireki.find(:first, :conditions => {:konyuRirekiId => params[:id]})
+    redirect_to "/kanseizu/show?id=" + @konyuRireki["id"].to_s
   end
 
 end
