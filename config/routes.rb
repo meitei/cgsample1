@@ -40,8 +40,10 @@ JqgridSample::Application.routes.draw do
   get "item_extend/search"
 
   get "report/report"
+  get "report/report_mitsumori"
 
   get "kanseizu/show"
+  get "kanseizu/show_mitsumori"
 
   resources :items do
     get 'report', :on => :collection
