@@ -407,7 +407,7 @@
     var a = parseFloatEx($("input#1-173_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-173_tan").text(formatComma(t));
+    $("input#1-173_tan").val(formatComma(t));
     $("td#1-173_kin").text(formatComma(k));
     $("td#1-173_tax_v").text((x * 100) + "%");
     $("input#1-173_tax").val(formatComma(z));
@@ -417,7 +417,7 @@
     var a = parseFloatEx($("input#1-174_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-174_tan").text(formatComma(t));
+    $("input#1-174_tan").val(formatComma(t));
     $("td#1-174_kin").text(formatComma(k));
     $("td#1-174_tax_v").text((x * 100) + "%");
     $("input#1-174_tax").val(formatComma(z));
@@ -427,7 +427,7 @@
     var a = parseFloatEx($("input#2-175_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#2-175_tan").text(formatComma(t));
+    $("input#2-175_tan").val(formatComma(t));
     $("td#2-175_kin").text(formatComma(k));
     $("td#2-175_tax_v").text((x * 100) + "%");
     $("input#2-175_tax").val(formatComma(z));
@@ -437,7 +437,7 @@
     var a = parseFloatEx($("input#3-176_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#3-176_tan").text(formatComma(t));
+    $("input#3-176_tan").val(formatComma(t));
     $("td#3-176_kin").text(formatComma(k));
     $("td#3-176_tax_v").text((x * 100) + "%");
     $("input#3-176_tax").val(formatComma(z));
@@ -447,7 +447,7 @@
     var a = parseFloatEx($("input#3-177_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#3-177_tan").text(formatComma(t));
+    $("input#3-177_tan").val(formatComma(t));
     $("td#3-177_kin").text(formatComma(k));
     $("td#3-177_tax_v").text((x * 100) + "%");
     $("input#3-177_tax").val(formatComma(z));
@@ -457,7 +457,7 @@
     var a = parseFloatEx($("input#3-178_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#3-178_tan").text(formatComma(t));
+    $("input#3-178_tan").val(formatComma(t));
     $("td#3-178_kin").text(formatComma(k));
     $("td#3-178_tax_v").text((x * 100) + "%");
     $("input#3-178_tax").val(formatComma(z));
@@ -467,7 +467,7 @@
     var a = parseFloatEx($("input#4-179_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#4-179_tan").text(formatComma(t));
+    $("input#4-179_tan").val(formatComma(t));
     $("td#4-179_kin").text(formatComma(k));
     $("td#4-179_tax_v").text((x * 100) + "%");
     $("input#4-179_tax").val(formatComma(z));
@@ -477,7 +477,7 @@
     var a = parseFloatEx($("input#4-180_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#4-180_tan").text(formatComma(t));
+    $("input#4-180_tan").val(formatComma(t));
     $("td#4-180_kin").text(formatComma(k));
     $("td#4-180_tax_v").text((x * 100) + "%");
     $("input#4-180_tax").val(formatComma(z));
@@ -487,7 +487,7 @@
     var a = parseFloatEx($("input#5-181_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#5-181_tan").text(formatComma(t));
+    $("input#5-181_tan").val(formatComma(t));
     $("td#5-181_kin").text(formatComma(k));
     $("td#5-181_tax_v").text((x * 100) + "%");
     $("input#5-181_tax").val(formatComma(z));
@@ -497,7 +497,7 @@
     var a = parseFloatEx($("input#5-182_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#5-182_tan").text(formatComma(t));
+    $("input#5-182_tan").val(formatComma(t));
     $("td#5-182_kin").text(formatComma(k));
     $("td#5-182_tax_v").text((x * 100) + "%");
     $("input#5-182_tax").val(formatComma(z));
@@ -507,7 +507,7 @@
     var a = parseFloatEx($("input#5-183_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#5-183_tan").text(formatComma(t));
+    $("input#5-183_tan").val(formatComma(t));
     $("td#5-183_kin").text(formatComma(k));
     $("td#5-183_tax_v").text((x * 100) + "%");
     $("input#5-183_tax").val(formatComma(z));
@@ -517,7 +517,7 @@
     var a = parseFloatEx($("input#6-184_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#6-184_tan").text(formatComma(t));
+    $("input#6-184_tan").val(formatComma(t));
     $("td#6-184_kin").text(formatComma(k));
     $("td#6-184_tax_v").text((x * 100) + "%");
     $("input#6-184_tax").val(formatComma(z));
@@ -527,7 +527,7 @@
     var a = parseFloatEx($("input#6-185_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#6-185_tan").text(formatComma(t));
+    $("input#6-185_tan").val(formatComma(t));
     $("td#6-185_kin").text(formatComma(k));
     $("td#6-185_tax_v").text((x * 100) + "%");
     $("input#6-185_tax").val(formatComma(z));
@@ -537,7 +537,7 @@
     var a = parseFloatEx($("input#6-186_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#6-186_tan").text(formatComma(t));
+    $("input#6-186_tan").val(formatComma(t));
     $("td#6-186_kin").text(formatComma(k));
     $("td#6-186_tax_v").text((x * 100) + "%");
     $("input#6-186_tax").val(formatComma(z));
@@ -549,6 +549,12 @@
     // アルミニューム選択
     if(col1Value == "1"){
       $("input#1-COL23_1").attr("checked", true);
+      var col2Value = wm.mitsumoriData["COL23_2"];
+      if (col2Value == "1") {
+        $("input#1-1-COL23_2").attr("checked", true);
+      } else if (col2Value == "2") {
+        $("input#1-2-COL23_2").attr("checked", true);
+      }
     }
     // ステンレス選択
     if(col1Value == "2"){
@@ -557,18 +563,48 @@
     // 木製選択
     if(col1Value == "3"){
       $("input#3-COL23_1").attr("checked", true);
+      var col3Value = wm.mitsumoriData["COL23_3"];
+      if (col3Value == "1") {
+        $("input#3-1-COL23_3").attr("checked", true);
+      } else if (col3Value == "2") {
+        $("input#3-2-COL23_3").attr("checked", true);
+      } else if (col3Value == "3") {
+        $("input#3-3-COL23_3").attr("checked", true);
+      }
     }
     // アルミニューム選択
     if(col1Value == "4"){
       $("input#4-COL23_1").attr("checked", true);
+      var col4Value = wm.mitsumoriData["COL23_4"];
+      if (col4Value == "1") {
+        $("input#4-1-COL23_4").attr("checked", true);
+      } else if (col4Value == "2") {
+        $("input#4-2-COL23_4").attr("checked", true);
+      }
     }
     // ステンレス選択
     if(col1Value == "5"){
       $("input#5-COL23_1").attr("checked", true);
+      var col5Value = wm.mitsumoriData["COL23_5"];
+      if (col5Value == "1") {
+        $("input#5-1-COL23_5").attr("checked", true);
+      } else if (col5Value == "2") {
+        $("input#5-2-COL23_5").attr("checked", true);
+      } else if (col5Value == "3") {
+        $("input#5-3-COL23_5").attr("checked", true);
+      }
     }
     // 木製選択
     if(col1Value == "6"){
       $("input#6-COL23_1").attr("checked", true);
+      var col6Value = wm.mitsumoriData["COL23_6"];
+      if (col6Value == "1") {
+        $("input#6-1-COL23_6").attr("checked", true);
+      } else if (col6Value == "2") {
+        $("input#6-2-COL23_6").attr("checked", true);
+      } else if (col6Value == "3") {
+        $("input#6-3-COL23_6").attr("checked", true);
+      }
     }
   }
 
@@ -601,7 +637,7 @@
     var a = parseFloatEx($("input#1-187_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-187_tan").text(formatComma(t));
+    $("input#1-187_tan").val(formatComma(t));
     $("td#1-187_kin").text(formatComma(k));
     $("td#1-187_tax_v").text((x * 100) + "%");
     $("input#1-187_tax").val(formatComma(z));
@@ -611,7 +647,7 @@
     var a = parseFloatEx($("input#1-188_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-188_tan").text(formatComma(t));
+    $("input#1-188_tan").val(formatComma(t));
     $("td#1-188_kin").text(formatComma(k));
     $("td#1-188_tax_v").text((x * 100) + "%");
     $("input#1-188_tax").val(formatComma(z));
@@ -621,7 +657,7 @@
     var a = parseFloatEx($("input#1-189_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-189_tan").text(formatComma(t));
+    $("input#1-189_tan").val(formatComma(t));
     $("td#1-189_kin").text(formatComma(k));
     $("td#1-189_tax_v").text((x * 100) + "%");
     $("input#1-189_tax").val(formatComma(z));
@@ -631,7 +667,7 @@
     var a = parseFloatEx($("input#1-190_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-190_tan").text(formatComma(t));
+    $("input#1-190_tan").val(formatComma(t));
     $("td#1-190_kin").text(formatComma(k));
     $("td#1-190_tax_v").text((x * 100) + "%");
     $("input#1-190_tax").val(formatComma(z));
@@ -641,7 +677,7 @@
     var a = parseFloatEx($("input#1-191_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-191_tan").text(formatComma(t));
+    $("input#1-191_tan").val(formatComma(t));
     $("td#1-191_kin").text(formatComma(k));
     $("td#1-191_tax_v").text((x * 100) + "%");
     $("input#1-191_tax").val(formatComma(z));
@@ -651,7 +687,7 @@
     var a = parseFloatEx($("input#1-192_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-192_tan").text(formatComma(t));
+    $("input#1-192_tan").val(formatComma(t));
     $("td#1-192_kin").text(formatComma(k));
     $("td#1-192_tax_v").text((x * 100) + "%");
     $("input#1-192_tax").val(formatComma(z));
@@ -661,7 +697,7 @@
     var a = parseFloatEx($("input#1-193_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-193_tan").text(formatComma(t));
+    $("input#1-193_tan").val(formatComma(t));
     $("td#1-193_kin").text(formatComma(k));
     $("td#1-193_tax_v").text((x * 100) + "%");
     $("input#1-193_tax").val(formatComma(z));
@@ -671,7 +707,7 @@
     var a = parseFloatEx($("input#1-194_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-194_tan").text(formatComma(t));
+    $("input#1-194_tan").val(formatComma(t));
     $("td#1-194_kin").text(formatComma(k));
     $("td#1-194_tax_v").text((x * 100) + "%");
     $("input#1-194_tax").val(formatComma(z));
@@ -681,7 +717,7 @@
     var a = parseFloatEx($("input#1-195_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-195_tan").text(formatComma(t));
+    $("input#1-195_tan").val(formatComma(t));
     $("td#1-195_kin").text(formatComma(k));
     $("td#1-195_tax_v").text((x * 100) + "%");
     $("input#1-195_tax").val(formatComma(z));
@@ -691,7 +727,7 @@
     var a = parseFloatEx($("input#1-196_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-196_tan").text(formatComma(t));
+    $("input#1-196_tan").val(formatComma(t));
     $("td#1-196_kin").text(formatComma(k));
     $("td#1-196_tax_v").text((x * 100) + "%");
     $("input#1-196_tax").val(formatComma(z));
@@ -701,7 +737,7 @@
     var a = parseFloatEx($("input#2-197_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#2-197_tan").text(formatComma(t));
+    $("input#2-197_tan").val(formatComma(t));
     $("td#2-197_kin").text(formatComma(k));
     $("td#2-197_tax_v").text((x * 100) + "%");
     $("input#2-197_tax").val(formatComma(z));
@@ -711,7 +747,7 @@
     var a = parseFloatEx($("input#2-198_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#2-198_tan").text(formatComma(t));
+    $("input#2-198_tan").val(formatComma(t));
     $("td#2-198_kin").text(formatComma(k));
     $("td#2-198_tax_v").text((x * 100) + "%");
     $("input#2-198_tax").val(formatComma(z));
@@ -721,7 +757,7 @@
     var a = parseFloatEx($("input#2-199_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#2-199_tan").text(formatComma(t));
+    $("input#2-199_tan").val(formatComma(t));
     $("td#2-199_kin").text(formatComma(k));
     $("td#2-199_tax_v").text((x * 100) + "%");
     $("input#2-199_tax").val(formatComma(z));
@@ -733,10 +769,40 @@
     // アルミニューム選択
     if(col1Value == "1"){
       $("input#1-COL24_1").attr("checked", true);
+      var col2Value = wm.mitsumoriData["COL24_2"];
+      if (col2Value == "1") {
+        $("input#1-1-COL24_2").attr("checked", true);
+      } else if (col2Value == "2") {
+        $("input#1-2-COL24_2").attr("checked", true);
+      } else if (col2Value == "3") {
+        $("input#1-3-COL24_2").attr("checked", true);
+      } else if (col2Value == "4") {
+        $("input#1-4-COL24_2").attr("checked", true);
+      } else if (col2Value == "5") {
+        $("input#1-5-COL24_2").attr("checked", true);
+      } else if (col2Value == "6") {
+        $("input#1-6-COL24_2").attr("checked", true);
+      } else if (col2Value == "7") {
+        $("input#1-7-COL24_2").attr("checked", true);
+      } else if (col2Value == "8") {
+        $("input#1-8-COL24_2").attr("checked", true);
+      } else if (col2Value == "9") {
+        $("input#1-9-COL24_2").attr("checked", true);
+      } else if (col2Value == "10") {
+        $("input#1-10-COL24_2").attr("checked", true);
+      }
     }
     // ステンレス選択
     if(col1Value == "2"){
       $("input#2-COL24_1").attr("checked", true);
+      var col3Value = wm.mitsumoriData["COL24_3"];
+      if (col3Value == "1") {
+        $("input#2-1-COL24_3").attr("checked", true);
+      } else if (col3Value == "2") {
+        $("input#2-2-COL24_3").attr("checked", true);
+      } else if (col3Value == "3") {
+        $("input#2-3-COL24_3").attr("checked", true);
+      }
     }
   }
 
@@ -759,7 +825,7 @@
     var a = parseFloatEx($("input#1-200_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-200_tan").text(formatComma(t));
+    $("input#1-200_tan").val(formatComma(t));
     $("td#1-200_kin").text(formatComma(k));
     $("td#1-200_tax_v").text((x * 100) + "%");
     $("input#1-200_tax").val(formatComma(z));
@@ -769,7 +835,7 @@
     var a = parseFloatEx($("input#1-201_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-201_tan").text(formatComma(t));
+    $("input#1-201_tan").val(formatComma(t));
     $("td#1-201_kin").text(formatComma(k));
     $("td#1-201_tax_v").text((x * 100) + "%");
     $("input#1-201_tax").val(formatComma(z));
