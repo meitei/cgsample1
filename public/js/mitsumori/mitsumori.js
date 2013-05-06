@@ -57,11 +57,21 @@
     return num;
   }
 
+  /*
+   * 桁区切り除去する。
+   *  
+   * amount 処理対象
+   */
   function removeComma(amount) {
     var num = new String(amount).replace(/,/g,"");
     return num;
   }
 
+  /*
+   * DOM要素のIDから、製品Noを抽出する。
+   *  
+   * domId DOM要素のID
+   */
   function getSeihinNo(domId) {
     var s1 = domId.split("-");
     var str = s1[1].split("_");
@@ -77,10 +87,28 @@
     return val ? parseFloat(val) : 0;
   }
 
+  /*
+   * 単価情報から製品Noで抽出する。
+   *  
+   * seihinNo 製品No
+   */
   function getSeihinInfo(seihinNo){
     for(var i=0; i<tanka.length; i++) {
       if(tanka[i]["seihinNo"] == seihinNo) {
         return tanka[i];
+      }
+    }
+  }
+
+  /*
+   * 見積製品情報から製品Noで抽出する。
+   *  
+   * seihinNo 製品No
+   */
+  function getProduct(seihinNo){
+    for(var i=0; i<seihin.length; i++) {
+      if(seihin[i]["seihinNo"] == seihinNo) {
+        return seihin[i];
       }
     }
   }

@@ -242,6 +242,58 @@
     $("input#4-COL11_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
     });
+
+    // 更新時、DBの値をセット
+    if (wm.mitsumoriData["COL11_1"] == "1") {
+      $("input#1-COL11_1").attr("checked", true);
+    } else if (wm.mitsumoriData["COL11_1"] == "2"){
+      $("input#2-COL11_1").attr("checked", true);
+      if (wm.mitsumoriData["COL11_2"] == "1") {
+        $("input#2-COL11_2").attr("checked", true);
+      }
+      // コンボボックス
+      var seihin = getProduct(73);
+      if(seihin != undefined) { $("select#2-73_su").val(seihin["suryo"]); }
+      seihin = getProduct(74);
+      if(seihin != undefined) { $("select#2-74_su").val(seihin["suryo"]); } 
+      seihin = getProduct(75);
+      if(seihin != undefined) { $("select#2-75_su").val(seihin["suryo"]); } 
+      seihin = getProduct(76);
+      if(seihin != undefined) { $("select#2-76_su").val(seihin["suryo"]); }
+    } else if (wm.mitsumoriData["COL11_1"] == "3"){
+      $("input#3-COL11_1").attr("checked", true);
+      if (wm.mitsumoriData["COL11_2"] == "1") {
+        $("input#3-COL11_2").attr("checked", true);
+      }
+      // コンボボックス
+      var seihin = getProduct(73);
+      if(seihin != undefined) { $("select#3-73_su").val(seihin["suryo"]); }
+      seihin = getProduct(74);
+      if(seihin != undefined) { $("select#3-74_su").val(seihin["suryo"]); } 
+      seihin = getProduct(75);
+      if(seihin != undefined) { $("select#3-75_su").val(seihin["suryo"]); } 
+      seihin = getProduct(76);
+      if(seihin != undefined) { $("select#3-76_su").val(seihin["suryo"]); }
+    } else if (wm.mitsumoriData["COL11_1"] == "4"){
+      $("input#4-COL11_1").attr("checked", true);
+      if (wm.mitsumoriData["COL11_2"] == "1") {
+        $("input#4-COL11_2").attr("checked", true);
+      }
+      $("input#4-COL11_3").val(wm.mitsumoriData["COL11_3"]);
+      $("input#4-COL11_4").val(wm.mitsumoriData["COL11_4"]);
+      // コンボボックス
+      var seihin = getProduct(73);
+      if(seihin != undefined) { $("select#4-73_su").val(seihin["suryo"]); }
+      seihin = getProduct(74);
+      if(seihin != undefined) { $("select#4-74_su").val(seihin["suryo"]); } 
+      seihin = getProduct(78);
+      if(seihin != undefined) { $("select#4-78_su").val(seihin["suryo"]); }  
+      seihin = getProduct(79);
+      if(seihin != undefined) { $("select#4-79_su").val(seihin["suryo"]); }
+      seihin = getProduct(76);
+      if(seihin != undefined) { $("select#4-76_su").val(seihin["suryo"]); }
+    }
+
     $("select#2-73_su").change(function() {
       var m_tanka = getSeihinInfo("73");
       var tanka = parseFloatEx(m_tanka["tanka"]);
@@ -539,35 +591,5 @@
 
     wm.submitItems[11] = submitItem11;
 
-    if (wm.mitsumoriData["COL11_1"] == "1") {
-
-      $("input#1-COL11_1").attr("checked", true);
-
-    } else if (wm.mitsumoriData["COL11_1"] == "2"){
-      
-      $("input#2-COL11_1").attr("checked", true);
-      
-      if (wm.mitsumoriData["COL11_2"] == "1") {
-        $("input#2-COL11_2").attr("checked", true);
-      }
-
-    } else if (wm.mitsumoriData["COL11_1"] == "3"){
-
-      $("input#3-COL11_1").attr("checked", true);
-
-      if (wm.mitsumoriData["COL11_2"] == "1") {
-        $("input#3-COL11_2").attr("checked", true);
-      }
-
-    } else if (wm.mitsumoriData["COL11_1"] == "4"){
-
-      $("input#4-COL11_1").attr("checked", true);
-
-      if (wm.mitsumoriData["COL11_2"] == "1") {
-        $("input#4-COL11_2").attr("checked", true);
-      }
-      $("input#4-COL11_3").val(wm.mitsumoriData["COL11_3"]);
-      $("input#4-COL11_4").val(wm.mitsumoriData["COL11_4"]);
-    }
     $("div#step12").load("/mitsumori/step_13.html", wizard12e);
   }

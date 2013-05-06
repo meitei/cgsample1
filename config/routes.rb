@@ -16,9 +16,12 @@ JqgridSample::Application.routes.draw do
       get 'search', :on => :collection
   end
 
-  resources :mitsumoris
-
+  resources :mitsumoris do
+    get 'products', :on => :collection
+  end
+    
   resources :mitsumori_tankas
+  
 
   resources :hoken_shubetsus do
     get 'search', :on => :collection

@@ -21,6 +21,17 @@ class MitsumorisController < ApplicationController
     end
   end
 
+  # GET /mitsumoris/products
+  # GET /mitsumoris/products.json
+  def products
+    @mitsumori_sehin = MitsumoriSeihin.find(:all, :conditions => ["mitsumoriNo = ?", params[:mitsumoriNo]])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @mitsumori_sehin }
+    end
+  end
+
   # GET /mitsumoris/new
   # GET /mitsumoris/new.json
   def new
@@ -82,6 +93,7 @@ class MitsumorisController < ApplicationController
   # PUT /mitsumoris/1
   # PUT /mitsumoris/1.json
   def update
+    #logger.debug(params)
     if params[:mitsumoriData].nil? then
       return
     end
@@ -89,16 +101,9 @@ class MitsumorisController < ApplicationController
     @mitsumori = Mitsumori.find(@mitsumori_data[:id])
     @result = @mitsumori.update_attributes(@mitsumori_data)
 
-
-    
     MitsumoriSeihin.destroy_all(["mitsumoriNo = ?", @mitsumori_data[:mitsumoriNo]])
-    # @products = MitsumoriSeihin.find(:all, :conditions => {:mitsumoriNo => @mitsumori_data[:mitsumoriNo]})
-    # logger.debug(@products.count)
-    # if @products.count > 0 then
-    #   @products.destroy_all
-    # end
     @products_data = params[:productsData]
-    logger.debug(@products_data)
+    #logger.debug(@products_data)
     @products_data.each do |key, value|
       value[:mitsumoriNo] = @mitsumori_data[:mitsumoriNo]
       @seihin = MitsumoriSeihin.new(value)

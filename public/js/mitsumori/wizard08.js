@@ -175,6 +175,76 @@
     $("input#2-COL16_1").click(function(){
       $("button.jqwizard_next").removeAttr("disabled");
     });
+
+    // 更新時、DBの値をセット
+    if (wm.mitsumoriData["COL16_1"] == "1") {
+      $("input#1-COL16_1").attr("checked", true);
+    } else if (wm.mitsumoriData["COL16_1"] == "2"){
+      $("input#2-COL16_1").attr("checked", true);
+    }
+    if (wm.mitsumoriData["COL16_11"] == "1"){
+      $("input#2-1-COL16_11").attr("checked", true);
+    } else if (wm.mitsumoriData["COL16_11"] == "2"){
+      $("input#2-2-COL16_11").attr("checked", true);
+    }
+    if (wm.mitsumoriData["COL16_3"] == "1") {
+      $("input#2-COL16_3").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(101);
+      if(seihin != undefined) { $("select#2-101_su").val(seihin["suryo"]); }
+    }
+    if (wm.mitsumoriData["COL16_4"] == "1") {
+      $("input#2-COL16_4").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(102);
+      if(seihin != undefined) { $("select#2-102_su").val(seihin["suryo"]); }
+    }
+    if (wm.mitsumoriData["COL16_13"] == "1") {
+      $("input#2-COL16_13").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(97);
+      if(seihin != undefined) { $("select#2-97_su").val(seihin["suryo"]); }
+    }
+    if (wm.mitsumoriData["COL16_5"] == "1") {
+      $("input#2-COL16_5").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(98);
+      if(seihin != undefined) { $("select#2-98_su").val(seihin["suryo"]); }
+    }
+    if (wm.mitsumoriData["COL16_6"] == "1") {
+      $("input#2-COL16_6").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(99);
+      if(seihin != undefined) { $("select#2-99_su").val(seihin["suryo"]); }
+    }
+    if (wm.mitsumoriData["COL16_7"] == "1") {
+      $("input#2-COL16_7").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(103);
+      if(seihin != undefined) { $("select#2-103_su").val(seihin["suryo"]); }
+    }
+    if (wm.mitsumoriData["COL16_8"] == "1") {
+      $("input#2-COL16_8").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(104);
+      if(seihin != undefined) { $("select#2-104_su").val(seihin["suryo"]); }
+    }
+    if (wm.mitsumoriData["COL16_9"] == "1") {
+      $("input#2-COL16_9").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(105);
+      if(seihin != undefined) { $("select#2-105_su").val(seihin["suryo"]); }
+    }
+    if (wm.mitsumoriData["COL16_10"] == "1") {
+      $("input#2-COL16_10").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(106);
+      if(seihin != undefined) { $("select#2-106_su").val(seihin["suryo"]); }
+    }
+    if (wm.mitsumoriData["COL16_12"] == "1") {
+      $("input#2-COL16_12").attr("checked", true);
+    }
+    
     $("select#2-101_su").change(function() {
       var m_tanka = getSeihinInfo("101");
       var tanka = parseFloatEx(m_tanka["tanka"]);
@@ -399,51 +469,7 @@
     var col10Value = wm.mitsumoriData["COL16_10"];
     var col11Value = wm.mitsumoriData["COL16_11"];
     var col12Value = wm.mitsumoriData["COL16_12"];
-    //$("input[name='COL1_1']").val(col1Value);
-    // 不要
-    if(col1Value == "1"){
-      $("input#1-COL16_1").attr("checked", true);
-    }
-    // 必要
-    if(col1Value == "2"){
-      $("input#2-COL16_1").attr("checked", true);
-      if(col11Value == "1"){
-        $("input#2-1-COL16_11").attr("checked", true);
-      }
-      if(col11Value == "2"){
-        $("input#2-2-COL16_11").attr("checked", true);
-      }
-    }
-    if(col2Value == "1"){
-      $("input#2-COL16_2").attr("checked", true);
-    }
-    if(col3Value == "1"){
-      $("input#2-COL16_3").attr("checked", true);
-    }
-    if(col4Value == "1"){
-      $("input#2-COL16_4").attr("checked", true);
-    }
-    if(col5Value == "1"){
-      $("input#2-COL16_5").attr("checked", true);
-    }
-    if(col6Value == "1"){
-      $("input#2-COL16_6").attr("checked", true);
-    }
-    if(col7Value == "1"){
-      $("input#2-COL16_7").attr("checked", true);
-    }
-    if(col8Value == "1"){
-      $("input#2-COL16_8").attr("checked", true);
-    }
-    if(col9Value == "1"){
-      $("input#2-COL16_9").attr("checked", true);
-    }
-    if(col10Value == "1"){
-      $("input#2-COL16_10").attr("checked", true);
-    }
-    if(col10Value == "12"){
-      $("input#2-COL16_12").attr("checked", true);
-    }
+
     $("div#step9").load("/mitsumori/step_17.html", wizard9d);
   }
 

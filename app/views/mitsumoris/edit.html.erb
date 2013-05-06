@@ -7,6 +7,7 @@
 <script>
   	//var submitItem = {};
   	var tanka = {};
+    var seihin = {};
   	var konyuRirekiId = $("#konyuRirekiId").val();
   	var kokyakuId = $("#kokyakuId").val();
   	var mitsumoriNo = $("#mitsumoriNo").val();
@@ -15,7 +16,7 @@
     // 次へ
     $.wizard.prototype.loadnext = function () {
       WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-    if(wm.addEstimate() == false) { return false; };
+      if(wm.addEstimate() == false) { return false; };
       wm.step++;
       $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
       if(wm.step == wm.lastStep) {
@@ -64,23 +65,31 @@
       $.ajax({
         scriptCharset:"UTF-8",
         type: "GET",
-        url: "/mitsumoris/" + mitsumoriId + ".json",
-        root: "mitsumori",
+        url: "/mitsumoris/products.json",
+        data: "mitsumoriNo=" + mitsumoriNo,
         dataType: "json",
         success: function(result) {
           if(result != null) {
-            wm.mitsumoriData = result;
-            $("div#step1").load("/mitsumori/step_01.html", wizard1);
+            seihin = result;
+            $.ajax({
+              scriptCharset:"UTF-8",
+              type: "GET",
+              url: "/mitsumoris/" + mitsumoriId + ".json",
+              root: "mitsumori",
+              dataType: "json",
+              success: function(result) {
+                if(result != null) {
+                  wm.mitsumoriData = result;
+                  $("div#step1").load("/mitsumori/step_01.html", wizard1);
+                }
+              }
+            });
           }
         }
       });
     	$("#estimateForm").wizard();
     	$("#btnEstimateRegist").hide();
     	$("button#jqwizard_previous").hide();
-    	// 見積データを用意する
-    	wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
-    	wm.mitsumoriData["kokyakuId"] = kokyakuId;
-    	wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
     	// 更新
     	$("#btnEstimateRegist").click(function() {
     		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
@@ -89,13 +98,13 @@
           return false;
         }
     		var postData = {};
-    		var url = "/mitsumoris/" + wm.mitsumoriData["id"] + ".json";
+    		var url = "/mitsumoris/" + mitsumoriId + ".json";
     		var type = "POST";
     		wm.mitsumoriData["koshinshaId"] = $("#loginId").val();
      		wm.mitsumoriData["torokushaId"] = $("#torokushaId").val();
      		for(var products in wm.productsData) {
-        		wm.productsData[products]["koshinshaId"] = $("#loginId").val();
-        		wm.productsData[products]["torokushaId"] = $("#torokushaId").val();        
+          wm.productsData[products]["koshinshaId"] = $("#loginId").val();
+        	wm.productsData[products]["torokushaId"] = $("#torokushaId").val();
     		}
     		postData["mitsumoriData"] = wm.mitsumoriData;
     		postData["productsData"] = wm.productsData;
