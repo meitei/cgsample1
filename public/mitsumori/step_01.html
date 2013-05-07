@@ -174,8 +174,11 @@
             }   
         }
         // 見積データ保存
-        this.mitsumoriData["COL1_1"] = $("input[name='COL1_1']:checked").val();
-        this.mitsumoriData["COL1_2"] = $("input[name='COL1_2']:checked").val();
+        if(this.mitsumoriData["COL1_1"] != $("input[name='COL1_1']:checked").val()) {
+            this.mitsumoriData = {};
+            this.mitsumoriData["COL1_1"] = $("input[name='COL1_1']:checked").val();
+            this.mitsumoriData["COL1_2"] = $("input[name='COL1_2']:checked").val();
+        }
     };
 </script>
 

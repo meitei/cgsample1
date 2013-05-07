@@ -142,7 +142,12 @@
             alert("種別を選択してください。");
             return false;
         }
-        this.mitsumoriData["COL2_1"] = $("input[name='COL2_1']:checked").val();
+        if(this.mitsumoriData["COL2_1"] != $("input[name='COL2_1']:checked").val()) {
+            var col1_1 = this.mitsumoriData["COL1_1"];
+            this.mitsumoriData = {};
+            this.mitsumoriData["COL1_1"] = col1_1;
+            this.mitsumoriData["COL2_1"] = $("input[name='COL2_1']:checked").val();
+        }
         return;
     }
 </script>
