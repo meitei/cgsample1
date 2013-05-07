@@ -24,7 +24,7 @@ class MitsumorisController < ApplicationController
   # GET /mitsumoris/products
   # GET /mitsumoris/products.json
   def products
-    @mitsumori_sehin = MitsumoriSeihin.find(:all, :conditions => ["mitsumoriNo = ?", params[:mitsumoriNo]])
+    @mitsumori_sehin = MitsumoriSeihin.find(:all, :conditions => ["\"mitsumoriNo\" = ?", params[:mitsumoriNo]])
 
     respond_to do |format|
       format.html # show.html.erb
