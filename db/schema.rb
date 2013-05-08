@@ -61,8 +61,7 @@ ActiveRecord::Schema.define(:version => 20130427045105) do
     t.datetime "updated_at",                 :null => false
   end
 
-  create_table "kokyakus", :id => false, :force => true do |t|
-    t.integer  "kokyakuId"
+  create_table "kokyakus", :primary_key => "kokyakuId", :force => true do |t|
     t.integer  "seibetsu"
     t.string   "postNo",         :limit => 8
     t.string   "address1",       :limit => 100
@@ -91,14 +90,14 @@ ActiveRecord::Schema.define(:version => 20130427045105) do
   end
 
   create_table "konyu_rirekis", :force => true do |t|
-    t.integer  "konyuRirekiId",         :limit => 11
-    t.integer  "kokyakuId",                                               :null => false
+    t.decimal  "konyuRirekiId",                             :precision => 11, :scale => 0
+    t.integer  "kokyakuId",                                                                               :null => false
     t.integer  "byoinCd"
     t.string   "mitsumoriTantoEigyoCd", :limit => 10
     t.date     "mitsumoriDt"
     t.string   "shohinNm",              :limit => 100
-    t.decimal  "kin"
-    t.decimal  "seikyuKin"
+    t.decimal  "kin",                                       :precision => 10, :scale => 0
+    t.decimal  "seikyuKin",                                 :precision => 10, :scale => 0
     t.string   "shohinShiyoBiko",       :limit => 200
     t.string   "uketsukeSesakuTantoCd", :limit => 10
     t.date     "juchuDt"
@@ -111,10 +110,10 @@ ActiveRecord::Schema.define(:version => 20130427045105) do
     t.date     "nyukinDt"
     t.date     "oshiinDt"
     t.date     "kanryoDt"
-    t.integer  "koshinshaId",                                             :null => false
-    t.integer  "torokushaId",                                             :null => false
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
+    t.integer  "koshinshaId",                                                                             :null => false
+    t.integer  "torokushaId",                                                                             :null => false
+    t.datetime "created_at",                                                                              :null => false
+    t.datetime "updated_at",                                                                              :null => false
     t.string   "ishiNm1",               :limit => 50
     t.string   "ishiNm2",               :limit => 50
     t.string   "rigakuRyohoNm1",        :limit => 50
@@ -125,10 +124,10 @@ ActiveRecord::Schema.define(:version => 20130427045105) do
     t.integer  "seihinId"
     t.integer  "hokenShubetsuCd1"
     t.integer  "hokenShubetsuCd2"
-    t.binary   "kanseiImg",             :limit => 1048576
-    t.binary   "kanseiTmbImg",          :limit => 1048576
+    t.binary   "kanseiImg",             :limit => 16777215
+    t.binary   "kanseiTmbImg",          :limit => 16777215
     t.string   "kanseiImgName"
-    t.integer  "delFlg",                                   :default => 0, :null => false
+    t.integer  "delFlg",                                                                   :default => 0, :null => false
   end
 
   create_table "mitsumori_seihins", :force => true do |t|
@@ -323,10 +322,10 @@ ActiveRecord::Schema.define(:version => 20130427045105) do
   end
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id",                    :null => false
-    t.text     "data",       :limit => 2097152
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.string   "session_id",                     :null => false
+    t.text     "data",       :limit => 16777215
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"

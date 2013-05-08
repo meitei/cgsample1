@@ -58,3 +58,5 @@ gem 'thinreports'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'mysql2'

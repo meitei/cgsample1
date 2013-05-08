@@ -292,13 +292,13 @@
           </tr>
         </table>
       </td>
-      <td>
+      <td rowspan="4">
         <table>
           <tr>
             <th>完成図</th>
             <!-- 完成図を表示する -->
-            <td rowspan="4">
-              <div id="uploaded_image"></div>
+            <td>
+              <div id="uploaded_image" style="width:250px;height:180px;"></div>
             </td>
           </tr>
         </table>
@@ -594,8 +594,6 @@ $(function() {
                     $('<img />')
                       .attr('src', file.thumbnail_url)
                       .attr('alt', file.name + "(" + file.size + "bytes)")
-                      .attr('width', "100px")
-                      .attr('height', "100px")
                       .appendTo('#uploaded_image'));
             });
         }
@@ -608,8 +606,6 @@ $(function() {
   $('<img />')
     .attr('src', '<%=src %>')
     .attr('alt', '<%=alt %>')
-    .attr('width', "100px")
-    .attr('height', "100px")
     .appendTo('#uploaded_image');
   <% end %>
 
