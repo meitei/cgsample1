@@ -7,7 +7,7 @@
       <ul>
         <a href="/konyu_rirekis">購入履歴管理</a>
         <a href="#" onclick="showReport(<%= @mitsumori.konyuRirekiId %>)">見積書出力</a>
-        <a href="#" onclick="showMitsumoriKanseizu(<%= @mitsumori.konyuRirekiId %>)">見積完成図表示</a>
+        <a href="#" id="showKanseizu" onclick="showMitsumoriKanseizu(<%= @mitsumori.konyuRirekiId %>)">見積完成図表示</a>
       </ul>
   </div>
 </div>
@@ -36,4 +36,7 @@
 	    window.open(url,'_blank')
 	    return false;
 	}
+
+    // 読み込み時点で完成図表示(別タグ)
+    $("#showKanseizu").click();
 </script>
