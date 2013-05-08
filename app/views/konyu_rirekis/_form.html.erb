@@ -47,7 +47,7 @@
           <tr>
               <th style="width:100px;">受付制作担当者</th>
               <td>
-                <input style="width:70px; ime-mode: disabled;" type="text" id="uketsukeSesakuTantoCd" name="konyu_rireki[uketsukeSesakuTantoCd]" value="<%= @konyu_rireki.uketsukeSesakuTantoCd %>" />
+                <input style="width:80px; ime-mode: disabled;" type="text" id="uketsukeSesakuTantoCd" name="konyu_rireki[uketsukeSesakuTantoCd]" value="<%= @konyu_rireki.uketsukeSesakuTantoCd %>" />
               </td>
               <td>
                 <div id="uketsukeSesakuTantoNm"><%= @konyu_rireki.uketsukeSesakuTantoNm %></div>
@@ -100,7 +100,9 @@
           <tr>
             <th style="width:100px;">仮合担当者</th>
             <td>
-              <input style="width:70px; ime-mode: disabled;" type="text" id="kariAwaseTantoCd" name="konyu_rireki[kariAwaseTantoCd]" value="<%= @konyu_rireki.kariAwaseTantoCd %>" />
+              <input style="width:80px; ime-mode: disabled;" type="text" id="kariAwaseTantoCd" name="konyu_rireki[kariAwaseTantoCd]" value="<%= @konyu_rireki.kariAwaseTantoCd %>" />
+            </td>
+            <td>
               <div id="kariAwaseTantoNm"><%= @konyu_rireki.kariAwaseTantoNm %></div>
             </td>
           </tr>
@@ -151,7 +153,9 @@
           <tr>
             <th style="width:100px;">納品担当者</th>
             <td>
-              <input style="width:70px; ime-mode: disabled;" type="text" id="nohinTantoCd" name="konyu_rireki[nohinTantoCd]" value="<%= @konyu_rireki.nohinTantoCd %>" />
+              <input style="width:80px; ime-mode: disabled;" type="text" id="nohinTantoCd" name="konyu_rireki[nohinTantoCd]" value="<%= @konyu_rireki.nohinTantoCd %>" />
+            </td>
+            <td>
               <div id="nohinTantoNm"><%= @konyu_rireki.nohinTantoNm %></div>
             </td>
           </tr>
@@ -361,7 +365,7 @@
           <tr>
             <th><br></th>
             <td>
-              <input id="fileupload" type="file" name="files[]" data-url="/konyu_rirekis/file_upload.json">
+              <input id="fileupload" type="file" name="files[]" data-url="/konyu_rirekis/file_upload.json" />
             </td>
           </tr>
         </table>
