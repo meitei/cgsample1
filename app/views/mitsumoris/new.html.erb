@@ -61,9 +61,9 @@
     $("button#jqwizard_previous").hide();
     $("div#step1").load("/mitsumori/step_01.html", wizard1);
     // 見積データを用意する
-    wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
-    wm.mitsumoriData["kokyakuId"] = kokyakuId;
-    wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
+    //wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
+    //wm.mitsumoriData["kokyakuId"] = kokyakuId;
+    //wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
     // 登録
     $("#btnEstimateRegist").click(function() {
       WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
@@ -76,6 +76,9 @@
       var type = "POST";
       wm.mitsumoriData["koshinshaId"] = $("#loginId").val();
       wm.mitsumoriData["torokushaId"] = $("#loginId").val();
+      wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
+      wm.mitsumoriData["kokyakuId"] = kokyakuId;
+      wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
       for(var products in wm.productsData) {
         wm.productsData[products]["koshinshaId"] = $("#loginId").val();
         wm.productsData[products]["torokushaId"] = $("#loginId").val();        
