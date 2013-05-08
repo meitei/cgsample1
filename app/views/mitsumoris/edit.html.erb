@@ -93,7 +93,7 @@
     	// 更新
     	$("#btnEstimateRegist").click(function() {
     		WizardManager.prototype.addEstimate = wm.submitItems[wm.step];
-    		wm.addEstimate();      
+    		if(wm.addEstimate() == false) { return false; };
         if (confirm("更新します。よろしいですか？") == false) {
           return false;
         }
@@ -102,6 +102,9 @@
     		var type = "POST";
     		wm.mitsumoriData["koshinshaId"] = $("#loginId").val();
      		wm.mitsumoriData["torokushaId"] = $("#torokushaId").val();
+        wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
+        wm.mitsumoriData["kokyakuId"] = kokyakuId;
+        wm.mitsumoriData["mitsumoriNo"] = mitsumoriNo;
      		for(var products in wm.productsData) {
           wm.productsData[products]["koshinshaId"] = $("#loginId").val();
         	wm.productsData[products]["torokushaId"] = $("#torokushaId").val();

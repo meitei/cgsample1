@@ -98,7 +98,7 @@ class MitsumorisController < ApplicationController
       return
     end
     @mitsumori_data = params[:mitsumoriData]
-    @mitsumori = Mitsumori.find(@mitsumori_data[:id])
+    @mitsumori = Mitsumori.find(params[:id])
     @result = @mitsumori.update_attributes(@mitsumori_data)
 
     MitsumoriSeihin.destroy_all(["mitsumoriNo = ?", @mitsumori_data[:mitsumoriNo]])
