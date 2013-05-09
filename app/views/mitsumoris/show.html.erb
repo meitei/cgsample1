@@ -1,10 +1,13 @@
+<% content_for :title do %>
+見積登録完了 - Assort 座位保持装置選定支援・補装具管理ソリューション
+<% end %>
 <div class="container" id="mainmenu_box">
   <div>見積登録が完了いたしました</div>
     <div class="mainmenu_inner cf">
       <ul>
         <a href="/konyu_rirekis">購入履歴管理</a>
         <a href="#" onclick="showReport(<%= @mitsumori.konyuRirekiId %>)">見積書出力</a>
-        <a href="#" onclick="showMitsumoriKanseizu(<%= @mitsumori.konyuRirekiId %>)">見積完成図表示</a>
+        <a href="#" id="showKanseizu" onclick="showMitsumoriKanseizu(<%= @mitsumori.konyuRirekiId %>)">見積完成図表示</a>
       </ul>
   </div>
 </div>
@@ -33,4 +36,7 @@
 	    window.open(url,'_blank')
 	    return false;
 	}
+
+    // 読み込み時点で完成図表示(別タグ)
+    $("#showKanseizu").click();
 </script>

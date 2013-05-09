@@ -1,3 +1,6 @@
+<% content_for :title do %>
+購入履歴登録 - Assort 座位保持装置選定支援・補装具管理ソリューション
+<% end %>
 <form id="konyuRirekiForm" method="post">
 <input type="hidden" id="id" name="konyu_rireki[id]" value="<%= @konyu_rireki.id %>" />
 <input type="hidden" id="konyuRirekiId" name="konyu_rireki[konyuRirekiId]" value="<%= @konyu_rireki.konyuRirekiId %>" />
@@ -44,7 +47,7 @@
           <tr>
               <th style="width:100px;">受付制作担当者</th>
               <td>
-                <input style="width:70px; ime-mode: disabled;" type="text" id="uketsukeSesakuTantoCd" name="konyu_rireki[uketsukeSesakuTantoCd]" value="<%= @konyu_rireki.uketsukeSesakuTantoCd %>" />
+                <input style="width:80px; ime-mode: disabled;" type="text" id="uketsukeSesakuTantoCd" name="konyu_rireki[uketsukeSesakuTantoCd]" value="<%= @konyu_rireki.uketsukeSesakuTantoCd %>" />
               </td>
               <td>
                 <div id="uketsukeSesakuTantoNm"><%= @konyu_rireki.uketsukeSesakuTantoNm %></div>
@@ -97,7 +100,9 @@
           <tr>
             <th style="width:100px;">仮合担当者</th>
             <td>
-              <input style="width:70px; ime-mode: disabled;" type="text" id="kariAwaseTantoCd" name="konyu_rireki[kariAwaseTantoCd]" value="<%= @konyu_rireki.kariAwaseTantoCd %>" />
+              <input style="width:80px; ime-mode: disabled;" type="text" id="kariAwaseTantoCd" name="konyu_rireki[kariAwaseTantoCd]" value="<%= @konyu_rireki.kariAwaseTantoCd %>" />
+            </td>
+            <td>
               <div id="kariAwaseTantoNm"><%= @konyu_rireki.kariAwaseTantoNm %></div>
             </td>
           </tr>
@@ -148,7 +153,9 @@
           <tr>
             <th style="width:100px;">納品担当者</th>
             <td>
-              <input style="width:70px; ime-mode: disabled;" type="text" id="nohinTantoCd" name="konyu_rireki[nohinTantoCd]" value="<%= @konyu_rireki.nohinTantoCd %>" />
+              <input style="width:80px; ime-mode: disabled;" type="text" id="nohinTantoCd" name="konyu_rireki[nohinTantoCd]" value="<%= @konyu_rireki.nohinTantoCd %>" />
+            </td>
+            <td>
               <div id="nohinTantoNm"><%= @konyu_rireki.nohinTantoNm %></div>
             </td>
           </tr>
@@ -289,13 +296,13 @@
           </tr>
         </table>
       </td>
-      <td>
+      <td rowspan="4">
         <table>
           <tr>
             <th>完成図</th>
             <!-- 完成図を表示する -->
-            <td rowspan="4">
-              <div id="uploaded_image"></div>
+            <td>
+              <div id="uploaded_image" style="width:250px;height:180px;"></div>
             </td>
           </tr>
         </table>
@@ -358,7 +365,7 @@
           <tr>
             <th><br></th>
             <td>
-              <input id="fileupload" type="file" name="files[]" data-url="/konyu_rirekis/file_upload.json">
+              <input id="fileupload" type="file" name="files[]" data-url="/konyu_rirekis/file_upload.json" />
             </td>
           </tr>
         </table>
@@ -591,8 +598,6 @@ $(function() {
                     $('<img />')
                       .attr('src', file.thumbnail_url)
                       .attr('alt', file.name + "(" + file.size + "bytes)")
-                      .attr('width', "100px")
-                      .attr('height', "100px")
                       .appendTo('#uploaded_image'));
             });
         }
@@ -605,8 +610,6 @@ $(function() {
   $('<img />')
     .attr('src', '<%=src %>')
     .attr('alt', '<%=alt %>')
-    .attr('width', "100px")
-    .attr('height', "100px")
     .appendTo('#uploaded_image');
   <% end %>
 
