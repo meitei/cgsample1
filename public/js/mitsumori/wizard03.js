@@ -1146,7 +1146,7 @@
     var a = parseFloatEx($("input#1-167_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-167_tan").text(formatComma(t));
+    $("input#1-167_tan").val(formatComma(t));
     $("td#1-167_kin").text(formatComma(k));
     $("td#1-167_tax_v").text((x * 100) + "%");
     $("input#1-167_tax").val(formatComma(z));
@@ -1156,7 +1156,7 @@
     var a = parseFloatEx($("input#1-168_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-168_tan").text(formatComma(t));
+    $("input#1-168_tan").val(formatComma(t));
     $("td#1-168_kin").text(formatComma(k));
     $("td#1-168_tax_v").text((x * 100) + "%");
     $("input#1-168_tax").val(formatComma(z));
@@ -1166,7 +1166,7 @@
     var a = parseFloatEx($("input#1-169_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#1-169_tan").text(formatComma(t));
+    $("input#1-169_tan").val(formatComma(t));
     $("td#1-169_kin").text(formatComma(k));
     $("td#1-169_tax_v").text((x * 100) + "%");
     $("input#1-169_tax").val(formatComma(z));
@@ -1176,7 +1176,7 @@
     var a = parseFloatEx($("input#2-170_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#2-170_tan").text(formatComma(t));
+    $("input#2-170_tan").val(formatComma(t));
     $("td#2-170_kin").text(formatComma(k));
     $("td#2-170_tax_v").text((x * 100) + "%");
     $("input#2-170_tax").val(formatComma(z));
@@ -1186,7 +1186,7 @@
     var a = parseFloatEx($("input#2-171_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#2-171_tan").text(formatComma(t));
+    $("input#2-171_tan").val(formatComma(t));
     $("td#2-171_kin").text(formatComma(k));
     $("td#2-171_tax_v").text((x * 100) + "%");
     $("input#2-171_tax").val(formatComma(z));
@@ -1196,7 +1196,7 @@
     var a = parseFloatEx($("input#2-172_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
-    $("td#2-172_tan").text(formatComma(t));
+    $("input#2-172_tan").val(formatComma(t));
     $("td#2-172_kin").text(formatComma(k));
     $("td#2-172_tax_v").text((x * 100) + "%");
     $("input#2-172_tax").val(formatComma(z));
