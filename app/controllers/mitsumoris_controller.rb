@@ -101,7 +101,7 @@ class MitsumorisController < ApplicationController
     @mitsumori = Mitsumori.find(params[:id])
     @result = @mitsumori.update_attributes(@mitsumori_data)
 
-    MitsumoriSeihin.destroy_all(["mitsumoriNo = ?", @mitsumori_data[:mitsumoriNo]])
+    MitsumoriSeihin.destroy_all(["\"mitsumoriNo\" = ?", @mitsumori_data[:mitsumoriNo]])
     @products_data = params[:productsData]
     #logger.debug(@products_data)
     @products_data.each do |key, value|
