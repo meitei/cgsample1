@@ -13,6 +13,7 @@ function wizard1(){
       $("div#step2").load("/mitsumori/step_05.html", wizard2a);
       $("li#step2 a").attr("href", "#step2");
       $("li#step2 span").text("構造フレーム");
+      $("input[name='COL1_2']").attr("checked", false);
       $("button#jqwizard_next").removeAttr("disabled");
       wm.lastStep = 17;
     });
@@ -21,6 +22,7 @@ function wizard1(){
       $("div#step2").load("/mitsumori/step_02.html", wizard2e);
       $("li#step2 a").attr("href", "#step2");
       $("li#step2 span").text("フレーム材質");
+      $("input[name='COL1_2']").attr("checked", false);
       $("button#jqwizard_next").removeAttr("disabled");
       wm.lastStep = 17;
     });

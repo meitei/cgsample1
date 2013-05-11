@@ -389,7 +389,10 @@
                 return false;
             }
         }
-
+        if(this.mitsumoriData["COL5_1"] != $("input[name='COL5_1']:checked").val()) {
+            this.initEstimate();
+            this.mitsumoriData["COL1_1"] = "1";
+        }
         this.mitsumoriData["COL5_1"] = selected;
         this.mitsumoriData["COL5_2"] = 0;
         this.mitsumoriData["COL5_3"] = 0;
