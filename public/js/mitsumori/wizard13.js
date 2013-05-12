@@ -30,6 +30,9 @@
     } else if (wm.mitsumoriData["COL16_11"] == "2"){
       $("input#2-2-COL16_11").attr("checked", true);
     }
+    if (wm.mitsumoriData["COL16_2"] == "1") {
+      $("input#2-COL16_2").attr("checked", true);
+    }
     if (wm.mitsumoriData["COL16_3"] == "1") {
       $("input#2-COL16_3").attr("checked", true);
       // コンボボックス
