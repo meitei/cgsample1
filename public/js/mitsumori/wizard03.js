@@ -935,17 +935,19 @@
     var col5Value = wm.mitsumoriData["COL3_5"];
     var col10Value = wm.mitsumoriData["COL3_10"];
     var col12Value = wm.mitsumoriData["COL3_12"];
+    var col13Value = wm.mitsumoriData["COL3_13"];
 
     // 固定型
     if(col1Value == "1"){
       $("input#1-COL3_1").attr("checked", true);
-      $("select#1_COL3_4").val(col4Value);
-      $("select#1_COL3_2").val(col2Value);
+      $("select#1-COL3_4").val(col4Value);
+      $("select#1-COL3_2").val(col2Value);
+      $("input#1-COL3_13").val(col13Value);
     }
     // リクライニング
     if(col1Value == "2"){
       $("input#2-COL3_1").attr("checked", true);
-      $("select#2_COL3_4").val(col4Value);
+      $("select#2-COL3_4").val(col4Value);
       if(col5Value == "1"){
         $("input#2-1-COL3_5").attr("checked", true);
       }
@@ -959,7 +961,7 @@
     // ティルト
     if(col1Value == "3"){
       $("input#3-COL3_1").attr("checked", true);
-      $("select#3_COL3_3").val(col3Value);
+      $("select#3-COL3_3").val(col3Value);
       if(col10Value == "1"){
         $("input#3-1-COL3_10").attr("checked", true);
       }

@@ -53,13 +53,13 @@
         success: function(result) {
             if(result != null) {
                 tanka = result;
+                $("div#step1").load("/mitsumori/step_01.html", wizard1);
             }
         }
     });
     $("#estimateForm").wizard();
     $("#btnEstimateRegist").hide();
     $("button#jqwizard_previous").hide();
-    $("div#step1").load("/mitsumori/step_01.html", wizard1);
     // 見積データを用意する
     //wm.mitsumoriData["konyuRirekiId"] = konyuRirekiId;
     //wm.mitsumoriData["kokyakuId"] = kokyakuId;
