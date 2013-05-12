@@ -114,7 +114,73 @@
   }
 
   WizardManager.prototype.initEstimate = function() {
-    // item2
+    // radio
+    if(wm.step == 1) {
+      $("div#step2 input[type='text']").val("0");
+      $("div#step2 input[type='radio']").attr("checked", false);
+      $("div#step2 input[type='checkbox']").attr("checked", false);
+      $("div#step2 select").val("0");
+    }
+    $("div#step3 input[type='text']").val("0");
+    $("div#step3 input[type='radio']").attr("checked", false);
+    $("div#step3 input[type='checkbox']").attr("checked", false);
+    $("div#step3 select").val("0");
+    $("div#step4 input[type='text']").val("0");
+    $("div#step4 input[type='radio']").attr("checked", false);
+    $("div#step4 input[type='checkbox']").attr("checked", false);
+    $("div#step4 select").val("0");
+    $("div#step5 input[type='text']").val("0");
+    $("div#step5 input[type='radio']").attr("checked", false);
+    $("div#step5 input[type='checkbox']").attr("checked", false);
+    $("div#step5 select").val("0");
+    $("div#step6 input[type='text']").val("0");
+    $("div#step6 input[type='radio']").attr("checked", false);
+    $("div#step6 input[type='checkbox']").attr("checked", false);
+    $("div#step6 select").val("0");
+    $("div#step7 input[type='text']").val("0");
+    $("div#step7 input[type='radio']").attr("checked", false);
+    $("div#step7 input[type='checkbox']").attr("checked", false);
+    $("div#step7 select").val("0");
+    $("div#step8 input[type='text']").val("0");
+    $("div#step8 input[type='radio']").attr("checked", false);
+    $("div#step8 input[type='checkbox']").attr("checked", false);
+    $("div#step8 select").val("0");
+    $("div#step9 input[type='text']").val("0");
+    $("div#step9 input[type='radio']").attr("checked", false);
+    $("div#step9 input[type='checkbox']").attr("checked", false);
+    $("div#step9 select").val("0");
+    $("div#step10 input[type='text']").val("0");
+    $("div#step10 input[type='radio']").attr("checked", false);
+    $("div#step10 input[type='checkbox']").attr("checked", false);
+    $("div#step10 select").val("0");
+    $("div#step11 input[type='text']").val("0");
+    $("div#step11 input[type='radio']").attr("checked", false);
+    $("div#step11 input[type='checkbox']").attr("checked", false);
+    $("div#step11 select").val("0");
+    $("div#step12 input[type='text']").val("0");
+    $("div#step12 input[type='radio']").attr("checked", false);
+    $("div#step12 input[type='checkbox']").attr("checked", false);
+    $("div#step12 select").val("0");
+    $("div#step13 input[type='text']").val("0");
+    $("div#step13 input[type='radio']").attr("checked", false);
+    $("div#step13 input[type='checkbox']").attr("checked", false);
+    $("div#step13 select").val("0");
+    $("div#step14 input[type='text']").val("0");
+    $("div#step14 input[type='radio']").attr("checked", false);
+    $("div#step14 input[type='checkbox']").attr("checked", false);
+    $("div#step14 select").val("0");
+    $("div#step15 input[type='text']").val("0");
+    $("div#step15 input[type='radio']").attr("checked", false);
+    $("div#step15 input[type='checkbox']").attr("checked", false);
+    $("div#step15 select").val("0");
+    $("div#step16 input[type='text']").val("0");
+    $("div#step16 input[type='radio']").attr("checked", false);
+    $("div#step16 input[type='checkbox']").attr("checked", false);
+    $("div#step16 select").val("0");
+    $("div#step17 input[type='text']").val("0");
+    $("div#step17 input[type='radio']").attr("checked", false);
+    $("div#step17 input[type='checkbox']").attr("checked", false);
+    $("div#step17 select").val("0");
     this.mitsumoriData["COL2_1"] = "0";
     this.mitsumoriData["COL3_1"] = "0";
     this.mitsumoriData["COL3_2"] = "0";
