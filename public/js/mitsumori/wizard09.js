@@ -1169,6 +1169,7 @@
     var col1Value = wm.mitsumoriData["COL10_1"];
     var col2Value = wm.mitsumoriData["COL10_2"];
     var col3Value = wm.mitsumoriData["COL10_3"];
+    var col4Value = wm.mitsumoriData["COL10_4"];
     //$("input[name='COL1_1']").val(col1Value);
     // 不要
     if(col1Value == "1"){
@@ -1180,6 +1181,7 @@
       if(col2Value == "1"){
         $("input#2-COL10_2").attr("checked", true);
       }
+        $("input#2-COL10_4").val(col4Value);
       if(col3Value == "1"){
         $("input#2-COL10_3").attr("checked", true);
       }
@@ -1189,6 +1191,7 @@
       $("input#3-COL10_1").attr("checked", true);
       if(col2Value == "1"){
         $("input#3-COL10_2").attr("checked", true);
+        $("input#3-COL10_4").val(col4Value);
       }
       if(col3Value == "1"){
         $("input#3-COL10_3").attr("checked", true);
@@ -1199,6 +1202,7 @@
       $("input#4-COL10_1").attr("checked", true);
       if(col2Value == "1"){
         $("input#4-COL10_2").attr("checked", true);
+        $("input#4-COL10_4").val(col4Value);
       }
     }
     $("div#step10").load("/mitsumori/step_12.html", wizard10e);

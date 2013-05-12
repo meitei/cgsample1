@@ -282,6 +282,11 @@
     // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL7_1"];
     var col2Value = wm.mitsumoriData["COL7_2"];
+    var col3Value = wm.mitsumoriData["COL7_3"];
+    var col4Value = wm.mitsumoriData["COL7_4"];
+    var col5Value = wm.mitsumoriData["COL7_5"];
+    var col6Value = wm.mitsumoriData["COL7_6"];
+    var col7Value = wm.mitsumoriData["COL7_7"];
     //$("input[name='COL1_1']").val(col1Value);
     // 平面形状型
     if(col1Value == "1"){
@@ -289,6 +294,8 @@
       if(col2Value == "1"){
         $("input#1-COL7_2").attr("checked", true);
       }
+      $("input#1-COL7_3").val(col3Value);
+      $("input#1-COL7_4").val(col4Value);
     }
     // 張り調整
     if(col1Value == "2"){
@@ -296,6 +303,11 @@
       if(col2Value == "1"){
         $("input#2-COL7_2").attr("checked", true);
       }
+      $("input#2-COL7_3").val(col3Value);
+      $("input#2-COL7_4").val(col4Value);
+      $("input#2-COL7_5").val(col5Value);
+      $("input#2-COL7_6").val(col6Value);
+      $("input#2-COL7_7").val(col7Value);
     }
     // モールド（採寸）
     if(col1Value == "3"){
@@ -303,6 +315,8 @@
       if(col2Value == "1"){
         $("input#3-COL7_2").attr("checked", true);
       }
+      $("input#3-COL7_3").val(col3Value);
+      $("input#3-COL7_4").val(col4Value);
     }
     // モールド型（採型）
     if(col1Value == "4"){
@@ -310,6 +324,8 @@
       if(col2Value == "1"){
         $("input#4-COL7_2").attr("checked", true);
       }
+      $("input#4-COL7_3").val(col3Value);
+      $("input#4-COL7_4").val(col4Value);
     }
     $("div#step4").load("/mitsumori/step_08.html", wizard4b);
   }
@@ -837,6 +853,11 @@
     // 更新時、DBの値をセット
     var col1Value = wm.mitsumoriData["COL7_1"];
     var col2Value = wm.mitsumoriData["COL7_2"];
+    var col3Value = wm.mitsumoriData["COL7_3"];
+    var col4Value = wm.mitsumoriData["COL7_4"];
+    var col5Value = wm.mitsumoriData["COL7_5"];
+    var col6Value = wm.mitsumoriData["COL7_6"];
+    var col7Value = wm.mitsumoriData["COL7_7"];
     //$("input[name='COL1_1']").val(col1Value);
     // 平面形状型
     if(col1Value == "1"){
@@ -844,6 +865,8 @@
       if(col2Value == "1"){
         $("input#1-COL7_2").attr("checked", true);
       }
+      $("input#1-COL7_3").val(col3Value);
+      $("input#1-COL7_4").val(col4Value);
     }
     // 張り調整
     if(col1Value == "2"){
@@ -851,6 +874,11 @@
       if(col2Value == "1"){
         $("input#2-COL7_2").attr("checked", true);
       }
+      $("input#2-COL7_3").val(col3Value);
+      $("input#2-COL7_4").val(col4Value);
+      $("input#2-COL7_5").val(col5Value);
+      $("input#2-COL7_6").val(col6Value);
+      $("input#2-COL7_7").val(col7Value);
     }
     // モールド（採寸）
     if(col1Value == "3"){
@@ -858,6 +886,8 @@
       if(col2Value == "1"){
         $("input#3-COL7_2").attr("checked", true);
       }
+      $("input#3-COL7_3").val(col3Value);
+      $("input#3-COL7_4").val(col4Value);
     }
     // モールド型（採型）
     if(col1Value == "4"){
@@ -865,6 +895,8 @@
       if(col2Value == "1"){
         $("input#4-COL7_2").attr("checked", true);
       }
+      $("input#4-COL7_3").val(col3Value);
+      $("input#4-COL7_4").val(col4Value);
     }
     $("div#step4").load("/mitsumori/step_08.html", wizard4d);
   }
