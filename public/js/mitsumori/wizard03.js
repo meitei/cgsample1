@@ -933,7 +933,12 @@
     var col3Value = wm.mitsumoriData["COL3_3"];
     var col4Value = wm.mitsumoriData["COL3_4"];
     var col5Value = wm.mitsumoriData["COL3_5"];
+    var col6Value = wm.mitsumoriData["COL3_6"];
+    var col7Value = wm.mitsumoriData["COL3_7"];
+    var col8Value = wm.mitsumoriData["COL3_8"];
+    var col9Value = wm.mitsumoriData["COL3_9"];
     var col10Value = wm.mitsumoriData["COL3_10"];
+    var col11Value = wm.mitsumoriData["COL3_11"];
     var col12Value = wm.mitsumoriData["COL3_12"];
     var col13Value = wm.mitsumoriData["COL3_13"];
 
@@ -954,6 +959,12 @@
       if(col5Value == "2"){
         $("input#2-2-COL3_5").attr("checked", true);
       }
+      $("input#2-COL3_13").val(col13Value);
+      $("select#2-COL3_4").val(col4Value);
+      $("input#2-COL3_6").val(col6Value);
+      $("input#2-COL3_7").val(col7Value);
+      $("input#2-COL3_8").val(col8Value);
+      $("input#2-COL3_9").val(col9Value);
       // コンボボックス
       var seihin = getProduct(3);
       if(seihin != undefined) { $("select#2-3_su").val(seihin["suryo"]); } 
@@ -968,6 +979,10 @@
       if(col10Value == "2"){
         $("input#3-2-COL3_10").attr("checked", true);
       }
+      $("input#3-COL3_13").val(col13Value);
+      $("select#3-COL3_3").val(col3Value);
+      $("input#3-COL3_8").val(col8Value);
+      $("input#3-COL3_9").val(col9Value);
       // コンボボックス
       var seihin = getProduct(3);
       if(seihin != undefined) { $("select#3-3_su").val(seihin["suryo"]); } 
@@ -975,6 +990,15 @@
     // モールド型（採型）
     if(col1Value == "4"){
       $("input#4-COL3_1").attr("checked", true);
+      if(col11Value == "1"){
+        $("input#4-1-COL3_11").attr("checked", true);
+      }
+      if(col11Value == "2"){
+        $("input#4-2-COL3_11").attr("checked", true);
+      }
+      if(col11Value == "3"){
+        $("input#4-3-COL3_11").attr("checked", true);
+      }
       if(col12Value == "1"){
         $("input#4-1-COL3_12").attr("checked", true);
       }
@@ -984,15 +1008,11 @@
       if(col12Value == "3"){
         $("input#4-3-COL3_12").attr("checked", true);
       }
-      if(col12Value == "4"){
-        $("input#4-4-COL3_12").attr("checked", true);
-      }
-      if(col12Value == "5"){
-        $("input#4-5-COL3_12").attr("checked", true);
-      }
-      if(col12Value == "6"){
-        $("input#4-6-COL3_12").attr("checked", true);
-      }
+      $("input#4-COL3_13").val(col13Value);
+      $("input#4-COL3_6").val(col6Value);
+      $("input#4-COL3_7").val(col7Value);
+      $("input#4-COL3_8").val(col8Value);
+      $("input#4-COL3_9").val(col9Value);
       // コンボボックス
       var seihin = getProduct(3);
       if(seihin != undefined) { $("select#4-3_su").val(seihin["suryo"]); } 
