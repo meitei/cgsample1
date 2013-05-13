@@ -177,8 +177,10 @@
         if(this.mitsumoriData["COL1_1"] != $("input[name='COL1_1']:checked").val()) {
             this.initEstimate();
         }
-        if(this.mitsumoriData["COL1_2"] != $("input[name='COL1_2']:checked").val()) {
-            this.initEstimate();
+        if($("input[name='COL1_1']:checked").val() == "3") {
+            if(this.mitsumoriData["COL1_2"] != $("input[name='COL1_2']:checked").val()) {
+                this.initEstimate();
+            }
         }
         this.mitsumoriData["COL1_1"] = $("input[name='COL1_1']:checked").val();
         this.mitsumoriData["COL1_2"] = $("input[name='COL1_2']:checked").val();
