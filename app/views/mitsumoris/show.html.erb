@@ -7,7 +7,7 @@
       <ul>
         <a href="/konyu_rirekis">購入履歴管理</a>
         <a href="#" onclick="showReport(<%= @mitsumori.konyuRirekiId %>)">見積書出力</a>
-        <a href="#" id="showKanseizu" onclick="showMitsumoriKanseizu(<%= @mitsumori.konyuRirekiId %>)">見積完成図表示</a>
+        <a href="#" id="showKanseizu" target='kanseizu' onclick="showMitsumoriKanseizu(<%= @mitsumori.konyuRirekiId %>)">見積完成図表示</a>
       </ul>
   </div>
 </div>
@@ -33,7 +33,7 @@
 	// 見積完成図表示用メソッド
 	function showMitsumoriKanseizu(id) {
 	    url = "/kanseizu/show_mitsumori?id=" + id;
-	    window.open(url,'_blank')
+        window.open(url, "kanseizu", "width=600,height=600,scrollbars=yes,menubar=no,toolbar=no,location=no,directories=,status=no");
 	    return false;
 	}
 

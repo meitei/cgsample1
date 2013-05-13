@@ -271,7 +271,7 @@ function mitsumoriKanseizuFormatter(cellval, options, rowdata) {
     } else {
         visible = "display:none;";
     }
-    return "<img src='/images/image.png' onclick='showMitsumoriKanseizu(" + rowdata['id'] + ")' title='見積完成図表示' style='width:16px; height:16px; " + visible + "'>";
+    return "<img src='/images/image.png' target='kanseizu' onclick='showMitsumoriKanseizu(" + rowdata['id'] + ")' title='見積完成図表示' style='width:16px; height:16px; " + visible + "'>";
 }
 
 function updateFormatter(cellval, options, rowdata) {
@@ -345,7 +345,7 @@ function showReport(id) {
 // 見積完成図表示用メソッド
 function showMitsumoriKanseizu(id) {
     url = "kanseizu/show?id=" + id;
-    window.open(url,'_blank')
+    window.open(url, "kanseizu", "width=600,height=600,scrollbars=yes,menubar=no,toolbar=no,location=no,directories=,status=no");
     return false;
 }
 
