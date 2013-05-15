@@ -354,6 +354,9 @@
     } else if (wm.mitsumoriData["COL16_1"] == "2"){
       $("input#2-COL16_1").attr("checked", true);
     }
+    if (wm.mitsumoriData["COL16_2"] == "1") {
+      $("input#2-COL16_2").attr("checked", true);
+    }
     if (wm.mitsumoriData["COL16_11"] == "1"){
       $("input#2-1-COL16_11").attr("checked", true);
     } else if (wm.mitsumoriData["COL16_11"] == "2"){
