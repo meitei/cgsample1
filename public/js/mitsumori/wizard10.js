@@ -918,7 +918,7 @@
 
     var t = parseFloatEx(tanka136["tanka"]);
     var x = parseFloatEx(tanka136["tax"]);
-    var a = parseFloatEx($("td#7-136_su").val());
+    var a = parseFloatEx($("select#7-136_su").val());
     var k = t * a;
     var z = getFormatAmount(k * x, 1, 0);
     $("td#7-136_tan").text(formatComma(t));
