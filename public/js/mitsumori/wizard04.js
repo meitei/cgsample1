@@ -1410,5 +1410,9 @@
     if(col1Value == "4"){
       $("input#4-COL4_1").attr("checked", true);
     }
+    // 屋内外用（家庭、保育所用）
+    if(col1Value == "5"){
+      $("input#5-COL4_1").attr("checked", true);
+    }
     $("div#step5").load("/mitsumori/step_06.html", wizard5e);
   }
