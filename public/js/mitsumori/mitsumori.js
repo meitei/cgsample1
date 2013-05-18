@@ -325,4 +325,5 @@
     this.mitsumoriData["COL25_1"] = "0";
 
     seihin = {};
+
   }
