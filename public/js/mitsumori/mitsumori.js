@@ -181,6 +181,267 @@
     $("div#step17 input[type='radio']").attr("checked", false);
     $("div#step17 input[type='checkbox']").attr("checked", false);
     $("div#step17 select").val("0");
+
+    var amount = parseFloatEx($("select#2-3_su").val());
+    var tanka = parseFloatEx($("td#2-3_tan").text());
+    var kingaku = tanka * amount;
+    $("td#2-3_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-3_su").val());
+    tanka = parseFloatEx($("td#3-3_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-3_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-3_su").val());
+    tanka = parseFloatEx($("td#4-3_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-3_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-73_su").val());
+    tanka = parseFloatEx($("td#2-73_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-73_kin").text(formatComma(kingaku));
+    
+    amount = parseFloatEx($("select#2-74_su").val());
+    tanka = parseFloatEx($("td#2-74_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-74_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-75_su").val());
+    tanka = parseFloatEx($("td#2-75_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-75_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-76_su").val());
+    tanka = parseFloatEx($("td#2-76_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-76_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-73_su").val());
+    tanka = parseFloatEx($("td#3-73_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-73_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-74_su").val());
+    tanka = parseFloatEx($("td#3-74_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-74_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-75_su").val());
+    tanka = parseFloatEx($("td#3-75_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-75_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-76_su").val());
+    tanka = parseFloatEx($("td#3-76_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-76_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-73_su").val());
+    tanka = parseFloatEx($("td#4-73_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-73_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-74_su").val());
+    tanka = parseFloatEx($("td#4-74_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-74_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-78_su").val());
+    tanka = parseFloatEx($("td#4-78_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-78_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-79_su").val());
+    tanka = parseFloatEx($("td#4-79_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-79_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-76_su").val());
+    tanka = parseFloatEx($("td#4-76_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-76_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-81_su").val());
+    tanka = parseFloatEx($("td#2-81_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-81_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-82_su").val());
+    tanka = parseFloatEx($("td#2-82_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-82_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-83_su").val());
+    tanka = parseFloatEx($("td#2-83_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-83_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-85_su").val());
+    tanka = parseFloatEx($("td#2-85_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-85_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-86_su").val());
+    tanka = parseFloatEx($("td#2-86_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-86_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-81_su").val());
+    tanka = parseFloatEx($("td#3-81_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-81_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-87_su").val());
+    tanka = parseFloatEx($("td#3-87_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-87_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-83_su").val());
+    tanka = parseFloatEx($("td#3-83_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-83_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-85_su").val());
+    tanka = parseFloatEx($("td#3-85_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-85_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#3-86_su").val());
+    tanka = parseFloatEx($("td#3-86_tan").text());
+    kingaku = tanka * amount;
+    $("td#3-86_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-81_su").val());
+    tanka = parseFloatEx($("td#4-81_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-81_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-82_su").val());
+    tanka = parseFloatEx($("td#4-82_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-82_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-83_su").val());
+    tanka = parseFloatEx($("td#4-83_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-83_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-85_su").val());
+    tanka = parseFloatEx($("td#4-85_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-85_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-86_su").val());
+    tanka = parseFloatEx($("td#4-86_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-86_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#4-88_su").val());
+    tanka = parseFloatEx($("td#4-88_tan").text());
+    kingaku = tanka * amount;
+    $("td#4-88_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-101_su").val());
+    tanka = parseFloatEx($("td#2-101_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-101_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-102_su").val());
+    tanka = parseFloatEx($("td#2-102_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-102_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-97_su").val());
+    tanka = parseFloatEx($("td#2-97_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-97_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-98_su").val());
+    tanka = parseFloatEx($("td#2-98_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-98_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-99_su").val());
+    tanka = parseFloatEx($("td#2-99_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-99_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-103_su").val());
+    tanka = parseFloatEx($("td#2-103_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-103_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-104_su").val());
+    tanka = parseFloatEx($("td#2-104_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-104_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-105_su").val());
+    tanka = parseFloatEx($("td#2-105_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-105_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-106_su").val());
+    tanka = parseFloatEx($("td#2-106_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-106_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-113_su").val());
+    tanka = parseFloatEx($("td#2-113_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-113_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-115_su").val());
+    tanka = parseFloatEx($("td#2-115_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-115_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-108_su").val());
+    tanka = parseFloatEx($("td#2-108_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-108_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-109_su").val());
+    tanka = parseFloatEx($("td#2-109_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-109_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-110_su").val());
+    tanka = parseFloatEx($("td#2-110_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-110_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-111_su").val());
+    tanka = parseFloatEx($("td#2-111_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-111_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-118_su").val());
+    tanka = parseFloatEx($("td#2-118_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-118_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-119_su").val());
+    tanka = parseFloatEx($("td#2-119_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-119_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-120_su").val());
+    tanka = parseFloatEx($("td#2-120_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-120_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#2-121_su").val());
+    tanka = parseFloatEx($("td#2-121_tan").text());
+    kingaku = tanka * amount;
+    $("td#2-121_kin").text(formatComma(kingaku));
+
+    amount = parseFloatEx($("select#7-136_su").val());
+    tanka = parseFloatEx($("td#7-136_tan").text());
+    kingaku = tanka * amount;
+    $("td#7-136_kin").text(formatComma(kingaku));
+
     this.mitsumoriData["COL2_1"] = "0";
     this.mitsumoriData["COL3_1"] = "0";
     this.mitsumoriData["COL3_2"] = "0";
