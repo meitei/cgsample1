@@ -142,13 +142,9 @@
             alert("種別を選択してください。");
             return false;
         }
-        var col2_1_val = $("input[name='COL2_1']:checked").val();
-        if(this.mitsumoriData["COL2_1"] != col2_1_val) {
+        if(this.mitsumoriData["COL2_1"] != $("input[name='COL2_1']:checked").val()) {
             this.initEstimate();
             this.mitsumoriData["COL1_1"] = "2";
-            if(col2_1_val == "1" || col2_1_val == "2") {
-                wizard2e();   
-            }
         }
         this.mitsumoriData["COL2_1"] = $("input[name='COL2_1']:checked").val();
         return;
