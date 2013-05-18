@@ -323,4 +323,6 @@
     this.mitsumoriData["COL24_8"] = "0";
     this.mitsumoriData["COL24_9"] = "0";
     this.mitsumoriData["COL25_1"] = "0";
+
+    seihin = {};
   }
