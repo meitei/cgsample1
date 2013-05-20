@@ -157,7 +157,7 @@
       var m_tanka = getSeihinInfo("81");
       var tanka = parseFloatEx(m_tanka["tanka"]);
       var tax = parseFloatEx(m_tanka["tax"]);
-      var amount = parseFloatEx($("select#2-81_su").val());
+      var amount = parseFloatEx($("select#3-81_su").val());
       var kingaku = tanka * amount;
       var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
       $("td#3-81_kin").text(formatComma(kingaku));
@@ -179,7 +179,7 @@
       var m_tanka = getSeihinInfo("83");
       var tanka = parseFloatEx(m_tanka["tanka"]);
       var tax = parseFloatEx(m_tanka["tax"]);
-      var amount = parseFloatEx($("select#2-83_su").val());
+      var amount = parseFloatEx($("select#3-83_su").val());
       var kingaku = tanka * amount;
       var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
       $("td#3-83_kin").text(formatComma(kingaku));
@@ -190,7 +190,7 @@
       var m_tanka = getSeihinInfo("85");
       var tanka = parseFloatEx(m_tanka["tanka"]);
       var tax = parseFloatEx(m_tanka["tax"]);
-      var amount = parseFloatEx($("select#2-85_su").val());
+      var amount = parseFloatEx($("select#3-85_su").val());
       var kingaku = tanka * amount;
       var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
       $("td#3-85_kin").text(formatComma(kingaku));
@@ -201,7 +201,7 @@
       var m_tanka = getSeihinInfo("86");
       var tanka = parseFloatEx(m_tanka["tanka"]);
       var tax = parseFloatEx(m_tanka["tax"]);
-      var amount = parseFloatEx($("select#2-86_su").val());
+      var amount = parseFloatEx($("select#3-86_su").val());
       var kingaku = tanka * amount;
       var zeigaku = getFormatAmount(kingaku * tax, 1, 0);
       $("td#3-86_kin").text(formatComma(kingaku));
