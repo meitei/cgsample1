@@ -60,23 +60,25 @@ class MitsumorisController < ApplicationController
     if params[:mitsumoriData].nil? then
       return
     end
-    @mitsumori_data = params[:mitsumoriData]
-    #logger.debug(@mitsumori_data)
-    max_id = Mitsumori.maximum("mitsumoriNo")
-    if max_id.nil? then
-      max_id = 0
-    end
-    #logger.debug(max_id)
-    @mitsumori_data[:mitsumoriNo] = max_id + 1
-    @mitsumori = Mitsumori.new(@mitsumori_data)
-    @result = @mitsumori.save
+    ActiveRecord::Base.transaction do
+      @mitsumori_data = params[:mitsumoriData]
+      #logger.debug(@mitsumori_data)
+      max_id = Mitsumori.maximum("mitsumoriNo")
+      if max_id.nil? then
+        max_id = 0
+      end
+      #logger.debug(max_id)
+      @mitsumori_data[:mitsumoriNo] = max_id + 1
+      @mitsumori = Mitsumori.new(@mitsumori_data)
+      @result = @mitsumori.save
 
-    @products_data = params[:productsData]
-    #logger.debug(@products_data)
-    @products_data.each do |key, value|
-      value[:mitsumoriNo] = max_id + 1
-      @seihin = MitsumoriSeihin.new(value)
-      @result = @seihin.save
+      @products_data = params[:productsData]
+      #logger.debug(@products_data)
+      @products_data.each do |key, value|
+        value[:mitsumoriNo] = max_id + 1
+        @seihin = MitsumoriSeihin.new(value)
+        @result = @seihin.save
+      end
     end
 
     respond_to do |format|
@@ -97,17 +99,19 @@ class MitsumorisController < ApplicationController
     if params[:mitsumoriData].nil? then
       return
     end
-    @mitsumori_data = params[:mitsumoriData]
-    @mitsumori = Mitsumori.find(params[:id])
-    @result = @mitsumori.update_attributes(@mitsumori_data)
+    ActiveRecord::Base.transaction do
+      @mitsumori_data = params[:mitsumoriData]
+      @mitsumori = Mitsumori.find(params[:id])
+      @result = @mitsumori.update_attributes(@mitsumori_data)
 
-    MitsumoriSeihin.destroy_all(["\"mitsumoriNo\" = ?", @mitsumori_data[:mitsumoriNo]])
-    @products_data = params[:productsData]
-    #logger.debug(@products_data)
-    @products_data.each do |key, value|
-      value[:mitsumoriNo] = @mitsumori_data[:mitsumoriNo]
-      @seihin = MitsumoriSeihin.new(value)
-      @result = @seihin.save
+      MitsumoriSeihin.destroy_all(["\"mitsumoriNo\" = ?", @mitsumori_data[:mitsumoriNo]])
+      @products_data = params[:productsData]
+      #logger.debug(@products_data)
+      @products_data.each do |key, value|
+        value[:mitsumoriNo] = @mitsumori_data[:mitsumoriNo]
+        @seihin = MitsumoriSeihin.new(value)
+        @result = @seihin.save
+      end
     end
     respond_to do |format|
       if @result
