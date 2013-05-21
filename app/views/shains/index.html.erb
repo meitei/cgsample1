@@ -214,6 +214,7 @@ function showShainFormDialog(shainId) {
                 id: "dialog_close",
                 class : "btn_white",
                 click : function(){
+                    $("#shainErrorMessage").text("");
                     $('#shainForm input[type="text"], select, textarea').val('');
                     $('#shainForm input[type="password"], select, textarea').val('');
                     $("#shainForm").validate().resetForm();
