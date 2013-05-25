@@ -2,12 +2,14 @@
   function wizard15a(){
     // STEPボタンクリック
     $("li#step15").click(function() {
-      wm.step = 15;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show();
-      if(wm.step < wm.lastStep) {
-        $("#btnEstimateRegist").hide();
+      if ($("li#step15").hasClass('jqwizard_current')) {
+        wm.step = 15;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show();
+        if(wm.step < wm.lastStep) {
+          $("#btnEstimateRegist").hide();
+        }
       }
     });
     $("button.jqwizard_next").removeAttr("disabled");
@@ -189,10 +191,12 @@
   function wizard15e(){
     // STEPボタンクリック
     $("li#step15").click(function() {
-      wm.step = 15;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      if ($("li#step15").hasClass('jqwizard_current')) {
+        wm.step = 15;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show(); 
+      }
     });
     //
     $("input#1-COL16_1").click(function(){

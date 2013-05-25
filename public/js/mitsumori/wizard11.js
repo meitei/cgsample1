@@ -2,12 +2,14 @@
   function wizard11a(){
     // STEPボタンクリック
     $("li#step11").click(function() {
-      wm.step = 11;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show();
-      if(wm.step < wm.lastStep) {
-        $("#btnEstimateRegist").hide();
+      if ($("li#step11").hasClass('jqwizard_current')) {
+        wm.step = 11;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show();
+        if(wm.step < wm.lastStep) {
+          $("#btnEstimateRegist").hide();
+        }
       }
     });
     //
@@ -92,10 +94,12 @@
   function wizard11b(){
     // STEPボタンクリック
     $("li#step11").click(function() {
-      wm.step = 11;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      if ($("li#step11").hasClass('jqwizard_current')) {
+        wm.step = 11;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show(); 
+      }
     });
     $("button.jqwizard_next").removeAttr("disabled");
 
@@ -221,10 +225,12 @@
   function wizard11e(){
     // STEPボタンクリック
     $("li#step11").click(function() {
-      wm.step = 11;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      if ($("li#step11").hasClass('jqwizard_current')) {
+        wm.step = 11;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show(); 
+      }
     });
     //
     $("input#1-COL11_1").click(function(){

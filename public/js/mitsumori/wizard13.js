@@ -2,12 +2,14 @@
   function wizard13a(){
     // STEPボタンクリック
     $("li#step13").click(function() {
-      wm.step = 13;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show();
-      if(wm.step < wm.lastStep) {
-        $("#btnEstimateRegist").hide();
+      if ($("li#step13").hasClass('jqwizard_current')) {
+        wm.step = 13;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show();
+        if(wm.step < wm.lastStep) {
+          $("#btnEstimateRegist").hide();
+        }
       }
     });
     //
@@ -310,10 +312,12 @@
   function wizard13e(){
     // STEPボタンクリック
     $("li#step13").click(function() {
-      wm.step = 13;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      if ($("li#step13").hasClass('jqwizard_current')) {
+        wm.step = 13;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show(); 
+      }
     });
     //
     $("input#1-COL14_1").click(function(){

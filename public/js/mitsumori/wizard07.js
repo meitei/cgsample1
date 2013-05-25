@@ -2,13 +2,15 @@
   function wizard7a(){
     // STEPボタンクリック
     $("li#step7").click(function() {
-      wm.step = 7;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show();
-      if(wm.step < wm.lastStep) {
-        $("#btnEstimateRegist").hide();
-      }
+        if ($("li#step7").hasClass('jqwizard_current')) {
+            wm.step = 7;
+            $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+            $("button#jqwizard_previous").show();
+            $("button#jqwizard_next").show();
+            if(wm.step < wm.lastStep) {
+                $("#btnEstimateRegist").hide();
+            }
+        }
     });
     //
     $("input#1-COL10_1").click(function(){
@@ -180,10 +182,12 @@
   function wizard7b(){
     // STEPボタンクリック
     $("li#step7").click(function() {
-      wm.step = 7;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+        if ($("li#step7").hasClass('jqwizard_current')) {
+            wm.step = 7;
+            $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+            $("button#jqwizard_previous").show();
+            $("button#jqwizard_next").show(); 
+        }
     });
     //
     $("input#1-COL14_1").click(function(){
@@ -275,10 +279,12 @@
   function wizard7d(){
     // STEPボタンクリック
     $("li#step7").click(function() {
-      wm.step = 7;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+        if ($("li#step7").hasClass('jqwizard_current')) {
+            wm.step = 7;
+            $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+            $("button#jqwizard_previous").show();
+            $("button#jqwizard_next").show(); 
+        }
     });
     //
     $("input#1-COL15_1").click(function(){
@@ -381,10 +387,12 @@
   function wizard7e(){
     // STEPボタンクリック
     $("li#step7").click(function() {
-      wm.step = 7;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+        if ($("li#step7").hasClass('jqwizard_current')) {
+            wm.step = 7;
+            $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+            $("button#jqwizard_previous").show();
+            $("button#jqwizard_next").show(); 
+        }
     });
     //
     $("input#1-COL7_1").click(function(){

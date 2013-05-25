@@ -2,12 +2,14 @@
   function wizard16e(){
     // STEPボタンクリック
     $("li#step16").click(function() {
-      wm.step = 16;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show();
-      if(wm.step < wm.lastStep) {
-        $("#btnEstimateRegist").hide();
+      if ($("li#step16").hasClass('jqwizard_current')) {
+        wm.step = 16;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show();
+        if(wm.step < wm.lastStep) {
+          $("#btnEstimateRegist").hide();
+        }
       }
     });
     //

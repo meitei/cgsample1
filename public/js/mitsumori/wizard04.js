@@ -2,7 +2,7 @@
   function wizard4a(){
     // STEPボタンクリック
     $("li#step4").click(function() {
-      if ($("li#step4").hasClass('jqwizard_done') || $("li#step4").hasClass('jqwizard_lastdone')) {
+      if ($("li#step4").hasClass('jqwizard_current')) {
         wm.step = 4;
         $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
         $("button#jqwizard_previous").show();
@@ -302,7 +302,7 @@
   function wizard4b(){
     // STEPボタンクリック
     $("li#step4").click(function() {
-        if ($("li#step4").hasClass('jqwizard_done') || $("li#step4").hasClass('jqwizard_lastdone')) {
+        if ($("li#step4").hasClass('jqwizard_current')) {
             wm.step = 4;
             $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
             $("button#jqwizard_previous").show();
@@ -599,7 +599,7 @@
   function wizard4c(){
     // STEPボタンクリック
     $("li#step4").click(function() {
-        if ($("li#step4").hasClass('jqwizard_done') || $("li#step4").hasClass('jqwizard_lastdone')) {
+        if ($("li#step4").hasClass('jqwizard_current')) {
             wm.step = 4;
             $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
             $("button#jqwizard_previous").show();
@@ -954,7 +954,7 @@
   function wizard4d(){
     // STEPボタンクリック
     $("li#step4").click(function() {
-        if ($("li#step4").hasClass('jqwizard_done') || $("li#step4").hasClass('jqwizard_lastdone')) {
+        if ($("li#step4").hasClass('jqwizard_current')) {
             wm.step = 4;
             $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
             $("button#jqwizard_previous").show();
@@ -1251,7 +1251,7 @@
   function wizard4e(){
     // STEPボタンクリック
     $("li#step4").click(function() {
-        if ($("li#step4").hasClass('jqwizard_done') || $("li#step4").hasClass('jqwizard_lastdone')) {
+        if ($("li#step4").hasClass('jqwizard_current')) {
             wm.step = 4;
             $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
             $("button#jqwizard_previous").show();

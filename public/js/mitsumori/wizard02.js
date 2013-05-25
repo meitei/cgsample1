@@ -3,7 +3,7 @@
     // STEPボタンクリック
     $("li#step2").click(function() {
       
-      if ($("li#step2").hasClass('jqwizard_done') || $("li#step2").hasClass('jqwizard_lastdone')) {
+      if ($("li#step2").hasClass('jqwizard_current')) {
         wm.step = 2;
         $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
         $("button#jqwizard_previous").show();
@@ -319,7 +319,7 @@
   function wizard2e() {
     // STEPボタンクリック
     $("li#step2").click(function() {
-      if ($("li#step2").hasClass('jqwizard_done') || $("li#step2").hasClass('jqwizard_lastdone')) {
+      if ($("li#step2").hasClass('jqwizard_current')) {
         wm.step = 2;
         $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
         $("button#jqwizard_previous").show();
@@ -619,7 +619,7 @@
   function wizard2h(){
     // STEPボタンクリック
     $("li#step2").click(function() {
-      if ($("li#step2").hasClass('jqwizard_done') || $("li#step2").hasClass('jqwizard_lastdone')) {
+      if ($("li#step2").hasClass('jqwizard_current')) {
         wm.step = 2;
         $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
         $("button#jqwizard_previous").show();
@@ -819,7 +819,7 @@
   function wizard2i(){
     // STEPボタンクリック
     $("li#step2").click(function() {
-      if ($("li#step2").hasClass('jqwizard_done') || $("li#step2").hasClass('jqwizard_lastdone')) {
+      if ($("li#step2").hasClass('jqwizard_current')) {
         wm.step = 2;
         $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
         $("button#jqwizard_previous").show();
