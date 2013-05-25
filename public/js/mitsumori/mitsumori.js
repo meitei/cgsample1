@@ -469,6 +469,7 @@
     this.mitsumoriData["COL7_5"] = "0";
     this.mitsumoriData["COL7_6"] = "0";
     this.mitsumoriData["COL7_7"] = "0";
+    this.mitsumoriData["COL7_8"] = "0";
     this.mitsumoriData["COL8_1"] = "0";
     this.mitsumoriData["COL8_2"] = "0";
     this.mitsumoriData["COL8_3"] = "0";

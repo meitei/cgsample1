@@ -86,6 +86,21 @@
     $("input#4-COL7_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
     });
+    $("input#2-COL7_8").change(function(){
+      if ($("input#2-COL7_8").attr('checked')) {
+        $("input#2-COL7_5").val('0');
+        $("input#2-COL7_6").val('0');
+        $("input#2-COL7_7").val('0');
+        $("input#2-COL7_5").attr('disabled', true);
+        $("input#2-COL7_6").attr('disabled', true);
+        $("input#2-COL7_7").attr('disabled', true);
+      }
+      else {
+        $("input#2-COL7_5").attr('disabled', false);
+        $("input#2-COL7_6").attr('disabled', false);
+        $("input#2-COL7_7").attr('disabled', false);
+      }
+    });
     var tanka32 = getSeihinInfo("32");
     var tanka33 = getSeihinInfo("33");
     var tanka34 = getSeihinInfo("34");
@@ -287,6 +302,7 @@
     var col5Value = wm.mitsumoriData["COL7_5"];
     var col6Value = wm.mitsumoriData["COL7_6"];
     var col7Value = wm.mitsumoriData["COL7_7"];
+    var col8Value = wm.mitsumoriData["COL7_8"];
     //$("input[name='COL1_1']").val(col1Value);
     // 平面形状型
     if(col1Value == "1"){
@@ -308,6 +324,12 @@
       $("input#2-COL7_5").val(col5Value);
       $("input#2-COL7_6").val(col6Value);
       $("input#2-COL7_7").val(col7Value);
+      if(col8Value == "1"){
+        $("input#2-COL7_8").attr("checked", true);
+        $("input#2-COL7_5").attr('disabled', true);
+        $("input#2-COL7_6").attr('disabled', true);
+        $("input#2-COL7_7").attr('disabled', true);
+      }
     }
     // モールド（採寸）
     if(col1Value == "3"){
@@ -660,6 +682,21 @@
     $("input#4-COL7_1").change(function(){
       $("button.jqwizard_next").removeAttr("disabled");
     });
+    $("input#2-COL7_8").change(function(){
+      if ($("input#2-COL7_8").attr('checked')) {
+        $("input#2-COL7_5").val('0');
+        $("input#2-COL7_6").val('0');
+        $("input#2-COL7_7").val('0');
+        $("input#2-COL7_5").attr('disabled', true);
+        $("input#2-COL7_6").attr('disabled', true);
+        $("input#2-COL7_7").attr('disabled', true);
+      }
+      else {
+        $("input#2-COL7_5").attr('disabled', false);
+        $("input#2-COL7_6").attr('disabled', false);
+        $("input#2-COL7_7").attr('disabled', false);
+      }
+    });
     var tanka32 = getSeihinInfo("32");
     var tanka33 = getSeihinInfo("33");
     var tanka34 = getSeihinInfo("34");
@@ -861,6 +898,7 @@
     var col5Value = wm.mitsumoriData["COL7_5"];
     var col6Value = wm.mitsumoriData["COL7_6"];
     var col7Value = wm.mitsumoriData["COL7_7"];
+    var col8Value = wm.mitsumoriData["COL7_8"];
     //$("input[name='COL1_1']").val(col1Value);
     // 平面形状型
     if(col1Value == "1"){
@@ -882,6 +920,12 @@
       $("input#2-COL7_5").val(col5Value);
       $("input#2-COL7_6").val(col6Value);
       $("input#2-COL7_7").val(col7Value);
+      if(col8Value == "1"){
+        $("input#2-COL7_8").attr("checked", true);
+        $("input#2-COL7_5").attr('disabled', true);
+        $("input#2-COL7_6").attr('disabled', true);
+        $("input#2-COL7_7").attr('disabled', true);
+      }
     }
     // モールド（採寸）
     if(col1Value == "3"){
