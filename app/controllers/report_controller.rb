@@ -168,7 +168,7 @@ class ReportController < ApplicationController
       139 => 26,
       126 => 27,
       140 => 27,
-      155 => 27,
+      155 => 28,
       141 => 28,
       122 => 29,
       130 => 29,
