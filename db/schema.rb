@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427045105) do
+ActiveRecord::Schema.define(:version => 20130525053249) do
 
   create_table "byoins", :primary_key => "byoinCd", :force => true do |t|
     t.string   "byoinNm",     :limit => 50, :null => false
@@ -307,6 +307,7 @@ ActiveRecord::Schema.define(:version => 20130427045105) do
     t.integer  "koshinshaId"
     t.integer  "COL1_2"
     t.integer  "COL23_1"
+    t.integer  "COL7_8"
   end
 
   create_table "seihins", :primary_key => "seihinId", :force => true do |t|
@@ -331,22 +332,6 @@ ActiveRecord::Schema.define(:version => 20130427045105) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
-
-  create_table "shains", :primary_key => "shainId", :force => true do |t|
-    t.string   "shainCd",       :limit => 10, :null => false
-    t.string   "myoji",         :limit => 50, :null => false
-    t.string   "name",          :limit => 50, :null => false
-    t.string   "myojiFuri",     :limit => 50, :null => false
-    t.string   "nameFuri",      :limit => 50, :null => false
-    t.string   "loginId",       :limit => 50, :null => false
-    t.string   "loginPassword", :limit => 50, :null => false
-    t.integer  "manageFlg",                   :null => false
-    t.integer  "koshinshaId",                 :null => false
-    t.integer  "torokushaId",                 :null => false
-    t.date     "loginLastDt"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-  end
 
   create_table "shobyos", :primary_key => "shobyoCd", :force => true do |t|
     t.string   "shobyoNm",     :limit => 50, :null => false
