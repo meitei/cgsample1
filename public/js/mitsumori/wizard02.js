@@ -2,12 +2,15 @@
   function wizard2a(){
     // STEPボタンクリック
     $("li#step2").click(function() {
-      wm.step = 2;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show();
-      if(wm.step < wm.lastStep) {
-        $("#btnEstimateRegist").hide();
+      
+      if ($("li#step2").hasClass('jqwizard_done') || $("li#step2").hasClass('jqwizard_lastdone')) {
+        wm.step = 2;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show();
+        if(wm.step < wm.lastStep) {
+          $("#btnEstimateRegist").hide();
+        }
       }
     });
     // 屋内用
@@ -316,10 +319,12 @@
   function wizard2e() {
     // STEPボタンクリック
     $("li#step2").click(function() {
-      wm.step = 2;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      if ($("li#step2").hasClass('jqwizard_done') || $("li#step2").hasClass('jqwizard_lastdone')) {
+        wm.step = 2;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show(); 
+      }
     });
     // アルミニューム選択
     $("input#1-COL2_1").change(function(){
@@ -380,10 +385,12 @@
   function wizard2g(){
     // STEPボタンクリック
     $("li#step2").click(function() {
-      wm.step = 2;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      if ($("li#step2").hasClass('jqwizard_done') || $("li#step2").hasClass('jqwizard_lastdone')) {
+        wm.step = 2;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show(); 
+      }
     });
     wm.lastStep = 2;
 
@@ -612,10 +619,12 @@
   function wizard2h(){
     // STEPボタンクリック
     $("li#step2").click(function() {
-      wm.step = 2;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      if ($("li#step2").hasClass('jqwizard_done') || $("li#step2").hasClass('jqwizard_lastdone')) {
+        wm.step = 2;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show(); 
+      }
     });
       wm.lastStep = 2;
     var tanka187 = getSeihinInfo("187");
@@ -810,10 +819,12 @@
   function wizard2i(){
     // STEPボタンクリック
     $("li#step2").click(function() {
-      wm.step = 2;
-      $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
-      $("button#jqwizard_previous").show();
-      $("button#jqwizard_next").show(); 
+      if ($("li#step2").hasClass('jqwizard_done') || $("li#step2").hasClass('jqwizard_lastdone')) {
+        wm.step = 2;
+        $("div.statuslabel").html("<span>STEP " + wm.step + "</span>" + $("div#step" + wm.step + " > div#title").text());
+        $("button#jqwizard_previous").show();
+        $("button#jqwizard_next").show(); 
+      }
     });
     wm.lastStep = 2;
 
