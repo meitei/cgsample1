@@ -628,7 +628,7 @@ class ReportController < ApplicationController
     # PDFファイル操作
     ###########################
     # 保存先
-    saveDir = File.join(Rails.root, "public", "tmp")
+    saveDir = File.join(Rails.root, "tmp", "pdf")
 
     # tmp内のファイルを削除する
     files = Dir.glob(File.join(saveDir,"*.pdf"))
@@ -651,14 +651,9 @@ class ReportController < ApplicationController
     # ファイル保存
     report.generate_file(File.join(saveDir,fileName))
 
-    # http://serverName/tmp/fileName.pdf で読み込まれるようにする
-    fileInfo = {'fileName' =>"/tmp/" + fileName}
-
-    # render :json => fileInfo
-    respond_to do |format|
-      format.html
-      format.json { render json: fileInfo }
-    end
+    filepath = Rails.root.join(saveDir, fileName)
+    fileName = ERB::Util.url_encode(fileName) if /MSIE/ =~ request.user_agent
+    send_data(File.read(filepath), :filename => fileName, :type => "application/pdf", :disposition => 'inline')
   end
 
   def report_mitsumori

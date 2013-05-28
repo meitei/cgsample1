@@ -14,26 +14,15 @@
 <script type="text/javascript">
 	// 見積書PDF出力用メソッド
 	function showReport(id) {
-	  var url = "/report/report_mitsumori.json";
-	  url += "?id=" + id;
-	  $.ajax({
-	      scriptCharset:"UTF-8",
-	      type: "GET",
-	      url: url,
-	      //data: data,
-	      dataType: "json",
-	      success: function(result) {
-	          if (result != null){
-	              window.open(result.fileName, "帳票出力");
-	          }
-	      }
-	  });
+	    var url = "/report/report_mitsumori?id=" + id
+        window.open(url, "report", "menubar=no,toolbar=no,location=no,directories=no,status=no,titlebar=no,resizable=yes");
+        return false;
 	}
 
 	// 見積完成図表示用メソッド
 	function showMitsumoriKanseizu(id) {
-	    url = "/kanseizu/show_mitsumori?id=" + id;
-        window.open(url, "kanseizu", "width=600,height=600,scrollbars=yes,menubar=no,toolbar=no,location=no,directories=,status=no");
+	    var url = "/kanseizu/show_mitsumori?id=" + id;
+        window.open(url, "kanseizu", "width=600,height=600,scrollbars=yes,menubar=no,toolbar=no,location=no,directories=no,status=no,resizable=yes");
 	    return false;
 	}
 
