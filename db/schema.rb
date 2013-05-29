@@ -131,7 +131,8 @@ ActiveRecord::Schema.define(:version => 20130525053249) do
     t.integer  "delFlg",                                   :default => 0, :null => false
   end
 
-  create_table "mitsumori_seihins", :force => true do |t|
+  create_table "mitsumori_seihins", :id => false, :force => true do |t|
+    t.integer  "id",          :null => false
     t.integer  "mitsumoriNo", :null => false
     t.integer  "seihinNo",    :null => false
     t.integer  "tanka",       :null => false
@@ -155,7 +156,8 @@ ActiveRecord::Schema.define(:version => 20130525053249) do
     t.datetime "updated_at",                :null => false
   end
 
-  create_table "mitsumoris", :force => true do |t|
+  create_table "mitsumoris", :id => false, :force => true do |t|
+    t.integer  "id",            :null => false
     t.integer  "kokyakuId"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
@@ -332,6 +334,22 @@ ActiveRecord::Schema.define(:version => 20130525053249) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "shains", :primary_key => "shainId", :force => true do |t|
+    t.string   "shainCd",       :limit => 10, :null => false
+    t.string   "myoji",         :limit => 50, :null => false
+    t.string   "name",          :limit => 50, :null => false
+    t.string   "myojiFuri",     :limit => 50, :null => false
+    t.string   "nameFuri",      :limit => 50, :null => false
+    t.string   "loginId",       :limit => 50, :null => false
+    t.string   "loginPassword", :limit => 50, :null => false
+    t.integer  "manageFlg",                   :null => false
+    t.integer  "koshinshaId",                 :null => false
+    t.integer  "torokushaId",                 :null => false
+    t.date     "loginLastDt"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
 
   create_table "shobyos", :primary_key => "shobyoCd", :force => true do |t|
     t.string   "shobyoNm",     :limit => 50, :null => false

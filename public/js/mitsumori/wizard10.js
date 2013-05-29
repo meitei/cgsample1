@@ -827,6 +827,13 @@
         $("button#jqwizard_next").show(); 
       }
     });
+    // 更新時、DBの値をセット
+    if (wm.mitsumoriData["COL19_7"] == "1") {
+      $("input#7-COL19_7").attr("checked", true);
+      // コンボボックス
+      var seihin = getProduct(136);
+      if(seihin != undefined) { $("select#7-136_su").val(seihin["suryo"]); }
+    }
 
     $("select#7-136_su").change(function() {
       var m_tanka = getSeihinInfo("136");
