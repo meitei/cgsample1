@@ -23,17 +23,17 @@ $(function() {
     var isLoaded = false;
     var colNames = ["完成部品コード","完成部品名","型式コード", "型式名", "価格", "使用部品","備考","更新者ID","登録者ID","",""];
     var colModelSettings = [
-            {name:"buhinCd", index:"buhinCd", hidden:true},
-            {name:"buhinNm", index:"buhinNm"},
-            {name:"katashikiCd", index:"katashikiCd"},
-            {name:"katashikiNm", index:"katashikiNm"},
-            {name:"kakaku", index:"kakaku"},
-            {name:"shiyoBuhin", index:"shiyoBuhin"},
-            {name:"biko", index:"biko"},
-            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
-            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
-            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
-            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+            {name:"buhinCd", index:"buhinCd", hidden:true, sortable:false},
+            {name:"buhinNm", index:"buhinNm", sortable:false},
+            {name:"katashikiCd", index:"katashikiCd", sortable:false},
+            {name:"katashikiNm", index:"katashikiNm", sortable:false},
+            {name:"kakaku", index:"kakaku", sortable:false},
+            {name:"shiyoBuhin", index:"shiyoBuhin", sortable:false},
+            {name:"biko", index:"biko", sortable:false},
+            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true, sortable:false},
+            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true, sortable:false},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter, sortable:false},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter, sortable:false}
     ];
     $("#searchKanseiBuhinGrid").jqGrid({
         datatype: "local",

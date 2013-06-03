@@ -23,16 +23,16 @@ $(function() {
     var isLoaded = false;
     var colNames = ["傷病コード","傷病名","傷病名カナ", "ICD10CD" ,"収載日","廃止日", "更新者ID","登録者ID","",""];
     var colModelSettings = [
-            {name:"shobyoCd", index:"shobyoCd", hidden:true},
-            {name:"shobyoNm", index:"shobyoNm"},
-            {name:"shobyoNmKana", index:"shobyoNmKana"},
-            {name:"icd10Cd", index:"icd10Cd"},
-            {name:"shusaiDt", index:"shusaiDt", hidden:true},
-            {name:"haishiDt", index:"haishiDt", hidden:true},
-            {name:"koshinshaId", index:"koshinshaId", hidden:true},
-            {name:"torokushaId", index:"torokushaId", hidden:true},
-            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
-            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+            {name:"shobyoCd", index:"shobyoCd", hidden:true, sortable:false},
+            {name:"shobyoNm", index:"shobyoNm", sortable:false},
+            {name:"shobyoNmKana", index:"shobyoNmKana", sortable:false},
+            {name:"icd10Cd", index:"icd10Cd", sortable:false},
+            {name:"shusaiDt", index:"shusaiDt", hidden:true, sortable:false},
+            {name:"haishiDt", index:"haishiDt", hidden:true, sortable:false},
+            {name:"koshinshaId", index:"koshinshaId", hidden:true, sortable:false},
+            {name:"torokushaId", index:"torokushaId", hidden:true, sortable:false},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter, sortable:false},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter, sortable:false}
     ];
     $("#searchShobyoGrid").jqGrid({
         datatype: "local",

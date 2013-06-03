@@ -23,13 +23,13 @@ $(function() {
     var isLoaded = false;
     var colNames = ["保険種別コード","保険種別名", "表示順","更新者ID","登録者ID","",""];
     var colModelSettings = [
-            {name:"hokenShubetsuCd", index:"hokenShubetsuCd"},
-            {name:"hokenShubetsuNm", index:"hokenShubetsuNm"},
-            {name:"hyojiJun", index:"hyojiJun", hidden:true},
-            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true},
-            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true},
-            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
-            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+            {name:"hokenShubetsuCd", index:"hokenShubetsuCd", sortable:false},
+            {name:"hokenShubetsuNm", index:"hokenShubetsuNm", sortable:false},
+            {name:"hyojiJun", index:"hyojiJun", hidden:true, sortable:false},
+            {name:"koshinshaId", index:"koshinshaId", editable:true, hidden:true, sortable:false},
+            {name:"torokushaId", index:"torokushaId", editable:true, hidden:true, sortable:false},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter, sortable:false},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter, sortable:false}
     ];
     $("#searchHokenShubetsuGrid").jqGrid({
         datatype: "local",

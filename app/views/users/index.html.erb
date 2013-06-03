@@ -19,18 +19,18 @@ $(function() {
     var isLoaded = false;
     var colNames = ["社員ID","社員コード","姓","名","姓（フリガナ）","名（フリガナ）","ログインID","パスワード","管理者フラグ","管理者フラグ","",""];
     var colModelSettings = [
-            {name:"id", index:"id", hidden:true},
-            {name:"shainCd", index:"shainCd"},
-            {name:"myoji", index:"myoji"},
-            {name:"name", index:"name"},
-            {name:"myojiFuri", index:"myojiFuri"},
-            {name:"nameFuri", index:"nameFuri"},
-            {name:"username", index:"username"},
-            {name:"password", index:"password"},
-            {name:"manageFlg", index:"manageFlg",hidden:true},
-            {name:"manageName", index:"manageName"},
-            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
-            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+            {name:"id", index:"id", hidden:true, sortable:false},
+            {name:"shainCd", index:"shainCd", sortable:false},
+            {name:"myoji", index:"myoji", sortable:false},
+            {name:"name", index:"name", sortable:false},
+            {name:"myojiFuri", index:"myojiFuri", sortable:false},
+            {name:"nameFuri", index:"nameFuri", sortable:false},
+            {name:"username", index:"username", sortable:false},
+            {name:"password", index:"password", sortable:false},
+            {name:"manageFlg", index:"manageFlg",hidden:true, sortable:false},
+            {name:"manageName", index:"manageName", sortable:false},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter, sortable:false},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter, sortable:false}
     ];
     $("#searchUserGrid").jqGrid({
         datatype: "local",

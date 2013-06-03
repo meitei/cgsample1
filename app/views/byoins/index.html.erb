@@ -23,12 +23,12 @@ $(function() {
     var isLoaded = false;
     var colNames = ["病院コード","病院名","更新者ID","登録者ID","",""];
     var colModelSettings = [
-            {name:"byoinCd", index:"byoinCd"},
-            {name:"byoinNm", index:"byoinNm"},
-            {name:"koshinshaId", index:"koshinshaId", hidden:true},
-            {name:"torokushaId", index:"torokushaId", hidden:true},
-            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
-            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+            {name:"byoinCd", index:"byoinCd", sortable:false},
+            {name:"byoinNm", index:"byoinNm", sortable:false},
+            {name:"koshinshaId", index:"koshinshaId", hidden:true, sortable:false},
+            {name:"torokushaId", index:"torokushaId", hidden:true, sortable:false},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter, sortable:false},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter, sortable:false}
     ];
     $("#searchByoinGrid").jqGrid({
         datatype: "local",

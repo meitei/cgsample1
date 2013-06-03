@@ -23,15 +23,15 @@ $(function() {
     var isLoaded = false;
     var colNames = ["製品ID","分類コード","分類名","品名コード","品名","型式コード","型式名","",""];
     var colModelSettings = [
-            {name:"seihinId", index:"seihinId", hidden:true},
-            {name:"bunruiCd", index:"bunruiCd"},
-            {name:"bunruiNm", index:"bunruiNm"},
-            {name:"hinmeiCd", index:"hinmeiCd"},
-            {name:"hinmeiNm", index:"hinmeiNm"},
-            {name:"katashikiCd", index:"katashikiCd"},
-            {name:"katashikiNm", index:"katashikiNm"},
-            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter},
-            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter}
+            {name:"seihinId", index:"seihinId", hidden:true, sortable:false},
+            {name:"bunruiCd", index:"bunruiCd", sortable:false},
+            {name:"bunruiNm", index:"bunruiNm", sortable:false},
+            {name:"hinmeiCd", index:"hinmeiCd", sortable:false},
+            {name:"hinmeiNm", index:"hinmeiNm", sortable:false},
+            {name:"katashikiCd", index:"katashikiCd", sortable:false},
+            {name:"katashikiNm", index:"katashikiNm", sortable:false},
+            {name:'updateImg', index:'updateImg', align:'center', width:40, formatter: updateFormatter, sortable:false},
+            {name:'deleteImg', index:'deleteImg', align:'center', width:40, formatter: deleteFormatter, sortable:false}
     ];
     $("#searchSeihinGrid").jqGrid({
         datatype: "local",

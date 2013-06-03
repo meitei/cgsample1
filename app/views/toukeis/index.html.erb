@@ -34,9 +34,9 @@ $(function() {
     var isLoaded = false;
     var colNames = ["集計単位","金額","台数"];
     var colModelSettings = [
-            {name:"sumUnt", index:"sumUnt"},
-            {name:"kingaku", index:"kingaku", editable:false, formatter:"currency", align:"right"},
-            {name:"daisu", index:"daisu", editable:false, formatter:"integer", align:"right"}
+            {name:"sumUnt", index:"sumUnt", sortable:false},
+            {name:"kingaku", index:"kingaku", editable:false, formatter:"currency", align:"right", sortable:false},
+            {name:"daisu", index:"daisu", editable:false, formatter:"integer", align:"right", sortable:false}
     ];
     $("#searchToukeiGrid").jqGrid({
         datatype: "local",
